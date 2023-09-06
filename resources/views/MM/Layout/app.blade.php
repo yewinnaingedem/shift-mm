@@ -37,7 +37,7 @@
         @include('MM.Layout.navbar')
     @show 
     <!-- search contianer -->
-    <div class="mt-[70px]  ">
+    <div class="mt-[70px]  "  >
         @section('search-1') 
             @include('MM.Layout.search_1')
         @show 
@@ -51,14 +51,18 @@
     @show 
 
 @yield('script')
-<!-- <script src="../path/to/flowbite/dist/flowbite.min.js"></script> -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js" integrity="sha512-uKQ39gEGiyUJl4AI6L+ekBdGKpGw4xJ55+xyJG7YFlJokPNYegn9KwQ3P8A7aFQAUtUsAQHep+d/lrGqrbPIDQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
     $(document).ready(function () {
+        $('#input_search').focus();
         $(document).on('click','#register' , ()=> {
             $("#register_down").toggle('active_hidden');
+        });
+        $(window).scroll(()=> {
+            $('#register_down').fadeOut();
         });
     })
 </script>

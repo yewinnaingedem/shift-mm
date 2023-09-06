@@ -35,7 +35,9 @@
                         <ul class="flex flex-col items-center justify-center text-center">
                             <li class="pb-3 mb-1  border-b-2 w-[80%] rounded border-black">{{$id->name}}</li>
                             <li class="pb-3 mb-1  border-b-2 w-[80%] rounded border-black">{{$id->email}}</li>
-                            <li class="pb-3 mb-1  border-b-2 w-[80%] rounded border-black">{{$id->google_id}}</li>
+                            @if($id->google_id)
+                                <li class="pb-3 mb-1  border-b-2 w-[80%] rounded border-black">{{$id->google_id}}</li>
+                            @endif
                         </ul>
                         <div class="footer flex justify-between items-center mt-2 ">
                             <button class="px-3 py-2 rounded bg-black w-[80px] text-white font-semibold">Save </button>

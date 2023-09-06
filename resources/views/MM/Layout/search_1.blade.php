@@ -8,7 +8,7 @@
                             <form action="" method="post">
                                 @csrf 
                                 <i class="fa-solid fa-magnifying-glass absolute top-[15px] left-[28px]"></i>
-                                <input type="text" class="reg-input w-input rounded w-full pl-10 pr-2 outline-none border-none focus:ring-0 focus:ring-transparent h-10 bg-neutral-50 " placeholder="Search Keyword , Modals , Type ... ">
+                                <input type="text" id="input_search" class="reg-input w-input rounded w-full pl-10 pr-2 outline-none border-none focus:ring-0 focus:ring-transparent h-10 bg-neutral-50 " placeholder="Search Keyword , Modals , Type ... ">
                             </form>
                             <div class="" id="search_result">
                                 

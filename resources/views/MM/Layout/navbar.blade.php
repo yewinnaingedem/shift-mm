@@ -19,7 +19,7 @@
                     </a>
                 </div>
                 <ul class="list-none text-sm   2xl:block ">
-                    <li class="inline-block px-3 "><a href="">Shop Cars</a></li>
+                    <li class="inline-block px-3 "><a id="shop_cars" href="">Shop Cars</a></li>
                     <li class="inline-block px-3 "><a href="">Sell & Trade </a></li>
                     <li class="inline-block px-3 "><a href="">Financing</a></li>
                     <li class="inline-block px-3 "><a href="">How Shop MM Work?</a></li>
@@ -50,7 +50,7 @@
                     </li>
                     @if(Auth::user())
                     <li class="inline-block align-baseline ">
-                        <a href="{{url('mm_cars/profile/'.Auth::user()->id)}}" class="border border-neutral-400 box-content text-xs rounded py-3 px-5">{{Auth::user()->name}}</a>
+                        <a  href="{{url('mm_cars/profile/'.Auth::user()->id)}}" class="border capitalize  font-extrabold  border-neutral-400 box-content text-xs rounded py-3 px-5">{{Auth::user()->name}}</a>
                     </li>
                     @else 
                     <li class="inline-block align-baseline ">
