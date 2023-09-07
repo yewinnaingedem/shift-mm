@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\POS\MMCarsController ;
 use App\Http\Controllers\Register\AuthController ;
+use App\Http\Controllers\Contant\DetailsController ;
 
 
 Route::get('/google' , [AuthController::class , 'googleLogIn']);
@@ -19,6 +20,9 @@ Route::prefix('mm_cars')->group(function () {
     Route::get('/register',[AuthController::class , 'userRegister']);
     Route::post('/register',[AuthController::class , 'register']);
     Route::post('change_profile/{id}' , [AuthController::class , 'changeProfile']);
+
+    // Car Details
+    Route::get('{carname}/{id}' , [DetailsController::class , 'index'] );
 });
 
 ?> 
