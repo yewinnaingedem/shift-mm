@@ -26,6 +26,15 @@
             padding : 10px 15px ;
             border-radius : 15px ;
         }
+        .bg-secondary-100 {
+            background-color : #232D3E ;
+        }
+        .hover-bg-secondary-100:hover {
+            background-color : #232D3E ;
+        }
+        .text-secondary-100 {
+            color :#232D3E ;
+        }
     </style>
 @endsection 
 
@@ -49,8 +58,8 @@
                     <div>
                         <div class="flex items-center w-100  ">
                             <h1 class="text-2xl font-semibold font- ">2018 Audi SQ5 Prestige</h1>
-                            <div class="bg-white ml-2 text-neutral-100 border items-center border-secondary flex jsutify-center p-2 text-sm font-semibold rounded-lg capitalize ">
-                                <i class="fa-solid fa-certificate mr-1.5"></i>
+                            <div class="bg-white ml-2 text-neutral-500 border items-center border-secondary flex jsutify-center p-2 text-sm font-semibold rounded-lg capitalize ">
+                                <i class="fa-solid text-black fa-certificate mr-1.5"></i>
                                 <div class="ml-2">Shift Cartificated </div>
                             </div>
                             <div class=" ml-2 bg-primary text-neutral-100 border border-primary flex items-center p-2 outline-none text-xs rounded-lg capitalize ">
@@ -134,7 +143,7 @@
                 </span>
             </button>
         </div>
-        <div class="grid grid-cols-3">
+        <div class="grid grid-cols-3 mb-5">
             <div class='col-span-2  ' style="margin-left : 30px;">
                 <div  class="w-full mt-8 ">
                     <div class="px-5">
@@ -288,17 +297,136 @@
                         <div class="mt-5 mb-3 ">
                             <a href="" class="shift-button border border-gray-700 ">View Full Carfax Report </a>
                         </div>
-                        <hr>
                     </div>
                 </div>
             </div>  
-            <div class="col-span-1 flex justify-between flex-col mt-7 ">
-                <div class="w-100 px-3">
+            <div class="col-span-1 my-[135px] mx-2 border border-gray-500 hover:shadow-full rounded-xl flex justify-between flex-col mt-7 ">
+                <div class="w-100  p-6 h-[65%]">
                     <div class="flex justify-between w-full ">
-                        <div class="text-primary-60 font-semibold text-neutral-90 text-3xl font-display"> $30,950</div>
+                        <div class="text-primary-60 font-bold text-neutral-90 text-3xl font-display"> $30,950</div>
                         <div>
                             <div class="w-100 ">Est $145/month</div>
-                            <div class="text-xs text-neutral-50 font-inter font-normal mt-1"><a href="" class="text-gray-300">Customize my payment</a></div>
+                            <div class="text-xs text-neutral-50 font-inter font-normal mt-1"><a href="" class="text-gray-600">Customize my payment</a></div>
+                        </div>
+                    </div>
+                    <hr class="mt-8 mb-8">
+                    <div>
+                        <h1 class="capitalize font-bold font-serif mb-4">Get Pre-Quanity </h1>
+                        <div>
+                            <i class="fa-solid fa-landmark main-color mr-3 "></i>
+                            <span class="font-bold"><a href="">Get pre-qualified</a></span>for personalized terms in just a few minutes with no impact to your credit score.
+                        </div>
+                    </div>
+                    <hr class="mt-8 mb-8">
+                    <div>
+                        <h1 class="font-semibold mb-4 ">How do you want to get your car?</h1>
+                        <div class="flex items-center mb-4">
+                            <div class="main-color inline-block mr-3 text-[20px]" ><i class="fa-solid fa-truck-monster"></i></div>
+                            <div class="inline-block">
+                                <span>Test drive in-person at <a href="" class="main-color">Portland, OR</a></span> 7,478 miles away
+                            </div>
+                        </div>
+                        <div class='flex item-center '>
+                            <div class="main-color text-[20px] mr-3">
+                                <i class="fa-solid fa-building-user"></i>
+                            </div>
+                            <div>
+                                <div class="font-semibold"><span class="">Buy online for free pickup</span> ,  or delivery to: <a href="" class="main-color">1171</a> </div>
+                                <div class="text-[13px] font-semibold ">Delivery cost calculated based on your shipping address</div>
+                            </div>
+                        </div>
+                        <div class="mb-4 mt-8">
+                            <button class="bg-primary rounded-l-lg px-3 py-2 text-[25px] w-full"><i class="fa-solid text-gray-700 fa-handshake"></i><span></span></button>
+                        </div>
+                        <div class="mb-4 mt-5">
+                            <a href="" class="font-semibold text-gray-600 border w-full text-center  inline-block border-black rounded-lg py-3 px-4">Buy it now Online</a>
+                        </div>
+                        <hr class="mt-4 mb-4">
+                        <div>
+                            <h1 class="font-bold text-gray-900 mb-4">We're here to help</h1>
+                            <div class="flex items-center ">
+                                <div class="inline-block mr-3 text-[18px] "><i class="fa-regular fa-envelope"></i></div>
+                                <a  href=''  class="inline-block font-semibold main-color">Ask a question about this car</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Payment Plans -->
+        <div class="bg-secondary-100 max-w-screen-2xl mx-auto mb-8 rounded-lg border">
+            <div>
+                <h1 class="mx-6 my-4 text-center font-bold text-[30px] text-white">Bulid Your Prefect Payment Plan </h1>
+                <div class="flex item-center justify-center mt-5 mb-5">
+                    <div class="py-2 px-4 rounded-l-lg hover-bg-secondary-100 hover:text-white uppercase text-[20px] text-gray-600 font-semibold  border-black bg-white ">Financing </div>
+                    <div class="py-2 px-4 rounded-r-lg hover-bg-secondary-100 hover:text-white uppercase text-[20px] text-gray-600 font-semibold  border-black bg-white ">Cash </div>
+                </div>
+                <div class="grid grid-cols-2 w-[80%] m-auto ">
+                    <div class="text-secondary-100 mr-1 bg-white h-[350px] px-5 border rounded-lg my-2 mb-4 ">
+                        <h1 class="text-center my-3 font-bold text-[25px] capitalize">Enter Your Estimated Term </h1>
+                        <hr>
+                        <div>
+                            <h1 class="font-semibold mb-3">Loan length</h1>
+                            <div class="flex items-center w-full  mx-auto mb-3">
+                                <div class="w-[33%] border rounded-l-lg flex justify-center items-center bg-secondary-100 text-white py-2">
+                                    <div class="inline-block mr-2">36</div> 
+                                    <div class="inline-block font-bold">Months</div>
+                                </div>
+                                <div class="w-[33%] border  flex justify-center items-center bg-secondary-100 text-white py-2">
+                                    <div class="inline-block mr-2">48</div>
+                                    <div class="inline-block font-bold">Months</div>
+                                </div>
+                                <div class="w-[33%] border rounded-r-lg flex justify-center items-center bg-secondary-100 text-white py-2">
+                                    <div class="inline-block mr-2">60</div>
+                                    <div class="inline-block font-bold">Months</div>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="mt-3 ">
+                                <label for="" class="font-bold my-2 ">Monthly Payment</label>
+                                <input id="monthly_payment"  type="range" dat-min="0" data-max="3000000"  step="1" class="w-full h-2 bg-secondary-100 rounded-lg appearance- cursor-pointer dark:bg-white">
+                            </div>
+                            <div class="mt-3 mb-3">
+                                <label for="" class="font-bold my-2 ">Down Payment</label>
+                                <input id="downPayment" onKeyup="dataBinding()" type="range" min="30%" max="100%" step="" class="w-full h-2 bg-secondary-100 rounded-lg appearance cursor-pointer dark:bg-white">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-secondary-100 bg-white h-[350px ] ml-2 px-5 border rounded-lg my-2 mb-4">
+                        <h1 class="text-center my-3 font-bold text-[25px] capitalize">Estimated Price Breakdown</h1>
+                        <hr>
+                        <div class="mt-4">
+                            <div class="flex justify-between items-center py-1 ">
+                                <div class="font-semibold text-[17px]">Vehicle price</div>
+                                <div class="font-bold text-[18px]">$34,350</div>
+                            </div>
+                            <div class="flex justify-between items-center py-1 ">
+                                <div class="font-semibold text-[17px]">Est. Tax, Title & Reg.</div>
+                                <div class="font-bold text-[18px]">$3840</div>
+                            </div>
+                            <div class="flex justify-between items-center py-1 ">
+                                <div class="font-semibold text-[17px]">Down payment</div>
+                                <div class="font-bold text-[18px] " id="downPaymentVal"></div>
+                            </div>
+                            <div class="flex justify-between items-center py-1 ">
+                                <div class="font-semibold text-[17px]">Length of loan</div>
+                                <div class="font-bold text-[18px]">60 Months</div>
+                            </div>
+                            <div class="flex justify-between items-center py-1 ">
+                                <div class="font-semibold text-[17px]">Interest of rated</div>
+                                <div class="font-bold text-[18px]">10 %</div>
+                            </div>
+                            <div class="flex justify-between items-center py-1 ">
+                                <div class="font-semibold text-[17px]">Est. Monthly Payment</div>
+                                <div class="font-extrabold text-[21px]">$460</div>
+                            </div>
+                            <div class="flex justify-between items-center py-1 ">
+                                <div class="font-semibold text-[17px]">Est. Finance Amount</div>
+                                <div class="font-extrabold text-[21px]">$23236</div>
+                            </div>
+                            <div class="mb-3">
+                                <button class="py-4 w-full text-center font-bold border bg-primary rounded-lg ">Get Started </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -308,11 +436,21 @@
 @endsection 
 
 @section('footer') 
-
+    @parent
 @endsection 
 
 @section('script')
     <script>
-
+        let monthly_payment = document.getElementById('monthly_payment') ;
+        let downPaymentVal = document.getElementById('downPaymentVal') ;
+        const formObject = {} ;
+        Object.defineProperty(formObject , 'name' , {
+            get() {
+                return monthly_payment.value ;
+            },
+            set(newValue) {
+                downPaymentVal.innerHTML = newValue ;
+            }
+        });
     </script>
 @endsection 

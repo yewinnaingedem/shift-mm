@@ -15,6 +15,7 @@ Route::prefix('mm_cars')->group(function () {
     Route::get('/profile/{id}' , [AuthController::class, "authProfile"]);
     Route::get("/log-out" , function () {
         Auth::logout() ;
+        
         return redirect('mm_cars');
     });
     Route::get('/register',[AuthController::class , 'userRegister']);

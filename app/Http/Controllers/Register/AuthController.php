@@ -81,9 +81,9 @@ class AuthController extends Controller
             $inputs['name'] = $request['name'] ;
             $inputs['email'] = $request['email'] ;
             $inputs['user_img'] = $img_path ;
-            User::where('id',$id)->update($inputs) ;
-            session()->put('message' , 'You have changed successfuly');
-            session()->put('picture' , $img_path) ;
+            User::where('id',$id)->update($inputs) ;    
+            session()->flush('message' , 'You have changed successfuly');
+            session()->flush('picture' , $img_path) ;
             return redirect("/mm_cars/profile/".$id);
         }else {
             $validator = Validator::make(
