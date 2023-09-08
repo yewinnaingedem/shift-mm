@@ -47,10 +47,10 @@
 
 @section('content') 
     <main class="px-0 m-auto bg-white sm:px-4">
-        <div class="max-w-screen-2xl mx-auto mb-4 ">
+        <div class="max-w-screen-2xl mx-auto mb-4  border-b-0  border-gray-400">
             <nav  class="mx-3 text-gray-900 pt-5 text-sm font-sans block">
                 <a href="">Audi </a>
-                /
+                
                 <a href="">SQ5</a>
             </nav>
             <div class="block pl-8 pt-2 sticky top-[3.70rem] mt-1.5  z-[9996] bg-white">
@@ -71,7 +71,7 @@
                             <div class="font-bold text-xs text-gray-dark"> 77 K Miles</div>
                         </div>
                     </div>
-                    <div class="flex items-center ">
+                    <div class="flex items-center mb-2 ">
                         <div>
                             <div class='flex justify-end '>
                                 <h2 class="text-base font-bold ">
