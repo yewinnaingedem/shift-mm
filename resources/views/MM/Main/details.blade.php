@@ -381,14 +381,37 @@
                                     <div class="inline-block font-bold">Months</div>
                                 </div>
                             </div>
-                            <hr>
-                            <div class="mt-3 ">
-                                <label for="" class="font-bold my-2 ">Monthly Payment</label>
-                                <input id="monthly_payment"  type="range" dat-min="0" data-max="3000000"  step="1" class="w-full h-2 bg-secondary-100 rounded-lg appearance- cursor-pointer dark:bg-white">
+                            <hr class="mb-2">
+                            <h1 class="font-semibold mb-2">DownPayment %</h1>
+                            <div class="flex items-center w-full  mx-auto mb-3">
+                                <div class="w-[33%] border rounded-l-lg flex justify-center items-center bg-secondary-100 text-white py-2">
+                                    <div class="inline-block mr-2">30</div> 
+                                    <div class="inline-block font-bold">%</div>
+                                </div>
+                                <div class="w-[33%] border  flex justify-center items-center bg-secondary-100 text-white py-2">
+                                    <div class="inline-block mr-2">40</div>
+                                    <div class="inline-block font-bold">%</div>
+                                </div>
+                                <div class="w-[33%] border rounded-r-lg flex justify-center items-center bg-secondary-100 text-white py-2">
+                                    <div class="inline-block mr-2">50</div>
+                                    <div class="inline-block font-bold">%</div>
+                                </div>
                             </div>
-                            <div class="mt-3 mb-3">
-                                <label for="" class="font-bold my-2 ">Down Payment</label>
-                                <input id="downPayment" onKeyup="dataBinding()" type="range" min="30%" max="100%" step="" class="w-full h-2 bg-secondary-100 rounded-lg appearance cursor-pointer dark:bg-white">
+                            <hr class="mb-2">
+                            <h1 class="font-semibold mb-2">Option </h1>
+                            <div class="flex items-center w-full  mx-auto mb-3">
+                                <div class="w-[33%] border rounded-l-lg flex justify-center items-center bg-secondary-100 text-white py-2">
+                                    <div class="inline-block mr-2">36</div> 
+                                    <div class="inline-block font-bold">Months</div>
+                                </div>
+                                <div class="w-[33%] border  flex justify-center items-center bg-secondary-100 text-white py-2">
+                                    <div class="inline-block mr-2">48</div>
+                                    <div class="inline-block font-bold">Months</div>
+                                </div>
+                                <div class="w-[33%] border rounded-r-lg flex justify-center items-center bg-secondary-100 text-white py-2">
+                                    <div class="inline-block mr-2">60</div>
+                                    <div class="inline-block font-bold">Months</div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -398,15 +421,19 @@
                         <div class="mt-4">
                             <div class="flex justify-between items-center py-1 ">
                                 <div class="font-semibold text-[17px]">Vehicle price</div>
-                                <div class="font-bold text-[18px]">$34,350</div>
-                            </div>
-                            <div class="flex justify-between items-center py-1 ">
-                                <div class="font-semibold text-[17px]">Est. Tax, Title & Reg.</div>
-                                <div class="font-bold text-[18px]">$3840</div>
+                                <div class="font-bold text-[18px]" id="formatnumber1"></div>
                             </div>
                             <div class="flex justify-between items-center py-1 ">
                                 <div class="font-semibold text-[17px]">Down payment</div>
                                 <div class="font-bold text-[18px] " id="downPaymentVal"></div>
+                            </div>
+                            <div class="flex justify-between items-center py-1 ">
+                                <div class="font-semibold text-[17px]">Insurance (1%)</div>
+                                <div class="font-bold text-[18px]" id="ins_1"></div>
+                            </div>
+                            <div class="flex justify-between items-center py-1 ">
+                                <div class="font-semibold text-[17px]">Service Charge (2% on Vehicle price)</div>
+                                <div class="font-bold text-[18px]" id="sv_c"></div>
                             </div>
                             <div class="flex justify-between items-center py-1 ">
                                 <div class="font-semibold text-[17px]">Length of loan</div>
@@ -418,11 +445,11 @@
                             </div>
                             <div class="flex justify-between items-center py-1 ">
                                 <div class="font-semibold text-[17px]">Est. Monthly Payment</div>
-                                <div class="font-extrabold text-[21px]">$460</div>
+                                <div class="font-extrabold text-[21px]" id="mnth"></div>
                             </div>
                             <div class="flex justify-between items-center py-1 ">
                                 <div class="font-semibold text-[17px]">Est. Finance Amount</div>
-                                <div class="font-extrabold text-[21px]">$23236</div>
+                                <div class="font-extrabold text-[21px]" id="fin_am"></div>
                             </div>
                             <div class="mb-3">
                                 <button class="py-4 w-full text-center font-bold border bg-primary rounded-lg ">Get Started </button>
@@ -441,16 +468,27 @@
 
 @section('script')
     <script>
-        let monthly_payment = document.getElementById('monthly_payment') ;
-        let downPaymentVal = document.getElementById('downPaymentVal') ;
-        const formObject = {} ;
-        Object.defineProperty(formObject , 'name' , {
-            get() {
-                return monthly_payment.value ;
-            },
-            set(newValue) {
-                downPaymentVal.innerHTML = newValue ;
-            }
+        $(document).ready(function () {
+            let price = $('#formatnumber1');
+            let vehicle_pirce = 30000000 ;
+            let finalPrice = vehicle_pirce.toLocaleString() ;
+            price.text(finalPrice + " "+ "Kyats");
+            let downPayment = $('#downPaymentVal');
+            let dpPrice = 15000000 ;
+            let fn = dpPrice.toLocaleString();
+            downPayment.text(fn);
+            let inst = 300000 ;
+            let ins = inst.toLocaleString();
+            $('#ins_1').text(ins);
+            let svp = 600000 ;
+            let svpf = svp.toLocaleString() ;
+            $('#sv_c').text(svpf);
+            let month = 700000 ;
+            let monf = month.toLocaleString() ;
+            $('#mnth').text(monf+""+"Kyats");
+            let fin = 15000000 ;
+            let finf = fin.toLocaleString();
+            $('#fin_am').text(finf + "" + "Kyats")
         });
     </script>
 @endsection 
