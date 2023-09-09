@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Http;
+use Stevebauman\Location\Facades\Location;
+
 
 
 class AuthController extends Controller
@@ -53,8 +55,28 @@ class AuthController extends Controller
        }
     }
 
-    public function authProfile($id) {
+    public function authProfile($id , Request $request) {
         $name = User::where('id', $id)->first();
+        // $name = $request->ip() ;
+        $name = "66.102.0.0";
+        // $name = $_SERVER['REMOTE_ADDR'] ;
+        $location = Location::get($name);
+
+        dd($location);
+        $data = [] ;
+        $data['ip'] = $location->ip ;
+        $data['countryName'] = $location->countryName ;
+        $data['countryCode'] = $location->countryCode ;
+        $data['regionName'] = $location->regionName ;
+        $data['region_code'] = $location->regionCode ;
+        $data['city_name'] = $location->cityName ;
+        $data['zipCode'] = $location->zipCode ;
+        $data['latitude'] = $location->latitude ;
+        $data['logitude'] = $location->logitude ;
+        $data['area_Code'] = $location->areaCode ;
+        $data['tiemZone'] = $location->timeZone ;
+
+        dd($data);
         return view('MM.Register.profile')
                     ->with('id',$name);
     }
