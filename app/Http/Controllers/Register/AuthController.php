@@ -30,10 +30,15 @@ class AuthController extends Controller
     public function redirectGoogle() {
        try {
         $user = $user = Socialite::driver('google')->stateless()->user();
-        $userId = User::where('google_id', $user->id)->first();
+        $userId = User::where('google_id', $user->id)->first(); 
         if($userId) {
-                Auth::login($userId);
+            Auth::login($userId);
+            $userType = User::where('google_id' ,$user->id )->count() > 0 ? User::where('google_id' , $user->id )->first()->user_row : '';
+            if($userType == "admin") {
+                return redirect('admin');
+            }else {
                 return redirect('/mm_cars');
+            }
         }else {
                 $user_img = $user->user['picture'];
                 $img_path =  $this->checkImg($user_img);
@@ -62,7 +67,7 @@ class AuthController extends Controller
         // $name = $_SERVER['REMOTE_ADDR'] ;
         $location = Location::get($name);
 
-        dd($location);
+        // dd($location);
         $data = [] ;
         $data['ip'] = $location->ip ;
         $data['countryName'] = $location->countryName ;
@@ -139,9 +144,14 @@ class AuthController extends Controller
             return redirect('/mm_cars/log-in')->withErrors($validator)->withInput() ;
         }
         $cardinal = $request->only('email','password') ;
-        
-        if(Auth::attempt($cardinal)) {
-            return redirect('/mm_cars');
+        $userType = User::where('email' , $request['email'])->count() > 0 ? User::where('email' , $request['email'])->first()->user_row : ''; 
+        if(Auth::attempt($cardinal && $userType == " ")) {
+            if($userType == 'admin')
+            {
+                return redircet('admin');
+            }else {
+                return redirect('/mm_cars');
+            } 
         }else {
             $validator->errors()->add('password_token','Pleace fill out the correct Form') ;
             return redirect('/mm_cars/log-in')->withErrors($validator)->withInput();

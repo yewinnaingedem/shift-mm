@@ -6,6 +6,7 @@ use App\Http\Controllers\Register\AuthController ;
 use App\Http\Controllers\Contant\DetailsController ;
 use App\Http\Controllers\Financing\FinancingController;
 use App\Http\Controllers\Admin\AdminAuthController;
+use App\Http\Controllers\Admin\ImagesController;
 
 Route::get('/google' , [AuthController::class , 'googleLogIn']);
 Route::prefix('mm_cars')->group(function () {
@@ -16,7 +17,6 @@ Route::prefix('mm_cars')->group(function () {
     Route::get('/profile/{id}' , [AuthController::class, "authProfile"]);
     Route::get("/log-out" , function () {
         Auth::logout() ;
-        
         return redirect('mm_cars');
     });
     Route::get('/register',[AuthController::class , 'userRegister']);
@@ -32,7 +32,7 @@ Route::prefix('mm_cars')->group(function () {
 
 Route::prefix('admin')->group(function (){
     Route::get('/' , [AdminAuthController::class , 'index']);
-
+    Route::resource('imgs' , ImagesController::class );
 });
 
 ?> 
