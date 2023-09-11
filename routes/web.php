@@ -5,6 +5,7 @@ use App\Http\Controllers\POS\MMCarsController ;
 use App\Http\Controllers\Register\AuthController ;
 use App\Http\Controllers\Contant\DetailsController ;
 use App\Http\Controllers\Financing\FinancingController;
+use App\Http\Controllers\Admin\AdminAuthController;
 
 Route::get('/google' , [AuthController::class , 'googleLogIn']);
 Route::prefix('mm_cars')->group(function () {
@@ -27,6 +28,11 @@ Route::prefix('mm_cars')->group(function () {
 
     // financing 
     Route::get('financing' , [FinancingController::class , 'index'] );
+});
+
+Route::prefix('admin')->group(function (){
+    Route::get('/' , [AdminAuthController::class , 'index']);
+
 });
 
 ?> 
