@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Car_Img extends Model
 {
     use HasFactory;
+
 }

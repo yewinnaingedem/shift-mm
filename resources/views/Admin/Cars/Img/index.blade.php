@@ -68,7 +68,7 @@
                         </td>
                         <td>
                             <a href="{{url('admin/imgs/'.$image->id)}}" class="text-primary mr-2"><i class="fa-solid fa-eye"></i></a>
-                            <a href="{{url('admin/imgs/'.$image->id.'/edit')}}">update</a>
+                            <a href="{{url('admin/imgs/'.$image->id.'/edit')}}"><i class="fa-solid fa-file-pen"></i></a>
                             <button class="text-danger btn delete" data-id="{{$image->id}}"><i class="fa-solid fa-trash-can"></i></button>
                         </td>
                     </tr>

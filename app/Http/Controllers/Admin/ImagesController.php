@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Car_Img ;
 use Illuminate\Support\Facades\Storage;
+use Carbon\Carbon ;
 class ImagesController extends Controller
 {
     /**
@@ -93,14 +94,12 @@ class ImagesController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        
         $font = $request->font ? $request->file('font') : null ;
         $east = $request->east ? $request->file('east') : null ;
         $side_1 = $request->side_1 ? $request->file('side_1') : null ;
         $side_2 = $request->side_2 ? $request->file('side_2') : null ;
         $interior = $request->interior ? $request->file('interior') : null ;
         $kilo = $request->kilo ? $request->file('kilo') : null ;
-        
         $data = [];
         $data['font'] = $font ;
         $data['east'] = $east ;
@@ -108,8 +107,6 @@ class ImagesController extends Controller
         $data['side_2']  = $side_2 ;
         $data['interior'] = $interior ;
         $data['kilo'] = $kilo ;
-
-
         $items = [] ;
         $inputs = [] ;
         $keys = [] ;
@@ -121,14 +118,16 @@ class ImagesController extends Controller
                 array_push($inputs , $item );
            }
         }
-        
-        $data = Storage::disk('public')->put($this->carImg, $keys[0]) ;
-        dd($data);
-        $combinedArray = [];
-        
-        foreach ($inputs as $index => $key) {
-            $combinedArray[$key] = $keys[$index];
+        $datas = [] ;
+        foreach ($keys as $value ) {
+            $data = Storage::disk('public')->put($this->carImg, $value) ;
+            array_push($datas , $data);    
         }
+        $combinedArray = [];
+        foreach ($inputs as $index => $key) {
+            $combinedArray[$key] = $datas[$index];
+        }
+        $combinedArray['updated_at'] = Carbon::now();
         Car_Img::where('id' , $id )->update($combinedArray);
         return redirect('admin/imgs');
     }
