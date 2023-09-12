@@ -12,6 +12,8 @@ class ImagesController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public $carImg = "Car_Img" ; 
+
     public function index()
     {
         $images = Car_Img::get();
@@ -47,13 +49,13 @@ class ImagesController extends Controller
             return redirect('admin/imgs/create')->withErrors($validation)->withInput() ;
         }
 
-        $carImg = "Car_Img" ;
-        $font = Storage::disk('public')->put($carImg , $request->file('font'));
-        $east = Storage::disk('public')->put($carImg , $request->file('east'));
-        $side_1 = Storage::disk('public')->put($carImg , $request->file('side_1'));
-        $side_2 = Storage::disk('public')->put($carImg , $request->file('side_2'));
-        $interior = Storage::disk('public')->put($carImg , $request->file('interior'));
-        $kilo = Storage::disk('public')->put($carImg , $request->file('kilo'));
+        
+        $font = Storage::disk('public')->put($this->carImg , $request->file('font'));
+        $east = Storage::disk('public')->put($this->carImg , $request->file('east'));
+        $side_1 = Storage::disk('public')->put($this->carImg , $request->file('side_1'));
+        $side_2 = Storage::disk('public')->put($this->carImg , $request->file('side_2'));
+        $interior = Storage::disk('public')->put($this->carImg , $request->file('interior'));
+        $kilo = Storage::disk('public')->put($this->carImg , $request->file('kilo'));
 
         $imgs = [] ;
         $imgs['font'] =  $font ; 
@@ -73,7 +75,8 @@ class ImagesController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $image = Car_Img::where('id' , $id)->first();
+        return view('admin.cars.img.show' , compact('image'));
     }
 
     /**
@@ -81,7 +84,8 @@ class ImagesController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $data = Car_Img::where('id',$id)->first();
+        return view('admin.cars.img.update' , compact('data'));
     }
 
     /**
@@ -89,7 +93,44 @@ class ImagesController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        
+        $font = $request->font ? $request->file('font') : null ;
+        $east = $request->east ? $request->file('east') : null ;
+        $side_1 = $request->side_1 ? $request->file('side_1') : null ;
+        $side_2 = $request->side_2 ? $request->file('side_2') : null ;
+        $interior = $request->interior ? $request->file('interior') : null ;
+        $kilo = $request->kilo ? $request->file('kilo') : null ;
+        
+        $data = [];
+        $data['font'] = $font ;
+        $data['east'] = $east ;
+        $data['side_1'] = $side_1 ;
+        $data['side_2']  = $side_2 ;
+        $data['interior'] = $interior ;
+        $data['kilo'] = $kilo ;
+
+
+        $items = [] ;
+        $inputs = [] ;
+        $keys = [] ;
+        foreach ($data as $item => $key) {
+           if($key == null ){
+                array_push($items , $item );
+           }else {
+                array_push($keys , $key) ;
+                array_push($inputs , $item );
+           }
+        }
+        
+        $data = Storage::disk('public')->put($this->carImg, $keys[0]) ;
+        dd($data);
+        $combinedArray = [];
+        
+        foreach ($inputs as $index => $key) {
+            $combinedArray[$key] = $keys[$index];
+        }
+        Car_Img::where('id' , $id )->update($combinedArray);
+        return redirect('admin/imgs');
     }
 
     /**
@@ -97,6 +138,16 @@ class ImagesController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $data = Car_Img::where('id' , $id)->first();
+        Storage::delete('public/' . $data->font);
+        Storage::delete('public/' . $data->east);
+        Storage::delete('public/' . $data->side_1);
+        Storage::delete('public/' . $data->side_2);
+        Storage::delete('public/' . $data->interior);
+        Storage::delete('public/' . $data->kilo);
+        
+        $data->delete() ;
+
+        return response()->json($data);
     }
 }

@@ -42,6 +42,7 @@
                     <th>Images Side 2 </th>
                     <th>Interior</th>
                     <th>Kilo</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -65,6 +66,11 @@
                         <td>   
                             <img style="width: 100px; height: 100px; " src="{{asset('storage/'. $image->kilo )}}" alt="font">    
                         </td>
+                        <td>
+                            <a href="{{url('admin/imgs/'.$image->id)}}" class="text-primary mr-2"><i class="fa-solid fa-eye"></i></a>
+                            <a href="{{url('admin/imgs/'.$image->id.'/edit')}}">update</a>
+                            <button class="text-danger btn delete" data-id="{{$image->id}}"><i class="fa-solid fa-trash-can"></i></button>
+                        </td>
                     </tr>
                 @endforeach
             </tbody>
@@ -73,5 +79,26 @@
 @endsection
 
 @section('script')
-    
+    <script>
+        $(document).ready(function () {
+            $('.delete').click((e)=> {
+                let button = $(e.currentTarget);
+                let id = button.data('id');
+                let row = button.parent().parent() ;
+                $.ajax({
+                    type  : "DELETE" ,
+                    url : "/admin/imgs/" + id ,
+                    data : {
+                        "_token" : "{{csrf_token() }}"
+                    },
+                    success : (response) => {
+                        console.log(response);
+                    },
+                    error : function (err)  {
+                        console.log(err);
+                    }
+                });
+            });
+        });
+    </script>
 @endsection 
