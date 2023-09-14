@@ -40,6 +40,9 @@ Route::prefix('admin')->group(function (){
     Route::resource('brands' , BrandController::class );
     // Fecuter 
     Route::resource('fecuters' , FectureController::class );
+
+    // Vue Add
+    Route::get('add-cars' , [AdminAuthController::class , 'addCars'] );
 });
 
 ?> 

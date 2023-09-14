@@ -7,7 +7,7 @@
                     <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                     Admin  Dashboard
                 </a>
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="{{url('admin/add-cars')}}">
                     <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                     Add Cars 
                 </a>
