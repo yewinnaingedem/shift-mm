@@ -14,11 +14,8 @@ return new class extends Migration
         Schema::create('seats', function (Blueprint $table) {
             $table->id();
             $table->string('seate_moter');
-            $table->string('driver_seat_motor');
-            $table->string('both_passanger');
-            $table->string('third_rows');
-            $table->string('seat_leather');
-            $table->string('seat_normal');
+            $table->string('num_of_seats');
+            $table->string('seat_conditions');
             $table->string('seat_header');
             $table->string('both_header');
         });

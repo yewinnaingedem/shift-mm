@@ -76,6 +76,7 @@
             <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="{{url('admin/imgs')}}">Images</a></li>
                 <li class="nav-item"> <a class="nav-link" href="{{url('admin/brands')}}">Brands</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{url('admin/fecuters')}}">Fecuter</a></li>
             </ul>
         </div>
         </li>

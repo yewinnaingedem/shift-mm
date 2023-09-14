@@ -76,7 +76,27 @@ class BrandController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validation = Validator::make(
+            $request->all() ,
+            [
+                'brand_name' => 'required' ,
+                'model' => ['required','numeric'] ,
+                'make'       => 'required|string',
+                'name' => 'required|string'
+            ]    
+        );
+        if($validation->fails()) {
+            return redirect('admin/brands/'.$id.'/edit')->withErrors($validation)->withInput();
+        }
+        $datas = [] ;
+        $datas['brand_name'] = $request->brand_name ;
+        $datas['model'] = $request->model ;
+        $datas['make'] = $request->make ;
+        $datas['name'] = $request->name ;
+        $data['updated_at'] = Carbon::now();
+
+        Brand::where('id',$id)->update($datas);
+        return redirect('admin/brands');
     }
 
     /**

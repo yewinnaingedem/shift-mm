@@ -8,6 +8,7 @@ use App\Http\Controllers\Financing\FinancingController;
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\ImagesController;
 use App\Http\Controllers\Cars\BrandController;
+use App\Http\Controllers\Cars\FectureController;
 
 Route::get('/google' , [AuthController::class , 'googleLogIn']);
 Route::prefix('mm_cars')->group(function () {
@@ -33,10 +34,12 @@ Route::prefix('mm_cars')->group(function () {
 
 Route::prefix('admin')->group(function (){
     Route::get('/' , [AdminAuthController::class , 'index']);
-
+    // Car img
     Route::resource('imgs' , ImagesController::class );
-
+    // Brands
     Route::resource('brands' , BrandController::class );
+    // Fecuter 
+    Route::resource('fecuters' , FectureController::class );
 });
 
 ?> 
