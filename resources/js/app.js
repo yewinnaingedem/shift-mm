@@ -1,11 +1,9 @@
 import { createApp } from "vue";
-// import addcars from "./Component/addcars.vue" ;
-import App from "./App.vue" ;
-
+import step1 from "./Component/step1.vue";
 const app = createApp({
     components : {
-        App ,
+        step1 ,
     }
 })
 
-app.mount('#add') ;
+app.mount('#app') ;

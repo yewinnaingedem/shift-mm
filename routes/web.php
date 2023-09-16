@@ -9,6 +9,8 @@ use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\ImagesController;
 use App\Http\Controllers\Cars\BrandController;
 use App\Http\Controllers\Cars\FectureController;
+use App\Http\Controllers\Car\ModelController;
+
 
 Route::get('/google' , [AuthController::class , 'googleLogIn']);
 Route::prefix('mm_cars')->group(function () {
@@ -34,15 +36,18 @@ Route::prefix('mm_cars')->group(function () {
 
 Route::prefix('admin')->group(function (){
     Route::get('/' , [AdminAuthController::class , 'index']);
-    // Car img
-    Route::resource('imgs' , ImagesController::class );
-    // Brands
-    Route::resource('brands' , BrandController::class );
-    // Fecuter 
-    Route::resource('fecuters' , FectureController::class );
+    // // Car img
+    // Route::resource('imgs' , ImagesController::class );
+    // // Brands
+    // Route::resource('brands' , BrandController::class );
+    // // Fecuter 
+    // Route::resource('fecuters' , FectureController::class );
 
     // Vue Add
     Route::get('add-cars' , [AdminAuthController::class , 'addCars'] );
+
+    Route::post('add-cars' , [ModelController::class , 'index']);
+    Route::get('step-progess' , [ModelController::class , 'stepProgess']);
 });
 
 ?> 
