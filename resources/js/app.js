@@ -1,9 +1,10 @@
 import { createApp } from "vue";
-import addcars from "./Component/addcars.vue" ;
+// import addcars from "./Component/addcars.vue" ;
+import App from "./App.vue" ;
 
 const app = createApp({
     components : {
-        addcars ,
+        App ,
     }
 })
 

@@ -14,7 +14,7 @@
 
 @section('content')
     <div id="add">
-        <addcars/>
+        <App/>
     </div>
 @endsection 
 

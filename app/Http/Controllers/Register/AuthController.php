@@ -144,11 +144,11 @@ class AuthController extends Controller
             return redirect('/mm_cars/log-in')->withErrors($validator)->withInput() ;
         }
         $cardinal = $request->only('email','password') ;
-        $userType = User::where('email' , $request['email'])->count() > 0 ? User::where('email' , $request['email'])->first()->user_row : ''; 
-        if(Auth::attempt($cardinal && $userType == " ")) {
+        $userType = User::where('email' , $request['email'])->count() > 0 ? User::where('email' , $request['email'])->first()->user_row : null ; 
+        if(Auth::attempt($cardinal) && $userType != null ) {
             if($userType == 'admin')
             {
-                return redircet('admin');
+                return redirect('admin');
             }else {
                 return redirect('/mm_cars');
             } 
