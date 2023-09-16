@@ -31,11 +31,13 @@ class ModelController extends Controller
         foreach ($input as $data ) {
             array_push($datas , $data);
         }
+        session()->put('data' , $datas);
 
-        return view('admin.cars.stepProgess' , compact('datas'));
+        return redirect('admin/step-progess')->with('datas' , $datas );
     }
 
     public function stepProgess () {
-        return view('admin.cars.stepProgess');
+        $datas = session()->has('data') ? session()->get('data') : [] ;
+        return view('admin.cars.stepProgess' , compact('datas'));
     }
 }
