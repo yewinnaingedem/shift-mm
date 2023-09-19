@@ -48,6 +48,7 @@ Route::prefix('admin')->group(function (){
 
     Route::post('add-cars' , [ModelController::class , 'index']);
     Route::get('step-progess' , [ModelController::class , 'stepProgess']);
+    Route::get('cars-test/{model_year}/{make}/{modal}' , [ModelController::class , 'routeTest']);
 });
 
 ?> 

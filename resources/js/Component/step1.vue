@@ -1,6 +1,6 @@
 <template>
     <div class="row">
-        <div  class="col-md-4  main-color w-full vh-100">
+        <div  class="col-md-4 position-sticky top-0 bottom-0 main-color w-full vh-100">
             <div class="header   ">
                 <div class="d-flex justify-content-center w-full  align-items-start ">
                     <h1 class="mt-3">Shift MM </h1>
@@ -46,7 +46,6 @@
                     </div>
                 </div>
             </div>
-            
             <div class="main w-75 m-auto pt-20">
                 <h3 class="fw-bolder">Basic Details </h3>
                 <div class="row">
@@ -54,15 +53,15 @@
                         <div class="mb-3">
                             <div class="d-flex flex-column justify-content-center align-items-start ">
                                 <label for="zip" class="form-label">Zip</label>
-                                <input type="text" name="" id="zip" class="w-100 form-control mb-1" placeholder="Enter Zip">
+                                <input type="text" name="" v-model="zip" id="zip" class="w-100 form-control mb-1" placeholder="Enter Zip">
                                 <p class="fs-8 text-danger">invaild zip code</p>
                             </div>
                         </div>
                     </div>
                     <div class="mb-3 col-md-6">
                             <div class="d-flex flex-column justify-content-center align-items-start ">
-                                <label for="millage" class="form-label">Millage</label>
-                                <input type="text" name="" id="millage" class="w-100 form-control mb-1" placeholder="Enter Millage">
+                                <label for="millage"  class="form-label">Millage</label>
+                                <input type="text" v-model="millage" name="" id="millage" class="w-100 form-control mb-1" placeholder="Enter Millage">
                                 <p class="fs-8 text-danger">invaild Millage</p>
                             </div>
                         </div>
@@ -142,13 +141,13 @@
                                 </label>
                             </div>
                             <div class="col-md-3 mb-3">
-                                <input class="form-check-input mr-5" type="radio" name="body_styel" id="sedan">
+                                <input class="form-check-input mr-5" type="radio" v-model="body_style" name="body_styel" id="sedan">
                                 <label class="form-check-label" for="sedan">
                                     Sedon 
                                 </label>
                             </div>
                             <div class="col-md-3 mb-3 ">
-                                <input class="form-check-input mr-5" type="radio" name="body_styel" id="mvp">
+                                <input class="form-check-input mr-5" v-model="body_style" type="radio" name="body_styel" id="mvp">
                                 <label class="form-check-label" for="mvp">
                                     MVP
                                 </label>
@@ -215,6 +214,7 @@
             </div>
         </div>
     </div>
+    
 </template>
 
 <style>
@@ -257,6 +257,6 @@
 
 <script>
     import $ from 'jquery'
-
+   
     
 </script> 

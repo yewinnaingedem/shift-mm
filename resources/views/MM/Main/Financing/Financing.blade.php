@@ -28,6 +28,19 @@
         .bg-secondary-100 {
             background :#232D3E ;
         }
+        .makes:before , .el_hy:before , .luxury:before , .coupe:before , .sedan:before , .suv:before , .truck:before  , .hatchback:before , .van:before , .convertibles:before , .hatchback:before {
+            position: absolute;
+            content : "" ;
+            width : 0% ;
+            height: 5px;
+            left : 0 ;
+            bottom : -12px ;
+            border-radius : 5px ;
+            background : #06CBA3 ;
+        }
+        .makes:hover:before  , .el_hy:hover:before , .luxury:hover:before , .coupe:hover:before , .sedan:hover:before , .suv:hover:before , .truck:hover:before  , .hatchback:hover:before , .van:hover:before , .convertibles:hover:before {
+            width : 100% ;
+        }
     </style>
 @endsection 
 
@@ -43,40 +56,40 @@
     <main class="">
         <div class="block px-5 pt-2 bg-white border-b-2 relative border-gray-300">
             <div class="flex items-center justify-between ">
-                <div id="makes" class="pb-3 border-b-0 hover:border-b-4 hover-main-color">
-                    <div >Makes</div>
+                <div id="makes" class="pb-3 border-b-0  ">
+                    <div class="relative makes">Makes</div>
                 </div>
-                <div id="el_hy" class="pb-3 border-b-0 hover:border-b-4 hover-main-color">
-                    <div >Electric / Hybird </div>
+                <div id="el_hy" class="pb-3 border-b-0  ">
+                    <div class="el_hy relative" >Electric / Hybird </div>
                 </div>
-                <div id="luxury" class="pb-3 border-b-0 hover:border-b-4 hover-main-color ">
-                    <div >Luxury</div>
+                <div id="luxury" class="pb-3 border-b-0   ">
+                    <div class="luxury relative" >Luxury</div>
                 </div>
-                <div id="sedan" class="pb-3 border-b-0 hover:border-b-4 hover-main-color ">
-                    <div >Sedan</div>
+                <div id="sedan" class="pb-3 border-b-0   ">
+                    <div class="sedan relative" >Sedan</div>
                 </div>
-                <div id="coupe" class="pb-3 border-b-0 hover:border-b-4 hover-main-color ">
-                    <div >Coupe</div>
+                <div id="coupe" class="pb-3 border-b-0   ">
+                    <div class="coupe relative" >Coupe</div>
                 </div>
-                <div id="suv" class="pb-3 border-b-0 hover:border-b-4 hover-main-color ">
-                    <div>SUV</div>
+                <div id="suv" class="pb-3 border-b-0   ">
+                    <div class="suv relative">SUV</div>
                 </div>
-                <div id="truck" class="pb-3 border-b-0 hover:border-b-4 hover-main-color ">
-                    <div>Truck</div>
+                <div id="truck" class="pb-3 border-b-0   ">
+                    <div class="truck relative">Truck</div>
                 </div>
-                <div id="van" class="pb-3 border-b-0 hover:border-b-4 hover-main-color ">
-                    <div>Van</div>
+                <div id="van" class="pb-3 border-b-0   ">
+                    <div class="van relative">Van</div>
                 </div>
-                <div id="convertibles" class="pb-3 border-b-0 hover:border-b-4 hover-main-color ">
-                    <div>Convertibles</div>
+                <div id="convertibles" class="pb-3 border-b-0   ">
+                    <div class="convertibles relative">Convertibles</div>
                 </div>
-                <div id="hatchback" class="pb-3 border-b-0 hover:border-b-4 hover-main-color ">
-                    <div>Hatchback</div>
+                <div id="hatchback" class="pb-3 border-b-0   ">
+                    <div class="hatchback relative">Hatchback</div>
                 </div>
             </div>
-            <div class="px-5 bg-white absolute top-[4.5rem] z-30 block w-full left-0 ">
+            <div class="px-5 bg-white absolute top-[45px] z-30 block w-full left-0 ">
                 <div class="hidden z-50" id="makes_ho">
-                    <div class="grid grid-cols-3 ">
+                    <div class="grid grid-cols-3 py-[10px] ">
                         <div class="col-span-2">
                             <h1 class="font-semibold main-color mb-3">All Makes</h1>
                             <div class="grid grid-cols-6">
@@ -141,7 +154,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-span-1">
+                        <div class="col-span-1 flex justify-center items-center">
                             <img src="{{asset('storage/img/bg_cars.png')}}" alt="">
                         </div>
                     </div>
@@ -413,12 +426,10 @@
             let van = $('#van');
             let convertibles = $('#convertibles');
             let hatchback = $('#hatchback');
-            makes.mouseenter(function () {
+            makes.hover(function () {
                 $('#makes_ho').show();
             });
-            makes.mouseleave(function () {
-                $('#makes_ho').hide();
-            })
+            
         });
     </script>
 @endsection 

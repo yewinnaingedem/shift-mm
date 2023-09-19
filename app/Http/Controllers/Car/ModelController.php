@@ -40,4 +40,8 @@ class ModelController extends Controller
         $datas = session()->has('data') ? session()->get('data') : [] ;
         return view('admin.cars.stepProgess' , compact('datas'));
     }
+
+    public function routeTest($model_year , $make , $modal) {
+        dd($modal , $make , $model_year);
+    }
 }
