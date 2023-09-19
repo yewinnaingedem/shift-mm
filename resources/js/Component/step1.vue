@@ -211,6 +211,10 @@
                         </div>
                     </div>
                 </div>
+
+                <button class="btn btn-primary">
+                        Next Step 
+                </button>
             </div>
         </div>
     </div>
@@ -258,5 +262,9 @@
 <script>
     import $ from 'jquery'
    
-    
+    exprot default ({
+        data () {
+            
+        }
+    })
 </script> 

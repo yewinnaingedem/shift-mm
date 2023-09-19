@@ -30,6 +30,15 @@
         .c-hover:hover {
             color : #06cba3;
         }
+        .loader {
+            width: 100%;
+            height: 100vh;
+            background : tomato ;
+            position: absolute;
+        }
+        .loader-content{
+            
+        }
     </style>
 </head>
 <body>
@@ -37,18 +46,23 @@
         @include('MM.Layout.navbar')
     @show 
     <!-- search contianer -->
-    <div class="mt-[70px]  "  >
+    <div class="mt-[70px]  loader-content"  >
         @section('search-1') 
             @include('MM.Layout.search_1')
         @show 
         @section('content')
             @include('MM.Layout.content')
         @show 
-    </div>
 
-    @section('footer')
-        @include('MM.Layout.footer')
-    @show 
+        @section('footer')
+            @include('MM.Layout.footer')
+        @show 
+    </div>
+    <div class="loader">
+
+    </div>
+    
+    
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
@@ -64,6 +78,11 @@
         });
         $(window).scroll(()=> {
             $('#register_down').fadeOut();
+        });
+
+        $(window).on('load',()=> {
+            $('.loader').fadeOut('slow');
+            $('loader-content').show('slow');
         });
     })
 </script>

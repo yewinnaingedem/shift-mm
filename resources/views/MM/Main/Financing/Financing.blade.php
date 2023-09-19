@@ -407,6 +407,9 @@
             </div>
         </div>
     </div>
+    <div class="loader">
+
+    </div>
 @endsection 
 
 @section('footer') 
@@ -426,10 +429,13 @@
             let van = $('#van');
             let convertibles = $('#convertibles');
             let hatchback = $('#hatchback');
-            makes.hover(function () {
-                $('#makes_ho').show();
-            });
+            let data = false ;
             
+            $('#makes').hover(function () {
+                $('#makes_ho').show();
+            },function (){
+                $('#makes_ho').hide();
+            });
         });
     </script>
 @endsection 
