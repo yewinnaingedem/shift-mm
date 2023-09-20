@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 class DetailsController extends Controller
 {
     public function index($carname , $id) {
-        return view('MM.Main.details');
+        $total = 50000000 ;
+        return view('MM.Main.details' , compact('total'));
     }
 }

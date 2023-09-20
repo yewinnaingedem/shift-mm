@@ -53,7 +53,7 @@
                         <div class="mb-3">
                             <div class="d-flex flex-column justify-content-center align-items-start ">
                                 <label for="zip" class="form-label">Zip</label>
-                                <input type="text" name="" v-model="zip" id="zip" class="w-100 form-control mb-1" placeholder="Enter Zip">
+                                <input type="text" v-model="form.zip" name=""  id="zip" class="w-100 form-control mb-1" placeholder="Enter Zip">
                                 <p class="fs-8 text-danger">invaild zip code</p>
                             </div>
                         </div>
@@ -61,7 +61,7 @@
                     <div class="mb-3 col-md-6">
                             <div class="d-flex flex-column justify-content-center align-items-start ">
                                 <label for="millage"  class="form-label">Millage</label>
-                                <input type="text" v-model="millage" name="" id="millage" class="w-100 form-control mb-1" placeholder="Enter Millage">
+                                <input type="text" v-model="form.millage"  name="" id="millage" class="w-100 form-control mb-1" placeholder="Enter Millage">
                                 <p class="fs-8 text-danger">invaild Millage</p>
                             </div>
                         </div>
@@ -71,7 +71,7 @@
                         <h5 class="fw-bold">Trim</h5>
                         <i class="fa-solid fa-question"></i>
                     </div>
-                    <select class="form-select" aria-label="">
+                    <select class="form-select">
                         <option value="1">One</option>
                         <option value="2">Two</option>
                         <option value="3">Three</option>
@@ -141,13 +141,13 @@
                                 </label>
                             </div>
                             <div class="col-md-3 mb-3">
-                                <input class="form-check-input mr-5" type="radio" v-model="body_style" name="body_styel" id="sedan">
+                                <input class="form-check-input mr-5" type="radio"  name="body_styel" id="sedan">
                                 <label class="form-check-label" for="sedan">
                                     Sedon 
                                 </label>
                             </div>
                             <div class="col-md-3 mb-3 ">
-                                <input class="form-check-input mr-5" v-model="body_style" type="radio" name="body_styel" id="mvp">
+                                <input class="form-check-input mr-5"  type="radio" name="body_styel" id="mvp">
                                 <label class="form-check-label" for="mvp">
                                     MVP
                                 </label>
@@ -159,7 +159,7 @@
                                 </label>
                             </div>
                             <div class="col-md-3 mb-3 ">
-                                <input class="form-check-input mr-5" type="radio" name="body_styel" id="hatchback">
+                                <input class="form-check-input mr-5" v-model="form.hatchback" type="radio" name="body_styel" id="hatchback">
                                 <label class="form-check-label" for="hatchback">
                                     Hatchback 
                                 </label>
@@ -262,9 +262,15 @@
 <script>
     import $ from 'jquery'
    
-    exprot default ({
+    export default   ({
         data () {
-            
-        }
+            return {
+                form : {
+                    zip : null ,
+                    millage : null ,
+                    hatchback : null ,
+                }
+            }
+        },
     })
 </script> 

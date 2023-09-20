@@ -315,7 +315,7 @@
                     <div class="mb-3">
                         <div class="flex items-center justify-between mb-2">
                             <div class="font-bold text-xl text-gray-600">Vehicle Price</div>
-                            <div>30,000,000 <span class="ml-2 font-bold">Kyats</span></div>
+                            <div>{{ $total}} <span class="ml-2 font-bold">Kyats</span></div>
                         </div>
                         <div class="w-full ">
                             <input class="block w-full" type="range" min="0" max="25000">

@@ -368,15 +368,15 @@
                         <div>
                             <h1 class="font-semibold mb-3">Loan length</h1>
                             <div class="flex items-center w-full  mx-auto mb-3">
-                                <div class="w-[33%] border rounded-l-lg flex justify-center items-center bg-secondary-100 text-white py-2">
+                                <div id="36mons" class="w-[33%] border rounded-l-lg cursor-pointer flex justify-center items-center bg-secondary-100 text-white py-2">
                                     <div class="inline-block mr-2">36</div> 
                                     <div class="inline-block font-bold">Months</div>
                                 </div>
-                                <div class="w-[33%] border  flex justify-center items-center bg-secondary-100 text-white py-2">
+                                <div id="48mons" class="w-[33%] border cursor-pointer flex justify-center items-center bg-secondary-100 text-white py-2">
                                     <div class="inline-block mr-2">48</div>
                                     <div class="inline-block font-bold">Months</div>
                                 </div>
-                                <div class="w-[33%] border rounded-r-lg flex justify-center items-center bg-secondary-100 text-white py-2">
+                                <div id="60mons" class="w-[33%] border cursor-pointer rounded-r-lg flex justify-center items-center bg-secondary-100 text-white py-2">
                                     <div class="inline-block mr-2">60</div>
                                     <div class="inline-block font-bold">Months</div>
                                 </div>
@@ -384,15 +384,15 @@
                             <hr class="mb-2">
                             <h1 class="font-semibold mb-2">DownPayment %</h1>
                             <div class="flex items-center w-full  mx-auto mb-3">
-                                <div class="w-[33%] border rounded-l-lg flex justify-center items-center bg-secondary-100 text-white py-2">
+                                <div id="30dp" class="w-[33%] border rounded-l-lg cursor-pointer flex justify-center items-center bg-secondary-100 text-white py-2">
                                     <div class="inline-block mr-2">30</div> 
                                     <div class="inline-block font-bold">%</div>
                                 </div>
-                                <div class="w-[33%] border  flex justify-center items-center bg-secondary-100 text-white py-2">
+                                <div id="40dp" class="w-[33%] border  flex justify-center cursor-pointer items-center bg-secondary-100 text-white py-2">
                                     <div class="inline-block mr-2">40</div>
                                     <div class="inline-block font-bold">%</div>
                                 </div>
-                                <div class="w-[33%] border rounded-r-lg flex justify-center items-center bg-secondary-100 text-white py-2">
+                                <div id="50dp" class="w-[33%] border rounded-r-lg flex cursor-pointer justify-center items-center bg-secondary-100 text-white py-2">
                                     <div class="inline-block mr-2">50</div>
                                     <div class="inline-block font-bold">%</div>
                                 </div>
@@ -418,10 +418,10 @@
                     <div class="text-secondary-100 bg-white h-[350px ] ml-2 px-5 border rounded-lg my-2 mb-4">
                         <h1 class="text-center my-3 font-bold text-[25px] capitalize">Estimated Price Breakdown</h1>
                         <hr>
-                        <div class="mt-4">
+                        <div class="mt-4" id='emi'>
                             <div class="flex justify-between items-center py-1 ">
                                 <div class="font-semibold text-[17px]">Vehicle price</div>
-                                <div class="font-bold text-[18px]" id="formatnumber1"></div>
+                                <div class="font-bold text-[18px]" data-id="{{$total}}" id="formatnumber1"></div>
                             </div>
                             <div class="flex justify-between items-center py-1 ">
                                 <div class="font-semibold text-[17px]">Down payment</div>
@@ -443,9 +443,14 @@
                                 <div class="font-semibold text-[17px]">Interest of rated</div>
                                 <div class="font-bold text-[18px]">10 %</div>
                             </div>
+                            <hr class="font-bold">
+                            <div class="flex justify-between items-center py-1 ">
+                                <div class="font-bold text-[17px] ">Est . Initial Payment</div>
+                                <div class="font-extrabold text-[21px]" id='initial'></div>
+                            </div>
                             <div class="flex justify-between items-center py-1 ">
                                 <div class="font-semibold text-[17px]">Est. Monthly Payment</div>
-                                <div class="font-extrabold text-[21px]" id="mnth"></div>
+                                <div class="font-extrabold text-[21px]" id="months"></div>
                             </div>
                             <div class="flex justify-between items-center py-1 ">
                                 <div class="font-semibold text-[17px]">Est. Finance Amount</div>
@@ -469,26 +474,61 @@
 @section('script')
     <script>
         $(document).ready(function () {
+
             let price = $('#formatnumber1');
-            let vehicle_pirce = 30000000 ;
-            let finalPrice = vehicle_pirce.toLocaleString() ;
-            price.text(finalPrice + " "+ "Kyats");
-            let downPayment = $('#downPaymentVal');
-            let dpPrice = 15000000 ;
-            let fn = dpPrice.toLocaleString();
-            downPayment.text(fn);
-            let inst = 300000 ;
-            let ins = inst.toLocaleString();
-            $('#ins_1').text(ins);
-            let svp = 600000 ;
-            let svpf = svp.toLocaleString() ;
-            $('#sv_c').text(svpf);
-            let month = 700000 ;
-            let monf = month.toLocaleString() ;
-            $('#mnth').text(monf+""+"Kyats");
-            let fin = 15000000 ;
-            let finf = fin.toLocaleString();
-            $('#fin_am').text(finf + "" + "Kyats")
+            let present = 100 ;
+            let value = price.data('id');
+            let dp = $('#downPaymentVal');
+            price.html(value.toLocaleString());
+            let insurance = value * (1 / present) ;
+            $('#ins_1').html(insurance.toLocaleString());
+            let service = value * (2 / present );
+            const intestRate = 10 / 12 / 100 ;
+            onload( 50 ) ;
+
+
+            function monthPay (fin_amo ,mon ) {
+                $('#fin_am').html( fin_amo.toLocaleString() + " " + "Kyats");
+                emi(fin_amo , mon) ;
+            }
+            function onload ( dp_persent  ) {
+                let down = dp_persent / present ;
+                let downPayment = value * down ;
+                dp.html(downPayment.toLocaleString());
+                $('#sv_c').text(service.toLocaleString());
+                const months = 60 ;
+                let initial = downPayment + insurance + service ;
+                $('#initial').html(initial.toLocaleString() + " " + 'Kyats');
+                let fin_amo = value - downPayment ;
+                monthPay(fin_amo , 60 );
+
+                $(document).on('click','#36mons' , ()=>{
+                    monthPay(fin_amo , 36 );
+                });
+
+                $(document).on('click','#48mons' , ()=>{
+                    monthPay(fin_amo , 48 );
+                });
+                
+                $(document).on('click','#60mons' , ()=>{
+                    monthPay(fin_amo , 60 );
+                });
+            }
+            function emi ( fin_amo , months ) {
+                let emiValue = fin_amo * intestRate * (Math.pow(1 + intestRate , months) / (Math.pow(1 + intestRate , months) - 1 ) ) ;
+                $('#months').html(emiValue);
+            }
+            $(document).on('click','#30dp' , ()=>{
+                onload(30) ;
+            });
+            $(document).on('click','#40dp' , ()=>{
+                onload(40) ;
+            });
+            $(document).on('click','#50dp' , ()=>{
+                onload(50) ;
+            });
+           
+            
         });
     </script>
 @endsection 

@@ -72,7 +72,9 @@
 @yield('script')
 <script>
     $(document).ready(function () {
-        $('#input_search').focus();
+        $(document).on(()=>{
+            $('#input_search').focus();
+        });
         $(document).on('click','#register' , ()=> {
             $("#register_down").toggle('active_hidden');
         });

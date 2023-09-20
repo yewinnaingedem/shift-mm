@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 class FinancingController extends Controller
 {
     public function index () {
-        return view('MM.Main.Financing.Financing');
+        $total = 60000000;
+        return view('MM.Main.Financing.Financing' , compact('total'));
     }
 }
