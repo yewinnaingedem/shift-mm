@@ -362,7 +362,7 @@
                     <div class="py-2 px-4 rounded-r-lg hover-bg-secondary-100 hover:text-white uppercase text-[20px] text-gray-600 font-semibold  border-black bg-white ">Cash </div>
                 </div>
                 <div class="grid grid-cols-2 w-[80%] m-auto ">
-                    <div class="text-secondary-100 mr-1 bg-white h-[350px] px-5 border rounded-lg my-2 mb-4 ">
+                    <div class="text-secondary-100 mr-1 bg-white h-[380px] px-5 border rounded-lg my-2 mb-4 ">
                         <h1 class="text-center my-3 font-bold text-[25px] capitalize">Enter Your Estimated Term </h1>
                         <hr>
                         <div>
@@ -399,18 +399,12 @@
                             </div>
                             <hr class="mb-2">
                             <h1 class="font-semibold mb-2">Option </h1>
-                            <div class="flex items-center w-full  mx-auto mb-3">
-                                <div class="w-[33%] border rounded-l-lg flex justify-center items-center bg-secondary-100 text-white py-2">
-                                    <div class="inline-block mr-2">36</div> 
-                                    <div class="inline-block font-bold">Months</div>
+                            <div class="grid grid-cols-2 gap-1">
+                                <div class="col-span-1">
+                                    <input type="number" name="month" class="px-3 py-2.5 w-full text-white outline-none border-none bg-secondary-100 rounded-lg" placeholder="Enter Months">
                                 </div>
-                                <div class="w-[33%] border  flex justify-center items-center bg-secondary-100 text-white py-2">
-                                    <div class="inline-block mr-2">48</div>
-                                    <div class="inline-block font-bold">Months</div>
-                                </div>
-                                <div class="w-[33%] border rounded-r-lg flex justify-center items-center bg-secondary-100 text-white py-2">
-                                    <div class="inline-block mr-2">60</div>
-                                    <div class="inline-block font-bold">Months</div>
+                                <div class="col-span-1">
+                                    <input type="number" name="downPayment" class="px-3 py-2.5 w-full text-white outline-none border-none bg-secondary-100 rounded-lg" placeholder="Enter Downpayments">
                                 </div>
                             </div>
                         </div>
@@ -423,21 +417,21 @@
                                 <div class="font-semibold text-[17px]">Vehicle price</div>
                                 <div class="font-bold text-[18px]" data-id="{{$total}}" id="formatnumber1"></div>
                             </div>
-                            <div class="flex justify-between items-center py-1 ">
-                                <div class="font-semibold text-[17px]">Down payment</div>
+                            <div class="flex justify-between items-center py-1 dpAfter" >
+                                <div class="font-semibold text-[17px]">Down payment <span class="font-bold dpPresent"></span> </div>
                                 <div class="font-bold text-[18px] " id="downPaymentVal"></div>
                             </div>
                             <div class="flex justify-between items-center py-1 ">
-                                <div class="font-semibold text-[17px]">Insurance (1%)</div>
+                                <div class="font-semibold text-[17px]">Insurance <span class="font-bold">(1%)</span></div>
                                 <div class="font-bold text-[18px]" id="ins_1"></div>
                             </div>
                             <div class="flex justify-between items-center py-1 ">
-                                <div class="font-semibold text-[17px]">Service Charge (2% on Vehicle price)</div>
+                                <div class="font-semibold text-[17px]">Service Charge <span class="font-bold">(2% on Vehicle price)</span></div>
                                 <div class="font-bold text-[18px]" id="sv_c"></div>
                             </div>
                             <div class="flex justify-between items-center py-1 ">
                                 <div class="font-semibold text-[17px]">Length of loan</div>
-                                <div class="font-bold text-[18px]">60 Months</div>
+                                <div class="font-bold text-[18px]"><span class="months"> </span> Months</div>
                             </div>
                             <div class="flex justify-between items-center py-1 ">
                                 <div class="font-semibold text-[17px]">Interest of rated</div>
@@ -478,6 +472,13 @@
             let price = $('#formatnumber1');
             let present = 100 ;
             let value = price.data('id');
+            let downPaymentInput = $('input[name="downPayment"]') ;
+            let monthsInput = $('input[name="month"]') ;
+            
+            
+            setInterval(() => {
+                console.log('timeinterval');
+            }, 1000);
             let dp = $('#downPaymentVal');
             price.html(value.toLocaleString());
             let insurance = value * (1 / present) ;
@@ -486,49 +487,99 @@
             const intestRate = 10 / 12 / 100 ;
             onload( 50 ) ;
 
-
             function monthPay (fin_amo ,mon ) {
                 $('#fin_am').html( fin_amo.toLocaleString() + " " + "Kyats");
+                $('.months').html(mon);
                 emi(fin_amo , mon) ;
             }
             function onload ( dp_persent  ) {
                 let down = dp_persent / present ;
                 let downPayment = value * down ;
+                $('.dpPresent').html("(" + (down * present ) + "%" +  ")");
+                $('#deposit').remove();
                 dp.html(downPayment.toLocaleString());
                 $('#sv_c').text(service.toLocaleString());
-                const months = 60 ;
-                let initial = downPayment + insurance + service ;
-                $('#initial').html(initial.toLocaleString() + " " + 'Kyats');
+                
                 let fin_amo = value - downPayment ;
+                if(dp_persent < 50 ) {
+                    let depositValue = fin_amo * (10 / present )  ;
+                    let deposit = `
+                                <div class="flex justify-between items-center py-1 i" id="deposit">
+                                    <div class="font-semibold text-[17px]">Deposit <span class='font-bold'>(10 %) </></div>
+                                    <div class="font-bold text-[18px]">${depositValue.toLocaleString()}</div>
+                                </div>
+                                `; 
+                    $('.dpAfter').after(deposit);
+                    let initial = downPayment + insurance + service + depositValue  ;
+                    $('#initial').html(initial.toLocaleString() + " " + 'Kyats');
+                }else {
+                    dp.html(downPayment.toLocaleString());
+                    $('#sv_c').text(service.toLocaleString());
+                    let initial = downPayment + insurance + service ;
+                    $('#initial').html(initial.toLocaleString() + " " + 'Kyats');
+                    
+                }
                 monthPay(fin_amo , 60 );
-
+                // 36 Months
                 $(document).on('click','#36mons' , ()=>{
                     monthPay(fin_amo , 36 );
                 });
-
+                // 48 Months 
                 $(document).on('click','#48mons' , ()=>{
                     monthPay(fin_amo , 48 );
                 });
-                
+                // 60 Months
                 $(document).on('click','#60mons' , ()=>{
                     monthPay(fin_amo , 60 );
+                });
+                // option 
+                $(monthsInput).keyup(function () {
+                    let dpValue = monthsInput.val();
+                    $('.invalid-months').remove();
+                    if(dpValue > 0 && dpValue <= 60 ) {
+                        monthPay(fin_amo , dpValue );
+                    }else {
+                        let invalid = `
+                                        <p class="text-red-700 text-[12px] font-bold invalid-months mt-2">Your input field must be within 5 years</p>  
+                                    `;
+                        monthsInput.after(invalid);
+                        setTimeout(() => {
+                            $('.invalid-months').remove();
+                        }, 10000);
+                    }
                 });
             }
             function emi ( fin_amo , months ) {
                 let emiValue = fin_amo * intestRate * (Math.pow(1 + intestRate , months) / (Math.pow(1 + intestRate , months) - 1 ) ) ;
                 $('#months').html(emiValue);
             }
+            // 30 Downpayment 
+            downPaymentInput.keyup(()=>{
+                let dpValue = downPaymentInput.val();
+                $('.invalid').remove();
+                if(dpValue > 30 && dpValue < 99) {
+                    onload(dpValue);
+                }else {
+                    let invalid = `
+                                        <p class="text-red-700 text-[12px] font-bold invalid mt-2">Your Downpayment must be above 30 % </p>  
+                                    `;
+                    downPaymentInput.after(invalid);
+                    setTimeout(() => {
+                        $('.invalid').remove();
+                    }, 10000);
+                }
+            });
             $(document).on('click','#30dp' , ()=>{
                 onload(30) ;
             });
+            // 40 Downpayment 
             $(document).on('click','#40dp' , ()=>{
                 onload(40) ;
             });
+            // 50 Downpayment 
             $(document).on('click','#50dp' , ()=>{
                 onload(50) ;
             });
-           
-            
         });
     </script>
 @endsection 
