@@ -36,7 +36,7 @@ Route::prefix('mm_cars')->group(function () {
 
 Route::prefix('admin')->group(function (){
     Route::get('/' , [AdminAuthController::class , 'index']);
-    // // Car img
+    // Car img
     // Route::resource('imgs' , ImagesController::class );
     // // Brands
     // Route::resource('brands' , BrandController::class );
