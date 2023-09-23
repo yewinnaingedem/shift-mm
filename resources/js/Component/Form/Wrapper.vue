@@ -72,21 +72,12 @@
 
     import step1 from "../step1.vue"
     import step2 from '../step2.vue';
-
+    import getData from  "./getData.js";
     export default {
-        props : {
-            group  : {
-                type : String ,
-                required : false ,
-            },  
-            behaviour : {
-                type : String ,
-                required : false , 
-            }
-        },
         components : {
             step1 , 
-            step2
+            step2 ,
+            getData ,
         } , 
         data () {
             return {
@@ -97,6 +88,10 @@
                     step1 ,
                     step2 ,
                 ],
+                formValue : {
+                    zip : null ,
+                    millage : null ,
+                }
             }
         },
         methods : {
@@ -109,8 +104,8 @@
             },
             previousStep () {
                 console.log('This is previous Step ');
-            }
-        }
+            },
+        },
     }
    
 </script>

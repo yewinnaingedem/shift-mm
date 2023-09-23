@@ -7,6 +7,7 @@
                     <div class="d-flex flex-column justify-content-center align-items-start ">
                         <label for="zip" class="form-label">Zip</label>
                         <input type="text" 
+                        v-model="formValue.zip"
                         name="" id="zip" class="w-100 form-control mb-1"
                             placeholder="Enter Zip">
                         <p class="fs-8 text-danger">invaild zip code</p>
