@@ -7,8 +7,9 @@
                     <div class="d-flex flex-column justify-content-center align-items-start ">
                         <label for="zip" class="form-label">Zip</label>
                         <input type="text" 
-                        v-model="formValue.zip"
-                        name="" id="zip" class="w-100 form-control mb-1"
+                            maxlength="10"
+                            v-model="data.zip"
+                            name="" id="zip" class="w-100 form-control mb-1"
                             placeholder="Enter Zip">
                         <p class="fs-8 text-danger">invaild zip code</p>
                     </div>
@@ -18,6 +19,7 @@
                 <div class="d-flex flex-column justify-content-center align-items-start ">
                     <label for="millage" class="form-label">Millage</label>
                     <input type="text"  name="" id="millage" class="w-100 form-control mb-1"
+                        v-model="data.millage"
                         placeholder="Enter Millage">
                     <p class="fs-8 text-danger">invaild Millage</p>
                 </div>
@@ -28,35 +30,35 @@
                 <h5 class="fw-bold">Trim</h5>
                 <i class="fa-solid fa-question"></i>
             </div>
-            <select class="form-select">
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+            <select class="form-select" v-model="data.select">
+                <option value="one">One</option>
+                <option value="two">Two</option>
+                <option value="three">Three</option>
             </select>
         </div>
         <div class="mb-3">
             <h5 class="fw-bold cap-5">Exterior color</h5>
             <div class=" row ">
                 <div class="mb-3 col-md-3">
-                    <input class="form-check-input mr-5" type="radio" name="color" id="black">
+                    <input class="form-check-input mr-5" type="radio" v-model="data.radio" name="color" value="black" id="black">
                     <label class="form-check-label" for="black">
                         Black
                     </label>
                 </div>
                 <div class="mb-3 col-md-3">
-                    <input class="form-check-input mr-5" type="radio" name="color" id="white">
+                    <input class="form-check-input mr-5" type="radio" v-model="data.radio" name="color" value="white" id="white">
                     <label class="form-check-label" for="white">
                         White
                     </label>
                 </div>
                 <div class="mb-3 col-md-3">
-                    <input class="form-check-input mr-5" type="radio" name="color" id="pearl_white">
+                    <input class="form-check-input mr-5" type="radio" v-model="data.radio" value="pearl_white" name="color" id="pearl_white">
                     <label class="form-check-label" for="pearl_white">
                         Pearl White
                     </label>
                 </div>
                 <div class="mb-3 col-md-3">
-                    <input class="form-check-input mr-5" type="radio" name="color" id="gray">
+                    <input class="form-check-input mr-5" type="radio" v-model="data.radio" name="color" id="gray">
                     <label class="form-check-label" for="gray">
                         Gray
                     </label>
@@ -169,11 +171,8 @@
                 </div>
             </div>
         </div>
-
-        
     </div>
 </template>
-
 <style>
 .mr-3 {
     margin-right: 15px;
@@ -220,7 +219,14 @@
     z-index: 100;
 }
 </style>
-
-<script setup>
     
+<script setup>
+
+    import { defineProps ,ref } from 'vue';
+
+    const pops = defineProps({
+        data : Object ,
+    });
+    const data = ref(pops.data);
+
 </script> 

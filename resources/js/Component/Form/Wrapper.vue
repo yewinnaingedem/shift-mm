@@ -47,16 +47,7 @@
                 </div>
             </div>
             <div class="main w-75 m-auto pt-20">
-                <component v-bind:is="steps[currentStep]"
-                    v-bind:formValues="multiData"
-                >
-
-                </component>
-                <div class="d-flex justify-content-end align-items-end">
-                    <button class="btn btn-primary " @click="nextStep">
-                        Next Step
-                    </button> 
-                </div> 
+                <component v-bind:is="steps[currentStep]" :data="field[0]"></component>
             </div>
         </div>
     </div>
@@ -69,43 +60,30 @@
 </style>
 
 <script >
-
-    import step1 from "../step1.vue"
+    import step1 from '../step1.vue';
     import step2 from '../step2.vue';
-    import getData from  "./getData.js";
     export default {
-        components : {
-            step1 , 
-            step2 ,
-            getData ,
-        } , 
         data () {
             return {
-                field : {} ,
-                validationBag : {} ,
-                currentStep : 0 ,
                 steps : [
                     step1 ,
-                    step2 ,
+                    step2 
                 ],
-                formValue : {
-                    zip : null ,
-                    millage : null ,
-                }
+                currentStep : 0 ,
+                field : [
+                    {
+                        zip : null ,
+                        millage : null ,
+                        select : null ,
+                        radio: null ,
+                    } ,
+                ]
             }
         },
-        methods : {
-            nextStep () {
-                if(this.currentStep < this.steps.length) {
-                    this.currentStep += 1 ;
-                    return ;
-                }
-                console.log('hi');
-            },
-            previousStep () {
-                console.log('This is previous Step ');
-            },
+        components : {
+            step1 ,
+            step2 
         },
     }
-   
+    
 </script>

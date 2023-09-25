@@ -402,13 +402,12 @@
                             <div class="grid grid-cols-2 gap-1">
                                 <div class="col-span-1">
                                     <label for="">DownPayment</label>
-                                    <input type="number" name="downPayment" class="px-3 py-2.5 w-full text-white outline-none border-none bg-secondary-100 rounded-lg" placeholder="Enter Downpayments">
+                                    <input type="number" name="downPayment" maxlength="2" class="px-3 py-2.5 w-full text-white outline-none border-none bg-secondary-100 rounded-lg" placeholder="Enter Downpayments">
                                 </div>
                                 <div class="col-span-1">
                                     <label for="">Months</label>
-                                    <input type="number" name="month" class="px-3 py-2.5 w-full text-white outline-none border-none bg-secondary-100 rounded-lg" placeholder="Enter Months">
+                                    <input type="number" name="month" maxlength="3" class="px-3 py-2.5 w-full text-white outline-none border-none bg-secondary-100 rounded-lg" placeholder="Enter Months">
                                 </div>
-                                
                             </div>
                         </div>
                     </div>
