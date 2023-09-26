@@ -47,7 +47,15 @@
                 </div>
             </div>
             <div class="main w-75 m-auto pt-20">
-                <component v-bind:is="steps[currentStep]" :data="field[0]"></component>
+                <component v-bind:is="steps[currentStep]" :data="field[currentStep]"></component>
+                <div class="row mb-5 mt-3">
+                    <div class="d-flex justify-content-start align-items-center col-md-6" >
+                        <button class="btn btn-primary"  @click="nextStep">Next Step</button>
+                    </div>
+                    <div class="d-flex justify-content-end align-items-center col-md-6"  >
+                        <button class="btn btn-primary" v-show="toggleVisitable"  @click="previousStep">Preivous Step</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -69,20 +77,50 @@
                     step1 ,
                     step2 
                 ],
+
+                toggleVisitable : false ,
+                nextVisibality : false ,
                 currentStep : 0 ,
+                
                 field : [
                     {
                         zip : null ,
                         millage : null ,
-                        select : null ,
-                        radio: null ,
+                        trim : null ,
+                        exterior_color: null ,
+                        bodyType : null ,
                     } ,
-                ]
+                    {
+                        name : null ,
+                        lastName : null ,
+                    }
+                ] ,
+                
             }
         },
         components : {
             step1 ,
             step2 
+        },
+        methods : {
+            nextStep() {
+                if(this.currentStep < this.steps.length) {
+                    this.currentStep ++ ;
+                    this.toggleVisitable = true ;
+                    return ;
+                }
+                this.nextVisibality = true ;
+                return ;
+            },
+            previousStep () {
+                if(this.currentStep > 0) {
+                    this.currentStep-- ;
+                    if(this.currentStep == 0) {
+                        this.toggleVisitable = false ;
+                    }
+                    return ;
+                }
+            },
         },
     }
     
