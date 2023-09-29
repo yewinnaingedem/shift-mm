@@ -1,34 +1,36 @@
 <template>
     <div class="row w-100 m-0">
-        <div class="col-md-4 position-sticky top-0 bottom-0 main-color w-full vh-100">
+        <div class="col-md-4 bg-main position-sticky top-0 bottom-0 main-color w-full vh-100">
             <div class="header   ">
                 <div class="d-flex justify-content-center w-full  align-items-start ">
                     <h1 class="mt-3">Shift MM </h1>
                 </div>
             </div>
-            <div class="d-flex justify-content-center flex-column  align-items-start pl-25 h-75">
-                <div class="d-flex w-full justify-content-center  fw-semibold  font-weight-normal">
-                    <span class="mr-3">1</span>
-                    <div>
-                        <p>Basic Details </p>
-                    </div>
-                </div>
-                <div class="d-flex w-full justify-content-center fw-semibold  font-weight-normal">
-                    <span class="mr-3">2</span>
-                    <div>
-                        <p>Additional Fecuture </p>
-                    </div>
-                </div>
-                <div class="d-flex w-full justify-content-center fw-semibold  font-weight-normal">
-                    <span class="mr-3">3</span>
-                    <div>
-                        <p>Vehicle History </p>
-                    </div>
-                </div>
+            <div>
+                <ul class="d-flex flex-col justify-content-center align-items-center vh-100">
+                    <li class="list-none mb-3 w-100">
+                        <a href="" class="a-link fw-bold text-black text-decoration-none d-flex justify-content-start align-items-center " type="button">
+                            <div class="mr-10">1</div>
+                            <p class="m-0 ">Basic Details </p>
+                        </a>
+                    </li>
+                    <li class="list-none mb-3 w-100">
+                        <a href="" class="a-link fw-bold  m-auto text-black text-decoration-none d-flex justify-content-start align-items-start " type="button">
+                            <div class="mr-10">2</div>
+                            <p class="m-0">Additional Fecuture  </p>
+                        </a>
+                    </li>
+                    <li class="list-none mb-3 w-100">
+                        <a href="" class="a-link fw-bold  m-auto text-black text-decoration-none d-flex justify-content-start align-items-center " type="button">
+                            <div class="mr-10">3</div>
+                            <p class="m-0">Vehicle History </p>
+                        </a>
+                    </li>
+                </ul>
             </div>
         </div>
         <div class="col-md-8">
-            <div class="position-sticky   z-100 bg-white w-100">
+            <div class="sticky-top z-100 bg-white w-100">
                 <div class="header  d-flex justify-content-between border-bottom p-3">
                     <div class="d-flex justify-content-center align-items-center font-normal">
                         <div class="mr-2">
@@ -47,13 +49,18 @@
                 </div>
             </div>
             <div class="main w-75 m-auto pt-20">
-                <component v-bind:is="steps[currentStep]" :data="field[currentStep]"></component>
+                <component v-bind:is="steps[currentStep]" :data="field[currentStep]" :invalid="invalid"></component>
                 <div class="row mb-5 mt-3">
-                    <div class="d-flex justify-content-start align-items-center col-md-6" >
-                        <button class="btn btn-primary"  @click="nextStep">Next Step</button>
+                    <div class="d-flex justify-content-start align-items-center col-md-6"
+                        :class="{'not-allowed': notAllowed }"
+                     >
+                        <button class="btn btn-primary" v-show="currentStep < steps.length-1" @click="nextStep">Next Step</button>
+                        <button  v-show="toggleVisitable" class="btn btn-primary"
+                             :disabled="notAllowed"
+                           @click="sumibt">Sumbit</button>
                     </div>
                     <div class="d-flex justify-content-end align-items-center col-md-6"  >
-                        <button class="btn btn-primary" v-show="toggleVisitable"  @click="previousStep">Preivous Step</button>
+                        <button class="btn btn-primary"  v-show="toggleVisitable"  @click="previousStep">Preivous Step</button>
                     </div>
                 </div>
             </div>
@@ -61,9 +68,24 @@
     </div>
 </template>
 
-<style>
+<style scoped>
+    .flex-col {
+        flex-direction: column ;
+    }
+    .list-none {
+        list-style: none;
+    }
     .m-0 {
         margin: 0 !important;
+    }
+    .mr-10 {
+        margin-right: 10px;
+    }
+    .bg-main {
+       background: #71747D;
+    }
+    .not-allowed {
+        cursor: not-allowed;
     }
 </style>
 
@@ -77,11 +99,14 @@
                     step1 ,
                     step2 
                 ],
-
+                notAllowed : true ,
+                invalid : false ,
                 toggleVisitable : false ,
                 nextVisibality : false ,
                 currentStep : 0 ,
-                
+                titel : {
+                    
+                },
                 field : [
                     {
                         zip : null ,
@@ -91,8 +116,9 @@
                         bodyType : null ,
                     } ,
                     {
-                        name : null ,
-                        lastName : null ,
+                        transmission : null ,
+                        drivetrain : null ,
+                        engine : null ,
                     }
                 ] ,
                 
@@ -104,7 +130,7 @@
         },
         methods : {
             nextStep() {
-                if(this.currentStep < this.steps.length) {
+                if(this.currentStep < this.steps.length -1) {
                     this.currentStep ++ ;
                     this.toggleVisitable = true ;
                     return ;
@@ -121,6 +147,20 @@
                     return ;
                 }
             },
+            async sumibt () {
+                try {
+                    console.log(this.field);                    
+                }catch (error ) {
+                    console.log(error);
+                }
+            }
+        },
+        computed : {
+            zipChecked () {
+                return this.field
+            }
+        },  
+        watch : {
         },
     }
     
