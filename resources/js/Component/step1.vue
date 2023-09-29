@@ -5,11 +5,9 @@
             <div class="col-md-6 ">
                 <div class="mb-3">
                     <div class="d-flex flex-column justify-content-center align-items-start ">
-                        <label for="zip" class="form-label">Zip</label>
-                        <input type="number" 
-                            :maxlength="5"
-                            v-model="data.zip"
-                            focus=true
+                        <label for="zip" class="form-label">license Plate </label>
+                        <input type="text" 
+                            v-model="data.license"
                             name="" id="zip" class="w-100 form-control mb-1"
                             placeholder="Enter Zip">
                         <p v-show="data.zip" class="fs-8 text-danger">invaild zip code</p>

@@ -57,7 +57,7 @@
                         <button class="btn btn-primary" v-show="currentStep < steps.length-1" @click="nextStep">Next Step</button>
                         <button  v-show="toggleVisitable" class="btn btn-primary"
                              :disabled="notAllowed"
-                           @click="sumibt">Sumbit</button>
+                           @click="submit">Sumbit</button>
                     </div>
                     <div class="d-flex justify-content-end align-items-center col-md-6"  >
                         <button class="btn btn-primary"  v-show="toggleVisitable"  @click="previousStep">Preivous Step</button>
@@ -93,7 +93,7 @@
     import step1 from '../step1.vue';
     import step2 from '../step2.vue';
     import step3 from '../step3.vue';
-    
+    import axios from 'axios';
     export default {
         data () {
             return {
@@ -107,12 +107,9 @@
                 toggleVisitable : false ,
                 nextVisibality : false ,
                 currentStep : 0 ,
-                titel : {
-                    
-                },
                 field : [
                     {
-                        zip : null ,
+                        license : null ,
                         millage : null ,
                         trim : null ,
                         exterior_color: null ,
@@ -178,8 +175,13 @@
                     this.notAllowed = false ;
                 }
             },
-            sumbit () {
-                
+            submit () {
+                axios.post('/api/admin/setup', this.field)
+                .then((response) => {
+                    console.log(response);
+                }).catch((error )=> {
+                    console.log(error);
+                });
             }
         },
         computed : {
