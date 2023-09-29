@@ -92,12 +92,15 @@
 <script >
     import step1 from '../step1.vue';
     import step2 from '../step2.vue';
+    import step3 from '../step3.vue';
+    
     export default {
         data () {
             return {
                 steps : [
                     step1 ,
-                    step2 
+                    step2 ,
+                    step3 
                 ],
                 notAllowed : true ,
                 invalid : false ,
@@ -119,6 +122,24 @@
                         transmission : null ,
                         drivetrain : null ,
                         engine : null ,
+                    },
+                    {
+                        blind_sport : false ,
+                        lane_assit : false ,
+                        streeing_volume : false ,
+                        rounded_ac : false ,
+                        key : null ,
+                        sun_roof : null ,
+                        auto_headlight : false ,
+                        rain_sensor : false ,
+                        auto_em_b : false ,
+                        abs : true ,
+                        auto_hold : false ,
+                        tire_pressure : false ,
+                        camera : false ,
+                        truck_motor : false ,
+                        kick_sensor : false ,
+                        sonor : null ,
                     }
                 ] ,
                 
@@ -147,12 +168,18 @@
                     return ;
                 }
             },
-            async sumibt () {
-                try {
-                    console.log(this.field);                    
-                }catch (error ) {
-                    console.log(error);
+            checkNull () {
+                const hasNullObject = this.field.some((object) => {
+                    return Object.values(object).some((value) => value == null );
+                });
+                if(hasNullObject) {
+                    this.notAllowed = true ;
+                }else {
+                    this.notAllowed = false ;
                 }
+            },
+            sumbit () {
+                
             }
         },
         computed : {
@@ -161,6 +188,15 @@
             }
         },  
         watch : {
+            field() {
+                this.checkNull() ;
+            },
+            field : {
+                deep : true ,
+                handler ( ) {
+                    this.checkNull();
+                }
+            }
         },
     }
     
