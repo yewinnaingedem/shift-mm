@@ -11,8 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('car__imgs', function (Blueprint $table) {
-            //
+        Schema::create('years', function (Blueprint $table) {
+            $table->id();
+            $table->string('year');
+            $table->timestamps();
         });
     }
 
@@ -21,8 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('car__imgs', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('years');
     }
 };

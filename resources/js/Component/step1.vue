@@ -9,18 +9,17 @@
                         <input type="text" 
                             v-model="data.license"
                             name="" id="zip" class="w-100 form-control mb-1"
-                            placeholder="Enter Zip">
+                            placeholder="Enter License Plate Number">
                         <p v-show="data.zip" class="fs-8 text-danger">invaild zip code</p>
                     </div>
                 </div>
             </div>
             <div class="mb-3 col-md-6">
                 <div class="d-flex flex-column justify-content-center align-items-start ">
-                    <label for="millage" class="form-label">Millage</label>
+                    <label for="millage" class="form-label">Millage Or KiloMeter</label>
                     <input type="text"  name="" id="millage" class="w-100 form-control mb-1"
                         v-model="data.millage"
-                        placeholder="Enter Millage">
-                    <p class="fs-8 text-danger">invaild Millage</p>
+                        placeholder="Enter Millage Or Kilo Meter">
                 </div>
             </div>
         </div>
@@ -29,11 +28,7 @@
                 <h5 class="fw-bold">Trim</h5>
                 <i class="fa-solid fa-question"></i>
             </div>
-            <select class="form-select" v-model="data.trim">
-                <option value="one">One</option>
-                <option value="two">Two</option>
-                <option value="three">Three</option>
-            </select>
+            <input type="text" v-model="data.trim"  id="" placeholder="Enter Trim" class="form-control mb-3">
         </div>
         <div class="mb-3">
             <h5 class="fw-bold cap-5">Exterior color</h5>
@@ -311,6 +306,7 @@
     export default {
         props :  {
             data : Object ,
+            brands : Object ,
         } ,
         data () {
             return {

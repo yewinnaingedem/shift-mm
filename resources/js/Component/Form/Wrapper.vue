@@ -49,7 +49,7 @@
                 </div>
             </div>
             <div class="main w-75 m-auto pt-20">
-                <component v-bind:is="steps[currentStep]" :data="field[currentStep]" :invalid="invalid"></component>
+                <component v-bind:is="steps[currentStep]" :data="field[currentStep]" :brands="brands" :invalid="invalid"></component>
                 <div class="row mb-5 mt-3">
                     <div class="d-flex justify-content-start align-items-center col-md-6"
                         :class="{'not-allowed': notAllowed }"
@@ -111,7 +111,7 @@
                     {
                         license : null ,
                         millage : null ,
-                        trim : null ,
+                        trim : false ,
                         exterior_color: null ,
                         bodyType : null ,
                     } ,
@@ -200,10 +200,8 @@
                 }
             }
         },
-        props :  ['make' , 'model' , 'year'] ,
-        mounted() {
-            console.log(this.make , this.model , this.year);
-        }
+        props :  ['make' , 'model' , 'year' , 'brands'] ,
+        
     }
     
 </script>

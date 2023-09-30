@@ -102,28 +102,9 @@
                                 <label class="w-full ">
                                     <div class="wrapper d-flex justify-content-center align-items-center px-10">
                                         <select name="model_year" id="Year" >
-                                            <option value="2001">2001</option>
-                                            <option value="2002">2002</option>
-                                            <option value="2001">2003</option>
-                                            <option value="2001">2004</option>
-                                            <option value="2001">2005</option>
-                                            <option value="2001">2006</option>
-                                            <option value="2001">2007</option>
-                                            <option value="2001">2008</option>
-                                            <option value="2001">2009</option>
-                                            <option value="2001">2010</option>
-                                            <option value="2001">2011</option>
-                                            <option value="2001">2012</option>
-                                            <option value="2001">2013</option>
-                                            <option value="2001">2014</option>
-                                            <option value="2001">2015</option>
-                                            <option value="2001">2016</option>
-                                            <option value="2001">2017</option>
-                                            <option value="2001">2018</option>
-                                            <option value="2001">2019</option>
-                                            <option value="2001">2020</option>
-                                            <option value="2001">2021</option>
-                                            <option value="2001">2022</option>
+                                           @foreach($years as $year) 
+                                                <option value="{{$year->year}}">{{$year->year}}</option>
+                                           @endforeach
                                         </select>
                                         <div class="">
                                             <i class="fa-solid fa-caret-down"></i>
@@ -140,21 +121,9 @@
                                 <label class="w-full ">
                                     <div class="wrapper d-flex justify-content-center align-items-center px-10">
                                         <select name="make" id="Year" >
-                                            <option selected>Make</option>
-                                            <option value="toyato">Toyato</option>
-                                            <option value="hundai">Hundai</option>
-                                            <option value="2001">KIA</option>
-                                            <option value="2001">BAIC</option>
-                                            <option value="2001">Soueat</option>
-                                            <option value="2001">Jetour</option>
-                                            <option value="2001">Hunda</option>
-                                            <option value="2001">Cherovolet</option>
-                                            <option value="2001">Suzuki</option>
-                                            <option value="2001">Sunny</option>
-                                            <option value="2001">GMC</option>
-                                            <option value="2001">Changhe</option>
-                                            <option value="2001">Brillance</option>
-                                            <option value="2001">BYD</option>
+                                            @foreach($brands as $brand )
+                                                <option value="{{$brand->brand_name}}">{{$brand->brand_name}}</option>
+                                            @endforeach
                                         </select>
                                         <div class="">
                                             <i class="fa-solid fa-caret-down"></i>
@@ -169,8 +138,9 @@
                                 <label class="w-full ">
                                     <div class="wrapper d-flex justify-content-center align-items-center px-10">
                                         <select name="modal" id="Year" >
-                                            <option selected value="">Modal</option>
-                                            <option value="2010">2001</option>
+                                            @foreach($modals as $modal)
+                                                <option value="{{$modal->modal_name}}">{{$modal->modal_name}}</option>
+                                            @endforeach
                                         </select>
                                         <div class="">
                                             <i class="fa-solid fa-caret-down"></i>

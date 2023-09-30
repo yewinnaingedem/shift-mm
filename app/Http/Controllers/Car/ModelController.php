@@ -5,9 +5,14 @@ namespace App\Http\Controllers\Car;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Models\Brand ;
 
 class ModelController extends Controller
 {
+    public function Customize ( $model , $make , $modal ) {
+        $data = new \App\Http\Controllers\Api\Customize($model , $make , $modal);
+        return $data ;
+    }
     public function index (Request $request ) {
         $validator = Validator::make(
             $request->all() ,
@@ -21,29 +26,22 @@ class ModelController extends Controller
         if($validator->fails()) {
             return redirect('admin/add-cars')->withErrors($validator)->withInput() ;
         }
-
+        $model = $request['model_year'] ;
+        $make = $request['make'] ;
+        $modal = $request['modal'] ;
         $input = []; 
-        $input['model_year'] = $request['model_year'] ;
-        $input['make']  = $request['make'] ;
-        $input['modal'] = $request['modal'] ;
+        $input['model_year'] = $model ;
+        $input['make']  = $make  ;
+        $input['modal'] = $modal ;
+        
+        $data = $this->Customize($model , $make , $modal) ;
+        return redirect('admin/'.$model.'/'.$make.'/'.$model);
 
-        $datas = [] ;
-        foreach ($input as $data ) {
-            array_push($datas , $data);
-        }
-        session()->put('data' , $datas);
-
-        return redirect('admin/step-progess')->with('datas' , $datas );
     }
 
     public function stepProgess ($make , $model , $year) {
-        $data = new \App\Http\Controllers\Api\Customize($make , $model , $year);
-        $datas = [$make , $model , $year] ;
+        $data = $this->Customize($make , $model , $year);
         return view('admin.cars.stepProgess' , compact('data'));
-    }
-
-    public function toObject($make , $model ,$year) {
-
     }
 
     public function routeTest($model_year , $make , $modal) {
