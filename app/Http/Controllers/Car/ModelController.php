@@ -38,7 +38,7 @@ class ModelController extends Controller
 
     public function stepProgess ($make , $model , $year) {
         $data = new \App\Http\Controllers\Api\Customize($make , $model , $year);
-        dd($data.make);
+        $datas = [$make , $model , $year] ;
         return view('admin.cars.stepProgess' , compact('data'));
     }
 

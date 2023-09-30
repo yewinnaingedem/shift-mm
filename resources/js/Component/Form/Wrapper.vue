@@ -34,10 +34,10 @@
                 <div class="header  d-flex justify-content-between border-bottom p-3">
                     <div class="d-flex justify-content-center align-items-center font-normal">
                         <div class="mr-2">
-                            {{ data }}
+                            {{ make }}
                         </div>
                         <div class="fw-bold mr-2 capitalize">
-                            {{ make }}
+                            {{ model }}
                         </div>
                         <div class="fw-normal capitalize">
                             {{ year }}
@@ -200,12 +200,10 @@
                 }
             }
         },
-        props :  {
-            data : Object ,
-            make : String ,
-            year : Object ,
-        } ,
-        
+        props :  ['make' , 'model' , 'year'] ,
+        mounted() {
+            console.log(this.make , this.model , this.year);
+        }
     }
     
 </script>
