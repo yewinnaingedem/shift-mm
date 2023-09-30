@@ -36,9 +36,14 @@ class ModelController extends Controller
         return redirect('admin/step-progess')->with('datas' , $datas );
     }
 
-    public function stepProgess () {
-        $datas = session()->has('data') ? session()->get('data') : [] ;
-        return view('admin.cars.stepProgess' , compact('datas'));
+    public function stepProgess ($make , $model , $year) {
+        $data = new \App\Http\Controllers\Api\Customize($make , $model , $year);
+        dd($data.make);
+        return view('admin.cars.stepProgess' , compact('data'));
+    }
+
+    public function toObject($make , $model ,$year) {
+
     }
 
     public function routeTest($model_year , $make , $modal) {

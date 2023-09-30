@@ -34,13 +34,13 @@
                 <div class="header  d-flex justify-content-between border-bottom p-3">
                     <div class="d-flex justify-content-center align-items-center font-normal">
                         <div class="mr-2">
-                            2016
+                            {{ data }}
                         </div>
                         <div class="fw-bold mr-2 capitalize">
-                            Suzuki
+                            {{ make }}
                         </div>
                         <div class="fw-normal capitalize">
-                            ciaz
+                            {{ year }}
                         </div>
                     </div>
                     <div class="color-primary">
@@ -200,6 +200,12 @@
                 }
             }
         },
+        props :  {
+            data : Object ,
+            make : String ,
+            year : Object ,
+        } ,
+        
     }
     
 </script>
