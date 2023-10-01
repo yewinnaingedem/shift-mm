@@ -36,18 +36,13 @@ Route::prefix('mm_cars')->group(function () {
 
 Route::prefix('admin')->group(function (){
     Route::get('/' , [AdminAuthController::class , 'index']);
-    // Car img
-    // Route::resource('imgs' , ImagesController::class );
-    // // Brands
-    // Route::resource('brands' , BrandController::class );
-    // // Fecuter 
-    // Route::resource('fecuters' , FectureController::class );
 
     // Vue Add
     Route::get('add-cars' , [AdminAuthController::class , 'addCars'] );
-
+    Route::get('car-info' , [AdminAuthController::class , 'carInfo']);
     Route::post('add-cars' , [ModelController::class , 'index']);
     Route::get('{make}/{model}/{year}' , [ModelController::class , 'stepProgess']);
+    Route::get('car-info/{id}' , [AdminAuthController::class , 'details']);
 });
 
 ?> 

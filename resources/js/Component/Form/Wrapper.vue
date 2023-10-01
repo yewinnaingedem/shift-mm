@@ -34,13 +34,13 @@
                 <div class="header  d-flex justify-content-between border-bottom p-3">
                     <div class="d-flex justify-content-center align-items-center font-normal">
                         <div class="mr-2">
-                            {{ make }}
+                            {{ data.brand_id }}
                         </div>
                         <div class="fw-bold mr-2 capitalize">
-                            {{ model }}
+                            {{ data.year_id }}
                         </div>
                         <div class="fw-normal capitalize">
-                            {{ year }}
+                            {{ data.modal_name }}
                         </div>
                     </div>
                     <div class="color-primary">
@@ -111,7 +111,7 @@
                     {
                         license : null ,
                         millage : null ,
-                        trim : false ,
+                        trim : 'none' ,
                         exterior_color: null ,
                         bodyType : null ,
                     } ,
@@ -176,7 +176,7 @@
                 }
             },
             submit () {
-                axios.post('/api/admin/setup', this.field)
+                axios.post('/api/admin/setup', { field : this.field , id : this.data.id}) 
                 .then((response) => {
                     console.log(response);
                 }).catch((error )=> {
@@ -200,7 +200,9 @@
                 }
             }
         },
-        props :  ['make' , 'model' , 'year' , 'brands'] ,
+        props : {
+            data : Object ,
+        },
         
     }
     

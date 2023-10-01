@@ -29,7 +29,7 @@ return new class extends Migration
             $table->string('sun_roof')->default(null);
             $table->string('senor')->default('back');
             $table->timestamps();
-
+            
             $table->foreign('modal_name')->references('id')->on('modals');
         });
     }

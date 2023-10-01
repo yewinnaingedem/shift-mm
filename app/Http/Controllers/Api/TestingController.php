@@ -7,14 +7,9 @@ use Illuminate\Http\Request;
 
 class TestingController extends Controller
 {
-    public function index(Request $request) {
-        $basic = $request[0];
-        $testing = [];
-        foreach ($basic as $value => $keys) {
-            
-        }
+    public function index(Request $request  ) {
+        return response()->json($request['field'][0]);
 
-        return response()->json($testing);
     }
     public function setup() {
         dd('hi');
