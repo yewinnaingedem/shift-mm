@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('sun_roof')->default('none');
             $table->boolean('auto_headlight')->default(false);
             $table->boolean('rain_sensor')->default(false);
-            $table->boolean('auto_em_br')->default(false);
+            $table->boolean('auto_em_b')->default(false);
             $table->boolean('auto_hold')->default(false);
             $table->boolean('abs')->default(true);
             $table->boolean('tire_prssure')->default(false);

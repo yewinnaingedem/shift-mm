@@ -33,14 +33,14 @@
             <div class="sticky-top z-100 bg-white w-100">
                 <div class="header  d-flex justify-content-between border-bottom p-3">
                     <div class="d-flex justify-content-center align-items-center font-normal">
-                        <div class="mr-2">
-                            {{ data.brand_id }}
+                        <div class="mr-2 fw-semibold">
+                            {{ data.year }} /
                         </div>
                         <div class="fw-bold mr-2 capitalize">
-                            {{ data.year_id }}
+                            {{ data.brand_name }} /
                         </div>
-                        <div class="fw-normal capitalize">
-                            {{ data.modal_name }}
+                        <div class="fw-semibold capitalize">
+                            {{ data.name }}
                         </div>
                     </div>
                     <div class="color-primary">
@@ -52,12 +52,16 @@
                 <component v-bind:is="steps[currentStep]" :data="field[currentStep]" :brands="brands" :invalid="invalid"></component>
                 <div class="row mb-5 mt-3">
                     <div class="d-flex justify-content-start align-items-center col-md-6"
-                        :class="{'not-allowed': notAllowed }"
+                        
                      >
                         <button class="btn btn-primary" v-show="currentStep < steps.length-1" @click="nextStep">Next Step</button>
-                        <button  v-show="toggleVisitable" class="btn btn-primary"
+                        <div
+                            :class="{'not-allowed': notAllowed }"
+                        >
+                            <button  v-show="currentStep == (steps.length -1)" class="btn btn-primary"
                              :disabled="notAllowed"
                            @click="submit">Sumbit</button>
+                        </div>
                     </div>
                     <div class="d-flex justify-content-end align-items-center col-md-6"  >
                         <button class="btn btn-primary"  v-show="toggleVisitable"  @click="previousStep">Preivous Step</button>
@@ -83,6 +87,9 @@
     }
     .bg-main {
        background: #71747D;
+    }
+    .mr-2 {
+        margin-right: 5px;
     }
     .not-allowed {
         cursor: not-allowed;
@@ -112,7 +119,7 @@
                     {
                         license : null ,
                         millage : null ,
-                        trim : 'none' ,
+                        trim : null ,
                         exterior_color: null ,
                         body_style : null ,
                     } ,
@@ -122,22 +129,23 @@
                         engine : null ,
                     },
                     {
-                        blind_sport : false ,
-                        lane_assit : false ,
+                        blind_sprot : false ,
+                        lane_keep_assit : false ,
                         streeing_volume : false ,
                         rounded_ac : false ,
-                        key : null ,
-                        sun_roof : null ,
+                        key : 'simple' ,
+                        sun_roof : 'none' ,
                         auto_headlight : false ,
                         rain_sensor : false ,
                         auto_em_b : false ,
                         abs : true ,
                         auto_hold : false ,
                         tire_pressure : false ,
+                        seat_leather : 'simple' ,
                         camera : false ,
                         truck_motor : false ,
                         kick_sensor : false ,
-                        sonor : null ,
+                        sonor : 'back' ,
                     }
                 ] ,
                 

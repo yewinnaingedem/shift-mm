@@ -34,16 +34,24 @@ class ModelController extends Controller
         $input['year_id']  = $model ;
         $input['modal_name'] = $modal ;
         $key = Modal::insertGetId($input);
-        // $data = $this->Customize($model , $make , $modal , $key) ;
-        return redirect('admin/'.$model.'/'.$make.'/'.$model .'/'. $key)->with('data' , $input);
+
+        $data = $this->leftJoin($key);
+
+        return redirect('admin/'. $data['year'] .'/'.$data['brand_name'].'/'.$data['name'] .'/'. $key);
         
     }
 
     public function stepProgess ($make , $model , $year , $id) {
-        $datas = Modal::where('id',$id)->first();
-        return view('admin.cars.stepProgess')->with('data' , $datas);
+        $data = $this->leftJoin($id);               
+        return view('admin.cars.stepProgess')->with('data' , $data);
     }
-
+    public function leftJoin($id) {
+        return  Modal::select('modals.modal_name as name' , 'brands.brand_name as brand_name' ,'years.year as year')
+                        ->leftJoin('brands','modals.brand_id','brands.id')
+                        ->leftJoin('years','modals.year_id','years.id')
+                        ->where('modals.id',$id)
+                        ->first() ;
+    }
     public function routeTest($model_year , $make , $modal ) {
         dd($modal , $make , $model_year);
     }

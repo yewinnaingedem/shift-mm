@@ -126,24 +126,35 @@
             </div>
             <div class="row">
                 <div class="col-md-6 mb-3">
-                    <select class="form-select" v-model="data.key" >
+                    <label for="key" class="form-label">Select Key</label>
+                    <select class="form-select" v-model="data.key"  id="key">
                         <option value="push">Push Start</option>
                         <option value="smart">Smart Key</option>
                         <option value="smiple" selected>Simple Key</option>
                     </select>
                 </div>
                 <div class="col-md-6 mb-3">
-                    <select class="form-select" v-model="data.none">
+                    <label for="sun_roof" class="form-label">Have or Haven't Sun Roof</label>
+                    <select class="form-select" id="sun_roof" v-model="data.none">
                         <option value="none" selected>None</option>
                         <option value="sun_roof">Sun Roof</option>
                         <option value="pandoramic_roof" >Pandoramic  Roof</option>
                         <option value="sun_pan_roof">Pandoramic & Sun  Roof</option>
                     </select>
                 </div>
-                <div class="col-md-">
-                    <select class="form-select" v-model="data.sonor">
+                <div class="col-md-6">
+                    <label for="sonor" class="form-label">Sonor Option</label>
+                    <select class="form-select" id="sonor" v-model="data.sonor">
                         <option value="back" selected>Back Sonor</option>
                         <option value="round">Round Sonor</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label for="seat_leather" class="form-label">Seats</label>
+                    <select  class="form-select" id="seat_leather" v-model="data.seat_leather">
+                        <option value="simple"> Simple </option>
+                        <option value="half_leather">Half Leather</option>
+                        <option value="leather">Leather</option>
                     </select>
                 </div>
             </div>

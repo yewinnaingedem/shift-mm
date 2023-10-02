@@ -14,7 +14,7 @@ class TestingController extends Controller
         $id = $request['id'] ;
         $basic = $request['field'][0] ;
         $basic['modal_name'] = $id ;
-        Basic::insert($main);
+        Basic::insert($basic);
 
         $car_infos = $request['field'][1] ;
         $car_infos['modal_name'] = $id ;
@@ -23,7 +23,7 @@ class TestingController extends Controller
         $fuctures = $request['field'][2] ;
         $fuctures['modal_name'] = $id ;
         Fucture::insert($fuctures);
-        
+
         $db  = 'You creted successfully' ;
 
         return response()->json($db);

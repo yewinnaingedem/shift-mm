@@ -10,7 +10,7 @@
                             v-model="data.license"
                             name="" id="zip" class="w-100 form-control mb-1"
                             placeholder="Enter License Plate Number">
-                        <p v-show="data.zip" class="fs-8 text-danger">invaild zip code</p>
+                        <p v-show="data.zip" class="fs-8 text-danger capitalize">invaild zip code</p>
                     </div>
                 </div>
             </div>
@@ -29,6 +29,12 @@
                 <i class="fa-solid fa-question"></i>
             </div>
             <input type="text" v-model="data.trim"  id="" placeholder="Enter Trim" class="form-control mb-3">
+            <div>
+                <input type="checkbox" v-model="data.trim" id="trim_input" value="none" class="form-checkbox mr-5">
+                <label for="trim_input" class="form-label">
+                    It doesn't have 
+                </label>
+            </div>
         </div>
         <div class="mb-3">
             <h5 class="fw-bold cap-5">Exterior color</h5>
