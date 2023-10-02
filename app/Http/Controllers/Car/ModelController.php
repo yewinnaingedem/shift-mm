@@ -35,12 +35,12 @@ class ModelController extends Controller
         $input['modal_name'] = $modal ;
         $key = Modal::insertGetId($input);
         // $data = $this->Customize($model , $make , $modal , $key) ;
-        return redirect('admin/'.$model.'/'.$make.'/'.$model )->with('data' , $input);
+        return redirect('admin/'.$model.'/'.$make.'/'.$model .'/'. $key)->with('data' , $input);
         
     }
 
-    public function stepProgess ($make , $model , $year ) {
-        $datas = Modal::where('id',21)->first();
+    public function stepProgess ($make , $model , $year , $id) {
+        $datas = Modal::where('id',$id)->first();
         return view('admin.cars.stepProgess')->with('data' , $datas);
     }
 

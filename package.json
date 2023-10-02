@@ -17,6 +17,7 @@
         "@vitejs/plugin-vue": "^4.3.4",
         "flowbite": "^1.8.1",
         "jquery": "^3.7.1",
+        "sweetalert2": "^11.7.31",
         "vue": "^3.2.36"
     }
 }

@@ -101,9 +101,9 @@
                 <div class="row">
                     <div class="col-md-3 mb-3 ">
                         <label for="4_door_suv" class="d-flex justify-content-center align-items-center rounded-sm p-10 text-white"
-                            :class="[data.bodyType == '4_door_suv' ? activeClass : mainClass ]"
+                            :class="[data.body_style == '4_door_suv' ? activeClass : mainClass ]"
                         >
-                            <input type="radio" value="4_door_suv" class="check-input" id="4_door_suv" v-model="data.bodyType">
+                            <input type="radio" value="4_door_suv" class="check-input" id="4_door_suv" v-model="data.body_style">
                             <div>
                                 4 Door SUV 
                             </div>
@@ -111,9 +111,9 @@
                     </div>
                     <div class="col-md-3 mb-3">
                         <label for="sedon" class="d-flex justify-content-center align-items-center rounded-sm p-10 text-white"
-                            :class="[data.bodyType == 'sedon' ? activeClass : mainClass ]"
+                            :class="[data.body_style == 'sedon' ? activeClass : mainClass ]"
                         >
-                            <input type="radio" value="sedon" class="check-input" id="sedon" v-model="data.bodyType">
+                            <input type="radio" value="sedon" class="check-input" id="sedon" v-model="data.body_style">
                             <div>
                                 Sedon 
                             </div>
@@ -121,9 +121,9 @@
                     </div>
                     <div class="col-md-3 mb-3">
                         <label for="luxury" class="d-flex justify-content-center align-items-center rounded-sm p-10 text-white"
-                            :class="[data.bodyType == 'luxury' ? activeClass : mainClass ]"
+                            :class="[data.body_style == 'luxury' ? activeClass : mainClass ]"
                         >
-                            <input type="radio" value="luxury" class="check-input" id="luxury" v-model="data.bodyType">
+                            <input type="radio" value="luxury" class="check-input" id="luxury" v-model="data.body_style">
                             <div>
                                 Luxury 
                             </div>
@@ -131,9 +131,9 @@
                     </div>
                     <div class="col-md-3 mb-3">
                         <label for="crossover" class="d-flex justify-content-center align-items-center rounded-sm p-10 text-white"
-                            :class="[data.bodyType == 'crossover' ? activeClass : mainClass ]"
+                            :class="[data.body_style == 'crossover' ? activeClass : mainClass ]"
                         >
-                            <input type="radio" value="crossover" class="check-input" id="crossover" v-model="data.bodyType">
+                            <input type="radio" value="crossover" class="check-input" id="crossover" v-model="data.body_style">
                             <div>
                                 Crossover
                             </div>
@@ -141,9 +141,9 @@
                     </div>
                     <div class="col-md-3 mb-3">
                         <label for="hatchback" class="d-flex justify-content-center align-items-center rounded-sm p-10 text-white"
-                            :class="[data.bodyType == 'hatchback' ? activeClass : mainClass ]"
+                            :class="[data.body_style == 'hatchback' ? activeClass : mainClass ]"
                         >
-                            <input type="radio" value="hatchback" class="check-input" id="hatchback" v-model="data.bodyType">
+                            <input type="radio" value="hatchback" class="check-input" id="hatchback" v-model="data.body_style">
                             <div>
                                 Hatchback
                             </div>
@@ -151,9 +151,9 @@
                     </div>
                     <div class="col-md-3 mb-3">
                         <label for="pickup" class="d-flex justify-content-center align-items-center rounded-sm p-10 text-white"
-                            :class="[data.bodyType == 'pickup' ? activeClass : mainClass ]"
+                            :class="[data.body_style == 'pickup' ? activeClass : mainClass ]"
                         >
-                            <input type="radio" value="pickup" class="check-input" id="pickup" v-model="data.bodyType">
+                            <input type="radio" value="pickup" class="check-input" id="pickup" v-model="data.body_style">
                             <div>
                                 Pickup Truck 
                             </div>
@@ -161,9 +161,9 @@
                     </div>
                     <div class="col-md-3 mb-3">
                         <label for="compact_suv" class="d-flex justify-content-center align-items-center rounded-sm p-10 text-white"
-                            :class="[data.bodyType == 'compact_suv' ? activeClass : mainClass ]"
+                            :class="[data.body_style == 'compact_suv' ? activeClass : mainClass ]"
                         >
-                            <input type="radio" value="compact_suv" class="check-input" id="compact_suv" v-model="data.bodyType">
+                            <input type="radio" value="compact_suv" class="check-input" id="compact_suv" v-model="data.body_style">
                             <div>
                                 Compact SUV
                             </div>
@@ -171,9 +171,9 @@
                     </div>
                     <div class="col-md-3 mb-3">
                         <label for="convertible" class="d-flex justify-content-center align-items-center rounded-sm p-10 text-white"
-                            :class="[data.bodyType == 'convertible' ? activeClass : mainClass ]"
+                            :class="[data.body_style == 'convertible' ? activeClass : mainClass ]"
                         >
-                            <input type="radio" value="convertible" class="check-input" id="convertible" v-model="data.bodyType">
+                            <input type="radio" value="convertible" class="check-input" id="convertible" v-model="data.body_style">
                             <div>
                                 Convertible
                             </div>
@@ -181,9 +181,9 @@
                     </div>
                     <div class="col-md-3 mb-3">
                         <label for="sport" class="d-flex justify-content-center align-items-center rounded-sm p-10 text-white"
-                            :class="[data.bodyType == 'sport' ? activeClass : mainClass ]"
+                            :class="[data.body_style == 'sport' ? activeClass : mainClass ]"
                         >
-                            <input type="radio" value="sport" class="check-input" id="sport" v-model="data.bodyType">
+                            <input type="radio" value="sport" class="check-input" id="sport" v-model="data.body_style">
                             <div>
                                 Sport Car
                             </div>
@@ -191,9 +191,9 @@
                     </div>
                     <div class="col-md-3 mb-3">
                         <label for="minivan" class="d-flex justify-content-center align-items-center rounded-sm p-10 text-white"
-                            :class="[data.bodyType == 'minivan' ? activeClass : mainClass ]"
+                            :class="[data.body_style == 'minivan' ? activeClass : mainClass ]"
                         >
-                            <input type="radio" value="minivan" class="check-input" id="minivan" v-model="data.bodyType">
+                            <input type="radio" value="minivan" class="check-input" id="minivan" v-model="data.body_style">
                             <div>
                                 Minivan
                             </div>
@@ -201,9 +201,9 @@
                     </div>
                      <div class="col-md-3 mb-3">
                         <label for="ev" class="d-flex justify-content-center align-items-center rounded-sm p-10 text-white"
-                            :class="[data.bodyType == 'ev' ? activeClass : mainClass ]"
+                            :class="[data.body_style == 'ev' ? activeClass : mainClass ]"
                         >
-                            <input type="radio" value="ev" class="check-input" id="ev" v-model="data.bodyType">
+                            <input type="radio" value="ev" class="check-input" id="ev" v-model="data.body_style">
                             <div>
                                 Electric Car 
                             </div>
@@ -211,9 +211,9 @@
                     </div>
                     <div class="col-md-3 mb-3">
                         <label for="hybric" class="d-flex justify-content-center align-items-center rounded-sm p-10 text-white"
-                            :class="[data.bodyType == 'hybric' ? activeClass : mainClass ]"
+                            :class="[data.body_style == 'hybric' ? activeClass : mainClass ]"
                         >
-                            <input type="radio" value="hybric" class="check-input" id="hybric" v-model="data.bodyType">
+                            <input type="radio" value="hybric" class="check-input" id="hybric" v-model="data.body_style">
                             <div>
                                 Hybric Car 
                             </div>
@@ -221,9 +221,9 @@
                     </div>
                     <div class="col-md-3 mb-3">
                         <label for="wagon" class="d-flex justify-content-center align-items-center rounded-sm p-10 text-white"
-                            :class="[data.bodyType == 'wagon' ? activeClass : mainClass ]"
+                            :class="[data.body_style == 'wagon' ? activeClass : mainClass ]"
                         >
-                            <input type="radio" value="wagon" class="check-input" id="wagon" v-model="data.bodyType">
+                            <input type="radio" value="wagon" class="check-input" id="wagon" v-model="data.body_style">
                             <div>
                                 Wagon 
                             </div>

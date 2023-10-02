@@ -77,7 +77,7 @@
                     >
                         <input type="radio" class="form-control check-input mr-5" v-model="data.drivetrain" value="all_wheels" id="all_wheels">
                         <div>
-                            Four Wheel Drives
+                            All Wheels Drive
                         </div>
                     </label>
                 </div>
@@ -87,7 +87,7 @@
                     >
                         <input type="radio" class="form-control check-input mr-5" v-model="data.drivetrain" value="font_wheels" id="font_wheels">
                         <div>
-                            Four Wheel Drives
+                            Font Wheels Drive
                         </div>
                     </label>
                 </div>
@@ -97,7 +97,7 @@
                     >
                         <input type="radio" class="form-control check-input mr-5" v-model="data.drivetrain" value="back_wheels" id="back_wheels">
                         <div>
-                            Four Wheel Drives
+                            Back Wheels Drive
                         </div>
                     </label>
                 </div>
@@ -107,7 +107,7 @@
                     >
                         <input type="radio" class="form-control check-input mr-5" v-model="data.drivetrain" value="four_wheels" id="four_wheels">
                         <div>
-                            Four Wheel Drives
+                            Four Wheels Drives
                         </div>
                     </label>
                 </div>

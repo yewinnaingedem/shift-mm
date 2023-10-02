@@ -94,6 +94,7 @@
     import step2 from '../step2.vue';
     import step3 from '../step3.vue';
     import axios from 'axios';
+    import Swal from 'sweetalert2' ;
     export default {
         data () {
             return {
@@ -113,7 +114,7 @@
                         millage : null ,
                         trim : 'none' ,
                         exterior_color: null ,
-                        bodyType : null ,
+                        body_style : null ,
                     } ,
                     {
                         transmission : null ,
@@ -178,7 +179,12 @@
             submit () {
                 axios.post('/api/admin/setup', { field : this.field , id : this.data.id}) 
                 .then((response) => {
-                    console.log(response);
+                    Swal.fire({
+                        title : "You created the successfullly" ,
+                        text : 'good job' ,
+                        icon : 'success' ,
+                    });
+                    return 'localhost:8000/admin' ;
                 }).catch((error )=> {
                     console.log(error);
                 });
