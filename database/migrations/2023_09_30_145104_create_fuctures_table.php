@@ -16,7 +16,10 @@ return new class extends Migration
             $table->unsignedBigInteger('modal_name');
             $table->boolean('blind_sprot')->default(false);
             $table->boolean('lane_keep_assit')->default(false);
+            $table->boolean('streeing_volume')->default(false);
             $table->boolean('rounded_ac')->default(false);
+            $table->string('key')->default('smiple');
+            $table->string('sun_roof')->default('none');
             $table->boolean('auto_headlight')->default(false);
             $table->boolean('rain_sensor')->default(false);
             $table->boolean('auto_em_br')->default(false);

@@ -133,9 +133,10 @@
                     </select>
                 </div>
                 <div class="col-md-6 mb-3">
-                    <select class="form-select" v-model="data.sun_roof">
+                    <select class="form-select" v-model="data.none">
+                        <option value="none" selected>None</option>
                         <option value="sun_roof">Sun Roof</option>
-                        <option value="pandoramic_roof">Pandoramic  Roof</option>
+                        <option value="pandoramic_roof" >Pandoramic  Roof</option>
                         <option value="sun_pan_roof">Pandoramic & Sun  Roof</option>
                     </select>
                 </div>

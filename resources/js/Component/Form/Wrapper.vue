@@ -118,7 +118,7 @@
                     } ,
                     {
                         transmission : null ,
-                        drivetrain : null ,
+                        divertrim : null ,
                         engine : null ,
                     },
                     {

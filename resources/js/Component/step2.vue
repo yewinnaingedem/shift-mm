@@ -67,15 +67,15 @@
                 </div>
             </div>
         </div>
-        <!-- Drivetrain -->
+        <!-- divertrim -->
         <div class="mb-3">
-            <h3 class="mb-3 text-center fw-bold">Drivetrain </h3>
+            <h3 class="mb-3 text-center fw-bold">divertrim </h3>
             <div class="row">
                 <div class="col-md-4 mb-3">
                     <label for="all_wheels" class="d-flex justify-content-center align-items-center text-white rounded-xsm  p-10" 
-                        :class="[data.drivetrain == 'all_wheels' ? activeClass : mainClass]"
+                        :class="[data.divertrim == 'all_wheels' ? activeClass : mainClass]"
                     >
-                        <input type="radio" class="form-control check-input mr-5" v-model="data.drivetrain" value="all_wheels" id="all_wheels">
+                        <input type="radio" class="form-control check-input mr-5" v-model="data.divertrim" value="all_wheels" id="all_wheels">
                         <div>
                             All Wheels Drive
                         </div>
@@ -83,9 +83,9 @@
                 </div>
                 <div class="col-md-4 mb-3">
                     <label for="font_wheels" class="d-flex justify-content-center align-items-center text-white rounded-xsm  p-10" 
-                        :class="[data.drivetrain == 'font_wheels' ? activeClass : mainClass]"
+                        :class="[data.divertrim == 'font_wheels' ? activeClass : mainClass]"
                     >
-                        <input type="radio" class="form-control check-input mr-5" v-model="data.drivetrain" value="font_wheels" id="font_wheels">
+                        <input type="radio" class="form-control check-input mr-5" v-model="data.divertrim" value="font_wheels" id="font_wheels">
                         <div>
                             Font Wheels Drive
                         </div>
@@ -93,9 +93,9 @@
                 </div>
                 <div class="col-md-4 mb-3">
                     <label for="back_wheels" class="d-flex justify-content-center align-items-center text-white rounded-xsm  p-10" 
-                        :class="[data.drivetrain == 'back_wheels' ? activeClass : mainClass]"
+                        :class="[data.divertrim == 'back_wheels' ? activeClass : mainClass]"
                     >
-                        <input type="radio" class="form-control check-input mr-5" v-model="data.drivetrain" value="back_wheels" id="back_wheels">
+                        <input type="radio" class="form-control check-input mr-5" v-model="data.divertrim" value="back_wheels" id="back_wheels">
                         <div>
                             Back Wheels Drive
                         </div>
@@ -103,9 +103,9 @@
                 </div>
                 <div class="col-md-4 mb-3" >
                     <label for="four_wheels" class="d-flex justify-content-center align-items-center text-white rounded-xsm  p-10" 
-                        :class="[data.drivetrain == 'four_wheels' ? activeClass : mainClass]"
+                        :class="[data.divertrim == 'four_wheels' ? activeClass : mainClass]"
                     >
-                        <input type="radio" class="form-control check-input mr-5" v-model="data.drivetrain" value="four_wheels" id="four_wheels">
+                        <input type="radio" class="form-control check-input mr-5" v-model="data.divertrim" value="four_wheels" id="four_wheels">
                         <div>
                             Four Wheels Drives
                         </div>
