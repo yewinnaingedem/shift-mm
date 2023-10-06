@@ -142,7 +142,7 @@
                         auto_hold : false ,
                         tire_pressure : false ,
                         seat_leather : 'simple' ,
-                        camera : false ,
+                        camera : null ,
                         truck_motor : false ,
                         kick_sensor : false ,
                         sonor : 'back' ,
@@ -217,7 +217,9 @@
         props : {
             data : Object ,
         },
-        
+        mounted () {
+            console.log(this.data.id);
+        }
     }
     
 </script>

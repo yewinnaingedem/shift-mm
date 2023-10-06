@@ -123,9 +123,9 @@
                         </div>
                     </label>
                 </div>
-                <div class="col-md-12 mb-3">
-                    <input type="checkbox" name="" v-model="checkAll" id="">
-                    <label class="form-label">Check All Fucture</label>
+                <div class="col-md-12 mb-3" @click="allFucture" >
+                    <input type="checkbox"  v-model="checkAll" id="allFucture">
+                    <label class="form-label" for="allFucture">Check All Fucture</label>
                 </div>
             </div>
             <div class="row">
@@ -161,6 +161,14 @@
                         <option value="leather">Leather</option>
                     </select>
                 </div>
+                <div class="col-md-12">
+                    <label for="camera" class="form-label">Camera</label>
+                    <select name="" id="camera" class="form-select">
+                        <option value="back_camera">Back Camera</option>
+                        <option value="font_and_back_camaera"> Font and Back Camera</option>
+                        <option value="360_camera">360 Camera</option>
+                    </select>
+                </div>
             </div>
         </div>
     </div>
@@ -171,18 +179,37 @@
         props : ['data'],
         data() {
             return {
-                checkAll : false , 
+                checkAll : false ,
             }
         },
         watch  : {
-            checkAll (value ) {
-                if(value == ture){
-                    console.log('make it');
-                }else {
-                    console.log('does not make it');
+            
+        },
+        methods : {
+            allFucture () {
+                this.checkAll = true ;
+                if(this.checkAll) {
+                    this.data.blind_sport = true ;
+                    this.data.lane_keep_assit = true ;
+                    this.data.streeing_volume = true ;
+                    this.data.auto_headlight  = true ;
+                    this.data.auto_em_b = true ;
+                    this.data.abs = true ;
+                    this.data.rain_sensor = true ;
+                    this.data.auto_hold = true ;
+                    this.data.tire_pressure  = true ;
+                    this.data.truck_motor = true ;
+                    this.data.kick_sensor  = true ;
+                    return ;
                 }
+
+                return this.checkAll = false ;
             }
+        },
+        mounted () {
+            console.log(this.checkAll);
         }
+
     };
 </script>
 

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->boolean('rounded_ac')->default(false);
             $table->string('sun_roof')->default('none');
             $table->boolean('auto_headlight')->default(false);
+            $table->string('camera')->default('none');
             $table->boolean('rain_sensor')->default(false);
             $table->boolean('auto_em_b')->default(false);
             $table->boolean('auto_hold')->default(false);

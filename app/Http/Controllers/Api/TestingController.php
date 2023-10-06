@@ -14,11 +14,13 @@ class TestingController extends Controller
         $id = $request['id'] ;
 
         // insert into Basic Table ;
+
         $basic = $request['field'][0] ;
         $basic['modal_name'] = $id ;
         Basic::insert($basic);
         
         // insert into Car Info Table ;
+
         $car_infos = $request['field'][1] ;
         $car_infos['modal_name'] = $id ;
         CarInfo::insert($car_infos);
@@ -26,6 +28,7 @@ class TestingController extends Controller
         $fuctures = $request['field'][2] ;
         $fuctures['modal_name'] = $id ;
         Fucture::insert($fuctures);
+
         // insert into Fuctrue Table ;
         $db  = 'You creted successfully' ;
 
