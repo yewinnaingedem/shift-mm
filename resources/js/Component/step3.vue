@@ -123,6 +123,10 @@
                         </div>
                     </label>
                 </div>
+                <div class="col-md-12 mb-3">
+                    <input type="checkbox" name="" v-model="checkAll" id="">
+                    <label class="form-label">Check All Fucture</label>
+                </div>
             </div>
             <div class="row">
                 <div class="col-md-6 mb-3">
@@ -165,6 +169,20 @@
 <script >
     export default {
         props : ['data'],
+        data() {
+            return {
+                checkAll : false , 
+            }
+        },
+        watch  : {
+            checkAll (value ) {
+                if(value == ture){
+                    console.log('make it');
+                }else {
+                    console.log('does not make it');
+                }
+            }
+        }
     };
 </script>
 

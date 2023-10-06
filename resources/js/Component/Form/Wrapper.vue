@@ -119,7 +119,7 @@
                     {
                         license : null ,
                         millage : null ,
-                        trim : null ,
+                        trim : null  ,
                         exterior_color: null ,
                         body_style : null ,
                     } ,

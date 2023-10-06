@@ -24,12 +24,12 @@ class AdminAuthController extends Controller
     }
 
     public function carInfo () {
-        $car_infos = CarInfo::select('car_infos.*','brands.id','brands.brand_name as name','years.year as year','basics.exterior_color as color','modals.modal_name as modal','modals.id as main_id')
-                    ->leftJoin('modals' , 'car_infos.modal_name' , 'modals.id')
-                    ->leftJoin('brands','modals.brand_id','brands.id')
-                    ->leftJoin('years','modals.year_id','years.id')
-                    ->leftJoin('basics','modals.id','basics.modal_name')
-                    ->get();
+    $car_infos = CarInfo::select('car_infos.*','brands.id','brands.brand_name as name','years.year as year','basics.exterior_color as color','modals.modal_name as modal','modals.id as main_id')
+                ->leftJoin('modals' , 'car_infos.modal_name' , 'modals.id')
+                ->leftJoin('brands','modals.brand_id','brands.id')
+                ->leftJoin('years','modals.year_id','years.id')
+                ->leftJoin('basics','modals.id','basics.modal_name')
+                ->get();
 
         return view('admin.Cars.info')->with('car_infos' , $car_infos);
     }

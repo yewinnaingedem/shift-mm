@@ -68,8 +68,8 @@
             </div>
         </div>
         <div class="sb-sidenav-footer">
-            <div class="small">Logged in as:</div>
-            Start Bootstrap
+            <div class="small text-capitalize">Logged in as:</div>
+            {{Auth::user()->user_row}} 
         </div>
     </nav>
 </div>
