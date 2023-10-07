@@ -164,6 +164,7 @@
                 <div class="col-md-12">
                     <label for="camera" class="form-label">Camera</label>
                     <select name="" id="camera" class="form-select">
+                        <option value="none">None</option>
                         <option value="back_camera">Back Camera</option>
                         <option value="font_and_back_camaera"> Font and Back Camera</option>
                         <option value="360_camera">360 Camera</option>
