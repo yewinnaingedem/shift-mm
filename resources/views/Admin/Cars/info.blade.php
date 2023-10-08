@@ -59,31 +59,25 @@
         </tfoot>
     </table>
 </div>
-<!-- Button trigger modal -->
 
-
-<!-- Modal -->
+<!-- Card -->
 <div class="modal fade" id="view" >
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="modal_label">
-            <div class="d-flex justify-content-between align-items-center">
-                <div class='mr-3'>2006 </div>
-                <div class='mr-3 fw-bolder'>/ Toyato /</div>
-                <div>Wish</div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="modal_label">
+                    
+                </h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-        </h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cencle</button>
-        <button type="button" class="btn btn-primary">Save</button>
-      </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary">Save</button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 @endsection 
 
@@ -128,7 +122,16 @@
                         "_token" : "{{csrf_token()}}"
                     },
                     success : (response) => {
-                        let data = response[0] ;
+                        let title = response['car_data'] ;
+                        let data = response['car_infos'] ;
+                        let modal_title = 
+                        `   
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class='mr-3'>${title.year} </div>
+                            <div class='mr-3 fw-bolder'>/ ${title.brand_name} /</div>
+                            <div>${title.modal_name}</div>
+                        </div>
+                        `;
                         let modal_header = `
                         <div class="row">
                             <div class="col-md-4 mb-2">
@@ -143,9 +146,18 @@
                                 <label for="lincese" class="form-label">Grade</label>
                                 <input type="text" name="kilo" id="lincese" value="${data.trim}" class="form-control">
                             </div>
+                            <div class="col-md-4 mb-5">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="221" id="flexCheckChecked" checked>
+                                    <label class="form-check-label" for="flexCheckChecked">
+                                        Blind Sport 
+                                    </label>
+                                </div>
+                            </div>
                         </div>
                         `;
-                        console.log(response);
+                        // console.log(response['car_data']);
+                        $('#modal_label').html(modal_title);
                         $('.modal-body').html(modal_header);
                         $('#view').modal('show');
                     },

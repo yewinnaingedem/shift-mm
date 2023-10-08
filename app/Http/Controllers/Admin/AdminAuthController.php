@@ -35,17 +35,19 @@ class AdminAuthController extends Controller
     }
 
     public function details ( $id ) {
-        $car_infos = Fucture::select('modals.modal_name as name ', 'fuctures.modal_name as id' ,'fuctures.*','car_infos.*' , 'basics.*' , 'modals.*')
+        $data['car_infos'] = Fucture::select('modals.modal_name as name ', 'fuctures.modal_name as id' ,'fuctures.*','car_infos.*' , 'basics.*' , 'modals.*')
                             ->leftJoin('modals','fuctures.modal_name','modals.id')
                             ->leftJoin('basics','modals.id','basics.modal_name')
                             ->leftJoin('car_infos','modals.id','car_infos.modal_name')
                             ->where('fuctures.modal_name','=',$id)
-                            ->get();
+                            ->first();
+        $data['car_data'] = Modal::select('brands.brand_name','years.year','modals.modal_name')
+                        ->leftJoin('brands','modals.brand_id','brands.id')
+                        ->leftJoin('years','modals.year_id','years.id')
+                        ->where('modals.id','=',$id)
+                        ->first();
 
-                            // SELECT modals.modal_name FROM fuctures LEFT JOIN modals on fuctures.modal_name = modals.id WHERE modals.modal_name = 6;
-
-        // return view('admin.Cars.show',compact('car_infos'));
         
-        return response()->json($car_infos);
+        return response()->json( $data);
     }
 }
