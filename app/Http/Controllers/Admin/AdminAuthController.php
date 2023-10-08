@@ -52,6 +52,7 @@ class AdminAuthController extends Controller
     }
 
     public function deleteCard($id) {
+        // Modal::where('id' , $id)->delete();
         return response()->json($id);
     }
 }

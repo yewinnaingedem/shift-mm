@@ -5,6 +5,7 @@
 @section('style')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet"  href="https://common.olemiss.edu/_js/sweet-alert/sweet-alert.css">
     <style> 
         .mr-3 {
             margin-right : 5px ;
@@ -92,6 +93,7 @@
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://common.olemiss.edu/_js/sweet-alert/sweet-alert.min.js"></script>
     <script>
         $(document).ready(()=>{
             new DataTable('#example');
@@ -292,19 +294,33 @@
                 let deleteBtn = $(e.currentTarget);
                 let dataId = deleteBtn.data('id');
                 let row = deleteBtn.parent().parent();
-                $.ajax({
-                    type : "delete" ,
-                    url : "/admin/car-info/" + dataId ,
-                    data : {
-                        "_token" : "{{csrf_token()}}"
+                swal({
+                        title: "Are you sure?",
+                        text: "You will not be able to recover this imaginary file!",
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "Yes, delete it!",
+                        closeOnConfirm: false
                     },
-                    success : (res) => {
-                        console.log(res );
-                    },
-                    error : (err) => {
-                        console.log(err);
-                    }
+                function(){
+                    $.ajax({
+                        type : "delete" ,
+                        url : "/admin/car-info/" + dataId ,
+                        data : {
+                            "_token" : "{{csrf_token()}}"
+                        },
+                        success : (res) => {
+                            row.remove();
+                            swal("Deleted!", "Your imaginary file has been deleted."+ res , "success");
+                        },
+                        error : (err) => {
+                            console.log(err);
+                        }
+                    });
+                    
                 });
+                
             } )
         });
     </script>
