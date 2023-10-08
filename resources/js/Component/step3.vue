@@ -4,20 +4,20 @@
         <div>
             <div class="row">
                 <div class="col-md-4 mb-3">
-                    <label for="blind_sport" class="d-flex justify-content-center bg-main align-items-center p-10 rounded-sm "
-                        :class="{activeColor : data.blind_sport}"
+                    <label for="blind_sprot" class="d-flex justify-content-center bg-main align-items-center p-10 rounded-sm "
+                        :class="{activeColor : data.blind_sprot}"
                     >
-                        <input type="checkbox" v-model="data.blind_sport" class="input-check" id="blind_sport">
+                        <input type="checkbox" v-model="data.blind_sprot" class="input-check" id="blind_sprot">
                         <div class="fw-bold">
                             Blind Sport 
                         </div>
                     </label>
                 </div>
                 <div class="col-md-4 mb-3">
-                    <label for="lane_assit" class="d-flex justify-content-center bg-main align-items-center p-10 rounded-sm "
-                        :class="{activeColor : data.lane_assit}"
+                    <label for="lane_keep_assit" class="d-flex justify-content-center bg-main align-items-center p-10 rounded-sm "
+                        :class="{activeColor : data.lane_keep_assit}"
                     >
-                        <input type="checkbox" v-model="data.lane_assit" class="input-check" id="lane_assit">
+                        <input type="checkbox" v-model="data.lane_keep_assit" class="input-check" id="lane_keep_assit">
                         <div class="fw-bold">
                             Lane Keep Assit 
                         </div>
@@ -139,8 +139,8 @@
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="sun_roof" class="form-label">Have or Haven't Sun Roof</label>
-                    <select class="form-select" id="sun_roof" v-model="data.none">
-                        <option value="none" selected>None</option>
+                    <select class="form-select" id="sun_roof" v-model="data.sun_roof">
+                        <option value="none" >None</option>
                         <option value="sun_roof">Sun Roof</option>
                         <option value="pandoramic_roof" >Pandoramic  Roof</option>
                         <option value="sun_pan_roof">Pandoramic & Sun  Roof</option>
@@ -149,7 +149,7 @@
                 <div class="col-md-6">
                     <label for="sonor" class="form-label">Sonor Option</label>
                     <select class="form-select" id="sonor" v-model="data.sonor">
-                        <option value="back" selected>Back Sonor</option>
+                        <option value="back" >Back Sonor</option>
                         <option value="round">Round Sonor</option>
                     </select>
                 </div>
@@ -163,7 +163,7 @@
                 </div>
                 <div class="col-md-12">
                     <label for="camera" class="form-label">Camera</label>
-                    <select name="" id="camera" class="form-select">
+                    <select name="" id="camera" v-model="data.camera"  class="form-select">
                         <option value="none">None</option>
                         <option value="back_camera">Back Camera</option>
                         <option value="font_and_back_camaera"> Font and Back Camera</option>

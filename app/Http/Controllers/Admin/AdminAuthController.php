@@ -44,6 +44,8 @@ class AdminAuthController extends Controller
 
                             // SELECT modals.modal_name FROM fuctures LEFT JOIN modals on fuctures.modal_name = modals.id WHERE modals.modal_name = 6;
 
-        return view('admin.Cars.show',compact('car_infos'));
+        // return view('admin.Cars.show',compact('car_infos'));
+        
+        return response()->json($car_infos);
     }
 }

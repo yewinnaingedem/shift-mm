@@ -27,9 +27,10 @@ return new class extends Migration
             $table->boolean('abs')->default(true);
             $table->boolean('tire_pressure')->default(false);
             $table->string('seat_leather')->defaule('simple');
+            $table->boolean('kick_sensor')->default(false);
             $table->boolean('truck_motor')->default(false);
             $table->string('key')->default('simple');
-            $table->string('senor')->default('back');
+            $table->string('sonor')->default('back');
             $table->timestamps();
             
             $table->foreign('modal_name')->references('id')->on('modals');

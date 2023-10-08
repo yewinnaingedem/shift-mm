@@ -9,21 +9,21 @@
             <div>
                 <ul class="d-flex flex-col justify-content-center align-items-center vh-100">
                     <li class="list-none mb-3 w-100">
-                        <a href="" class="a-link fw-bold text-black text-decoration-none d-flex justify-content-start align-items-center " type="button">
+                        <a href="" @click="step(1)" class="a-link fw-bold  text-black text-decoration-none d-flex justify-content-start align-items-center " type="button">
                             <div class="mr-10">1</div>
-                            <p class="m-0 ">Basic Details </p>
+                            <p class="m-0 " >Basic Details </p>
                         </a>
                     </li>
                     <li class="list-none mb-3 w-100">
                         <a href="" class="a-link fw-bold  m-auto text-black text-decoration-none d-flex justify-content-start align-items-start " type="button">
                             <div class="mr-10">2</div>
-                            <p class="m-0">Additional Fecuture  </p>
+                            <p class="m-0" >Additional Fecuture  </p>
                         </a>
                     </li>
                     <li class="list-none mb-3 w-100">
                         <a href="" class="a-link fw-bold  m-auto text-black text-decoration-none d-flex justify-content-start align-items-center " type="button">
                             <div class="mr-10">3</div>
-                            <p class="m-0">Vehicle History </p>
+                            <p class="m-0" >Vehicle History </p>
                         </a>
                     </li>
                 </ul>
@@ -133,15 +133,15 @@
                         lane_keep_assit : false ,
                         streeing_volume : false ,
                         rounded_ac : false ,
-                        key : 'simple' ,
-                        sun_roof : 'none' ,
+                        key : null ,
+                        sun_roof : null ,
                         auto_headlight : false ,
                         rain_sensor : false ,
                         auto_em_b : false ,
                         abs : true ,
                         auto_hold : false ,
                         tire_pressure : false ,
-                        seat_leather : 'simple' ,
+                        seat_leather : null ,
                         camera : null ,
                         truck_motor : false ,
                         kick_sensor : false ,

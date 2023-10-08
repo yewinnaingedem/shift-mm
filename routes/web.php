@@ -42,7 +42,7 @@ Route::prefix('admin')->group(function (){
     Route::get('car-info' , [AdminAuthController::class , 'carInfo']);
     Route::post('add-cars' , [ModelController::class , 'index']);
     Route::get('{make}/{model}/{year}/{id}' , [ModelController::class , 'stepProgess']);
-    Route::get('car-info/{id}' , [AdminAuthController::class , 'details']);
+    Route::post('car-info/{id}' , [AdminAuthController::class , 'details']);
 });
 
 ?> 

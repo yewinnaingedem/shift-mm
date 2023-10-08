@@ -27,6 +27,7 @@ class TestingController extends Controller
 
         $fuctures = $request['field'][2] ;
         $fuctures['modal_name'] = $id ;
+
         Fucture::insert($fuctures);
 
         // insert into Fuctrue Table ;

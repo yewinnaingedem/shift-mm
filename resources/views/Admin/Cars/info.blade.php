@@ -36,9 +36,10 @@
                         <button class="btn btn-primary view" data-id="{{$info->main_id}}">
                             Delete
                         </button>
-                        <a href="{{url('admin/car-info/'.$info->main_id.'/')}}" class="btn btn-info">
-                            View 
-                        </a>
+                        <button  class="btn show-data btn-primary" id='show' data-id="{{$info->main_id}}" >
+                            View
+                        </button>
+                        
                     </td>
                 </tr>
             @endforeach
@@ -53,6 +54,27 @@
             </tr>
         </tfoot>
     </table>
+</div>
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="view" >
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="modal_label"></h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Understood</button>
+      </div>
+    </div>
+  </div>
 </div>
 @endsection 
 
@@ -87,6 +109,25 @@
                     }
                 });
             });
+            $(document).on('click','#show',((event)=> {
+                let viewBtn = $(event.currentTarget);
+                let id = viewBtn.data('id');
+                $.ajax({
+                    type : 'post' ,
+                    url : "/admin/car-info/"+ id ,
+                    data : {
+                        "_token" : "{{csrf_token()}}"
+                    },
+                    success : (response) => {
+                        $('#view').modal('show');
+                    },
+                    error : (errorData) => {
+                        console.log(errorData);
+                    }
+                });
+                
+                // $('#view').modal('show');
+            }));
         });
     </script>
 @endsection 
