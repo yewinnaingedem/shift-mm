@@ -137,11 +137,7 @@
                             <div class="flex-1">
                                 <label class="w-full ">
                                     <div class="wrapper d-flex justify-content-center align-items-center px-10">
-                                        <select name="modal" id="Year" >
-                                            @foreach($modals as $modal)
-                                                <option value="{{$modal->modal_name}}">{{$modal->modal_name}}</option>
-                                            @endforeach
-                                        </select>
+                                        <input type="text" name="modal" id="Year" class="">
                                         <div class="">
                                             <i class="fa-solid fa-caret-down"></i>
                                         </div>

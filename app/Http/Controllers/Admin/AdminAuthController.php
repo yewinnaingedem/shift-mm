@@ -50,4 +50,8 @@ class AdminAuthController extends Controller
         
         return response()->json( $data);
     }
+
+    public function deleteCard($id) {
+        return response()->json($id);
+    }
 }

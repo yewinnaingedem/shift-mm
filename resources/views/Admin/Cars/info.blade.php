@@ -41,7 +41,7 @@
                     <td>{{$info->modal}}</td>
                     <td>{{$info->color}}</td>
                     <td>
-                        <button class="btn btn-primary view" data-id="{{$info->main_id}}">
+                        <button class="btn btn-danger delete" data-id="{{$info->main_id}}">
                             Delete
                         </button>
                         <button  class="btn show-data btn-primary" id='show' data-id="{{$info->main_id}}" >
@@ -77,7 +77,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary">Save</button>
+                <button type="button" id="save" class="btn btn-primary">Save</button>
             </div>
         </div>
     </div>
@@ -168,37 +168,31 @@
                             <div class="row mb-2">
                                 <div class="col-md-6">
                                     <div class="mb-1.5">
-                                        <input class="form-check-input" type="checkbox"  id="abs" ${Boolean(data.abs) ? 'checked' : ' '}>
+                                        <input class="form-check-input" type="checkbox" value="abs"  id="abs" ${Boolean(data.abs) ? 'checked' : ' '}>
                                         <label class="form-check-label" for="abs">
                                             A B S 
                                         </label>
                                     </div>
                                     <div class="mb-1.5">
-                                        <input class="form-check-input" type="checkbox"  id="auto_em_b" ${Boolean(data.auto_em_b) ? 'checked' : ' '}>
+                                        <input class="form-check-input" type="checkbox"  value="auto_em_b" id="auto_em_b" ${Boolean(data.auto_em_b) ? 'checked' : ' '}>
                                         <label class="form-check-label" for="auto_em_b">
                                             Auto Emergency Breake
                                         </label>
                                     </div>
                                     <div class="mb-1.5">
-                                        <input class="form-check-input" type="checkbox"  id="auto_em_b" ${Boolean(data.auto_em_b) ? 'checked' : ' '}>
-                                        <label class="form-check-label" for="auto_em_b">
-                                            Auto Emergency Breake
-                                        </label>
-                                    </div>
-                                    <div class="mb-1.5">
-                                        <input class="form-check-input" type="checkbox"  id="auto_hold" ${Boolean(data.auto_hold) ? 'checked' : ' '}>
+                                        <input class="form-check-input" type="checkbox" value="auto_hold"  id="auto_hold" ${Boolean(data.auto_hold) ? 'checked' : ' '}>
                                         <label class="form-check-label" for="auto_hold">
                                             Auto Hold
                                         </label>
                                     </div>
                                     <div class="mb-1.5">
-                                        <input class="form-check-input" type="checkbox"  id="blind_sprot" ${Boolean(data.blind_sprot) ? 'checked' : ' '}>
+                                        <input class="form-check-input" type="checkbox" value="blind_sprot" id="blind_sprot" ${Boolean(data.blind_sprot) ? 'checked' : ' '}>
                                         <label class="form-check-label" for="blind_sprot">
                                             Blind Sport 
                                         </label>
                                     </div>
                                     <div class="mb-1.5">
-                                        <input class="form-check-input" type="checkbox"  id="kick_sensor" ${Boolean(data.kick_sensor) ? 'checked' : ' '}>
+                                        <input class="form-check-input" type="checkbox" value="kick_sensor" id="kick_sensor" ${Boolean(data.kick_sensor) ? 'checked' : ' '}>
                                         <label class="form-check-label" for="kick_sensor">
                                             Kick Sensor
                                         </label>
@@ -207,37 +201,37 @@
                                 </div>
                                 <div class="col-md-6" > 
                                     <div class="mb-1.5">
-                                        <input class="form-check-input" type="checkbox"  id="tire_pressure" ${Boolean(data.tire_pressure) ? 'checked' : ' '}>
+                                        <input class="form-check-input" type="checkbox" value="tire_pressure" id="tire_pressure" ${Boolean(data.tire_pressure) ? 'checked' : ' '}>
                                         <label class="form-check-label" for="tire_pressure">
                                             Tire Pressure
                                         </label>
                                     </div>
                                     <div class="mb-1.5">
-                                        <input class="form-check-input" type="checkbox"  id="truck_motor" ${Boolean(data.truck_motor) ? 'checked' : ' '}>
+                                        <input class="form-check-input" type="checkbox" value="truck_motor"  id="truck_motor" ${Boolean(data.truck_motor) ? 'checked' : ' '}>
                                         <label class="form-check-label" for="truck_motor">
                                             Truck Motor
                                         </label>
                                     </div>
                                     <div class="mb-1.5">
-                                        <input class="form-check-input" type="checkbox"  id="lane_keep_assit" ${Boolean(data.lane_keep_assit) ? 'checked' : ' '}>
+                                        <input class="form-check-input" type="checkbox" value="lane_keep_assit"  id="lane_keep_assit" ${Boolean(data.lane_keep_assit) ? 'checked' : ' '}>
                                         <label class="form-check-label" for="lane_keep_assit">
                                             Lane Keep Assit 
                                         </label>
                                     </div>
                                     <div class="mb-1.5">
-                                        <input class="form-check-input" type="checkbox"  id="rain_sensor" ${Boolean(data.rain_sensor) ? 'checked' : ' '}>
+                                        <input class="form-check-input" type="checkbox" value="rain_sensor"  id="rain_sensor" ${Boolean(data.rain_sensor) ? 'checked' : ' '}>
                                         <label class="form-check-label" for="rain_sensor">
                                             Rain Sensor
                                         </label>
                                     </div>
                                     <div class="mb-1.5">
-                                        <input class="form-check-input" type="checkbox"  id="rounded_ac" ${Boolean(data.rounded_ac) ? 'checked' : ' '}>
+                                        <input class="form-check-input" type="checkbox" value="rounded_ac" id="rounded_ac" ${Boolean(data.rounded_ac) ? 'checked' : ' '}>
                                         <label class="form-check-label" for="rounded_ac">
                                             Rounded AirCon
                                         </label>
                                     </div>
                                     <div class="mb-1.5">
-                                        <input class="form-check-input" type="checkbox"  id="streeing_volume" ${Boolean(data.streeing_volume) ? 'checked' : ' '}>
+                                        <input class="form-check-input" type="checkbox" value="streeing_volume" id="streeing_volume" ${Boolean(data.streeing_volume) ? 'checked' : ' '}>
                                         <label class="form-check-label" for="streeing_volume">
                                             Streeing Volume
                                         </label>
@@ -263,7 +257,6 @@
                         $('#modal_label').html(modal_title);
                         $('.modal-body').html(modal_header);
                         $('#view').modal('show');
-                        console.log(data);
                     },
                     error : (errorData) => {
                         console.log(errorData);
@@ -271,6 +264,48 @@
                 });
                 
             }));
+            $(document).on('click','#save',()=> {
+                let key = $('input[name="key"]').val();
+                let engine = $('input[name="engine"]').val();
+                let lincese = $('input[name="lincese"]').val();
+                let grade = $('input[name="grade"]').val();
+                let kilo = $('input[name="kilo"]').val();
+                let divertrim = $('input[name="divertrim"]').val();
+                let camera = $('input[name="camera"]').val();
+                let seat_leather = $('input[name="seat_leather"]').val();
+                let transmission = $('input[name="transmission"]').val();
+                let exterior_color = $('input[name="exterior_color"]').val();
+                let abs = $('#abs').val() ? $('#abs').val() : false;
+                let auto_em_b = $('#auto_em_b').val() ? $('#auto_em_b').val() : false;
+                let auto_hold = $('#auto_hold').val() ? $('#auto_hold').val() : false;
+                let blind_sprot = $('#blind_sprot').val() ? $('#blind_sprot').val() : false;
+                let kick_sensor = $('#kick_sensor').val() ? $('#kick_sensor').val() : false;
+                let tire_pressure = $('#tire_pressure').val() ? $('#tire_pressure').val() : false;
+                let lane_keep_assit = $('#lane_keep_assit').val() ? $('#lane_keep_assit').val() : false;
+                let rain_sensor = $('#rain_sensor').val() ? $('#rain_sensor').val() : false;
+                let rounded_ac = $('#rounded_ac').val() ? $('#rounded_ac').val() : false;
+                let streeing_volume = $('#streeing_volume').checked ? $('#streeing_volume').val() : false;
+                console.log(abs , auto_em_b ,blind_sprot , kick_sensor , tire_pressure , lane_keep_assit , rain_sensor , rounded_ac , streeing_volume );
+                // console.log(key , engine , lincese , grade ,kilo , divertrim , camera , seat_leather  , transmission , exterior_color );
+            });
+            $(document).on('click','.delete' , (e) => {
+                let deleteBtn = $(e.currentTarget);
+                let dataId = deleteBtn.data('id');
+                let row = deleteBtn.parent().parent();
+                $.ajax({
+                    type : "delete" ,
+                    url : "/admin/car-info/" + dataId ,
+                    data : {
+                        "_token" : "{{csrf_token()}}"
+                    },
+                    success : (res) => {
+                        console.log(res );
+                    },
+                    error : (err) => {
+                        console.log(err);
+                    }
+                });
+            } )
         });
     </script>
 @endsection 
