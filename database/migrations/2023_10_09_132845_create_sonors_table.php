@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('sonors', function (Blueprint $table) {
             $table->id();
+            $table->string('sonor');
             $table->timestamps();
         });
     }
