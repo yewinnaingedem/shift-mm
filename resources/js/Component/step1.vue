@@ -39,13 +39,13 @@
         <div class="mb-3">
             <h5 class="fw-bold cap-5">Exterior color</h5>
             <div class=" row ">
-                <div class="col-md-3 mb-3"
+                <div class="col-md-4 mb-3"
                 v-for="color in arrayData['exterior_colors']" 
                 :key="color.id" 
                 >
                     <label 
                     :for="color.id"
-                    class="justify-content-center align-items-center p-10 rounded-sm  text-white"
+                    class="justify-content-center d-flex align-items-center p-10 rounded-sm  text-white"
                     :class="[data.exterior_color == color.exterior_color ? activeClass : mainClass ] "
 
                     >
@@ -66,135 +66,25 @@
             <h5 class="fw-bold cap-5"> Body Style</h5>
             <div class="mb-3">
                 <div class="row">
-                    <div class="col-md-3 mb-3 ">
-                        <label for="4_door_suv" class="d-flex justify-content-center align-items-center rounded-sm p-10 text-white"
-                            :class="[data.body_style == '4_door_suv' ? activeClass : mainClass ]"
-                        >
-                            <input type="radio" value="4_door_suv" class="check-input" id="4_door_suv" v-model="data.body_style">
-                            <div>
-                                4 Door SUV 
-                            </div>
-                        </label>
-                    </div>
-                    <div class="col-md-3 mb-3">
-                        <label for="sedon" class="d-flex justify-content-center align-items-center rounded-sm p-10 text-white"
-                            :class="[data.body_style == 'sedon' ? activeClass : mainClass ]"
-                        >
-                            <input type="radio" value="sedon" class="check-input" id="sedon" v-model="data.body_style">
-                            <div>
-                                Sedon 
-                            </div>
-                        </label>
-                    </div>
-                    <div class="col-md-3 mb-3">
-                        <label for="luxury" class="d-flex justify-content-center align-items-center rounded-sm p-10 text-white"
-                            :class="[data.body_style == 'luxury' ? activeClass : mainClass ]"
-                        >
-                            <input type="radio" value="luxury" class="check-input" id="luxury" v-model="data.body_style">
-                            <div>
-                                Luxury 
-                            </div>
-                        </label>
-                    </div>
-                    <div class="col-md-3 mb-3">
-                        <label for="crossover" class="d-flex justify-content-center align-items-center rounded-sm p-10 text-white"
-                            :class="[data.body_style == 'crossover' ? activeClass : mainClass ]"
-                        >
-                            <input type="radio" value="crossover" class="check-input" id="crossover" v-model="data.body_style">
-                            <div>
-                                Crossover
-                            </div>
-                        </label>
-                    </div>
-                    <div class="col-md-3 mb-3">
-                        <label for="hatchback" class="d-flex justify-content-center align-items-center rounded-sm p-10 text-white"
-                            :class="[data.body_style == 'hatchback' ? activeClass : mainClass ]"
-                        >
-                            <input type="radio" value="hatchback" class="check-input" id="hatchback" v-model="data.body_style">
-                            <div>
-                                Hatchback
-                            </div>
-                        </label>
-                    </div>
-                    <div class="col-md-3 mb-3">
-                        <label for="pickup" class="d-flex justify-content-center align-items-center rounded-sm p-10 text-white"
-                            :class="[data.body_style == 'pickup' ? activeClass : mainClass ]"
-                        >
-                            <input type="radio" value="pickup" class="check-input" id="pickup" v-model="data.body_style">
-                            <div>
-                                Pickup Truck 
-                            </div>
-                        </label>
-                    </div>
-                    <div class="col-md-3 mb-3">
-                        <label for="compact_suv" class="d-flex justify-content-center align-items-center rounded-sm p-10 text-white"
-                            :class="[data.body_style == 'compact_suv' ? activeClass : mainClass ]"
-                        >
-                            <input type="radio" value="compact_suv" class="check-input" id="compact_suv" v-model="data.body_style">
-                            <div>
-                                Compact SUV
-                            </div>
-                        </label>
-                    </div>
-                    <div class="col-md-3 mb-3">
-                        <label for="convertible" class="d-flex justify-content-center align-items-center rounded-sm p-10 text-white"
-                            :class="[data.body_style == 'convertible' ? activeClass : mainClass ]"
-                        >
-                            <input type="radio" value="convertible" class="check-input" id="convertible" v-model="data.body_style">
-                            <div>
-                                Convertible
-                            </div>
-                        </label>
-                    </div>
-                    <div class="col-md-3 mb-3">
-                        <label for="sport" class="d-flex justify-content-center align-items-center rounded-sm p-10 text-white"
-                            :class="[data.body_style == 'sport' ? activeClass : mainClass ]"
-                        >
-                            <input type="radio" value="sport" class="check-input" id="sport" v-model="data.body_style">
-                            <div>
-                                Sport Car
-                            </div>
-                        </label>
-                    </div>
-                    <div class="col-md-3 mb-3">
-                        <label for="minivan" class="d-flex justify-content-center align-items-center rounded-sm p-10 text-white"
-                            :class="[data.body_style == 'minivan' ? activeClass : mainClass ]"
-                        >
-                            <input type="radio" value="minivan" class="check-input" id="minivan" v-model="data.body_style">
-                            <div>
-                                Minivan
-                            </div>
-                        </label>
-                    </div>
-                     <div class="col-md-3 mb-3">
-                        <label for="ev" class="d-flex justify-content-center align-items-center rounded-sm p-10 text-white"
-                            :class="[data.body_style == 'ev' ? activeClass : mainClass ]"
-                        >
-                            <input type="radio" value="ev" class="check-input" id="ev" v-model="data.body_style">
-                            <div>
-                                Electric Car 
-                            </div>
-                        </label>
-                    </div>
-                    <div class="col-md-3 mb-3">
-                        <label for="hybric" class="d-flex justify-content-center align-items-center rounded-sm p-10 text-white"
-                            :class="[data.body_style == 'hybric' ? activeClass : mainClass ]"
-                        >
-                            <input type="radio" value="hybric" class="check-input" id="hybric" v-model="data.body_style">
-                            <div>
-                                Hybric Car 
-                            </div>
-                        </label>
-                    </div>
-                    <div class="col-md-3 mb-3">
-                        <label for="wagon" class="d-flex justify-content-center align-items-center rounded-sm p-10 text-white"
-                            :class="[data.body_style == 'wagon' ? activeClass : mainClass ]"
-                        >
-                            <input type="radio" value="wagon" class="check-input" id="wagon" v-model="data.body_style">
-                            <div>
-                                Wagon 
-                            </div>
-                        </label>
+                    <div 
+                        v-for="bodyStyle in arrayData['body_styles']"
+                        :key="bodyStyle.id"
+                        class="mb-3 col-md-4"
+                    >
+                    <label
+                        :for="bodyStyle.body_style"
+                        class="justify-content-center d-flex align-items-center p-10 rounded-sm  text-white"
+                        :class="[data.body_style == bodyStyle.body_style ? activeClass : mainClass ]"
+                    >
+                        <input type="radio" 
+                            v-model="data.body_style" 
+                            :value="bodyStyle.body_style" 
+                            :id="bodyStyle.body_style"
+                            class="check-input" >
+                        <div>
+                            {{ bodyStyle.body_style }}
+                        </div>
+                    </label>
                     </div>
                 </div>
             </div>
@@ -208,6 +98,14 @@
 
 .mr-5 {
     margin-right: 5px;
+}
+.px-0 {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+.py-10 {
+    padding-right: 10px;
+    padding-left: 10px;
 }
 
 .fs-8 {
@@ -298,7 +196,7 @@
             }
         } ,
         mounted ( ) {
-            console.log(this.arrayData['exterior_colors']);
+            console.log(this.arrayData['body_styles']);
         }
     }
 

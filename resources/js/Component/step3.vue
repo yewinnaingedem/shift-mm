@@ -132,9 +132,13 @@
                 <div class="col-md-6 mb-3">
                     <label for="key" class="form-label">Select Key</label>
                     <select class="form-select" v-model="data.key"  id="key">
-                        <option value="push">Push Start</option>
-                        <option value="smart">Smart Key</option>
-                        <option value="smiple" selected>Simple Key</option>
+                        <option 
+                            v-for="key in arrayData['keys']" 
+                            :key="key.id" 
+                            :value="key.key"
+                            >
+                            {{ key.key }}
+                        </option>
                     </select>
                 </div>
                 <div class="col-md-6 mb-3">
@@ -149,25 +153,37 @@
                 <div class="col-md-6">
                     <label for="sonor" class="form-label">Sonor Option</label>
                     <select class="form-select" id="sonor" v-model="data.sonor">
-                        <option value="back" >Back Sonor</option>
-                        <option value="round">Round Sonor</option>
+                        <option
+                            v-for="sonar in arrayData['sonors']"
+                            :key="sonar.id"
+                            :value="sonar.sonor"
+                        >
+                            {{ sonar.sonor }}
+                        </option>
                     </select>
                 </div>
                 <div class="col-md-6">
                     <label for="seat_leather" class="form-label">Seats</label>
                     <select  class="form-select" id="seat_leather" v-model="data.seat_leather">
-                        <option value="simple"> Simple </option>
-                        <option value="half_leather">Half Leather</option>
-                        <option value="leather">Leather</option>
+                        <option
+                            v-for="seat in arrayData['seats']"
+                            :key="seat.id"
+                            :value="seat.seat"
+                        >
+                            {{ seat.seat }}
+                        </option>
                     </select>
                 </div>
                 <div class="col-md-12">
                     <label for="camera" class="form-label">Camera</label>
                     <select name="" id="camera" v-model="data.camera"  class="form-select">
-                        <option value="none">None</option>
-                        <option value="back_camera">Back Camera</option>
-                        <option value="font_and_back_camaera"> Font and Back Camera</option>
-                        <option value="360_camera">360 Camera</option>
+                        <option
+                            v-for="camera in arrayData['cameraes']"
+                            :key="camera.id"
+                            :value="camera.camera"
+                        >
+                            {{ camera.camera }}
+                        </option>
                     </select>
                 </div>
             </div>
@@ -177,7 +193,10 @@
 
 <script >
     export default {
-        props : ['data'],
+        props : {
+            data : Object ,
+            arrayData : Array ,
+        },
         data() {
             return {
                 checkAll : false ,
