@@ -44,6 +44,7 @@ Route::prefix('admin')->group(function (){
     Route::get('{make}/{model}/{year}/{id}' , [ModelController::class , 'stepProgess']);
     Route::post('car-info/{id}' , [AdminAuthController::class , 'details']);
     Route::delete('car-info/{id}', [AdminAuthController::class , 'deleteCard']);
+    Route::put('update-info/{id}' , [AdminAuthController::class , 'updateInfo']);
 });
 
 ?> 

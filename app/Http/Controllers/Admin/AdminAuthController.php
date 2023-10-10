@@ -61,6 +61,7 @@ class AdminAuthController extends Controller
         $data['body_styles'] = BodyStyle::get();
         $data['keys'] = Key::get();
         $data['sonors'] = Sonor::get();
+        $data['sun_roofs'] = SunRoof::get();
         $data['cameraes'] = Camera::get();
         $data['seats'] = Seat::get() ;
         $data['divertrimes'] = Divertrim::get();
@@ -68,7 +69,11 @@ class AdminAuthController extends Controller
     }
 
     public function deleteCard($id) {
-        // Modal::where('id' , $id)->delete();
+        Modal::where('id' , $id)->delete();
+        return response()->json('you deleted the successfully');
+    }
+
+    public function updateInfo ($id ) {
         return response()->json($id);
     }
 }
