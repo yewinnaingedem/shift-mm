@@ -94,6 +94,7 @@
     <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script src="https://common.olemiss.edu/_js/sweet-alert/sweet-alert.min.js"></script>
+    <!-- <script src="{{asset('storage/Jquery/car_info.js')}}"></script> -->
     <script>
         $(document).ready(()=>{
             new DataTable('#example');
@@ -155,7 +156,7 @@
                                 <label for="divertrim" class="form-label">Divertrim</label>
                                 <select class="form-select form-select-md mb-3" aria-label=".form-select-lg example">
                                     ${response['divertrimes'].map(divertrim => `
-                                        <option value="${divertrim.divertrim}">${divertrim.divertrim}</option>    
+                                        <option value="${divertrim.divertrim}" ${divertrim.divertrim == data.divertrim ? 'selected' : ''}>${divertrim.divertrim}</option>    
                                     `).join('')}
                                 </select>
                             </div>
@@ -163,7 +164,7 @@
                                 <label for="camera" class="form-label">Camera</label>
                                 <select class="form-select form-select-md mb-3" aria-label=".form-select-lg example">
                                     ${response['cameraes'].map(camera => `
-                                        <option value="${camera.camera}">${camera.camera}</option>    
+                                        <option value="${camera.camera}" ${camera.camera == data.camera ? "selected" : ''}>${camera.camera}</option>    
                                     `).join('')}
                                 </select>
                             </div>
@@ -171,7 +172,7 @@
                                 <label for="seat_leather" class="form-label">Seat</label>
                                 <select class="form-select form-select-md mb-3" aria-label=".form-select-lg example">
                                     ${response['seats'].map(seat => `
-                                        <option value="${seat.seat}">${seat.seat}</option>    
+                                        <option value="${seat.seat}" ${seat.seat == data.seat_leather ? 'selected' : ''}>${seat.seat}</option>    
                                     `).join('')}
                                 </select>
                             </div>
@@ -179,7 +180,15 @@
                                 <label for="transmission" class="form-label">Transmission</label>
                                 <select class="form-select form-select-md mb-3" aria-label=".form-select-lg example">
                                     ${response['transmissions'].map(transmission => `
-                                        <option value="${transmission.transmission}">${transmission.transmission}</option>    
+                                        <option value="${transmission.transmission}" ${transmission.transmission == data.transmission ? 'selected' : ''}>${transmission.transmission}</option>    
+                                    `).join('')}
+                                </select>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="transmission" class="form-label">Sonar</label>
+                                <select class="form-select form-select-md mb-3" aria-label=".form-select-lg example">
+                                    ${response['sonors'].map(sonor => `
+                                        <option value="${sonor.sonor}" ${sonor.sonor == data.sonor ? 'selected' : ''}>${sonor.sonor}</option>    
                                     `).join('')}
                                 </select>
                             </div>
@@ -261,7 +270,7 @@
                                     <label for="key" class="form-label">Key</label>
                                     <select class="form-select form-select-md mb-3" aria-label=".form-select-lg example">
                                         ${response['keys'].map(key => `
-                                            <option value="${key.key}">${key.key}</option>    
+                                            <option value="${key.key}" ${key.key == data.key ? "selected" : '' }>${key.key}</option>    
                                         `).join('')}
                                     </select>
                                 </div>
@@ -269,7 +278,7 @@
                                     <label for="engine " class="form-label">Engine</label>
                                     <select class="form-select form-select-md mb-3" aria-label=".form-select-lg example">
                                         ${response['engines'].map(engine => `
-                                            <option value="${engine.engine_power}">${engine.engine_power}</option>    
+                                            <option value="${engine.engine_power}" ${engine.engine_power == data.engine ? 'selected' : ""}>${engine.engine_power}</option>    
                                         `).join('')}
                                     </select>
                                 </div>
@@ -277,7 +286,7 @@
                                     <label for="exterior_color" class="form-label">Exterior Color</label>
                                     <select class="form-select form-select-md mb-3" aria-label=".form-select-lg example">
                                         ${response['exterior_colors'].map(exterior_color => `
-                                            <option value="${exterior_color.exterior_color}">${exterior_color.exterior_color}</option>    
+                                            <option value="${exterior_color.exterior_color}" ${exterior_color.exterior_color == data.exterior_color ? "selected" : ''}>${exterior_color.exterior_color}</option>    
                                         `).join('')}
                                     </select>
                                 </div>
@@ -286,6 +295,7 @@
                         `;
                         $('#modal_label').html(modal_title);
                         $('.modal-body').html(modal_header);
+                        console.log(data);
                         $('#view').modal('show');
                     },
                     error : (errorData) => {

@@ -49,7 +49,7 @@ class ModelController extends Controller
     }
 
     public function stepProgess ($make , $model , $year , $id) {
-        
+
         $data['main'] = $this->leftJoin($id);      
         $data['engines'] = Engine::get();
         $data['transmissions'] = Transmission::get() ;

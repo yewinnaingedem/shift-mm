@@ -36,6 +36,6 @@ class TestingController extends Controller
         return response()->json($db);
     }
     public function setup() {
-        dd('hi');
+        return response()->json('You will move to the another page');
     }
 }

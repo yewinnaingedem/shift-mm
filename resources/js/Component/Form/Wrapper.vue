@@ -185,7 +185,7 @@
                 }
             },
             submit () {
-                axios.post('/api/admin/setup', { field : this.field , id : this.data.id}) 
+                axios.post('/api/admin/setup', { field : this.field , id : this.data['main'].id}) 
                 .then((response) => {
                     Swal.fire({
                         title : "You created the successfullly" ,
@@ -217,9 +217,6 @@
         props : {
             data : Array ,
         },
-        mounted () {
-            console.log(this.data);
-        }
     }
     
 </script>

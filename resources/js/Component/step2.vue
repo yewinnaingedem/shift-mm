@@ -107,9 +107,6 @@ export default ({
     methods : {
         
     },
-    mounted () {
-        console.log(this.arrayData['transmissions']);
-    }
 });
 </script>
 

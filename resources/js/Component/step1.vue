@@ -195,9 +195,6 @@
                 }
             }
         } ,
-        mounted ( ) {
-            console.log(this.arrayData['body_styles']);
-        }
     }
 
 

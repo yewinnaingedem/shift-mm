@@ -225,15 +225,9 @@
                     this.data.kick_sensor  = true ;
                     return ;
                 }
-
                 return this.checkAll = false ;
             }
         },
-        mounted () {
-            console.log(this.arrayData['sun_roofs']);
-        },
-
-
     };
 </script>
 
