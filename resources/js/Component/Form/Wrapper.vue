@@ -34,13 +34,13 @@
                 <div class="header  d-flex justify-content-between border-bottom p-3">
                     <div class="d-flex justify-content-center align-items-center font-normal">
                         <div class="mr-2 fw-semibold">
-                            {{ data.year }} /
+                            {{data['main'].year }}/
                         </div>
                         <div class="fw-bold mr-2 capitalize">
-                            {{ data.brand_name }} /
+                            {{ data['main'].brand_name }} /
                         </div>
                         <div class="fw-semibold capitalize">
-                            {{ data.name }}
+                            {{data['main'].name }}
                         </div>
                     </div>
                     <div class="color-primary">
@@ -49,7 +49,7 @@
                 </div>
             </div>
             <div class="main w-75 m-auto pt-20">
-                <component v-bind:is="steps[currentStep]" :data="field[currentStep]" :brands="brands" :invalid="invalid"></component>
+                <component v-bind:is="steps[currentStep]" :data="field[currentStep]" :arrayData="data" ></component>
                 <div class="row mb-5 mt-3">
                     <div class="d-flex justify-content-start align-items-center col-md-6"
                         
@@ -215,10 +215,10 @@
             }
         },
         props : {
-            data : Object ,
+            data : Array ,
         },
         mounted () {
-            console.log(this.data.id);
+            console.log(this.data);
         }
     }
     

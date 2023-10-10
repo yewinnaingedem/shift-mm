@@ -6,6 +6,16 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Modal ;
+use App\Models\Engine ;
+use App\Models\Key ;
+use App\Models\SunRoof ;
+use App\Models\Transmission ;
+use App\Models\Divertrim ;
+use App\Models\ExteriorColor ;
+use App\Models\BodyStyle ;
+use App\Models\Sonor ;
+use App\Models\Camera ;
+use App\Models\Seat ;
 
 class ModelController extends Controller
 {
@@ -35,11 +45,29 @@ class ModelController extends Controller
         $input['modal_name'] = $modal ;
         $key = Modal::insertGetId($input);
         $data = $this->leftJoin($key);
+        $data['engines'] = Engine::get();
+        $data['transmissions'] = Transmission::get() ;
+        $data['exterior_colors'] = ExteriorColor::get();
+        $data['body_styles'] = BodyStyle::get();
+        $data['keys'] = Key::get();
+        $data['sonors'] = Sonor::get();
+        $data['cameraes'] = Camera::get();
+        $data['seats'] = Seat::get() ;
+        $data['divertrimes'] = Divertrim::get();
         return redirect('admin/'. $data['year'] .'/'.$data['brand_name'].'/'.$data['name'] .'/'. $key);
     }
 
     public function stepProgess ($make , $model , $year , $id) {
-        $data = $this->leftJoin($id);      
+        $data['main'] = $this->leftJoin($id);      
+        $data['engines'] = Engine::get();
+        $data['transmissions'] = Transmission::get() ;
+        $data['exterior_colors'] = ExteriorColor::get();
+        $data['body_styles'] = BodyStyle::get();
+        $data['keys'] = Key::get();
+        $data['sonors'] = Sonor::get();
+        $data['cameraes'] = Camera::get();
+        $data['seats'] = Seat::get() ;
+        $data['divertrimes'] = Divertrim::get();
         return view('admin.cars.stepProgess')->with('data' , $data);
     }
     public function leftJoin($id) {

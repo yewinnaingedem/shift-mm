@@ -9,7 +9,16 @@ use App\Models\Year ;
 use App\Models\Modal ;
 use App\Models\CarInfo ;
 use App\Models\Fucture ;
-
+use App\Models\Engine ;
+use App\Models\Key ;
+use App\Models\SunRoof ;
+use App\Models\Transmission ;
+use App\Models\Divertrim ;
+use App\Models\ExteriorColor ;
+use App\Models\BodyStyle ;
+use App\Models\Sonor ;
+use App\Models\Camera ;
+use App\Models\Seat ;
 class AdminAuthController extends Controller
 {
     public function index() {
@@ -46,8 +55,15 @@ class AdminAuthController extends Controller
                         ->leftJoin('years','modals.year_id','years.id')
                         ->where('modals.id','=',$id)
                         ->first();
-
-        
+        $data['engines'] = Engine::get();
+        $data['transmissions'] = Transmission::get() ;
+        $data['exterior_colors'] = ExteriorColor::get();
+        $data['body_styles'] = BodyStyle::get();
+        $data['keys'] = Key::get();
+        $data['sonors'] = Sonor::get();
+        $data['cameraes'] = Camera::get();
+        $data['seats'] = Seat::get() ;
+        $data['divertrimes'] = Divertrim::get();
         return response()->json( $data);
     }
 

@@ -39,66 +39,27 @@
         <div class="mb-3">
             <h5 class="fw-bold cap-5">Exterior color</h5>
             <div class=" row ">
-                <div class="col-md-3 mb-3">
-                    <label for="red" class="d-flex justify-content-center align-items-center p-10 rounded-sm  text-white"
-                        :class="[data.exterior_color == 'red' ? activeClass : mainClass]"
+                <div class="col-md-3 mb-3"
+                v-for="color in arrayData['exterior_colors']" 
+                :key="color.id" 
+                >
+                    <label 
+                    :for="color.id"
+                    class="justify-content-center align-items-center p-10 rounded-sm  text-white"
+                    :class="[data.exterior_color == color.exterior_color ? activeClass : mainClass ] "
+
                     >
-                        <input type="radio" v-model="data.exterior_color" class="check-input" id="red" value="red">
-                        <div>
-                            Red 
-                        </div>
+                        <input 
+                            type="radio"
+                            v-model="data.exterior_color" 
+                            :id="color.id" 
+                            :value="color.exterior_color"
+                            class="check-input"
+                            >
+                        <div>{{ color.exterior_color }}</div>
                     </label>
                 </div>
-                <div class="col-md-3 mb-3">
-                    <label for="white" class="d-flex justify-content-center align-items-center p-10 rounded-sm  text-white"
-                        :class="[data.exterior_color == 'white' ? activeClass : mainClass]"
-                    >
-                        <input type="radio" v-model="data.exterior_color" class="check-input" id="white" value="white">
-                        <div>
-                            White
-                        </div>
-                    </label>
-                </div>
-                <div class="col-md-3 mb-3">
-                    <label for="pear_white" class="d-flex justify-content-center align-items-center p-10 rounded-sm  text-white"
-                        :class="[data.exterior_color == 'pear_white' ? activeClass : mainClass]"
-                    >
-                        <input type="radio" v-model="data.exterior_color" class="check-input" id="pear_white" value="pear_white">
-                        <div>
-                            Pear White
-                        </div>
-                    </label>
-                </div>
-                <div class="col-md-3 mb-3">
-                    <label for="gray" class="d-flex justify-content-center align-items-center p-10 rounded-sm  text-white"
-                        :class="[data.exterior_color == 'gray' ? activeClass : mainClass]"
-                    >
-                        <input type="radio" v-model="data.exterior_color" class="check-input" id="gray" value="gray">
-                        <div>
-                            Gray
-                        </div>
-                    </label>
-                </div>
-                <div class="col-md-3 mb-3">
-                    <label for="ivory_gold" class="d-flex justify-content-center align-items-center p-10 rounded-sm  text-white"
-                        :class="[data.exterior_color == 'ivory_gold' ? activeClass : mainClass]"
-                    >
-                        <input type="radio" v-model="data.exterior_color" class="check-input" id="ivory_gold" value="ivory_gold">
-                        <div>
-                            Ivory Gold
-                        </div>
-                    </label>
-                </div>
-                <div class="col-md-3 mb-3">
-                    <label for="blue" class="d-flex justify-content-center align-items-center p-10 rounded-sm  text-white"
-                        :class="[data.exterior_color == 'blue' ? activeClass : mainClass]"
-                    >
-                        <input type="radio" v-model="data.exterior_color" class="check-input" id="blue" value="blue">
-                        <div>
-                            Blue 
-                        </div>
-                    </label>
-                </div>
+                
             </div>
         </div>
         <div class="mb-3">
@@ -312,7 +273,7 @@
     export default {
         props :  {
             data : Object ,
-            brands : Object ,
+            arrayData : Object ,
         } ,
         data () {
             return {
@@ -335,7 +296,10 @@
                     console.log(newValue);
                 }
             }
-        }   
+        } ,
+        mounted ( ) {
+            console.log(this.arrayData['exterior_colors']);
+        }
     }
 
 

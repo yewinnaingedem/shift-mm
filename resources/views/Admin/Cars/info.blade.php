@@ -153,21 +153,37 @@
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="divertrim" class="form-label">Divertrim</label>
-                                <input type="text" name="divertrim" id="divertrim" value="${data.divertrim}" class="form-control">
+                                <select class="form-select form-select-md mb-3" aria-label=".form-select-lg example">
+                                    ${response['divertrimes'].map(divertrim => `
+                                        <option value="${divertrim.divertrim}">${divertrim.divertrim}</option>    
+                                    `).join('')}
+                                </select>
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="camera" class="form-label">Camera</label>
-                                <input type="text" name="camera" id="camera" value="${data.camera}" class="form-control">
+                                <select class="form-select form-select-md mb-3" aria-label=".form-select-lg example">
+                                    ${response['cameraes'].map(camera => `
+                                        <option value="${camera.camera}">${camera.camera}</option>    
+                                    `).join('')}
+                                </select>
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="seat_leather" class="form-label">Seat</label>
-                                <input type="text" name="seat_leather" id="seat_leather" value="${data.seat_leather}" class="form-control">
+                                <select class="form-select form-select-md mb-3" aria-label=".form-select-lg example">
+                                    ${response['seats'].map(seat => `
+                                        <option value="${seat.seat}">${seat.seat}</option>    
+                                    `).join('')}
+                                </select>
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="transmission" class="form-label">Transmission</label>
-                                <input type="text" name="transmission" id="transmission" value="${data.transmission}" class="form-control">
+                                <select class="form-select form-select-md mb-3" aria-label=".form-select-lg example">
+                                    ${response['transmissions'].map(transmission => `
+                                        <option value="${transmission.transmission}">${transmission.transmission}</option>    
+                                    `).join('')}
+                                </select>
                             </div>
-                            <div class="row mb-2">
+                                <div class="row mb-2">
                                 <div class="col-md-6">
                                     <div class="mb-1.5">
                                         <input class="form-check-input" type="checkbox" value="abs"  id="abs" ${Boolean(data.abs) ? 'checked' : ' '}>
@@ -243,15 +259,27 @@
                             <div class="row mb-3">
                                 <div class="col-md-4 mb-2">
                                     <label for="key" class="form-label">Key</label>
-                                    <input type="text" name="key" id="key" value="${data.key}" class="form-control">
+                                    <select class="form-select form-select-md mb-3" aria-label=".form-select-lg example">
+                                        ${response['keys'].map(key => `
+                                            <option value="${key.key}">${key.key}</option>    
+                                        `).join('')}
+                                    </select>
                                 </div>
                                 <div class="col-md-4 mb-2">
                                     <label for="engine " class="form-label">Engine</label>
-                                    <input type="text" name="engine" id="engine" value="${data.engine}" class="form-control">
+                                    <select class="form-select form-select-md mb-3" aria-label=".form-select-lg example">
+                                        ${response['engines'].map(engine => `
+                                            <option value="${engine.engine_power}">${engine.engine_power}</option>    
+                                        `).join('')}
+                                    </select>
                                 </div>
                                 <div class="col-md-4 mb-2">
-                                    <label for="exterior_color" class="form-label">exterior_color</label>
-                                    <input type="text" name="exterior_color" id="exterior_color" value="${data.exterior_color}" class="form-control">
+                                    <label for="exterior_color" class="form-label">Exterior Color</label>
+                                    <select class="form-select form-select-md mb-3" aria-label=".form-select-lg example">
+                                        ${response['exterior_colors'].map(exterior_color => `
+                                            <option value="${exterior_color.exterior_color}">${exterior_color.exterior_color}</option>    
+                                        `).join('')}
+                                    </select>
                                 </div>
                             </div>
                         </div>
