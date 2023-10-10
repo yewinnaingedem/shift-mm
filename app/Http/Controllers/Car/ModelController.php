@@ -45,19 +45,11 @@ class ModelController extends Controller
         $input['modal_name'] = $modal ;
         $key = Modal::insertGetId($input);
         $data = $this->leftJoin($key);
-        $data['engines'] = Engine::get();
-        $data['transmissions'] = Transmission::get() ;
-        $data['exterior_colors'] = ExteriorColor::get();
-        $data['body_styles'] = BodyStyle::get();
-        $data['keys'] = Key::get();
-        $data['sonors'] = Sonor::get();
-        $data['cameraes'] = Camera::get();
-        $data['seats'] = Seat::get() ;
-        $data['divertrimes'] = Divertrim::get();
         return redirect('admin/'. $data['year'] .'/'.$data['brand_name'].'/'.$data['name'] .'/'. $key);
     }
 
     public function stepProgess ($make , $model , $year , $id) {
+        
         $data['main'] = $this->leftJoin($id);      
         $data['engines'] = Engine::get();
         $data['transmissions'] = Transmission::get() ;
@@ -67,7 +59,9 @@ class ModelController extends Controller
         $data['sonors'] = Sonor::get();
         $data['cameraes'] = Camera::get();
         $data['seats'] = Seat::get() ;
+        $data['sun_roofs'] = SunRoof::get();
         $data['divertrimes'] = Divertrim::get();
+
         return view('admin.cars.stepProgess')->with('data' , $data);
     }
     public function leftJoin($id) {

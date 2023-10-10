@@ -144,10 +144,13 @@
                 <div class="col-md-6 mb-3">
                     <label for="sun_roof" class="form-label">Have or Haven't Sun Roof</label>
                     <select class="form-select" id="sun_roof" v-model="data.sun_roof">
-                        <option value="none" >None</option>
-                        <option value="sun_roof">Sun Roof</option>
-                        <option value="pandoramic_roof" >Pandoramic  Roof</option>
-                        <option value="sun_pan_roof">Pandoramic & Sun  Roof</option>
+                        <option 
+                            v-for="sunRoof in arrayData['sun_roofs']"
+                            :key="sunRoof.id"
+                            :value="sunRoof.sun_roofs"
+                        >
+                            {{ sunRoof.sun_roofs }}
+                        </option>
                     </select>
                 </div>
                 <div class="col-md-6">
@@ -227,8 +230,9 @@
             }
         },
         mounted () {
-            console.log(this.checkAll);
-        }
+            console.log(this.arrayData['sun_roofs']);
+        },
+
 
     };
 </script>
