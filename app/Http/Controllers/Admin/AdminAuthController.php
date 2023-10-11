@@ -12,6 +12,7 @@ use App\Models\Fucture ;
 use App\Models\Engine ;
 use App\Models\Key ;
 use App\Models\SunRoof ;
+use App\Models\Basic ;
 use App\Models\Transmission ;
 use App\Models\Divertrim ;
 use App\Models\ExteriorColor ;
@@ -19,6 +20,8 @@ use App\Models\BodyStyle ;
 use App\Models\Sonor ;
 use App\Models\Camera ;
 use App\Models\Seat ;
+use Carbon\Carbon ;
+
 class AdminAuthController extends Controller
 {
     public function index() {
@@ -73,7 +76,47 @@ class AdminAuthController extends Controller
         return response()->json('you deleted the successfully');
     }
 
-    public function updateInfo ($id ) {
-        return response()->json($id);
+    public function updateInfo ($id  , Request $request ) {
+        // basic tabel
+        $basics = [] ;
+        $basics['license'] = $request['lincese'] ;
+        $basics['millage'] = $request['kilo'] ;
+        $basics['trim'] = $request['grade'] ;
+        $basics['exterior_color'] = $request['exterior_color'] ;
+        $basics['body_style'] = $request['body_style'] ;
+        $basics['updated_at'] = Carbon::now() ;
+        $basic = Basic::where('modal_name' , $id)->update($basics);
+
+        // // Fucture tabel 
+        // $fuctures = [] ;
+        // $fuctures['blind_sprot'] = $request['blind_sprot'] ;
+        // $fuctures['lane_keep_assit'] = $request['lane_keep_assit'];
+        // $fuctures['streeing_volume'] = $request['streeing_volume'];
+        // $fuctures['rounded_ac'] = $request['rounded_ac'];
+        // $fuctures['sun_roofs'] = $request['sun_roof'];
+        // $fuctures['auto_headlight'] = $request['auto_headlight'];
+        // $fuctures['camera'] = $request['camera'];
+        // $fuctures['rain_sensor'] = $request['rain_sensor'];
+        // $fuctures['auto_em_b'] = $request['auto_em_b'];
+        // $fuctures['auto_hold'] = $request['auto_hold'];
+        // $fuctures['abs'] = $request['abs'];
+        // $fuctures['tire_pressure'] = $request['tire_pressure'];
+        // $fuctures['seat_leather'] = $request['seat'];
+        // $fuctures['kick_sensor'] = $request['kick_sensor'];
+        // $fuctures['truck_motor'] = $request['truck_motor'];
+        // $fuctures['key'] = $request['key'];
+        // $fuctures['sonor'] = $request['sonar'];
+        // $fucture = Fucture::update($fuctures)->where('modal_name' , $id) ;
+
+        // // Car Info Tabel
+        // $car_infos = [] ;
+        // $car_infos['transmission']  = $request['transmission'] ;
+        // $car_infos['divertrim']  = $request['divertrim'] ;
+        // $car_infos['engine']  = $request['enigne'] ;
+        // $car_info = CarInfo::update($car_infos)->where('modal_name' , $id) ;
+        
+
+        return response()->json($basics);
+
     }
 }

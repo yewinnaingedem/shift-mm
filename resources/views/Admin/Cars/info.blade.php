@@ -231,6 +231,12 @@
                                                 Kick Sensor
                                             </label>
                                         </div>
+                                        <div class="mb-1.5">
+                                            <input class="form-check-input" type="checkbox" value="auto_headlight" id="auto_headlight" ${Boolean(data.auto_headlight) ? 'checked' : ' '}>
+                                            <label class="form-check-label" for="auto_headlight">
+                                                Auto Head Light
+                                            </label>
+                                        </div>
                                         
                                     </div>
                                     <div class="col-md-6" > 
@@ -297,6 +303,14 @@
                                             `).join('')}
                                         </select>
                                     </div>
+                                    <div class="col-md-4 mb-2">
+                                        <label for="body_style" class="form-label">Body Style</label>
+                                        <select class="form-select form-select-md mb-3" id="body_style">
+                                            ${response['body_styles'].map(body_style => `
+                                                <option value="${body_style.body_style}" ${body_style.body_style == data.body_style ? "selected" : ''}>${body_style.body_style}</option>    
+                                            `).join('')}
+                                        </select>
+                                    </div>
                                 </div>
                             </div> `;
                         let modal_footer = `
@@ -338,19 +352,41 @@
                 let lane_keep_assit = $('#lane_keep_assit').prop('checked') ? true : false ;
                 let rain_sensor = $('#rain_sensor').prop('checked') ? true : false ;
                 let rounded_ac = $('#rounded_ac').prop('checked') ? true : false ;
+                let auto_headlight = $('#auto_headlight').prop('checked') ? true : false ;
                 let streeing_volume = $('#streeing_volume').prop('checked') ? true : false ;
-                
-                let updateData = [
-                    engine => engine ,
-                    streeing_volume => streeing_volume,
-                ];
-                console.log(engine);
-                console.log(updateData);
+                let exterior_color = $('#exterior_color').val();
+                let body_style = $('#body_style').val();
+
                 $.ajax({
                     method : "PUT" ,
                     url : "/admin/update-info/" + id ,
                     data : {
                         "_token" : "{{csrf_token()}}" ,
+                        'enigne' : engine ,
+                        'streeing_volume' : streeing_volume,
+                        'lincese' : lincese ,
+                        'grade' : grade ,
+                        'kilo' : kilo ,
+                        'auto_headlight' : auto_headlight ,
+                        'rounded_ac' : rounded_ac ,
+                        'rain_sensor' : rain_sensor ,
+                        'lane_keep_assit' : lane_keep_assit ,
+                        'truck_motor' : truck_motor ,
+                        'blind_sprot' : blind_sprot ,
+                        'auto_hold' : auto_hold ,
+                        'abs' : abs ,
+                        'tire_pressure' : tire_pressure ,
+                        'auto_em_b' : auto_em_b ,
+                        'divertrim' : divertrim ,
+                        'sun_roof' : sun_roof ,
+                        'seat' : seat ,
+                        'camera' : camera ,
+                        'transmission' : transmission ,
+                        'sonar' : sonar ,
+                        'key' : key ,
+                        'kick_sensor' : kick_sensor ,
+                        'exterior_color' : exterior_color ,
+                        'body_style' : body_style ,
                     },
                     success : (res) => {
                         console.log(res);
