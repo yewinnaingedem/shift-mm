@@ -40,7 +40,7 @@
                     <td>{{$info->name}}</td>
                     <td>{{$info->year}}</td>
                     <td>{{$info->modal}}</td>
-                    <td>{{$info->color}}</td>
+                    <td id="color">{{$info->color}}</td>
                     <td>
                         <button class="btn btn-danger delete" data-id="{{$info->main_id}}">
                             Delete
@@ -120,8 +120,8 @@
             $(document).on('click','#show',((event)=> {
                 let viewBtn = $(event.currentTarget);
                 let id = viewBtn.data('id');
-                let row = viewBtn.parent().parent();
-                console.log(row );
+                
+                
                 $.ajax({
                     type : 'post' ,
                     url : "/admin/car-info/"+ id ,
@@ -131,7 +131,6 @@
                     success : (response) => {
                         let title = response['car_data'] ;
                         let data = response['car_infos'] ;
-                        console.log(data );
                         let modal_title = 
                         `   
                         <div class="d-flex justify-content-between align-items-center">
@@ -327,7 +326,6 @@
                             <button type="button" id="save" class="btn btn-primary" data-id='${id}'>Save</button>
                         `;
                         $('.modal-footer').html(modal_footer);
-                        console.log(data['transmission']);
                         $('#modal_label').html(modal_title);
                         $('.modal-body').html(modal_header);
                         $('#view').modal('show');
@@ -336,80 +334,80 @@
                         console.log(errorData);
                     }
                 });
-                
             }));
             $(document).on('click','#save',(e)=> {
-                let saveBtn = $(e.currentTarget);
-                let id = saveBtn.data('id');
-                let lincese = $('input[name="lincese"]').val();
-                let grade = $('input[name="grade"]').val();
-                let kilo = $('input[name="kilo"]').val();
-                let key = $('#key').val();
-                let camera  =$('#camera').val();
-                let engine = $('#engine').val();
-                let sonar = $('#sonar').val();
-                let transmission = $('#transmission').val();
-                let seat = $('#seat_leather').val();
-                let sun_roof = $('#sun_roof').val();
-                let divertrim = $('#divertrim').val();
-                let abs = $('#abs').prop('checked') ? true : false ;
-                let auto_em_b = $('#auto_em_b').prop('checked') ? true : false ;
-                let auto_hold = $('#auto_hold').prop('checked') ? true : false ;
-                let blind_sprot = $('#blind_sprot').prop('checked') ? true : false ;
-                let kick_sensor = $('#kick_sensor').prop('checked') ? true : false ;
-                let tire_pressure = $('#tire_pressure').prop('checked') ? true : false ;
-                let truck_motor = $('#truck_motor').prop('checked') ? true : false ;
-                let lane_keep_assit = $('#lane_keep_assit').prop('checked') ? true : false ;
-                let rain_sensor = $('#rain_sensor').prop('checked') ? true : false ;
-                let rounded_ac = $('#rounded_ac').prop('checked') ? true : false ;
-                let auto_headlight = $('#auto_headlight').prop('checked') ? true : false ;
-                let streeing_volume = $('#streeing_volume').prop('checked') ? true : false ;
-                let exterior_color = $('#exterior_color').val();
-                let body_style = $('#body_style').val();
-                console.log(tire_pressure);
-                $.ajax({
-                    method : "PUT" ,
-                    url : "/admin/update-info/" + id ,
-                    data : {
-                        "_token" : "{{csrf_token()}}" ,
-                        'enigne' : engine ,
-                        'streeing_volume' : streeing_volume,
-                        'lincese' : lincese ,
-                        'grade' : grade ,
-                        'kilo' : kilo ,
-                        'auto_headlight' : auto_headlight ,
-                        'rounded_ac' : rounded_ac ,
-                        'rain_sensor' : rain_sensor ,
-                        'lane_keep_assit' : lane_keep_assit ,
-                        'truck_motor' : truck_motor ,
-                        'blind_sprot' : blind_sprot ,
-                        'auto_hold' : auto_hold ,
-                        'abs' : abs ,
-                        tire_pressure : tire_pressure ,
-                        'auto_em_b' : auto_em_b ,
-                        'divertrim' : divertrim ,
-                        'sun_roof' : sun_roof ,
-                        'seat' : seat ,
-                        'camera' : camera ,
-                        'transmission' : transmission ,
-                        'sonar' : sonar ,
-                        'key' : key ,
-                        'kick_sensor' : kick_sensor ,
-                        'exterior_color' : exterior_color ,
-                        'body_style' : body_style ,
-                    },
-                    success : (res) => {
-                        swal({
-                            title: "Alert",
-                            text: res,
-                            timer: 2000
-                        });
-                    },
-                    error : (err ) => {
-                        console.log(err );
-                    }
+                    let saveBtn = $(e.currentTarget);
+                    let id = saveBtn.data('id');
+                    let lincese = $('input[name="lincese"]').val();
+                    let grade = $('input[name="grade"]').val();
+                    let kilo = $('input[name="kilo"]').val();
+                    let key = $('#key').val();
+                    let camera  =$('#camera').val();
+                    let engine = $('#engine').val();
+                    let sonar = $('#sonar').val();
+                    let transmission = $('#transmission').val();
+                    let seat = $('#seat_leather').val();
+                    let sun_roof = $('#sun_roof').val();
+                    let divertrim = $('#divertrim').val();
+                    let abs = $('#abs').prop('checked') ? true : false ;
+                    let auto_em_b = $('#auto_em_b').prop('checked') ? true : false ;
+                    let auto_hold = $('#auto_hold').prop('checked') ? true : false ;
+                    let blind_sprot = $('#blind_sprot').prop('checked') ? true : false ;
+                    let kick_sensor = $('#kick_sensor').prop('checked') ? true : false ;
+                    let tire_pressure = $('#tire_pressure').prop('checked') ? true : false ;
+                    let truck_motor = $('#truck_motor').prop('checked') ? true : false ;
+                    let lane_keep_assit = $('#lane_keep_assit').prop('checked') ? true : false ;
+                    let rain_sensor = $('#rain_sensor').prop('checked') ? true : false ;
+                    let rounded_ac = $('#rounded_ac').prop('checked') ? true : false ;
+                    let auto_headlight = $('#auto_headlight').prop('checked') ? true : false ;
+                    let streeing_volume = $('#streeing_volume').prop('checked') ? true : false ;
+                    let exterior_color = $('#exterior_color').val();
+                    let body_style = $('#body_style').val();
+                    
+                    $.ajax({
+                        method : "PUT" ,
+                        url : "/admin/update-info/" + id ,
+                        data : {
+                            "_token" : "{{csrf_token()}}" ,
+                            'enigne' : engine ,
+                            'streeing_volume' : streeing_volume,
+                            'lincese' : lincese ,
+                            'grade' : grade ,
+                            'kilo' : kilo ,
+                            'auto_headlight' : auto_headlight ,
+                            'rounded_ac' : rounded_ac ,
+                            'rain_sensor' : rain_sensor ,
+                            'lane_keep_assit' : lane_keep_assit ,
+                            'truck_motor' : truck_motor ,
+                            'blind_sprot' : blind_sprot ,
+                            'auto_hold' : auto_hold ,
+                            'abs' : abs ,
+                            tire_pressure : tire_pressure ,
+                            'auto_em_b' : auto_em_b ,
+                            'divertrim' : divertrim ,
+                            'sun_roof' : sun_roof ,
+                            'seat' : seat ,
+                            'camera' : camera ,
+                            'transmission' : transmission ,
+                            'sonar' : sonar ,
+                            'key' : key ,
+                            'kick_sensor' : kick_sensor ,
+                            'exterior_color' : exterior_color ,
+                            'body_style' : body_style ,
+                        },
+                        success : (res) => {
+                            swal({
+                                title: "Alert",
+                                text: res,
+                                timer: 2000
+                            });
+                        },
+                        error : (err ) => {
+                            console.log(err );
+                        }
+                    });
                 });
-            });
+            
             $(document).on('click','.delete' , (e) => {
                 let deleteBtn = $(e.currentTarget);
                 let dataId = deleteBtn.data('id');

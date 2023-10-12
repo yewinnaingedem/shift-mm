@@ -163,23 +163,4 @@
 @endsection 
 
 @section('script')
-    <script>
-        // $(document).ready(()=>{
-        //     let model_year = $('select[name="model_year"]').val();
-        //     let make = $('select[name="model_year"]').val();
-        //     let modal  = $('select[name="model_year"]').val();
-        //     $('#started').click(()=>{
-        //         $.ajax({
-        //             type : 'get' ,
-        //             url : "/admin/cars-test/"+ model_year + "/" + make + "/" + modal ,
-        //             success : (response) => {
-        //                 console.log(response);
-        //             },
-        //             error : (error) => {
-        //                 console.log(error);
-        //             }
-        //         });             
-        //     });
-        // });
-    </script>
 @endsection 

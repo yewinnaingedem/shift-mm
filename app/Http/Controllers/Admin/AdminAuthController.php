@@ -96,7 +96,7 @@ class AdminAuthController extends Controller
         $fuctures['sun_roof'] = $request['sun_roof'];
         $fuctures['auto_headlight'] = $request['auto_headlight'] == "true" ? true : false;
         $fuctures['camera'] = $request['camera'];
-        $fuctures['rain_sensor'] = $request['rain_sensor'] == "true" ? true : false;
+        $fuctures['rain_sensor'] = $request['rain_sensor'] === "true" ;
         $fuctures['auto_em_b'] = $request->auto_em_b == "true" ? true : false ;
         $fuctures['auto_hold'] = $request['auto_hold'] == "true" ? true : false ;
         $fuctures['abs'] = $request['abs'] == "true" ? true : false ;
