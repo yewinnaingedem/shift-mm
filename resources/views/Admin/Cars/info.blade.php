@@ -120,6 +120,8 @@
             $(document).on('click','#show',((event)=> {
                 let viewBtn = $(event.currentTarget);
                 let id = viewBtn.data('id');
+                let row = viewBtn.parent().parent();
+                console.log(row );
                 $.ajax({
                     type : 'post' ,
                     url : "/admin/car-info/"+ id ,
@@ -129,6 +131,7 @@
                     success : (response) => {
                         let title = response['car_data'] ;
                         let data = response['car_infos'] ;
+                        console.log(data );
                         let modal_title = 
                         `   
                         <div class="d-flex justify-content-between align-items-center">
@@ -178,9 +181,15 @@
                                 <div class="col-md-4 mb-3">
                                     <label for="transmission" class="form-label">Transmission</label>
                                     <select class="form-select form-select-md mb-3" id="transmission">
-                                        ${response['transmissions'].map(transmission => `
-                                            <option value="${transmission.transmission}" ${transmission.transmission == data.transmission ? 'selected' : ''}>${transmission.transmission}</option>    
-                                        `).join('')}
+                                    ${response['transmissions'].map(transmission => {
+                                            const numericPart = transmission.transmission.match(/^(\d+)/);
+                                            const optionValue = numericPart ? numericPart[1] : '';
+                                            return `
+                                                <option value="${optionValue}" ${optionValue === data.transmission ? 'selected' : ''}>
+                                                    ${transmission.transmission}
+                                                </option>
+                                            `;
+                                        }).join('')}
                                     </select>
                                 </div>
                                 <div class="col-md-4 mb-3">
@@ -195,7 +204,7 @@
                                     <label for="sun_roof" class="form-label">Sun Roof</label>
                                     <select class="form-select form-select-md mb-3" id="sun_roof">
                                         ${response['sun_roofs'].map(sunRoof => `
-                                            <option value="${sunRoof.sun_roofs}" ${sunRoof.sun_roofs == data.sun_roofs ? 'selected' : ''}>${sunRoof.sun_roofs}</option>    
+                                            <option value="${sunRoof.sun_roofs}" ${sunRoof.sun_roofs == data.sun_roof ? 'selected' : ''}>${sunRoof.sun_roofs}</option>    
                                         `).join('')}
                                     </select>
                                 </div>
@@ -318,6 +327,7 @@
                             <button type="button" id="save" class="btn btn-primary" data-id='${id}'>Save</button>
                         `;
                         $('.modal-footer').html(modal_footer);
+                        console.log(data['transmission']);
                         $('#modal_label').html(modal_title);
                         $('.modal-body').html(modal_header);
                         $('#view').modal('show');
@@ -348,7 +358,7 @@
                 let blind_sprot = $('#blind_sprot').prop('checked') ? true : false ;
                 let kick_sensor = $('#kick_sensor').prop('checked') ? true : false ;
                 let tire_pressure = $('#tire_pressure').prop('checked') ? true : false ;
-                let truck_motor = $('#truck_motor').prop('checked') ? ture : false ;
+                let truck_motor = $('#truck_motor').prop('checked') ? true : false ;
                 let lane_keep_assit = $('#lane_keep_assit').prop('checked') ? true : false ;
                 let rain_sensor = $('#rain_sensor').prop('checked') ? true : false ;
                 let rounded_ac = $('#rounded_ac').prop('checked') ? true : false ;
@@ -356,7 +366,7 @@
                 let streeing_volume = $('#streeing_volume').prop('checked') ? true : false ;
                 let exterior_color = $('#exterior_color').val();
                 let body_style = $('#body_style').val();
-
+                console.log(tire_pressure);
                 $.ajax({
                     method : "PUT" ,
                     url : "/admin/update-info/" + id ,
@@ -375,7 +385,7 @@
                         'blind_sprot' : blind_sprot ,
                         'auto_hold' : auto_hold ,
                         'abs' : abs ,
-                        'tire_pressure' : tire_pressure ,
+                        tire_pressure : tire_pressure ,
                         'auto_em_b' : auto_em_b ,
                         'divertrim' : divertrim ,
                         'sun_roof' : sun_roof ,
@@ -389,7 +399,11 @@
                         'body_style' : body_style ,
                     },
                     success : (res) => {
-                        console.log(res);
+                        swal({
+                            title: "Alert",
+                            text: res,
+                            timer: 2000
+                        });
                     },
                     error : (err ) => {
                         console.log(err );

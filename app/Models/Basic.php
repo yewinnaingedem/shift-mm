@@ -10,8 +10,10 @@ class Basic extends Model
     use HasFactory;
 
     protected $fillable = [
-        'brand_id',
-        'year_id',
-        'modal_name'
+        'license',
+        'millage',
+        'trim',
+        'exterior_color', 
+        'body_style' ,
     ];
 }

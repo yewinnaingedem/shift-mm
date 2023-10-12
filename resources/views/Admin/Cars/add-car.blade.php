@@ -103,7 +103,7 @@
                                     <div class="wrapper d-flex justify-content-center align-items-center px-10">
                                         <select name="model_year" id="Year" >
                                            @foreach($years as $year) 
-                                                <option value="{{$year->id}}">{{$year->year}}</option>
+                                                <option value="{{$year->id}}" >{{$year->year}}</option>
                                            @endforeach
                                         </select>
                                         <div class="">
@@ -114,9 +114,7 @@
                                         <p class="text-danger">{{ $errors->first('model_year')}} </p>
                                     @endif 
                                 </label>
-                                
                             </div>
-                            
                             <div class="flex-1">
                                 <label class="w-full ">
                                     <div class="wrapper d-flex justify-content-center align-items-center px-10">
@@ -142,8 +140,8 @@
                                             <i class="fa-solid fa-caret-down"></i>
                                         </div>
                                     </div>
-                                    @if($errors->has('make'))
-                                        <p class="text-danger">{{ $errors->first('make')}} </p>
+                                    @if($errors->has('modal'))
+                                        <p class="text-danger">{{ $errors->first('modal')}} </p>
                                     @endif 
                                 </label>
                             </div>
@@ -166,22 +164,22 @@
 
 @section('script')
     <script>
-        $(document).ready(()=>{
-            let model_year = $('select[name="model_year"]').val();
-            let make = $('select[name="model_year"]').val();
-            let modal  = $('select[name="model_year"]').val();
-            $('#started').click(()=>{
-                $.ajax({
-                    type : 'get' ,
-                    url : "/admin/cars-test/"+ model_year + "/" + make + "/" + modal ,
-                    success : (response) => {
-                        console.log(response);
-                    },
-                    error : (error) => {
-                        console.log(error);
-                    }
-                });             
-            });
-        });
+        // $(document).ready(()=>{
+        //     let model_year = $('select[name="model_year"]').val();
+        //     let make = $('select[name="model_year"]').val();
+        //     let modal  = $('select[name="model_year"]').val();
+        //     $('#started').click(()=>{
+        //         $.ajax({
+        //             type : 'get' ,
+        //             url : "/admin/cars-test/"+ model_year + "/" + make + "/" + modal ,
+        //             success : (response) => {
+        //                 console.log(response);
+        //             },
+        //             error : (error) => {
+        //                 console.log(error);
+        //             }
+        //         });             
+        //     });
+        // });
     </script>
 @endsection 

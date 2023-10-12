@@ -32,7 +32,6 @@ class ModelController extends Controller
                 'modal' => 'required' ,
             ]
         );  
-
         if($validator->fails()) {
             return redirect('admin/add-cars')->withErrors($validator)->withInput() ;
         }
