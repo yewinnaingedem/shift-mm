@@ -401,6 +401,7 @@
                                 text: res,
                                 timer: 2000
                             });
+                            $('#view').modal('hide');
                         },
                         error : (err ) => {
                             console.log(err );

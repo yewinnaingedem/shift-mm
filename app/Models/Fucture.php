@@ -10,7 +10,7 @@ class Fucture extends Model
     use HasFactory;
 
     protected $fillable = [
-        'blind_sprot',
+        'blind_sport',
         'lane_keep_assit' ,
         'streeing_volume' ,
         'rounded_ac' ,

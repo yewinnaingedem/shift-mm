@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('fuctures', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('modal_name');
-            $table->boolean('blind_sprot')->default(false);
+            $table->boolean('blind_sport')->default(false);
             $table->boolean('lane_keep_assit')->default(false);
             $table->boolean('streeing_volume')->default(false);
             $table->boolean('rounded_ac')->default(false);

@@ -30,7 +30,10 @@
             </div>
             <input type="text" v-model="data.trim"  id="" placeholder="Enter Trim" class="form-control mb-3">
             <div>
-                <input type="checkbox" v-model="data.trim" id="trim_input" value="none" class="form-checkbox mr-5">
+                <input type="checkbox"
+                v-model="data.trim" 
+                id="trim_input" 
+                value="none" class="form-checkbox mr-5">
                 <label for="trim_input" class="form-label">
                     It doesn't have 
                 </label>
@@ -170,8 +173,14 @@
     
     export default {
         props :  {
-            data : Object ,
-            arrayData : Object ,
+            data : {
+                type : Object ,
+                required : true ,
+            } ,
+            arrayData : {
+                type : Array ,
+                required : true ,
+            } ,
         } ,
         data () {
             return {
@@ -186,7 +195,7 @@
         computed : {
             checkedInput () {
                 this.$data
-            }
+            },
         },
         watch : {
             checkedInput : {
@@ -195,6 +204,14 @@
                 }
             }
         } ,
+        methods : {
+            autoGenerate () {
+                const numbericValue = parseFloat(this.data.millage.replace(/[^0-9.-]+/g, ''));
+                if(!isNaN(numbericValue)) {
+
+                }
+            }
+        }
     }
 
 

@@ -215,7 +215,10 @@
             }
         },
         props : {
-            data : Array ,
+            data : {
+                type : Array ,
+                required : true ,
+            } ,
         },
     }
     

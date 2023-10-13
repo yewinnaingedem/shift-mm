@@ -197,8 +197,14 @@
 <script >
     export default {
         props : {
-            data : Object ,
-            arrayData : Array ,
+            data : {
+                type : Object ,
+                required : true ,
+            } ,
+            arrayData : {
+                type : Array ,
+                required : true ,
+            } ,
         },
         data() {
             return {

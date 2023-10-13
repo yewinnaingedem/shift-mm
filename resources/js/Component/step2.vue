@@ -85,9 +85,13 @@
 export default ({
     props: {
         data: {
+            type : Object ,
             required: true,
         },
-        arrayData  : Array ,
+        arrayData  : {
+            type : Array , 
+            required : true ,
+        } ,
     },
     computed :  {
         
