@@ -129,7 +129,7 @@
                         engine : null ,
                     },
                     {
-                        blind_sprot : false ,
+                        blind_sport : false ,
                         lane_keep_assit : false ,
                         streeing_volume : false ,
                         rounded_ac : false ,
@@ -188,11 +188,11 @@
                 axios.post('/api/admin/setup', { field : this.field , id : this.data['main'].id}) 
                 .then((response) => {
                     Swal.fire({
-                        title : "You created the successfullly" ,
+                        title : response ,
                         text : 'good job' ,
                         icon : 'success' ,
                     });
-                    return 'localhost:8000/admin' ;
+                    
                 }).catch((error )=> {
                     console.log(error);
                 });

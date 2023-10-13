@@ -4,10 +4,10 @@
         <div>
             <div class="row">
                 <div class="col-md-4 mb-3">
-                    <label for="blind_sprot" class="d-flex justify-content-center bg-main align-items-center p-10 rounded-sm "
-                        :class="{activeColor : data.blind_sprot}"
+                    <label for="blind_sport" class="d-flex justify-content-center bg-main align-items-center p-10 rounded-sm "
+                        :class="{activeColor : data.blind_sport}"
                     >
-                        <input type="checkbox" v-model="data.blind_sprot" class="input-check" id="blind_sprot">
+                        <input type="checkbox" v-model="data.blind_sport" class="input-check" id="blind_sport">
                         <div class="fw-bold">
                             Blind Sport 
                         </div>

@@ -12,28 +12,32 @@ class TestingController extends Controller
 {
     public function index(Request $request  ) {
         $id = $request['id'] ;
-
+        if(Basic::where('modal_name' ,$id)->exists() || CarInfo::where('modal_name' ,$id)->exists() || Fucture::where('modal_name' , $id)->exists()){ // it retrun ture or false
+            return response()->json('you created the data');
+        }
         // insert into Basic Table ;
-
         $basic = $request['field'][0] ;
         $basic['modal_name'] = $id ;
-        Basic::insert($basic);
-        
+        $basicTable = Basic::insertGetId($basic);
         // insert into Car Info Table ;
-
         $car_infos = $request['field'][1] ;
         $car_infos['modal_name'] = $id ;
-        CarInfo::insert($car_infos);
-
+        $car_infoTable = CarInfo::insertGetId($car_infos);
         $fuctures = $request['field'][2] ;
         $fuctures['modal_name'] = $id ;
-
-        Fucture::insert($fuctures);
-
-        // insert into Fuctrue Table ;
-        $db  = 'You creted successfully' ;
-
-        return response()->json($db);
+        $fuctureTable =  Fucture::insertGetId($fuctures);
+        if($basicTable || $car_infoTable || $fuctureTable) {
+            return response()->json([
+                'status' => "success" ,
+                'message' => 'you updated the data' ,
+                'redirect_url' => '/admin/car-info'
+            ],200);
+        }else {
+            Basic::find($basicTable)->delete() ;
+            CarInfo::find($car_infoTable)->delete() ;
+            Fucture::find($fuctureTable)->delete() ;
+            return response()->json('Please Try Again');
+        }
     }
     public function setup() {
         return response()->json('You will move to the another page');
