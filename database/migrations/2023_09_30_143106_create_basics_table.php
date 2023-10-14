@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('basics', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('modal_name');
             $table->string('license')->unique();
             $table->string('millage');
             $table->string('trim')->nullable();
@@ -22,7 +21,6 @@ return new class extends Migration
             $table->timestamps();
 
             // Modal Name is foreign Key 
-            $table->foreign('modal_name')->references('id')->on('modals');
         });
     }
 

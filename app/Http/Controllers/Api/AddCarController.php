@@ -1,0 +1,32 @@
+<?php
+
+namespace App\Http\Controllers\Api;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use App\Models\Modal ;
+use App\Models\Basic ;
+use App\Models\CarInfo ;
+use App\Models\Fucture ;
+
+class AddCarController extends Controller
+{
+    public function index (Request $request) {
+        $modals = [] ;
+        $modals['brand_id'] = $request['modal']['make'] ;
+        $modals['year_id'] = $request['modal']['year'] ;
+        $modals['modal_name'] = $request['modal']['model'] ;
+        $model = Modal::insertGetId($modals);
+        $basices= $request['field'][0] ;
+        $basicTable = Basic::insertGetId($basices);
+        $car_infos = $request['field'][1] ;
+        $car_infoTable = CarInfo::insertGetId($car_infos);
+        $fuctures = $request['field'][2];
+        $fuctureTable =  Fucture::insertGetId($fuctures);
+        if($modal || $basices || $fuctureTable || $car_infos) {
+            return response()->json('I think it true');
+        }
+        return response()->json('awesome Plese Try again');
+        
+    }
+}

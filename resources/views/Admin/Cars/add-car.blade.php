@@ -100,7 +100,7 @@
                                     <div class="wrapper d-flex justify-content-center align-items-center px-10">
                                         <select name="model_year" id="Year" >
                                            @foreach($years as $year) 
-                                                <option value="{{$year->id}}" >{{$year->year}}</option>
+                                                <option value="{{$year->year}}" >{{$year->year}}</option>
                                            @endforeach
                                         </select>
                                         <div class="">
@@ -117,7 +117,7 @@
                                     <div class="wrapper  d-flex justify-content-center align-items-center px-10">
                                         <select name="make" class="cursor-not-allowed" id="Year" disabled>
                                             @foreach($brands as $brand )
-                                                <option value="{{$brand->id}}">{{$brand->brand_name}}</option>
+                                                <option value="{{$brand->brand_name}}">{{$brand->brand_name}}</option>
                                             @endforeach
                                         </select>
                                         <div class="">
@@ -137,9 +137,6 @@
                                             <i class="fa-solid fa-caret-down"></i>
                                         </div>
                                     </div>
-                                    @if($errors->has('modal'))
-                                        <p class="text-danger">{{ $errors->first('modal')}} </p>
-                                    @endif 
                                 </label>
                             </div>
                             <div class="flex-1 wrapper active h-50" >

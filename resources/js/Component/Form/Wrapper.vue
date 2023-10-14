@@ -37,10 +37,10 @@
                             {{data['main'].year }}/
                         </div>
                         <div class="fw-bold mr-2 capitalize">
-                            {{ data['main'].brand_name }} /
+                            {{ data['main'].make }} /
                         </div>
                         <div class="fw-semibold capitalize">
-                            {{data['main'].name }}
+                            {{data['main'].model }}
                         </div>
                     </div>
                     <div class="color-primary">
@@ -185,7 +185,7 @@
                 }
             },
             submit () {
-                axios.post('/api/admin/setup', { field : this.field , id : this.data['main'].id}) 
+                axios.post('/api/admin/setup', { field : this.field , modal : this.data['main']}) 
                 .then((response) => {
                     Swal.fire({
                         title : response.data ,
@@ -218,7 +218,7 @@
                 type : Array ,
                 required : true ,
             } ,
-        },
+        }
     }
     
 </script>

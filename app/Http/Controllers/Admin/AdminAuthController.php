@@ -30,9 +30,8 @@ class AdminAuthController extends Controller
 
     public function addCars() {
         $brands = Brand::get();
-        $modals = Modal::get();
         $years = Year::get();
-        return view('admin.cars.add-car',compact('brands','years','modals'));
+        return view('admin.cars.add-car',compact('brands','years'));
     }
 
     public function carInfo () {
@@ -72,7 +71,7 @@ class AdminAuthController extends Controller
     }
 
     public function deleteCard($id) {
-        // Modal::where('id' , $id)->delete();
+        Modal::where('id' , $id)->delete();
         return response()->json('you deleted the successfully');
     }
 

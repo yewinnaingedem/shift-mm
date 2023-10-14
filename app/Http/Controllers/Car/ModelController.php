@@ -35,21 +35,12 @@ class ModelController extends Controller
         if($validator->fails()) {
             return redirect('admin/add-cars')->withErrors($validator)->withInput() ;
         }
-        $model = $request['model_year'] ;
-        $make = $request['make'] ;
-        $modal = $request['modal'] ;
-        $input = []; 
-        $input['brand_id'] = $make ;
-        $input['year_id']  = $model ;
-        $input['modal_name'] = $modal ;
-        $key = Modal::insertGetId($input);
-        $data = $this->leftJoin($key);
-        return redirect('admin/'. $data['year'] .'/'.$data['brand_name'].'/'.$data['name'] .'/'. $key);
+        return redirect('admin/'. $request['model_year'] .'/'.$request['make'].'/'.$request['modal']);
     }
 
-    public function stepProgess ($make , $model , $year , $id) {
+    public function stepProgess ($make , $model , $year) {
 
-        $data['main'] = $this->leftJoin($id);      
+        $data['main'] = [ 'year'=>$make , 'make'=>$model , 'model'=>$year ] ;
         $data['engines'] = Engine::get();
         $data['transmissions'] = Transmission::get() ;
         $data['exterior_colors'] = ExteriorColor::get();

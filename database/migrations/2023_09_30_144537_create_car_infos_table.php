@@ -13,13 +13,11 @@ return new class extends Migration
     {
         Schema::create('car_infos', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('modal_name');
             $table->string('transmission');
             $table->string('divertrim');
             $table->string('engine');
             $table->timestamps();
             // Modals foreign Key ;
-            $table->foreign('modal_name')->references('id')->on('modals');
         });
     }
 

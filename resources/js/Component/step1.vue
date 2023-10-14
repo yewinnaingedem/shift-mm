@@ -9,10 +9,11 @@
                         <input type="text" 
                             :maxLength = "maxCharacter"
                             v-model="data.license"
-                            @input="validateInput"
                             name="" id="zip" 
+                            @input="checkValidae"
                             class="w-100 form-control mb-1 "
-                            :class="{'is-valid' : isValide }"
+                            :class="{'is-valid' : isValide  , 'is-invalid' : isInValide}"
+                            
                             placeholder="Enter License Plate Number">
                         <p v-show="data.zip" class="fs-8 text-danger capitalize">invaild zip code</p>
                     </div>
@@ -23,6 +24,8 @@
                     <label for="millage" class="form-label">Millage Or KiloMeter</label>
                     <input type="text"  name="" id="millage" class="w-100 form-control mb-1"
                         v-model="data.millage"
+                        @input="toLocalString"
+                        :maxlength="maxMillage"
                         placeholder="Enter Millage Or Kilo Meter">
                 </div>
             </div>
@@ -178,29 +181,37 @@
                     'bg-main'
                 ] ,
                 maxCharacter : 7 ,
+                maxMillage : 8 ,
                 isValide : false ,
+                isInValide : false ,
             }
-        },
-        computed : {
-            checkedInput () {
-                this.$data
-            },
         },
         watch : {
             checkedInput : {
                 handler (newValue) {
                     console.log(newValue);
                 }
-            }
+            }, 
         } ,
         methods : {
-            validateInput () {
-                if(this.data.license.length > this.maxLength ){
-                    this.data.license = this.data.license.slice(0 , this.maxLength);
-                    this.isValide = true  ;
-                    console.log(this.isValide = true);
+            checkValidae  () {
+                if(this.data.license.length == this.maxCharacter) {
+                    this.isValide = true ;
+                    this.isInValide = false ;
+                }else {
+                    this.isValide = false ;
+                    this.isInValide = true ;
+                }
+            } ,
+            toLocalString() {
+                let value = this.data.millage.replace(/\D/g, '') ;
+                value = Number(value).toLocaleString();
+                if(value == 0) {
+                    this.data.millage = '';
+                }else {
+                    this.data.millage = value ;
                 }
             }
-        }
+        },
     }
 </script> 
