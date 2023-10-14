@@ -26,17 +26,14 @@ Route::prefix('mm_cars')->group(function () {
     Route::get('/register',[AuthController::class , 'userRegister']);
     Route::post('/register',[AuthController::class , 'register']);
     Route::post('change_profile/{id}' , [AuthController::class , 'changeProfile']);
-
     // Car Details
     Route::get('{carname}/{id}' , [DetailsController::class , 'index'] );
-
     // financing 
     Route::get('financing' , [FinancingController::class , 'index'] );
 });
 
 Route::prefix('admin')->group(function (){
     Route::get('/' , [AdminAuthController::class , 'index']);
-
     // Vue Add
     Route::get('add-cars' , [AdminAuthController::class , 'addCars'] );
     Route::get('car-info' , [AdminAuthController::class , 'carInfo']);

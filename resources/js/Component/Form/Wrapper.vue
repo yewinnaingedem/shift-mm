@@ -117,32 +117,32 @@
                 currentStep : 0 ,
                 field : [
                     {
-                        license : null ,
-                        millage : null ,
-                        trim : null  ,
-                        exterior_color: null ,
-                        body_style : null ,
+                        license : '' ,
+                        millage : '' ,
+                        trim : ''  ,
+                        exterior_color: '' ,
+                        body_style : '' ,
                     } ,
                     {
-                        transmission : null ,
-                        divertrim : null ,
-                        engine : null ,
+                        transmission : '' ,
+                        divertrim : '' ,
+                        engine : '' ,
                     },
                     {
                         blind_sport : false ,
                         lane_keep_assit : false ,
                         streeing_volume : false ,
                         rounded_ac : false ,
-                        key : null ,
-                        sun_roof : null ,
+                        key : '' ,
+                        sun_roof : '' ,
                         auto_headlight : false ,
                         rain_sensor : false ,
                         auto_em_b : false ,
                         abs : true ,
                         auto_hold : false ,
                         tire_pressure : false ,
-                        seat_leather : null ,
-                        camera : null ,
+                        seat_leather : '' ,
+                        camera : '' ,
                         truck_motor : false ,
                         kick_sensor : false ,
                         sonor : 'back' ,
@@ -188,11 +188,10 @@
                 axios.post('/api/admin/setup', { field : this.field , id : this.data['main'].id}) 
                 .then((response) => {
                     Swal.fire({
-                        title : response ,
-                        text : 'good job' ,
+                        title : response.data ,
                         icon : 'success' ,
                     });
-                    
+                    console.log(response.data)
                 }).catch((error )=> {
                     console.log(error);
                 });

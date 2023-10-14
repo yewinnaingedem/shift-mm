@@ -7,8 +7,12 @@
                     <div class="d-flex flex-column justify-content-center align-items-start ">
                         <label for="zip" class="form-label">license Plate </label>
                         <input type="text" 
+                            :maxLength = "maxCharacter"
                             v-model="data.license"
-                            name="" id="zip" class="w-100 form-control mb-1"
+                            @input="validateInput"
+                            name="" id="zip" 
+                            class="w-100 form-control mb-1 "
+                            :class="{'is-valid' : isValide }"
                             placeholder="Enter License Plate Number">
                         <p v-show="data.zip" class="fs-8 text-danger capitalize">invaild zip code</p>
                     </div>
@@ -95,29 +99,19 @@
     </div>
 </template>
 <style scoped>
-.mr-3 {
-    margin-right: 15px;
-}
+
 
 .mr-5 {
     margin-right: 5px;
 }
-.px-0 {
-    padding-top: 0;
-    padding-bottom: 0;
-}
-.py-10 {
-    padding-right: 10px;
-    padding-left: 10px;
-}
+
+
 
 .fs-8 {
     font-size: 12px;
 }
 
-.pl-25 {
-    padding-left: 25px;
-}
+
 
 .cap-5 {
     opacity: 0.8;
@@ -128,13 +122,6 @@
     left: 0;
 }
 
-.pt-20 {
-    padding-top: 20px;
-}
-
-.mr-2 {
-    margin-right: 5px;
-}
 
 .capitalize {
     text-transform: capitalize;
@@ -189,7 +176,9 @@
                 ],
                 mainClass : [
                     'bg-main'
-                ]
+                ] ,
+                maxCharacter : 7 ,
+                isValide : false ,
             }
         },
         computed : {
@@ -205,14 +194,13 @@
             }
         } ,
         methods : {
-            autoGenerate () {
-                const numbericValue = parseFloat(this.data.millage.replace(/[^0-9.-]+/g, ''));
-                if(!isNaN(numbericValue)) {
-
+            validateInput () {
+                if(this.data.license.length > this.maxLength ){
+                    this.data.license = this.data.license.slice(0 , this.maxLength);
+                    this.isValide = true  ;
+                    console.log(this.isValide = true);
                 }
             }
         }
     }
-
-
 </script> 
