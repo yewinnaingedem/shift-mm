@@ -117,32 +117,32 @@
                 currentStep : 0 ,
                 field : [
                     {
-                        license : '' ,
-                        millage : '' ,
-                        trim : ''  ,
-                        exterior_color: '' ,
-                        body_style : '' ,
+                        license : null ,
+                        millage : null ,
+                        trim : null  ,
+                        exterior_color: null ,
+                        body_style : null ,
                     } ,
                     {
-                        transmission : '' ,
-                        divertrim : '' ,
-                        engine : '' ,
+                        transmission : null ,
+                        divertrim : null ,
+                        engine : null ,
                     },
                     {
                         blind_sport : false ,
                         lane_keep_assit : false ,
                         streeing_volume : false ,
                         rounded_ac : false ,
-                        key : '' ,
-                        sun_roof : '' ,
+                        key : null ,
+                        sun_roof : null ,
                         auto_headlight : false ,
                         rain_sensor : false ,
                         auto_em_b : false ,
                         abs : true ,
                         auto_hold : false ,
                         tire_pressure : false ,
-                        seat_leather : '' ,
-                        camera : '' ,
+                        seat_leather : null ,
+                        camera : null ,
                         truck_motor : false ,
                         kick_sensor : false ,
                         sonor : 'back' ,
@@ -187,11 +187,7 @@
             submit () {
                 axios.post('/admin/setup', { field : this.field , modal : this.data['main']}) 
                 .then((response) => {
-                    Swal.fire({
-                        title : response.data ,
-                        icon : 'success' ,
-                    });
-                    console.log(response.data)
+                    window.location.replace("/admin/add-cars");  
                 }).catch((error )=> {
                     console.log(error);
                 });

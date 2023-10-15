@@ -38,7 +38,7 @@ class AddCarController extends Controller
         $items['created_at'] = Carbon::now();
 
         $item = Item::insertGetId($items);
-        return response()->json('you created the data'. (session()->has('id')?session()->get('id') : ''));
+        return redirect('admin/add-cars')->with('message' , 'you created the data');
     }
     public function sessionCheck () {
         return session()->has('id') ? session()->get('id') : '' ;
