@@ -35,6 +35,8 @@ class ModelController extends Controller
         if($validator->fails()) {
             return redirect('admin/add-cars')->withErrors($validator)->withInput() ;
         }
+        // $modal_year = Year::where('year',$request['model_year'])->first();
+        // $make = Brand::where('brand_name' , $request['make'])->first();
         return redirect('admin/'. $request['model_year'] .'/'.$request['make'].'/'.$request['modal']);
     }
 

@@ -100,7 +100,7 @@
                                     <div class="wrapper d-flex justify-content-center align-items-center px-10">
                                         <select name="model_year" id="Year" >
                                            @foreach($years as $year) 
-                                                <option value="{{$year->year}}" >{{$year->year}}</option>
+                                                <option value="{{$year->id}}" >{{$year->year}}</option>
                                            @endforeach
                                         </select>
                                         <div class="">
@@ -117,7 +117,7 @@
                                     <div class="wrapper  d-flex justify-content-center align-items-center px-10">
                                         <select name="make" class="cursor-not-allowed" id="Year" disabled>
                                             @foreach($brands as $brand )
-                                                <option value="{{$brand->brand_name}}">{{$brand->brand_name}}</option>
+                                                <option value="{{$brand->id}}">{{$brand->brand_name}}</option>
                                             @endforeach
                                         </select>
                                         <div class="">
