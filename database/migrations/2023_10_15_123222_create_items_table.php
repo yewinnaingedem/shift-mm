@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('items', function (Blueprint $table) {
+            $table->id() ;
             $table->unsignedBigInteger('modal_Id');
             $table->unsignedBigInteger('basic_Id');
             $table->unsignedBigInteger('fucture_Id');

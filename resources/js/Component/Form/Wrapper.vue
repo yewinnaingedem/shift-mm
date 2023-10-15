@@ -185,7 +185,7 @@
                 }
             },
             submit () {
-                axios.post('/api/admin/setup', { field : this.field , modal : this.data['main']}) 
+                axios.post('/admin/setup', { field : this.field , modal : this.data['main']}) 
                 .then((response) => {
                     Swal.fire({
                         title : response.data ,

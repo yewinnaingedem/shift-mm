@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\ImagesController;
 use App\Http\Controllers\Cars\BrandController;
 use App\Http\Controllers\Cars\FectureController;
 use App\Http\Controllers\Car\ModelController;
+use App\Http\Controllers\Api\AddCarController ;
 
 
 Route::get('/google' , [AuthController::class , 'googleLogIn']);
@@ -42,6 +43,7 @@ Route::prefix('admin')->group(function (){
     Route::post('car-info/{id}' , [AdminAuthController::class , 'details']);
     Route::delete('car-info/{id}', [AdminAuthController::class , 'deleteCard']);
     Route::put('update-info/{id}' , [AdminAuthController::class , 'updateInfo']);
+    Route::post('setup' , [AddCarController::class , 'index']);
 });
 
 ?> 
