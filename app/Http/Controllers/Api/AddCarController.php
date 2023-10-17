@@ -9,6 +9,8 @@ use Carbon\Carbon ;
 use App\Models\Basic ;
 use App\Models\CarInfo ;
 use App\Models\Fucture ;
+use App\Models\Brand;
+use App\Models\Year;
 use App\Models\Item ;
 
 class AddCarController extends Controller
@@ -16,9 +18,16 @@ class AddCarController extends Controller
     public function index (Request $request) {
 
         $modals = [] ;
-        $modals['brand_id'] = $request['modal']['make'] ;
-        $modals['year_id'] = $request['modal']['year'] ;
-        $modals['modal_name'] = $request['modal']['model'] ;
+        $brand_name = $request['modal']['make'] ;
+        $brand = Brand::select('id')->where('brand_name' , $brand_name)->first() ;
+        $year_name =  $request['modal']['year']  ;
+        $year = Year::select('id')->where('year',$year_name)->first();
+        $modal = $request['modal']['model'] ;
+        $modals['year_id'] = $year->id;
+        $modals['brand_id'] = $brand->id ;
+        $modals['modal_name'] =  $modal ;
+        // $hasData = Modal::where('brand_id' , $brand->id)->where('years_id' , $year)->where('modal_name' , $modal)->exists() ;
+        
         $model = Modal::insertGetId($modals);
         
         $basices= $request['field'][0] ;
@@ -38,7 +47,7 @@ class AddCarController extends Controller
         $items['created_at'] = Carbon::now();
 
         $item = Item::insertGetId($items);
-        return redirect('admin/add-cars')->with('message' , 'you created the data');
+        return response()->json('You created the data record');
     }
     public function sessionCheck () {
         return session()->has('id') ? session()->get('id') : '' ;

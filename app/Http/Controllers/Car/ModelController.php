@@ -9,6 +9,9 @@ use App\Models\Modal ;
 use App\Models\Engine ;
 use App\Models\Key ;
 use App\Models\SunRoof ;
+use App\Models\Year ;
+use App\Models\Brand ;
+use App\Models\Item ;
 use App\Models\Transmission ;
 use App\Models\Divertrim ;
 use App\Models\ExteriorColor ;
@@ -35,24 +38,33 @@ class ModelController extends Controller
         if($validator->fails()) {
             return redirect('admin/add-cars')->withErrors($validator)->withInput() ;
         }
-        // $modal_year = Year::where('year',$request['model_year'])->first();
-        // $make = Brand::where('brand_name' , $request['make'])->first();
         return redirect('admin/'. $request['model_year'] .'/'.$request['make'].'/'.$request['modal']);
     }
 
     public function stepProgess ($make , $model , $year) {
-
-        $data['main'] = [ 'year'=>$make , 'make'=>$model , 'model'=>$year ] ;
-        $data['engines'] = Engine::get();
-        $data['transmissions'] = Transmission::get() ;
-        $data['exterior_colors'] = ExteriorColor::get();
-        $data['body_styles'] = BodyStyle::get();
-        $data['keys'] = Key::get();
-        $data['sonors'] = Sonor::get();
-        $data['cameraes'] = Camera::get();
-        $data['seats'] = Seat::get() ;
-        $data['sun_roofs'] = SunRoof::get();
-        $data['divertrimes'] = Divertrim::get();
+        
+        $brand = Brand::select('id')->where('brand_name' , $model )->first() ;
+        $year_Id = Year::select('id')->where('year' , $make )->first() ;
+        $hasbrand = Modal::where('brand_id' , $brand->id)->exists();
+        $hasYear = Modal::where('year_id' , $year_Id->id)->exists();
+        $hasModel = Modal::where('modal_name' , $year)->exists();
+        if($hasbrand && $hasYear && $hasModel) {
+            $existId = Modal::where('modal_name',$year)->first('id');
+            $existData = Item::where('fucture_Id' , $existId->id)->first();
+            dd('success');
+        }else {
+            $data['main'] = [ 'year'=>$make , 'make'=>$model , 'model'=>$year ] ;
+            $data['engines'] = Engine::get();
+            $data['transmissions'] = Transmission::get() ;
+            $data['exterior_colors'] = ExteriorColor::get();
+            $data['body_styles'] = BodyStyle::get();
+            $data['keys'] = Key::get();
+            $data['sonors'] = Sonor::get();
+            $data['cameraes'] = Camera::get();
+            $data['seats'] = Seat::get() ;
+            $data['sun_roofs'] = SunRoof::get();
+            $data['divertrimes'] = Divertrim::get();
+        }
 
         return view('admin.cars.stepProgess')->with('data' , $data);
     }

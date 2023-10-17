@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\ImagesController;
 use App\Http\Controllers\Cars\BrandController;
 use App\Http\Controllers\Cars\FectureController;
 use App\Http\Controllers\Car\ModelController;
+use App\Http\Controllers\Car\CarModelController;
 use App\Http\Controllers\Api\AddCarController ;
 
 
@@ -44,6 +45,8 @@ Route::prefix('admin')->group(function (){
     Route::delete('car-info/{id}', [AdminAuthController::class , 'deleteCard']);
     Route::put('update-info/{id}' , [AdminAuthController::class , 'updateInfo']);
     Route::post('setup' , [AddCarController::class , 'index']);
+
+    Route::resource('car_models' , CarModelController::class) ;
 });
 
 ?> 

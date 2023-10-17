@@ -119,7 +119,6 @@
                     {
                         license : null ,
                         millage : null ,
-                        trim : null  ,
                         exterior_color: null ,
                         body_style : null ,
                     } ,
@@ -188,6 +187,7 @@
                 axios.post('/admin/setup', { field : this.field , modal : this.data['main']}) 
                 .then((response) => {
                     window.location.replace("/admin/add-cars");  
+                    console.log(response);
                 }).catch((error )=> {
                     console.log(error);
                 });

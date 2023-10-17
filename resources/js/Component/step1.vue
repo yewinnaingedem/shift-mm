@@ -31,22 +31,6 @@
             </div>
         </div>
         <div class="mb-3">
-            <div class="d-flex justify-content-between align-items-center mb-2 ">
-                <h5 class="fw-bold">Trim</h5>
-                <i class="fa-solid fa-question"></i>
-            </div>
-            <input type="text" v-model="data.trim"  id="" placeholder="Enter Trim" class="form-control mb-3">
-            <div>
-                <input type="checkbox"
-                v-model="data.trim" 
-                id="trim_input" 
-                value="none" class="form-checkbox mr-5">
-                <label for="trim_input" class="form-label">
-                    It doesn't have 
-                </label>
-            </div>
-        </div>
-        <div class="mb-3">
             <h5 class="fw-bold cap-5">Exterior color</h5>
             <div class=" row ">
                 <div class="col-md-4 mb-3"

@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('license')->unique();
             $table->string('millage');
-            $table->string('trim')->nullable();
             $table->string('exterior_color');
             $table->string('body_style');
             $table->timestamps();

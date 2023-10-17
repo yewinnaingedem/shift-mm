@@ -81,12 +81,12 @@
 <div class="mt-3">
         <div>
             <h1 class="text-center font-bold" >Please Start With </h1>
-            <div class="container">
+            <div class="container-furid">
                 <div class="m-5 text-center ">
                     <div class="d-inline-flex flex-row min-width-450px border-b-2 pb-2">
                         <div class="d-flex justify-content-center align-items-center w-full">
                             <h5 class="text-18px px-0">
-                                <p class="px-0">Yars , Make ,Modal</p>
+                                <p class="px-0">Yars , Make  , Modal , Grade </p>
                             </h5>
                         </div>
                     </div>
@@ -100,7 +100,7 @@
                                     <div class="wrapper d-flex justify-content-center align-items-center px-10">
                                         <select name="model_year" id="Year" >
                                            @foreach($years as $year) 
-                                                <option value="{{$year->id}}" >{{$year->year}}</option>
+                                                <option value="{{$year->year}}" >{{$year->year}}</option>
                                            @endforeach
                                         </select>
                                         <div class="">
@@ -117,7 +117,7 @@
                                     <div class="wrapper  d-flex justify-content-center align-items-center px-10">
                                         <select name="make" class="cursor-not-allowed" id="Year" disabled>
                                             @foreach($brands as $brand )
-                                                <option value="{{$brand->id}}">{{$brand->brand_name}}</option>
+                                                <option value="{{$brand->brand_name}}">{{$brand->brand_name}}</option>
                                             @endforeach
                                         </select>
                                         <div class="">
