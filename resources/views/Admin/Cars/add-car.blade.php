@@ -26,7 +26,7 @@
             border-radius: 4px;
             background-color: #fff;
         }
-        #Year {
+        #Year , #brand  , #model{
             width: 100%;
             display: block;
             text-overflow: ellipsis;
@@ -115,9 +115,9 @@
                             <div class="flex-1">
                                 <label class="w-full ">
                                     <div class="wrapper  d-flex justify-content-center align-items-center px-10">
-                                        <select name="make" class="cursor-not-allowed" id="Year" disabled>
+                                        <select name="make" class="cursor-not-allowed" id="brand" disabled>
                                             @foreach($brands as $brand )
-                                                <option value="{{$brand->brand_name}}">{{$brand->brand_name}}</option>
+                                                <option value="{{$brand->id}}">{{$brand->brand_name}}</option>
                                             @endforeach
                                         </select>
                                         <div class="">
@@ -131,12 +131,17 @@
                             </div>
                             <div class="flex-1">
                                 <label class="w-full ">
-                                    <div class="wrapper d-flex justify-content-center align-items-center px-10">
-                                        <input type="text" disabled name="modal" id="Year" class="cursor-not-allowed">
+                                    <div class="wrapper  d-flex justify-content-center align-items-center px-10">
+                                        <select name="model" class="cursor-not-allowed" id="model" disabled>
+                                            
+                                        </select>
                                         <div class="">
                                             <i class="fa-solid fa-caret-down"></i>
                                         </div>
                                     </div>
+                                    @if($errors->has('make'))
+                                        <p class="text-danger">{{ $errors->first('make')}} </p>
+                                    @endif 
                                 </label>
                             </div>
                             <div class="flex-1 wrapper active h-50" >
@@ -161,7 +166,7 @@
         $(document).ready(()=>{
             let $model_year = $('select[name="model_year"]');
             let $make = $('select[name="make"]');
-            let $modal = $('input[name="modal"]');
+            let $model = $('select[name="model"]');
             $model_year.on('change' , ()=> {
                 if($model_year.val() !== '') {
                     $make.prop('disabled' , false );
@@ -169,13 +174,31 @@
                 }
             });
             $make.on('change',()=> {
-                if($model_year.val() !== '') {
-                    $modal.prop('disabled' , false );
-                    $modal.removeClass('cursor-not-allowed');
-                }
+                $model.val('');
+                $('#model option').remove();
+                $.ajax({
+                    type : 'POST' , 
+                    url : '/admin/model/' + $make.val() ,
+                    data : {
+                        "_token" : "{{csrf_token()}}"
+                    },
+                    success : (res) => {
+                        let $innerHtml = `
+                                            ${res.map(item => `
+                                                <option  value="${item.id}">${item.model_name}</option>
+                                            `).join('')}
+                                    `;               
+                        $model.append($innerHtml);
+                        $model.prop('disabled' , false);
+                        $model.removeClass('cursor-not-allowed');
+                    },
+                    error : (err) => {
+                        console.log(err );
+                    }
+                });
             });
-            $modal.on('keyup', ()=> {
-                if($modal.val() == '') {
+            $model.on('change', ()=> {
+                if($model.val() == '') {
                     $('.disabled').addClass('cursor-not-allowed');
                     $('.disabled').prop('disabled' , true) ;
                 }else {

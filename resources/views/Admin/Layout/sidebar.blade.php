@@ -2,16 +2,10 @@
     <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
         <div class="sb-sidenav-menu">
             <div class="nav">
-                <div class="sb-sidenav-menu-heading">Core</div>
-                <a class="nav-link" href="index.html">
-                    <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                    Admin  Dashboard
-                </a>
                 <a class="nav-link" href="{{url('admin/add-cars')}}">
                     <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                    Add Cars 
+                    Car Add 
                 </a>
-                <!-- Car Infomation pages -->
                 <a class="nav-link collapsed" href="{{url('admin/car-info')}}" >
                     <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                      Car Info   

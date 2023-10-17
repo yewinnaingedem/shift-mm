@@ -47,6 +47,7 @@ Route::prefix('admin')->group(function (){
     Route::post('setup' , [AddCarController::class , 'index']);
 
     Route::resource('car_models' , CarModelController::class) ;
+    Route::post('model/{id}' , [CarModelController::class , 'modelSearch']);
 });
 
 ?> 

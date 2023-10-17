@@ -72,39 +72,52 @@
     <script>
         $(document).ready(()=> {
             new DataTable('#example');
-            $('.delete').click((e)=> 
+            $(document).on('click','.delete' ,((e)=> 
                 {
                     let deleteBtn = $(e.currentTarget);
                     let id = deleteBtn.data('id') ;
                     let row = deleteBtn.parent().parent();
-                    $.ajax({
-                        type : 'delete' ,
-                        url : "/admin/car_models/" + id ,
-                        data : {
-                            "_token" : "{{csrf_token()}}"
+                    swal({
+                        title: "Are you sure?",
+                        text: "You will not be able to recover this imaginary file!",
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "Yes, delete it!",
+                        closeOnConfirm: false
                         },
-                        success : (response) => 
-                        {
-                            swal({
-                                title: "Are you sure?",
-                                text: "You will not be able to recover this imaginary file!",
-                                type: "warning",
-                                showCancelButton: true,
-                                confirmButtonColor: "#DD6B55",
-                                confirmButtonText: "Yes, delete it!",
-                                closeOnConfirm: false
+                        function(){
+                            $.ajax({
+                                type : 'delete' ,
+                                url : "/admin/car_models/" + id ,
+                                data : {
+                                    "_token" : "{{csrf_token()}}"
                                 },
-                                function(){
-                                    swal("Deleted!", response , "success");
-                                    row.remove() ;
+                                success : (response) => 
+                                {
+                                    swal({
+                                        title: "Are you sure?",
+                                        text: "You will not be able to recover this imaginary file!",
+                                        type: "warning",
+                                        showCancelButton: true,
+                                        confirmButtonColor: "#DD6B55",
+                                        confirmButtonText: "Yes, delete it!",
+                                        closeOnConfirm: false
+                                        },
+                                        function(){
+                                            swal("Deleted!", response , "success");
+                                            row.remove() ;
+                                    });
+                                },
+                                error : (error) => {
+                                    console.log(error);
+                                }
                             });
-                        },
-                        error : (error) => {
-                            console.log(error);
-                        }
+                            swal("Deleted!", response , "success");
+                            row.remove() ;
                     });
                 }
-            );
+            ));
         });
     </script>
 @endsection 

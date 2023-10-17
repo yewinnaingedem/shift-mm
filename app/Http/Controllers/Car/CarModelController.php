@@ -87,7 +87,16 @@ class CarModelController extends Controller
      */
     public function destroy(string $id)
     {
-        CarModel::where('id' , $id)->delete();
-        return response()->json('you deleted the record successfully');
+        $existId =CarModel::find($id);
+        if($existId->exists()) {
+            $existId->delete();
+            return response()->json('you deleted the record successfully');
+        }
+        return response()->json('Error Occuring');
+    }
+
+    public function modelSearch ($id) {
+        $idSearch = CarModel::where('brand_id' , $id)->get();
+        return response()->json($idSearch);
     }
 }
