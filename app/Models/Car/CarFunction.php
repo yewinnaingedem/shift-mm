@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Car;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Fucture extends Model
+class CarFunction extends Model
 {
     use HasFactory;
 }

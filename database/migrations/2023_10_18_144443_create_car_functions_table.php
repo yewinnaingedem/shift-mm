@@ -11,27 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('fuctures', function (Blueprint $table) {
+        Schema::create('car_functions', function (Blueprint $table) {
             $table->id();
             $table->boolean('blind_sport')->default(false);
             $table->boolean('lane_keep_assit')->default(false);
-            $table->boolean('streeing_volume')->default(false);
-            $table->boolean('rounded_ac')->default(false);
-            $table->string('sun_roof')->default('none');
             $table->boolean('auto_headlight')->default(false);
-            $table->string('camera')->default('none');
             $table->boolean('rain_sensor')->default(false);
-            $table->boolean('auto_em_b')->default(false);
             $table->boolean('auto_hold')->default(false);
-            $table->boolean('abs')->default(true);
             $table->boolean('tire_pressure')->default(false);
-            $table->string('seat_leather')->defaule('simple');
             $table->boolean('kick_sensor')->default(false);
-            $table->boolean('truck_motor')->default(false);
-            $table->string('key')->default('simple');
-            $table->string('sonor')->default('back');
             $table->timestamps();
-            
         });
     }
 
@@ -40,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('fuctures');
+        Schema::dropIfExists('car_functions');
     }
 };

@@ -15,7 +15,7 @@
 @section('content')
     <div class="container-fluid mt-3">
         <div class="mb-3">
-            <a href="{{url('admin/car_models/create')}}" class=" btn btn-primary">
+            <a href="{{url('admin/grade/create')}}" class=" btn btn-primary">
                 <i class="fa-solid fa-plus">Add</i>
                 <span>Add New</span>
             </a>
@@ -31,20 +31,20 @@
         <table id="example" class="display" style="width:100%">
             <thead>
                 <tr>
-                    <th>Brand </th>
-                    <th>Car Model</th>
+                    <th>Model Name </th>
+                    <th>Grade</th>
                     <th>Created At</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach($car_models as $models)
+                @foreach($grades as $grade)
                     <tr>
-                        <td> {{ $models->brand_name}}</td>
-                        <td> {{$models->model_name}}</td>
-                        <td>{{ $models->created_at }}</td>
+                        <td> {{ $grade->model_name}}</td>
+                        <td> {{$grade->grade == 0 ? 'None' : $grade->grade }}</td>
+                        <td>{{ $grade->created_at }}</td>
                         <td>
-                            <button class="btn btn-danger delete" data-id="{{$models->id}}">Delete</button>
+                            <button class="btn btn-danger delete" data-id="{{$grade->id}}">Delete</button>
                             <a href="{{url('')}}" class="btn btn-primary">View</a>
                         </td>
                     </tr>
@@ -52,8 +52,8 @@
             </tbody>
             <tfoot>
                 <tr>
-                    <th>Brand </th>
-                    <th>Car Model</th>
+                    <th>Model Name </th>
+                    <th>Grade</th>
                     <th>Creted At</th>
                     <th>Action</th>
                 </tr>
@@ -87,28 +87,16 @@
                         closeOnConfirm: false
                         },
                         function(){
-                            swal("Deleted!", response , "success");
+                            swal("Deleted!", 'response' , "success");
                             $.ajax({
                                 type : 'delete' ,
-                                url : "/admin/car_models/" + id ,
+                                url : "/admin/grade/" + id ,
                                 data : {
                                     "_token" : "{{csrf_token()}}"
                                 },
                                 success : (response) => 
                                 {
-                                    swal({
-                                        title: "Are you sure?",
-                                        text: "You will not be able to recover this imaginary file!",
-                                        type: "warning",
-                                        showCancelButton: true,
-                                        confirmButtonColor: "#DD6B55",
-                                        confirmButtonText: "Yes, delete it!",
-                                        closeOnConfirm: false
-                                        },
-                                        function(){
-                                            swal("Deleted!", response , "success");
-                                            row.remove() ;
-                                    });
+                                    row.remove();
                                 },
                                 error : (error) => {
                                     console.log(error);
