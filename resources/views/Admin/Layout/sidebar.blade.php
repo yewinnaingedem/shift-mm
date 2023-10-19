@@ -21,6 +21,7 @@
                     <nav class="sb-sidenav-menu-nested nav">
                         <a class="nav-link" href="{{url('admin/car_models')}}"> Car Models </a>
                         <a class="nav-link" href="{{url('admin/grade')}}">Grade</a>
+                        <a class="nav-link" href="{{url('admin/function')}}">Function </a>
                     </nav>
                 </div>
                

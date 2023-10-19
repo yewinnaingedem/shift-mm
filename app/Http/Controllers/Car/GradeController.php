@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\Grade ;
 use App\Models\CarModel ;
 use Carbon\Carbon;
+use App\Models\CarDetails ;
+use App\Models\Transmission ;
+use App\Models\BodyStyle ;
 
 class GradeController extends Controller
 {
@@ -53,7 +56,10 @@ class GradeController extends Controller
         $inputs['grade'] = $request['grade'] ? $request['grade'] : false ;
         $inputs['created_at'] = Carbon::now();
         Grade::insert($inputs);
-        return redirect('admin/grade')->with('message' , 'you creted the grade');
+        $functions = CarDetails::get();
+        $transmissions = Transmission::get();
+        $bodyStyles = BodyStyle::get();
+        return view('admin.POS.Grade.details' , compact('functions','transmissions','bodyStyles'));
     }
 
     /**

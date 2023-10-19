@@ -13,7 +13,7 @@ use App\Http\Controllers\Car\ModelController;
 use App\Http\Controllers\Car\CarModelController;
 use App\Http\Controllers\Api\AddCarController ;
 use App\Http\Controllers\Car\GradeController ;
-
+use App\Http\Controllers\Car\FunctionController ;
 
 
 
@@ -51,6 +51,7 @@ Route::prefix('admin')->group(function (){
 
     Route::resource('car_models' , CarModelController::class) ;
     Route::resource('grade'  , GradeController::class);
+    Route::resource('function' , FunctionController::class );
     Route::post('model/{id}' , [CarModelController::class , 'modelSearch']);
 });
 
