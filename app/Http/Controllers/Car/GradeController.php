@@ -29,7 +29,7 @@ class GradeController extends Controller
      */
     public function index()
     {
-        $grades = Grade::select('car_models.model_name','grades.grade' , 'grades.id' , 'grades.created_at')
+        $grades = Grade::select('car_models.model_name','grades.grade'  , 'grades.id' , 'grades.created_at')
                     ->leftJoin('car_models' , 'grades.carModel_id' , 'car_models.id')
                     ->get();
         return view('admin.POS.Grade.index' , compact('grades'));
@@ -85,7 +85,7 @@ class GradeController extends Controller
      */
     public function show(string $id)
     {
-        //
+        dd($id);
     }
 
     /**
@@ -93,22 +93,36 @@ class GradeController extends Controller
      */
     public function edit(string $id)
     {
-        $datas = CarFucture::select('grades.grade' , 'seats.seat' , 'divertrims.divertrim' , 'sun_roofs.sun_roofs' ,
-                    'keys.key' , 'motors.motor' , 'transmissions.transmission' ,'sonors.sonor' , 'body_styles.body_style'
+        $data_id = CarFucture::select('grades.grade','aircons.id as aircon_id','engines.id as engine_id', 'seats.id as seat_id' , 'divertrims.id as divertrim_id' , 'sun_roofs.id as sun_roof_id' ,
+                    'keys.id as key_id' , 'motors.id as motor_id' , 'transmissions.id as trasn_id' ,'sonors.id as sonar_id' , 'body_styles.id as body_id'
                     )
                     ->leftJoin('grades','car_fuctures.grade_id' , 'grades.id')
-                    ->leftJoin('car_functions','car_fuctures.function_id','car_functions.id')
                     ->leftJoin('seats','car_fuctures.seat_id' , 'seats.id')
                     ->leftJoin('sun_roofs','car_fuctures.sun_roof_id' , 'sun_roofs.id')
                     ->leftJoin('motors','car_fuctures.motor_id','motors.id')
+                    ->leftJoin('engines','car_fuctures.engine_id','engines.id')
                     ->leftJoin('keys' , 'car_fuctures.key_id','keys.id')
+                    ->leftJoin('aircons','car_fuctures.aircon_id','aircons.id')
                     ->leftJoin('sonors' , 'car_fuctures.sonor_id' , 'sonors.id')
                     ->leftJoin('transmissions' , 'car_fuctures.transmission_id' , 'transmissions.id')
                     ->leftJoin('divertrims' , 'car_fuctures.divertrim_id' , 'divertrims.id')
                     ->leftJoin('body_styles' , 'car_fuctures.bodyStyle_id','body_styles.id')
                     ->where('car_fuctures.grade_id' , $id)
                     ->first();
-        return view('admin.POS.Grade.update'  )->with('id' , $datas);
+        $blas = CarFunction::where('grade_id',$id)->get();
+        $input['transmissions'] = Transmission::get();
+        $input['body_styles'] = BodyStyle::get();
+        $input['engines'] = Engine::get();
+        $input['keys'] = Key::get();
+        $input['divertrims'] = Divertrim::get();
+        $input['sun_roofs'] = SunRoof::get();
+        $input['aircons'] = Aircon::get();
+        $input['sonars'] = Sonor::get();
+        $input['seats'] = Seat::get();
+        $input['motors'] = Motor::get();
+        $input['functions'] = CarDetails::get();
+
+        return view('admin.POS.Grade.update'  ,compact('data_id' , 'input' , 'blas'));
     }
 
     /**
@@ -124,6 +138,7 @@ class GradeController extends Controller
      */
     public function destroy(string $id)
     {
+        CarFucture::where('grade_id',$id)->delete();
         Grade::find($id)->delete();
         return response()->json('You deleted the data scuccessfully');
     }
@@ -148,23 +163,19 @@ class GradeController extends Controller
         $inputs['sonor_id'] = $request['sonar'];
         $inputs['key_id'] = $request['key'] ;
         $inputs['aircon_id'] = $request['aircon'] ;
+        $inputs['engine_id'] = $request['engine'];
         $inputs['motor_id'] = $request['motor'] ;
         $inputs['transmission_id'] = $request['transmission'] ;
         $inputs['divertrim_id'] = $request['divertrim'] ;
         $inputs['bodyStyle_id'] = $request['body_style'] ;
         
-        $function = [] ;
-        $function['blind_sport'] = $request['Blind_Sport'] ? $request['Blind_Sport'] : false  ;
-        $function['lane_keep_assit'] = $request['lane_keep_assit'] ? $request['lane_keep_assit'] : false ;
-        $function['auto_headlight'] = $request['auto_headlight'] ? $request['auto_headlight'] : false ;
-        $function['rain_sensor'] = $request['rain_sensor'] ? $request['rain_sensor'] : false ;
-        $function['auto_hold'] = $request['auto_hold'] ? $request['auto_hold'] : false;
-        $function['tire_pressure'] = $request['Tire_Pressure'] ? $request['Tire_Pressure'] : false;
-        $function['kick_sensor'] = $request['kick_sensor'] ? $request['kick_sensor'] : false ;
-
-
-        $function_Id = CarFunction::insertGetId($function);
-        $inputs['function_id'] = $function_Id ;
+        
+        foreach ($request['functions'] as $key => $value) {
+            CarFunction::insert([
+                'grade_id' => $inputs['grade_id'] ,
+                'car_detail_id' => $value
+            ]);
+        }
         CarFucture::insert($inputs);
         return redirect('admin/grade')->with('message' , 'you created the grade successfully');
 

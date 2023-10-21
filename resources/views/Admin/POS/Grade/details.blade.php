@@ -417,7 +417,7 @@
                     @foreach($functions as $function)
                         <div class="col-md-4">
                             <label for="{{$function->id}}" class="p-10 d-flex align-items-center justify-content-center mb-3 testing" data-id="{{$function->id}}">
-                                <input type="checkbox" id="{{$function->id}}"  value="{{$function->id}}" name="{{$function->function}}" class="checkbox_customize" >
+                                <input type="checkbox" id="{{$function->id}}"  value="{{$function->id}}" name="functions[{{$function->function}}]" class="checkbox_customize" >
                                 <div>
                                     {{$function->function}}
                                 </div>

@@ -23,7 +23,7 @@ return new class extends Migration
             $table->unsignedBigInteger('transmission_id');
             $table->unsignedBigInteger('divertrim_id');
             $table->unsignedBigInteger('bodyStyle_id');
-            $table->unsignedBigInteger('function_id');
+            $table->unsignedBigInteger('engine_id');
             $table->timestamps();
 
             $table->foreign('grade_id')->references('id')->on('grades');
@@ -36,7 +36,7 @@ return new class extends Migration
             $table->foreign('transmission_id')->references('id')->on('transmissions');
             $table->foreign('divertrim_id')->references('id')->on('divertrims');
             $table->foreign('bodyStyle_id')->references('id')->on('body_styles');
-            $table->foreign('function_id')->references('id')->on('car_functions');
+            $table->foreign('engine_id')->references('id')->on('engines');
             
         });
     }
