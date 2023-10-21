@@ -45,7 +45,7 @@
                         <td>{{ $grade->created_at }}</td>
                         <td>
                             <button class="btn btn-danger delete" data-id="{{$grade->id}}">Delete</button>
-                            <a href="{{url('')}}" class="btn btn-primary">View</a>
+                            <a href="{{url('admin/grade/'. $grade->id .'/edit')}}" class="btn btn-primary">View</a>
                         </td>
                     </tr>
                 @endforeach

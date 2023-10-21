@@ -283,8 +283,12 @@
    <!-- MultiStep Form -->
    <div class="row d-flex justify-content-center align-items-center h-80">
     <div class="col-md-8 col-md-offset-3">
-        <form id="msform">
+        
+        <form id="msform" action="{{url('admin/function/create')}}" method="post">
             <!-- progressbar -->
+            @method('post')
+            @csrf 
+            <input type="hidden" name="id" value="{{$id}}">
             <ul id="progressbar" class="d-flex justify-content-center align-items-center">
                 <li class="active">Function</li>
                 <li>Basic</li>
@@ -293,27 +297,11 @@
             <!-- fieldsets -->
             <fieldset>
                 <h2 class="fs-title text-center mb-3">Function Details </h2>
-                <div class="row">
-                    @foreach($functions as $function)
-                        <div class="col-md-4">
-                            <label for="{{$function->id}}" class="p-10 d-flex align-items-center justify-content-center mb-3 testing" data-id="{{$function->id}}">
-                                <input type="checkbox" id="{{$function->id}}"  value="{{$function->function}}" name="{{$function->function}}" class="checkbox_customize" >
-                                <div>
-                                    {{$function->function}}
-                                </div>
-                            </label>
-                        </div>
-                    @endforeach
-                </div>
-                <input type="button" name="next" class="next action-button" value="Next"/>
-            </fieldset>
-            <fieldset>
-                <h2 class="fs-title text-center mb-3">Social Profiles</h2>
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <div class="mb-3 text-left">
-                            <label for="transmission" class="form-label">Transmission</label>
-                            <select class="form-select" aria-label="Default select example">
+                            <label for="transmission"  class="form-label">Transmission</label>
+                            <select class="form-select"  name="transmission">
                                 @foreach($transmissions as $transmission)
                                     <option value="{{$transmission->id}}">{{$transmission->transmission}}</option>
                                 @endforeach
@@ -322,10 +310,99 @@
                     </div>
                     <div class="col-md-6">
                         <div class="mb-3 text-left">
-                            <label for="transmission" class="form-label">Transmission</label>
-                            <select class="form-select" aria-label="Default select example">
+                            <label for="transmission" class="form-label">Body Style </label>
+                            <select class="form-select" name="body_style">
                                 @foreach($bodyStyles as $bodyStyles)
                                     <option value="{{$bodyStyles->id}}">{{$bodyStyles->body_style}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3 text-left">
+                            <label for="transmission" class="form-label"> Engine  </label>
+                            <select class="form-select" name="engine">
+                                @foreach($engines as $engine)
+                                    <option value="{{$engine->id}}">{{$engine->engine_power}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3 text-left">
+                            <label for="transmission" class="form-label">Key  </label>
+                            <select class="form-select" name="key">
+                                @foreach($keys as $key)
+                                    <option value="{{$key->id}}">{{$key->key}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3 text-left">
+                            <label for="transmission" class="form-label">Divertrim  </label>
+                            <select class="form-select" name="divertrim">
+                                @foreach($divertrims as $divertrim)
+                                    <option value="{{$divertrim->id}}">{{$divertrim->divertrim}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3 text-left">
+                            <label for="transmission" class="form-label">Sun Roof  </label>
+                            <select class="form-select" name="sun_roof">
+                                @foreach($sun_roofs as $sun_roof)
+                                    <option value="{{$sun_roof->id}}">{{$sun_roof->sun_roofs}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <input type="button" name="next" class="next action-button" value="Next"/>
+                <a href="{{url('admin/grade/create')}}" class="previous ">
+                    Quit 
+                </a>
+            </fieldset>
+            <fieldset>
+                <h2 class="fs-title text-center mb-3">Social Profiles</h2>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3 text-left">
+                            <label for="transmission" class="form-label">Air Condition </label>
+                            <select class="form-select" name="aircon">
+                                @foreach($aircons as $aircon)
+                                    <option value="{{$aircon->id}}">{{$aircon->aircon}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3 text-left">
+                            <label for="transmission" class="form-label">Sonar </label>
+                            <select class="form-select" name="sonar">
+                                @foreach($sonars as $sonar)
+                                    <option value="{{$sonar->id}}">{{$sonar->sonor}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3 text-left">
+                            <label for="transmission" class="form-label">Seats Condition </label>
+                            <select class="form-select" name="seat">
+                                @foreach($seats as $seat)
+                                    <option value="{{$seat->id}}">{{$seat->seat}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3 text-left">
+                            <label for="transmission" class="form-label">Seats Condition </label>
+                            <select class="form-select" name="motor">
+                                @foreach($motors as $motor)
+                                    <option value="{{$motor->id}}">{{$motor->motor}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -336,12 +413,21 @@
             </fieldset>
             <fieldset>
                 <h2 class="fs-title text-center mb-3">Create your account</h2>
-                <h3 class="fs-subtitle">Fill in your credentials</h3>
-                <input type="text" name="email" placeholder="Email"/>
-                <input type="password" name="pass" placeholder="Password"/>
-                <input type="password" name="cpass" placeholder="Confirm Password"/>
+                <div class="row">
+                    @foreach($functions as $function)
+                        <div class="col-md-4">
+                            <label for="{{$function->id}}" class="p-10 d-flex align-items-center justify-content-center mb-3 testing" data-id="{{$function->id}}">
+                                <input type="checkbox" id="{{$function->id}}"  value="{{$function->id}}" name="{{$function->function}}" class="checkbox_customize" >
+                                <div>
+                                    {{$function->function}}
+                                </div>
+                            </label>
+                        </div>
+                    @endforeach
+                </div>
                 <input type="button" name="previous" class="previous action-button-previous" value="Previous"/>
-                <input type="submit" name="submit" class="submit action-button" value="Submit"/>
+                <input type="submit" name="submit" class="action-button" value="Submit"/>
+                
             </fieldset>
         </form>
 @endsection 

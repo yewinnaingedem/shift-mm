@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class CarFucture extends Model
 {
     use HasFactory;
+    protected $table = 'car_fuctures' ;
 }

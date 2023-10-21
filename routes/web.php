@@ -43,7 +43,7 @@ Route::prefix('admin')->group(function (){
     Route::get('add-cars' , [AdminAuthController::class , 'addCars'] );
     Route::get('car-info' , [AdminAuthController::class , 'carInfo']);
     Route::post('add-cars' , [ModelController::class , 'index']);
-    Route::get('{make}/{model}/{year}' , [ModelController::class , 'stepProgess']);
+    // Route::get('{make}/{model}/{year}' , [ModelController::class , 'stepProgess']);
     Route::post('car-info/{id}' , [AdminAuthController::class , 'details']);
     Route::delete('car-info/{id}', [AdminAuthController::class , 'deleteCard']);
     Route::put('update-info/{id}' , [AdminAuthController::class , 'updateInfo']);
@@ -51,8 +51,10 @@ Route::prefix('admin')->group(function (){
 
     Route::resource('car_models' , CarModelController::class) ;
     Route::resource('grade'  , GradeController::class);
+    Route::post('grade/function' , [GradeController::class , 'gradeFunction']);
     Route::resource('function' , FunctionController::class );
     Route::post('model/{id}' , [CarModelController::class , 'modelSearch']);
+    Route::post('function/create' , [GradeController::class , 'gradeFunction']);
 });
 
 ?> 
