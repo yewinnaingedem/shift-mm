@@ -284,10 +284,11 @@
    <div class="row d-flex justify-content-center align-items-center h-80">
     <div class="col-md-8 col-md-offset-3">
         
-        <form id="msform" action="{{url('admin/function/create')}}" method="post">
+        <form id="msform" action="{{url('admin/function/testing')}}" method="post">
             <!-- progressbar -->
             @method('post')
             @csrf 
+            <input type="hidden" name="id" value="{{$id}}">
             <ul id="progressbar" class="d-flex justify-content-center align-items-center">
                 <li class="active">Function</li>
                 <li>Basic</li>
@@ -440,22 +441,32 @@
             <fieldset>
                 <h2 class="fs-title text-center mb-3">Create your account</h2>
                 <div class="row">
-                        @foreach($input['functions'] as $function)
-                            <div class="col-md-4">
-                                <label for="{{$function->id}}" class="p-10 d-flex align-items-center justify-content-center mb-3 testing" data-id="{{$function->id}}">
-                                    <input type="checkbox" id="{{$function->id}}"
+                    @foreach($input['functions'] as $function)
+                        <div class="col-md-4">
+                            @php
+                            $isBgInfo = false;
+                            $isChecked = false;
+                            foreach ($blas as $bla) {
+                                if ($bla->car_detail_id == $function->id) {
+                                    $isBgInfo = true;
+                                    $isChecked = true;
+                                    break; 
+                                }
+                            }
+                            @endphp
+
+                            <label for="{{$function->id}}" class="p-10 d-flex align-items-center justify-content-center mb-3 testing {{ $isBgInfo ? 'bg-info' : '' }}" data-id="{{$function->id}}">
+                                <input type="checkbox" id="{{$function->id}}"
                                     value="{{$function->id}}"
-                                        @foreach($blas as $bla )
-                                            {{$function->id == $bla->car_detail_id ? 'checked' : ''}}
-                                        @endforeach
-                                    name="{{$function->function}}" 
+                                    name="functions[{{$function->function}}]" 
+                                    {{ $isChecked ? 'checked' : '' }}
                                     class="checkbox_customize" >
-                                    <div>
-                                        {{$function->function}}
-                                    </div>
-                                </label>
-                            </div>
-                        @endforeach
+                                <div>
+                                    {{$function->function}}
+                                </div>
+                            </label>
+                        </div>
+                    @endforeach
                 </div>
                 <input type="button" name="previous" class="previous action-button-previous" value="Previous"/>
                 <input type="submit" name="submit" class="action-button" value="Submit"/>
@@ -472,11 +483,6 @@
         $(document).ready(function(){
                 var current_fs, next_fs, previous_fs; //fieldsets
                 var opacity;
-
-                let trySmoe = $('.testing');
-                trySmoe.forEach(element => {
-                    console.log(element);
-                });
                 $(".next").click(function(){
                     
                     current_fs = $(this).parent();
@@ -541,10 +547,10 @@
                     const childEle = target.find('.checkbox_customize');
                     const isChecked = childEle.prop('checked');
                     if(isChecked) {
-                        target.addClass('bg-info');
-                    }else {
-                        target.removeClass('bg-info');
+                        return target.addClass('bg-info');
                     }
+                    return  target.removeClass('bg-info');
+                    
                 });
                 $(document).on('change' , '.transmisssion' , (e) => {
 

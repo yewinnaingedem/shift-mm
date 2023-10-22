@@ -55,6 +55,7 @@ Route::prefix('admin')->group(function (){
     Route::resource('function' , FunctionController::class );
     Route::post('model/{id}' , [CarModelController::class , 'modelSearch']);
     Route::post('function/create' , [GradeController::class , 'gradeFunction']);
+    Route::post('function/testing' , [GradeController::class , 'functionTesting']);
 });
 
 ?> 

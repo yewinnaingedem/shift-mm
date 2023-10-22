@@ -122,7 +122,7 @@ class GradeController extends Controller
         $input['motors'] = Motor::get();
         $input['functions'] = CarDetails::get();
 
-        return view('admin.POS.Grade.update'  ,compact('data_id' , 'input' , 'blas'));
+        return view('admin.POS.Grade.update'  ,compact('data_id' , 'input' , 'blas' , 'id'));
     }
 
     /**
@@ -169,7 +169,6 @@ class GradeController extends Controller
         $inputs['divertrim_id'] = $request['divertrim'] ;
         $inputs['bodyStyle_id'] = $request['body_style'] ;
         
-        
         foreach ($request['functions'] as $key => $value) {
             CarFunction::insert([
                 'grade_id' => $inputs['grade_id'] ,
@@ -179,5 +178,61 @@ class GradeController extends Controller
         CarFucture::insert($inputs);
         return redirect('admin/grade')->with('message' , 'you created the grade successfully');
 
+    }
+
+    public function functionTesting(Request $request) {
+        $validator = Validator::make(
+            $request->all() ,
+            [
+                'transmission' => 'required' ,
+                'body_style' => 'required' ,
+                'engine' => 'required' ,
+                'key' => 'required' ,
+                'divertrim' => 'required' ,
+                'sun_roof' => 'required' ,
+                'aircon' => 'required' ,
+                'sonar' => 'required' ,
+                'seat' => 'required' ,
+                'motor' => 'required' ,
+            ]
+        );
+        if($validator->fails())
+        {
+            return  redirect()->back()->withErrors($validator)->withInput();
+        }
+        $id = $request['id'] ;
+        $inputs = [];
+        $inputs['seat_id'] = $request['seat'] ;
+        $inputs['sun_roof_id'] = $request['sun_roof'];
+        $inputs['sonor_id'] = $request['sonar'];
+        $inputs['key_id'] = $request['key'] ;
+        $inputs['aircon_id'] = $request['aircon'] ;
+        $inputs['engine_id'] = $request['engine'];
+        $inputs['motor_id'] = $request['motor'] ;
+        $inputs['transmission_id'] = $request['transmission'] ;
+        $inputs['divertrim_id'] = $request['divertrim'] ;
+        $inputs['bodyStyle_id'] = $request['body_style'] ;
+        $input['updated_at'] = Carbon::now();
+        CarFucture::where('grade_id' , $id)->update($inputs);
+        $valid = $this->updateFucture($request['functions'] , $id);
+        if($valid) {
+            return redirect('admin/grade')->with('message' , 'you updated the record succesfully');
+        }
+
+        return redirect('admin/grade')->with('message' , 'something happend please check again');
+    }
+
+    public function updateFucture( array $value  ,  $id  ) {
+        $existId = CarFunction::where('grade_id' , $id)->exists();
+        if($existId) {
+            CarFunction::where('grade_id' , $id)->delete();
+        }
+        foreach ($value  as $update ) {
+            CarFunction::insert([
+                'grade_id' => $id ,
+                'car_detail_id' => $update 
+            ]);
+        }
+        return true ;
     }
 }
