@@ -14,6 +14,8 @@ use App\Http\Controllers\Car\CarModelController;
 use App\Http\Controllers\Api\AddCarController ;
 use App\Http\Controllers\Car\GradeController ;
 use App\Http\Controllers\Car\FunctionController ;
+use App\Http\Controllers\Condition\SeatController ;
+use App\Http\Controllers\Condition\KeyController ;
 
 
 
@@ -56,6 +58,8 @@ Route::prefix('admin')->group(function (){
     Route::post('model/{id}' , [CarModelController::class , 'modelSearch']);
     Route::post('function/create' , [GradeController::class , 'gradeFunction']);
     Route::post('function/testing' , [GradeController::class , 'functionTesting']);
+    Route::resource('seat' , SeatController::class) ;
+    Route::resource('key' , KeyController::class);
 });
 
 ?> 

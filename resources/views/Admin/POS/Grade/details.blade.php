@@ -365,7 +365,7 @@
                 </a>
             </fieldset>
             <fieldset>
-                <h2 class="fs-title text-center mb-3">Social Profiles</h2>
+                <h2 class="fs-title text-center mb-3">Condition </h2>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="mb-3 text-left">
@@ -399,7 +399,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="mb-3 text-left">
-                            <label for="transmission" class="form-label">Seats Condition </label>
+                            <label for="transmission" class="form-label">Truck Motor </label>
                             <select class="form-select" name="motor">
                                 @foreach($motors as $motor)
                                     <option value="{{$motor->id}}">{{$motor->motor}}</option>
@@ -412,7 +412,7 @@
                 <input type="button" name="next" class="next action-button" value="Next"/>
             </fieldset>
             <fieldset>
-                <h2 class="fs-title text-center mb-3">Create your account</h2>
+                <h2 class="fs-title text-center mb-3"> Addtional Fucture</h2>
                 <div class="row">
                     @foreach($functions as $function)
                         <div class="col-md-4">

@@ -17,13 +17,27 @@
                             Car Info
                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                     </a>
-                <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                    <nav class="sb-sidenav-menu-nested nav">
-                        <a class="nav-link" href="{{url('admin/car_models')}}"> Car Models </a>
-                        <a class="nav-link" href="{{url('admin/grade')}}">Grade</a>
-                        <a class="nav-link" href="{{url('admin/function')}}">Function </a>
-                    </nav>
-                </div>
+                    <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" href="{{url('admin/car_models')}}"> Car Models </a>
+                            <a class="nav-link" href="{{url('admin/grade')}}">Grade</a>
+                            <a class="nav-link" href="{{url('admin/function')}}">Function </a>
+                        </nav>
+                    </div>
+
+
+                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#car_condition" aria-expanded="false" aria-controls="car_condition">
+                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                            Car Condition 
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="car_condition" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" href="{{url('admin/seat')}}"> Car Seat </a>
+                            <a class="nav-link" href="{{url('admin/key')}}">Car Key</a>
+                            <a class="nav-link" href="{{url('admin/function')}}">Function </a>
+                        </nav>
+                    </div>
                
                 <!-- <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
