@@ -15,7 +15,10 @@ use App\Http\Controllers\Api\AddCarController ;
 use App\Http\Controllers\Car\GradeController ;
 use App\Http\Controllers\Car\FunctionController ;
 use App\Http\Controllers\Condition\SeatController ;
-use App\Http\Controllers\Condition\KeyController ;
+use App\Http\Controllers\Condition\SunRoofController ;
+use App\Http\Controllers\Condition\SonarController ;
+use App\Http\Controllers\Condition\CameraController ;
+use App\Http\Controllers\Engine\EngineController ;
 
 
 
@@ -60,6 +63,10 @@ Route::prefix('admin')->group(function (){
     Route::post('function/testing' , [GradeController::class , 'functionTesting']);
     Route::resource('seat' , SeatController::class) ;
     Route::resource('key' , KeyController::class);
+    Route::resource('sun_roof' , SunRoofController::class);
+    Route::resource('sonar' , SonarController::class);
+    Route::resource('camera' , CameraController::class);
+    Route::resource('engine' , EngineController::class );
 });
 
 ?> 

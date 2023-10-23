@@ -13,7 +13,10 @@ return new class extends Migration
     {
         Schema::create('engines', function (Blueprint $table) {
             $table->id();
-            $table->string('engine_power');
+            $table->string('Engine_power');
+            $table->string('Cylinder');
+            $table->string('Fuel');
+            $table->boolean('Trubo')->nullable();
             $table->timestamps();
         });
     }

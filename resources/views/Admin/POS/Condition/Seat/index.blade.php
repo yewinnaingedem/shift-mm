@@ -34,6 +34,7 @@
                     <th>ID </th>
                     <th>Seat Condition</th>
                     <th>Created At</th>
+                    <th>Updated At</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -43,6 +44,7 @@
                         <td> {{ $seat->id}}</td>
                         <td> {{ $seat->seat}}</td>
                         <td>{{ $seat->created_at }}</td>
+                        <td>{{$seat->updated_at}}</td>
                         <td>
                             <button class="btn btn-danger delete" data-id="{{$seat->id}}">Delete</button>
                             <a href="{{url('admin/seat/'. $seat->id .'/edit')}}" class="btn btn-primary">Edit</a>
@@ -55,6 +57,7 @@
                     <th>ID</th>
                     <th>Seat Condition</th>
                     <th>Creted At</th>
+                    <th>Updated At</th>
                     <th>Action</th>
                 </tr>
             </tfoot>

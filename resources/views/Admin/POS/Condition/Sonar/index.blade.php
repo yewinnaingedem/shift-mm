@@ -15,7 +15,7 @@
 @section('content')
     <div class="container-fluid mt-3">
         <div class="mb-3">
-            <a href="{{url('admin/key/create')}}" class=" btn btn-primary">
+            <a href="{{url('admin/sonar/create')}}" class=" btn btn-primary">
                 <i class="fa-solid fa-plus">Add</i>
                 <span>Add New</span>
             </a>
@@ -39,15 +39,15 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($keys as $key)
+                @foreach($sonars as $sonar)
                     <tr>
-                        <td> {{ $key->id}}</td>
-                        <td> {{ $key->key}}</td>
-                        <td>{{ $key->created_at }}</td>
-                        <td>{{$key->updated_at}}</td>
+                        <td> {{ $sonar->id}}</td>
+                        <td> {{ $sonar->sonar}}</td>
+                        <td>{{ $sonar->created_at }}</td>
+                        <td>{{$sonar->updated_at}}</td>
                         <td>
-                            <button class="btn btn-danger delete" data-id="{{$key->id}}">Delete</button>
-                            <a href="{{url('admin/key/'. $key->id .'/edit')}}" class="btn btn-primary">Edit</a>
+                            <button class="btn btn-danger delete" data-id="{{$sonar->id}}">Delete</button>
+                            <a href="{{url('admin/sonar/'. $sonar->id .'/edit')}}" class="btn btn-primary">Edit</a>
                         </td>
                     </tr>
                 @endforeach
@@ -93,7 +93,7 @@
                             swal("Deleted!", 'response' , "success");
                             $.ajax({
                                 type : 'delete' ,
-                                url : "/admin/key/" + id ,
+                                url : "/admin/sonar/" + id ,
                                 data : {
                                     "_token" : "{{csrf_token()}}"
                                 },

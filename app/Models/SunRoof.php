@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class SunRoof extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'sun_roof',
+    ];
 }

@@ -15,7 +15,7 @@
 @section('content')
     <div class="container-fluid mt-3">
         <div class="mb-3">
-            <a href="{{url('admin/key/create')}}" class=" btn btn-primary">
+            <a href="{{url('admin/engine/create')}}" class=" btn btn-primary">
                 <i class="fa-solid fa-plus">Add</i>
                 <span>Add New</span>
             </a>
@@ -32,31 +32,36 @@
             <thead>
                 <tr>
                     <th>ID </th>
-                    <th>Seat Condition</th>
+                    <th>Engine Power </th>
+                    <th>Fuel</th>
+                    <th>Turbo </th>
                     <th>Created At</th>
                     <th>Updated At</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach($keys as $key)
+                @foreach($engines as $engine)
                     <tr>
-                        <td> {{ $key->id}}</td>
-                        <td> {{ $key->key}}</td>
-                        <td>{{ $key->created_at }}</td>
-                        <td>{{$key->updated_at}}</td>
+                        <td> {{ $engine->Engine_power}}</td>
+                        <td> {{ $engine->Fuel}}</td>
+                        <td> {{ $engine->Turbo}}</td>
+                        <td>{{ $engine->created_at }}</td>
+                        <td>{{$engine->updated_at}}</td>
                         <td>
-                            <button class="btn btn-danger delete" data-id="{{$key->id}}">Delete</button>
-                            <a href="{{url('admin/key/'. $key->id .'/edit')}}" class="btn btn-primary">Edit</a>
+                            <button class="btn btn-danger delete" data-id="{{$engine->id}}">Delete</button>
+                            <a href="{{url('admin/engine/'. $engine->id .'/edit')}}" class="btn btn-primary">Edit</a>
                         </td>
                     </tr>
                 @endforeach
             </tbody>
             <tfoot>
                 <tr>
-                    <th>ID</th>
-                    <th>Seat Condition</th>
-                    <th>Creted At</th>
+                    <th>ID </th>
+                    <th>Engine Power </th>
+                    <th>Fuel</th>
+                    <th>Turbo </th>
+                    <th>Created At</th>
                     <th>Updated At</th>
                     <th>Action</th>
                 </tr>
@@ -93,7 +98,7 @@
                             swal("Deleted!", 'response' , "success");
                             $.ajax({
                                 type : 'delete' ,
-                                url : "/admin/key/" + id ,
+                                url : "/admin/engine/" + id ,
                                 data : {
                                     "_token" : "{{csrf_token()}}"
                                 },

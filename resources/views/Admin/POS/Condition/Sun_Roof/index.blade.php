@@ -15,7 +15,7 @@
 @section('content')
     <div class="container-fluid mt-3">
         <div class="mb-3">
-            <a href="{{url('admin/key/create')}}" class=" btn btn-primary">
+            <a href="{{url('admin/sun_roof/create')}}" class=" btn btn-primary">
                 <i class="fa-solid fa-plus">Add</i>
                 <span>Add New</span>
             </a>
@@ -32,22 +32,22 @@
             <thead>
                 <tr>
                     <th>ID </th>
-                    <th>Seat Condition</th>
+                    <th>Sun Roof</th>
                     <th>Created At</th>
                     <th>Updated At</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach($keys as $key)
+                @foreach($sun_roofs as $sun_roof)
                     <tr>
-                        <td> {{ $key->id}}</td>
-                        <td> {{ $key->key}}</td>
-                        <td>{{ $key->created_at }}</td>
-                        <td>{{$key->updated_at}}</td>
+                        <td> {{ $sun_roof->id}}</td>
+                        <td> {{ $sun_roof->sun_roof}}</td>
+                        <td>{{ $sun_roof->created_at }}</td>
+                        <td>{{$sun_roof->updated_at}}</td>
                         <td>
-                            <button class="btn btn-danger delete" data-id="{{$key->id}}">Delete</button>
-                            <a href="{{url('admin/key/'. $key->id .'/edit')}}" class="btn btn-primary">Edit</a>
+                            <button class="btn btn-danger delete" data-id="{{$sun_roof->id}}">Delete</button>
+                            <a href="{{url('admin/sun_roof/'. $sun_roof->id .'/edit')}}" class="btn btn-primary">Edit</a>
                         </td>
                     </tr>
                 @endforeach
@@ -55,7 +55,7 @@
             <tfoot>
                 <tr>
                     <th>ID</th>
-                    <th>Seat Condition</th>
+                    <th>Sun Roof</th>
                     <th>Creted At</th>
                     <th>Updated At</th>
                     <th>Action</th>
@@ -93,7 +93,7 @@
                             swal("Deleted!", 'response' , "success");
                             $.ajax({
                                 type : 'delete' ,
-                                url : "/admin/key/" + id ,
+                                url : "/admin/sun_roof/" + id ,
                                 data : {
                                     "_token" : "{{csrf_token()}}"
                                 },
@@ -102,7 +102,7 @@
                                     row.remove();
                                 },
                                 error : (error) => {
-                                    console.log(error);
+                                    sweetAlert("Oops...", "Something went wrong!", error);
                                 }
                             });
                             row.remove() ;
