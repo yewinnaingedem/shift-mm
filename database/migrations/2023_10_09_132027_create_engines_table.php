@@ -14,10 +14,13 @@ return new class extends Migration
         Schema::create('engines', function (Blueprint $table) {
             $table->id();
             $table->string('Engine_power');
-            $table->string('Cylinder');
-            $table->string('Fuel');
-            $table->boolean('Trubo')->nullable();
+            $table->unsignedBigInteger('Cylinder_id');
+            $table->unsignedBigInteger('Fuel');
+            $table->boolean('Turbo');
             $table->timestamps();
+
+            $table->foreign('Cylinder_id')->references('id')->on('cylinders');
+            $table->foreign('Fuel')->references('id')->on('engine_types');
         });
     }
 

@@ -87,7 +87,6 @@
                         closeOnConfirm: false
                         },
                         function(){
-                            swal("Deleted!", response , "success");
                             $.ajax({
                                 type : 'delete' ,
                                 url : "/admin/car_models/" + id ,

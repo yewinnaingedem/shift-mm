@@ -34,6 +34,7 @@
                     <th>ID </th>
                     <th>Engine Power </th>
                     <th>Fuel</th>
+                    <th>Type</th>
                     <th>Turbo </th>
                     <th>Created At</th>
                     <th>Updated At</th>
@@ -43,9 +44,18 @@
             <tbody>
                 @foreach($engines as $engine)
                     <tr>
-                        <td> {{ $engine->Engine_power}}</td>
-                        <td> {{ $engine->Fuel}}</td>
-                        <td> {{ $engine->Turbo}}</td>
+                        <td> {{ $engine->id}}</td>
+                        <td> {{ $engine->Engine_power . " CC"}}</td>
+                        <td> {{ $engine->cylinder}}</td>
+                        <td>{{$engine->type}}</td>
+                        <td > 
+                             @php 
+                                $isTrue = $engine->Turbo ;
+                             @endphp 
+                            <div class="text-center rounded {{$isTrue ? 'bg-primary' : 'bg-danger '}}">
+                                {{ $isTrue ? "Turbo" : "None" }}
+                            </div>
+                        </td>
                         <td>{{ $engine->created_at }}</td>
                         <td>{{$engine->updated_at}}</td>
                         <td>
@@ -60,6 +70,7 @@
                     <th>ID </th>
                     <th>Engine Power </th>
                     <th>Fuel</th>
+                    <th>Cylinder</th>
                     <th>Turbo </th>
                     <th>Created At</th>
                     <th>Updated At</th>

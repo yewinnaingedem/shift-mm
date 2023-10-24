@@ -69,7 +69,10 @@ class GradeController extends Controller
         $functions = CarDetails::get();
         $transmissions = Transmission::get();
         $bodyStyles = BodyStyle::get();
-        $engines = Engine::get();
+        $engines = Engine::select('engines.*' , 'cylinders.cylinder' , 'engine_types.type')
+                        ->leftJoin('cylinders','engines.Cylinder_id','cylinders.id')
+                        ->leftJoin('engine_types','engines.Fuel','engine_types.id')
+                        ->get();
         $seats = Seat::get();
         $keys = Key::get();
         $divertrims = Divertrim::get();

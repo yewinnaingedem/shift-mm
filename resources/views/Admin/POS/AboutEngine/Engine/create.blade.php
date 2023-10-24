@@ -32,12 +32,22 @@
         </a>
         <form action="{{url('admin/engine')}}"  method="post">
             @csrf 
-            <div class="mb-3">
-                <label for="engine_power" class="form-label">Engine Power CC</label>
-                <input type="text" name="engine_power" id="engine_power" placeholder="Add Engine Power" class="form-control" value="{{old('engine_power')}}">
-                @if($errors->has('engine_power'))
-                    <p class="text-danger">{{$errors->first('engine_power')}}</p>
-                @endif 
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="engine_power" class="form-label">Engine Power CC</label>
+                    <input type="number" name="Engine_power" id="engine_power" placeholder="Add Engine Power" class="form-control" value="{{old('engine_power')}}">
+                    @if($errors->has('engine_power'))
+                        <p class="text-danger">{{$errors->first('engine_power')}}</p>
+                    @endif 
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="cylinder" class="form-label">Cylinder</label>
+                    <select class="form-select" name="Cylinder" >
+                        @foreach($cylinders as $cylinder) 
+                            <option value="{{$cylinder->id}}">{{$cylinder->cylinder}}</option>
+                        @endforeach
+                    </select>
+                </div>
             </div>
             <div class="mb-3">
                 <div class="row">
@@ -46,13 +56,15 @@
                     </div>
                     <div class="form-check col-md-6 form-switch mb-3 d-flex justify-content-end align-items-center ">
                         <label class="d-block mr-50" for="gradeValide">Does it have Trubo ?</label>
-                        <input class="form-check-input" type="checkbox" name="trubo" role="switch" value="exist" id="gradeValide">
+                        <input class="form-check-input" type="checkbox" name="Turbo" role="switch" value="exist" id="gradeValide">
                     </div>
                 </div>
-                <input type="text" name="fuel" id="fuel" placeholder="Add Engine Power" class="form-control" value="{{old('fuel')}}">
-                @if($errors->has('fuel'))
-                    <p class="text-danger">{{$errors->first('fuel')}}</p>
-                @endif 
+                <select class="form-select" name="Fuel" >
+                        @foreach($fuels as $fuel) 
+                            <option value="{{$fuel->id}}">{{$fuel->type}}</option>
+                        @endforeach
+                </select>
+                
             </div>
             <div class="mb-3">
                 <button class="btn btn-primary">Sumbit</button>

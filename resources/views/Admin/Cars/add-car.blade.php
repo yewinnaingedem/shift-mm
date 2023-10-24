@@ -64,10 +64,9 @@
         .cursor-not-allowed {
             cursor : not-allowed ;
         }
-        /* .disabled {
-            background : '#71747D' ;
-            color : #fff ;
-        } */
+        .d-none {
+            display : none ;
+        }
     </style>
 @endsection 
 
@@ -99,9 +98,10 @@
                                 <label class="w-full ">
                                     <div class="wrapper d-flex justify-content-center align-items-center px-10">
                                         <select name="model_year" id="Year" >
-                                           @foreach($years as $year) 
-                                                <option value="{{$year->year}}" >{{$year->year}}</option>
-                                           @endforeach
+                                            <option class="d-none" selected>Year</option>
+                                            @foreach($years as $year) 
+                                                    <option value="{{$year->year}}" >{{$year->year}}</option>
+                                            @endforeach
                                         </select>
                                         <div class="">
                                             <i class="fa-solid fa-caret-down"></i>
@@ -116,6 +116,7 @@
                                 <label class="w-full ">
                                     <div class="wrapper  d-flex justify-content-center align-items-center px-10">
                                         <select name="make" class="cursor-not-allowed" id="brand" disabled>
+                                            <option class="d-none" selected>Brand</option>
                                             @foreach($brands as $brand )
                                                 <option value="{{$brand->id}}">{{$brand->brand_name}}</option>
                                             @endforeach
@@ -133,7 +134,7 @@
                                 <label class="w-full ">
                                     <div class="wrapper  d-flex justify-content-center align-items-center px-10">
                                         <select name="model" class="cursor-not-allowed" id="model" disabled>
-                                            
+                                            <option class="d-none" selected>Model</option>
                                         </select>
                                         <div class="">
                                             <i class="fa-solid fa-caret-down"></i>

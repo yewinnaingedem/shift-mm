@@ -26,7 +26,9 @@ class EngineValidationRequest extends FormRequest
         return [
             'Engine_power' => [
                 'required',
-                Rule::uniqueMultipleColumns('engines', ['Engine_power', 'Fuel', 'Turbo']),
+                Rule::unqiue('engines')->where(function ($query) {
+                    return $query->where('Engine_power',request('Engine_power'))->where('Fuel',request('Fuel'));
+                }),
             ],
         ];
     }

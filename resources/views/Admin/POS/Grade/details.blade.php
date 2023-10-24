@@ -323,7 +323,11 @@
                             <label for="transmission" class="form-label"> Engine  </label>
                             <select class="form-select" name="engine">
                                 @foreach($engines as $engine)
-                                    <option value="{{$engine->id}}">{{$engine->engine_power}}</option>
+                                <option value="{{ $engine->id }}">
+                                    @php $isTurbo = $engine->Turbo @endphp
+                                    {{ $engine->Engine_power . " " ."($engine->cylinder) " . ($isTurbo ? 'Turbo' : '') }}
+                                </option>
+
                                 @endforeach
                             </select>
                         </div>
@@ -353,7 +357,7 @@
                             <label for="transmission" class="form-label">Sun Roof  </label>
                             <select class="form-select" name="sun_roof">
                                 @foreach($sun_roofs as $sun_roof)
-                                    <option value="{{$sun_roof->id}}">{{$sun_roof->sun_roofs}}</option>
+                                    <option value="{{$sun_roof->id}}">{{$sun_roof->sun_roof}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -382,7 +386,7 @@
                             <label for="transmission" class="form-label">Sonar </label>
                             <select class="form-select" name="sonar">
                                 @foreach($sonars as $sonar)
-                                    <option value="{{$sonar->id}}">{{$sonar->sonor}}</option>
+                                    <option value="{{$sonar->id}}">{{$sonar->sonar}}</option>
                                 @endforeach
                             </select>
                         </div>
