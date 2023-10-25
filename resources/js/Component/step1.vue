@@ -31,6 +31,16 @@
             </div>
         </div>
         <div class="mb-3">
+            <label for="form-label mb-3">Grade </label>
+            <select class="form-select" aria-label="Default select example">
+                <option :value="grade.id" v-for="grade in arrayData['grades']"
+                    :key="grade.id"
+                >
+                    {{ grade.grade }}
+                </option>
+            </select>
+        </div>
+        <div class="mb-3">
             <h5 class="fw-bold cap-5">Exterior color</h5>
             <div class=" row ">
                 <div class="col-md-4 mb-3"
@@ -52,34 +62,6 @@
                             >
                         <div>{{ color.exterior_color }}</div>
                     </label>
-                </div>
-                
-            </div>
-        </div>
-        <div class="mb-3">
-            <h5 class="fw-bold cap-5"> Body Style</h5>
-            <div class="mb-3">
-                <div class="row">
-                    <div 
-                        v-for="bodyStyle in arrayData['body_styles']"
-                        :key="bodyStyle.id"
-                        class="mb-3 col-md-4"
-                    >
-                    <label
-                        :for="bodyStyle.body_style"
-                        class="justify-content-center d-flex align-items-center p-10 rounded-sm  text-white"
-                        :class="[data.body_style == bodyStyle.body_style ? activeClass : mainClass ]"
-                    >
-                        <input type="radio" 
-                            v-model="data.body_style" 
-                            :value="bodyStyle.body_style" 
-                            :id="bodyStyle.body_style"
-                            class="check-input" >
-                        <div>
-                            {{ bodyStyle.body_style }}
-                        </div>
-                    </label>
-                    </div>
                 </div>
             </div>
         </div>

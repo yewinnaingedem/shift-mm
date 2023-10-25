@@ -11,15 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('basics', function (Blueprint $table) {
+        Schema::create('owners', function (Blueprint $table) {
             $table->id();
-            $table->string('license')->unique();
-            $table->string('millage');
-            $table->string('exterior_color');
-            $table->string('body_style');
+            $table->integer('VIN');
+            $table->string('pass_owner');
+            $table->string('car_license');
+            $table->string('exception');
             $table->timestamps();
-
-            // Modal Name is foreign Key 
         });
     }
 
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('basics');
+        Schema::dropIfExists('owners');
     }
 };

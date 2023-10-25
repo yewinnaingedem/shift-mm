@@ -128,68 +128,6 @@
                     <label class="form-label" for="allFucture">Check All Fucture</label>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-6 mb-3">
-                    <label for="key" class="form-label">Select Key</label>
-                    <select class="form-select" v-model="data.key"  id="key">
-                        <option 
-                            v-for="key in arrayData['keys']" 
-                            :key="key.id" 
-                            :value="key.key"
-                            >
-                            {{ key.key }}
-                        </option>
-                    </select>
-                </div>
-                <div class="col-md-6 mb-3">
-                    <label for="sun_roof" class="form-label">Have or Haven't Sun Roof</label>
-                    <select class="form-select" id="sun_roof" v-model="data.sun_roof">
-                        <option 
-                            v-for="sunRoof in arrayData['sun_roofs']"
-                            :key="sunRoof.id"
-                            :value="sunRoof.sun_roofs"
-                        >
-                            {{ sunRoof.sun_roofs }}
-                        </option>
-                    </select>
-                </div>
-                <div class="col-md-6">
-                    <label for="sonor" class="form-label">Sonor Option</label>
-                    <select class="form-select" id="sonor" v-model="data.sonor">
-                        <option
-                            v-for="sonar in arrayData['sonors']"
-                            :key="sonar.id"
-                            :value="sonar.sonor"
-                        >
-                            {{ sonar.sonor }}
-                        </option>
-                    </select>
-                </div>
-                <div class="col-md-6">
-                    <label for="seat_leather" class="form-label">Seats</label>
-                    <select  class="form-select" id="seat_leather" v-model="data.seat_leather">
-                        <option
-                            v-for="seat in arrayData['seats']"
-                            :key="seat.id"
-                            :value="seat.seat"
-                        >
-                            {{ seat.seat }}
-                        </option>
-                    </select>
-                </div>
-                <div class="col-md-12">
-                    <label for="camera" class="form-label">Camera</label>
-                    <select name="" id="camera" v-model="data.camera"  class="form-select">
-                        <option
-                            v-for="camera in arrayData['cameraes']"
-                            :key="camera.id"
-                            :value="camera.camera"
-                        >
-                            {{ camera.camera }}
-                        </option>
-                    </select>
-                </div>
-            </div>
         </div>
     </div>
 </template>

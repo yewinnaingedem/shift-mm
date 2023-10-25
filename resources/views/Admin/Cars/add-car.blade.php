@@ -167,7 +167,7 @@
         $(document).ready(()=>{
             let $model_year = $('select[name="model_year"]');
             let $make = $('select[name="make"]');
-            let $model = $('select[name="model"]');
+            let $model = $('select[name="model"] ');
             $model_year.on('change' , ()=> {
                 if($model_year.val() !== '') {
                     $make.prop('disabled' , false );
@@ -176,7 +176,7 @@
             });
             $make.on('change',()=> {
                 $model.val('');
-                $('#model option').remove();
+                $('#model option:not(:first-child)').remove();
                 $.ajax({
                     type : 'POST' , 
                     url : '/admin/model/' + $make.val() ,
@@ -185,10 +185,11 @@
                     },
                     success : (res) => {
                         let $innerHtml = `
+                                            
                                             ${res.map(item => `
                                                 <option  value="${item.id}">${item.model_name}</option>
                                             `).join('')}
-                                    `;               
+                                        `;         
                         $model.append($innerHtml);
                         $model.prop('disabled' , false);
                         $model.removeClass('cursor-not-allowed');

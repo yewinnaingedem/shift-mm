@@ -214,6 +214,9 @@
                 type : Array ,
                 required : true ,
             } ,
+        },
+        mounted () {
+            console.log(this.data['grades']);
         }
     }
     

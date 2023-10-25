@@ -8,6 +8,7 @@ use Carbon\Carbon ;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Engine ;
 use App\Models\Cylinder ;
+use App\Models\TransmissionType ;
 use App\Models\Engine_type ;
 use App\Http\Requests\EngineValidationRequest ;
 
@@ -18,11 +19,11 @@ class EngineController extends Controller
      */
     public function index()
     {
-        $engines = Engine::select('engines.Engine_power' , 'engines.created_at' , 'engines.id' , 'engines.Turbo' , 'cylinders.cylinder' , 'engine_types.type')
+        $engines = Engine::select('engines.Engine_power' , 'engines.created_at' ,'transmission_types.transmission_type', 'engines.id' , 'engines.Turbo' , 'cylinders.cylinder' , 'engine_types.type')
                     ->leftJoin('engine_types' , 'engines.Fuel' , 'engine_types.id')
                     ->leftJoin('cylinders','engines.Cylinder_id' , 'cylinders.id')
+                    ->leftJoin('transmission_types','engines.transmission_type' , 'transmission_types.id')
                     ->get();
-        
         return view('admin.POS.AboutEngine.Engine.index',compact('engines'));
     }
 
@@ -33,7 +34,8 @@ class EngineController extends Controller
     {
         $cylinders = Cylinder::get();
         $fuels = Engine_type::get();
-        return view('admin.POS.AboutEngine.Engine.create' , compact('cylinders' , 'fuels'));
+        $transmission_types = TransmissionType::get();
+        return view('admin.POS.AboutEngine.Engine.create' , compact('cylinders' , 'fuels','transmission_types'));
     }
 
     /**
@@ -45,7 +47,8 @@ class EngineController extends Controller
             $request->all() ,
             [
                 'Engine_power' => 'required' ,
-                'Fuel' => 'required'
+                'Fuel' => 'required' ,
+                'transmission_type' => 'required' ,
             ]
         );
         if($validator->fails())
@@ -57,6 +60,7 @@ class EngineController extends Controller
         $inputs['Engine_power'] = $request['Engine_power'] ;
         $inputs['Fuel'] = $request['Fuel'] ;
         $inputs['Cylinder_id'] = $request['Cylinder'];
+        $inputs['transmission_type'] = $request['transmission_type'];
         $inputs['Turbo'] = $turbo ;
         $inputs['created_at'] = Carbon::now();
 
@@ -79,7 +83,8 @@ class EngineController extends Controller
     {
         $engine = Engine::where('id' , $id)->first() ;
         $engine['cylinders'] = Cylinder::get();
-        $engine['engine_type'] = Engine_type::get();
+        $engine['engine_types'] = Engine_type::get();
+        $engine['transmission_types'] = TransmissionType::get();
         return view('admin.POS.AboutEngine.Engine.update',compact('engine'));
     }
 

@@ -35,6 +35,7 @@
                     <th>Engine Power </th>
                     <th>Fuel</th>
                     <th>Type</th>
+                    <th>Transmission</th>
                     <th>Turbo </th>
                     <th>Created At</th>
                     <th>Updated At</th>
@@ -48,6 +49,7 @@
                         <td> {{ $engine->Engine_power . " CC"}}</td>
                         <td> {{ $engine->cylinder}}</td>
                         <td>{{$engine->type}}</td>
+                        <td>{{$engine->transmission_type}}</td>
                         <td > 
                              @php 
                                 $isTrue = $engine->Turbo ;
@@ -56,6 +58,7 @@
                                 {{ $isTrue ? "Turbo" : "None" }}
                             </div>
                         </td>
+                        
                         <td>{{ $engine->created_at }}</td>
                         <td>{{$engine->updated_at}}</td>
                         <td>
@@ -70,7 +73,8 @@
                     <th>ID </th>
                     <th>Engine Power </th>
                     <th>Fuel</th>
-                    <th>Cylinder</th>
+                    <th>Type </th>
+                    <th>Transmission</th>
                     <th>Turbo </th>
                     <th>Created At</th>
                     <th>Updated At</th>

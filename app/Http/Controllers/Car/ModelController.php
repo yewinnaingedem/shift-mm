@@ -13,6 +13,7 @@ use App\Models\Year ;
 use App\Models\Brand ;
 use App\Models\Item ;
 use App\Models\CarModel ;
+use App\Models\Grade ;
 use App\Models\Transmission ;
 use App\Models\Divertrim ;
 use App\Models\ExteriorColor ;
@@ -39,26 +40,14 @@ class ModelController extends Controller
         $year = $request['model_year'] ;
         $brand = Brand::where('id' , $request['make'])->first();
         $model = CarModel::where('id' , $request['model'])->first() ;
-        // $data = CarModel::select('brands.brand_name' , 'car_models.model_name')
-        //             ->leftJoin('brands', 'car_models.brand_id' , 'brands.id')
-        //             ->where('car_models.brand_id' , $request['model'])
-        //             ->first() ;
-        return redirect('admin/'. $year  .'/'. $brand->brand_name .'/'. $model->model_name);
+        return redirect('admin/car/'. $year  .'/'. $brand->brand_name .'/'. $model->model_name);
     }
 
     public function stepProgess ($make , $model , $year) {
             $data['main'] = [ 'year'=>$make , 'make'=>$model , 'model'=>$year ] ;
-            $data['engines'] = Engine::get();
-            $data['transmissions'] = Transmission::get() ;
             $data['exterior_colors'] = ExteriorColor::get();
-            $data['body_styles'] = BodyStyle::get();
-            $data['keys'] = Key::get();
-            $data['sonors'] = Sonor::get();
-            $data['cameraes'] = Camera::get();
-            $data['seats'] = Seat::get() ;
-            $data['sun_roofs'] = SunRoof::get();
-            $data['divertrimes'] = Divertrim::get();
-
+            $brandId = CarModel::where('model_name',$year)->first('id');
+            $data['grades'] = Grade::where('carModel_id',$brandId->id)->get();
         return view('admin.cars.stepProgess',compact('data'));
     }
     public function leftJoin($id) {

@@ -15,6 +15,9 @@
         .mr-50 {
             margin-right : 50px ;
         }
+        .d-none {
+            display : none ;
+        }
     </style>
 @endsection 
 
@@ -59,12 +62,23 @@
                         <input class="form-check-input" type="checkbox" name="Turbo" role="switch" value="exist" id="gradeValide">
                     </div>
                 </div>
-                <select class="form-select" name="Fuel" >
-                        @foreach($fuels as $fuel) 
-                            <option value="{{$fuel->id}}">{{$fuel->type}}</option>
-                        @endforeach
-                </select>
-                
+                <div class="row">
+                    <div class="col-md-6">
+                        <select class="form-select" name="Fuel" >
+                                @foreach($fuels as $fuel) 
+                                    <option value="{{$fuel->id}}">{{$fuel->type}}</option>
+                                @endforeach
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <select name="transmission_type"  class="form-select">
+                            <option class="d-none" selected>Transmission Type</option>
+                            @foreach($transmission_types as $transmission_type) 
+                                <option value="{{$transmission_type->id}}">{{$transmission_type->transmission_type}}</option>
+                            @endforeach 
+                        </select>
+                    </div>
+                </div>
             </div>
             <div class="mb-3">
                 <button class="btn btn-primary">Sumbit</button>

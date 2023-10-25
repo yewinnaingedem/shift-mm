@@ -331,7 +331,7 @@
                                 @foreach($input['engines'] as $engine)
                                     <option value="{{$engine->id}}"
                                         {{ $engine->id == $data_id->engine_id ? 'selected' : ''}}>
-                                        {{$engine->engine_power}}
+                                        {{$engine->Engine_power  }}
                                     </option>
                                 @endforeach
                             </select>
@@ -370,7 +370,7 @@
                                 @foreach($input['sun_roofs'] as $sun_roof )
                                     <option value="{{$sun_roof->id}}"
                                         {{ $sun_roof->id == $data_id->sun_roof_id ? 'selected' : ''}}>
-                                        {{$sun_roof->sun_roofs}}
+                                        {{$sun_roof->sun_roof}}
                                     </option>
                                 @endforeach
                             </select>
@@ -402,7 +402,7 @@
                                 @foreach($input['sonars'] as $sonar )
                                     <option value="{{$sonar->id}}"
                                         {{ $sonar->id == $data_id->sonar_id ? 'selected' : ''}}>
-                                        {{$sonar->sonor}}
+                                        {{$sonar->sonar}}
                                     </option>
                                 @endforeach
                             </select>

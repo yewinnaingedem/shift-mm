@@ -57,6 +57,7 @@ class GradeController extends Controller
         );
 
         if($validator->fails()) {
+            dd('hi');
             return redirect('admin/grade/create')->withErrors($validator)->withInput();
         }
 
@@ -88,7 +89,7 @@ class GradeController extends Controller
      */
     public function show(string $id)
     {
-        dd($id);
+        dd("hi");
     }
 
     /**
@@ -171,12 +172,14 @@ class GradeController extends Controller
         $inputs['transmission_id'] = $request['transmission'] ;
         $inputs['divertrim_id'] = $request['divertrim'] ;
         $inputs['bodyStyle_id'] = $request['body_style'] ;
-        
-        foreach ($request['functions'] as $key => $value) {
-            CarFunction::insert([
-                'grade_id' => $inputs['grade_id'] ,
-                'car_detail_id' => $value
-            ]);
+        $existFunction = $request['functions'] ? true : false ;
+        if($existFunction) {
+            foreach ($request['functions'] as $key => $value) {
+                CarFunction::insert([
+                    'grade_id' => $inputs['grade_id'] ,
+                    'car_detail_id' => $value
+                ]);
+            }
         }
         CarFucture::insert($inputs);
         return redirect('admin/grade')->with('message' , 'you created the grade successfully');
@@ -201,6 +204,7 @@ class GradeController extends Controller
         );
         if($validator->fails())
         {
+            dd('hi');
             return  redirect()->back()->withErrors($validator)->withInput();
         }
         $id = $request['id'] ;
@@ -217,12 +221,12 @@ class GradeController extends Controller
         $inputs['bodyStyle_id'] = $request['body_style'] ;
         $input['updated_at'] = Carbon::now();
         CarFucture::where('grade_id' , $id)->update($inputs);
-        $valid = $this->updateFucture($request['functions'] , $id);
-        if($valid) {
-            return redirect('admin/grade')->with('message' , 'you updated the record succesfully');
+        $existFunction = $request['functions'] ? true : false ;
+        if($existFunction) {
+            $valid = $this->updateFucture($request['functions'] , $id);
         }
+        return redirect('admin/grade')->with('message' , 'you updated the record succesfully');
 
-        return redirect('admin/grade')->with('message' , 'something happend please check again');
     }
 
     public function updateFucture( array $value  ,  $id  ) {

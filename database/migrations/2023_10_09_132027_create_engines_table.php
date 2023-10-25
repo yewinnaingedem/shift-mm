@@ -16,11 +16,13 @@ return new class extends Migration
             $table->string('Engine_power');
             $table->unsignedBigInteger('Cylinder_id');
             $table->unsignedBigInteger('Fuel');
+            $table->unsignedBigInteger('transmission_type');
             $table->boolean('Turbo');
             $table->timestamps();
 
             $table->foreign('Cylinder_id')->references('id')->on('cylinders');
             $table->foreign('Fuel')->references('id')->on('engine_types');
+            $table->foreign('transmission_type')->references('id')->on('transmission_types');
         });
     }
 
