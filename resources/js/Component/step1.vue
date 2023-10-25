@@ -33,11 +33,10 @@
         <div class="mb-3">
             <label for="form-label mb-3">Grade </label>
             <select class="form-select" aria-label="Default select example">
-                <option :value="grade.id" v-for="grade in arrayData['grades']"
-                    :key="grade.id"
-                >
+                <option :value="grade.id" v-if="arrayData['grades'] !== 0 " v-for="grade in arrayData['grades']" :key="grade.id" >
                     {{ grade.grade }}
                 </option>
+                <option v-else>We detected that doesn't have a grade </option>
             </select>
         </div>
         <div class="mb-3">
