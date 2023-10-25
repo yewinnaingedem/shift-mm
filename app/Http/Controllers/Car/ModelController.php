@@ -47,31 +47,19 @@ class ModelController extends Controller
     }
 
     public function stepProgess ($make , $model , $year) {
-        
-        // $brand = Brand::select('id')->where('brand_name' , $model )->first() ;
-        // $year_Id = Year::select('id')->where('year' , $make )->first() ;
-        // $hasbrand = Modal::where('brand_id' , $brand->id)->exists();
-        // $hasYear = Modal::where('year_id' , $year_Id->id)->exists();
-        // $hasModel = Modal::where('modal_name' , $year)->exists();
-        // if($hasbrand && $hasYear && $hasModel) {
-        //     $existId = Modal::where('modal_name',$year)->first('id');
-        //     $existData = Item::where('fucture_Id' , $existId->id)->first();
-        //     dd('success');
-        // }else {
-        //     $data['main'] = [ 'year'=>$make , 'make'=>$model , 'model'=>$year ] ;
-        //     $data['engines'] = Engine::get();
-        //     $data['transmissions'] = Transmission::get() ;
-        //     $data['exterior_colors'] = ExteriorColor::get();
-        //     $data['body_styles'] = BodyStyle::get();
-        //     $data['keys'] = Key::get();
-        //     $data['sonors'] = Sonor::get();
-        //     $data['cameraes'] = Camera::get();
-        //     $data['seats'] = Seat::get() ;
-        //     $data['sun_roofs'] = SunRoof::get();
-        //     $data['divertrimes'] = Divertrim::get();
-        // }
+            $data['main'] = [ 'year'=>$make , 'make'=>$model , 'model'=>$year ] ;
+            $data['engines'] = Engine::get();
+            $data['transmissions'] = Transmission::get() ;
+            $data['exterior_colors'] = ExteriorColor::get();
+            $data['body_styles'] = BodyStyle::get();
+            $data['keys'] = Key::get();
+            $data['sonors'] = Sonor::get();
+            $data['cameraes'] = Camera::get();
+            $data['seats'] = Seat::get() ;
+            $data['sun_roofs'] = SunRoof::get();
+            $data['divertrimes'] = Divertrim::get();
 
-        return view('admin.cars.stepProgess');
+        return view('admin.cars.stepProgess',compact('data'));
     }
     public function leftJoin($id) {
         $data =  Modal::select('modals.modal_name as name' , 'modals.id', 'brands.brand_name as brand_name' ,'years.year as year')
