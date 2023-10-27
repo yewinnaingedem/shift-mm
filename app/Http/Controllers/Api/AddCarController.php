@@ -25,14 +25,23 @@ class AddCarController extends Controller
         //         'license_state'
         //     ]
         // );
-        $basics = $request['field'][0] ;
-        $inputs = [] ;
-        $inputs['license'] = $basics['license'] ;
-        $inputs['millages'] = $basics['millage'] ;
-        $inputs['grade'] = $basics['grade'] ;
-        $inputs['exterior_color'] = $basics['exterior_color'] ;
+        $data1 = $request['field'][0] ;
+        $data2 = $request['field'][1];
+        $data3 = $request['field'][2];
+        $basics = [] ;
+        $basics['license'] = $data1['license'] ;
+        $basics['millages'] = $data1['millage'] ;
+        $basics['grade'] = $data1['grade'] ;
+        $basics['steering_id'] = $data2['steering'];
+        $basics['exterior_color'] = $data1['exterior_color'] ;
         
-        return response()->json($inputs);
+        $carOwners = [] ;
+        $carOwners['VIN'] = $data3['VIN'] ;
+        $carOwners['pass_owner'] = $data3['pass_owner'];
+        $carOwners['car_license'] = $data3['car_license'];
+        $carOwners['exception'] = $data3['addtional'] ;
+        
+        return response()->json($basics);
 
     }
     public function sessionCheck () {

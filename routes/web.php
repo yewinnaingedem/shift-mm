@@ -45,7 +45,6 @@ Route::prefix('mm_cars')->group(function () {
 
 Route::prefix('admin')->group(function (){
     Route::get('/' , [AdminAuthController::class , 'index']);
-    // Vue Add
     Route::get('add-cars' , [AdminAuthController::class , 'addCars'] );
     Route::get('car-info' , [AdminAuthController::class , 'carInfo']);
     Route::post('add-cars' , [ModelController::class , 'index']);

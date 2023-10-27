@@ -107,12 +107,12 @@
                         pass_owner : null ,
                         madeIn : null ,
                         num_seat : null ,
-                        VIN :  null ,
                         font_break : null ,
                         back_break : null ,
                     },
                     {
                         interior_color : null ,
+                        VIN : null ,
                         addtional : '' ,
                     }
                 ] ,

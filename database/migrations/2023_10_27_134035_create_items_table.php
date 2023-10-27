@@ -11,16 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('basics', function (Blueprint $table) {
+        Schema::create('items', function (Blueprint $table) {
             $table->id();
-            $table->string('license_plate');
-            $table->string('license_state');
-            $table->string('exterior_color');
-            $table->string('interior_color');
-            $table->unsignedBigInteger('steering_id');
             $table->timestamps();
-
-            $table->foreign('steering_id')->references('id')->on('steerings');
         });
     }
 
@@ -29,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('basics');
+        Schema::dropIfExists('items');
     }
 };
