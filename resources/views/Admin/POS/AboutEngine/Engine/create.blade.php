@@ -72,7 +72,7 @@
                     </div>
                     <div class="col-md-6">
                         <select name="transmission_type"  class="form-select">
-                            <option class="d-none" selected>Transmission Type</option>
+                            <option class="d-none" value='' selected>Transmission Type</option>
                             @foreach($transmission_types as $transmission_type) 
                                 <option value="{{$transmission_type->id}}">{{$transmission_type->transmission_type}}</option>
                             @endforeach 

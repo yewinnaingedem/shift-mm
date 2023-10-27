@@ -15,6 +15,7 @@ use App\Http\Controllers\Api\AddCarController ;
 use App\Http\Controllers\Car\GradeController ;
 use App\Http\Controllers\Car\FunctionController ;
 use App\Http\Controllers\Condition\SeatController ;
+use App\Http\Controllers\Condition\KeyController ;
 use App\Http\Controllers\Condition\SunRoofController ;
 use App\Http\Controllers\Condition\SonarController ;
 use App\Http\Controllers\Condition\CameraController ;

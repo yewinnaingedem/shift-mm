@@ -13,7 +13,6 @@
                             @input="checkValidae"
                             class="w-100 form-control mb-1 "
                             :class="{'is-valid' : isValide  , 'is-invalid' : isInValide}"
-                            
                             placeholder="Enter License Plate Number">
                         <p v-show="data.zip" class="fs-8 text-danger capitalize">invaild zip code</p>
                     </div>
@@ -30,14 +29,16 @@
                 </div>
             </div>
         </div>
-        <div class="mb-3">
+        <div class="mb-3" v-if="arrayData['grades'] !== '0'">
             <label for="form-label mb-3">Grade </label>
-            <select class="form-select" aria-label="Default select example">
-                <option :value="grade.id" v-if="arrayData['grades'] !== 0 " v-for="grade in arrayData['grades']" :key="grade.id" >
+            <select class="form-select"  v-model="data.grade" aria-label="Default select example">
+                <option :value="grade.id"  v-for="grade in arrayData['grades']" :key="grade.id" >
                     {{ grade.grade }}
                 </option>
-                <option v-else>We detected that doesn't have a grade </option>
             </select>
+        </div>
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>Mingalar Car Sale Center </strong> We dected that doesn't have a grade 
         </div>
         <div class="mb-3">
             <h5 class="fw-bold cap-5">Exterior color</h5>

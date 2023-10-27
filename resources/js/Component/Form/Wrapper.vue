@@ -3,30 +3,8 @@
         <div class="col-md-4 bg-main position-sticky top-0 bottom-0 main-color w-full vh-100">
             <div class="header   ">
                 <div class="d-flex justify-content-center w-full  align-items-start ">
-                    <h1 class="mt-3">Shift MM </h1>
+                    <h3 class="mt-3"> Mingalar Car Sale Center</h3>
                 </div>
-            </div>
-            <div>
-                <ul class="d-flex flex-col justify-content-center align-items-center vh-100">
-                    <li class="list-none mb-3 w-100">
-                        <a href="" @click="step(1)" class="a-link fw-bold  text-black text-decoration-none d-flex justify-content-start align-items-center " type="button">
-                            <div class="mr-10">1</div>
-                            <p class="m-0 " >Basic Details </p>
-                        </a>
-                    </li>
-                    <li class="list-none mb-3 w-100">
-                        <a href="" class="a-link fw-bold  m-auto text-black text-decoration-none d-flex justify-content-start align-items-start " type="button">
-                            <div class="mr-10">2</div>
-                            <p class="m-0" >Additional Fecuture  </p>
-                        </a>
-                    </li>
-                    <li class="list-none mb-3 w-100">
-                        <a href="" class="a-link fw-bold  m-auto text-black text-decoration-none d-flex justify-content-start align-items-center " type="button">
-                            <div class="mr-10">3</div>
-                            <p class="m-0" >Vehicle History </p>
-                        </a>
-                    </li>
-                </ul>
             </div>
         </div>
         <div class="col-md-8">
@@ -119,32 +97,23 @@
                     {
                         license : null ,
                         millage : null ,
+                        grade : this.data['grades'][0].grade,
                         exterior_color: null ,
-                        body_style : null ,
                     } ,
                     {
-                        transmission : null ,
-                        divertrim : null ,
-                        engine : null ,
+                        license_state : null ,
+                        steering : null ,
+                        warranty  : null ,
+                        pass_owner : null ,
+                        madeIn : null ,
+                        num_seat : null ,
+                        VIN :  null ,
+                        font_break : null ,
+                        back_break : null ,
                     },
                     {
-                        blind_sport : false ,
-                        lane_keep_assit : false ,
-                        streeing_volume : false ,
-                        rounded_ac : false ,
-                        key : null ,
-                        sun_roof : null ,
-                        auto_headlight : false ,
-                        rain_sensor : false ,
-                        auto_em_b : false ,
-                        abs : true ,
-                        auto_hold : false ,
-                        tire_pressure : false ,
-                        seat_leather : null ,
-                        camera : null ,
-                        truck_motor : false ,
-                        kick_sensor : false ,
-                        sonor : 'back' ,
+                        interior_color : null ,
+                        addtional : '' ,
                     }
                 ] ,
                 
@@ -186,7 +155,7 @@
             submit () {
                 axios.post('/admin/setup', { field : this.field , modal : this.data['main']}) 
                 .then((response) => {
-                    window.location.replace("/admin/add-cars");  
+                    // window.location.replace("/admin/add-cars");  
                     console.log(response);
                 }).catch((error )=> {
                     console.log(error);

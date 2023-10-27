@@ -6,21 +6,13 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Modal ;
-use App\Models\Engine ;
-use App\Models\Key ;
-use App\Models\SunRoof ;
-use App\Models\Year ;
-use App\Models\Brand ;
-use App\Models\Item ;
 use App\Models\CarModel ;
 use App\Models\Grade ;
 use App\Models\Transmission ;
+use App\Models\Brand ;
 use App\Models\Divertrim ;
 use App\Models\ExteriorColor ;
-use App\Models\BodyStyle ;
-use App\Models\Sonor ;
-use App\Models\Camera ;
-use App\Models\Seat ;
+use App\Models\Steering ;
 
 class ModelController extends Controller
 {
@@ -48,6 +40,7 @@ class ModelController extends Controller
             $data['exterior_colors'] = ExteriorColor::get();
             $brandId = CarModel::where('model_name',$year)->first('id');
             $data['grades'] = Grade::where('carModel_id',$brandId->id)->get();
+            $data['steerings'] = Steering::get();
         return view('admin.cars.stepProgess',compact('data'));
     }
     public function leftJoin($id) {
@@ -57,8 +50,5 @@ class ModelController extends Controller
                         ->where('modals.id',$id)
                         ->first() ;
         return $data ;
-    }
-    public function routeTest($model_year , $make , $modal ) {
-        dd($modal , $make , $model_year);
     }
 }

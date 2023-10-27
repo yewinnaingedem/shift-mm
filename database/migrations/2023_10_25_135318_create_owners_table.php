@@ -15,8 +15,10 @@ return new class extends Migration
             $table->id();
             $table->integer('VIN');
             $table->string('pass_owner');
+            $table->string('color');
             $table->string('car_license');
-            $table->string('exception');
+            $table->string('engine_exception');
+            $table->string('engine_exception');
             $table->timestamps();
         });
     }
