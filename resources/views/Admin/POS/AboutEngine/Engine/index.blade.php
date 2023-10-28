@@ -35,7 +35,6 @@
                     <th>Engine Power </th>
                     <th>Fuel</th>
                     <th>Type</th>
-                    <th>Transmission</th>
                     <th>Turbo </th>
                     <th>Created At</th>
                     <th>Updated At</th>
@@ -49,7 +48,6 @@
                         <td> {{ $engine->Engine_power . " CC"}}</td>
                         <td> {{ $engine->cylinder}}</td>
                         <td>{{$engine->type}}</td>
-                        <td>{{$engine->transmission_type}}</td>
                         <td > 
                              @php 
                                 $isTrue = $engine->Turbo ;
@@ -74,7 +72,6 @@
                     <th>Engine Power </th>
                     <th>Fuel</th>
                     <th>Type </th>
-                    <th>Transmission</th>
                     <th>Turbo </th>
                     <th>Created At</th>
                     <th>Updated At</th>
@@ -110,7 +107,7 @@
                         closeOnConfirm: false
                         },
                         function(){
-                            swal("Deleted!", 'response' , "success");
+                            
                             $.ajax({
                                 type : 'delete' ,
                                 url : "/admin/engine/" + id ,
@@ -119,10 +116,11 @@
                                 },
                                 success : (response) => 
                                 {
+                                    swal("Deleted!", response , "success");
                                     row.remove();
                                 },
                                 error : (error) => {
-                                    console.log(error);
+                                    swal("Cancelled", "You cann't delete this row cause It is being used in somewhere:)", "error");
                                 }
                             });
                             row.remove() ;

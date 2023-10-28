@@ -60,21 +60,12 @@
                         <input class="form-check-input" {{ $engine->Turbo ? 'checked' : ''}} type="checkbox" name="Turbo" role="switch" value="exist" id="gradeValide">
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <select class="form-select" name="Fuel" >
-                                @foreach($engine['engine_types'] as $fuel) 
-                                    <option value="{{$fuel->id}}" {{ $engine->Fuel == $fuel->id ? 'selected' : ''}}>{{$fuel->type}}</option>
-                                @endforeach
-                        </select>
-                    </div>
-                    <div class="col-md-6">
-                        <select name="transmission_type" id="" class="form-select">
-                            @foreach($engine['transmission_types'] as $transmission_type)
-                                <option value="{{$transmission_type->id}}" {{ $engine->transmission_type == $transmission_type->id ? 'selected' : ''}}>{{$transmission_type->transmission_type}}</option>
+                <div class="mb-3">
+                    <select class="form-select" name="Fuel" >
+                            @foreach($engine['engine_types'] as $fuel) 
+                                <option value="{{$fuel->id}}" {{ $engine->Fuel == $fuel->id ? 'selected' : ''}}>{{$fuel->type}}</option>
                             @endforeach
-                        </select>
-                    </div>
+                    </select>
                 </div>
             </div>
             <div class="mb-3">

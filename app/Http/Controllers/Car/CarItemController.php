@@ -68,7 +68,7 @@ class CarItemController extends Controller
      */
     public function destroy(string $id)
     {
-        // Car::find($id)->delete();
+        Car::find($id)->delete();
         return response()->json($id);
     }
 }
