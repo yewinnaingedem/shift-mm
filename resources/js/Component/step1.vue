@@ -37,6 +37,15 @@
                 </option>
             </select>
         </div>
+        <div class="mb-3">
+            <label for="transmission_type" class="form-label mb-3">Transmission</label>
+            <select v-model="data.transmission" id="transmission_type" class="form-select">
+                <option style="display: none;"  selected>Dirving Hand</option>
+                <option v-for="transmission_type in arrayData['transmissionTypes']" :key="transmission_type.id" :value="transmission_type.id">
+                    {{ transmission_type.transmission_type }}
+                </option>
+            </select>
+        </div>
         <div class="alert alert-warning alert-dismissible fade show" role="alert">
             <strong>Mingalar Car Sale Center </strong> We dected that doesn't have a grade 
         </div>

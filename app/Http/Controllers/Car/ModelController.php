@@ -9,6 +9,7 @@ use App\Models\Modal ;
 use App\Models\CarModel ;
 use App\Models\Grade ;
 use App\Models\Transmission ;
+use App\Models\TransmissionType ;
 use App\Models\Brand ;
 use App\Models\Divertrim ;
 use App\Models\ExteriorColor ;
@@ -41,6 +42,7 @@ class ModelController extends Controller
             $brandId = CarModel::where('model_name',$year)->first('id');
             $data['grades'] = Grade::where('carModel_id',$brandId->id)->get();
             $data['steerings'] = Steering::get();
+            $data['transmissionTypes'] = TransmissionType::get();
         return view('admin.cars.stepProgess',compact('data'));
     }
     public function leftJoin($id) {

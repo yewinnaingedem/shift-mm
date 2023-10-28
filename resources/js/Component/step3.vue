@@ -8,8 +8,16 @@
         <input type="text" class="form-control" v-model="data.VIN" placeholder="Enter VIN " id="vin">
     </div>
     <div class="mb-3">
-        <label for="addtional" class="form-label">Addtional Fucture</label>
-        <textarea class="form-control" v-model="data.addtional" id="addtional" rows="3"></textarea>
+        <label for="engine_exception" class="form-label">Engine Exception</label>
+        <textarea class="form-control" placeholder="Enter Engine Exception" v-model="data.engine_exception" id="engine_exception" rows="1"></textarea>
+    </div>
+    <div class="mb-3">
+        <label for="license_exception" class="form-label">License Exception</label>
+        <textarea class="form-control" placeholder="Enter License Exception" v-model="data.license_exception" id="license_exception" rows="1"></textarea>
+    </div>
+    <div class="mb-3">
+        <label for="exception" class="form-label">Exception</label>
+        <textarea class="form-control" v-model="data.exception" placeholder="Enter Exception" id="exception" rows="1"></textarea>
     </div>
 </template>
 

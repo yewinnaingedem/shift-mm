@@ -13,7 +13,17 @@ return new class extends Migration
     {
         Schema::create('items', function (Blueprint $table) {
             $table->id();
+            $table->string('warranty');
+            $table->unsignedBigInteger("steering_coner");
+            $table->string('place_of_orgin');
+            $table->string('number_seats');
+            $table->string('kilo_meter');
+            $table->string('grade');
+            $table->string('interior_color');
+            $table->string('break');
             $table->timestamps();
+
+            $table->foreign('steering_coner')->references('id')->on('steerings');
         });
     }
 

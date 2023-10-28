@@ -99,6 +99,7 @@
                         millage : null ,
                         grade : this.data['grades'][0].grade,
                         exterior_color: null ,
+                        transmission : null ,
                     } ,
                     {
                         license_state : null ,
@@ -113,7 +114,9 @@
                     {
                         interior_color : null ,
                         VIN : null ,
-                        addtional : '' ,
+                        engine_exception : '' ,
+                        license_exception : '' ,
+                        exception : '' ,
                     }
                 ] ,
                 
@@ -155,7 +158,7 @@
             submit () {
                 axios.post('/admin/setup', { field : this.field , modal : this.data['main']}) 
                 .then((response) => {
-                    // window.location.replace("/admin/add-cars");  
+                    window.location.replace("/admin/add-cars");  
                     console.log(response);
                 }).catch((error )=> {
                     console.log(error);
