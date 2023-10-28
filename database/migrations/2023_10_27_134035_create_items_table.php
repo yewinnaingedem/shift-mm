@@ -18,12 +18,13 @@ return new class extends Migration
             $table->string('place_of_orgin');
             $table->string('number_seats');
             $table->string('kilo_meter');
-            $table->string('grade');
+            $table->unsignedBigInteger('grade');
             $table->string('interior_color');
             $table->string('break');
             $table->timestamps();
 
             $table->foreign('steering_coner')->references('id')->on('steerings');
+            $table->foreign('grade')->references('id')->on('grades');
         });
     }
 

@@ -43,6 +43,7 @@ class ModelController extends Controller
             $data['grades'] = Grade::where('carModel_id',$brandId->id)->get();
             $data['steerings'] = Steering::get();
             $data['transmissionTypes'] = TransmissionType::get();
+            $data['id']  = $brandId ;
         return view('admin.cars.stepProgess',compact('data'));
     }
     public function leftJoin($id) {

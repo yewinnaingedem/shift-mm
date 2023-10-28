@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('vin');
             $table->string('color');
+            $table->unsignedBigInteger('model_id');
             $table->string('license_state');
             $table->string('license_plate');
             $table->string('pass_owner');
@@ -23,10 +24,11 @@ return new class extends Migration
             $table->string('license_exception')->nullable();
             $table->string('exception')->nullable();
             $table->timestamps();
+            $table->foreign('model_id')->references('id')->on('car_models');
         });
     }
 
-    /**
+    /** 
      * Reverse the migrations.
      */
     public function down(): void

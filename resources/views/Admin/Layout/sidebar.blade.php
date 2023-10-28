@@ -6,11 +6,10 @@
                     <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                     Car Add 
                 </a>
-                <a class="nav-link collapsed" href="{{url('admin/car-info')}}" >
+                <a class="nav-link collapsed" href="{{url('admin/cars')}}" >
                     <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                     Car Info   
+                     Car Item    
                 </a>
-
                 <div class="sb-sidenav-menu-heading">Car Infomation</div>
 
                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">

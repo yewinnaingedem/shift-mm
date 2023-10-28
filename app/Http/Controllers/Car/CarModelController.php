@@ -93,6 +93,7 @@ class CarModelController extends Controller
 
     public function modelSearch ($id) {
         $idSearch = CarModel::where('brand_id' , $id)->get();
+        
         return response()->json($idSearch);
     }
 }

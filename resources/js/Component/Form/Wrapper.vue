@@ -156,7 +156,7 @@
                 }
             },
             submit () {
-                axios.post('/admin/setup', { field : this.field , modal : this.data['main']}) 
+                axios.post('/admin/setup', { field : this.field , model_Id : this.data['id']}) 
                 .then((response) => {
                     window.location.replace("/admin/add-cars");  
                     console.log(response);
