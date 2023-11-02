@@ -21,6 +21,8 @@ use App\Http\Controllers\Condition\SonarController ;
 use App\Http\Controllers\Condition\CameraController ;
 use App\Http\Controllers\Engine\EngineController ;
 use App\Http\Controllers\Car\CarItemController ;
+use App\Http\Controllers\Car\CarSellController ;
+
 
 
 
@@ -69,6 +71,7 @@ Route::prefix('admin')->group(function (){
     Route::resource('camera' , CameraController::class);
     Route::resource('engine' , EngineController::class );
     Route::resource('cars' ,  CarItemController::class );
+    Route::resource('car_sells', CarsellController::class);
 });
 
 ?> 

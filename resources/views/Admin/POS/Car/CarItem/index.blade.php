@@ -22,6 +22,7 @@
                 <th>Grade </th>
                 <th>VIN</th>
                 <th>Created At</th>
+                <th>Sale</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -30,9 +31,22 @@
                 <tr>
                     <td>{{$carItem->model_name}}</td>
                     <td>{{$carItem->license_plate}}</td>
-                    <td>{{$carItem->grade}}</td>
-                    <td>{{$carItem->vin}}</td>
+                    <td>
+                        @php 
+                            $active = 'bg-info' ;
+                            $default = 'bg-primary';
+                        @endphp
+                        <div
+                            class="rounded text-center {{  $carItem->grade == '0' ? 'bg-danger' : 'bg-primary fw-bold' }} " 
+                        >
+                        {{$carItem->grade === '0' ? 'none': $carItem->grade   }}
+                        </div>
+                    </td>
+                    <td class="fst-italic fw-bolder">{{$carItem->vin}}</td>
                     <td>{{$carItem->created_at}}</td>
+                    <td>
+                        <button class="btn btn-info saling" data-id="{{$carItem->car_id}}">Sell </button>
+                    </td>
                     <td>
                         <button class="btn btn-danger delete" data-id="{{$carItem->car_id}}">Delete</button>
                         <a href=""
@@ -51,6 +65,7 @@
                 <th>Grade </th>
                 <th>VIN</th>
                 <th>Created At</th>
+                <th>Sale</th>
                 <th>Action</th>
             </tr>
         </tfoot>
@@ -99,6 +114,25 @@
                         });    
                         
                     });
+            });
+            $(document).on("click",'.saling',(e)=>{
+                let $sell = $('.sell-item');
+                let $sellEvent = $(e.currentTarget);
+                let $sellId = $sellEvent.data('id');
+                $.ajax({
+                    type : 'post' ,
+                    url : "/admin/car_sells" ,
+                    data : {
+                        '_token' : "{{csrf_token()}}" ,
+                        id : $sellId 
+                    },
+                    success : (response) => {
+                        $sell.html(response);
+                    },
+                    error : (error) => {
+                        console.log(error);
+                    }
+                });
             });
         });
     </script>
