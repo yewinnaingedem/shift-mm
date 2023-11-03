@@ -45,7 +45,25 @@
                     <td class="fst-italic fw-bolder">{{$carItem->vin}}</td>
                     <td>{{$carItem->created_at}}</td>
                     <td>
-                        <button class="btn btn-info saling" data-id="{{$carItem->car_id}}">Sell </button>
+                    @php
+                        $found = false; // Variable to track if the item has been found
+                    @endphp
+
+                    @foreach($saledItems as $saledItem)
+                        @if($carItem->car_id === $saledItem->car_id)
+                            <button class="btn btn-info">Selling</button>
+                            @php
+                                $found = true; // Set the found variable to true
+                                break; // Exit the loop
+                            @endphp
+                        @endif
+                    @endforeach
+
+                    @if (!$found)
+                        <button class="btn btn-info saling" data-id="{{ $carItem->car_id }}">Sell</button>
+                    @endif
+
+                        
                     </td>
                     <td>
                         <button class="btn btn-danger delete" data-id="{{$carItem->car_id}}">Delete</button>
@@ -71,6 +89,12 @@
         </tfoot>
     </table>
 </div>
+
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+
 @endsection 
 
 @section('footer')
