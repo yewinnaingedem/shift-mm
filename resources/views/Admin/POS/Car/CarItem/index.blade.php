@@ -128,58 +128,45 @@
     <script>
         $(document).ready(()=> {
             new DataTable('#carItem');
-            $(document).on('click','.delete' , (e)=>{
-                let $deleteBtn = $(e.currentTarget);
-                let $id = $deleteBtn.data('id');
-                let $row = $deleteBtn.parent().parent();
-                swal({
-                    title: "Are you sure?",
-                    text: "You will not be able to recover this imaginary file!",
-                    type: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "Yes, delete it!",
-                    closeOnConfirm: false
-                    },
+            // $(document).on('click','.delete' , (e)=>{
+            //     let $deleteBtn = $(e.currentTarget);
+            //     let $id = $deleteBtn.data('id');
+            //     let $row = $deleteBtn.parent().parent();
+            //     swal({
+            //         title: "Are you sure?",
+            //         text: "You will not be able to recover this imaginary file!",
+            //         type: "warning",
+            //         showCancelButton: true,
+            //         confirmButtonColor: "#DD6B55",
+            //         confirmButtonText: "Yes, delete it!",
+            //         closeOnConfirm: false
+            //         },
                     
-                    function(){
-                        $.ajax({
-                            type : 'delete',
-                            url : '/admin/cars/' + $id ,
-                            data : {
-                                '_token' : '{{csrf_token()}}',
-                            },
-                            success : (res) => {
-                                $row.remove();
-                                swal("Deleted!", res, "success");
-                            },
-                            error : (err) => {
-                                swal("Deleted!", err.message , "success");
-                            }
-                        });    
+            //         function(){
+            //             $.ajax({
+            //                 type : 'delete',
+            //                 url : '/admin/cars/' + $id ,
+            //                 data : {
+            //                     '_token' : '{{csrf_token()}}',
+            //                 },
+            //                 success : (res) => {
+            //                     $row.remove();
+            //                     swal("Deleted!", res, "success");
+            //                 },
+            //                 error : (err) => {
+            //                     swal("Deleted!", err.message , "success");
+            //                 }
+            //             });    
                         
-                    });
-            });
+            //         });
+            // });
             
             $(document).on("click",'.saling',(e)=>{
                 let $sell = $('.sell-item');
                 let $sellEvent = $(e.currentTarget);
                 let $sellId = $sellEvent.data('id');
+                console.log('hi');
             });
-            // $.ajax({
-            //         type : 'post' ,
-            //         url : "/admin/car_sells" ,
-            //         data : {
-            //             '_token' : "{{csrf_token()}}" ,
-            //             id : $sellId 
-            //         },
-            //         success : (response) => {
-            //             $sell.html(response);
-            //         },
-            //         error : (error) => {
-            //             console.log(error);
-            //         }
-            //     });
         });
     </script>
 @endsection 
