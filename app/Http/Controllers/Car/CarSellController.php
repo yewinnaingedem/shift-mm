@@ -36,6 +36,7 @@ class CarSellController extends Controller
      */
     public function store(Request $request)
     {
+        return response()->json('hi');
         $validator = Validator::make(
             $request->all() ,
             [
@@ -84,6 +85,7 @@ class CarSellController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $test = Sale::find($id)->delete();
+        return response()->json('You deleted the Sale Item successfully');
     }
 }

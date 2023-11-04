@@ -61,8 +61,8 @@
 
                     @if (!$found)
                         <button class="btn btn-info saling" data-id="{{ $carItem->car_id }}">Sell</button>
+                        <!-- <button type="button" class="btn btn-primary" data-id="{{$carItem->car_id}}" data-bs-toggle="modal" data-bs-target="#sell" data-bs-whatever="@mdo">Sell</button> -->
                     @endif
-
                         
                     </td>
                     <td>
@@ -94,7 +94,28 @@
 
 
 <!-- Modal -->
-
+<div class="modal fade" id="sell" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form action="{{url('')}}" method="post">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Mingalar Car Sale Center</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="price" class="col-form-label">Price:</label>
+                        <input type="number" class="form-control" id="price" placeholder="Enter Price">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Price</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 @endsection 
 
 @section('footer')
@@ -139,25 +160,26 @@
                         
                     });
             });
+            
             $(document).on("click",'.saling',(e)=>{
                 let $sell = $('.sell-item');
                 let $sellEvent = $(e.currentTarget);
                 let $sellId = $sellEvent.data('id');
-                $.ajax({
-                    type : 'post' ,
-                    url : "/admin/car_sells" ,
-                    data : {
-                        '_token' : "{{csrf_token()}}" ,
-                        id : $sellId 
-                    },
-                    success : (response) => {
-                        $sell.html(response);
-                    },
-                    error : (error) => {
-                        console.log(error);
-                    }
-                });
             });
+            // $.ajax({
+            //         type : 'post' ,
+            //         url : "/admin/car_sells" ,
+            //         data : {
+            //             '_token' : "{{csrf_token()}}" ,
+            //             id : $sellId 
+            //         },
+            //         success : (response) => {
+            //             $sell.html(response);
+            //         },
+            //         error : (error) => {
+            //             console.log(error);
+            //         }
+            //     });
         });
     </script>
 @endsection 

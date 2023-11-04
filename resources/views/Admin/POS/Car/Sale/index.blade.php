@@ -29,6 +29,7 @@
                     <th>License </th>
                     <th>State</th>
                     <th>Grade</th>
+                    <th>Price</th>
                     <th>Sale</th>
                     <th>Action</th>
                 </tr>
@@ -50,13 +51,14 @@
                                 {{$sale->grade == '0' ? 'none' : $sale->grade }}
                             </div>
                         </td>
-                        <td class='text-center'>
-                            <button type="button" class="btn btn-primary" data-id="{{$sale->id}}"   data-bs-toggle="modal" data-bs-target="#sold_out">
-                                Sold Out 
-                            </button>
+                        <td>
+                            1500000
                         </td>
                         <td class='text-center'>
-                            <button class="btn btn-danger" data-id="{{$sale->id}}">Delete</button>
+                            <a href="{{url('admin/sold_out/'.$sale->id)}}" class="btn btn-primary">Sold Out</a>
+                        </td>
+                        <td class='text-center'>
+                            <button class="btn btn-danger delete" data-id="{{$sale->id}}">Delete</button>
                         </td>
                     </tr>
                 @endforeach
@@ -67,66 +69,12 @@
                     <th>License </th>
                     <th>State</th>
                     <th>Grade</th>
+                    <th>Price</th>
                     <th>Sale</th>
                     <th>Action</th>
                 </tr>
             </tfoot>
         </table>
-    </div>
-
-    
-    <div class="modal fade" id="sold_out" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <form action="{{url('admin/sold_out')}}" method="post">
-                @csrf 
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Mingalar Car Sale Center</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="buyer" class="form-label">Buyer</label>
-                                <input type="text" class="form-control" name="buyer" placeholder="Enter Buyer Name">
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label" for="origin_price">Origin Price</label>
-                                <input type="number" class="form-control" name="price_of_ori" placeholder="Enter Origin Price">
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label" for="origin_price">Saled Price</label>
-                                <input type="number" class="form-control" name="purchase_price" placeholder="Enter Saled Price">
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label" for="origin_price">HP PLan</label>
-                                <input type="text" class="form-control" name="hp_plane" placeholder="Enter Installment Plan">
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label" for="origin_price">Brokder Name</label>
-                                <input type="text" class="form-control" name="broker_name" placeholder="Enter Broker Name">
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="origin_price" class="form-label">Broker Fee</label>
-                                <input type="number" class="form-control" name="broker_fee" placeholder="Enter Broker Name">
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="origin_price" class="form-label">Length Of Loan</label>
-                                <input type="number" class="form-control" placeholder="Enter Broker Name">
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="origin_price" class="form-label">Origin Price</label>
-                                <input type="number" class="form-control" placeholder="Enter Origin Price">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="sumbit" class="btn btn-primary">Save & Change </button>
-                    </div>
-                </div>
-            </form>
-        </div>
     </div>
 @endsection 
 
@@ -140,10 +88,11 @@
     <script>
         $(document).ready(()=> {
             new DataTable('#example');
-            $(document).on('click','.selling' ,((e)=> 
+            $(document).on('click','.delete' ,((e)=> 
                 {
                     let deleteBtn = $(e.currentTarget);
                     let id = deleteBtn.data('id') ;
+                    let row = deleteBtn.parent().parent();
                     swal({
                         title: "Are you sure?",
                         text: "This item will automotivcally move to sell table",
@@ -156,13 +105,14 @@
                         function(){
                             swal("Deleted!", 'response' , "success");
                             $.ajax({
-                                type : 'post' ,
-                                url : "/admin/car_sells" ,
+                                type : 'delete' ,
+                                url : "/admin/car_sells/"+ id,
                                 data : {
                                     "_token" : "{{csrf_token()}}"
                                 },
                                 success : (response) => 
                                 {
+                                    console.log(response);
                                     row.remove();
                                 },
                                 error : (error) => {
