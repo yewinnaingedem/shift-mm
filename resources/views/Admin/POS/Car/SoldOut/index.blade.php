@@ -14,10 +14,17 @@
 
 @section('content')
     <div class="container mt-3">
-        <div class="text-center">
-            <p class="h3">Mingalar Car Sale Center </p>
-        </div>
+        
         <form action="{{url('admin/sold_out')}}" method="post">
+            @csrf 
+            <div class="text-center">
+                <p class="h3">Mingalar Car Sale Center </p>
+                <select name="employee" >
+                    @foreach($employees as $employee)
+                        <option value="{{$employee->id}}">{{$employee->name}}</option>
+                    @endforeach
+                </select>
+            </div>
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label for="buyer" class="form-label">Buyer Name</label>
@@ -93,9 +100,12 @@
                 if($hpPLan.val() == 2) {
                     $brokerName.prop('disabled',true);
                     $lenghtYear.prop('disabled',true);
+                }else {
+                    $brokerName.prop('disabled',false);
+                    $lenghtYear.prop('disabled',false);
                 }
             });
-            $forBroker.change(function () {
+            $(document).on('change',$forBroker , () => {
                 if($forBroker.prop('checked')){
                     $('#broker').removeClass('d-none');
                 }else {

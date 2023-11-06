@@ -7,6 +7,7 @@ use App\Http\Controllers\Contant\DetailsController ;
 use App\Http\Controllers\Financing\FinancingController;
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\ImagesController;
+use App\Http\Controllers\Admin\EmployeeController;
 use App\Http\Controllers\Cars\BrandController;
 use App\Http\Controllers\Cars\FectureController;
 use App\Http\Controllers\Car\ModelController;
@@ -74,6 +75,7 @@ Route::prefix('admin')->group(function (){
     Route::resource('cars' ,  CarItemController::class );
     Route::resource('car_sells', CarsellController::class);
     Route::resource('sold_out' , SoldOutController::class) ;
+    Route::resource('employees', EmployeeController::class);
 });
 
 ?> 
