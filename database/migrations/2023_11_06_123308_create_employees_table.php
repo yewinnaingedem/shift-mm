@@ -19,9 +19,12 @@ return new class extends Migration
             $table->unsignedBigInteger('position');
             $table->string('age');
             $table->string('start_date');
+            $table->string('font-nrc');
+            $table->string('back-nrc');
+            $table->string('address');
             $table->string('salary');
             $table->timestamps();
-            
+
             $table->foreign('position')->references('id')->on('positions');
         });
     }

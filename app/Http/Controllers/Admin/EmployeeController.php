@@ -8,14 +8,16 @@ use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon ;
 use App\Models\Employee ;
 use App\Models\Position ;
+use Illuminate\Support\Facades\Storage;
 
 class EmployeeController extends Controller
 {
     
     public function index()
     {
-        $employees = Employee::get();
-        
+        $employees = Employee::select('employees.*' , 'positions.role')
+                        ->leftJoin('positions','employees.position','positions.id')
+                        ->get();
         return view('Admin.Employees.index',compact('employees'));
     }
 
@@ -41,20 +43,38 @@ class EmployeeController extends Controller
                 'email' => 'required' ,
                 'position' => 'required' ,
                 'age' => 'required' ,
+                'start_date' => 'required|date|date_format:Y-m-d' ,
+                'address' => 'required' ,
                 'salary' => 'required' ,
+                'font-nrc' => ['image', 'mimes:jpeg,png,jpg,gif,svg'] ,
+                'back-nrc' => ['image', 'mimes:jpeg,png,jpg,gif,svg'] 
             ]
         );
+
         if($validator->fails()) 
         {
             return redirect('admin/employees/create')->withErrors($validator)->withInput();
         }
+        
+        $nrc = 'NRC/img' ;
 
+        
         $employees = [] ;
         $employees['name'] = $request['name'] ;
         $employees['email'] = $request['email'] ;
         $employees['phone'] = $request['phone'] ;
         $employees['position'] = $request['position'] ;
         $employees['age'] = $request['age'] ;
+        $employees['address'] = $request['address'];
+        if($request->hasFile('font-nrc')) {
+            $font_nrc = Storage::disk('public')->put($nrc , $request->file('font-nrc'));
+        }
+        // $validator->errors()->add('field_name','errors message');
+        if($request->hasFile('back-nrc')) {
+            $back_nrc = Storage::disk('public')->put($nrc ,$request->file('back-nrc'));
+        }
+        $employees['font-nrc'] = $font_nrc ;
+        $employees['back-nrc'] = $back_nrc ;
         $employees['start_date'] = $request['start_date'] ;
         $employees['salary'] = $request['salary'] ;
         $employees['created_at'] = Carbon::now();
@@ -92,6 +112,7 @@ class EmployeeController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Employee::find($id)->delete();
+        return response()->json('You deleted the employee Role successfully');
     }
 }

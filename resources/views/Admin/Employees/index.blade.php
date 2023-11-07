@@ -47,7 +47,7 @@
                         <td> {{ $employee->name}}</td>
                         <td> {{$employee->email }}</td>
                         <td>{{ $employee->phone }}</td>
-                        <td>{{$employee->position}}</td>
+                        <td>{{$employee->role}}</td>
                         <td>{{ $employee->age }}</td>
                         <td>{{ $employee->start_date }}</td>
                         <td>{{$employee->salary}}</td>
@@ -102,7 +102,7 @@
                             swal("Deleted!", 'response' , "success");
                             $.ajax({
                                 type : 'delete' ,
-                                url : "/admin/employee/" + id ,
+                                url : "/admin/employees/" + id ,
                                 data : {
                                     "_token" : "{{csrf_token()}}"
                                 },

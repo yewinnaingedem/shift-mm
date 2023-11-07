@@ -4,6 +4,11 @@
 
 @section('style')
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <style> 
+        .p-10 {
+            padding : 10px ;
+        }
+    </style>
 @endsection 
 
 @section('navbar') 
@@ -17,13 +22,18 @@
         
         <form action="{{url('admin/sold_out')}}" method="post">
             @csrf 
-            <div class="text-center">
-                <p class="h3">Mingalar Car Sale Center </p>
-                <select name="employee" >
-                    @foreach($employees as $employee)
-                        <option value="{{$employee->id}}">{{$employee->name}}</option>
-                    @endforeach
-                </select>
+            <div class=" row">
+                <div class="col-md-9">
+                    <p class="h3">Mingalar Car Sale Center </p>
+                </div>
+                <div class="col-md-3 text-end">
+                    <select name="employee" class="form-select" width="50%" >
+                        <option selected class="d-none">Who Sell ?</option>
+                        @foreach($employees as $employee)
+                            <option value="{{$employee->id}}">{{$employee->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
             </div>
             <div class="row">
                 <div class="col-md-6 mb-3">
