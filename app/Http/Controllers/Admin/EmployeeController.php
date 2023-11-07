@@ -7,15 +7,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon ;
 use App\Models\Employee ;
+use App\Models\Position ;
 
 class EmployeeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    
     public function index()
     {
         $employees = Employee::get();
+        
         return view('Admin.Employees.index',compact('employees'));
     }
 
@@ -24,7 +24,8 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        return view('Admin.Employees.create');
+        $positions = Position::get();
+        return view('Admin.Employees.create',compact('positions'));
     }
 
     /**
@@ -75,7 +76,7 @@ class EmployeeController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        
     }
 
     /**

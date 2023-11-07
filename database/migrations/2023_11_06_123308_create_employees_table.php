@@ -16,11 +16,13 @@ return new class extends Migration
             $table->string('name');
             $table->string('email');
             $table->string('phone');
-            $table->string('position');
+            $table->unsignedBigInteger('position');
             $table->string('age');
             $table->string('start_date');
             $table->string('salary');
             $table->timestamps();
+            
+            $table->foreign('position')->references('id')->on('positions');
         });
     }
 
