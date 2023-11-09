@@ -35,6 +35,7 @@
                     </select>
                 </div>
             </div>
+            <hr>
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label for="buyer" class="form-label">Buyer Name</label>
@@ -48,8 +49,8 @@
                     <input type="number" class="form-control" value="{{old('price_of_ori',$salePrice->price)}}" name="price_of_ori" placeholder="Enter Origin Price">
                 </div>
                 <div class="col-md-6 mb-3">
-                    <label class="form-label" for="origin_price">Saled Price</label>
-                    <input type="number" class="form-control" name="purchase_price" placeholder="Enter Saled Price">
+                    <label class="form-label" for="purchase">Saled Price</label>
+                    <input type="number" name="purchase_price" id="purchase" class="form-control">
                 </div>
                 <div class="col-md-6 mb-3">
                     <label class="form-label" for="origin_price">Phone Number</label>
@@ -60,18 +61,104 @@
                     <textarea class="form-control" name="address" value="{{old('address')}}" id="address" rows="2" placeholder="Enter Address"></textarea>
                 </div>
             </div>
-            <div class="bg-dark rounded ">
-                <div class="row pt-3 w-50 m-auto" >
-                    <div class="col-md-6">
-                        <button class="btn btn-primary w-100" >HP</button>
+            <div class="bg-dark rounded overflow-hidden mb-3">
+                <div class="card text-center">
+                    <div class="card-header">
+                        <button type="button" class="btn btn-dark">HP</button>
+                        <button type="button" class="btn btn-dark">Cash</button>
                     </div>
-                    <div class="col-md-6">
-                        <button class="btn btn-primary w-100">Cash</button>
-                    </div>
-                </div>
-                <div class="hp-content">
-                    <div class="main">
-                            
+                    <div class="card-body">
+                        <div class="row mb-2">
+                            <div class="col-md-6 d-flex jsutify-content-center align-items-center">
+                                <label class="form-label "  for="hp">Loan Plan</label>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <select name="hp" id="hp" class="form-select">
+                                            <option class="d-none" selected>Enter Loan Plan</option>
+                                            @foreach($hps as $hp)
+                                                <option value="{{$hp->id}}">{{$hp->hp_loan}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="text" name="present" value="50" class="form-control bg-dark text-white" placeholder="Enter Parsent">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-md-6 d-flex jsutify-content-center align-items-center">
+                                <label class="form-label" for="hp">Downpayment</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" name="downpayment" class="form-control fw-bold" placeholder="Enter Downpayment">
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-md-6 d-flex jsutify-content-center align-items-center">
+                                <label class="form-label" for="hp">Deposit</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" name="deposit" class="form-control" placeholder="Enter Deposit">
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-md-6 d-flex jsutify-content-center align-items-center">
+                                <label class="form-label" for="hp">Insurance</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="insurance" placeholder="Enter Insurance">
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-md-6 d-flex jsutify-content-center align-items-center">
+                                <label class="form-label" for="hp">Bank Commission</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="bankCommission" placeholder="Enter Bank Commission">
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-md-6 d-flex jsutify-content-center align-items-center">
+                                <label class="form-label" for="hp">Service Charge</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="serviceCharge" placeholder="Enter Service Charge">
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-md-6 d-flex jsutify-content-center align-items-center">
+                                <label class="form-label" for="hp">Initial Payment</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" name="intial" class="form-control bg-dark text-white font-bold" >
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-md-6 d-flex jsutify-content-center align-items-center">
+                                <label class="form-label" for="hp">Loan Amount</label>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control fw-bold" name="loanamount" placeholder="Enter Loan Lenght">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="text" name="monthly"  value="60" class="form-control bg-dark text-white fw-bold" placeholder="Enter Months Only">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-md-6 d-flex jsutify-content-center align-items-center">
+                                <label class="form-label" for="hp">Monthly Payment</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="monthlyPayment"  placeholder="Enter Loan">
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -113,14 +200,21 @@
             let $brokerName = $('input[name="downpayment"]');
             let $lenghtYear = $('input[name="lenght_year"]');
             let $forBroker = $('#for_broker');
-            $(document).on('change',$hpPLan , ()=> {
-                if($hpPLan.val() == 2) {
-                    $brokerName.prop('disabled',true);
-                    $lenghtYear.prop('disabled',true);
-                }else {
-                    $brokerName.prop('disabled',false);
-                    $lenghtYear.prop('disabled',false);
-                }
+            let $deposit = $('input[name="deposit"]');
+            let purchsedPrice = $('input[name="purchase_price"]');
+            let $present = $('input[name="present"]');
+            let $downpayment = $('input[name="downpayment"]');
+            let $loanAmount = $('input[name="loanamount"]');
+            let $insurance = $('input[name="insurance"]');
+            let $bankCommission = $('input[name="bankCommission"]');
+            let $serviceCharge = $('input[name="serviceCharge"]');
+            let $intial = $('input[name="intial"]');
+            let $monthlyPayment = $('input[name="monthlyPayment"]');
+            let $monthly = $('input[name="monthly"]');
+
+            $monthly.on('keyup' , () => {
+                let $value = $monthly.val() ;
+                
             });
             $(document).on('change',$forBroker , () => {
                 if($forBroker.prop('checked')){
@@ -129,6 +223,60 @@
                     $('#broker').addClass('d-none');
                 }
             });
+            let present = $present.val() ;
+            purchsedPrice.on('keyup' , function () {
+                let $value = purchsedPrice.val() ;
+                let present = $present.val() ;
+                loanFunction($value , present);
+
+                $present.on('keyup' , ()=> {
+                    loanFunction($value , $present.val());
+                });
+
+            });
+
+            function months (value ) {
+                return value ;
+            };
+
+            
+            
+            function loanFunction (price , $hpPresent ) {
+                let  $value= $hpPresent;
+                let down = price * ($value / 100 ) ;
+                let loanAmount = price - down ;
+                let deposit = loanAmount * (10 / 100) ;
+                let insurance = price * ( 1.5 / 100 );
+                let bankCommission = loanAmount * ( 1 / 100 );
+                let serviceCharge = price * ( 2 / 100 );
+                let intial = down + bankCommission + insurance + deposit + serviceCharge ;
+                
+                $downpayment.val(down.toLocaleString());
+                $loanAmount.val(loanAmount.toLocaleString());
+                $deposit.val(deposit.toLocaleString());
+                $insurance.val(insurance.toLocaleString());
+                $bankCommission.val(bankCommission.toLocaleString());
+                $serviceCharge.val(serviceCharge.toLocaleString());
+                $intial.val(intial.toLocaleString());
+                $monthly.on('keyup' , function () {
+                    let emiVal = $monthly.val() ;
+                    emi(emiVal , loanAmount);
+                });
+
+                let emiVal = $monthly.val() ;
+                emi(emiVal , loanAmount);
+            }
+            function emi (months , loanAmount ) {
+                let interestRate = 10 / 12 / 100 ;
+                let emiValue = loanAmount * interestRate * (Math.pow(1 + interestRate, months) / (Math.pow(1 + interestRate, months) - 1));
+                let formatted = emiValue.toFixed(1);
+                if(formatted % 1 >= 0.5 ) {
+                    $monthlyPayment.val(Math.ceil(formatted));
+                }else {
+                    $monthlyPayment.val(formatted);
+                }
+            }
+            
         });
     </script>
 @endsection 
