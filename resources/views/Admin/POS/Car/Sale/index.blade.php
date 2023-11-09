@@ -19,8 +19,8 @@
 
 @section('content')
     <div class="container-fluid mt-3">
-        <div class="mb-3 bg-primary rounded">
-            <div class="text-center text-info p-10 h-4">This table is currently sale table</div>
+        <div class="mb-3 bg-danger rounded">
+            <div class="text-center text-info fw-bold  p-10 h-3">This table is currently sale table</div>
         </div>
         <table id="example" class="display text-center" style="width:100%">
             <thead>
@@ -52,7 +52,7 @@
                             </div>
                         </td>
                         <td>
-                            1500000
+                            {{$sale->price}}
                         </td>
                         <td class='text-center'>
                             <a href="{{url('admin/sold_out/'.$sale->id)}}" class="btn btn-primary">Sold Out</a>

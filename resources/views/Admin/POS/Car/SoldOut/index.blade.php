@@ -28,7 +28,7 @@
                 </div>
                 <div class="col-md-3 text-end">
                     <select name="employee" class="form-select" width="50%" >
-                        <option selected class="d-none">Who Sell ?</option>
+                        <option selected class="d-none">Who Sell This Car?</option>
                         @foreach($employees as $employee)
                             <option value="{{$employee->id}}">{{$employee->name}}</option>
                         @endforeach
@@ -45,27 +45,34 @@
                 </div>
                 <div class="col-md-6 mb-3">
                     <label class="form-label" for="origin_price">Orgin Price</label>
-                    <input type="number" class="form-control" name="price_of_ori" placeholder="Enter Origin Price">
+                    <input type="number" class="form-control" value="{{old('price_of_ori',$salePrice->price)}}" name="price_of_ori" placeholder="Enter Origin Price">
                 </div>
                 <div class="col-md-6 mb-3">
                     <label class="form-label" for="origin_price">Saled Price</label>
                     <input type="number" class="form-control" name="purchase_price" placeholder="Enter Saled Price">
                 </div>
                 <div class="col-md-6 mb-3">
-                    <label  for="hp_plan" class="form-label">HP Plan</label>
-                    <select class="form-select" id="hp_plan" name="hp_plan">
-                        @foreach($hps as $hp)
-                            <option value="{{$hp->id}}">{{$hp->hp_loan}}</option>
-                        @endforeach
-                    </select>
+                    <label class="form-label" for="origin_price">Phone Number</label>
+                    <input type="number" class="form-control" name="phone_number" placeholder="Enter Phone Number">
                 </div>
-                <div class="col-md-6 mb-3">
-                    <label class="form-label" for="origin_price">Downpayment</label>
-                    <input type="text" class="form-control"  name="downpayment" placeholder="Enter Payment Amount">
+                    <div class="col-md-6 mb-3">
+                    <label for="address" class="form-label">Enter Address</label>
+                    <textarea class="form-control" name="address" value="{{old('address')}}" id="address" rows="2" placeholder="Enter Address"></textarea>
                 </div>
-                <div class="col-md-6 mb-3">
-                    <label class="form-label" for="origin_price">Lenght Of Year</label>
-                    <input type="text" class="form-control" name="lenght_year" placeholder="Enter Lenght Of Loan">
+            </div>
+            <div class="bg-dark rounded ">
+                <div class="row pt-3 w-50 m-auto" >
+                    <div class="col-md-6">
+                        <button class="btn btn-primary w-100" >HP</button>
+                    </div>
+                    <div class="col-md-6">
+                        <button class="btn btn-primary w-100">Cash</button>
+                    </div>
+                </div>
+                <div class="hp-content">
+                    <div class="main">
+                            
+                    </div>
                 </div>
             </div>
             <div class="form-check form-switch mb-3">

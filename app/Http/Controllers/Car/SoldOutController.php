@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\HpPlan;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Employee ;
+use App\Models\Car\Sale ;
 
 class SoldOutController extends Controller
 {
@@ -54,7 +55,8 @@ class SoldOutController extends Controller
     {
         $hps = HpPlan::get();
         $employees = Employee::get();
-        return view('admin.POS.Car.SoldOut.index' , compact('employees','hps'))->with('id',$id);
+        $salePrice = Sale::where('id',$id)->first('price');
+        return view('admin.POS.Car.SoldOut.index' , compact('employees','hps','salePrice'))->with('id',$id);
     }
 
     /**

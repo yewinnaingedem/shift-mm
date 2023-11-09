@@ -14,6 +14,12 @@
 
 @section('content')
 <div class="container mt-3">
+    @if(session('message')) 
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>Holy guacamole!</strong> {{ session('message')}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif 
     <table id="carItem" class="table table-striped" style="width:100%">
         <thead>
             <tr>
@@ -29,8 +35,8 @@
         <tbody>
             @foreach($carItems as $carItem)
                 <tr>
-                    <td>{{$carItem->model_name}}</td>
-                    <td>{{$carItem->license_plate}}</td>
+                    <td id="model_name">{{$carItem->model_name}}</td>
+                    <td id="licensePlate">{{$carItem->license_plate}}</td>
                     <td>
                         @php 
                             $active = 'bg-info' ;
@@ -46,7 +52,7 @@
                     <td>{{$carItem->created_at}}</td>
                     <td>
                     @php
-                        $found = false; // Variable to track if the item has been found
+                        $found = false; 
                     @endphp
 
                     @foreach($saledItems as $saledItem)
@@ -60,8 +66,9 @@
                     @endforeach
 
                     @if (!$found)
-                        <button class="btn btn-info saling" data-id="{{ $carItem->car_id }}">Sell</button>
-                        <!-- <button type="button" class="btn btn-primary" data-id="{{$carItem->car_id}}" data-bs-toggle="modal" data-bs-target="#sell" data-bs-whatever="@mdo">Sell</button> -->
+                        <button id="modalId"  class="btn btn-primary" data-id="{{$carItem->car_id}}" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            Sell
+                        </button>
                     @endif
                         
                     </td>
@@ -90,32 +97,27 @@
     </table>
 </div>
 
-<!-- Button trigger modal -->
 
-
-<!-- Modal -->
-<div class="modal fade" id="sell" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <form action="{{url('')}}" method="post">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Mingalar Car Sale Center</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="mb-3">
-                        <label for="price" class="col-form-label">Price:</label>
-                        <input type="number" class="form-control" id="price" placeholder="Enter Price">
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <form action="{{url('admin/car_sells')}}" method="post">
+            @csrf 
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Mingalar Car Sale Center </h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Price</button>
+                    <div class="modal-body">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="sumbit" class="btn btn-primary">Save changes</button>
+                    </div>
                 </div>
             </div>
         </form>
     </div>
-</div>
 @endsection 
 
 @section('footer')
@@ -128,45 +130,26 @@
     <script>
         $(document).ready(()=> {
             new DataTable('#carItem');
-            // $(document).on('click','.delete' , (e)=>{
-            //     let $deleteBtn = $(e.currentTarget);
-            //     let $id = $deleteBtn.data('id');
-            //     let $row = $deleteBtn.parent().parent();
-            //     swal({
-            //         title: "Are you sure?",
-            //         text: "You will not be able to recover this imaginary file!",
-            //         type: "warning",
-            //         showCancelButton: true,
-            //         confirmButtonColor: "#DD6B55",
-            //         confirmButtonText: "Yes, delete it!",
-            //         closeOnConfirm: false
-            //         },
-                    
-            //         function(){
-            //             $.ajax({
-            //                 type : 'delete',
-            //                 url : '/admin/cars/' + $id ,
-            //                 data : {
-            //                     '_token' : '{{csrf_token()}}',
-            //                 },
-            //                 success : (res) => {
-            //                     $row.remove();
-            //                     swal("Deleted!", res, "success");
-            //                 },
-            //                 error : (err) => {
-            //                     swal("Deleted!", err.message , "success");
-            //                 }
-            //             });    
-                        
-            //         });
-            // });
-            
-            $(document).on("click",'.saling',(e)=>{
-                let $sell = $('.sell-item');
-                let $sellEvent = $(e.currentTarget);
-                let $sellId = $sellEvent.data('id');
-                console.log('hi');
+            $(document).on('click','#modalId',(e)=> {
+                var $modalId = $(e.currentTarget);
+                var $data = $modalId.data('id');
+                var $modelName = $modalId.parent().parent().find("#model_name").html();
+                var $licensePlate = $modalId.parent().parent().find("#licensePlate").html();
+                let $modelContent = `
+                        <input type="hidden" name="id" value="${$data}">
+                        <div class="mb-3">
+                            <label for="price" class="form-label">Price For <span class="text-danger fw-bold">${$modelName}</span ><span class="fw-bold">(${$licensePlate})</span></label>
+                            <input type="number" name="price" id="price" placeholder="Enter Price" class="form-control">
+                        </div>
+                `;
+                $('.modal-body').html($modelContent);
             });
+
+            var $price = $('input[name="price"]');
+            // $(document).on('onchange',$price , ()=> {
+            //     console.log($price.val());
+            // });
+            console.log($price);
         });
     </script>
 @endsection 

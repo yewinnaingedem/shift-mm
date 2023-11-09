@@ -7,13 +7,14 @@ use Illuminate\Http\Request;
 use App\Models\Car\Car ;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Car\Sale ;
+use App\Models\Car\Item ;
 
 class CarSellController extends Controller
 {
     
     public function index()
     {
-        $sales = Sale::select('car_models.model_name','owner_books.license_state','owner_books.license_plate','grades.grade','sales.id')
+        $sales = Sale::select('car_models.model_name','owner_books.license_state','owner_books.license_plate','grades.grade','sales.id','sales.price')
                     ->leftJoin('cars','sales.car_id','cars.id')
                     ->leftJoin('owner_books','cars.owner_book_id','owner_books.id')
                     ->leftJoin('items','cars.item_id','items.id')
@@ -36,24 +37,26 @@ class CarSellController extends Controller
      */
     public function store(Request $request)
     {
-        return response()->json('hi');
+        
         $validator = Validator::make(
             $request->all() ,
             [
                 'id' => 'required' ,
+                'price' => 'required'
             ]
         );  
         if($validator->fails()){
-            return response()->json('some error occuring in database');
+            return redirect('admin/cars')->with('message','You can not skip the price Please Try Again');
         }
         $existId = Sale::where('car_id',$request['id'])->exists();
         if($existId) {
-            return response()->json('you already created');
+            return redirect('admin/cars')->with('message','You already Created the record');
         }
         $inputs = [];
         $inputs['car_id'] = $request['id'];
+        $inputs['price'] = $request['price'];
         Sale::insert($inputs);
-        return response()->json('you saled this item');
+        return redirect('admin/car_sells')->with('message' , 'You successfully created It');
     }
 
     /**
@@ -61,7 +64,7 @@ class CarSellController extends Controller
      */
     public function show(string $id)
     {
-        //
+
     }
 
     /**
