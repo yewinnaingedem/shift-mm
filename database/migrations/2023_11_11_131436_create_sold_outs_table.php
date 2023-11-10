@@ -14,16 +14,15 @@ return new class extends Migration
         Schema::create('sold_outs', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('car_id');
-            $table->string('buyer');
-            $table->string('price_of_ori');
-            $table->string('purchase_price');
-            $table->string('hp_plane');
-            $table->string('lenght_of_loan')->nullabel();
-            $table->string('broker_fee')->nullable();
-            $table->string('broker_name')->nullable();
+            $table->unsignedBigInteger('buyer_id');
+            $table->unsignedBigInteger('hire_purchase_id');
+            $table->unsignedBigInteger('broker_id')->nullable();
             $table->timestamps();
 
             $table->foreign('car_id')->references('id')->on('cars');
+            $table->foreign('buyer_id')->references('id')->on('buyers');
+            $table->foreign('hire_purchase_id')->references('id')->on('hire_purchases');
+            $table->foreign('broker_id')->references('id')->on('brokers');
         });
     }
 
