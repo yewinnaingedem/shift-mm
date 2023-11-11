@@ -10,6 +10,7 @@ use App\Models\Employee ;
 use App\Models\Car\Sale ;
 use App\Models\SoldOut ;
 use App\Models\Buyer ;
+use Carbon\Carbon ;
 use App\Models\Broker ;
 use App\Models\Hire_purchase ;
 
@@ -57,7 +58,7 @@ class SoldOutController extends Controller
         $buyer['phone'] = $request['phone_number'] ;
         $buyer['purchase_price'] = $request['purchase_price'] ;
         $buyer['address'] = $request['address'] ;
-        // $buyerId = Buyer::insertGetId($buyer);
+        $buyerId = Buyer::insertGetId($buyer);
 
         $hps = [];
         $hps['hp_plan_id'] = $request['hp'];
@@ -67,28 +68,28 @@ class SoldOutController extends Controller
         $hps['bank_commission'] = $request['bankCommission'];
         $hps['service_charge'] = $request['serviceCharge'];
         $hps['loan_month'] = $request['monthly'];
-        // $hp_id = Hire_purchase::insertGetId($hps);
+        $hp_id = Hire_purchase::insertGetId($hps);
 
-        if($request['broker']['name'] == null) {
-            $broker = [] ;
-            $broker['name'] = $request->broker['name'];
-            $broker['phone'] = $request->broker['phone'];
-            $broker['broker_fee'] = $request->broker['fee'] ;
-            // $brokerId = Broker::insertGetId($broker);
-            dd($broker);
+        
+        $brokerFee = [];
+        foreach ($request['broker'] as $key => $value) {
+            if($value !== null ) {
+                $brokerFee[$key] = $value ;
+            }
+        }
+        if(!empty($brokerFee)) {
+            $brokerId = Broker::insertGetId($brokerFee);
             $soldOuts['broker_id'] = $brokerId ;
         }
-        
         
         $soldOuts['employee_id'] = $request['employee'];
         $soldOuts['car_id'] = $request['id'];
         $soldOuts['buyer_id'] = $buyerId;
+        $soldOuts['created_at'] = Carbon::now();
         $soldOuts['hire_purchase_id'] = $hp_id;
-        
 
-        
-        // SoldOut::insertGetId($soldOuts);
-        // Sale::where('car_id',$request['id'])->delete();
+        SoldOut::insertGetId($soldOuts);
+        Sale::where('car_id',$request['id'])->delete();
         
         return redirect('admin/saled')->with('message' , 'You Make the record successfully');
     }

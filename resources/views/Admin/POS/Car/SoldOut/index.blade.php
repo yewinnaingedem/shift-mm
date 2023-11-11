@@ -168,7 +168,7 @@
                 </div>
                 <div class="col-md-6">
                     <label for="broker_fee" class="form-label">Broker Fee</label>
-                    <input type="text" name="broker[fee]" id="broker_fee" class="form-control" placeholder="Enter Broker Name">
+                    <input type="text" name="broker[broker_fee]" id="broker_fee" class="form-control" placeholder="Enter Broker Name">
                     @if($errors->has('broker_fee'))
                         <p class="text-danger">{{$errors->first('broker_fee')}}</p>
                     @endif 

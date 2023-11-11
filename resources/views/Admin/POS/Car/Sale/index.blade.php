@@ -19,9 +19,10 @@
 
 @section('content')
     <div class="container-fluid mt-3">
-        <div class="mb-3 bg-danger rounded">
-            <div class="text-center text-info fw-bold  p-10 h-3">This table is currently sale table</div>
+        <div class="mb-3  rounded">
+            <h2 class='text-center text-capitalize' >This Tabel is currently Sale Tabel</h2>
         </div>
+        <hr>
         <table id="example" class="display text-center" style="width:100%">
             <thead>
                 <tr>

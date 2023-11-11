@@ -15,7 +15,7 @@
 @section('content')
     <div class="container-fluid mt-3">
         <div class="mb-3">
-            <a href="{{url('admin/sonar/create')}}" class=" btn btn-primary">
+            <a href="{{url('admin/car_sells')}}" class=" btn btn-primary">
                 <i class="fa-solid fa-plus">Add</i>
                 <span>Add New</span>
             </a>
@@ -47,7 +47,11 @@
                         <td> {{ $saled->name}}</td>
                         <td>{{ $saled->employee }}</td>
                         <td>{{$saled->hp_loan}}</td>
-                        <td>{{$saled->broker_name}}</td>
+                        @php 
+                            $broker = $saled->broker_name ;
+                            $test = $broker == null ? TRUE : FALSE ;
+                        @endphp 
+                        <td class="fw-bold text-center {{ $test ? 'bg-dark text-white' : '' }}">{{ $test ? 'None' : $broker}}</td>
                         <td>{{$saled->created_at}}</td>
                         <td>
                             <button class="btn btn-danger delete" data-id="{{$saled->id}}">Delete</button>
