@@ -14,13 +14,14 @@ class CarSellController extends Controller
     
     public function index()
     {
-        $sales = Sale::select('car_models.model_name','owner_books.license_state','owner_books.license_plate','grades.grade','sales.id','sales.price')
+        $sales = Sale::select('car_models.model_name','owner_books.license_state','owner_books.license_plate','grades.grade','sales.id','sales.price' , 'cars.id as main_id')
                     ->leftJoin('cars','sales.car_id','cars.id')
                     ->leftJoin('owner_books','cars.owner_book_id','owner_books.id')
                     ->leftJoin('items','cars.item_id','items.id')
                     ->leftJoin('car_models','owner_books.model_id','car_models.id')
                     ->leftJoin('grades','items.grade','grades.id')
                     ->get();
+        
         return view('admin.POS.Car.Sale.index',compact('sales'));
     }
 

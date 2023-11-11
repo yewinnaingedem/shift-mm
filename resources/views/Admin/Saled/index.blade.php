@@ -4,11 +4,6 @@
 
 @section('style')
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
-    <style>
-        .p-10 {
-            padding : 5px 10px ;
-        }
-    </style>
 @endsection 
 
 @section('navbar') 
@@ -19,58 +14,56 @@
 
 @section('content')
     <div class="container-fluid mt-3">
-        <div class="mb-3 bg-danger rounded">
-            <div class="text-center text-info fw-bold  p-10 h-3">This table is currently sale table</div>
+        <div class="mb-3">
+            <a href="{{url('admin/sonar/create')}}" class=" btn btn-primary">
+                <i class="fa-solid fa-plus">Add</i>
+                <span>Add New</span>
+            </a>
         </div>
-        <table id="example" class="display text-center" style="width:100%">
+        @if(session('message')) 
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>Holy guacamole!</strong> {{ session('message')}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif 
+        
+            
+        <table id="example" class="display" style="width:100%">
             <thead>
                 <tr>
-                    <th>Model</th>
-                    <th>License </th>
-                    <th>State</th>
-                    <th>Grade</th>
-                    <th>Price</th>
-                    <th>Sale</th>
+                    <th>Car Number </th>
+                    <th>Buyer Name</th>
+                    <th>Employee Name</th>
+                    <th>Hp Loan</th>
+                    <th>Broker Name</th>
+                    <th>Saled At</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach($sales as $sale)
+                @foreach($saled_cars as $saled)
                     <tr>
-                        <td> {{ $sale->model_name}}</td>
-                        <td> {{ $sale->license_plate}}</td>
-                        <td>{{$sale->license_state}}</td>
-                        <td class="d-flex jsutify-content-center align-items-center">
-                            @php 
-                                $active = 'bg-primary' ;
-                                $default = 'bg-danger';
-                            @endphp 
-                            <div
-                                class="rounded text-center p-10 text-white fw-bold {{$sale->grade == '0' ? $active : $default }}"
-                            >
-                                {{$sale->grade == '0' ? 'none' : $sale->grade }}
-                            </div>
-                        </td>
+                        <td> {{ $saled->number_plate}}</td>
+                        <td> {{ $saled->name}}</td>
+                        <td>{{ $saled->employee }}</td>
+                        <td>{{$saled->hp_loan}}</td>
+                        <td>{{$saled->broker_name}}</td>
+                        <td>{{$saled->created_at}}</td>
                         <td>
-                            {{$sale->price}}
-                        </td>
-                        <td class='text-center'>
-                            <a href="{{url('admin/sold_out/'.$sale->main_id)}}" class="btn btn-primary">Sold Out</a>
-                        </td>
-                        <td class='text-center'>
-                            <button class="btn btn-danger delete" data-id="{{$sale->id}}">Delete</button>
+                            <button class="btn btn-danger delete" data-id="{{$saled->id}}">Delete</button>
+                            <a href="{{url('admin/saled/'. $saled->id .'/edit')}}" class="btn btn-primary">Edit</a>
                         </td>
                     </tr>
                 @endforeach
             </tbody>
             <tfoot>
                 <tr>
-                    <th>Model</th>
-                    <th>License </th>
-                    <th>State</th>
-                    <th>Grade</th>
-                    <th>Price</th>
-                    <th>Sale</th>
+                    <th>Car Number </th>
+                    <th>Buyer Name</th>
+                    <th>Employee Name</th>
+                    <th>Hp Loan</th>
+                    <th>Broker Name</th>
+                    <th>Saled At</th>
                     <th>Action</th>
                 </tr>
             </tfoot>
@@ -95,7 +88,7 @@
                     let row = deleteBtn.parent().parent();
                     swal({
                         title: "Are you sure?",
-                        text: "This item will automotivcally move to sell table",
+                        text: "You will not be able to recover this imaginary file!",
                         type: "warning",
                         showCancelButton: true,
                         confirmButtonColor: "#DD6B55",
@@ -106,23 +99,22 @@
                             swal("Deleted!", 'response' , "success");
                             $.ajax({
                                 type : 'delete' ,
-                                url : "/admin/car_sells/"+ id,
+                                url : "/admin/sonar/" + id ,
                                 data : {
                                     "_token" : "{{csrf_token()}}"
                                 },
                                 success : (response) => 
                                 {
-                                    console.log(response);
                                     row.remove();
                                 },
                                 error : (error) => {
                                     console.log(error);
                                 }
                             });
+                            row.remove() ;
                     });
                 }
             ));
-            
         });
     </script>
 @endsection 

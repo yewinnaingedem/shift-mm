@@ -35,6 +35,7 @@
                 </div>
             </div>
             <hr>
+            <input type="hidden" name="id" value="{{$id}}">
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label for="buyer" class="form-label">Buyer Name</label>
@@ -160,16 +161,23 @@
             <div class="row d-none" id="broker">
                 <div class="col-md-6">
                     <label for="broker_name" class="form-label">Broker Name</label>
-                    <input type="text" name="broker_name" id="broker_name" class="form-control" placeholder="Enter Broker Name">
+                    <input type="text" name="broker[name]" id="broker_name" class="form-control" placeholder="Enter Broker Name">
                     @if($errors->has('broker_name'))
                         <p class="text-danger">{{$errors->first('broker_name')}}</p>
                     @endif 
                 </div>
                 <div class="col-md-6">
                     <label for="broker_fee" class="form-label">Broker Fee</label>
-                    <input type="text" name="broker_fee" id="broker_fee" class="form-control" placeholder="Enter Broker Name">
+                    <input type="text" name="broker[fee]" id="broker_fee" class="form-control" placeholder="Enter Broker Name">
                     @if($errors->has('broker_fee'))
                         <p class="text-danger">{{$errors->first('broker_fee')}}</p>
+                    @endif 
+                </div>
+                <div class="col-md-6">
+                    <label for="broker_phone" class="form-label">Broker Phone</label>
+                    <input type="text" name="broker[phone]" id="broker_fee" class="form-control" placeholder="Enter Broker Phone Number">
+                    @if($errors->has('broker_phone'))
+                        <p class="text-danger">{{$errors->first('broker_phone')}}</p>
                     @endif 
                 </div>
             </div>

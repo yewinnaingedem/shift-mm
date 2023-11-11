@@ -13,12 +13,14 @@ return new class extends Migration
     {
         Schema::create('sold_outs', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('employee_id');
             $table->unsignedBigInteger('car_id');
             $table->unsignedBigInteger('buyer_id');
             $table->unsignedBigInteger('hire_purchase_id');
             $table->unsignedBigInteger('broker_id')->nullable();
             $table->timestamps();
 
+            $table->foreign('employee_id')->references('id')->on('employees');
             $table->foreign('car_id')->references('id')->on('cars');
             $table->foreign('buyer_id')->references('id')->on('buyers');
             $table->foreign('hire_purchase_id')->references('id')->on('hire_purchases');

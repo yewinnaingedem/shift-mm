@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\ImagesController;
 use App\Http\Controllers\Admin\PositionController;
 use App\Http\Controllers\Admin\EmployeeController;
+use App\Http\Controllers\Admin\SaledController;
 use App\Http\Controllers\Cars\BrandController;
 use App\Http\Controllers\Cars\FectureController;
 use App\Http\Controllers\Car\ModelController;
@@ -78,6 +79,7 @@ Route::prefix('admin')->group(function (){
     Route::resource('sold_out' , SoldOutController::class) ;
     Route::resource('employees', EmployeeController::class);
     Route::resource('positions' , PositionController::class);
+    Route::resource('saled' , SaledController::class);
 });
 
 ?> 

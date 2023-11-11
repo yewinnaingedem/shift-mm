@@ -17,6 +17,10 @@
                     <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                     Car Sale  
                 </a>
+                <a class="nav-link collapsed" href="{{url('admin/saled')}}" >
+                    <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                    Histor Of Saled Car 
+                </a>
                 <!-- <a class="nav-link collapsed" href="{{url('admin/employees')}}" >
                     <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                     Employee 

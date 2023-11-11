@@ -8,6 +8,10 @@ use App\Models\HpPlan;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Employee ;
 use App\Models\Car\Sale ;
+use App\Models\SoldOut ;
+use App\Models\Buyer ;
+use App\Models\Broker ;
+use App\Models\Hire_purchase ;
 
 class SoldOutController extends Controller
 {
@@ -33,19 +37,60 @@ class SoldOutController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make(
-            $request->all(),
+            $request->all()  ,
             [
-                'name' => 'required' ,
+                'buyer' => 'required' ,
+                'purchase_price' => 'required' ,
+                'phone_number' => 'required' ,
+                'address' => 'required' ,
+                'hp' => 'required' ,
+                'present' => 'required' ,
+                'monthly' => 'required' ,
             ]
         );
-        if($validator->fails()) 
-        {
-            return redirect('admin/car_sells')->withErrors($validator)->withInput();
+        if($validator->fails()) {
+            return redirect('admin/sold_out/crete')->withErrors($validator)->withInput();
         }
         $soldOuts = [] ;
-        $soldOuts['buyer'] = $request['name'];
+        $buyer = [] ;
+        $buyer['name'] = $request['buyer'] ;
+        $buyer['phone'] = $request['phone_number'] ;
+        $buyer['purchase_price'] = $request['purchase_price'] ;
+        $buyer['address'] = $request['address'] ;
+        // $buyerId = Buyer::insertGetId($buyer);
 
-        dd($soldOuts);
+        $hps = [];
+        $hps['hp_plan_id'] = $request['hp'];
+        $hps['downpayment'] = $request['present'];
+        $hps['deposit'] = $request['deposit'];
+        $hps['insurance'] = $request['insurance'];
+        $hps['bank_commission'] = $request['bankCommission'];
+        $hps['service_charge'] = $request['serviceCharge'];
+        $hps['loan_month'] = $request['monthly'];
+        // $hp_id = Hire_purchase::insertGetId($hps);
+
+        if($request['broker']['name'] == null) {
+            $broker = [] ;
+            $broker['name'] = $request->broker['name'];
+            $broker['phone'] = $request->broker['phone'];
+            $broker['broker_fee'] = $request->broker['fee'] ;
+            // $brokerId = Broker::insertGetId($broker);
+            dd($broker);
+            $soldOuts['broker_id'] = $brokerId ;
+        }
+        
+        
+        $soldOuts['employee_id'] = $request['employee'];
+        $soldOuts['car_id'] = $request['id'];
+        $soldOuts['buyer_id'] = $buyerId;
+        $soldOuts['hire_purchase_id'] = $hp_id;
+        
+
+        
+        // SoldOut::insertGetId($soldOuts);
+        // Sale::where('car_id',$request['id'])->delete();
+        
+        return redirect('admin/saled')->with('message' , 'You Make the record successfully');
     }
 
     /**
@@ -55,7 +100,7 @@ class SoldOutController extends Controller
     {
         $hps = HpPlan::get();
         $employees = Employee::get();
-        $salePrice = Sale::where('id',$id)->first('price');
+        $salePrice = Sale::where('car_id',$id)->first('price');
         return view('admin.POS.Car.SoldOut.index' , compact('employees','hps','salePrice'))->with('id',$id);
     }
 
