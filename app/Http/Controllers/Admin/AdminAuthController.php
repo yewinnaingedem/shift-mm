@@ -68,7 +68,6 @@ class AdminAuthController extends Controller
         // $data['cameraes'] = Camera::get();
         // $data['seats'] = Seat::get() ;
         // $data['divertrimes'] = Divertrim::get();
-        return response()->json( $id);
     }
 
     public function deleteCard($id) {

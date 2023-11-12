@@ -156,10 +156,10 @@
                 }
             },
             submit () {
-                axios.post('/admin/setup', { field : this.field , model_Id : this.data['id']}) 
+                axios.post('/admin/setup', { field : this.field , model_Id : this.data['id'].id}) 
                 .then((response) => {
-                    window.location.replace("/admin/add-cars");  
-                    console.log(response);
+                    window.location.href = response.data.redirect;
+                    console.log(response.data.redirect);
                 }).catch((error )=> {
                     console.log(error);
                 });
@@ -188,7 +188,7 @@
             } ,
         },
         mounted () {
-            console.log(this.data['grades']);
+            console.log(this.data['id'].id);
         }
     }
     

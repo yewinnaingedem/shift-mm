@@ -25,6 +25,7 @@ use App\Http\Controllers\Condition\CameraController ;
 use App\Http\Controllers\Engine\EngineController ;
 use App\Http\Controllers\Car\CarItemController ;
 use App\Http\Controllers\Car\CarsellController ;
+use App\Http\Controllers\Car\CarImageItemController ;
 use App\Http\Controllers\Car\SoldOutController ;
 
 
@@ -60,7 +61,7 @@ Route::prefix('admin')->group(function (){
     Route::delete('car-info/{id}', [AdminAuthController::class , 'deleteCard']);
     Route::put('update-info/{id}' , [AdminAuthController::class , 'updateInfo']);
     Route::post('setup' , [AddCarController::class , 'index']);
-
+    Route::resource('car_img' , CarImageItemController::class );
     Route::resource('car_models' , CarModelController::class) ;
     Route::resource('grade'  , GradeController::class);
     Route::post('grade/function' , [GradeController::class , 'gradeFunction']);

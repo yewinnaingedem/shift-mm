@@ -15,10 +15,12 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('item_id');
             $table->unsignedBigInteger('owner_book_id');
+            $table->unsignedBigInteger('car_image_id');
             $table->timestamps();
 
             $table->foreign('item_id')->references('id')->on('items');
             $table->foreign('owner_book_id')->references('id')->on('owner_books');
+            $table->foreign('car_image_id')->references('id')->on('car_images');
         });
     }
 
