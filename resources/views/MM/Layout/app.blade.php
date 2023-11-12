@@ -85,6 +85,10 @@
             $('.loader').fadeOut('slow');
             $('loader-content').show('slow');
         });
+        var session = "{{session('visited_at')}}" ;
+
+        var elpsedTime = Math.floor((new Date() - new Date(session)) / 1000) ;
+        console.log(session);
     })
 </script>
 </body>
