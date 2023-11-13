@@ -74,7 +74,7 @@
                     </td>
                     <td>
                         <button class="btn btn-danger delete" data-id="{{$carItem->car_id}}">Delete</button>
-                        <a href=""
+                        <a href="{{url('admin/cars/'.$carItem->car_id.'/edit')}}"
                             class="btn btn-primary"
                         >
                             View

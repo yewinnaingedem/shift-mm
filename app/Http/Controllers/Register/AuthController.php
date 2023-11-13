@@ -62,12 +62,9 @@ class AuthController extends Controller
 
     public function authProfile($id , Request $request) {
         $name = User::where('id', $id)->first();
-        // $name = $request->ip() ;
         $name = "66.102.0.0";
-        // $name = $_SERVER['REMOTE_ADDR'] ;
         $location = Location::get($name);
 
-        // dd($location);
         $data = [] ;
         $data['ip'] = $location->ip ;
         $data['countryName'] = $location->countryName ;

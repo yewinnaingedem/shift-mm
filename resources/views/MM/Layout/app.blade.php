@@ -50,10 +50,7 @@
         @section('search-1') 
             @include('MM.Layout.search_1')
         @show 
-        @section('content')
-            @include('MM.Layout.content')
-        @show 
-
+        @yield('content')
         @section('footer')
             @include('MM.Layout.footer')
         @show 

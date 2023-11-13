@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Car\Car ;
 use App\Models\Car\Sale ;
+use App\Models\CarImage ;
+use App\Models\Grade ;
+use App\Models\Transmission ;
 
 class CarItemController extends Controller
 {
@@ -31,7 +34,7 @@ class CarItemController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -55,7 +58,15 @@ class CarItemController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $showData = Car::select()
+                    ->leftJoin('owner_books','cars.owner_book_id','owner_books.id')
+                    ->leftJoin('car_images','cars.car_image_id','car_images.id')
+                    ->leftJoin('items','cars.item_id','items.id')
+                    ->where('cars.id',$id)
+                    ->first();
+        $showData['grades'] = Grade::get();
+        $showData['transmissions'] = Transmission::get();
+        return view('Admin.POS.Car.CarItem.Show',compact('showData'));
     }
 
     /**

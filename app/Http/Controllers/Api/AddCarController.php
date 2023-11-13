@@ -18,6 +18,7 @@ class AddCarController extends Controller
         $data2 = $request['field'][1];
         $data3 = $request['field'][2];
         $model_id = $request['model_Id'];
+        $year = $request['year'];
         $items = [] ;
         $items['warranty'] = $data2['warranty'] ;
         $items['steering_coner'] = $data2['steering'] ;
@@ -34,6 +35,8 @@ class AddCarController extends Controller
         $carOwners['color'] = $data1['exterior_color'];
         $carOwners['license_state'] = $data2['license_state'];
         $carOwners['model_id'] = $model_id ;
+        $carOwners['year'] = $year ;
+    
         $carOwners['license_plate'] = $data1['license'];
         $carOwners['pass_owner'] = $data2['pass_owner'] ;
         $carOwners['transmission'] = $data1['transmission'];
@@ -44,6 +47,7 @@ class AddCarController extends Controller
         $cars = [];
         $cars['item_id'] = $itemId ;
         $cars['owner_book_id'] = $carOwnerId ;
+        $cars['year'] = $year ;
         session(['car_datas' => $cars]);
         $response = [
             'success' => true ,

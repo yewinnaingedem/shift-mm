@@ -1,4 +1,4 @@
-@include('MM.Layout.app')
+@extends('MM.Layout.app')
 
 @section('title' , 'Shop MM ') 
 @section('style')
@@ -12,8 +12,8 @@
     @parent 
 @endsection 
 
-@section('content')
-    @parent 
+@section('content') 
+    @include('MM.Layout.content')
 @endsection 
 
 @section('footer')
