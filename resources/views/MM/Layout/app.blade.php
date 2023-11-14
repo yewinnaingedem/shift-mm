@@ -55,12 +55,6 @@
             @include('MM.Layout.footer')
         @show 
     </div>
-    <div class="loader">
-
-    </div>
-    
-    
-
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -71,22 +65,7 @@
         $(document).on(()=>{
             $('#input_search').focus();
         });
-        $(document).on('click','#register' , ()=> {
-            $("#register_down").toggle('active_hidden');
-        });
-        $(window).scroll(()=> {
-            $('#register_down').fadeOut();
-        });
-
-        $(window).on('load',()=> {
-            $('.loader').fadeOut('slow');
-            $('loader-content').show('slow');
-        });
-        var session = "{{session('visited_at')}}" ;
-
-        var elpsedTime = Math.floor((new Date() - new Date(session)) / 1000) ;
-        console.log(session);
-    })
+    });
 </script>
 </body>
 </html>

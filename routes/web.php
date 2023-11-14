@@ -46,9 +46,9 @@ Route::prefix('mm_cars')->group(function () {
     Route::post('/register',[AuthController::class , 'register']);
     Route::post('change_profile/{id}' , [AuthController::class , 'changeProfile']);
     // Car Details
-    Route::get('{carname}/{id}' , [DetailsController::class , 'index'] );
+    Route::get('car/{details}' , [DetailsController::class , 'index'] );
     // financing 
-    Route::get('financing' , [FinancingController::class , 'index'] );
+    Route::get('financing' , [FinancingController::class , 'index']);
 });
 
 Route::prefix('admin')->group(function (){

@@ -39,7 +39,7 @@ class AddCarController extends Controller
     
         $carOwners['license_plate'] = $data1['license'];
         $carOwners['pass_owner'] = $data2['pass_owner'] ;
-        $carOwners['transmission'] = $data1['transmission'];
+        $carOwners['transmission_type'] = $data1['transmission'];
         $carOwners['engine_exception'] = $data3['engine_exception'] ;
         $carOwners['license_exception'] = $data3['license_exception'] ;
         $carOwners['exception'] = $data3['exception'];

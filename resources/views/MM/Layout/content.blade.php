@@ -3,44 +3,46 @@
         <!-- cart1 -->
         @foreach ($datas as $data)
             <div class="rounded-xl shadow-md hover:shadow-xl bg-white flex flex-col">
-                <a href=""></a>
+                
                 <!-- header -->
                 <div class="for-cars-slide">
                     <div class="w-full overflow-hidden  rounded-xl  " >
                         <!-- Img Slide-->
                         <div id="indicators-carousel" class="relative w-full" data-carousel="static">
                             <!-- Carousel wrapper -->
-                            <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
-                                <!-- Item 1 -->
-                                <div class="hidden duration-700 ease-in-out" data-carousel-item="active">
-                                    <img src="{{asset('storage/'.$data->img1)}}" class="absolute block w-full -translate-x-1/2 h-full object-cover -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                            <a href="{{url('mm_cars/car/finss')}}">
+                                <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
+                                    <!-- Item 1 -->
+                                    <div class="hidden duration-700 ease-in-out" data-carousel-item="active">
+                                        <img src="{{asset('storage/'.$data->img1)}}" class="absolute block w-full -translate-x-1/2 h-full object-cover -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                                    </div>
+                                    <!-- Item 2 -->
+                                    <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                                        <img src="{{asset('storage/'.$data->img2)}}" class="absolute block w-full h-full object-cover -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                                    </div> 
+                                    <!-- Item 3 -->
+                                    <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                                        <img src="{{asset('storage/'.$data->img3)}}" class="absolute block w-full  h-full object-cover -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                                    </div>
+                                    <!-- Item 4 -->
+                                    <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                                        <img src="{{asset('storage/'.$data->img4)}}" class="absolute block w-full h-full object-cover -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                                    </div>
+                                    <!-- Item 5 -->
+                                    <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                                        <img src="{{asset('storage/'.$data->img5)}}" class="absolute block w-full h-full object-cover -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                                    </div>
+                                    <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                                        <img src="{{asset('storage/'.$data->img6)}}" class="absolute block w-full h-full object-cover -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                                    </div>
+                                    <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                                        <img src="{{asset('storage/'.$data->img7)}}" class="absolute block w-full h-full object-cover -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                                    </div>
+                                    <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                                        <img src="{{asset('storage/'.$data->img8)}}" class="absolute block w-full h-full object-cover -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                                    </div>
                                 </div>
-                                <!-- Item 2 -->
-                                <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                                    <img src="{{asset('storage/'.$data->img2)}}" class="absolute block w-full h-full object-cover -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-                                </div> 
-                                <!-- Item 3 -->
-                                <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                                    <img src="{{asset('storage/'.$data->img3)}}" class="absolute block w-full  h-full object-cover -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-                                </div>
-                                <!-- Item 4 -->
-                                <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                                    <img src="{{asset('storage/'.$data->img4)}}" class="absolute block w-full h-full object-cover -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-                                </div>
-                                <!-- Item 5 -->
-                                <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                                    <img src="{{asset('storage/'.$data->img5)}}" class="absolute block w-full h-full object-cover -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-                                </div>
-                                <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                                    <img src="{{asset('storage/'.$data->img6)}}" class="absolute block w-full h-full object-cover -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-                                </div>
-                                <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                                    <img src="{{asset('storage/'.$data->img7)}}" class="absolute block w-full h-full object-cover -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-                                </div>
-                                <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                                    <img src="{{asset('storage/'.$data->img8)}}" class="absolute block w-full h-full object-cover -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-                                </div>
-                            </div>
+                            </a>
                             <!-- Slider indicators -->
                             <div class="absolute z-30 flex space-x-3 -translate-x-1/2 bottom-5 left-1/2">
                                 <button type="button" class="w-3 h-3 rounded-full" aria-current="true" aria-label="Slide 1" data-carousel-slide-to="0"></button>
@@ -75,18 +77,32 @@
                 </div>
                 <!-- body -->
                 <div class="grow flex flex-col content-between justify-between font-normal pt-3 px-3 pb-4 ">
-                    <div class="flex h-20 justify-between align-baseline gap-x-4  border-b-2 border-neutral-300">
+                    <div class="flex h-[110px] pb-1 justify-between align-baseline font-serif gap-x-4  border-b-2 border-neutral-300">
                         <a href="">
-                            <div class="capitalize font-sans text-gray-dark text-[14px]">{{$data->year}} Jeep for Sale</div>
-                            <div class="text-gray-light text-[13px]" style="color:rgb(101 , 96 , 96 , )">{{$data->kilo_meter . ' kilo'}}</div>
+                            <div class="capitalize font-sans text-gray-dark text-[14px] font-bold"><span>{{$data->year}}</span> {{$data->model_name}} for Sale </div>
+                            <div class="text-gray-light text-[13px] flex justify-between items-center" style="color:rgb(101 , 96 , 96 , )" >
+                                <div class="">Kilo:</div>
+                                <div id="kilo">{{$data->kilo_meter}}</div>
+                            </div>
+                            <div class='chat-notification-message flex justify-between items-center ' > 
+                                <div class="">Num : </div>
+                                <div>{{$data->license_plate}}</div>
+                            </div>
+                            <div class="text-gray-light text-[13px] flex justify-between items-center "> 
+                                <div>Vin:</div>
+                                <div>{{$data->vin}}</div>
+                            </div>
                         </a>
                         <div>
-                            <a href="" class="text-right shrink-0 ">
-                                <div class="text-gray-darkest font-dispaly font-bold text-xl"> {{$data->price }}</div>
-                                <!-- <div class="text-gray-light line-through font-inter text-sm">$21000</div> -->
+                            <a href="" class="text-right shrink-0 font-sans">
+                                <div class="text-gray-darkest font-dispaly font-bold font-sans text-xl price"> {{$data->price }}</div>
+                                @php 
+                                    $show = $data->grade == 0 ? TRUE : FALSE ;
+                                @endphp 
+                                <div class=" font-extrabold {{$show ? 'text-red-500' : 'text-gray-500'}}">{{$show ? " " : $data->grade}}</div>
+                                <div class="font-bold">{{$data->transmission_type}}</div>
+                                <div class="font-extrabold font-mono">{{$data->license_state}}</div>
                             </a>
-                            <div>
-                            </div>
                         </div>
                     </div>
                     <div class="border-t-1 flex justify-around min-h-[2.75rem]">
@@ -96,7 +112,7 @@
                             </div>
                             <div class="inline-block align-top ml-2 ">
                                 <div class="font-bold">Shipping Available</div>
-                                <div>Porland Or </div>
+                                <div>Mingalar Car Sale Center </div>
                             </div>
                         </a>
                     </div>
