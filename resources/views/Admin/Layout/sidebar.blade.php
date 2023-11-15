@@ -21,10 +21,6 @@
                     <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                     Histor Of Saled Car 
                 </a>
-                <!-- <a class="nav-link collapsed" href="{{url('admin/employees')}}" >
-                    <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                    Employee 
-                </a> -->
                 <!-- Car info -->
                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#employees" aria-expanded="false" aria-controls="employees">
                     <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
@@ -48,6 +44,7 @@
                         <a class="nav-link" href="{{url('admin/car_models')}}"> Car Models </a>
                         <a class="nav-link" href="{{url('admin/grade')}}">Grade</a>
                         <a class="nav-link" href="{{url('admin/function')}}">Function </a>
+                        <a class="nav-link" href="{{url('admin/default-function')}}">Default Function </a>
                     </nav>
                 </div>
                 <!-- EngineController -->

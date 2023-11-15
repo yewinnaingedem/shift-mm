@@ -11,8 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('owner_books', function (Blueprint $table) {
-            $table->string('year')->after('license_plate');
+        Schema::create('default_functions', function (Blueprint $table) {
+            $table->id();
+            $table->string('function_name');
+            $table->timestamps();
         });
     }
 
@@ -21,8 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('owner_books', function (Blueprint $table) {
-            $table->dropColumn('year');
-        });
+        Schema::dropIfExists('default_functions');
     }
 };

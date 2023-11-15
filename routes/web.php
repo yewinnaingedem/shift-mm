@@ -27,6 +27,7 @@ use App\Http\Controllers\Car\CarItemController ;
 use App\Http\Controllers\Car\CarsellController ;
 use App\Http\Controllers\Car\CarImageItemController ;
 use App\Http\Controllers\Car\SoldOutController ;
+use App\Http\Controllers\Car\DefaultFunctionController;
 
 
 
@@ -81,6 +82,7 @@ Route::prefix('admin')->group(function (){
     Route::resource('employees', EmployeeController::class);
     Route::resource('positions' , PositionController::class);
     Route::resource('saled' , SaledController::class);
+    Route::resource('default-function' , DefaultFunctionController::class );
 });
 
 ?> 

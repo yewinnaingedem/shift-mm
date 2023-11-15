@@ -14,11 +14,12 @@ class MMCarsController extends Controller
         return $num ;
     }
     public function index() {
-        $datas = Sale::select()
+        $datas = Sale::select('sales.id as sale_id' ,'sales.price', 'car_models.*' , 'brands.*','owner_books.*','transmission_types.*','grades.*','items.*','car_images.*','cars.*')
                 ->leftJoin('cars','sales.car_id','cars.id')
                 ->leftJoin('car_images','cars.car_image_id','car_images.id')
                 ->leftJoin('owner_books','cars.owner_book_id','owner_books.id')
                 ->leftJoin('car_models', 'owner_books.model_id' , 'car_models.id')
+                ->leftJoin('brands','car_models.brand_id','brands.id')
                 ->leftJoin('transmission_types','owner_books.transmission_type','transmission_types.id')
                 ->leftJoin('items','cars.item_id','items.id')
                 ->leftJoin('grades','items.grade','grades.id')

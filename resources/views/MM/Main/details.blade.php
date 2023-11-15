@@ -49,15 +49,15 @@
     <main class="px-0 m-auto bg-white sm:px-4">
         <div class="max-w-screen-2xl mx-auto mb-4  border-b-0  border-gray-400">
             <nav  class="mx-3 text-gray-900 pt-5 text-sm font-sans block">
-                <a href="">Audi </a>
+                <a href="">{{$sale->model_name}} </a>
                 
-                <a href="">SQ5</a>
+                <a href="">{{$sale->grade_main}}</a>
             </nav>
             <div class="block pl-8 pt-2 sticky top-[3.70rem] mt-1.5  z-[9996] bg-white">
                 <div class="flex justify-between ">
                     <div>
                         <div class="flex items-center w-100  ">
-                            <h1 class="text-2xl font-semibold font- ">2018 Audi SQ5 Prestige</h1>
+                            <h1 class="text-2xl font-semibold font- ">{{$sale->year}} {{$sale->model_name}} {{$sale->grade_main}}</h1>
                             <div class="bg-white ml-2 text-neutral-500 border items-center border-secondary flex jsutify-center p-2 text-sm font-semibold rounded-lg capitalize ">
                                 <i class="fa-solid text-black fa-certificate mr-1.5"></i>
                                 <div class="ml-2">Shift Cartificated </div>
@@ -68,19 +68,18 @@
                             
                         </div>
                         <div class="flex items-center w-100 mb-4 text-xs ">
-                            <div class="font-bold text-xs text-gray-dark"> 77 K Miles</div>
+                            <div class="font-bold text-xs text-gray-dark"> {{$sale->kilo_meter . ''.'Kilo'}}  </div>
                         </div>
                     </div>
                     <div class="flex items-center mb-2 ">
                         <div>
                             <div class='flex justify-end '>
                                 <h2 class="text-base font-bold ">
-                                    <s class="text-base font-normal ">$32950</s>
-                                    <span class="text-2xl">$30950</span>
+                                    <span class="text-2xl price">{{$sale->price}} </span>
                                 </h2>
                             </div>
                             <div class="flex justify-end text-xs text-gray-500">
-                                <span>Est . $420/month</span>
+                                <span class="emi_month"></span>
                             </div>
                         </div>
                         <div>
@@ -95,28 +94,39 @@
         <!-- image -->
         <div id="indicators-carousel" style="width:80%;" class="relative hover:shadow-md mx-auto mb-4" data-carousel="static">
             <!-- Carousel wrapper -->
-            <div style="height: 500px; " class="relative m-auto overflow-hidden rounded-lg ">
-                <!-- Item 1 -->
-                <div class="hidden duration-700 ease-in-out" data-carousel-item="active">
-                    <img src="{{asset('storage/img/dog-log-in.jpg')}}" class="absolute block w-full h-auto -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+            <a href="{{url('')}}">
+                <div style="height: 500px; " class="relative m-auto overflow-hidden rounded-lg ">
+                    <!-- Item 1 -->
+                    <div class="hidden duration-700 ease-in-out" data-carousel-item="active">
+                        <img src="{{asset('storage/'.$sale->img1)}}" class="absolute block w-full h-auto -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                    </div>
+                    <!-- Item 2 -->
+                    <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                        <img src="{{asset('storage/'.$sale->img2)}}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                    </div>
+                    <!-- Item 3 -->
+                    <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                        <img src="{{asset('storage/'.$sale->img3)}}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                    </div>
+                    <!-- Item 4 -->
+                    <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                        <img src="{{asset('storage/'.$sale->img4)}}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                    </div>
+                    <!-- Item 5 -->
+                    <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                        <img src="{{asset('storage/'.$sale->img5)}}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                    </div>
+                    <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                        <img src="{{asset('storage/'.$sale->img6)}}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                    </div>
+                    <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                        <img src="{{asset('storage/'.$sale->img7)}}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                    </div>
+                    <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                        <img src="{{asset('storage/'.$sale->img7)}}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                    </div>
                 </div>
-                <!-- Item 2 -->
-                <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                    <img src="{{asset('storage/img/zqfDT1BcYXoBV2qZdsECSvoOzYh5AdqE9tziLjfI.jpg')}}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-                </div>
-                <!-- Item 3 -->
-                <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                    <img src="{{asset('storage/img/ZlJ3ylCClUGWdEeDnKfKN5aKiCABRsqXL1grVgbz.jpg')}}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-                </div>
-                <!-- Item 4 -->
-                <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                    <img src="{{asset('storage/img/user_profile.jpg')}}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-                </div>
-                <!-- Item 5 -->
-                <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                    <img src="{{asset('storage/img/oT4JROIop9PxeFVvjgSkSkl8JE71ZHqUvxAFa0cK.jpg')}}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-                </div>
-            </div>
+            </a>
             <!-- Slider indicators -->
             <div class="absolute z-30 flex space-x-3 -translate-x-1/2 bottom-5 left-1/2">
                 <button type="button" class="w-3 h-3 rounded-full" aria-current="true" aria-label="Slide 1" data-carousel-slide-to="0"></button>
@@ -124,6 +134,9 @@
                 <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="2"></button>
                 <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 4" data-carousel-slide-to="3"></button>
                 <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 5" data-carousel-slide-to="4"></button>
+                <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 5" data-carousel-slide-to="5"></button>
+                <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 5" data-carousel-slide-to="6"></button>
+                <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 5" data-carousel-slide-to="7"></button>
             </div>
             <!-- Slider controls -->
             <button type="button" class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
@@ -150,28 +163,24 @@
                         <h2  class="text-2xl font-bold mb-4 ">Details At a Glance</h2>
                         <div class="grid grid-cols-3 grid-flow-row items-center">
                             <div class="p-cus ">
-                                <div class="w-100 text-neutral-80 font-light uppercase ">Mpg</div>
-                                <div class="w-100 font-bold">19 City / 24 Hry</div>
-                            </div>
-                            <div class="p-cus ">
                                 <div class="w-100 text-neutral-80 font-light uppercase ">Transmission</div>
-                                <div class="w-100 font-bold">Automatic</div>
+                                <div class="w-100 font-bold">{{$sale->transmission_type}}</div>
                             </div>
                             <div class="p-cus ">
                                 <div class="w-100 text-neutral-80 font-light uppercase ">Drive Type</div>
                                 <div class="w-100 font-bold">All wheel drive</div>
                             </div>
                             <div class="p-cus ">
-                                <div class="w-100 text-neutral-80 font-light uppercase ">Engine Type</div>
-                                <div class="w-100 font-bold">6-cylinder V</div>
+                                <div class="w-100 text-neutral-80 font-light uppercase ">Number Of Seats</div>
+                                <div class="w-100 font-bold">{{$sale->number_seats}}</div>
                             </div>
                             <div class="p-cus ">
-                                <div class="w-100 text-neutral-80 font-light uppercase ">Horsepower</div>
-                                <div class="w-100 font-bold">354 HP @ 5400 RPM</div>
+                                <div class="w-100 text-neutral-80 font-light uppercase ">Please Of Origin</div>
+                                <div class="w-100 font-bold">{{$sale->place_of_orgin}}</div>
                             </div>
                             <div class="p-cus ">
                                 <div class="w-100 text-neutral font-light upparecase">Interior</div>
-                                <div class="w-100 font-bold">Black</div>
+                                <div class="w-100 font-bold">{{$sale->interior_color}}</div>
                             </div>
                             <div class="p-cus ">
                                 <div class="w-100 text-neutral-80 font-light upparecase">Fuel Type</div>
@@ -179,11 +188,11 @@
                             </div> 
                             <div class="p-cus">
                                 <div class="w-100 text-neutral-80 font-light upparecase">VIN #</div>
-                                <div class="w-100 font-bold">WA1C4AFY1J2097150</div>
+                                <div class="w-100 font-bold">{{$sale->vin}}</div>
                             </div> 
                             <div class="p-cus">
                                 <div class="w-100 text-neutral-80 font-light uppercase ">Exterior</div>
-                                <div class="w-100 font-bold">Daytona Gray Pearl Effect</div>
+                                <div class="w-100 font-bold">{{$sale->color}}</div>
                             </div>
                         </div>
                         <div class="flex items-center mt-8">
@@ -283,7 +292,7 @@
                         <div class="grid grid-cols-1 text-base">
                             <div class="flex flex-row">
                                 <div class="w-2/3 ">Pass Owner</div>
-                                <div class="w-1/3  font-semibold">2</div>
+                                <div class="w-1/3  font-semibold">{{$sale->pass_owner}}</div>
                             </div>
                             <div class="flex flex-row">
                                 <div class="w-2/3 ">Reported accidents</div>
@@ -291,7 +300,7 @@
                             </div>
                             <div class="flex flex-row">
                                 <div class="w-2/3 ">Manufacturer's warranty</div>
-                                <div class="w-1/3  font-semibold">Over</div>
+                                <div class="w-1/3  font-semibold">{{$sale->warranty}}</div>
                             </div>
                         </div>
                         <div class="mt-5 mb-3 ">
@@ -303,7 +312,7 @@
             <div class="col-span-1 my-[135px] mx-2 border border-gray-500 hover:shadow-full rounded-xl flex justify-between flex-col mt-7 ">
                 <div class="w-100  p-6 h-[65%]">
                     <div class="flex justify-between w-full ">
-                        <div class="text-primary-60 font-bold text-neutral-90 text-3xl font-display"> $30,950</div>
+                        <div class="text-primary-60 font-bold text-neutral-90 text-3xl font-display price"> {{$sale->price}} </div>
                         <div>
                             <div class="w-100 ">Est $145/month</div>
                             <div class="text-xs text-neutral-50 font-inter font-normal mt-1"><a href="" class="text-gray-600">Customize my payment</a></div>
@@ -417,7 +426,7 @@
                         <div class="mt-4" id='emi'>
                             <div class="flex justify-between items-center py-1 ">
                                 <div class="font-semibold text-[17px]">Vehicle price</div>
-                                <div class="font-bold text-[18px]" data-id="{{$total}}" id="formatnumber1"></div>
+                                <div class="font-bold text-[18px]" data-id="{{$sale->price}}" id="formatnumber1"></div>
                             </div>
                             <div class="flex justify-between items-center py-1 dpAfter" >
                                 <div class="font-semibold text-[17px]">Down payment <span class="font-bold dpPresent"></span> </div>

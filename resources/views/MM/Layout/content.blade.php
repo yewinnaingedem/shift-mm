@@ -10,7 +10,7 @@
                         <!-- Img Slide-->
                         <div id="indicators-carousel" class="relative w-full" data-carousel="static">
                             <!-- Carousel wrapper -->
-                            <a href="{{url('mm_cars/car/finss')}}">
+                            <a href="{{url('mm_cars/car/'.$data->brand_name.'_'.$data->model_name.'_'.$data->year.'_'.'id'.'_'.$data->sale_id)}}">
                                 <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
                                     <!-- Item 1 -->
                                     <div class="hidden duration-700 ease-in-out" data-carousel-item="active">
