@@ -14,6 +14,13 @@ return new class extends Migration
         Schema::create('default_functions', function (Blueprint $table) {
             $table->id();
             $table->string('function_name');
+            $table->boolean('air_conditioning');
+            $table->boolean('power_steering');
+            $table->boolean('power_windows');
+            $table->boolean('abs_brakes');
+            $table->boolean('airbags');
+            $table->boolean('navigation_system');
+            $table->boolean('bluetooth_connectivity');
             $table->timestamps();
         });
     }

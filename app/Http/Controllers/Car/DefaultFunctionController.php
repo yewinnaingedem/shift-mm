@@ -71,14 +71,17 @@ class DefaultFunctionController extends Controller
     public function update(Request $request, string $id)
     {
         $valiatedData = $request->validate([
-            'function' => 'required'
+            'function' => 'required|unique:default_functions,id,' . $id 
         ]);
         $inputs = [] ;
         $inputs['function_name'] = $request['function'] ;
         $inputs['updated_at'] = Carbon::now(); 
 
         Default_function::where('id',$id)->update($inputs);
-        return response()->json('successfully');
+        $response  = [
+            'message' => " 1 row effected" ,
+        ];
+        return response()->json($response);
     }
 
     /**
@@ -86,6 +89,7 @@ class DefaultFunctionController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Default_Function::find($id)->delete();
+        return response()->json('You deleted it successfully');
     }
 }

@@ -296,7 +296,7 @@
                             </div>
                             <div class="flex flex-row">
                                 <div class="w-2/3 ">Reported accidents</div>
-                                <div class="w-1/3  font-semibold">0</div>
+                                <div class="w-1/3  font-semibold">none</div>
                             </div>
                             <div class="flex flex-row">
                                 <div class="w-2/3 ">Manufacturer's warranty</div>

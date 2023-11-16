@@ -97,9 +97,9 @@
                             <a href="" class="text-right shrink-0 font-sans">
                                 <div class="text-gray-darkest font-dispaly font-bold font-sans text-xl price"> {{$data->price }}</div>
                                 @php 
-                                    $show = $data->grade == 0 ? TRUE : FALSE ;
+                                    $show = $data->main_grade == 0 ? TRUE : FALSE ;
                                 @endphp 
-                                <div class=" font-extrabold {{$show ? 'text-red-500' : 'text-gray-500'}}">{{$show ? " " : $data->grade}}</div>
+                                <div class=" font-extrabold {{$show ? 'text-red-500' : 'text-gray-500'}}">{{$show ? " " : $data->main_grade}}</div>
                                 <div class="font-bold">{{$data->transmission_type}}</div>
                                 <div class="font-extrabold font-mono">{{$data->license_state}}</div>
                             </a>
