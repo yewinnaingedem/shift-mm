@@ -35,16 +35,27 @@ class DefaultFunctionController extends Controller
         $validation = Validator::make(
             $request->all() ,
             [
-                'function' => 'required' ,
+                'ac' => 'required' ,
+                'power_steering' => 'required' ,
+                'power_windows' => 'required' ,
+                'airbags' => 'required' ,
+                'navigation_system' => 'required' ,
+                'abs_brakes' => 'required' ,
             ]
         );
         if($validation->fails()) {
             return redirect('admin/default-function/create')->withErrors($validation)->withInput() ;
         }
         $inputs  = [] ;
-        $inputs['function_name'] = $request['function'] ;
+        $inputs['function_name'] = $request['function_name'] == "TRUE" ? true : false ;
+        $inputs['air_conditioning'] = $request['ac'] == "TRUE" ? true : false  ;
+        $inputs['power_steering'] = $request['power_steering'] == "TRUE" ? true : false ;
+        $inputs['power_windows'] = $request['power_windows'] == "TRUE" ? true : false ;
+        $inputs['abs_brakes'] = $request['abs_brakes'] == "TRUE" ? true : false ;
+        $inputs['airbags'] = $request['airbags'] == "TRUE" ? true : false ;
+        $inputs['navigation_system'] = $request['navigation_system'] == "TRUE" ? true : false ;
+        $inputs['bluetooth_connectivity'] = $request['bluetooth_connectivity'] == "TRUE" ? true : false ;
         $inputs['created_at'] = Carbon::now() ;
-
         Default_Function::insert($inputs) ;
         return redirect('admin/default-function')->with('message','You Creted the Default Function Successfully');
     }

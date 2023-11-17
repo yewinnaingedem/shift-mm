@@ -28,6 +28,7 @@ use App\Http\Controllers\Car\CarsellController ;
 use App\Http\Controllers\Car\CarImageItemController ;
 use App\Http\Controllers\Car\SoldOutController ;
 use App\Http\Controllers\Car\DefaultFunctionController;
+use App\Http\Controllers\Car\licenseStateController;
 
 
 
@@ -83,6 +84,7 @@ Route::prefix('admin')->group(function (){
     Route::resource('positions' , PositionController::class);
     Route::resource('saled' , SaledController::class);
     Route::resource('default-function' , DefaultFunctionController::class );
+    Route::resource('license-state' , licenseStateController::class);
 });
 
 ?> 

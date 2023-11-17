@@ -45,6 +45,7 @@
                         <a class="nav-link" href="{{url('admin/grade')}}">Grade</a>
                         <a class="nav-link" href="{{url('admin/function')}}">Function </a>
                         <a class="nav-link" href="{{url('admin/default-function')}}">Default Function </a>
+                        <a class="nav-link" href="{{url('admin/license-state')}}">License State </a>
                     </nav>
                 </div>
                 <!-- EngineController -->

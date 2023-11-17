@@ -13,15 +13,8 @@
         #editTd {
             position :relative ;
         }
-        .alert-info {
-            position: absolute;
-            top : 10px ;
-            right : 10px ;
-            border : 1px solid black ;
-            border-radius : 4px ;
-            background : #055160 ;
-            color : white ;
-            font-weight : bold ;
+        .main-color  {
+            color : #06CBA3 ;
         }
     </style>
 @endsection 
@@ -33,7 +26,7 @@
 @section('page-name' , 'Car Models')
 
 @section('content')
-    <div class="container-fluid mt-3">
+    <div class="container-fluid mt-3 pt-3">
         <div class="mb-3">
             <a href="{{url('admin/default-function/create')}}" class=" btn btn-primary">
                 <i class="fa-solid fa-plus">Add</i>
@@ -52,6 +45,13 @@
             <thead>
                 <tr>
                     <th>Function Name</th>
+                    <th>Air Conditioning</th>
+                    <th>Power_steering</th>
+                    <th>Power_windows</th>
+                    <th>Abs_brakes</th>
+                    <th>Airbags</th>
+                    <th>Navigation_system</th>
+                    <th>Bluetooth_connectivity</th>
                     <th>Created At</th>
                     <th>Updated AT</th>
                     <th>Action</th>
@@ -60,8 +60,78 @@
             <tbody>
                 @foreach($defaultFunctions as $defaultFunction)
                     <tr>
-                        <td class="editTd" style="position :relative ;" data-id="{{$defaultFunction->id}}"> {{$defaultFunction->function_name}}
-                            
+                        <td class="editTd" style="position :relative ;" data-id="{{$defaultFunction->id}}">
+                             {{$defaultFunction->function_name}}
+                        </td>
+                        @php
+                            $ac = $defaultFunction->air_conditioning == 0 ? FALSE  : TRUE  ;
+                        @endphp
+                        <td class="fw-bold text-center">
+                            @if($ac) 
+                                <i class="fa-solid fa-circle-check main-color"></i>
+                            @else 
+                                <i class="fa-solid fa-xmark text-danger"></i>
+                            @endif 
+                        </td>
+                        @php
+                            $pc = $defaultFunction->power_steering == 0 ? FALSE : TRUE ;
+                        @endphp 
+                        <td class="fw-bold text-center">
+                            @if($pc) 
+                                <i class="fa-solid fa-circle-check main-color"></i>
+                            @else 
+                                <i class="fa-solid fa-xmark text-danger"></i>
+                            @endif 
+                        </td>
+                        @php
+                            $pw = $defaultFunction->power_windows == 0 ? FALSE : TRUE ;
+                        @endphp 
+                        <td class="fw-bold text-center">
+                            @if($pw) 
+                                <i class="fa-solid fa-circle-check main-color"></i>
+                            @else 
+                                <i class="fa-solid fa-xmark text-danger"></i>
+                            @endif 
+                        </td>
+                        @php
+                            $pw = $defaultFunction->abs_brakes == 0 ? FALSE : TRUE ;
+                        @endphp 
+                        <td class="fw-bold text-center">
+                            @if($pw) 
+                                <i class="fa-solid fa-circle-check main-color"></i>
+                            @else 
+                                <i class="fa-solid fa-xmark text-danger"></i>
+                            @endif 
+                        </td>
+                        @php
+                            $pw = $defaultFunction->airbags == 0 ? FALSE : TRUE ;
+                        @endphp 
+                        <td class="fw-bold text-center">
+                            @if($pw) 
+                                <i class="fa-solid fa-circle-check main-color"></i>
+                            @else 
+                                <i class="fa-solid fa-xmark text-danger"></i>
+                            @endif 
+                        </td>
+                        @php
+                            $pw = $defaultFunction->navigation_system == 0 ? FALSE : TRUE ;
+                        @endphp 
+                        <td class="fw-bold text-center">
+                            @if($pw) 
+                                <i class="fa-solid fa-circle-check main-color"></i>
+                            @else 
+                                <i class="fa-solid fa-xmark text-danger"></i>
+                            @endif 
+                        </td>
+                        @php
+                            $pw = $defaultFunction->bluetooth_connectivity == 0 ? FALSE : TRUE ;
+                        @endphp 
+                        <td class="fw-bold text-center">
+                            @if($pw) 
+                                <i class="fa-solid fa-circle-check main-color"></i>
+                            @else 
+                                <i class="fa-solid fa-xmark text-danger"></i>
+                            @endif 
                         </td>
                         <td>{{ $defaultFunction->created_at }}
                             
@@ -75,9 +145,16 @@
             </tbody>
             <tfoot>
                 <tr>
-                    <th>Function</th>
-                    <th>Creted At</th>
-                    <th>Updated At</th>
+                    <th>Function Name</th>
+                    <th>Air Conditioning</th>
+                    <th>Power_steering</th>
+                    <th>Power_windows</th>
+                    <th>Abs_brakes</th>
+                    <th>Airbags</th>
+                    <th>Navigation_system</th>
+                    <th>Bluetooth_connectivity</th>
+                    <th>Created At</th>
+                    <th>Updated AT</th>
                     <th>Action</th>
                 </tr>
             </tfoot>
@@ -131,49 +208,49 @@
             ));
 
             // Use event delegation to handle dynamically added elements with the class '.editTd'
-            $(document).on('dblclick', '.editTd', function (e) {
-                var textOri = $(this).text();
-                var mainText = $(e.currentTarget);
-                var id = mainText.data('id');
-                var textareaId = 'editField_' + id ;
-                var alertInfo = $('.alert-info');
-                alertInfo.html('');
-                mainText.html('<textarea id="' + textareaId + '" rows="1">' + textOri + '</textarea>');
-                $('#' + textareaId).focus();
-                $('#' + textareaId).blur(function () {
-                    var newTest = $(this).val();
-                    if(newTest !== '') {
-                        $.ajax({
-                            type: "PUT",
-                            url: '/admin/default-function/' + id,
-                            data: {
-                                '_token': "{{csrf_token()}}",
-                                "function": newTest,
-                            },
-                            success: function (response) {
-                                var infoAlert = `<div class="alert-info"> ${response.message} </div>`;
-                                mainText.html(`${newTest} ${infoAlert}`  );
-                                setTimeout(function () {
-                                    mainText.find('.alert-info').fadeOut('slow', function () {
-                                        $(this).remove();
-                                    });
-                                }, 3000);
-                            },
-                            error: function (error) {
-                                alert(error.message);
-                            }
-                        });
-                    }else {
-                        mainText.html(`${textOri}`  );
-                    }
-                });
+            // $(document).on('dblclick', '.editTd', function (e) {
+            //     var textOri = $(this).text();
+            //     var mainText = $(e.currentTarget);
+            //     var id = mainText.data('id');
+            //     var textareaId = 'editField_' + id ;
+            //     var alertInfo = $('.alert-info');
+            //     alertInfo.html('');
+            //     mainText.html('<textarea id="' + textareaId + '" rows="1">' + textOri + '</textarea>');
+            //     $('#' + textareaId).focus();
+            //     $('#' + textareaId).blur(function () {
+            //         var newTest = $(this).val();
+            //         if(newTest !== '') {
+            //             $.ajax({
+            //                 type: "PUT",
+            //                 url: '/admin/default-function/' + id,
+            //                 data: {
+            //                     '_token': "{{csrf_token()}}",
+            //                     "function": newTest,
+            //                 },
+            //                 success: function (response) {
+            //                     var infoAlert = `<div class="alert-info"> ${response.message} </div>`;
+            //                     mainText.html(`${newTest} ${infoAlert}`  );
+            //                     setTimeout(function () {
+            //                         mainText.find('.alert-info').fadeOut('slow', function () {
+            //                             $(this).remove();
+            //                         });
+            //                     }, 3000);
+            //                 },
+            //                 error: function (error) {
+            //                     alert(error.message);
+            //                 }
+            //             });
+            //         }else {
+            //             mainText.html(`${textOri}`  );
+            //         }
+            //     });
 
-                $('#' + textareaId).keypress(function (e) {
-                    if (e.which === 13) {
-                        $(this).blur();
-                    }
-                });
-            });
+                // $('#' + textareaId).keypress(function (e) {
+                //     if (e.which === 13) {
+                //         $(this).blur();
+                //     }
+                // });
+            // });
 
             // Example of dynamically adding an element with the class '.editTd'
             // This could be done inside an AJAX success callback or some other dynamic addition scenario

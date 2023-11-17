@@ -29,10 +29,15 @@
                 </div>
             </div>
         </div>
-        <div class="mb-3" v-if="arrayData['grades'] !== '0'">
+        <div v-if="arrayData['grades'].length > 0 && arrayData['grades'][0].grade == 0">
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>Mingalar Car Sale Center !</strong> We detectived that doesn't have a grade 
+            </div>
+        </div>
+        <div class="mb-3" v-else>
             <label for="form-label mb-3">Grade </label>
-            <select class="form-select"  v-model="data.grade" aria-label="Default select example">
-                <option :value="grade.id"  v-for="grade in arrayData['grades']" :key="grade.id" >
+            <select class="form-select"  v-model="data.grade" >
+                <option :value="grade.id"   v-for="grade in arrayData['grades']" :key="grade.id" >
                     {{ grade.grade }}
                 </option>
             </select>
@@ -45,9 +50,6 @@
                     {{ transmission_type.transmission_type }}
                 </option>
             </select>
-        </div>
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            <strong>Mingalar Car Sale Center </strong> We dected that doesn't have a grade 
         </div>
         <div class="mb-3">
             <h5 class="fw-bold cap-5">Exterior color</h5>
@@ -188,5 +190,23 @@
                 }
             }
         },
+        computed : {
+            defaultGradeId () {
+                if(this.arrayData['grades'].length > 0) {
+                    return this.arrayData['grades'][0].id ;
+                }
+                return null ;
+            },
+            defaultTransmission() {
+                if(this.arrayData['transmissionTypes'].length > 0 ){
+                    return this.arrayData['transmissionTypes'][0].id ;
+                }
+                return null ;
+            }
+        },
+        mounted () {
+            this.data.grade = this.defaultGradeId ;
+            this.data.transmission = this.defaultTransmission ;
+        }
     }
 </script> 

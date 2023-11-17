@@ -8,7 +8,6 @@
         <div class="col-md-6">
             <label for="steering" class="form-label">Steering </label>
             <select v-model="data.steering" id="" class="form-select">
-                <option selected class="d-none" >Enter Steering</option>
                 <option :value="steering.id" :key="steering.id" v-for="steering in arrayData['steerings']">{{ steering.steering }}</option>
             </select>
         </div>
@@ -53,7 +52,12 @@ export default ({
         } ,
     },
     computed :  {
-        
+        defaultSteeringConer () {
+            if(this.arrayData['steerings'].length > 0) {
+                return this.arrayData['steerings'][0].id ;
+            }
+            return null ;
+        }
     },
     data () {
         return {
@@ -69,6 +73,9 @@ export default ({
             back_break : null ,
         }
     },
+    mounted () {
+        this.data.steering = this.defaultSteeringConer ;
+    }
     
 });
 </script>
