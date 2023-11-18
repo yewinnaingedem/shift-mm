@@ -3,7 +3,9 @@
     <div class="row  mt-3">
         <div class="col-md-6 mb-3">
             <label for="state" class="form-label">Lincense State</label>
-            <input type="text"  id="state" v-model="data.license_state" class="form-control" placeholder="Enter License State">
+            <select v-model="data.license_state"  class="form-select">
+                <option :value="license_state.id" :key="license_state.id" v-for="license_state in arrayData['license-states']">{{ license_state.state }}</option>
+            </select>
         </div>
         <div class="col-md-6">
             <label for="steering" class="form-label">Steering </label>
@@ -57,6 +59,12 @@ export default ({
                 return this.arrayData['steerings'][0].id ;
             }
             return null ;
+        },
+        defaultState () {
+            if(this.arrayData['license-states'].length > 0) {
+                return this.arrayData['license-states'][0].id ;
+            }
+            return null ;
         }
     },
     data () {
@@ -75,6 +83,7 @@ export default ({
     },
     mounted () {
         this.data.steering = this.defaultSteeringConer ;
+        this.data.license_state = this.defaultState ;
     }
     
 });

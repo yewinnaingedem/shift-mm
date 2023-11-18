@@ -13,25 +13,25 @@
 @section('page-name' , 'Car Models')
 
 @section('content')
-    <div class="container mt-3" >
+    <div class="container mt-3 pt-3" >
         <form action="{{url('admin/license-state')}}"  method="post">
             @csrf 
             <div class="mb-3">
-                <label for="function" class="form-label">License State</label>
-                <input type="text" class="form-control" value="{{old('state')}}" placeholder="Enter Car Model" name="state">
+                <label for="function" class="fw-bold form-label">License State</label>
+                <input type="text" class="form-control" value="{{old('state')}}" placeholder="Enter License State" name="state">
                 @if($errors->has('state'))
                     <p class="text-danger">{{$errors->first('state')}}</p>
                 @endif 
             </div>
             <div class="mb-3 row">
-                <div class="col-md-6">
-                    <button class="btn btn-primary">Sumbit</button>
+                <div class="col-md-6 ">
+                    <a href="{{url('admin/license-state')}}" class="btn btn-primary mb-3">
+                        <i class="fa-sharp fa-solid fa-backward"></i>
+                        <span>Back </span>
+                    </a>
                 </div>
                 <div class="col-md-6 text-end">
-                <a href="{{url('admin/license-state')}}" class="btn btn-primary mb-3">
-                    <i class="fa-sharp fa-solid fa-backward"></i>
-                    <span>Back </span>
-                </a>
+                    <button class="btn btn-primary">Sumbit</button>
                 </div>
             </div>
         </form>

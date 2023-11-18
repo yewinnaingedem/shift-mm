@@ -137,6 +137,8 @@
 </style>
     
 <script >
+import axios from 'axios';
+import $ from "jquery";
     
     export default {
         props :  {
@@ -164,21 +166,23 @@
             }
         },
         watch : {
-            checkedInput : {
-                handler (newValue) {
-                    console.log(newValue);
-                }
-            }, 
+            
         } ,
         methods : {
-            checkValidae  () {
-                if(this.data.license.length == this.maxCharacter) {
-                    this.isValide = true ;
-                    this.isInValide = false ;
-                }else {
-                    this.isValide = false ;
-                    this.isInValide = true ;
-                }
+            async checkValidae  () {
+                $.ajax({
+                    url : "/api/sarchQuery"  ,
+                    type : "POST" , 
+                    data : {
+                        'searchQuery' : "GG" ,
+                    },
+                    success : (response) => {
+                        console.log(response);
+                    },
+                    error : (error) => {
+                        console.log(error);
+                    }
+                })
             } ,
             toLocalString() {
                 let value = this.data.millage.replace(/\D/g, '') ;

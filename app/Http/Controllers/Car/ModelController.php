@@ -14,6 +14,7 @@ use App\Models\Brand ;
 use App\Models\Divertrim ;
 use App\Models\ExteriorColor ;
 use App\Models\Steering ;
+use App\Models\LicenseState ;
 
 class ModelController extends Controller
 {
@@ -44,6 +45,7 @@ class ModelController extends Controller
             $data['steerings'] = Steering::get();
             $data['transmissionTypes'] = TransmissionType::get();
             $data['id']  = $brandId ;
+            $data['license-states'] = LicenseState::get();
         return view('admin.cars.stepProgess',compact('data'));
     }
     public function leftJoin($id) {
@@ -53,5 +55,9 @@ class ModelController extends Controller
                         ->where('modals.id',$id)
                         ->first() ;
         return $data ;
+    }
+
+    public function searchQuery(Request $request) {
+        return response()->json("Hi");
     }
 }

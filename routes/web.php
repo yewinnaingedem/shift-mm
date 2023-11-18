@@ -65,6 +65,7 @@ Route::prefix('admin')->group(function (){
     Route::post('setup' , [AddCarController::class , 'index']);
     Route::resource('car_img' , CarImageItemController::class );
     Route::resource('car_models' , CarModelController::class) ;
+    
     Route::resource('grade'  , GradeController::class);
     Route::post('grade/function' , [GradeController::class , 'gradeFunction']);
     Route::resource('function' , FunctionController::class );
