@@ -101,7 +101,7 @@
                                 @endphp 
                                 <div class=" font-extrabold {{$show ? 'text-red-500' : 'text-gray-500'}}">{{$show ? " " : $data->main_grade}}</div>
                                 <div class="font-bold">{{$data->transmission_type}}</div>
-                                <div class="font-extrabold font-mono">{{$data->license_state}}</div>
+                                <div class="font-extrabold font-mono">{{$data->state}}</div>
                             </a>
                         </div>
                     </div>

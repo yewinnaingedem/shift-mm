@@ -14,6 +14,7 @@ use App\Models\Brand ;
 use App\Models\Divertrim ;
 use App\Models\ExteriorColor ;
 use App\Models\Steering ;
+use App\Models\Car\OwnerBook ;
 use App\Models\LicenseState ;
 
 class ModelController extends Controller
@@ -57,7 +58,16 @@ class ModelController extends Controller
         return $data ;
     }
 
+
     public function searchQuery(Request $request) {
-        return response()->json("Hi");
+        $query = $request->input('searchQuery');
+        $results = OwnerBook::where('license_plate',$query)->exists() ? true : false  ;
+        return response()->json([
+            'message' => $results ,
+        ]);
+        // $inputData = OwnerBook::pluck('license_plate')->implode(' '); // getting the data base data ;
+        // $count = substr_count($inputData , $query);
+
+        // return response()->json($count);
     }
 }

@@ -6,7 +6,8 @@
                 <div class="mb-3">
                     <div class="d-flex flex-column justify-content-center align-items-start ">
                         <label for="zip" class="form-label">license Plate </label>
-                        <input type="text" 
+                        <div class="w-100 position-relative">
+                            <input type="text" 
                             :maxLength = "maxCharacter"
                             v-model="data.license"
                             name="" id="zip" 
@@ -14,7 +15,12 @@
                             class="w-100 form-control mb-1 "
                             :class="{'is-valid' : isValide  , 'is-invalid' : isInValide}"
                             placeholder="Enter License Plate Number">
-                        <p v-show="data.zip" class="fs-8 text-danger capitalize">invaild zip code</p>
+                            <div class="position-absolute top-3 right-0" v-if="loading">
+                                <i class="fas fa-spinner fa-spin spinner-fw"></i>
+                            </div>
+                            <p class="text-danger m-0 fw-bold" v-else-if="showAlert">It is avaliable</p>
+                            <p class="text-danger m-0 fw-bold" v-else-if="showError">It is not avaliable</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -79,13 +85,23 @@
     </div>
 </template>
 <style scoped>
-
-
+.spinner-fw{
+    widows: 25px;
+    height: 25px;
+}
+.top-3 {
+    top : 5px ;
+}
+.right-0 {
+    right: 3px;
+}
 .mr-5 {
     margin-right: 5px;
 }
 
-
+.m-0 {
+    margin: 0;
+}
 
 .fs-8 {
     font-size: 12px;
@@ -163,6 +179,9 @@ import $ from "jquery";
                 maxMillage : 8 ,
                 isValide : false ,
                 isInValide : false ,
+                loading : false ,
+                showAlert : false ,
+                showError : false ,
             }
         },
         watch : {
@@ -170,19 +189,34 @@ import $ from "jquery";
         } ,
         methods : {
             async checkValidae  () {
-                $.ajax({
-                    url : "/api/sarchQuery"  ,
-                    type : "POST" , 
-                    data : {
-                        'searchQuery' : "GG" ,
-                    },
-                    success : (response) => {
-                        console.log(response);
-                    },
-                    error : (error) => {
-                        console.log(error);
-                    }
-                })
+                this.loading = true ;
+                this.showError = false ;
+                this.showAlert = false ;
+                if(this.data.license.length == 7 ){
+                        $.ajax({
+                        url : "/api/sarchQuery"  ,
+                        type : "POST" , 
+                        data : {
+                            'searchQuery' : this.data.license ,
+                        },
+                        success : (response) => {
+                            this.loading = false ;
+                            if(response.message) {
+                                this.showError = true ;
+                                this.showAlert = false ;
+                            }else {
+                                this.showAlert = true ;
+                            }
+                        },
+                        error : (error) => {
+                            console.log(error);
+                            }
+                        });
+                }
+                if(this.data.license.length == 0) {
+                    this.loading = false ;
+                }
+                
             } ,
             toLocalString() {
                 let value = this.data.millage.replace(/\D/g, '') ;
