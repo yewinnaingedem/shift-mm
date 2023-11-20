@@ -8,6 +8,7 @@ use App\Models\Car\Car ;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Car\Sale ;
 use App\Models\Car\Item ;
+use Carbon\Carbon ;
 
 class CarSellController extends Controller
 {
@@ -73,7 +74,7 @@ class CarSellController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        
     }
 
     /**
@@ -81,7 +82,25 @@ class CarSellController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validator = Validator::make(
+            $request->all() ,
+            [
+                'pirce' => 'required' ,
+            ]
+        );
+        if($validator->fails()){
+            return response()->json([
+                'errror' => $validator->errors()
+            ]);
+        }
+        $today = Carbon::today(); 
+        $inputs = [] ;
+        $inputs['price'] = $request['pirce'];
+        $inputs['updated_at'] = $today->format('Y-m-d');
+        Sale::where('car_id',$id)->update($inputs);
+        return response()->json([
+            'message' => true ,
+        ]);
     }
 
     /**

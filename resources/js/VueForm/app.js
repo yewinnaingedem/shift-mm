@@ -1,8 +1,8 @@
 import { createApp } from "vue";
-import Wrapper from './Component/Form/Wrapper.vue';
+import App from "./App.vue";
 const app = createApp({
     components : {
-        Wrapper ,
+        App ,
     }
 });
 

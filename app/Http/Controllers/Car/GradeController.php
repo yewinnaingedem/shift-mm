@@ -81,7 +81,7 @@ class GradeController extends Controller
         $aircons = Aircon::get();
         $sonars = Sonor::get();
         $motors = Motor::get();
-        return view('admin.POS.Grade.details' , compact('functions','motors' , 'id' ,'transmissions','bodyStyles','engines','keys' , 'divertrims','seats', 'sun_roofs','aircons' , 'sonars'));
+        return view('admin.POS.Grade.gradeForm' , compact('functions','motors' , 'id' ,'transmissions','bodyStyles','engines','keys' , 'divertrims','seats', 'sun_roofs','aircons' , 'sonars'));
     }
 
     /**

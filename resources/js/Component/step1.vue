@@ -9,8 +9,7 @@
                         <div class="w-100 position-relative">
                             <input type="text" 
                             :maxLength = "maxCharacter"
-                            v-model="data.license"
-                            name="" id="zip" 
+                            v-model="plate_number"
                             @input="checkValidae"
                             class="w-100 form-control mb-1 "
                             :class="{'is-valid' : isValide  , 'is-invalid' : isInValide}"
@@ -18,8 +17,8 @@
                             <div class="position-absolute top-3 right-0" v-if="loading">
                                 <i class="fas fa-spinner fa-spin spinner-fw"></i>
                             </div>
-                            <p class="text-danger m-0 fw-bold" v-else-if="showAlert">It is avaliable</p>
-                            <p class="text-danger m-0 fw-bold" v-else-if="showError">It is not avaliable</p>
+                            <p class="m-0 fw-bolder text-success" v-else-if="showAlert">It is avaliable</p>
+                            <p class="text-danger m-0 fw-bolder" v-else-if="showError">It is not avaliable</p>
                         </div>
                     </div>
                 </div>
@@ -182,6 +181,7 @@ import $ from "jquery";
                 loading : false ,
                 showAlert : false ,
                 showError : false ,
+                plate_number : null ,
             }
         },
         watch : {
@@ -191,13 +191,14 @@ import $ from "jquery";
             async checkValidae  () {
                 this.loading = true ;
                 this.showError = false ;
+                this.data.license = null ;
                 this.showAlert = false ;
-                if(this.data.license.length == 7 ){
+                if(this.plate_number.length == 7 ){
                         $.ajax({
                         url : "/api/sarchQuery"  ,
                         type : "POST" , 
                         data : {
-                            'searchQuery' : this.data.license ,
+                            'searchQuery' : this.plate_number ,
                         },
                         success : (response) => {
                             this.loading = false ;
@@ -206,6 +207,7 @@ import $ from "jquery";
                                 this.showAlert = false ;
                             }else {
                                 this.showAlert = true ;
+                                this.data.license = this.plate_number ;
                             }
                         },
                         error : (error) => {
@@ -213,7 +215,7 @@ import $ from "jquery";
                             }
                         });
                 }
-                if(this.data.license.length == 0) {
+                if(this.plate_number.length == 0) {
                     this.loading = false ;
                 }
                 
@@ -240,11 +242,12 @@ import $ from "jquery";
                     return this.arrayData['transmissionTypes'][0].id ;
                 }
                 return null ;
-            }
+            },
         },
         mounted () {
             this.data.grade = this.defaultGradeId ;
             this.data.transmission = this.defaultTransmission ;
+            
         }
     }
 </script> 

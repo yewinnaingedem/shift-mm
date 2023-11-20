@@ -52,8 +52,8 @@
                                 {{$sale->grade == '0' ? 'none' : $sale->grade }}
                             </div>
                         </td>
-                        <td>
-                            {{$sale->price}}
+                        <td  class=''>
+                            <div data-id="{{$sale->main_id}}" class="editTd">{{$sale->price}}</div>
                         </td>
                         <td class='text-center'>
                             <a href="{{url('admin/sold_out/'.$sale->main_id)}}" class="btn btn-primary">Sold Out</a>
@@ -77,6 +77,7 @@
             </tfoot>
         </table>
     </div>
+    
 @endsection 
 
 @section('footer')
@@ -123,7 +124,47 @@
                     });
                 }
             ));
-            
+            $(document).on('dblclick','.editTd',function (e) {
+                var row = $(e.currentTarget) ;
+                var getId = row.data('id');
+                var id = 'editedId'+ getId ;
+                var input = $(this).text();
+                var textarea = (value , id ) => {
+                    return `<textarea id="${id}" name="price" rows="2">${value}</textarea>`;              
+                } ;
+                row.html(`${textarea(input , id)}`);
+                $('#'+id).focus();
+                $('#'+id).blur(function () {
+                    var $value = $(this).val();
+                    if($value !== '') {
+                        $.ajax({
+                            type : "PUT" ,
+                            url : "/admin/car_sells/" + getId ,
+                            data : {
+                                '_token' : "{{csrf_token()}}" ,
+                                'pirce' : $value
+                            },
+                            success : (response) => {
+                                if(response.state_code == 304 ) {
+                                  return "Sorry" ;
+                                }
+                                return  row.html($value);
+                            },
+                            error : (error) => {
+                                console.log(error);
+                            }
+                        });
+                    }else {
+                        row.html('fuck');
+                    }
+                    
+                });
+                $('#' + id).keypress(function (e) {
+                    if (e.which === 13) {
+                        $(this).blur();
+                    }
+                });
+            });
         });
     </script>
 @endsection 
