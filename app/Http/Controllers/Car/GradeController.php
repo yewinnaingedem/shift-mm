@@ -89,7 +89,23 @@ class GradeController extends Controller
      */
     public function show(string $id)
     {
-        return view('admin.POS.Grade.gradeForm');
+        $datas = [] ;
+        $datas['functions'] = CarDetails::get();
+        $datas['transmissions'] = Transmission::get();
+        $datas['body_styles'] = BodyStyle::get(); 
+        $datas['engines'] =  Engine::select('engines.*' , 'cylinders.cylinder' , 'engine_types.type')
+                    ->leftJoin('cylinders','engines.Cylinder_id','cylinders.id')
+                    ->leftJoin('engine_types','engines.Fuel','engine_types.id')
+                    ->get();
+        $datas['seats'] = Seat::get();
+        $datas['keys']= Key::get();
+        $datas['divertrims'] = Divertrim::get();
+        $datas['sun_roofs'] = SunRoof::get();
+        $datas['aircons'] = Aircon::get();
+        $datas['sonars'] = Sonor::get();
+        $datas['motors'] = Motor::get();
+
+        return view('admin.POS.Grade.gradeForm',compact('datas'));
     }
 
     /**

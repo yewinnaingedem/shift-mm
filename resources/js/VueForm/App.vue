@@ -5,15 +5,31 @@
                 <li class="step" v-for="(step , index ) in steps" :key="step" :class="( index  == currentSteps ) ? 'step-active' : ' ' , (index < currentSteps) ? 'step-done' : ' ' ">
                     <div class="step-bubble"> {{ index }}</div>
                     <div class="step-line">
-                        <div class="line-fill"></div>
+                        <div class="line-fill">
+                            
+                        </div>
                     </div>
                 </li>
             </ul>
+            <div class='min-height-350'>
+                <component :is="steps[1]" :datas="datas" :stepsProgess="stepProgess[1]"></component>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <button class="btn btn-primary" v-on:click="nextStep">Next</button>
+                    </div>
+                    <div class="col-md-6 text-end">
+                        <button class="btn btn-primary " v-on:click="previousStep">Perivous Steps</button>
+                    </div>
+                </div>
+            </div>
         </div>
+        
+        
     </div>
     
-    <component :is="currentStepComponent"></component>
-    <button class="btn btn-primary" v-on:click="nextStep">Next</button>
+    
 </template>
 
 <script>
@@ -24,22 +40,24 @@
     export default {
         data () {
             return {
-                currentSteps : 1 ,
-                steps : ['Vue1', 'Vue2' , 'Vue3']
+                currentSteps : 1,
+                currentComponent : 0 ,
+                steps : ['Vue1', 'Vue2' , 'Vue3'] ,
+                stepProgess : [
+                    {
+                        transmission : null ,
+                        body_style : null ,
+                    },
+                    {
+                        divertrim : null ,
+                    }
+                ],
             }
         },
         components : {
             Vue1 ,
             Vue2, 
             Vue3
-        },  
-        computed : {
-            currentStepComponent () {
-                return this.steps[this.currentSteps -- ]
-            }
-        },
-        mounted : {
-            
         },  
         methods : {
             nextStep () {
@@ -52,7 +70,13 @@
                     this.currentSteps -- ;
                 }
             }
-        }
+        },
+        props : {
+            datas : {
+                type : Object ,
+                required : true ,
+            }
+        },
     }
 
 </script>
@@ -69,6 +93,9 @@
      .step-done .line-fill {
         width : 100% ;
      }
+     .h-96 {
+        height: 300px;
+     }
     .step {
         display: flex;
         flex-grow: 1; 
@@ -77,34 +104,45 @@
         position: relative;
         height : 60px ;
     }
+    .min-height-350 {
+        min-height   : 350px ;
+    }
     .step-bubble {
         width: 35px;
         height: 35px;
+        z-index: 100;
         border-radius: 50%;
-        background: tomato;
+        background: #4ade80;
         transition: all 0.3s ease;
         display: flex;
+        overflow: hidden;
         align-items: center;
         justify-content: center;
     }
     .step-line {
         width: 100%;
         height: 5px;
-        background-color: black;
+        background-color: #86efac;
         left: 0;
         position: absolute;
         transform: translateY(-50%);
         top: 50%;
     }
+    .step:nth-child(2) {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
     .step:last-child {
-        width: 60px;
+        width: 50px;
+        display: flex;
+        justify-content: end;
+        align-items: center;
     }
     .step-active .step-bubble ,
     .step-done .step-bubble {
-        width: 60px;
-        height: 60px;
+        width: 50px;
+        height: 50px;
     }
-    .step:last-child .step-line {
-        display: none;
-    }
+    
 </style>

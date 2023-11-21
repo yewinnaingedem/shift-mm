@@ -14,7 +14,7 @@
 
 @section('content')
     <div id="app">
-       <App></App>
+       <App :datas="{{json_encode($datas)}}"></App>
     </div>
 @endsection 
 

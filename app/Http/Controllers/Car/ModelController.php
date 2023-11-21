@@ -65,9 +65,6 @@ class ModelController extends Controller
         return response()->json([
             'message' => $results ,
         ]);
-        // $inputData = OwnerBook::pluck('license_plate')->implode(' '); // getting the data base data ;
-        // $count = substr_count($inputData , $query);
-
-        // return response()->json($count);
+        
     }
 }

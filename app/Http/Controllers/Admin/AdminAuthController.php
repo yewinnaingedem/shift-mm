@@ -53,21 +53,6 @@ class AdminAuthController extends Controller
                             ->where('items.id','=',$id)
                             ->first();
         return response()->json($data['car_infos']);
-        // $data['car_data'] = Modal::select('brands.brand_name','years.year','modals.modal_name')
-        //                 ->leftJoin('brands','modals.brand_id','brands.id')
-        //                 ->leftJoin('years','modals.year_id','years.id')
-        //                 ->where('modals.id','=',$id)
-        //                 ->first();
-        // $data['engines'] = Engine::get();
-        // $data['transmissions'] = Transmission::get() ;
-        // $data['exterior_colors'] = ExteriorColor::get();
-        // $data['body_styles'] = BodyStyle::get();
-        // $data['keys'] = Key::get();
-        // $data['sonors'] = Sonor::get();
-        // $data['sun_roofs'] = SunRoof::get();
-        // $data['cameraes'] = Camera::get();
-        // $data['seats'] = Seat::get() ;
-        // $data['divertrimes'] = Divertrim::get();
     }
 
     public function deleteCard($id) {
