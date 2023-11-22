@@ -15,10 +15,13 @@ use App\Models\SunRoof ;
 use App\Models\Sonor ;
 use App\Models\CarDetails ;
 use App\Models\Aircon ;
+use App\Models\Cylinder ;
+use App\Models\Engine_type ;
 use App\Models\Motor ;
 use App\Models\Transmission ;
 use App\Models\BodyStyle ;
 use App\Models\Car\CarFunction ;
+use App\Models\Default_function ;
 use App\Models\CarFucture ;
 use App\Models\Divertrim ;
 
@@ -93,10 +96,8 @@ class GradeController extends Controller
         $datas['functions'] = CarDetails::get();
         $datas['transmissions'] = Transmission::get();
         $datas['body_styles'] = BodyStyle::get(); 
-        $datas['engines'] =  Engine::select('engines.*' , 'cylinders.cylinder' , 'engine_types.type')
-                    ->leftJoin('cylinders','engines.Cylinder_id','cylinders.id')
-                    ->leftJoin('engine_types','engines.Fuel','engine_types.id')
-                    ->get();
+        $datas['cylinders'] =  Cylinder::get();
+        $datas['fuels'] =  Engine_type::get();
         $datas['seats'] = Seat::get();
         $datas['keys']= Key::get();
         $datas['divertrims'] = Divertrim::get();
@@ -104,6 +105,7 @@ class GradeController extends Controller
         $datas['aircons'] = Aircon::get();
         $datas['sonars'] = Sonor::get();
         $datas['motors'] = Motor::get();
+        $datas['defaultFunctions'] = Default_function::get() ;
 
         return view('admin.POS.Grade.gradeForm',compact('datas'));
     }

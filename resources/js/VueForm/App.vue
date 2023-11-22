@@ -11,10 +11,11 @@
                     </div>
                 </li>
             </ul>
+            <hr>
             <div class='min-height-350'>
-                <component :is="steps[1]" :datas="datas" :stepsProgess="stepProgess[1]"></component>
+                <component :is="steps[2]" :datas="datas" :stepsProgess="stepProgess[2]"></component>
             </div>
-            <div class="container">
+            <div class="container pt-2">
                 <div class="row">
                     <div class="col-md-6">
                         <button class="btn btn-primary" v-on:click="nextStep">Next</button>
@@ -50,6 +51,12 @@
                     },
                     {
                         divertrim : null ,
+                        key: null ,
+                        motor : null ,
+                        aircon : null  ,
+                        seat : null ,
+                    },{
+                        functions : [],
                     }
                 ],
             }
@@ -106,6 +113,8 @@
     }
     .min-height-350 {
         min-height   : 350px ;
+        max-height:  440px;
+        overflow-x: auto;
     }
     .step-bubble {
         width: 35px;
@@ -132,6 +141,16 @@
         display: flex;
         align-items: center;
         justify-content: center;
+    }
+    ::-webkit-scrollbar-track{
+        background: tomato;
+    }
+    ::-webkit-scrollbar-thumb {
+        width: 10px;
+        border-radius: 10px
+    }
+    ::-webkit-scrollbar-button {
+       display: none; /* Hide the scrollbar buttons */
     }
     .step:last-child {
         width: 50px;
