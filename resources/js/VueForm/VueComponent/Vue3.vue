@@ -14,19 +14,22 @@
             </div>
             <hr>
         </div>
-        <div class='default-function d-flex w-50 m-auto fw-bold cursor-pointer pe-auto mb-3' >
-            <div class="function one main-color mr-2" @click="defaultClick">Default Funcions</div>
-            <div class="function two main-color" @click="nextClick">Add For Default</div>
+        <div class="row mb-3">
+            <div class="col-md-6 text-end">
+                <button class="btn btn-primary" @click="defaultClick">Default Functions</button>
+            </div>
+            <div class="col-md-6">
+                <button class="btn btn-primary" @click="nextClick">Add For Default</button>
+            </div>
         </div>
         <div>
-            <component :is="functions[0]"   ></component>
+            <component :is="functions[functionEvent]"  :stepFun="advancedf" :defaultFun="datas['defaultFunctions']"></component>
         </div>
-        
     </div>
 </template>
 
 <script>
-
+    import defaultFunction from "./GenerateFunction/DefaultFunction.vue";
     import AdvanceFunction from './GenerateFunction/AdvanceFunction.vue';
     export default {
         name : "Vue3" ,
@@ -34,6 +37,7 @@
             return {
                 functionEvent : 0 ,
                 functions : [
+                    'defaultFunction' ,
                     'AdvanceFunction' ,
                 ],
                 advancedf : {
@@ -65,7 +69,7 @@
                 required : true ,
             }
         },
-        components : { AdvanceFunction} ,
+        components : { defaultFunction , AdvanceFunction} ,
         mounted () {
             
         }

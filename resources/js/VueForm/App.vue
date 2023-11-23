@@ -56,15 +56,7 @@
                         seat : null ,
                     },{
                         functions : [],
-                        advancedf : {
-                            air_conditioning : null , 
-                            power_steering : null ,
-                            power_windows : null,
-                            abs_brakes : null ,
-                            airbags : null ,
-                            navigation_system : null ,
-                            bluetooth_connectivity : null ,
-                        }
+                        
                     }
                 ],
             }

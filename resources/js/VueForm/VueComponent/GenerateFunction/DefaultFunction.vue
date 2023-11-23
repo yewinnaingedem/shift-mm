@@ -6,7 +6,7 @@
                 <th class="text-center">Conditons</th>
             </tr>
         </thead>
-        <tbody v-for="(df ,index) in defaultFunction" :key="index">
+        <tbody v-for="(df ,index) in defaultFun" :key="index">
             <tr>
                 <th scope="row" class="text-center">Air Conditioning</th>
                 <td class="fw-bold text-center" >
@@ -64,7 +64,7 @@
     export default {
         name : "DefaultFunction",
         props : {
-            defaultFunction : {
+            defaultFun : {
                 type : Object ,
                 required : true ,
             }
