@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use App\Models\Engine ;
 use App\Models\Seat ;
 use App\Models\Key ;
+use App\Models\Function_Name ;
 use App\Models\SunRoof ;
 use App\Models\Sonor ;
 use App\Models\CarDetails ;
@@ -106,6 +107,7 @@ class GradeController extends Controller
         $datas['sonars'] = Sonor::get();
         $datas['motors'] = Motor::get();
         $datas['defaultFunctions'] = Default_function::get() ;
+        $datas['function_names'] = Function_Name::get();
 
         return view('admin.POS.Grade.gradeForm',compact('datas'));
     }

@@ -2,12 +2,12 @@
     <div class="container">
         <div class="row">
             <div class="fw-bold mb-3 h-3 text-header text-center"> Define Functions Here !</div>
-            <div class="col-md-4 col-lg-4 mb-3" v-for="car_fun in datas['functions']" :key="car_fun.id">
+            <div class="col-md-4 col-lg-3 mb-3" v-for="car_fun in datas['functions']" :key="car_fun.id">
                 <label  class="d-flex justify-content-center align-items-center main-color p-10 rounded" 
                     
                 >
                     <input type="checkbox"  v-model="stepsProgess.function" :value="car_fun.id" class="d-none">
-                    <div class="fw-bold ">
+                    <div class="fw-bold text-15px ">
                         {{ car_fun.function }}
                     </div>
                 </label>
@@ -19,14 +19,14 @@
             <div class="function two main-color" @click="nextClick">Add For Default</div>
         </div>
         <div>
-            <component :is="functions[functionEvent]" :defaultFunction="datas['defaultFunctions']"></component>
+            <component :is="functions[0]"   ></component>
         </div>
+        
     </div>
 </template>
 
 <script>
 
-    import DefaultFunction from './GenerateFunction/DefaultFunction.vue';
     import AdvanceFunction from './GenerateFunction/AdvanceFunction.vue';
     export default {
         name : "Vue3" ,
@@ -34,9 +34,17 @@
             return {
                 functionEvent : 0 ,
                 functions : [
-                    'DefaultFunction' ,
                     'AdvanceFunction' ,
-                ]
+                ],
+                advancedf : {
+                    air_conditioning : null , 
+                    power_steering : null ,
+                    power_windows : null,
+                    abs_brakes : null ,
+                    airbags : null ,
+                    navigation_system : null ,
+                    bluetooth_connectivity : null ,
+                }
             }
         },
         methods : {
@@ -57,7 +65,10 @@
                 required : true ,
             }
         },
-        components : {DefaultFunction , AdvanceFunction}
+        components : { AdvanceFunction} ,
+        mounted () {
+            
+        }
     }
 </script>
 <style> 
@@ -70,6 +81,9 @@
     }
     .one  {
         border-radius: 10px 0 0px 10px;
+    }
+    .text-15px {
+        font-size: 15px;
     }
     .two {
         border-radius: 0px 10px 10px 0px;   

@@ -13,7 +13,7 @@
             </ul>
             <hr>
             <div class='min-height-350'>
-                <component :is="steps[2]" :datas="datas" :stepsProgess="stepProgess[2]"></component>
+                <component :is="steps[2]" :datas="datas" :stepsProgess="stepProgess"></component>
             </div>
             <div class="container pt-2">
                 <div class="row">
@@ -26,7 +26,6 @@
                 </div>
             </div>
         </div>
-        
         
     </div>
     
@@ -57,6 +56,15 @@
                         seat : null ,
                     },{
                         functions : [],
+                        advancedf : {
+                            air_conditioning : null , 
+                            power_steering : null ,
+                            power_windows : null,
+                            abs_brakes : null ,
+                            airbags : null ,
+                            navigation_system : null ,
+                            bluetooth_connectivity : null ,
+                        }
                     }
                 ],
             }
