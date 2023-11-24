@@ -1,12 +1,22 @@
 <template>
     <div class="container">
         <div class="row">
-            <div class="fw-bold mb-3 h-3 text-header text-center"> Define Functions Here !</div>
+            <div class="fw-bold mb-3 h-3 text-header d-flex justify-content-center align-items-center  row">
+                <div class="col-md-6">
+                    Define Functions Here !
+                </div>
+                <div class="col-md-6 text-end">
+                    <button class="btn btn-primary text-wrap">You selected : <span class="text-danger fw-bolder">{{ stepsProgess.functions.length > 0 ? stepsProgess.functions.length : 'None' }}</span></button>
+                </div>
+      
+            </div>
+
             <div class="col-md-4 col-lg-3 mb-3" v-for="car_fun in datas['functions']" :key="car_fun.id">
                 <label  class="d-flex justify-content-center align-items-center main-color p-10 rounded" 
-                    
+                    :for="car_fun.function"  
+                    :class="{ 'bg-dark text-white': stepsProgess.functions.includes(car_fun.id) }"
                 >
-                    <input type="checkbox"  v-model="stepsProgess.function" :value="car_fun.id" class="d-none">
+                    <input type="checkbox"  v-model="stepsProgess.functions" :id="car_fun.function" :value="car_fun.id" class="d-none">
                     <div class="fw-bold text-15px ">
                         {{ car_fun.function }}
                     </div>
@@ -16,10 +26,10 @@
         </div>
         <div class="row mb-3">
             <div class="col-md-6 text-end">
-                <button class="btn btn-primary" @click="defaultClick">Default Functions</button>
+                <button class="btn btn-primary" @click="defaultClick" :class="(functionEvent == 0 ) ? 'bg-dark' :' '">Default Functions</button>
             </div>
             <div class="col-md-6">
-                <button class="btn btn-primary" @click="nextClick">Add For Default</button>
+                <button class="btn btn-primary" @click="nextClick" :class="(functionEvent > 0 ) ? 'bg-dark ' : ' '">Add For Default</button>
             </div>
         </div>
         <div>
@@ -70,9 +80,6 @@
             }
         },
         components : { defaultFunction , AdvanceFunction} ,
-        mounted () {
-            
-        }
     }
 </script>
 <style> 

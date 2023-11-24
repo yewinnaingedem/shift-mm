@@ -2,11 +2,11 @@
     <div class="container">
         <div class="row">
             <div class="fw-bold mb-3 h-3 text-header"> Define Body Style !</div>
-            <div class="col-md-3 col-lg-4 mb-3" v-for="(divertrim  , index ) in datas['divertrims']" :key="divertrim.id">
+            <div class="col-md-3 col-lg-3 mb-3" v-for="(divertrim  , index ) in datas['divertrims']" :key="divertrim.id">
                 <label :for="divertrim.id + 'tr'" class="d-flex justify-content-center align-items-center main-color p-10 rounded" 
                     :class="(divertrim.id === stepsProgess.divertrim) ? 'bg-dark text-white' : ' ' "
                 >
-                    <input type="radio" v-model="stepsProgess.divertrim" :value="divertrim.id" :id="divertrim.id + 'tr'" class="d-none">
+                    <input type="radio" v-model="stepsProgess.divertrim"  :value="divertrim.id" :id="divertrim.id + 'tr'" class="d-none">
                     <div class="fw-bold text-sm-auto">
                         {{ divertrim.divertrim }}
                     </div>
@@ -30,11 +30,11 @@
         </div>
         <div class="row">
             <div class="fw-bold mb-3 h-3 text-header">Define SunRoof !</div>
-            <div class="col-md-4 col-md-3 mb-3" v-for="(SunRoof  , index ) in datas['sun_roofs']" :key="SunRoof.id">
+            <div class="col-md-4 col-md-3 col-lg-3 mb-3" v-for="(SunRoof  , index ) in datas['sun_roofs']" :key="SunRoof.id">
                 <label :for="SunRoof.id + 'sn'" class="d-flex justify-content-center align-items-center main-color p-10 rounded" 
-                    :class="(SunRoof.id === stepsProgess.key) ? 'bg-dark text-white' : ' ' "
+                    :class="(SunRoof.id === stepsProgess.sun_roof) ? 'bg-dark text-white' : ' ' "
                 >
-                    <input type="radio" v-model="stepsProgess.key" :value="SunRoof.id" :id="SunRoof.id + 'sn'" class="d-none">
+                    <input type="radio" v-model="stepsProgess.sun_roof" :value="SunRoof.id" :id="SunRoof.id + 'sn'" class="d-none">
                     <div class="fw-bold text-sm-12">
                         {{ SunRoof.sun_roof }}
                     </div>
@@ -57,7 +57,7 @@
             <hr>
         </div>
         <div class="row">
-            <div class="fw-bold mb-3 h-3 text-header">Define Truck Motor !</div>
+            <div class="fw-bold mb-3 h-3 text-header">Define Air Con Condition !</div>
             <div class="col-md-4 col-md-3 mb-3" v-for="(aircon  , index ) in datas['aircons']" :key="aircon.id">
                 <label :for="aircon.id + 'aircon'" class="d-flex justify-content-center align-items-center main-color p-10 rounded" 
                     :class="(aircon.id === stepsProgess.aircon) ? 'bg-dark text-white' : ' ' "
@@ -101,9 +101,7 @@
                 required :true ,
             }
         },
-        mounted () {
-            console.log(this.datas.sun_roofs);
-        }
+        
     }
 </script>
 

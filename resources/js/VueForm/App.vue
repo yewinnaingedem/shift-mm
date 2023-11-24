@@ -1,26 +1,29 @@
 <template >
     <div class="container pt-3">
         <div class="step-container">
-            <ul class="step-list">
-                <li class="step" v-for="(step , index ) in steps" :key="step" :class="( index  == currentSteps ) ? 'step-active' : ' ' , (index < currentSteps) ? 'step-done' : ' ' ">
-                    <div class="step-bubble"> {{ index }}</div>
+            <ul class="step-list mb-4 mb-botton">
+                <li class="step" v-for="(step , index ) in steps" :key="step" :class="( index  == currentSteps ) ? 'step-active' : ' ' , (index < currentSteps) ? 'step-done' : ' ' "
+                >
+                    <div class="step-bubble"> {{ index + 1}}</div>
                     <div class="step-line">
                         <div class="line-fill">
                             
                         </div>
                     </div>
+                    <div class="step-label">
+                        {{ step }}
+                    </div>
                 </li>
             </ul>
-            <hr>
             <div class='min-height-350'>
-                <component :is="steps[2]" :datas="datas" :stepsProgess="stepProgess"></component>
+                <component :is="steps[currentSteps]" :datas="datas" :stepsProgess="stepProgess[currentSteps]"></component>
             </div>
             <div class="container pt-2">
                 <div class="row">
                     <div class="col-md-6">
                         <button class="btn btn-primary" v-on:click="nextStep">Next</button>
                     </div>
-                    <div class="col-md-6 text-end">
+                    <div class="col-md-6 text-end"  v-if="currentSteps > 0">
                         <button class="btn btn-primary " v-on:click="previousStep">Perivous Steps</button>
                     </div>
                 </div>
@@ -40,17 +43,24 @@
     export default {
         data () {
             return {
-                currentSteps : 1,
-                currentComponent : 0 ,
+                
+                currentSteps : 0,
                 steps : ['Vue1', 'Vue2' , 'Vue3'] ,
                 stepProgess : [
                     {
                         transmission : null ,
                         body_style : null ,
+                        engine : {
+                            engine_power : null ,
+                            cylinder : null ,
+                            fuel_type : null ,
+                            turbo : false ,
+                        }
                     },
                     {
                         divertrim : null ,
                         key: null ,
+                        sun_roof : null ,
                         motor : null ,
                         aircon : null  ,
                         seat : null ,
@@ -59,7 +69,9 @@
                         
                     }
                 ],
+                removeBar : false ,
             }
+            
         },
         components : {
             Vue1 ,
@@ -84,12 +96,29 @@
                 required : true ,
             }
         },
+        mounted ( ) {
+            this.removeBar ;
+        } , 
+        computed : {
+            removeBarTe () {
+                this.removeBar = this.steps.length > 0 ? true : false ;
+            }
+        }
     }
 
 </script>
 
 <style scoped>
-    .step-container {
+    .step-label {
+        font-size: 18px;
+        font-weight: 500;
+        position: absolute;
+        bottom: -20px;
+    }
+    .mb-botton {
+        margin-bottom: 1px solid black;
+    }
+.step-container {
         width: 95%;
         margin : 0 auto ;
     }
@@ -103,6 +132,11 @@
      .h-96 {
         height: 300px;
      }
+     .step-bubble {
+        color : #fff ;
+        font-weight: 500;
+        font-size: 20px;
+     }
     .step {
         display: flex;
         flex-grow: 1; 
@@ -115,6 +149,9 @@
         min-height   : 350px ;
         max-height:  440px;
         overflow-x: auto;
+        background: #d7dce2;
+        border-radius: 10px;
+        padding-top: 5px;
     }
     .step-bubble {
         width: 35px;
@@ -127,6 +164,12 @@
         overflow: hidden;
         align-items: center;
         justify-content: center;
+    }
+    .step-in-advance .line-fill {
+        width: 50%;
+    }
+    .step-label {
+        opacity: 0.7;
     }
     .step-line {
         width: 100%;
@@ -142,15 +185,12 @@
         align-items: center;
         justify-content: center;
     }
-    ::-webkit-scrollbar-track{
+    .min-height-350::-webkit-scrollbar-track{
         background: tomato;
     }
-    ::-webkit-scrollbar-thumb {
+    .min-height-350::-webkit-scrollbar-thumb {
         width: 10px;
         border-radius: 10px
-    }
-    ::-webkit-scrollbar-button {
-       display: none; /* Hide the scrollbar buttons */
     }
     .step:last-child {
         width: 50px;
@@ -163,5 +203,10 @@
         width: 50px;
         height: 50px;
     }
+    .step-active .step-label ,
+    .step-done .step-label  {
+        opacity: 1;
+    }
+    
     
 </style>

@@ -23,6 +23,7 @@ use App\Models\Transmission ;
 use App\Models\BodyStyle ;
 use App\Models\Car\CarFunction ;
 use App\Models\Default_function ;
+use App\Models\EnginePower ;
 use App\Models\CarFucture ;
 use App\Models\Divertrim ;
 
@@ -108,7 +109,7 @@ class GradeController extends Controller
         $datas['motors'] = Motor::get();
         $datas['defaultFunctions'] = Default_function::get() ;
         $datas['function_names'] = Function_Name::get();
-
+        $datas['engine_powers'] = EnginePower::get();
         return view('admin.POS.Grade.gradeForm',compact('datas'));
     }
 

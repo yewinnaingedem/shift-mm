@@ -1,9 +1,9 @@
 <template>
     <table class="table table-success rounded">
         <thead class="bg-dark">
-            <tr class="text-center bg-info">
-                <th scope="col">Function Name</th>
-                <th class="text-center">Conditons</th>
+            <tr class="text-center ">
+                <th scope="col" class="bg-dark">Function Name</th>
+                <th class="text-center bg-info">Conditons</th>
             </tr>
         </thead>
         <tbody v-for="(df ,index) in defaultFun" :key="index">
