@@ -56,6 +56,7 @@
 </template>
 
 <script>
+    
     export default {
         name : "Vue1" ,
         props : {
@@ -68,48 +69,8 @@
                 required : true ,
             }
         },
-        computed : {
-            defaultBodyStyle () {
-                if(this.datas['body_styles'].length > 0) 
-                {
-                    return this.datas['body_styles'][0].id ;
-                }
-                return null ;
-            },
-            defaultEnginePower () {
-                if(this.datas['engine_powers'].length > 0) 
-                {
-                    return this.datas['engine_powers'][0].id ;
-                }
-                return null ;
-            },
-            defaultFuel () {
-                if(this.datas['fuels'].length > 0) 
-                {
-                    return this.datas['fuels'][0].id ;
-                }
-                return null ;
-            },
-            defaultCylinder () {
-                if(this.datas['cylinders'].length > 0) {
-                    return this.datas['cylinders'][0].id ;
-                }
-                return null ;
-            },
-            defaultTransmission () {
-                if(this.datas['transmissions'].length > 0) {
-                    return this.datas['transmissions'][0].id ;
-                }
-                return null ;
-            }
-        },
-        mounted () {
-            this.stepsProgess.body_style = this.defaultBodyStyle ;
-            this.stepsProgess.engine.engine_power = this.defaultEnginePower ;
-            this.stepsProgess.engine.fuel_type = this.defaultFuel ;
-            this.stepsProgess.transmission = this.defaultTransmission ;
-            this.stepsProgess.engine.cylinder = this.defaultCylinder ;
-        }
+        
+
     }
 </script>
 

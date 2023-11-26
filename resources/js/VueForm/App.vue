@@ -20,8 +20,11 @@
             </div>
             <div class="container pt-2">
                 <div class="row">
-                    <div class="col-md-6">
-                        <button class="btn btn-primary" v-on:click="nextStep">Next</button>
+                    <div class="col-md-6" v-if="submitCheck">
+                        <button class="btn btn-primary" v-on:click="submit">Submit</button>
+                    </div>
+                    <div class="col-md-6" v-else>
+                        <button class="btn btn-primary" v-on:click.prevent="nextStep">Next</button>
                     </div>
                     <div class="col-md-6 text-end"  v-if="currentSteps > 0">
                         <button class="btn btn-primary " v-on:click="previousStep">Perivous Steps</button>
@@ -29,7 +32,6 @@
                 </div>
             </div>
         </div>
-        
     </div>
     
     
@@ -66,10 +68,11 @@
                         seat : null ,
                     },{
                         functions : [],
-                        
+                        default_functions : [] ,
                     }
                 ],
                 removeBar : false ,
+                checkSumbit : false ,
             }
             
         },
@@ -88,6 +91,23 @@
                 if(this.currentSteps > 0) {
                     this.currentSteps -- ;
                 }
+            },
+            submit () {
+                $.ajax({
+                    type : "POST" ,
+                    url  : "/api/end-point" ,
+                    data : {
+                        vue1 : this.stepProgess[0] ,
+                        vue2 : this.stepProgess[1] ,
+                        vue3 : this.stepProgess[2],
+                    },
+                    success : (res)  => {
+                        console.log(res);
+                    },
+                    error : (error) => {
+                        console.log(error);
+                    }
+                });
             }
         },
         props : {
@@ -102,6 +122,12 @@
         computed : {
             removeBarTe () {
                 this.removeBar = this.steps.length > 0 ? true : false ;
+            },
+            submitCheck () {
+                if(this.currentSteps == this.stepProgess.length -1) {
+                    return this.checkSumbit = true ;   
+                }
+                return this.checkSumbit = false ;
             }
         }
     }

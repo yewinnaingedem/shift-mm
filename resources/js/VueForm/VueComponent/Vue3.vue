@@ -5,8 +5,16 @@
                 <div class="col-md-6">
                     Define Functions Here !
                 </div>
-                <div class="col-md-6 text-end">
-                    <button class="btn btn-primary text-wrap">You selected : <span class="text-danger fw-bolder">{{ stepsProgess.functions.length > 0 ? stepsProgess.functions.length : 'None' }}</span></button>
+                <div class="col-md-6  row text-end">
+                    <div class="col-md-6">
+                        <button class="btn btn-success text-wrap">{{ stepsProgess.functions.length > 0 ? stepsProgess.functions.length : 'None' }}</button>
+                    </div>
+                    <div class="col-md-3">
+                        <button class="btn btn-danger fw-bold" @click="reduce()">-</button>
+                    </div>
+                    <div class="col-md-3 fw-bold">
+                        <button class="btn btn-info" @click="increase()">+</button>
+                    </div>
                 </div>
       
             </div>
@@ -26,30 +34,44 @@
         </div>
         <div class="row mb-3">
             <div class="col-md-6 text-end">
-                <button class="btn btn-primary" @click="defaultClick" :class="(functionEvent == 0 ) ? 'bg-dark' :' '">Default Functions</button>
+                <div class="d-inline-block">
+                    <label for="df-id-no" @click="defaultClick" class="btn btn-primary d-flex justify-content-center align-items-center"
+                    :class="(function_name == false  ) ? 'bg-dark' : ' '">
+                        <div class="fw-bold">
+                            Default Function
+                        </div>
+                        <input type="radio" class="d-none"  v-model="function_name" :value="false" id="df-id-no">
+                    </label>
+                </div>
             </div>
             <div class="col-md-6">
-                <button class="btn btn-primary" @click="nextClick" :class="(functionEvent > 0 ) ? 'bg-dark ' : ' '">Add For Default</button>
+                <div class="d-inline-block">
+                    <label for="df-id-yes" @click="nextClick" class="btn btn-primary d-flex justify-content-center align-items-center" 
+                    :class="(function_name == true  ) ? 'bg-dark' : ' '">
+                        <div class="fw-bold">
+                            Set Default Function
+                        </div>
+                        <input type="radio" class="d-none"  v-model="function_name" :value="true" id="df-id-yes">
+                    </label>
+                </div>
             </div>
         </div>
         <div>
-            <component :is="functions[functionEvent]"  :stepFun="advancedf" :defaultFun="datas['defaultFunctions']"></component>
+            <DefaultFunction v-if="function_name == false" :defaultFun="datas['defaultFunctions']"></DefaultFunction>
+            <AdvanceFunction v-else :stepFun="advancedf"></AdvanceFunction>
         </div>
     </div>
 </template>
 
 <script>
-    import defaultFunction from "./GenerateFunction/DefaultFunction.vue";
+    import DefaultFunction from './GenerateFunction/DefaultFunction.vue';
     import AdvanceFunction from './GenerateFunction/AdvanceFunction.vue';
     export default {
         name : "Vue3" ,
         data () {
             return {
-                functionEvent : 0 ,
-                functions : [
-                    'defaultFunction' ,
-                    'AdvanceFunction' ,
-                ],
+                
+                function_name  : false ,
                 advancedf : {
                     air_conditioning : null , 
                     power_steering : null ,
@@ -58,7 +80,9 @@
                     airbags : null ,
                     navigation_system : null ,
                     bluetooth_connectivity : null ,
-                }
+                },
+                countData : 0 ,
+                testing : [] ,
             }
         },
         methods : {
@@ -67,6 +91,26 @@
             },
             defaultClick () {
                 return this.functionEvent = 0 ;
+            },
+            reduce () {
+                if(this.stepsProgess.functions.length > 0) {
+                    return this.stepsProgess.functions.length -- ;
+                }
+            },
+            increase () {
+                this.countData++;
+                const arrayTest = [];
+                if(this.countData < this.datas.functions.length +1 ) {
+                    Object.keys(this.datas.functions).forEach(key => {
+                        arrayTest.push(this.datas.functions[key].id);
+                    });
+                    const newValue = arrayTest[this.countData % arrayTest.length];
+                    this.stepsProgess.functions.push(newValue);
+                }else {
+                    this.countData = this.stepsProgess.functions.length   ;
+                    alert('Exceeded');
+                    
+                }
             }
         },  
         props : {
@@ -79,7 +123,7 @@
                 required : true ,
             }
         },
-        components : { defaultFunction , AdvanceFunction} ,
+        components : { DefaultFunction , AdvanceFunction} ,
     }
 </script>
 <style> 

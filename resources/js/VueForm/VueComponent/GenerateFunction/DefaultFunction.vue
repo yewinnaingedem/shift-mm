@@ -2,8 +2,8 @@
     <table class="table table-success rounded">
         <thead class="bg-dark">
             <tr class="text-center ">
-                <th scope="col" class="bg-dark">Function Name</th>
-                <th class="text-center bg-info">Conditons</th>
+                <th scope="col" class="bg-dark text-white">Default Function Name</th>
+                <th class="text-center bg-main">Conditons</th>
             </tr>
         </thead>
         <tbody v-for="(df ,index) in defaultFun" :key="index">
@@ -67,10 +67,8 @@
             defaultFun : {
                 type : Object ,
                 required : true ,
-            }
+            },
         },
-        mounted () {
-            
-        }
+        
     }
 </script>
