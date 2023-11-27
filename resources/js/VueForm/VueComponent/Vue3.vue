@@ -7,13 +7,17 @@
                 </div>
                 <div class="col-md-6  row text-end">
                     <div class="col-md-6">
-                        <button class="btn btn-success text-wrap">{{ stepsProgess.functions.length > 0 ? stepsProgess.functions.length : 'None' }}</button>
+                        <button class="btn btn-success text-wrap w-10" ref="countData">{{ stepsProgess.functions.length > 0 ? stepsProgess.functions.length : 0 }}</button>
                     </div>
                     <div class="col-md-3">
-                        <button class="btn btn-danger fw-bold" @click="reduce()">-</button>
+                        <button class="btn btn-danger fw-bold w-10" @click="reduce()">
+                            <i class="fa-solid fa-minus"></i>
+                        </button>
                     </div>
                     <div class="col-md-3 fw-bold">
-                        <button class="btn btn-info" @click="increase()">+</button>
+                        <button class="btn btn-info w-10" @click="increase()">
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
                     </div>
                 </div>
       
@@ -100,16 +104,15 @@
             increase () {
                 this.countData++;
                 const arrayTest = [];
-                if(this.countData < this.datas.functions.length +1 ) {
+                let test1 = this.$refs.countData.innerText;
+                if(test1 < this.datas.functions.length  ) {
                     Object.keys(this.datas.functions).forEach(key => {
                         arrayTest.push(this.datas.functions[key].id);
                     });
-                    const newValue = arrayTest[this.countData % arrayTest.length];
+                    const newValue = arrayTest[test1 % arrayTest.length];
                     this.stepsProgess.functions.push(newValue);
                 }else {
-                    this.countData = this.stepsProgess.functions.length   ;
                     alert('Exceeded');
-                    
                 }
             }
         },  
@@ -139,6 +142,9 @@
     }
     .text-15px {
         font-size: 15px;
+    }
+    .w-10 {
+        width: 50px;
     }
     .two {
         border-radius: 0px 10px 10px 0px;   

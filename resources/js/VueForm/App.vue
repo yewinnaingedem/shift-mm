@@ -175,7 +175,7 @@
         min-height   : 350px ;
         max-height:  440px;
         overflow-x: auto;
-        background: #d7dce2;
+        background: rgb(161, 156, 156);
         border-radius: 10px;
         padding-top: 5px;
     }
@@ -217,6 +217,15 @@
     .min-height-350::-webkit-scrollbar-thumb {
         width: 10px;
         border-radius: 10px
+    }
+    ::-webkit-scrollbar  {
+        width: 5px ;
+        height: 5px;
+    }
+    ::-webkit-scrollbar-thumb {
+        background: #86efac;
+        color : #fff ;
+        border-radius: 4px;
     }
     .step:last-child {
         width: 50px;

@@ -69,7 +69,12 @@
                 required : true ,
             }
         },
-        
+        data () {
+            return {
+                body_style :null ,
+                
+            }
+        }
 
     }
 </script>

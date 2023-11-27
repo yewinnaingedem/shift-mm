@@ -27,16 +27,16 @@ class AddCarController extends Controller
         $items['interior_color'] = $data3['interior_color'] ;
         $items['kilo_meter'] = $data1['millage'] ;
         $items['grade'] = $data1['grade'];
-        $items['break'] = $data2['font_break'] . $data2['back_break'];
+        $items['break'] = $data2['font_break'] .'/'. $data2['back_break'];
+
         $itemId = Item::insertGetId($items);
         
         $carOwners = [] ;
         $carOwners['vin'] = $data3['VIN'] ;
-        $carOwners['color'] = $data1['exterior_color'];
+        $carOwners['exterior_color_id'] = $data1['exterior_color'];
         $carOwners['license_state'] = $data2['license_state'];
         $carOwners['model_id'] = $model_id ;
         $carOwners['year'] = $year ;
-    
         $carOwners['license_plate'] = $data1['license'];
         $carOwners['pass_owner'] = $data2['pass_owner'] ;
         $carOwners['transmission_type'] = $data1['transmission'];

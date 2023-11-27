@@ -1,9 +1,9 @@
 <template>
     <table class="table table-success rounded">
         <thead class="bg-dark">
-            <tr class="text-center ">
-                <th scope="col" class="bg-dark text-white">Default Function Name</th>
-                <th class="text-center bg-main">Conditons</th>
+            <tr class="text-center bg-choco">
+                <th scope="col" class="bg-choco text-white">Default Function Name</th>
+                <th class="text-center bg-choco">Conditons</th>
             </tr>
         </thead>
         <tbody v-for="(df ,index) in defaultFun" :key="index">
@@ -58,7 +58,6 @@
             </tr>
         </tbody>
     </table>
-
     </template>
 <script>
     export default {
@@ -72,3 +71,8 @@
         
     }
 </script>
+<style>
+.bg-choco{
+    background: chocolate !important;
+}
+</style>

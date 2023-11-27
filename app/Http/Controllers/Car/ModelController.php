@@ -12,6 +12,7 @@ use App\Models\Transmission ;
 use App\Models\TransmissionType ;
 use App\Models\Brand ;
 use App\Models\Divertrim ;
+use App\Models\Car\Car ;
 use App\Models\ExteriorColor ;
 use App\Models\Steering ;
 use App\Models\Car\OwnerBook ;
@@ -62,6 +63,17 @@ class ModelController extends Controller
     public function searchQuery(Request $request) {
         $query = $request->input('searchQuery');
         $results = OwnerBook::where('license_plate',$query)->exists() ? true : false  ;
+        if($results) {
+            $queryResult = Car::select()
+                            ->leftJoin('owner_books','cars.owner_book_id','owner_books.id')
+                            ->leftJoin('items','cars.item_id','items.id')
+                            ->where('owner_books.license_plate',$query)
+                            ->first();
+            return response()->json([
+                'message' => $results ,
+                'existedQuery' => $queryResult 
+            ]);
+        }
         return response()->json([
             'message' => $results ,
         ]);

@@ -20,6 +20,7 @@
         "lodash": "^4.17.21",
         "sweetalert2": "^11.7.31",
         "vue": "^3.2.36",
-        "vue-router": "^4.2.5"
+        "vue-router": "^4.2.5",
+        "vue-scrollto": "^2.20.0"
     }
 }

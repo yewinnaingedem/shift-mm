@@ -27,7 +27,7 @@
                 </div>
             </div>
             <div class="main w-75 m-auto pt-20">
-                <component v-bind:is="steps[currentStep]" :data="field[currentStep]" :arrayData="data" ></component>
+                <component v-bind:is="steps[currentStep]" :forSpecific="field" :data="field[currentStep]" :arrayData="data" ></component>
                 <div class="row mb-5 mt-3">
                     <div class="d-flex justify-content-start align-items-center col-md-6"
                         
@@ -97,6 +97,8 @@
                     {
                         license : null ,
                         millage : null ,
+                        preDefindedColor :  false ,
+                        ownColor : 'none' ,
                         grade : this.data['grades'][0].grade,
                         exterior_color: null ,
                         transmission : null ,
@@ -114,9 +116,9 @@
                     {
                         interior_color : null ,
                         VIN : null ,
-                        engine_exception : '' ,
-                        license_exception : '' ,
-                        exception : '' ,
+                        engine_exception : 'none' ,
+                        license_exception : 'none',
+                        exception : 'none' ,
                     }
                 ] ,
                 
