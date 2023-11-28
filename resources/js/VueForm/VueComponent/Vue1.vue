@@ -6,7 +6,9 @@
                 <label :for="transmission.id + 'tr'" class="d-flex justify-content-center align-items-center main-color p-10 rounded" 
                     :class="(transmission.id === stepsProgess.transmission) ? 'bg-dark text-white' : ' ' "
                 >
-                    <input type="radio" v-model="stepsProgess.transmission" :value="transmission.id" :id="transmission.id + 'tr'" class="d-none">
+                    <input type="radio"
+                    @input="definedTransmisson"
+                    v-model="stepsProgess.transmission" :value="transmission.id" :id="transmission.id + 'tr'" class="d-none">
                     <div class="fw-bold">
                         {{ transmission.transmission }}
                     </div>
@@ -73,6 +75,16 @@
             return {
                 body_style :null ,
                 
+            }
+        },
+        computed : {
+            definedTransmisson () {
+                const turbo = this.stepsProgess.engine.engine_power ;
+                if(turbo) {
+                    turbo.scrollIntoView({behavior : 'smooth' , block :'center' ,
+
+                    })
+                }
             }
         }
 

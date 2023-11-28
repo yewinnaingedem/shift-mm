@@ -85,7 +85,6 @@
                     navigation_system : null ,
                     bluetooth_connectivity : null ,
                 },
-                countData : 0 ,
                 testing : [] ,
             }
         },
@@ -101,8 +100,10 @@
                     return this.stepsProgess.functions.length -- ;
                 }
             },
+            areAllPropertiesSet(obj) {
+                return Object.values(obj).every(property => property);
+            },
             increase () {
-                this.countData++;
                 const arrayTest = [];
                 let test1 = this.$refs.countData.innerText;
                 if(test1 < this.datas.functions.length  ) {
@@ -111,8 +112,6 @@
                     });
                     const newValue = arrayTest[test1 % arrayTest.length];
                     this.stepsProgess.functions.push(newValue);
-                }else {
-                    alert('Exceeded');
                 }
             }
         },  
@@ -127,6 +126,25 @@
             }
         },
         components : { DefaultFunction , AdvanceFunction} ,
+        watch : {
+            advancedf : {
+                handler (newAdvancedF) {
+                    if(Object.values(newAdvancedF).every(value => value === 0 || value === 1)) {
+                        this.$emit('send-data' , {
+                            exist : this.function_name ,
+                            air_conditioning : this.advancedf.air_conditioning , 
+                            power_steering : this.advancedf.power_steering ,
+                            power_windows : this.advancedf.power_steering,
+                            abs_brakes : this.advancedf.abs_brakes ,
+                            airbags : this.advancedf.airbags ,
+                            navigation_system : this.advancedf.navigation_system ,
+                            bluetooth_connectivity : this.advancedf.bluetooth_connectivity ,
+                        });
+                    }
+                },
+                deep : true ,
+            }
+        }
     }
 </script>
 <style> 

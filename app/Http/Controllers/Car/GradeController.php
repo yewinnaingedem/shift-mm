@@ -71,22 +71,25 @@ class GradeController extends Controller
         $inputs['carModel_id'] = $model_id ;
         $inputs['grade'] = $request['grade'] ? $request['grade'] : false ;
         $inputs['created_at'] = Carbon::now();
-        $id = Grade::insertGetId($inputs);
-        $functions = CarDetails::get();
-        $transmissions = Transmission::get();
-        $bodyStyles = BodyStyle::get();
-        $engines = Engine::select('engines.*' , 'cylinders.cylinder' , 'engine_types.type')
-                        ->leftJoin('cylinders','engines.Cylinder_id','cylinders.id')
-                        ->leftJoin('engine_types','engines.Fuel','engine_types.id')
-                        ->get();
-        $seats = Seat::get();
-        $keys = Key::get();
-        $divertrims = Divertrim::get();
-        $sun_roofs = SunRoof::get();
-        $aircons = Aircon::get();
-        $sonars = Sonor::get();
-        $motors = Motor::get();
-        return view('admin.POS.Grade.details' , compact('functions','motors' , 'id' ,'transmissions','bodyStyles','engines','keys' , 'divertrims','seats', 'sun_roofs','aircons' , 'sonars'));
+        $datas = [] ;
+        $datas['functions'] = CarDetails::get();
+        $datas['transmissions'] = Transmission::get();
+        $datas['body_styles'] = BodyStyle::get(); 
+        $datas['cylinders'] =  Cylinder::get();
+        $datas['fuels'] =  Engine_type::get();
+        $datas['seats'] = Seat::get();
+        $datas['keys']= Key::get();
+        $datas['divertrims'] = Divertrim::get();
+        $datas['sun_roofs'] = SunRoof::get();
+        $datas['aircons'] = Aircon::get();
+        $datas['sonars'] = Sonor::get();
+        $datas['motors'] = Motor::get();
+        $datas['defaultFunctions'] = Default_function::get() ;
+        $datas['function_names'] = Function_Name::get();
+        $datas['engine_powers'] = EnginePower::get();
+        $datas['inputField'] = $inputs ;
+        return view('admin.POS.Grade.gradeForm',compact('datas'));
+        
     }
 
     /**

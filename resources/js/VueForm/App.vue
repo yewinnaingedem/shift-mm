@@ -1,22 +1,8 @@
 <template >
     <div class="container pt-3">
         <div class="step-container">
-            <ul class="step-list mb-4 mb-botton">
-                <li class="step" v-for="(step , index ) in steps" :key="step" :class="( index  == currentSteps ) ? 'step-active' : ' ' , (index < currentSteps) ? 'step-done' : ' ' "
-                >
-                    <div class="step-bubble"> {{ index + 1}}</div>
-                    <div class="step-line">
-                        <div class="line-fill">
-                            
-                        </div>
-                    </div>
-                    <div class="step-label">
-                        {{ step }}
-                    </div>
-                </li>
-            </ul>
-            <div class='min-height-350'>
-                <component :is="steps[currentSteps]" :datas="datas" :stepsProgess="stepProgess[currentSteps]"></component>
+            <div class='min-height-350 pt-3'>
+                <component :is="steps[currentSteps]" :datas="datas" @send-data="dataHandleFromChild" :stepsProgess="stepProgess[currentSteps]"></component>
             </div>
             <div class="container pt-2">
                 <div class="row">
@@ -69,6 +55,9 @@
                     },{
                         functions : [],
                         default_functions : [] ,
+                        advance : {
+                            exist : false ,
+                        } ,
                     }
                 ],
                 removeBar : false ,
@@ -97,6 +86,7 @@
                     type : "POST" ,
                     url  : "/api/end-point" ,
                     data : {
+                        gread : this.datas.inputField ,
                         vue1 : this.stepProgess[0] ,
                         vue2 : this.stepProgess[1] ,
                         vue3 : this.stepProgess[2],
@@ -108,6 +98,10 @@
                         console.log(error);
                     }
                 });
+            },
+            dataHandleFromChild (data) {
+                console.log(data);
+                this.stepProgess[2].advance = data ;
             }
         },
         props : {
@@ -173,9 +167,9 @@
     }
     .min-height-350 {
         min-height   : 350px ;
-        max-height:  440px;
+        max-height:  540px;
+        height: 540px;
         overflow-x: auto;
-        background: rgb(161, 156, 156);
         border-radius: 10px;
         padding-top: 5px;
     }
@@ -212,7 +206,7 @@
         justify-content: center;
     }
     .min-height-350::-webkit-scrollbar-track{
-        background: tomato;
+        background: whitesmoke;   
     }
     .min-height-350::-webkit-scrollbar-thumb {
         width: 10px;
@@ -223,7 +217,7 @@
         height: 5px;
     }
     ::-webkit-scrollbar-thumb {
-        background: #86efac;
+        background: black;
         color : #fff ;
         border-radius: 4px;
     }
