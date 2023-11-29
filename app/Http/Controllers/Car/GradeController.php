@@ -84,7 +84,7 @@ class GradeController extends Controller
         $datas['aircons'] = Aircon::get();
         $datas['sonars'] = Sonor::get();
         $datas['motors'] = Motor::get();
-        $datas['defaultFunctions'] = Default_function::get() ;
+        $datas['defaultFunctions'] = Default_function::first() ;
         $datas['function_names'] = Function_Name::get();
         $datas['engine_powers'] = EnginePower::get();
         $datas['inputField'] = $inputs ;
@@ -110,7 +110,8 @@ class GradeController extends Controller
         $datas['aircons'] = Aircon::get();
         $datas['sonars'] = Sonor::get();
         $datas['motors'] = Motor::get();
-        $datas['defaultFunctions'] = Default_function::get() ;
+        $datas['defaultFunctions'] = Default_function::first() ;
+        dd($datas['defaultFunctions']);
         $datas['function_names'] = Function_Name::get();
         $datas['engine_powers'] = EnginePower::get();
         return view('admin.POS.Grade.gradeForm',compact('datas'));

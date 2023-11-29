@@ -52,6 +52,7 @@
                         motor : null ,
                         aircon : null  ,
                         seat : null ,
+                        sonor  :null ,
                     },{
                         functions : [],
                         default_functions : [] ,
@@ -92,7 +93,7 @@
                         vue3 : this.stepProgess[2],
                     },
                     success : (res)  => {
-                        console.log(res);
+                        window.location.href = res.redirect ;
                     },
                     error : (error) => {
                         console.log(error);

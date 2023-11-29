@@ -144,7 +144,7 @@
                 },
                 deep : true ,
             }
-        }
+        },
     }
 </script>
 <style> 

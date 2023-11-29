@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('default_functions', function (Blueprint $table) {
             $table->id();
-            $table->string('function_name')->nullable();
             $table->boolean('air_conditioning');
             $table->boolean('power_steering');
             $table->boolean('power_windows');

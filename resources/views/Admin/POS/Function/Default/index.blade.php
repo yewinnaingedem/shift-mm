@@ -44,7 +44,6 @@
         <table id="example" class="display" style="width:100%">
             <thead>
                 <tr>
-                    <th>Function Name</th>
                     <th>Air Conditioning</th>
                     <th>Power_steering</th>
                     <th>Power_windows</th>
@@ -60,9 +59,6 @@
             <tbody>
                 @foreach($defaultFunctions as $defaultFunction)
                     <tr>
-                        <td class="editTd" style="position :relative ;" data-id="{{$defaultFunction->id}}">
-                             {{$defaultFunction->function_name}}
-                        </td>
                         @php
                             $ac = $defaultFunction->air_conditioning == 0 ? FALSE  : TRUE  ;
                         @endphp
@@ -145,7 +141,6 @@
             </tbody>
             <tfoot>
                 <tr>
-                    <th>Function Name</th>
                     <th>Air Conditioning</th>
                     <th>Power_steering</th>
                     <th>Power_windows</th>

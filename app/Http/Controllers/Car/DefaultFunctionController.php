@@ -47,7 +47,6 @@ class DefaultFunctionController extends Controller
             return redirect('admin/default-function/create')->withErrors($validation)->withInput() ;
         }
         $inputs  = [] ;
-        $inputs['function_name'] = $request['function_name'] == "TRUE" ? true : false ;
         $inputs['air_conditioning'] = $request['ac'] == "TRUE" ? true : false  ;
         $inputs['power_steering'] = $request['power_steering'] == "TRUE" ? true : false ;
         $inputs['power_windows'] = $request['power_windows'] == "TRUE" ? true : false ;

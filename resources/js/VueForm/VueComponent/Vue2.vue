@@ -84,6 +84,20 @@
             </div>
             <hr>
         </div>
+        <div class="row">
+            <div class="fw-bold mb-3 h-3 text-header">Define Sonors Condition !</div>
+            <div class="col-md-4 col-md-3 mb-3" v-for="(sonor  , index ) in datas['sonars']" :key="sonor.id">
+                <label :for="sonor.id + 'sonor'" class="d-flex justify-content-center align-items-center main-color p-10 rounded" 
+                    :class="(sonor.id === stepsProgess.sonor) ? 'bg-dark text-white' : ' ' "
+                >
+                    <input type="radio" v-model="stepsProgess.sonor"  :value="sonor.id" :id="sonor.id + 'sonor'" class="d-none">
+                    <div class="fw-bold text-sm-12">
+                        {{ sonor.sonar }}
+                    </div>
+                </label>
+            </div>
+            <hr>
+        </div>
     </div>
 
 </template>
@@ -101,6 +115,7 @@
                 required :true ,
             }
         },
+        
         
     }
 </script>
