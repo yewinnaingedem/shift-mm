@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon ;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Engine ;
+use App\Models\EnginePower ;
 use App\Models\Cylinder ;
 use App\Models\Engine_type ;
 use App\Http\Requests\EngineValidationRequest ;
@@ -18,8 +19,9 @@ class EngineController extends Controller
      */
     public function index()
     {
-        $engines = Engine::select('engines.Engine_power' , 'engines.created_at' , 'engines.id' , 'engines.Turbo' , 'cylinders.cylinder' , 'engine_types.type')
+        $engines = Engine::select('engines.Engine_power_id','engine.engine_power as engine_power' , 'engines.created_at' , 'engines.id' , 'engines.Turbo' , 'cylinders.cylinder' , 'engine_types.type')
                     ->leftJoin('engine_types' , 'engines.Fuel' , 'engine_types.id')
+                    ->leftJoin('engine_powers as engine','engines.Engine_power_id','engine.id')
                     ->leftJoin('cylinders','engines.Cylinder_id' , 'cylinders.id')
                     ->get();
         return view('admin.POS.AboutEngine.Engine.index',compact('engines'));
@@ -53,7 +55,10 @@ class EngineController extends Controller
          }
         $turbo = $request['Turbo'] ? true : false ;
         $inputs = [] ;
-        $inputs['Engine_power'] = $request['Engine_power'] ;
+        $inputs['Engine_power_id'] = EnginePower::insertGetId([
+            'engine_power' => $request['Engine_power'] ,
+            'created_at'   => Carbon::now() ,
+        ]) ;
         $inputs['Fuel'] = $request['Fuel'] ;
         $inputs['Cylinder_id'] = $request['Cylinder'];
         $inputs['Turbo'] = $turbo ;

@@ -62,7 +62,9 @@ class FunctionController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        
+        $detials = CarDetails::where('id',$id)->first();
+        return view('admin.POS.Function.Update')->with('details' , $detials)->with('id' , $id);
     }
 
     /**
@@ -70,7 +72,24 @@ class FunctionController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+
+        $validator = Validator::make(
+            $request->all() ,
+            [
+                'function' => 'required|unique:car_details,function,'.$id ,
+            ]
+        );
+        if($validator->fails()) {
+            return redirect('admin/function/'.$id.'/edit')->withErrors($validator)->withInput();
+        }
+        $time = Carbon::now();
+        $timeString = $time->format('d/m/Y');
+        $updated = [] ;
+        $updated['function'] = $request->function ;
+        $time = \Carbon\Carbon::createFromFormat('d/m/Y', $timeString);
+        $updated['updated_at'] = $time;
+        CarDetails::where('id',$id)->update($updated);
+        return redirect('admin/function')->with('message','You successfully updated the function row');
     }
 
     /**

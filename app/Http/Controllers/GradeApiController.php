@@ -8,6 +8,8 @@ use App\Models\Default_function;
 use App\Models\Car\CarFunction ;
 use App\Models\Engine ;
 use App\Models\Grade ;
+use Carbon\Carbon ;
+use Illuminate\Support\Arr;
 
 class GradeApiController extends Controller
 {
@@ -41,6 +43,7 @@ class GradeApiController extends Controller
         $grades['carModel_id'] = $grade['carModel_id'];
         // for default Functions 
         $default_functionSet = [] ;
+        $now = Carbon::now();
         $defaultFunId = 1 ;
         if($step3['advance']['exist'] == 'true' ) {
             $default_functionSet['air_conditioning'] = $step3['advance']['air_conditioning'] ;
@@ -54,6 +57,7 @@ class GradeApiController extends Controller
         }
         $grades['default_function_id'] = $defaultFunId ;
         $grades['grade'] = $grade['grade'] == 'false' ? "none" : $grade['grade'];
+        $grade['created_at'] = $now->day."/".$now->month."/".$now->year ;
         $gradeId = Grade::insertGetId($grades);
         // for car fuctures 
         $car_fuctures = [] ;
@@ -69,24 +73,27 @@ class GradeApiController extends Controller
         $car_fuctures['bodyStyle_id'] = $step1['body_style'] ;
         
         $engines = [] ;
-        $engines['Engine_power'] = $step1['engine']['engine_power'];
+        $engines['Engine_power_id'] = $step1['engine']['engine_power'];
         $engines['Cylinder_id'] = $step1['engine']['cylinder'];
         $engines['Fuel'] = $step1['engine']['fuel_type'];
         $engines['Turbo'] = $step1['engine']['turbo'] == "false" ? FALSE : TRUE;
 
         $car_fuctures['engine_id'] = Engine::insertGetId($engines);
-        if(count($step3['functions']) !== 0) {
-            foreach ($step3['functions'] as $key => $value) {
-                CarFunction::insert([
-                    'grade_id' =>  $gradeId,
-                    'car_detail_id' => $value
-                ]);
+        $existFunction = Arr::has($step3, 'functions');
+        if($existFunction) {
+            if(count($step3['functions']) !== 0) {
+                foreach ($step3['functions'] as $key => $value) {
+                    CarFunction::insert([
+                        'grade_id' =>  $gradeId,
+                        'car_detail_id' => $value
+                    ]);
+                }
             }
         }
         CarFucture::insert($car_fuctures);
         return response()->json([
             'message' => "You success" ,
-            'redirect' => '/admin/grade/create'
+            'redirect' => '/admin/grade'
         ]);
     }
 
@@ -120,5 +127,10 @@ class GradeApiController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function apiRoute($dataId) {
+        $data = Default_function::where('id',$dataId)->first();
+        return response()->json($data);
     }
 }

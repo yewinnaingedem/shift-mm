@@ -208,85 +208,132 @@
                                 <i class="fa-solid fa-circle-exclamation"></i>
                             </a>
                         </div>
+                        
+
                     </div>
                     <hr>
                     <div class="px-5">
                         <h2 class="text-2xl font-bold mb-6 mt-6  ">Top Feacture</h2>
                         <div class="grid grid-cols-2 ">
-                            <div class="flex items-center mb-2">
+                            
+                            <!-- <div class="flex items-center mb-2">
                                 <div class="">Prestige Package</div>
                                 <a href="" class="ml-5">
                                     <i class="fa-solid fa-circle-exclamation"></i>
                                 </a>
-                            </div>
+                            </div> -->
+                            @foreach($advanc as $ad)
                             <div class="flex items-center mb-2">
-                                <div class="">Driver Assistance Package</div>
-                                <a href="" class="ml-5">
-                                    <i class="fa-solid fa-circle-exclamation"></i>
+                                <a href="" class='font-bold hover:bg-main'>
+                                    {{$ad}}
                                 </a>
                             </div>
-                            <div class="flex items-center mb-2">
-                                <div class="">S Sport Package</div>
-                                <a href="" class="ml-5">
-                                    <i class="fa-solid fa-circle-exclamation"></i>
-                                </a>
-                            </div>
-                            <div class="flex items-center mb-2">
-                                <a href="">
-                                    Driver Vanity Mirror
-                                </a>
-                            </div>
-                            <div class="flex items-center mb-2">
-                                <a href="">
-                                    Luggage Rack
-                                </a>
-                            </div>
-                            <div class="flex items-center mb-2">
-                                <a href="">
-                                    Rear Defrost
-                                </a>
-                            </div>
-                            <div class="flex items-center mb-2">
-                                <a href="">
-                                    Driver Vanity Mirror
-                                </a>
-                            </div>
-                            <div class="flex items-center mb-2">
-                                <a href="">
-                                    Driver Vanity Mirror
-                                </a>
-                            </div>
-                            <div class="flex items-center mb-2">
-                                <a href="">
-                                    Passenger Illuminated Visor Mirror
-                                </a>
-                            </div>
-                            <div class="flex items-center mb-2">
-                                <a href="">
-                                    Stability Control
-                                </a>
-                            </div>
-                            <div class="flex items-center mb-2">
-                                <a href="">
-                                    Traction Control
-                                </a>
-                            </div>
-                            <div class="flex items-center mb-2">
-                                <a href="">
-                                    Locking/Limited Slip Differential
-                                </a>
-                            </div>
-                            <div class="flex items-center mb-2">
-                                <a href="">
-                                    Abs
-                                </a>
-                            </div>
+                            @endforeach 
                         </div>
-                        <div class="mt-3 mb-4">
-                            <a href="" class="capitalize border border-gray-500 shift-button rounded-lg font-bold ">View All ficuter</a>
+                        <!-- <div class="mt-3 mb-4">
+                            <button type="button" data-id="{{$df_id}}" class="capitalize border border-gray-500 shift-button rounded-lg font-bold " id="view_all">View All ficuter</button>
+                        </div> -->
+                        <!-- // Table  -->
+                        <div id="detailed-pricing" class="w-full overflow-x-auto py-2">
+                            <div class="overflow-hidden min-w-max">
+                                <div class="grid grid-cols-2 p-4 text-sm font-medium text-gray-900 bg-gray-100 border-t border-b border-gray-200 gap-x-16 dark:bg-gray-800 dark:border-gray-700 dark:text-white">
+                                    <div class="flex items-center">Function Name</div>
+                                    <div class="flex items-center">Yes</div>
+                                </div>
+                                <div class="grid grid-cols-2 px-4 py-5 text-sm text-gray-700 border-b border-gray-200 gap-x-16 dark:border-gray-700">
+                                    <div class="text-gray-500 dark:text-gray-400">Air Conditioning</div>
+                                    <!-- <div>
+                                        <svg class="w-3 h-3 text-green-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                                        </svg>
+                                    </div> -->
+                                    <div>
+                                        <svg class="w-3 h-3 text-green-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-2 px-4 py-5 text-sm text-gray-700 border-b border-gray-200 gap-x-16 dark:border-gray-700">
+                                    <div class="text-gray-500 dark:text-gray-400">Power Steering</div>
+                                    <!-- <div>
+                                        <svg class="w-3 h-3 text-green-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                                        </svg>
+                                    </div> -->
+                                    <div>
+                                        <svg class="w-3 h-3 text-green-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-2 px-4 py-5 text-sm text-gray-700 border-b border-gray-200 gap-x-16 dark:border-gray-700">
+                                    <div class="text-gray-500 dark:text-gray-400">Power Windows</div>
+                                    <!-- <div>
+                                        <svg class="w-3 h-3 text-green-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                                        </svg>
+                                    </div> -->
+                                    <div>
+                                        <svg class="w-3 h-3 text-green-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-2 px-4 py-5 text-sm text-gray-700 border-b border-gray-200 gap-x-16 dark:border-gray-700">
+                                    <div class="text-gray-500 dark:text-gray-400">Abs Brakes</div>
+                                    <!-- <div>
+                                        <svg class="w-3 h-3 text-green-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                                        </svg>
+                                    </div> -->
+                                    <div>
+                                        <svg class="w-3 h-3 text-green-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-2 px-4 py-5 text-sm text-gray-700 border-b border-gray-200 gap-x-16 dark:border-gray-700">
+                                    <div class="text-gray-500 dark:text-gray-400">Airbags</div>
+                                    <!-- <div>
+                                        <svg class="w-3 h-3 text-green-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                                        </svg>
+                                    </div> -->
+                                    <div>
+                                        <svg class="w-3 h-3 text-green-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-2 px-4 py-5 text-sm text-gray-700 border-b border-gray-200 gap-x-16 dark:border-gray-700">
+                                    <div class="text-gray-500 dark:text-gray-400">Navigation System</div>
+                                    <!-- <div>
+                                        <svg class="w-3 h-3 text-green-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                                        </svg>
+                                    </div> -->
+                                    <div>
+                                        <svg class="w-3 h-3 text-green-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-2 px-4 py-5 text-sm text-gray-700 border-b border-gray-200 gap-x-16 dark:border-gray-700">
+                                    <div class="text-gray-500 dark:text-gray-400">Bluetooth Connectivity</div>
+                                    <!-- <div>
+                                        <svg class="w-3 h-3 text-green-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                                        </svg>
+                                    </div> -->
+                                    <div>
+                                        <svg class="w-3 h-3 text-green-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <hr>
                     <div class="px-5">
                         <h2 class="text-2xl font-bold mt-10 mb-6 ">Vehicle History</h2>
                         <div class="grid grid-cols-1 text-base">
@@ -309,8 +356,8 @@
                     </div>
                 </div>
             </div>  
-            <div class="col-span-1 my-[135px] mx-2 border border-gray-500 hover:shadow-full rounded-xl flex justify-between flex-col mt-7 ">
-                <div class="w-100  p-6 h-[65%]">
+            <div class="col-span-1 my-[135px] mx-2 hover:shadow-full rounded-xl  flex-col mt-2 flex justify-center items-center ">
+                <div class="w-100  p-6 h-[65%]  border border-gray-500  rounded">
                     <div class="flex justify-between w-full ">
                         <div class="text-primary-60 font-bold text-neutral-90 text-3xl font-display price"> {{$sale->price}} </div>
                         <div>
@@ -478,4 +525,22 @@
 
 @section('script')
     <script src="{{asset('storage/Jquery/financing.js')}}"></script>
+    <script>
+        $(document).ready(()=> {
+            $('#view_all').click((e)=>{
+                let btn = $(e.currentTarget);
+                let dataId = btn.data('id') ;
+                $.ajax({
+                    type : "get" ,
+                    url : "/api/default_function/" + dataId ,
+                    success : (response) => {
+                        console.log(response);
+                    },
+                    error : (error) => {
+                        console.log(error);
+                    }
+                });
+            });
+        });
+    </script>
 @endsection 

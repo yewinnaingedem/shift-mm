@@ -43,7 +43,7 @@
                         <td>{{ $function->created_at }}</td>
                         <td>
                             <button class="btn btn-danger delete" data-id="{{$function->id}}">Delete</button>
-                            <a href="{{url('')}}" class="btn btn-primary">View</a>
+                            <a href="{{url('admin/function/'.$function->id.'/edit')}}" class="btn btn-primary">View</a>
                         </td>
                     </tr>
                 @endforeach
