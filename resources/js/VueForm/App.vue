@@ -7,7 +7,7 @@
             <div class="container pt-2">
                 <div class="row">
                     <div class="col-md-6" v-if="submitCheck">
-                        <button class="btn btn-primary" v-on:click="submit">Submit</button>
+                        <button class="btn btn-primary" v-on:click.once="submit">Submit</button>
                     </div>
                     <div class="col-md-6" v-else>
                         <button class="btn btn-primary" v-on:click.prevent="nextStep">Next</button>

@@ -315,10 +315,10 @@
                     <div class="mb-3">
                         <div class="flex items-center justify-between mb-2">
                             <div class="font-bold text-xl text-gray-600">Vehicle Price</div>
-                            <div>{{ $sale->price }} <span class="ml-2 font-bold">Kyats</span></div>
+                            <div> <span id="pirceID" class="font-extrabold"></span> <span class="ml-2 font-bold">Lakhs</span></div>
                         </div>
                         <div class="w-full ">
-                            <input class="block w-full" type="range" min="0" max="25000">
+                            <input class="block w-full" type="range" name="priceRange" min="200" max="3500" value="500">
                         </div>
                     </div>
                     <!-- Loan Month -->
@@ -371,11 +371,11 @@
                         <div class="py-3">
                             <div class="flex justify-between items-center ">
                                 <div class="font-bold text-lg text-gray-700">Vehicle Price</div>
-                                <div>3000000 <span class="ml-1 font-semibold">Kyats</span></div>
+                                <div> <span id="vehiclePrice" class="font-extrabold"></span> <span class="ml-1 font-semibold">Kyats</span></div>
                             </div>
                             <div class="flex justify-between items-center ">
                                 <div class="font-bold text-lg text-gray-700">Down Payments</div>
-                                <div>150000 <span class="ml-1 font-semibold">Kyats</span></div>
+                                <div> <span id="DownPayment" class='font-bold'></span> <span class="ml-1 font-semibold">Kyats</span></div>
                             </div>
                             <div class="flex justify-between items-center ">
                                 <div class="font-bold text-lg text-gray-700">Interest Rate</div>
@@ -383,7 +383,7 @@
                             </div>
                             <div class="flex justify-between items-center ">
                                 <div class="font-bold text-lg text-gray-700 ">Loan Amout</div>
-                                <div>3000000 <span class="ml-1">Kyats</span></div>
+                                <div><span id="loanAmount" class="font-bold"></span> <span class="ml-1">Kyats</span></div>
                             </div>
                             <hr class="mt-3">
                             
@@ -416,22 +416,22 @@
 @section('script')
     <script>
         $(document).ready(function () {
-            let makes = $('#makes');
-            let el_hy = $('#el_hy');
-            let luxury = $('#luxury');
-            let sedan = $('#sedan');
-            let coupe = $('#coupe');
-            let suv = $('#suv');
-            let truck = $('#truck');
-            let van = $('#van');
-            let convertibles = $('#convertibles');
-            let hatchback = $('#hatchback');
-            let data = false ;
-            
-            $('#makes').hover(function () {
-                $('#makes_ho').show();
-            },function (){
-                $('#makes_ho').hide();
+                let $pircRange = $("input[name='priceRange']");
+                $value = $pircRange.val() ;
+                $vhPirce = $value + "00000" ;
+                $('#pirceID').html($value.toLocaleString());
+                $('#vehiclePrice').html($vhPirce.toLocaleString());
+                $dp = $vhPirce * ( 50 / 100 ) ;
+                $('#DownPayment').html($dp.toLocaleString());
+            $(document).on('input' , $pircRange , ()=> {
+                $value = $pircRange.val() ;
+                $vhPirce = $value + "00000" ;
+                $('#pirceID').html($value.toLocaleString());
+                $('#vehiclePrice').html($vhPirce.toLocaleString());
+                $dp = $vhPirce * ( 50 / 100 ) ;
+                $loanAmount = $dp - $value ;
+                $('#DownPayment').html($dp.toLocaleString());
+                $('#loanAmount').html($loanAmount.toLocaleString());
             });
         });
     </script>
