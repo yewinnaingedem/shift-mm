@@ -386,14 +386,13 @@
                                 <div><span id="loanAmount" class="font-bold"></span> <span class="ml-1">Kyats</span></div>
                             </div>
                             <hr class="mt-3">
-                            
                             <div class="grid grid-cols-3 pt-3">
                                 <div class="flex flex-col col-span-2  justify-start items-center">
                                     <div class="font-bold">
                                         <h1 class="text-gray-700 text-[25px]">Estimated Monthly Payment</h1>
                                     </div>
                                     <div class="font-bold main-color text-[45px]">
-                                        500000 <span>Kyats</span>
+                                        <span id='estimetedMonth'></span> <span class="text-[25px]">Kyats</span>
                                     </div>
                                 </div>
                                 <div class="col-span-1 flex justify-center items-center">
@@ -418,21 +417,28 @@
         $(document).ready(function () {
                 let $pircRange = $("input[name='priceRange']");
                 $value = $pircRange.val() ;
-                $vhPirce = $value + "00000" ;
+                $vhPirce = $value * 100000 ;
                 $('#pirceID').html($value.toLocaleString());
                 $('#vehiclePrice').html($vhPirce.toLocaleString());
                 $dp = $vhPirce * ( 50 / 100 ) ;
                 $('#DownPayment').html($dp.toLocaleString());
             $(document).on('input' , $pircRange , ()=> {
                 $value = $pircRange.val() ;
-                $vhPirce = $value + "00000" ;
+                $vhPirce = $value * 100000 ;
                 $('#pirceID').html($value.toLocaleString());
                 $('#vehiclePrice').html($vhPirce.toLocaleString());
                 $dp = $vhPirce * ( 50 / 100 ) ;
-                $loanAmount = $dp - $value ;
+                $loanAmount = $vhPirce - $dp ;
                 $('#DownPayment').html($dp.toLocaleString());
                 $('#loanAmount').html($loanAmount.toLocaleString());
+                let emiValue = emi($loanAmount , 60 );
+                $('#estimetedMonth').html(emiValue.toLocaleString());
             });
+            function emi(fin_amo, months) {
+                const intestRate = 10 / 12 / 100; 
+                let emiValue = fin_amo * intestRate * (Math.pow(1 + intestRate, months) / (Math.pow(1 + intestRate, months) - 1));
+                return emiValue ;
+            }
         });
     </script>
 @endsection 

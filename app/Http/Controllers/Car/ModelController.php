@@ -43,11 +43,18 @@ class ModelController extends Controller
             $data['main'] = [ 'year'=>$make , 'make'=>$model , 'model'=>$year ] ;
             $data['exterior_colors'] = ExteriorColor::get();
             $brandId = CarModel::where('model_name',$year)->first('id');
+            $grade = Grade::where('carModel_id',$brandId->id)->count();
+            if($grade == 0) {
+                $modelX = CarModel::where('model_name' , $year)->first('id');
+                return redirect('admin/grade/create')->with('model',$modelX->id);
+            }
             $data['grades'] = Grade::where('carModel_id',$brandId->id)->get();
+            dd($data['grades']);
             $data['steerings'] = Steering::get();
             $data['transmissionTypes'] = TransmissionType::get();
             $data['id']  = $brandId ;
             $data['license-states'] = LicenseState::get();
+            
         return view('admin.cars.stepProgess',compact('data'));
     }
     public function leftJoin($id) {

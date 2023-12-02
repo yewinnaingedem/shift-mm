@@ -19,17 +19,20 @@
 
 @section('content')
     <div class="container mt-3" >
-        <a href="{{url('admin/grade')}}" class="btn btn-primary mb-3">
-            <i class="fa-sharp fa-solid fa-backward"></i>
-            <span>Back </span>
-        </a>
+        @php 
+            $getModel = session('model') ? session('model') : null ;
+        @endphp 
         <form action="{{url('admin/grade')}}"  method="post">
             @csrf 
             <div class="mb-3">
                 <label for="models" class="form-label">Add Model</label>
                 <select class="form-select" name="model" id="models" aria-label="Disabled select example" >
+                    
+
                     @foreach($models as $model)
-                        <option value="{{$model->id}}">{{$model->model_name}}</option>
+                        <option value="{{$model->id}}"
+                            {{ $model->id === $getModel ? "selected" : "" }}
+                        >{{$model->model_name , $getModel}}</option>
                     @endforeach
                 </select>
             </div>
@@ -44,8 +47,17 @@
                     <p class="text-danger">{{$errors->first('grade')}}</p>
                 @endif 
             </div>
-            <div class="mb-3">
-                <button class="btn btn-primary">Sumbit</button>
+            <div class="mb-3 row">
+                <div class="col-md-6">
+                    <button class="btn btn-primary">Sumbit</button> 
+                </div>
+                <div class="col-md-6 text-end">
+                    <a href="{{url('admin/grade')}}" class="btn btn-primary mb-3">
+                        <i class="fa-sharp fa-solid fa-backward"></i>
+                        <span>Back </span>
+                    </a>
+                </div>
+                
             </div>
         </form>
     </div>
