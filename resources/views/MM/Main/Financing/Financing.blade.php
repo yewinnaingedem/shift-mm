@@ -53,7 +53,7 @@
 @endsection 
 
 @section('content') 
-    <main class="">
+    <main class="sticky top-[60px] z-50">
         <div class="block px-5 pt-2 bg-white border-b-2 relative border-gray-300">
             <div class="flex items-center justify-between ">
                 <div id="makes" class="pb-3 border-b-0  ">
@@ -62,7 +62,7 @@
                 <div id="el_hy" class="pb-3 border-b-0  ">
                     <div class="el_hy relative" >Electric / Hybird </div>
                 </div>
-                <div id="luxury" class="pb-3 border-b-0   ">
+                <div id="luxury" class="pb-3 border-b-0">
                     <div class="luxury relative" >Luxury</div>
                 </div>
                 <div id="sedan" class="pb-3 border-b-0   ">

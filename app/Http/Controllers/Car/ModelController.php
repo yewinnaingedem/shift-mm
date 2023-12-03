@@ -45,11 +45,14 @@ class ModelController extends Controller
             $brandId = CarModel::where('model_name',$year)->first('id');
             $grade = Grade::where('carModel_id',$brandId->id)->count();
             if($grade == 0) {
-                $modelX = CarModel::where('model_name' , $year)->first('id');
-                return redirect('admin/grade/create')->with('model',$modelX->id);
+                $modelX = [];
+                $modelX['model'] = CarModel::where('model_name' , $year)->first('id')->id;
+                $modelX['year'] = $make ;
+                $modelX['make'] = $model ;
+                session()->put('modelX' , $modelX);
+                return redirect('admin/grade/create');
             }
             $data['grades'] = Grade::where('carModel_id',$brandId->id)->get();
-            dd($data['grades']);
             $data['steerings'] = Steering::get();
             $data['transmissionTypes'] = TransmissionType::get();
             $data['id']  = $brandId ;

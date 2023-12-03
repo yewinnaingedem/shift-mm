@@ -58,14 +58,13 @@ class GradeController extends Controller
             $request->all() ,
             [
                 'model' => 'required' ,
+                'exist_model' => 'required'
             ]
         );
 
         if($validator->fails()) {
-            dd('hi');
             return redirect('admin/grade/create')->withErrors($validator)->withInput();
         }
-
         $model_id = $request['model'] ;
         $inputs = [] ;
         $inputs['carModel_id'] = $model_id ;
@@ -88,6 +87,11 @@ class GradeController extends Controller
         $datas['function_names'] = Function_Name::get();
         $datas['engine_powers'] = EnginePower::get();
         $datas['inputField'] = $inputs ;
+        $modelGenerate = [] ;
+        $modelGenerate['model'] = CarModel::where('id',$model_id)->first('model_name');
+        // $modelGenerate['']
+        // $datas['grade_model'] = 
+        dd($modelGenerate);
         return view('admin.POS.Grade.gradeForm',compact('datas'));
         
     }

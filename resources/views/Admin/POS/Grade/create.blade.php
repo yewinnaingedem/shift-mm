@@ -19,20 +19,23 @@
 
 @section('content')
     <div class="container mt-3" >
-        @php 
-            $getModel = session('model') ? session('model') : null ;
-        @endphp 
+        
         <form action="{{url('admin/grade')}}"  method="post">
+            @if(session()->has('modelX'))
+                @php
+                    $modelX = session()->get('modelX');
+                @endphp
+                <input type="hidden" name="modelX['model]" value="{{$modelX['model']}}">
+                <input type="hidden" name="modelX" value="{{$modelX['year']}}">
+                <input type="hidden" name="modelX" value="{{$modelX['make']}}">
+            @endif
             @csrf 
             <div class="mb-3">
                 <label for="models" class="form-label">Add Model</label>
                 <select class="form-select" name="model" id="models" aria-label="Disabled select example" >
-                    
-
                     @foreach($models as $model)
                         <option value="{{$model->id}}"
-                            {{ $model->id === $getModel ? "selected" : "" }}
-                        >{{$model->model_name , $getModel}}</option>
+                        >{{$model->model_name}}</option>
                     @endforeach
                 </select>
             </div>
