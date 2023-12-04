@@ -9,6 +9,7 @@ use App\Models\Car\CarFunction ;
 use App\Models\Engine ;
 use App\Models\Grade ;
 use Carbon\Carbon ;
+use App\Models\CarModel ;
 use Illuminate\Support\Arr;
 
 class GradeApiController extends Controller
@@ -38,6 +39,9 @@ class GradeApiController extends Controller
         $step2 = $request['vue2'];
         $step3 = $request['vue3'];
         $grade = $request['gread'];
+        $modelX = $request['modelX'];
+
+        
         // for grade 
         $grades = [] ;
         $grades['carModel_id'] = $grade['carModel_id'];
@@ -89,6 +93,13 @@ class GradeApiController extends Controller
                     ]);
                 }
             }
+        }
+        if($modelX['test'] == "TRUE") {
+            $model = CarModel::where('id',$modelX['model'])->first();
+            return response()->json([
+                'message' => "You success" ,
+                'redirect' => '/admin/car/'. $modelX['year'] . '/' . $modelX['make'] . '/' . $model->model_name ,
+            ]);
         }
         CarFucture::insert($car_fuctures);
         return response()->json([

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Car;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Brand ;
+use Illuminate\Validation\Rule;
 use App\Models\CarModel ;
 use Carbon\Carbon ;
 use Illuminate\Support\Facades\Validator;
@@ -52,8 +53,8 @@ class CarModelController extends Controller
         $inputs['brand_id'] = $request['brand'] ;
         $inputs['model_name'] = $request['car_model'];
         $inputs['created_at'] = Carbon::now();
-
         CarModel::insert($inputs) ;
+        session()->forget('id');
         return redirect('admin/car_models')->with('message' , 'you created the record successfully');
 
     }
@@ -79,7 +80,27 @@ class CarModelController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validator = Validator::make(
+            $request->all() ,
+            [
+                'model_name' => [
+                    'required' ,
+                    Rule::unique('car_models')->ignore($id),
+                ]
+            ]
+        );
+        if($validator->fails()) {
+            return response()->json([
+                'errror' => $validator->errors()
+            ]);
+        }
+        $updated = [] ;
+        $updated['model_name'] = $request['model_name'] ;
+        $updated['created_at'] = Carbon::now() ;
+        CarModel::where('id' , $id)->update($updated);
+        return response()->json([
+            'success' => 'message successed' ,
+        ]);
     }
 
     /**
@@ -93,7 +114,10 @@ class CarModelController extends Controller
 
     public function modelSearch ($id) {
         $idSearch = CarModel::where('brand_id' , $id)->get();
-        
-        return response()->json($idSearch);
+        session()->put('id' , $id) ;
+        return response()->json([
+            'response' => $idSearch ,
+            'redirect' => '/admin/car_models/create',
+        ]);
     }
 }

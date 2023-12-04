@@ -49,8 +49,7 @@ class ModelController extends Controller
                 $modelX['model'] = CarModel::where('model_name' , $year)->first('id')->id;
                 $modelX['year'] = $make ;
                 $modelX['make'] = $model ;
-                session()->put('modelX' , $modelX);
-                return redirect('admin/grade/create');
+                return redirect('admin/grade/create')->with('modelX' , $modelX );
             }
             $data['grades'] = Grade::where('carModel_id',$brandId->id)->get();
             $data['steerings'] = Steering::get();

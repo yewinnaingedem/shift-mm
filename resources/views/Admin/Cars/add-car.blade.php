@@ -184,13 +184,17 @@
                         "_token" : "{{csrf_token()}}"
                     },
                     success : (res) => {
-                        let $innerHtml = `
-                                            
-                                            ${res.map(item => `
+                        if(res.response.length !== 0) {
+                            let $innerHtml = `
+                                            ${res.response.map(item => `
                                                 <option  value="${item.id}">${item.model_name}</option>
                                             `).join('')}
-                                        `;         
-                        $model.append($innerHtml);
+                                        `;      
+                            $model.append($innerHtml);
+                        }else {
+                            alert('Model are not defined yet') ;
+                            window.location.href = res.redirect ;
+                        }
                         $model.prop('disabled' , false);
                         $model.removeClass('cursor-not-allowed');
                     },

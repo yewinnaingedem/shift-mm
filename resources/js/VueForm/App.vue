@@ -7,7 +7,7 @@
             <div class="container pt-2">
                 <div class="row">
                     <div class="col-md-6" v-if="submitCheck">
-                        <button class="btn btn-primary" v-on:click.once="submit">Submit</button>
+                        <button class="btn btn-primary" v-on:click="submit">Submit</button>
                     </div>
                     <div class="col-md-6" v-else>
                         <button class="btn btn-primary" v-on:click.prevent="nextStep">Next</button>
@@ -88,6 +88,7 @@
                     url  : "/api/end-point" ,
                     data : {
                         gread : this.datas.inputField ,
+                        modelX : this.datas.modelX ,
                         vue1 : this.stepProgess[0] ,
                         vue2 : this.stepProgess[1] ,
                         vue3 : this.stepProgess[2],

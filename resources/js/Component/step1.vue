@@ -28,7 +28,7 @@
                 </div>
             </div>
         </div>
-        <div v-if="arrayData['grades'].length > 0 && arrayData['grades'][0].grade == 0">
+        <div v-if="arrayData['grades'].length > 0 && arrayData['grades'][0].grade == 'none'">
             <div class="alert alert-warning alert-dismissible fade show" role="alert">
                 <strong>Mingalar Car Sale Center !</strong> We detectived that doesn't have a grade
             </div>
@@ -247,7 +247,6 @@ export default {
                         } else {
                             // for step1
                             step1.millage = null;
-                            step1.grade = null;
                             step1.exterior_color = null;
                             step1.transmission = null;
                             // for step2

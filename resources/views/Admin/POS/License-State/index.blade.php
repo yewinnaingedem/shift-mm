@@ -115,6 +115,7 @@
                 var getId = row.data('id');
                 var id = 'editedId'+ getId ;
                 var input = $(this).text();
+                console.log(input);
                 var textarea = (value , id ) => {
                     return `<textarea id="${id}"  rows="2">${value}</textarea>`;                  
                 } ;

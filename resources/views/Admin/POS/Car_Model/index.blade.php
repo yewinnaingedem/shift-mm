@@ -26,8 +26,6 @@
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         @endif 
-        
-            
         <table id="example" class="display" style="width:100%">
             <thead>
                 <tr>
@@ -38,14 +36,15 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($car_models as $models)
+                @foreach($car_models as $model)
                     <tr>
-                        <td> {{ $models->brand_name}}</td>
-                        <td> {{$models->model_name}}</td>
-                        <td>{{ $models->created_at }}</td>
+                        <td> {{ $model->brand_name}}</td>
+                        <td >
+                            <div data-id="{{$model->id}}" class="modelName">{{$model->model_name}}</div>
+                        </td>
+                        <td>{{ $model->created_at }}</td>
                         <td>
-                            <button class="btn btn-danger delete" data-id="{{$models->id}}">Delete</button>
-                            <a href="{{url('')}}" class="btn btn-primary">View</a>
+                            <button class="btn btn-danger delete" data-id="{{$model->id}}">Delete</button>
                         </td>
                     </tr>
                 @endforeach
@@ -117,6 +116,49 @@
                     });
                 }
             ));
+
+            $(document).on('dblclick','.modelName',function (e) {
+                var row = $(e.currentTarget) ;
+                var getId = row.data('id');
+                var id = 'editedId'+ getId ;
+                var input = $(this).text();
+                console.log(input);
+                var textarea = (value , id ) => {
+                    return `<textarea id="${id}"  rows="1">${value}</textarea>`;                  
+                } ;
+                row.html(`${textarea(input , id)}`);
+                $('#'+id).focus();
+                $('#'+id).blur(function () {
+                    var $value = $(this).val();
+                    if($value !== '') {
+                        $.ajax({
+                            type : "PUT" ,
+                            url : "/admin/car_models/" + getId ,
+                            data : {
+                                '_token' : "{{csrf_token()}}" ,
+                                'model_name' : $value
+                            },
+                            success : (response) => {
+                                if(response.state_code == 304 ) {
+                                  return "Sorry" ;
+                                }
+                                return  row.html($value);
+                            },
+                            error : (error) => {
+                                console.log(error);
+                            }
+                        });
+                    }else {
+                        row.html('fuck');
+                    }
+                    
+                });
+                $('#' + id).keypress(function (e) {
+                    if (e.which === 13) {
+                        $(this).blur();
+                    }
+                });
+            });
         });
     </script>
 @endsection 

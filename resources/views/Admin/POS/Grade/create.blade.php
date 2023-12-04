@@ -19,15 +19,17 @@
 
 @section('content')
     <div class="container mt-3" >
-        
         <form action="{{url('admin/grade')}}"  method="post">
-            @if(session()->has('modelX'))
-                @php
+            @if(session('modelX'))
+                @php 
                     $modelX = session()->get('modelX');
-                @endphp
-                <input type="hidden" name="modelX['model]" value="{{$modelX['model']}}">
-                <input type="hidden" name="modelX" value="{{$modelX['year']}}">
-                <input type="hidden" name="modelX" value="{{$modelX['make']}}">
+                @endphp 
+                <input type="hidden" name="modelX[model]" value="{{$modelX['model']}}">
+                <input type="hidden" name="modelX[year]" value="{{$modelX['year']}}">
+                <input type="hidden" name="modelX[make]" value="{{$modelX['make']}}">
+                <input type="hidden" name="modelX[test]" value="TRUE">
+            @else
+                <input type="hidden" name="modelX[test]" value="FALSE">
             @endif
             @csrf 
             <div class="mb-3">
