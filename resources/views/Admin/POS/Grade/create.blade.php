@@ -37,6 +37,9 @@
                 <select class="form-select" name="model" id="models" aria-label="Disabled select example" >
                     @foreach($models as $model)
                         <option value="{{$model->id}}"
+                        @if(session()->has('model')) 
+                            {{ $model->id == $modelX['model'] ? "selected" : " "}}
+                        @endif 
                         >{{$model->model_name}}</option>
                     @endforeach
                 </select>

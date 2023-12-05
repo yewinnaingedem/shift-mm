@@ -43,8 +43,19 @@
                         <td>{{$position->created_by}}</td>
                         <td>{{ $position->created_at }}</td>
                         <td>
-                            <button class="btn btn-danger delete" data-id="{{$position->id}}">Delete</button>
-                            <a href="{{url('admin/positions/'.$position->id.'/edit')}}" class="btn btn-primary">Update</a>
+                            <li class="nav-item  list-style-none">
+                                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
+                                    <i class="fa-solid fa-list"></i>
+                                </a>
+                                <ul class="dropdown-menu ">
+                                    <li>
+                                        <a href="{{url('admin/positions/'.$position->id.'/edit')}}" class="dropdown-item">Update</a>
+                                    </li>
+                                    <li >
+                                        <button class="dropdown-item delete" data-id="{{$position->id}}">Delete</button>
+                                    </li>
+                                </ul>
+                            </li>
                         </td>
                     </tr>
                 @endforeach

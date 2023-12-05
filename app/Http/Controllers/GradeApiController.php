@@ -72,6 +72,7 @@ class GradeApiController extends Controller
         $car_fuctures['key_id'] = $step2['key'] ;
         $car_fuctures['aircon_id'] = $step2['aircon'] ;
         $car_fuctures['motor_id'] = $step2['motor'] ;
+        $car_fuctures['camera_id'] = $step2['camera'];
         $car_fuctures['transmission_id'] = $step1['transmission'] ;
         $car_fuctures['divertrim_id'] = $step2['divertrim'] ;
         $car_fuctures['bodyStyle_id'] = $step1['body_style'] ;

@@ -4,6 +4,17 @@
 
 @section('style')
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <style>
+        .list-style-none {
+            list-style : none ;
+        }
+        .dropdown-toggle::after {
+            display : none ;
+        }
+        .delete:hover  {
+            background : tomato ;
+        }
+    </style>
 @endsection 
 
 @section('navbar') 
@@ -43,8 +54,21 @@
                             <div data-id="{{$model->id}}" class="modelName">{{$model->model_name}}</div>
                         </td>
                         <td>{{ $model->created_at }}</td>
-                        <td>
-                            <button class="btn btn-danger delete" data-id="{{$model->id}}">Delete</button>
+                        <td class="text-center">
+                            <li class="nav-item  list-style-none">
+                                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
+                                    <i class="fa-solid fa-list"></i>
+                                </a>
+                                <ul class="dropdown-menu ">
+                                    <li>
+                                        <a class="dropdown-item" href="#">View</a>
+                                    </li>
+                                    <li >
+                                        <button class="dropdown-item delete" data-id="{{$model->id}}">Delete</button>
+                                    </li>
+                                </ul>
+                            </li>
+                            
                         </td>
                     </tr>
                 @endforeach

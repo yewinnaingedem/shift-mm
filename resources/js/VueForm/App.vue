@@ -4,7 +4,7 @@
             <div class='min-height-350 pt-3'>
                 <component :is="steps[currentSteps]" :datas="datas" @send-data="dataHandleFromChild" :stepsProgess="stepProgess[currentSteps]"></component>
             </div>
-            <div class="container pt-2">
+            <div class="container mb-3">
                 <div class="row">
                     <div class="col-md-6" v-if="submitCheck">
                         <button class="btn btn-primary" v-on:click="submit">Submit</button>
@@ -53,6 +53,7 @@
                         aircon : null  ,
                         seat : null ,
                         sonor  :null ,
+                        camera : null ,
                     },{
                         functions : [],
                         default_functions : [] ,
@@ -83,6 +84,41 @@
                 }
             },
             submit () {
+                swal({
+                    title: "Are you sure?",
+                    text: "You will not be able to recover this imaginary file!",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Yes, delete it!",
+                    cancelButtonText: "No, cancel plx!",
+                    closeOnConfirm: false,
+                    closeOnCancel: false
+                    },
+                    function(isConfirm){
+                        if (isConfirm) {
+                            $.ajax({
+                                type : "POST" ,
+                                url  : "/api/end-point" ,
+                                data : {
+                                    gread : this.datas.inputField ,
+                                    modelX : this.datas.modelX ,
+                                    vue1 : this.stepProgess[0] ,
+                                    vue2 : this.stepProgess[1] ,
+                                    vue3 : this.stepProgess[2],
+                                },
+                                success : (res)  => {
+                                    window.location.href = res.redirect ;
+                                },
+                                error : (error) => {
+                                    console.log(error);
+                                }
+                            });
+                                swal("Deleted!", "Your imaginary file has been deleted.", "success");
+                        } else {
+                            swal("Cancelled", "Your imaginary file is safe :)", "error");
+                        }
+                    });
                 $.ajax({
                     type : "POST" ,
                     url  : "/api/end-point" ,
@@ -211,12 +247,16 @@
         background: whitesmoke;   
     }
     .min-height-350::-webkit-scrollbar-thumb {
-        width: 10px;
+        width: 1px;
         border-radius: 10px
     }
     ::-webkit-scrollbar  {
-        width: 5px ;
+        width: 10px ;
         height: 5px;
+    }
+    ::-webkit-scrollbar:hover {
+        width: 10px;
+        border-radius: 10px;
     }
     ::-webkit-scrollbar-thumb {
         background: black;

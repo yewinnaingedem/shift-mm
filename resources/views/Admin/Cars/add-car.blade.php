@@ -192,7 +192,7 @@
                                         `;      
                             $model.append($innerHtml);
                         }else {
-                            alert('Model are not defined yet') ;
+                            swal("Here's a message!", "Model are not defined yet")
                             window.location.href = res.redirect ;
                         }
                         $model.prop('disabled' , false);

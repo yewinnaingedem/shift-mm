@@ -19,21 +19,26 @@
 
 @section('content')
     <div class="container mt-3" >
-        <a href="{{url('admin/camera')}}" class="btn btn-primary mb-3">
-            <i class="fa-sharp fa-solid fa-backward"></i>
-            <span>Back </span>
-        </a>
+        
         <form action="{{url('admin/camera')}}"  method="post">
             @csrf 
             <div class="mb-3">
-                <label for="camera" class="form-label">Sonar</label>
-                <input type="text" name="camera" id="camera" placeholder="Add Sonar" class="form-control" value="{{old('camera')}}">
+                <label for="camera" class="form-label">Camera </label>
+                <input type="text" name="camera" id="camera" placeholder="Add Camera" class="form-control" value="{{old('camera')}}">
                 @if($errors->has('camera'))
                     <p class="text-danger">{{$errors->first('camera')}}</p>
                 @endif 
             </div>
-            <div class="mb-3">
-                <button class="btn btn-primary">Sumbit</button>
+            <div class="mb-3 row">
+                <div class="col-md-6">
+                    <button class="btn btn-primary">Sumbit</button>
+                </div>
+                <div class="col-md-6 text-end">
+                    <a href="{{url('admin/camera')}}" class="btn btn-primary mb-3">
+                        <i class="fa-sharp fa-solid fa-backward"></i>
+                        <span>Back </span>
+                    </a>
+                </div>
             </div>
         </form>
     </div>

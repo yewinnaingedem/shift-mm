@@ -46,8 +46,19 @@
                         <td>{{ $sun_roof->created_at }}</td>
                         <td>{{$sun_roof->updated_at}}</td>
                         <td>
-                            <button class="btn btn-danger delete" data-id="{{$sun_roof->id}}">Delete</button>
-                            <a href="{{url('admin/sun_roof/'. $sun_roof->id .'/edit')}}" class="btn btn-primary">Edit</a>
+                            <li class="nav-item  list-style-none">
+                                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
+                                    <i class="fa-solid fa-list"></i>
+                                </a>
+                                <ul class="dropdown-menu ">
+                                    <li>
+                                        <a href="{{url('admin/sun_roof/'. $sun_roof->id .'/edit')}}" class="dropdown-item">Edit</a>
+                                    </li>
+                                    <li >
+                                        <button class="dropdown-item delete" data-id="{{$sun_roof->id}}">Delete</button>
+                                    </li>
+                                </ul>
+                            </li>
                         </td>
                     </tr>
                 @endforeach

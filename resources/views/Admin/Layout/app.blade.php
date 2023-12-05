@@ -11,6 +11,17 @@
         <title>@yield('title')</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
         <link href="{{asset('storage/admin/css/styles.css')}}" rel="stylesheet" />
+        <style>
+            .list-style-none {
+                list-style : none ;
+            }
+            .dropdown-toggle::after {
+                display : none ;
+            }
+            .delete:hover  {
+                background : tomato ;
+            }
+        </style>
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
         @yield('style')
     </head>

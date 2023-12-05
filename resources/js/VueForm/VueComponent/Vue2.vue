@@ -98,6 +98,20 @@
             </div>
             <hr>
         </div>
+        <div class="row">
+            <div class="fw-bold mb-3 h-3 text-header">Define Camera Condition !</div>
+            <div class="col-md-4 col-md-3 mb-3" v-for="(camera  , index ) in datas['cameras']" :key="camera.id">
+                <label :for="camera.id + 'camera'" class="d-flex justify-content-center align-items-center main-color p-10 rounded" 
+                    :class="(camera.id === stepsProgess.camera) ? 'bg-dark text-white' : ' ' "
+                >
+                    <input type="radio" v-model="stepsProgess.camera"  :value="camera.id" :id="camera.id + 'camera'" class="d-none">
+                    <div class="fw-bold text-sm-12">
+                        {{ camera.camera }}
+                    </div>
+                </label>
+            </div>
+            <hr>
+        </div>
     </div>
 
 </template>
@@ -115,8 +129,6 @@
                 required :true ,
             }
         },
-        
-        
     }
 </script>
 

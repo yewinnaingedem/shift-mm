@@ -16,6 +16,7 @@ use App\Models\SunRoof ;
 use App\Models\Sonor ;
 use App\Models\CarDetails ;
 use App\Models\Aircon ;
+use App\Models\Camera ;
 use App\Models\Cylinder ;
 use App\Models\Engine_type ;
 use App\Models\Motor ;
@@ -87,6 +88,7 @@ class GradeController extends Controller
         $datas['function_names'] = Function_Name::get();
         $datas['engine_powers'] = EnginePower::get();
         $datas['inputField'] = $inputs ;
+        $datas['cameras'] = Camera::get();
         $modelX = [] ;
         if($request['modelX']['test'] == "TRUE"){
             $modelX['model'] = $request['modelX']['model'] ;

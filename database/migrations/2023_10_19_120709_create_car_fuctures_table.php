@@ -21,6 +21,7 @@ return new class extends Migration
             $table->unsignedBigInteger('aircon_id');
             $table->unsignedBigInteger('motor_id');
             $table->unsignedBigInteger('transmission_id');
+            $table->unsignedBigInteger('camera_id');
             $table->unsignedBigInteger('divertrim_id');
             $table->unsignedBigInteger('bodyStyle_id');
             $table->unsignedBigInteger('engine_id');
@@ -37,6 +38,7 @@ return new class extends Migration
             $table->foreign('divertrim_id')->references('id')->on('divertrims');
             $table->foreign('bodyStyle_id')->references('id')->on('body_styles');
             $table->foreign('engine_id')->references('id')->on('engines');
+            $table->foreign('camera_id')->references('id')->on('cameras');
             
         });
     }

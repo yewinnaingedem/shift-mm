@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Condition;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Camera ;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
+use Carbon\Carbon ;
 
 class CameraController extends Controller
 {
@@ -66,7 +69,7 @@ class CameraController extends Controller
      */
     public function edit(string $id)
     {
-        $camera = Camera::where('id',$id)->firs();
+        $camera = Camera::where('id',$id)->first();
         return view('admin.POS.Condition.Camera.update',compact('camera'));
     }
 
@@ -80,9 +83,7 @@ class CameraController extends Controller
             [
                 'camera' => [
                     'required' ,
-                    Rule::unique('cameras')->where(function ($query) {
-                        return $query->where('camera',request('camera'));
-                    }),
+                    Rule::unique('cameras')->ignore($id),
                 ],
             ],
         );

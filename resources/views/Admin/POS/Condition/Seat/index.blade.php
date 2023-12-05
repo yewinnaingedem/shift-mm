@@ -46,8 +46,19 @@
                         <td>{{ $seat->created_at }}</td>
                         <td>{{$seat->updated_at}}</td>
                         <td>
-                            <button class="btn btn-danger delete" data-id="{{$seat->id}}">Delete</button>
-                            <a href="{{url('admin/seat/'. $seat->id .'/edit')}}" class="btn btn-primary">Edit</a>
+                            <li class="nav-item  list-style-none">
+                                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
+                                    <i class="fa-solid fa-list"></i>
+                                </a>
+                                <ul class="dropdown-menu ">
+                                    <li>
+                                        <a href="{{url('admin/seat/'. $seat->id .'/edit')}}" class="dropdown-item">Edit</a>
+                                    </li>
+                                    <li >
+                                        <button class="dropdown-item delete" data-id="{{$seat->id}}">Delete</button>
+                                    </li>
+                                </ul>
+                            </li>
                         </td>
                     </tr>
                 @endforeach
