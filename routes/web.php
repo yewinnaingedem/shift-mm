@@ -17,6 +17,7 @@ use App\Http\Controllers\Car\CarModelController;
 use App\Http\Controllers\Api\AddCarController ;
 use App\Http\Controllers\Car\GradeController ;
 use App\Http\Controllers\Car\FunctionController ;
+use App\Http\Controllers\Search\SearchController ;
 use App\Http\Controllers\Condition\SeatController ;
 use App\Http\Controllers\Condition\KeyController ;
 use App\Http\Controllers\Condition\SunRoofController ;
@@ -29,8 +30,6 @@ use App\Http\Controllers\Car\CarImageItemController ;
 use App\Http\Controllers\Car\SoldOutController ;
 use App\Http\Controllers\Car\DefaultFunctionController;
 use App\Http\Controllers\Car\licenseStateController;
-
-
 
 
 Route::get('/google' , [AuthController::class , 'googleLogIn']);
@@ -85,6 +84,7 @@ Route::prefix('admin')->group(function (){
     Route::resource('saled' , SaledController::class);
     Route::resource('default-function' , DefaultFunctionController::class );
     Route::resource('license-state' , licenseStateController::class);
+    Route::get('search/{query}', [SearchController::class , 'search'] );
 });
 
 ?> 

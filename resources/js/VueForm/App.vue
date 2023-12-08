@@ -84,41 +84,41 @@
                 }
             },
             submit () {
-                swal({
-                    title: "Are you sure?",
-                    text: "You will not be able to recover this imaginary file!",
-                    type: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "Yes, delete it!",
-                    cancelButtonText: "No, cancel plx!",
-                    closeOnConfirm: false,
-                    closeOnCancel: false
-                    },
-                    function(isConfirm){
-                        if (isConfirm) {
-                            $.ajax({
-                                type : "POST" ,
-                                url  : "/api/end-point" ,
-                                data : {
-                                    gread : this.datas.inputField ,
-                                    modelX : this.datas.modelX ,
-                                    vue1 : this.stepProgess[0] ,
-                                    vue2 : this.stepProgess[1] ,
-                                    vue3 : this.stepProgess[2],
-                                },
-                                success : (res)  => {
-                                    window.location.href = res.redirect ;
-                                },
-                                error : (error) => {
-                                    console.log(error);
-                                }
-                            });
-                                swal("Deleted!", "Your imaginary file has been deleted.", "success");
-                        } else {
-                            swal("Cancelled", "Your imaginary file is safe :)", "error");
-                        }
-                    });
+                // swal({
+                //     title: "Are you sure?",
+                //     text: "You will not be able to recover this imaginary file!",
+                //     type: "warning",
+                //     showCancelButton: true,
+                //     confirmButtonColor: "#DD6B55",
+                //     confirmButtonText: "Yes, delete it!",
+                //     cancelButtonText: "No, cancel plx!",
+                //     closeOnConfirm: false,
+                //     closeOnCancel: false
+                //     },
+                //     function(isConfirm){
+                //         if (isConfirm) {
+                //             $.ajax({
+                //                 type : "POST" ,
+                //                 url  : "/api/end-point" ,
+                //                 data : {
+                //                     gread : this.datas.inputField ,
+                //                     modelX : this.datas.modelX ,
+                //                     vue1 : this.stepProgess[0] ,
+                //                     vue2 : this.stepProgess[1] ,
+                //                     vue3 : this.stepProgess[2],
+                //                 },
+                //                 success : (res)  => {
+                //                     window.location.href = res.redirect ;
+                //                 },
+                //                 error : (error) => {
+                //                     console.log(error);
+                //                 }
+                //             });
+                //                 swal("Deleted!", "Your imaginary file has been deleted.", "success");
+                //         } else {
+                //             swal("Cancelled", "Your imaginary file is safe :)", "error");
+                //         }
+                //     });
                 $.ajax({
                     type : "POST" ,
                     url  : "/api/end-point" ,
