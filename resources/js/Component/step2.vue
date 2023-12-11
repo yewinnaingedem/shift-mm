@@ -1,4 +1,6 @@
-
+<script setup>
+    import { fields } from './Form/Wrapper';
+</script>
 <template>
     <div class="row  mt-3">
         <div class="col-md-6 mb-3">
@@ -44,10 +46,6 @@
 <script>
 export default ({
     props: {
-        data: {
-            type : Object ,
-            required: true,
-        },
         arrayData  : {
             type : Array , 
             required : true ,

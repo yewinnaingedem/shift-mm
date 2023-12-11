@@ -35,6 +35,7 @@ use App\Http\Controllers\Car\licenseStateController;
 Route::get('/google' , [AuthController::class , 'googleLogIn']);
 Route::prefix('mm_cars')->group(function () {
     Route::get('/' , [MMCarsController::class , 'index']);
+    Route::get('shop_mm' , [MMCarsController::class , 'shopMM']);
     Route::get('/log-in' , [AuthController::class , 'index']); 
     Route::post('log-in',[AuthController::class , 'logIn']);
     Route::get('/redirect/google', [AuthController::class , 'redirectGoogle']);

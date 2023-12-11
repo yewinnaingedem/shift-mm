@@ -1,3 +1,6 @@
+<script setup>
+    import { fields } from './Wrapper';
+</script>
 <template>
     <div class="row w-100 m-0">
         <div class="col-md-4 bg-main position-sticky top-0 bottom-0 main-color w-full vh-100">
@@ -27,10 +30,9 @@
                 </div>
             </div>
             <div class="main w-75 m-auto pt-20">
-                <component v-bind:is="steps[currentStep]" :forSpecific="field" :data="field[currentStep]" :arrayData="data" ></component>
+                <component v-bind:is="steps[currentStep]" :forSpecific="field"  :arrayData="data" ></component>
                 <div class="row mb-5 mt-3">
                     <div class="d-flex justify-content-start align-items-center col-md-6"
-                        
                      >
                         <button class="btn btn-primary" v-show="currentStep < steps.length-1" @click="nextStep">Next Step</button>
                         <div
@@ -93,35 +95,6 @@
                 toggleVisitable : false ,
                 nextVisibality : false ,
                 currentStep : 0 ,
-                field : [
-                    {
-                        license : null ,
-                        millage : null ,
-                        preDefindedColor :  false ,
-                        ownColor : 'none' ,
-                        grade : this.data['grades'][0].grade,
-                        exterior_color: null ,
-                        transmission : null ,
-                    } ,
-                    {
-                        license_state : null ,
-                        steering : null ,
-                        warranty  : null ,
-                        pass_owner : null ,
-                        madeIn : null ,
-                        num_seat : null ,
-                        font_break : null ,
-                        back_break : null ,
-                    },
-                    {
-                        interior_color : null ,
-                        VIN : null ,
-                        engine_exception : 'none' ,
-                        license_exception : 'none',
-                        exception : 'none' ,
-                    }
-                ] ,
-                
             }
         },
         components : {
@@ -181,7 +154,7 @@
                 handler ( ) {
                     this.checkNull();
                 }
-            }
+            } ,
         },
         props : {
             data : {

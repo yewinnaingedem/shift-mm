@@ -19,7 +19,7 @@
                     </a>
                 </div>
                 <ul class="list-none text-sm   2xl:block ">
-                    <li class="inline-block px-3 "><a id="shop_cars" href="">Shop Cars</a></li>
+                    <li class="inline-block px-3 "><a id="shop_cars" href="{{url('mm_cars/shop_mm')}}">Shop Cars</a></li>
                     <li class="inline-block px-3 "><a href="">Sell & Trade </a></li>
                     <li class="inline-block px-3 "><a href="{{url('mm_cars/financing')}}">Financing</a></li>
                     <li class="inline-block px-3 "><a href="">How Shop MM Work?</a></li>

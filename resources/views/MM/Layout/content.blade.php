@@ -3,7 +3,6 @@
         <!-- cart1 -->
         @foreach ($datas as $data)
             <div class="rounded-xl shadow-md hover:shadow-xl bg-white flex flex-col">
-                
                 <!-- header -->
                 <div class="for-cars-slide">
                     <div class="w-full overflow-hidden  rounded-xl  " >

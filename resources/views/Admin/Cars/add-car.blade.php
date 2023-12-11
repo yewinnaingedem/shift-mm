@@ -192,8 +192,24 @@
                                         `;      
                             $model.append($innerHtml);
                         }else {
-                            swal("Here's a message!", "Model are not defined yet")
-                            window.location.href = res.redirect ;
+                            swal({
+                                    title: "Are you sure?",
+                                    text: "You have not added the model yet ",
+                                    type: "warning",
+                                    showCancelButton: true,
+                                    confirmButtonColor: "#DD6B55",
+                                    confirmButtonText: "Go To Next Step",
+                                    cancelButtonText: "No, cancel It",
+                                    closeOnConfirm: false,
+                                    closeOnCancel: false
+                                },
+                                function(isConfirm){
+                                    if (isConfirm) {
+                                        window.location.href = res.redirect ;
+                                    } else {
+                                        window.location.href = "http://localhost:8000/admin/add-cars" ;
+                                    }
+                                });
                         }
                         $model.prop('disabled' , false);
                         $model.removeClass('cursor-not-allowed');

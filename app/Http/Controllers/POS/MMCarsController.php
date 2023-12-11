@@ -13,7 +13,7 @@ class MMCarsController extends Controller
     public function pageLimit ($num) {
         return $num ;
     }
-    public function index() {
+    public function shopMM() {
         $datas = Sale::select('sales.id as sale_id' ,'sales.price', 'car_models.*' , 'brands.*','owner_books.*','transmission_types.*','grades.grade as main_grade','items.*','car_images.*','cars.*'
                 ,'license_states.*'
                 )
@@ -28,5 +28,10 @@ class MMCarsController extends Controller
                 ->leftJoin('grades','items.grade','grades.id')
                 ->paginate($this->pageLimit(8));
         return view('MM.index')->with('datas',$datas);
+        
+    }
+
+    public function index () {
+        return view('MM.main');
     }
 }

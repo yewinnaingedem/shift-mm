@@ -1,3 +1,6 @@
+<script setup>
+    import { fields } from './Form/Wrapper';
+</script>
 <template>
     <div class="mb-3 mt-3">
         <label for="interior" class="form-label"> Interior Color </label>
@@ -24,10 +27,6 @@
 <script >
     export default {
         props : {
-            data : {
-                type : Object ,
-                required : true ,
-            } ,
             arrayData : {
                 type : Array ,
                 required : true ,

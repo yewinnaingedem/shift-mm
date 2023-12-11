@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        
+        <link rel="stylesheet" href="{{asset('storage/style/main.css')}}">
         <link rel="stylesheet" type="text/css" href="https://common.olemiss.edu/_js/sweet-alert/sweet-alert.css">
         <title>@yield('title')</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
@@ -29,6 +29,10 @@
         <!-- navBar -->
         @section('navbar') 
             @include('Admin.Layout.navbar')
+        @show 
+
+        @section ('loader')
+            @include('Admin.Layout.loader')
         @show 
         <!-- End NavBar -->
         <div id="layoutSidenav">
@@ -59,5 +63,13 @@
         <script src="https://common.olemiss.edu/_js/sweet-alert/sweet-alert.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
         @yield('script')
+        <script>
+            $(document).ready(()=> {
+                $('.body').show();
+                $(window).on('load' , function () {
+                    $('.body').hide();
+                });
+            });
+        </script>
     </body>
 </html>
