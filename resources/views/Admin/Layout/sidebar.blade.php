@@ -8,9 +8,9 @@
                     Car Add 
                 </a>
                 <!-- Car CarItemController -->
-                <a class="nav-link collapsed" href="{{url('admin/cars')}}" >
+                <a class="nav-link collapsed" href="{{url('admin/before_sale')}}" >
                     <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                     Car Item    
+                     Before Sale
                 </a>
                 <!-- CarsellController -->
                 <a class="nav-link collapsed" href="{{url('admin/car_sells')}}" >

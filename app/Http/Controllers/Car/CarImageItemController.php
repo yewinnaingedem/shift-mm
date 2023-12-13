@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Car\Car ;
 use Carbon\Carbon ;
 use App\Models\CarImage ;
+use App\Models\Before_Sale ;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
@@ -46,7 +47,6 @@ class CarImageItemController extends Controller
             $validatedData = $request->validate([
                 'img.' . $key => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust file types and size as needed
             ]);
-
             $path = $image->store('carImages', 'public');
             $carImages[ 'img'.$key] = $path;
         }
@@ -56,7 +56,11 @@ class CarImageItemController extends Controller
         $finalDatas['owner_book_id'] = $request['owner_book_id'] ;
         $finalDatas['car_image_id'] = $imageId ;
         $finalDatas['created_at'] = Carbon::now();
-        Car::insert($finalDatas);
+        $car_item = Car::insertGetId($finalDatas);
+        $before_Sale = [] ;
+        $before_Sale['car_item'] = $car_item ;
+        $before_Sale['created_at'] = Carbon::now();
+        Before_Sale::create($before_Sale);
         return redirect('admin/cars')->with('message','You added to the cars table successfully') ;
 
     }

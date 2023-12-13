@@ -11,6 +11,7 @@ use App\Models\Car\Sale ;
 use App\Models\SoldOut ;
 use App\Models\Buyer ;
 use Carbon\Carbon ;
+use App\Models\Before_Sale ;
 use App\Models\Broker ;
 use App\Models\Hire_purchase ;
 
@@ -90,6 +91,7 @@ class SoldOutController extends Controller
 
         SoldOut::insertGetId($soldOuts);
         Sale::where('car_id',$request['id'])->delete();
+        Before_Sale::where('car_item',$request['id'])->delete();
         
         return redirect('admin/saled')->with('message' , 'You Make the record successfully');
     }

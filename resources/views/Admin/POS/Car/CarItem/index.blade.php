@@ -73,8 +73,8 @@
                         
                     </td>
                     <td>
-                        <button class="btn btn-danger delete" data-id="{{$carItem->car_id}}">Delete</button>
-                        <a href="{{url('admin/cars/'.$carItem->car_id.'/edit')}}"
+                        <button class="btn btn-danger delete" data-id="{{$carItem->car_item}}">Delete</button>
+                        <a href="{{url('admin/before_sale/'.$carItem->car_id.'/edit')}}"
                             class="btn btn-primary"
                         >
                             View
@@ -145,11 +145,37 @@
                 $('.modal-body').html($modelContent);
             });
 
-            var $price = $('input[name="price"]');
-            // $(document).on('onchange',$price , ()=> {
-            //     console.log($price.val());
-            // });
-            console.log($price);
+            $(document).on("click" , '.delete' , function (e) {
+                let deleteBtn = $(e.currentTarget);
+                let id = deleteBtn.data('id');
+                let row = deleteBtn.parent().parent() ;
+                swal({
+                    title: "Are you sure?",
+                    text: "You will not be able to recover this imaginary file!",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Yes, delete it!",
+                    closeOnConfirm: false
+                    },
+                    function(){
+                        $.ajax({
+                            url : "/admin/before_sale/" + id ,
+                            method : "DELETE" ,
+                            data : {
+                                "_token" : "{{csrf_token()}}"
+                            },
+                            success : (response) => {
+                                swal("Deleted!", response , "success");
+                            },
+                            error : (error) => {
+                                swal("Cancelled", "Error Occuring Happing " , "error");
+                            }
+                        }); 
+                    
+                    });
+            });
+            
         });
     </script>
 @endsection 

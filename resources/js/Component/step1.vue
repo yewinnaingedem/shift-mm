@@ -1,6 +1,3 @@
-<script setup>
-    import { fields } from './Form/Wrapper';
-</script>
 <template>
     <div>
         <h3 class="fw-bolder">Basic Details </h3>
@@ -10,7 +7,7 @@
                     <div class="d-flex flex-column justify-content-center align-items-start ">
                         <label for="zip" class="form-label">license Plate </label>
                         <div class="w-100 position-relative">
-                            <input type="text" :maxLength="maxCharacter" v-model="fields.step1.license" @input="checkValidae"
+                            <input type="text" :maxLength="maxCharacter" v-model="data.license" @input="checkValidae"
                                 class="w-100 form-control mb-1 "
                                 :class="{ 'is-valid': isValide, 'is-invalid': isInValide }"
                                 placeholder="Enter License Plate Number">
@@ -26,7 +23,7 @@
             <div class="mb-3 col-md-6">
                 <div class="d-flex flex-column justify-content-center align-items-start ">
                     <label for="millage" class="form-label">Millage Or KiloMeter</label>
-                    <input type="text" name="" id="millage" class="w-100 form-control mb-1" v-model="fields.step1.millage"
+                    <input type="text" name="" id="millage" class="w-100 form-control mb-1" v-model="data.millage"
                         @input="toLocalString" :maxlength="maxMillage" placeholder="Enter Millage Or Kilo Meter">
                 </div>
             </div>
@@ -46,7 +43,7 @@
         </div>
         <div class="mb-3">
             <label for="transmission_type" class="form-label mb-3">Transmission</label>
-            <select v-model="fields.step1.transmission" id="transmission_type" class="form-select">
+            <select v-model="data.transmission" id="transmission_type" class="form-select">
                 <option style="display: none;" selected>Dirving Hand</option>
                 <option v-for="transmission_type in arrayData['transmissionTypes']" :key="transmission_type.id"
                     :value="transmission_type.id">
@@ -61,7 +58,7 @@
                 </div>
                 <div class="form-check col-md-6 form-switch mb-3 d-flex justify-content-end align-items-center ">
                     <label class="d-block mr-50" for="preDefinedColor">Color ?</label>
-                    <input class="form-check-input" type="checkbox" v-model="fields.step1.preDefindedColor"  :value="true" id="preDefinedColor">
+                    <input class="form-check-input" type="checkbox" v-model="data.preDefindedColor"  :value="true" id="preDefinedColor">
                 </div>
             </div>
             <div class=" row ">
@@ -70,7 +67,7 @@
                     <label :for="color.id"
                         class="justify-content-center d-flex align-items-center p-10 rounded-sm  text-white"
                         :class="[data.exterior_color == color.id ? activeClass : mainClass]">
-                        <input type="radio" v-model="fields.step1.exterior_color" :id="color.id" :value="color.id"
+                        <input type="radio" v-model="data.exterior_color" :id="color.id" :value="color.id"
                             class="check-input">
                         <div>{{ color.exterior_color }}</div>
                     </label>
@@ -78,7 +75,7 @@
                 <div v-else>
                     <div class="mb-3">
                         <label for="preDefindedColor" class="form-label">Color</label>
-                        <input type="text" class="form-control" v-model="fields.step1.ownColor" placeholder="Enter Color">
+                        <input type="text" class="form-control" v-model="data.ownColor" placeholder="Enter Color">
                     </div>
                 </div>
             </div>
@@ -173,6 +170,10 @@ export default {
             type: Object,
             required: true,
         },
+        data : {
+            type : Object ,
+            required  : true ,
+        } ,
         forSpecific: {
             type: Array,
             required: true,
@@ -247,7 +248,6 @@ export default {
                             // for step1
                             step1.millage = null;
                             step1.exterior_color = null;
-                            step1.transmission = null;
                             // for step2
                             step2.license_state = null;
                             step2.steering = null;

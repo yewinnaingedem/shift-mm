@@ -25,7 +25,7 @@
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
         @yield('style')
     </head>
-    <body class="sb-nav-fixed">
+    <body class="sb-nav-fixed hidden">
         <!-- navBar -->
         @section('navbar') 
             @include('Admin.Layout.navbar')

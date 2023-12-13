@@ -195,7 +195,7 @@
             </div>
             <div class="mb-3 row">
                 <div class="col-md-6">
-                    <a href="{{url('admin/cars')}}" class="btn btn-danger">
+                    <a href="{{url('admin/before_sale')}}" class="btn btn-danger">
                         Back
                     </a>
                 </div>

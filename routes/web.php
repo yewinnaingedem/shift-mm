@@ -30,6 +30,7 @@ use App\Http\Controllers\Car\CarImageItemController ;
 use App\Http\Controllers\Car\SoldOutController ;
 use App\Http\Controllers\Car\DefaultFunctionController;
 use App\Http\Controllers\Car\licenseStateController;
+use App\Http\Controllers\BeforeSaleController ;
 
 
 Route::get('/google' , [AuthController::class , 'googleLogIn']);
@@ -77,6 +78,7 @@ Route::prefix('admin')->group(function (){
     Route::resource('sonar' , SonarController::class);
     Route::resource('camera' , CameraController::class);
     Route::resource('engine' , EngineController::class );
+    Route::resource('before_sale' , BeforeSaleController::class );
     Route::resource('cars' ,  CarItemController::class );
     Route::resource('car_sells', CarsellController::class);
     Route::resource('sold_out' , SoldOutController::class) ;

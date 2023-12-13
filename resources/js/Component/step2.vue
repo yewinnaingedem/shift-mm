@@ -1,6 +1,3 @@
-<script setup>
-    import { fields } from './Form/Wrapper';
-</script>
 <template>
     <div class="row  mt-3">
         <div class="col-md-6 mb-3">
@@ -50,6 +47,10 @@ export default ({
             type : Array , 
             required : true ,
         } ,
+        data : {
+            type : Object ,
+            required : true ,
+        }
     },
     computed :  {
         defaultSteeringConer () {

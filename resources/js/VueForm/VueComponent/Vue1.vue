@@ -1,3 +1,6 @@
+<script setup>
+    import { stepProgess } from "./AppStateFull";
+</script>
 <template>
     <div class="container">
         <div class="row">
@@ -8,7 +11,7 @@
                 >
                     <input type="radio"
                     @input="definedTransmisson"
-                    v-model="stepsProgess.transmission" :value="transmission.id" :id="transmission.id + 'tr'" class="d-none">
+                    v-model="stepProgess.step1.transmission" :value="transmission.id" :id="transmission.id + 'tr'" class="d-none">
                     <div class="fw-bold">
                         {{ transmission.transmission }}
                     </div>
@@ -18,7 +21,7 @@
         <hr>
         <div class="mb-3">
             <label class="text-header mb-2" for="">Body Style</label>
-            <select name="" id="" class="form-select" v-model="stepsProgess.body_style">
+            <select name="" id="" class="form-select" v-model="stepProgess.step1.body_style">
                 <option :value="body_style.id" v-for="body_style in datas['body_styles']" :key="body_style.id">{{ body_style.body_style }}</option>
             </select>
         </div>
@@ -27,13 +30,13 @@
             <div class="text-header text-center mb-3 fw-bold">Enigne</div>
             <div class="col-md-6 mb-3">
                 <label for="engine_power" class="form-label">Add Engine Power</label>
-                <select name="engine_power" id="engine_power" class="form-select" v-model="stepsProgess.engine.engine_power">
+                <select name="engine_power" id="engine_power" class="form-select" v-model="stepProgess.step1.engine.engine_power">
                     <option v-for="engine_power in datas.engine_powers" :key="engine_power.id" :value="engine_power.id"> {{ engine_power.engine_power + " " + "CC" }}</option>
                 </select>
             </div>  
             <div class="col-md-6 mb-3">
                 <label for="cylinder" class="form-label">Cylinder</label>
-                <select name="cylinder" id="" class="form-select" v-model="stepsProgess.engine.cylinder">
+                <select name="cylinder" id="" class="form-select" v-model="stepProgess.step1.engine.cylinder">
                     <option v-for="cylinder in datas.cylinders" :key="cylinder.id" :value="cylinder.id"> {{ cylinder.cylinder }}</option>
                 </select>
             </div>     
@@ -45,11 +48,11 @@
                 </div>
                 <div class="form-check col-md-6 form-switch mb-3 d-flex justify-content-end align-items-center ">
                     <label class="d-block mr-50" for="gradeValide">Does it have Trubo ?</label>
-                    <input class="form-check-input" type="checkbox" name="Turbo" role="switch" v-model="stepsProgess.engine.turbo" value="exist" id="gradeValide">
+                    <input class="form-check-input" type="checkbox" name="Turbo" role="switch" v-model="stepProgess.step1.engine.turbo" value="exist" id="gradeValide">
                 </div>
             </div>
             <div class="mb-3">
-                <select name="" id="" class="form-select" v-model="stepsProgess.engine.fuel_type">
+                <select name="" id="" class="form-select" v-model="stepProgess.step1.engine.fuel_type">
                     <option :value="fuel.id" v-for="fuel in datas.fuels" :key="fuel.id" >{{ fuel.type }}</option>
                 </select>
             </div>

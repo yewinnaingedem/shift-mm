@@ -1,6 +1,3 @@
-<script setup>
-    import { fields } from './Form/Wrapper';
-</script>
 <template>
     <div class="mb-3 mt-3">
         <label for="interior" class="form-label"> Interior Color </label>
@@ -31,6 +28,10 @@
                 type : Array ,
                 required : true ,
             } ,
+            data : {
+                type : Object ,
+                required  : true ,
+            }
         },
         data() {
             return {

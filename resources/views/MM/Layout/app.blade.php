@@ -27,20 +27,26 @@
         .main-color {
             color : #06CBA3 ;
         }
-        .c-hover:hover {
-            color : #06cba3;
-        }
         ::-webkit-scrollbar  {
+            width: 5px ;
+        }
+        ::-webkit-scrollbar:hover  {
             width: 10px ;
-            height: 5px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background-color: #888;
+            border-radius : 4px ;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background-color: #555;
+            width: 10px;
+            height : 5px ;
+            
         }
     </style>
 </head>
-<body>
-    @section('nav-bar')
-        @include('MM.Layout.navbar')
-    @show 
-    <div class="loader none" >
+<body >
+    <!-- <div class="loader none" >
         <div class="flex items-center justify-center h-screen">
             <div class="relative">
                 <div class="h-24 w-24 rounded-full border-t-8 border-b-8 border-gray-200"></div>
@@ -48,7 +54,10 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
+    @section('nav-bar')
+        @include('MM.Layout.navbar')
+    @show 
     <!-- search contianer -->
     <div class="mt-[70px]  loader-content"  >
         @section('search-1') 
@@ -102,12 +111,12 @@
 </script>
 
 <script>
-    $(document).ready(()=> {
-        $('.loader').show() ;
-        $(window).on('load', function () {
-            $('.loader').hide();
-        });
-    });
+    // $(document).ready(()=> {
+    //     $('.loader').show() ;
+    //     $(window).on('load', function () {
+    //         $('.loader').hide();
+    //     });
+    // });
 </script>
 </body>
 </html>
