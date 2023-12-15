@@ -1,13 +1,10 @@
-<script setup>
-    import { stepProgess } from "./AppStateFull";
-</script>
 <template>
     <div class="container">
         <div class="row">
             <div class="fw-bold mb-3 h-3 text-header">Transmission</div>
             <div class="col-lg-2 col-md-3 col-sm-4 mb-3" v-for="(transmission  , index ) in datas['transmissions']" :key="transmission.id">
                 <label :for="transmission.id + 'tr'" class="d-flex justify-content-center align-items-center main-color p-10 rounded" 
-                    :class="(transmission.id === stepsProgess.transmission) ? 'bg-dark text-white' : ' ' "
+                    :class="(transmission.id === stepProgess.step1.transmission) ? 'bg-dark text-white' : ' ' "
                 >
                     <input type="radio"
                     @input="definedTransmisson"
@@ -61,18 +58,18 @@
 </template>
 
 <script>
-    
+    import { stepProgess } from "./stepProgess.js";
     export default {
+        setup () {
+            return {stepProgess } ;
+        },
         name : "Vue1" ,
         props : {
             datas : {
                 type : Object , 
                 required : true ,
             },
-            stepsProgess : {
-                type : Object ,
-                required : true ,
-            }
+            
         },
         data () {
             return {
@@ -82,15 +79,28 @@
         },
         computed : {
             definedTransmisson () {
-                const turbo = this.stepsProgess.engine.engine_power ;
+                const turbo = this.stepProgess.step1.engine.engine_power ;
                 if(turbo) {
                     turbo.scrollIntoView({behavior : 'smooth' , block :'center' ,
 
                     })
                 }
+            },
+            defaultTransmission () {
+                return this.datas.transmissions.length  > 0 ? this.datas.transmissions[0].id : null ;
+            },
+            defaultBodyStyle () {
+                return this.datas.body_styles.length  > 0 ? this.datas.body_styles[0].id : null ;
+            }
+        },
+        mounted () {
+            if(this.stepProgess.step1.transmission == null ) {
+                this.stepProgess.step1.transmission = this.defaultTransmission ;
+            }
+            if(this.stepProgess.step1.body_style == null ) {
+                this.stepProgess.step1.body_style = this.defaultBodyStyle ;
             }
         }
-
     }
 </script>
 

@@ -36,16 +36,6 @@
                 steps : ['Vue1', 'Vue2' , 'Vue3'] ,
                 stepProgess : [
                     {
-                        transmission : null ,
-                        body_style : null ,
-                        engine : {
-                            engine_power : null ,
-                            cylinder : null ,
-                            fuel_type : null ,
-                            turbo : false ,
-                        }
-                    },
-                    {
                         divertrim : null ,
                         key: null ,
                         sun_roof : null ,

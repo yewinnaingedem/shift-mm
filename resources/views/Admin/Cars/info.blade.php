@@ -66,31 +66,11 @@
         </tfoot>
     </table>
 </div>
-
-<!-- Card -->
-<!-- <div class="modal fade" id="view" >
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="modal_label">
-                    
-                </h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-            </div>
-            <div class="modal-footer">
-                
-            </div>
-        </div>
-    </div>
-</div> -->
 @endsection 
 
 @section('footer')
     @parent 
 @endsection 
-
 @section('script')
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
@@ -104,7 +84,6 @@
                 let btn = $(e.currentTarget);
                 let id = btn.data('id');
                 let row = btn.parent().parent();
-
                 $.ajax({
                     type : "post" ,
                     url : "/admin/car-info", 
