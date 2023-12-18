@@ -2,7 +2,7 @@
     <div class="container pt-3">
         <div class="step-container">
             <div class='min-height-350 pt-3'>
-                <component :is="steps[currentSteps]" :datas="datas" @send-data="dataHandleFromChild" :stepsProgess="stepProgess[currentSteps]"></component>
+                <component :is="steps[currentSteps]" :datas="datas"  ></component>
             </div>
             <div class="container mb-3">
                 <div class="row">
@@ -34,24 +34,7 @@
                 
                 currentSteps : 0,
                 steps : ['Vue1', 'Vue2' , 'Vue3'] ,
-                stepProgess : [
-                    {
-                        divertrim : null ,
-                        key: null ,
-                        sun_roof : null ,
-                        motor : null ,
-                        aircon : null  ,
-                        seat : null ,
-                        sonor  :null ,
-                        camera : null ,
-                    },{
-                        functions : [],
-                        default_functions : [] ,
-                        advance : {
-                            exist : false ,
-                        } ,
-                    }
-                ],
+                
                 removeBar : false ,
                 checkSumbit : false ,
             }
@@ -93,10 +76,6 @@
                     });
                 
             },
-            dataHandleFromChild (data) {
-                console.log(data);
-                this.stepProgess[2].advance = data ;
-            }
         },
         props : {
             datas : {
@@ -112,9 +91,6 @@
                 this.removeBar = this.steps.length > 0 ? true : false ;
             },
             submitCheck () {
-                if(this.currentSteps == this.stepProgess.length -1) {
-                    return this.checkSumbit = true ;   
-                }
                 return this.checkSumbit = false ;
             }
         }

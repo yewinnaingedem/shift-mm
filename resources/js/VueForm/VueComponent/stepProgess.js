@@ -11,4 +11,21 @@ export const stepProgess  = reactive({
             turbo : false ,
         }
     },
+    step2 : {
+        divertrim : null ,
+        key: null ,
+        sun_roof : null ,
+        motor : null ,
+        aircon : null  ,
+        seat : null ,
+        sonor  :null ,
+        camera : null ,
+    },
+    step3 : {
+        functions : [],
+        default_functions : [] ,
+        advance : {
+            exist : false ,
+        } ,
+    }
 });

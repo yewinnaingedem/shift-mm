@@ -82,7 +82,6 @@
                 const turbo = this.stepProgess.step1.engine.engine_power ;
                 if(turbo) {
                     turbo.scrollIntoView({behavior : 'smooth' , block :'center' ,
-
                     })
                 }
             },
@@ -91,6 +90,15 @@
             },
             defaultBodyStyle () {
                 return this.datas.body_styles.length  > 0 ? this.datas.body_styles[0].id : null ;
+            },
+            defaultEnginePower () {
+                return this.datas.engine_powers.length  > 0 ? this.datas.engine_powers[0].id : null ;
+            },
+            defaultCylinder () {
+                return this.datas.cylinders.length  > 0 ? this.datas.cylinders[0].id : null ;
+            },
+            defaultFuel () {
+                return this.datas.fuels.length  > 0 ? this.datas.fuels[0].id : null ;
             }
         },
         mounted () {
@@ -100,6 +108,16 @@
             if(this.stepProgess.step1.body_style == null ) {
                 this.stepProgess.step1.body_style = this.defaultBodyStyle ;
             }
+            if(this.stepProgess.step1.engine.engine_power == null) {
+                this.stepProgess.step1.engine.engine_power = this.defaultEnginePower ;
+            }
+            if(this.stepProgess.step1.engine.cylinder == null) {
+                this.stepProgess.step1.engine.cylinder = this.defaultCylinder ;
+            }
+            if(this.stepProgess.step1.engine.fuel_type == null) {
+                this.stepProgess.step1.engine.fuel_type = this.defaultFuel ;
+            }
+            
         }
     }
 </script>

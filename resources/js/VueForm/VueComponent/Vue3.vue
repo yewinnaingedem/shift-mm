@@ -7,7 +7,7 @@
                 </div>
                 <div class="col-md-6  row text-end">
                     <div class="col-md-6">
-                        <button class="btn btn-success text-wrap w-10" ref="countData">{{ stepsProgess.functions.length > 0 ? stepsProgess.functions.length : 0 }}</button>
+                        <button class="btn btn-success text-wrap w-10" ref="countData">{{ stepProgess.step3.functions.length > 0 ? stepProgess.step3.functions.length : 0 }}</button>
                     </div>
                     <div class="col-md-3">
                         <button class="btn btn-danger fw-bold w-10" @click="reduce()">
@@ -26,9 +26,9 @@
             <div class="col-md-4 col-lg-3 mb-3" v-for="car_fun in datas['functions']" :key="car_fun.id">
                 <label  class="d-flex justify-content-center align-items-center main-color p-10 rounded" 
                     :for="car_fun.function"  
-                    :class="{ 'bg-dark text-white': stepsProgess.functions.includes(car_fun.id) }"
+                    :class="{ 'bg-dark text-white': stepProgess.step3.functions.includes(car_fun.id) }"
                 >
-                    <input type="checkbox"  v-model="stepsProgess.functions" :id="car_fun.function" :value="car_fun.id" class="d-none">
+                    <input type="checkbox"  v-model="stepProgess.step3.functions" :id="car_fun.function" :value="car_fun.id" class="d-none">
                     <div class="fw-bold text-15px ">
                         {{ car_fun.function }}
                     </div>
@@ -70,11 +70,14 @@
 <script>
     import DefaultFunction from './GenerateFunction/DefaultFunction.vue';
     import AdvanceFunction from './GenerateFunction/AdvanceFunction.vue';
+    import { stepProgess } from './stepProgess.js';
     export default {
         name : "Vue3" ,
+        setup() {
+            return { stepProgess } ;
+        }, 
         data () {
             return {
-                
                 function_name  : false ,
                 advancedf : {
                     air_conditioning : null , 
@@ -96,8 +99,8 @@
                 return this.functionEvent = 0 ;
             },
             reduce () {
-                if(this.stepsProgess.functions.length > 0) {
-                    return this.stepsProgess.functions.length -- ;
+                if(this.stepProgess.step3.functions.length > 0) {
+                    return this.stepProgess.step3.functions.length -- ;
                 }
             },
             areAllPropertiesSet(obj) {
@@ -111,7 +114,7 @@
                         arrayTest.push(this.datas.functions[key].id);
                     });
                     const newValue = arrayTest[test1 % arrayTest.length];
-                    this.stepsProgess.functions.push(newValue);
+                    this.stepProgess.step3.functions.push(newValue);
                 }
             }
         },  
@@ -120,10 +123,6 @@
                 type : Object ,
                 required : true ,
             },
-            stepsProgess : {
-                type : Object ,
-                required : true ,
-            }
         },
         components : { DefaultFunction , AdvanceFunction} ,
         watch : {
