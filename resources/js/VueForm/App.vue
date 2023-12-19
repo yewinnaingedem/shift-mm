@@ -4,9 +4,9 @@
             <div class='min-height-350 pt-3'>
                 <component :is="steps[currentSteps]" :datas="datas"  ></component>
             </div>
-            <div class="container mb-3">
+            <div class="container mt-3">
                 <div class="row">
-                    <div class="col-md-6" v-if="submitCheck">
+                    <div class="col-md-6" v-if="submitGet">
                         <button class="btn btn-primary" v-on:click="submit">Submit</button>
                     </div>
                     <div class="col-md-6" v-else>
@@ -27,18 +27,18 @@
     import Vue1 from "./VueComponent/Vue1.vue";
     import Vue2 from "./VueComponent/Vue2.vue";
     import Vue3 from "./VueComponent/Vue3.vue";
-
+    import { stepProgess } from "./VueComponent/stepProgess";
     export default {
+        setup () {
+            return { stepProgess }
+        }, 
         data () {
             return {
-                
                 currentSteps : 0,
                 steps : ['Vue1', 'Vue2' , 'Vue3'] ,
-                
                 removeBar : false ,
                 checkSumbit : false ,
             }
-            
         },
         components : {
             Vue1 ,
@@ -63,9 +63,9 @@
                         data : {
                             gread : this.datas.inputField ,
                             modelX : this.datas.modelX ,
-                            vue1 : this.stepProgess[0] ,
-                            vue2 : this.stepProgess[1] ,
-                            vue3 : this.stepProgess[2],
+                            vue1 : stepProgess.step1 ,
+                            vue2 : stepProgess.step2 ,
+                            vue3 : stepProgess.step3,
                         },
                         success : (res)  => {
                             window.location.href = res.redirect ;
@@ -88,12 +88,15 @@
         } , 
         computed : {
             removeBarTe () {
-                this.removeBar = this.steps.length > 0 ? true : false ;
+               this.removeBar = this.steps.length > 0 ? true : false ;
             },
-            submitCheck () {
-                return this.checkSumbit = false ;
+            submitGet () {
+                if(this.currentSteps === this.steps.length -1 ) {
+                    return true ;
+                }
             }
-        }
+        },
+
     }
 
 </script>
@@ -137,7 +140,7 @@
     }
     .min-height-350 {
         min-height   : 350px ;
-        max-height:  540px;
+        max-height:  520px;
         height: 540px;
         overflow-x: auto;
         border-radius: 10px;

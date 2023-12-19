@@ -25,7 +25,7 @@
         $(document).ready(function () {
             $('.body-fade').show() ;
             $(window).on('load', function () {
-                $('.body-fade').hide();
+                $('.body-fade').remove();
                 $('.loader-content').removeClass('hidden'); 
             } 
             );

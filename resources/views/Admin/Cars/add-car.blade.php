@@ -51,6 +51,9 @@
             font-size: 18px;
             font-weight: 700;
         }
+        .list-none {
+            list-style : none ;
+        }
         .border-b-2 {
             border-bottom: 2px solid ;
         }
@@ -67,6 +70,60 @@
         .d-none {
             display : none ;
         }
+        .top-15 {
+            top : 15px ;
+        }
+        .opacity-8 {
+            opacity: 0.8;
+        }
+        .bottom-22px {
+            bottom : -22px ;
+            background : tomato ;
+        }
+        .custom-select-wrapper {
+            position: relative;
+            width  : 100% ;
+        }
+
+        .select-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 10px;
+            height : 57px ;
+            border : 1px solid #94969e ;
+            border-radius  :4px ;
+        }
+
+        .select-options {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            display: none;
+            border : 1px solid #94969e ;
+            border-radius : 4px ;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .select-options li {
+            padding: 5px 10px;
+            border-bottom: 1px solid #ccc;
+            cursor: pointer;
+        }
+
+        .select-options li:last-child {
+            border-bottom: none;
+        }
+
+        .select-options li:hover {
+            background-color: #e0e0e0;
+        }
+
     </style>
 @endsection 
 
@@ -131,22 +188,24 @@
                                 </label>
                             </div>
                             <div class="flex-1">
-                                <label class="w-full ">
-                                    <div class="wrapper  d-flex justify-content-center align-items-center px-10">
-                                        <select name="model" class="cursor-not-allowed" id="model" disabled>
-                                            <option class="d-none" selected>Model</option>
+                                    <div class="custom-select-wrapper">
+                                        <select name="model" class="d-none"  id="model" >
                                         </select>
-                                        <div class="">
-                                            <i class="fa-solid fa-caret-down"></i>
+                                        <div class="select-header cursor-not-allowed">
+                                            <div class="model" id="selectedModel">Choose Model</div>
+                                            <div class="caret"><i class="fa-solid fa-caret-down"></i></div>
                                         </div>
+                                        <ul class="select-options">
+                                        </ul>
                                     </div>
-                                    @if($errors->has('make'))
-                                        <p class="text-danger">{{ $errors->first('make')}} </p>
-                                    @endif 
-                                </label>
+
+                                @if($errors->has('make'))
+                                    <p class="text-danger">{{ $errors->first('make')}} </p>
+                                @endif 
                             </div>
+                            
                             <div class="flex-1 wrapper active h-50" >
-                                <button class="w-full disabled cursor-not-allowed"  id="Year" disabled type="submit">
+                                <button class="w-full disabled cursor-not-allowed"  id="Year"  type="submit">
                                     Get Started
                                 </button>
                             </div>
@@ -168,6 +227,11 @@
             let $model_year = $('select[name="model_year"]');
             let $make = $('select[name="make"]');
             let $model = $('select[name="model"] ');
+            let opitonSelected = $('.select-options');
+            const $selectWrapper = $('.custom-select-wrapper');
+            const $selectHeader = $selectWrapper.find('.select-header');
+            const $selectOptions = $selectWrapper.find('.select-options');
+            const $selectedModel = $selectWrapper.find('#selectedModel');
             $model_year.on('change' , ()=> {
                 if($model_year.val() !== '') {
                     $make.prop('disabled' , false );
@@ -176,6 +240,8 @@
             });
             $make.on('change',()=> {
                 $model.val('');
+                $selectedModel.text('Chose Model');
+                opitonSelected.empty();
                 $('#model option:not(:first-child)').remove();
                 $.ajax({
                     type : 'POST' , 
@@ -187,10 +253,10 @@
                         if(res.response.length !== 0) {
                             let $innerHtml = `
                                             ${res.response.map(item => `
-                                                <option  value="${item.id}">${item.model_name}</option>
+                                                <li class="option" data-id="${item.id}">${item.model_name}</li>
                                             `).join('')}
                                         `;      
-                            $model.append($innerHtml);
+                            opitonSelected.append($innerHtml);
                         }else {
                             swal({
                                     title: "Are you sure?",
@@ -212,15 +278,18 @@
                                 });
                         }
                         $model.prop('disabled' , false);
-                        $model.removeClass('cursor-not-allowed');
+                        $('.select-header').removeClass('cursor-not-allowed');
                     },
                     error : (err) => {
                         console.log(err );
                     }
                 });
             });
-            $model.on('change', ()=> {
+            
+            change () ;
+            function change () {
                 if($model.val() == '') {
+                    console.log('hi');
                     $('.disabled').addClass('cursor-not-allowed');
                     $('.disabled').prop('disabled' , true) ;
                 }else {
@@ -228,6 +297,23 @@
                     $('.disabled').removeClass('cursor-not-allowed');
                     $('.active').css('background' , '#06CBA3');
                 }
+            }
+
+            $selectHeader.on('click', function() {
+                $selectOptions.toggle();
+            });
+
+            $selectOptions.on('click', 'li', function(e) {
+                const getData = $(e.currentTarget);
+                const id = getData.data('id');
+                const selectedOption = $(this).text();
+                $selectedModel.text(selectedOption);
+                $model.val(id);
+                $selectOptions.hide();
+            });
+            
+            $model.on('change',function () {
+                console.log('hi');
             });
         });
     </script>

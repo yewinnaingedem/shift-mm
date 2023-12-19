@@ -129,16 +129,14 @@
             advancedf : {
                 handler (newAdvancedF) {
                     if(Object.values(newAdvancedF).every(value => value === 0 || value === 1)) {
-                        this.$emit('send-data' , {
-                            exist : this.function_name ,
-                            air_conditioning : this.advancedf.air_conditioning , 
-                            power_steering : this.advancedf.power_steering ,
-                            power_windows : this.advancedf.power_steering,
-                            abs_brakes : this.advancedf.abs_brakes ,
-                            airbags : this.advancedf.airbags ,
-                            navigation_system : this.advancedf.navigation_system ,
-                            bluetooth_connectivity : this.advancedf.bluetooth_connectivity ,
-                        });
+                            stepProgess.step3.advance.exist = this.function_name ;
+                            stepProgess.step3.advance.air_conditioning = this.advancedf.air_conditioning ; 
+                            stepProgess.step3.advance.power_steering = this.advancedf.power_steering ;
+                            stepProgess.step3.advance.power_windows = this.advancedf.power_steering;
+                            stepProgess.step3.advance.abs_brakes = this.advancedf.abs_brakes ;
+                            stepProgess.step3.advance.airbags = this.advancedf.airbags ;
+                            stepProgess.step3.advance.navigation_system = this.advancedf.navigation_system ;
+                            stepProgess.step3.advance.bluetooth_connectivity = this.advancedf.bluetooth_connectivity ;
                     }
                 },
                 deep : true ,
