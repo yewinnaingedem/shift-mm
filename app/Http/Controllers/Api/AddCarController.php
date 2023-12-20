@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Modal ;
 use Carbon\Carbon ;
+use App\Models\ExteriorColor ;
 use App\Models\Car\Item ;
 use App\Models\Car\OwnerBook ;
 use App\Models\Car\Car ;
@@ -14,6 +15,7 @@ use App\Models\Car\Car ;
 class AddCarController extends Controller
 {
     public function index (Request $request) {
+        
         $data1 = $request['field'][0] ;
         $data2 = $request['field'][1];
         $data3 = $request['field'][2];
@@ -24,7 +26,15 @@ class AddCarController extends Controller
         $items['steering_coner'] = $data2['steering'] ;
         $items['place_of_orgin'] = $data2['madeIn'] ;
         $items['number_seats'] = $data2['num_seat'];
-        $items['interior_color'] = $data3['interior_color'] ;
+        if($data1['ownColor'] !== 'none') {
+            $ownId = ExteriorColor::insertGetId([
+                'exterior_color' => $data1['ownColor'] ,
+                'created_at' => Carbon::now(),
+            ]);
+            $items['interior_color'] = $ownId ;
+        }else {
+            $items['interior_color'] = $data3['interior_color'] ;
+        }
         $items['kilo_meter'] = $data1['millage'] ;
         $items['grade'] = $data1['grade'];
         $items['break'] = $data2['font_break'] .'/'. $data2['back_break'];

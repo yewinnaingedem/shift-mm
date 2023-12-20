@@ -97,7 +97,7 @@
                         license : null ,
                         millage : null ,
                         preDefindedColor :  false ,
-                        ownColor : null ,
+                        ownColor : "none" ,
                         grade : this.data['grades'][0].grade,
                         exterior_color: null ,
                         transmission : null ,
@@ -160,7 +160,6 @@
                 axios.post('/admin/setup', { field : this.field , model_Id : this.data['id'].id , year : this.data['main'].year}) 
                 .then((response) => {
                     window.location.href = response.data.redirect;
-                    console.log(response.data.redirect);
                 }).catch((error )=> {
                     console.log(error);
                 });
@@ -181,6 +180,17 @@
                     this.checkNull();
                 }
             } ,
+            'field': {
+            handler(newVal, oldVal) {
+                const preDefindedColor = newVal[0].preDefindedColor;
+                if(preDefindedColor == true ) {
+                    this.field[0].ownColor = null ;
+                }else {
+                    this.field[0].ownColor = "none" ;
+                }
+            },
+            deep: true, 
+            },
         },
         props : {
             data : {

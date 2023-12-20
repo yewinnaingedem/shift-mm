@@ -25,7 +25,6 @@ class ModelController extends Controller
     }
     
     public function index (Request $request ) {
-        dd($request->all());
         $validator = Validator::make(
             $request->all() ,
             [

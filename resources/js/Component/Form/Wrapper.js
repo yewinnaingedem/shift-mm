@@ -5,7 +5,7 @@ export const fields = reactive({
         license : null ,
         millage : null ,
         preDefindedColor :  false ,
-        ownColor : null ,
+        ownColor : 'none' ,
         grade : this.data['grades'][0].grade,
         exterior_color: null ,
         transmission : null ,

@@ -67,7 +67,7 @@
                     <label :for="color.id"
                         class="justify-content-center d-flex align-items-center p-10 rounded-sm  text-white"
                         :class="[data.exterior_color == color.id ? activeClass : mainClass]">
-                        <input type="radio" v-model="data.exterior_color" :id="color.id" :value="color.id"
+                        <input type="radio" v-model="exterior_color" :id="color.id" :value="color.id"
                             class="check-input">
                         <div>{{ color.exterior_color }}</div>
                     </label>
@@ -181,6 +181,7 @@ export default {
     },
     data() {
         return {
+            exterior_color : null ,
             activeClass: [
                 'active-color'
             ],
@@ -198,7 +199,7 @@ export default {
         }
     },
     watch: {
-
+        
     },
     methods: {
         async checkValidae() {
@@ -308,6 +309,13 @@ export default {
         this.data.grade = this.defaultGradeId;
         this.data.transmission = this.defaultTransmission;
         console.log(this.forSpecific[1]);
+    },
+    watch : {
+        exterior_color () {
+            if(this.exterior_color !== null ) {
+                this.data.exterior_color = this.exterior_color ;
+            }
+        }
     }
 }
 </script> 

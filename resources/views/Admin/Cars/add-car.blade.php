@@ -189,13 +189,13 @@
                             </div>
                             <div class="flex-1">
                                     <div class="custom-select-wrapper">
-                                        <select name="model" class="d-none"  id="model" >
-                                        </select>
+                                        <input type="text" name="model" class="d-none" >
                                         <div class="select-header cursor-not-allowed">
                                             <div class="model" id="selectedModel">Choose Model</div>
                                             <div class="caret"><i class="fa-solid fa-caret-down"></i></div>
                                         </div>
                                         <ul class="select-options">
+                                            
                                         </ul>
                                     </div>
 
@@ -226,7 +226,7 @@
         $(document).ready(()=>{
             let $model_year = $('select[name="model_year"]');
             let $make = $('select[name="make"]');
-            let $model = $('select[name="model"] ');
+            let $model = $('input[name="model"] ');
             let opitonSelected = $('.select-options');
             const $selectWrapper = $('.custom-select-wrapper');
             const $selectHeader = $selectWrapper.find('.select-header');
@@ -239,7 +239,7 @@
                 }
             });
             $make.on('change',()=> {
-                $model.val('');
+                // $model.val('');
                 $selectedModel.text('Chose Model');
                 opitonSelected.empty();
                 $('#model option:not(:first-child)').remove();
@@ -255,6 +255,9 @@
                                             ${res.response.map(item => `
                                                 <li class="option" data-id="${item.id}">${item.model_name}</li>
                                             `).join('')}
+                                            <li class="option">
+                                                <a href="{{url('admin/car_models/create')}}">add new</a>
+                                            </li>
                                         `;      
                             opitonSelected.append($innerHtml);
                         }else {
@@ -286,18 +289,18 @@
                 });
             });
             
-            change () ;
-            function change () {
-                if($model.val() == '') {
-                    console.log('hi');
-                    $('.disabled').addClass('cursor-not-allowed');
-                    $('.disabled').prop('disabled' , true) ;
-                }else {
-                    $('.disabled').prop('disabled' , false) ;
-                    $('.disabled').removeClass('cursor-not-allowed');
-                    $('.active').css('background' , '#06CBA3');
-                }
-            }
+            // change () ;
+            // function change () {
+            //     if($model.val() == '') {
+            //         console.log('hi');
+            //         $('.disabled').addClass('cursor-not-allowed');
+            //         $('.disabled').prop('disabled' , true) ;
+            //     }else {
+            //         $('.disabled').prop('disabled' , false) ;
+            //         $('.disabled').removeClass('cursor-not-allowed');
+            //         $('.active').css('background' , '#06CBA3');
+            //     }
+            // }
 
             $selectHeader.on('click', function() {
                 $selectOptions.toggle();
@@ -308,7 +311,7 @@
                 const id = getData.data('id');
                 const selectedOption = $(this).text();
                 $selectedModel.text(selectedOption);
-                $model.val(id);
+                $model.val(id) ;
                 $selectOptions.hide();
             });
             
