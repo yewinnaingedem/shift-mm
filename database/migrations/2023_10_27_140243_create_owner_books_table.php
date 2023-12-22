@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('vin');
             $table->unsignedBigInteger('exterior_color_id');
+            $table->unsignedBigInteger('engine_power_id');
             $table->string('year');
             $table->unsignedBigInteger('model_id');
             $table->unsignedBigInteger('license_state');
@@ -26,6 +27,7 @@ return new class extends Migration
             $table->string('exception')->nullable();
             $table->timestamps();
             $table->foreign('model_id')->references('id')->on('car_models');
+            $table->foreign('engine_power_id')->references('id')->on('engine_powers');
             $table->foreign('exterior_color_id')->references('id')->on('exterior_colors');
             $table->foreign('transmission_type')->references('id')->on('transmission_types');
             $table->foreign('license_state')->references('id')->on('license_states');

@@ -61,7 +61,7 @@ class CarImageItemController extends Controller
         $before_Sale['car_item'] = $car_item ;
         $before_Sale['created_at'] = Carbon::now();
         Before_Sale::create($before_Sale);
-        return redirect('admin/cars')->with('message','You added to the cars table successfully') ;
+        return redirect('admin/before_sale')->with('message','You added to the cars table successfully') ;
 
     }
 

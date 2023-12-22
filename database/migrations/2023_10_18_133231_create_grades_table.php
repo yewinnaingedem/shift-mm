@@ -14,10 +14,12 @@ return new class extends Migration
         Schema::create('grades', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('carModel_id');
+            $table->unsignedBigInteger('engine_id');
             $table->string('grade');
             $table->unsignedBigInteger('default_function_id') ;
             $table->timestamps();
             $table->foreign('carModel_id')->references('id')->on('car_models');
+            $table->foreign('engine_id')->references('id')->on('engines');
             $table->foreign('default_function_id')->references('id')->on('default_functions');
         });
     }

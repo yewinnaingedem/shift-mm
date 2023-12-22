@@ -143,6 +143,7 @@ class GradeApiController extends Controller
 
     public function apiRoute($dataId) {
         $data = Default_function::where('id',$dataId)->first();
-        return response()->json($data);
+        $responseData = \Illuminate\Support\Arr::except($data, ['id']);
+        return response()->json($responseData);
     }
 }

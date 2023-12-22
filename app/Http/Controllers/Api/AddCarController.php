@@ -16,6 +16,7 @@ class AddCarController extends Controller
 {
     public function index (Request $request) {
         
+        
         $data1 = $request['field'][0] ;
         $data2 = $request['field'][1];
         $data3 = $request['field'][2];
@@ -26,15 +27,7 @@ class AddCarController extends Controller
         $items['steering_coner'] = $data2['steering'] ;
         $items['place_of_orgin'] = $data2['madeIn'] ;
         $items['number_seats'] = $data2['num_seat'];
-        if($data1['ownColor'] !== 'none') {
-            $ownId = ExteriorColor::insertGetId([
-                'exterior_color' => $data1['ownColor'] ,
-                'created_at' => Carbon::now(),
-            ]);
-            $items['interior_color'] = $ownId ;
-        }else {
-            $items['interior_color'] = $data3['interior_color'] ;
-        }
+        $items['interior_color'] = $data3['interior_color'] ;
         $items['kilo_meter'] = $data1['millage'] ;
         $items['grade'] = $data1['grade'];
         $items['break'] = $data2['font_break'] .'/'. $data2['back_break'];
@@ -43,7 +36,15 @@ class AddCarController extends Controller
         
         $carOwners = [] ;
         $carOwners['vin'] = $data3['VIN'] ;
-        $carOwners['exterior_color_id'] = $data1['exterior_color'];
+        if(is_numeric($data1['exterior_color'])) {
+            $carOwners['exterior_color_id'] = $data1['exterior_color'];
+        }else {
+            $colorId = ExteriorColor::insertGetId([
+                'exterior_color' => $data1['exterior_color'] ,
+                'created_at' => Carbon::now() ,
+            ]);
+            $carOwners['exterior_color_id'] = $colorId;
+        }
         $carOwners['license_state'] = $data2['license_state'];
         $carOwners['model_id'] = $model_id ;
         $carOwners['year'] = $year ;

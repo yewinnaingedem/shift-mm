@@ -29,8 +29,9 @@
             </div>
         </div>
         <div v-if="arrayData['grades'].length > 0 && arrayData['grades'][0].grade == 'none'">
-            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <div class="alert alert-warning alert-dismissible fade show"  v-if="isvisiable">
                 <strong>Mingalar Car Sale Center !</strong> We detectived that doesn't have a grade
+                <button type="button" class="btn-close"  @click="btn_close" ></button>
             </div>
         </div>
         <div class="mb-3" v-else>
@@ -58,16 +59,16 @@
                 </div>
                 <div class="form-check col-md-6 form-switch mb-3 d-flex justify-content-end align-items-center ">
                     <label class="d-block mr-50" for="preDefinedColor">Color ?</label>
-                    <input class="form-check-input" type="checkbox" v-model="data.preDefindedColor"  :value="true" id="preDefinedColor">
+                    <input class="form-check-input" type="checkbox" v-model="adjustColor"  :value="true" id="preDefinedColor">
                 </div>
             </div>
             <div class=" row ">
                 <div class="col-md-4 mb-3" v-for="color in arrayData['exterior_colors']" :key="color.id"
-                    v-if="this.data.preDefindedColor == false">
+                    v-if="adjustColor == false">
                     <label :for="color.id"
                         class="justify-content-center d-flex align-items-center p-10 rounded-sm  text-white"
                         :class="[data.exterior_color == color.id ? activeClass : mainClass]">
-                        <input type="radio" v-model="exterior_color" :id="color.id" :value="color.id"
+                        <input type="radio"  v-model="data.exterior_color"  :id="color.id" :value="color.id"
                             class="check-input">
                         <div>{{ color.exterior_color }}</div>
                     </label>
@@ -75,7 +76,7 @@
                 <div v-else>
                     <div class="mb-3">
                         <label for="preDefindedColor" class="form-label">Color</label>
-                        <input type="text" class="form-control" v-model="data.ownColor" placeholder="Enter Color">
+                        <input type="text" class="form-control" v-model="data.exterior_color" placeholder="Enter Color">
                     </div>
                 </div>
             </div>
@@ -161,10 +162,13 @@
 </style>
     
 <script >
-import axios from 'axios';
 import $ from "jquery";
+import { color } from "./Form/Wrapper";
 
 export default {
+    setup () {
+        return { color } ;
+    }, 
     props: {
         arrayData: {
             type: Object,
@@ -181,10 +185,11 @@ export default {
     },
     data() {
         return {
-            exterior_color : null ,
+            adjustColor : false ,
             activeClass: [
                 'active-color'
             ],
+            isvisiable : true ,
             mainClass: [
                 'bg-main'
             ],
@@ -198,10 +203,10 @@ export default {
             plate_number: null,
         }
     },
-    watch: {
-        
-    },
     methods: {
+        btn_close () {
+            this.isvisiable  = false ;
+        }, 
         async checkValidae() {
             this.loading = true;
             this.showError = false;
@@ -278,8 +283,6 @@ export default {
             if (this.data.license.length == 0) {
                 this.loading = false;
             }
-
-
         },
         toLocalString() {
             let value = this.data.millage.replace(/\D/g, '');
@@ -298,6 +301,9 @@ export default {
             }
             return null;
         },
+        defaultColor () {
+            return this.exterior_color ;
+        }, 
         defaultTransmission() {
             if (this.arrayData['transmissionTypes'].length > 0) {
                 return this.arrayData['transmissionTypes'][0].id;
@@ -308,13 +314,10 @@ export default {
     mounted() {
         this.data.grade = this.defaultGradeId;
         this.data.transmission = this.defaultTransmission;
-        console.log(this.forSpecific[1]);
     },
     watch : {
-        exterior_color () {
-            if(this.exterior_color !== null ) {
-                this.data.exterior_color = this.exterior_color ;
-            }
+        adjustColor () {
+            return this.data.exterior_color = null ;
         }
     }
 }
