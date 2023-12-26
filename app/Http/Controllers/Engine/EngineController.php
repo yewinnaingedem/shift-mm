@@ -19,9 +19,8 @@ class EngineController extends Controller
      */
     public function index()
     {
-        $engines = Engine::select('engines.Engine_power_id','engine.engine_power as engine_power' , 'engines.created_at' , 'engines.id' , 'engines.Turbo' , 'cylinders.cylinder' , 'engine_types.type')
+        $engines = Engine::select('engines.Engine_power_id' , 'engines.created_at' , 'engines.id' , 'engines.Turbo' , 'cylinders.cylinder' , 'engine_types.type')
                     ->leftJoin('engine_types' , 'engines.Fuel' , 'engine_types.id')
-                    ->leftJoin('engine_powers as engine','engines.Engine_power_id','engine.id')
                     ->leftJoin('cylinders','engines.Cylinder_id' , 'cylinders.id')
                     ->get();
         return view('admin.POS.AboutEngine.Engine.index',compact('engines'));

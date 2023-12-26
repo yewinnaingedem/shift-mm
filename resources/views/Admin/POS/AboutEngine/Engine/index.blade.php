@@ -32,7 +32,6 @@
             <thead>
                 <tr>
                     <th>ID </th>
-                    <th>Engine Power </th>
                     <th>Fuel</th>
                     <th>Type</th>
                     <th>Turbo </th>
@@ -45,7 +44,6 @@
                 @foreach($engines as $engine)
                     <tr>
                         <td> {{ $engine->id}}</td>
-                        <td> {{ $engine->engine_power . " CC"}}</td>
                         <td> {{ $engine->cylinder}}</td>
                         <td>{{$engine->type}}</td>
                         <td > 
@@ -80,7 +78,6 @@
             <tfoot>
                 <tr>
                     <th>ID </th>
-                    <th>Engine Power </th>
                     <th>Fuel</th>
                     <th>Type </th>
                     <th>Turbo </th>

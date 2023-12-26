@@ -131,13 +131,13 @@
         },
         computed : {
             defaultDivertrim  () {
-                return this.datas.divertrims.length  > 0 ? this.datas.divertrims[0].id : null ;
+                return this.datas.divertrims.length  > 0 ? this.datas.divertrims[1].id : null ;
             },
             defaultKey () {
                 return this.datas.keys.length  > 0 ? this.datas.keys[0].id : null ;
             } ,
             defaultSunRoof () {
-                return this.datas.sun_roofs.length  > 0 ? this.datas.sun_roofs[0].id : null ;
+                return this.datas.sun_roofs.length  > 0 ? this.datas.sun_roofs[2].id : null ;
             },
             defaultTruckMotor () {
                 return this.datas.motors.length  > 0 ? this.datas.motors[0].id : null ;
@@ -149,7 +149,7 @@
                 return this.datas.seats.length  > 0 ? this.datas.seats[0].id : null ;
             },
             defaultSonor () {
-                return this.datas.sonars.length  > 0 ? this.datas.sonars[0].id : null ;
+                return this.datas.sonars.length  > 0 ? this.datas.sonars[1].id : null ;
             },
             defaultCamera () {
                 return this.datas.cameras.length  > 0 ? this.datas.cameras[0].id : null ;

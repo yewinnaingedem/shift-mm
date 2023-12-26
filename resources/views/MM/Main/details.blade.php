@@ -161,10 +161,10 @@
         </div>
         <div class="grid grid-cols-3 mb-5">
             <div class='col-span-2  ' style="margin-left : 30px;">
-                <div  class="w-full mt-8 ">
-                    <div class="px-5">
+                <div  class="w-full mt-8  ">
+                    <div class="px-5 mb-3">
                         <h2  class="text-2xl font-bold mb-4 ">Details At a Glance</h2>
-                        <div class="grid grid-cols-3 grid-flow-row items-center">
+                        <div class="grid grid-cols-4 grid-flow-row items-center">
                             <div class="p-cus ">
                                 <div class="w-100 text-neutral-80 font-light uppercase ">Transmission</div>
                                 <div class="w-100 font-bold">{{$sale->transmission_type}}</div>
@@ -199,30 +199,22 @@
                             </div>
                             <div class="p-cus">
                                 <div class="w-100 text-neutral-80 font-light uppercase ">Grade</div>
-                                <div class="w-100 font-bold">{{$sale->grade}}</div>
+                                <div class="w-100 font-bold">{{$sale->mainGrade}}</div>
                             </div>
                             <div class="p-cus">
-                                <div class="w-100 text-neutral-80 font-light uppercase ">Grade</div>
-                                <div class="w-100 font-bold">{{$sale->grade}}</div>
+                                <div class="w-100 text-neutral-80 font-light uppercase ">Engine Power</div>
+                                <div class="w-100 font-bold">{{$sale->engine_power . " CC" . " / " . $sale->cylinder}}</div>
                             </div>
                             <div class="p-cus">
-                                <div class="w-100 text-neutral-80 font-light uppercase ">Grade</div>
-                                <div class="w-100 font-bold">{{$sale->grade}}</div>
+                                <div class="w-100 text-neutral-80 font-light uppercase ">License State</div>
+                                <div class="w-100 font-bold">{{$sale->lincese_state_main}}</div>
                             </div>
                             <div class="p-cus">
-                                <div class="w-100 text-neutral-80 font-light uppercase ">Grade</div>
-                                <div class="w-100 font-bold">{{$sale->grade}}</div>
-                            </div>
-                            <div class="p-cus">
-                                <div class="w-100 text-neutral-80 font-light uppercase ">Grade</div>
-                                <div class="w-100 font-bold">{{$sale->grade}}</div>
-                            </div>
-                            <div class="p-cus">
-                                <div class="w-100 text-neutral-80 font-light uppercase ">Grade</div>
-                                <div class="w-100 font-bold">{{$sale->grade}}</div>
+                                <div class="w-100 text-neutral-80 font-light uppercase ">Turbo</div>
+                                <div class="w-100 font-bold text-neutral-90 text-[18px]"><i class="fa-solid fa-circle-check"></i></div>
                             </div>
                         </div>
-                        <div class="flex items-center mt-8">
+                        <!-- <div class="flex items-center mt-8">
                             <div class="mr-12">
                                 <a href="" class="shift-button capitalize border font-semibold border-gray-400 secondary small h-[52px]">
                                     view All Deatals
@@ -234,9 +226,7 @@
                             <a href="" class="ml-5">
                                 <i class="fa-solid fa-circle-exclamation"></i>
                             </a>
-                        </div>
-                        
-
+                        </div> -->
                     </div>
                     <hr>
                     <div class="px-5">
@@ -254,7 +244,6 @@
                             <button type="button" data-id="{{$df_id}}" class="capitalize border border-gray-500 shift-button rounded-lg font-bold " id="view_all">View All Fucture</button>
                         </div>
                         <div class="grid grid-cols-2 w-full" id="dataContainer">
-                                                  
                         </div>
                     </div>
                     <div class="px-5">
@@ -438,13 +427,9 @@
         </div>
     </main>
     
-
-<!-- Modal toggle -->
-
-
-<!-- Main modal -->
+    <!-- Main modal -->
     <div id="default-modal"  aria-hidden="true" style="height: 100vh;" 
-    class="hidden overflow-y-auto  overflow-x-hidden fixed top-0 z-50 bg-black bg-opacity-95 right-0 left-0   justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        class="hidden overflow-y-auto  overflow-x-hidden fixed top-0 z-50 bg-black bg-opacity-95 right-0 left-0   justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
         <div class="relative p-4  max-w-full w-full max-h-full ">
             <div class="relative bg-transparent rounded-lg shadow dark:bg-gray-700">
                 <button type="button" class="text-gray-400 absolute top-[10px] right-[10px] overflow-hidden z-50  bg-white hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="default-modal">
@@ -543,6 +528,12 @@
                                 <div class="rounded-md h-12 w-12 border-4 border-t-4 border-blue-500 animate-spin absolute"></div>\
                             </div> ')
                 $('#dataContainer').append(value);
+                // function capitalizeWords('mg su aung') {
+                //     return input.replace(/\b\w/g, function(match) {
+                //         return match.toUpperCase();
+                //     });
+                // }
+                // console.log(capitalizeWords());
                 let btn = $(e.currentTarget);
                 let dataId = btn.data('id') ;
                 $.ajax({
@@ -553,9 +544,10 @@
                         $('#dataContainer').empty();
                         $.each(response, function(key, value) {
                             if(value == 1 ) {
+                                var replace= key.replace('_'," ");
                                 var element = $('<div class="flex items-center mb-2">\
                                                 <a href="" class="font-bold hover:bg-main">\
-                                                ' + key + '\
+                                                ' +replace  + '\
                                                 </a>\
                                             </div>');
                                 

@@ -99,6 +99,7 @@
                         grade : this.data['grades'][0].grade,
                         exterior_color: null ,
                         transmission : null ,
+                        engine_power : null ,
                     }, 
                     {
                         license_state : null ,
@@ -184,7 +185,7 @@
             } ,
         },
         mounted () {
-            console.log(this.data['id'].id);
+            console.log(this.data['engine_powers']);
         }
     }
     

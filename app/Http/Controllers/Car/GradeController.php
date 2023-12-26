@@ -86,7 +86,6 @@ class GradeController extends Controller
         $datas['motors'] = Motor::get();
         $datas['defaultFunctions'] = Default_function::first() ;
         $datas['function_names'] = Function_Name::get();
-        $datas['engine_powers'] = EnginePower::get();
         $datas['inputField'] = $inputs ;
         $datas['cameras'] = Camera::get();
         $modelX = [] ;

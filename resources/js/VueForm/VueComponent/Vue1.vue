@@ -25,13 +25,7 @@
         <hr>
         <div class="row">
             <div class="text-header text-center mb-3 fw-bold">Enigne</div>
-            <div class="col-md-6 mb-3">
-                <label for="engine_power" class="form-label">Add Engine Power</label>
-                <select name="engine_power" id="engine_power" class="form-select" v-model="stepProgess.step1.engine.engine_power">
-                    <option v-for="engine_power in datas.engine_powers" :key="engine_power.id" :value="engine_power.id"> {{ engine_power.engine_power + " " + "CC" }}</option>
-                </select>
-            </div>  
-            <div class="col-md-6 mb-3">
+            <div class="col-md-12 mb-3">
                 <label for="cylinder" class="form-label">Cylinder</label>
                 <select name="cylinder" id="" class="form-select" v-model="stepProgess.step1.engine.cylinder">
                     <option v-for="cylinder in datas.cylinders" :key="cylinder.id" :value="cylinder.id"> {{ cylinder.cylinder }}</option>
@@ -91,11 +85,8 @@
             defaultBodyStyle () {
                 return this.datas.body_styles.length  > 0 ? this.datas.body_styles[0].id : null ;
             },
-            defaultEnginePower () {
-                return this.datas.engine_powers.length  > 0 ? this.datas.engine_powers[0].id : null ;
-            },
             defaultCylinder () {
-                return this.datas.cylinders.length  > 0 ? this.datas.cylinders[0].id : null ;
+                return this.datas.cylinders.length  > 0 ? this.datas.cylinders[1].id : null ;
             },
             defaultFuel () {
                 return this.datas.fuels.length  > 0 ? this.datas.fuels[0].id : null ;
@@ -108,16 +99,12 @@
             if(this.stepProgess.step1.body_style == null ) {
                 this.stepProgess.step1.body_style = this.defaultBodyStyle ;
             }
-            if(this.stepProgess.step1.engine.engine_power == null) {
-                this.stepProgess.step1.engine.engine_power = this.defaultEnginePower ;
-            }
             if(this.stepProgess.step1.engine.cylinder == null) {
                 this.stepProgess.step1.engine.cylinder = this.defaultCylinder ;
             }
             if(this.stepProgess.step1.engine.fuel_type == null) {
                 this.stepProgess.step1.engine.fuel_type = this.defaultFuel ;
             }
-            
         }
     }
 </script>

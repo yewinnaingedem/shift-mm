@@ -33,6 +33,8 @@ use App\Http\Controllers\Car\licenseStateController;
 use App\Http\Controllers\BeforeSaleController ;
 
 
+
+
 Route::get('/google' , [AuthController::class , 'googleLogIn']);
 Route::prefix('mm_cars')->group(function () {
     Route::get('/' , [MMCarsController::class , 'index']);
@@ -52,6 +54,7 @@ Route::prefix('mm_cars')->group(function () {
     Route::get('car/{details}' , [DetailsController::class , 'index'] );
     // financing 
     Route::get('financing' , [FinancingController::class , 'index']);
+    
 });
 
 Route::prefix('admin')->group(function (){

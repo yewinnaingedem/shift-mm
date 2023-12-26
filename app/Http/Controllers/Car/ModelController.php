@@ -14,6 +14,7 @@ use App\Models\Brand ;
 use App\Models\Divertrim ;
 use App\Models\Car\Car ;
 use App\Models\ExteriorColor ;
+use App\Models\EnginePower ;
 use App\Models\Steering ;
 use App\Models\Car\OwnerBook ;
 use App\Models\LicenseState ;
@@ -57,7 +58,8 @@ class ModelController extends Controller
             $data['transmissionTypes'] = TransmissionType::get();
             $data['id']  = $brandId ;
             $data['license-states'] = LicenseState::get();
-            
+            $data['engine_powers'] = EnginePower::get();
+            // dd($data['engine_powers']);
         return view('admin.cars.stepProgess',compact('data'));
     }
     public function leftJoin($id) {

@@ -24,11 +24,11 @@
                 @php 
                     $modelX = session()->get('modelX');
                 @endphp 
-                <input type="hidden" name="modelX[model]" value="{{$modelX['model']}}">
-                <input type="hidden" name="modelX[year]" value="{{$modelX['year']}}">
-                <input type="hidden" name="modelX[make]" value="{{$modelX['make']}}">
-                <input type="hidden" name="modelX[test]" value="TRUE">
-            @else
+                    <input type="hidden" name="modelX[model]" value="{{$modelX['model']}}">
+                    <input type="hidden" name="modelX[year]" value="{{$modelX['year']}}">
+                    <input type="hidden" name="modelX[make]" value="{{$modelX['make']}}">
+                    <input type="hidden" name="modelX[test]" value="TRUE">
+                @else
                 <input type="hidden" name="modelX[test]" value="FALSE">
             @endif
             @csrf 
@@ -37,10 +37,12 @@
                 <select class="form-select" name="model" id="models" aria-label="Disabled select example" >
                     @foreach($models as $model)
                         <option value="{{$model->id}}"
-                        @if(session()->has('model')) 
+                        @if(session('modelX')) 
                             {{ $model->id == $modelX['model'] ? "selected" : " "}}
                         @endif 
-                        >{{$model->model_name}}</option>
+                        >
+                            {{$model->model_name}}
+                        </option>
                     @endforeach
                 </select>
             </div>

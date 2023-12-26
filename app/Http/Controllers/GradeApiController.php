@@ -44,7 +44,13 @@ class GradeApiController extends Controller
         
         // for grade 
         $grades = [] ;
+        $engines = [] ;
         $grades['carModel_id'] = $grade['carModel_id'];
+        // for engine
+        $engines['Cylinder_id'] = $step1['engine']['cylinder'];
+        $engines['Fuel'] = $step1['engine']['fuel_type'];
+        $engines['Turbo'] = $step1['engine']['turbo'] == "false" ? FALSE : TRUE;
+        $grades['engine_id'] = Engine::insertGetId($engines);
         // for default Functions 
         $default_functionSet = [] ;
         $now = Carbon::now();
@@ -63,6 +69,7 @@ class GradeApiController extends Controller
         $grades['grade'] = $grade['grade'] == 'false' ? "none" : $grade['grade'];
         $grade['created_at'] = $now->day."/".$now->month."/".$now->year ;
         $gradeId = Grade::insertGetId($grades);
+        // return response()->json($gradeId);
         // for car fuctures 
         $car_fuctures = [] ;
         $car_fuctures['grade_id'] = $gradeId ;
@@ -77,13 +84,6 @@ class GradeApiController extends Controller
         $car_fuctures['divertrim_id'] = $step2['divertrim'] ;
         $car_fuctures['bodyStyle_id'] = $step1['body_style'] ;
         
-        $engines = [] ;
-        $engines['Engine_power_id'] = $step1['engine']['engine_power'];
-        $engines['Cylinder_id'] = $step1['engine']['cylinder'];
-        $engines['Fuel'] = $step1['engine']['fuel_type'];
-        $engines['Turbo'] = $step1['engine']['turbo'] == "false" ? FALSE : TRUE;
-
-        $car_fuctures['engine_id'] = Engine::insertGetId($engines);
         $existFunction = Arr::has($step3, 'functions');
         if($existFunction) {
             if(count($step3['functions']) !== 0) {

@@ -57,7 +57,7 @@
         <div class="block px-5 pt-2 bg-white border-b-2 relative border-gray-300">
             <div class="flex items-center justify-between ">
                 <div id="makes" class="pb-3 border-b-0  ">
-                    <div class="relative makes">Makes</div>
+                    <div class="relative makes">makes</div>
                 </div>
                 <div id="el_hy" class="pb-3 border-b-0  ">
                     <div class="el_hy relative" >Electric / Hybird </div>
@@ -88,76 +88,8 @@
                 </div>
             </div>
             <div class="px-5 bg-white absolute top-[45px] z-30 block w-full left-0 ">
-                <div class="hidden z-50" id="makes_ho">
-                    <div class="grid grid-cols-3 py-[10px] ">
-                        <div class="col-span-2">
-                            <h1 class="font-semibold main-color mb-3">All Makes</h1>
-                            <div class="grid grid-cols-6">
-                                <div class>
-                                    <a href="">Acura</a>
-                                </div>
-                                <div class>
-                                    <a href="">Cardilac</a>
-                                </div>
-                                <div class>
-                                    <a href="">Aston Martin</a>
-                                </div>
-                                <div class>
-                                    <a href="">Ford</a>
-                                </div>
-                                <div class>
-                                    <a href="">Toyota</a>
-                                </div>
-                                <div class>
-                                    <a href="">Nissan</a>
-                                </div>
-                                <div class>
-                                    <a href="">Soueast</a>
-                                </div>
-                                <div class>
-                                    <a href="">Baic</a>
-                                </div><div class>
-                                    <a href="">GAC</a>
-                                </div>
-                                <div class>
-                                    <a href="">BYD</a>
-                                </div>
-                                <div class>
-                                    <a href="">GMC</a>
-                                </div>
-                                <div class>
-                                    <a href="">KIA</a>
-                                </div>
-                                <div class>
-                                    <a href="">Hundai</a>
-                                </div>
-                                <div class>
-                                    <a href="">Hunda </a>
-                                </div>
-                                <div class>
-                                    <a href="">Jetour</a>
-                                </div>
-                                <div class>
-                                    <a href="">Hijet</a>
-                                </div>
-                                <div class>
-                                    <a href="">Changhe</a>
-                                </div>
-                                <div class>
-                                    <a href="">Brillance</a>
-                                </div>
-                                <div class>
-                                    <a href="">Suzuki</a>
-                                </div>
-                                <div class>
-                                    <a href="">Cherovolet</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-span-1 flex justify-center items-center">
-                            <img src="{{asset('storage/img/bg_cars.png')}}" alt="">
-                        </div>
-                    </div>
+                <div class="z-50" id="makes_ho">
+                    
                 </div>
             </div>
         </div>
@@ -406,6 +338,7 @@
             </div>
         </div>
     </div>
+   
 @endsection 
 
 @section('footer') 
@@ -414,31 +347,7 @@
 
 @section('script')
     <script>
-        $(document).ready(function () {
-                let $pircRange = $("input[name='priceRange']");
-                $value = $pircRange.val() ;
-                $vhPirce = $value * 100000 ;
-                $('#pirceID').html($value.toLocaleString());
-                $('#vehiclePrice').html($vhPirce.toLocaleString());
-                $dp = $vhPirce * ( 50 / 100 ) ;
-                $('#DownPayment').html($dp.toLocaleString());
-            $(document).on('input' , $pircRange , ()=> {
-                $value = $pircRange.val() ;
-                $vhPirce = $value * 100000 ;
-                $('#pirceID').html($value.toLocaleString());
-                $('#vehiclePrice').html($vhPirce.toLocaleString());
-                $dp = $vhPirce * ( 50 / 100 ) ;
-                $loanAmount = $vhPirce - $dp ;
-                $('#DownPayment').html($dp.toLocaleString());
-                $('#loanAmount').html($loanAmount.toLocaleString());
-                let emiValue = emi($loanAmount , 60 );
-                $('#estimetedMonth').html(emiValue.toLocaleString());
-            });
-            function emi(fin_amo, months) {
-                const intestRate = 10 / 12 / 100; 
-                let emiValue = fin_amo * intestRate * (Math.pow(1 + intestRate, months) / (Math.pow(1 + intestRate, months) - 1));
-                return emiValue ;
-            }
-        });
+        var imgeUrl = "{{asset('storage/img/bg_cars.png')}}" ;
     </script>
+    <script src="{{asset('storage/Jquery/Details.js')}}"></script>
 @endsection 

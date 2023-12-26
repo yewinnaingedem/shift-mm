@@ -28,6 +28,7 @@
                 </div>
             </div>
         </div>
+        
         <div v-if="arrayData['grades'].length > 0 && arrayData['grades'][0].grade == 'none'">
             <div class="alert alert-warning alert-dismissible fade show"  v-if="isvisiable">
                 <strong>Mingalar Car Sale Center !</strong> We detectived that doesn't have a grade
@@ -43,9 +44,22 @@
             </select>
         </div>
         <div class="mb-3">
-            <label for="transmission_type" class="form-label mb-3">Transmission</label>
+            <h5 class="fw-bold cap-5 mb-2">Engine Power</h5>
+            <div class="row">
+                <div class="col-md-3 mb-3" v-for="engine_power in arrayData['engine_powers']" :key="engine_power.id">
+                    <label :for="engine_power.engine_power + 'en'"
+                        class="justify-content-center d-flex align-items-center p-10 rounded-sm  text-white"    
+                        :class="[data.engine_power == engine_power.id ? activeClass : mainClass]">
+                        <input type="radio"  v-model="data.engine_power"  :id="engine_power.engine_power + 'en'" :value="engine_power.id"
+                            class="check-input">
+                        <div class="fw-bold">{{ engine_power.engine_power + "/" + "CC" }}</div>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="transmission_type" class="form-label mb-3">Transmission Auto</label>
             <select v-model="data.transmission" id="transmission_type" class="form-select">
-                <option style="display: none;" selected>Dirving Hand</option>
                 <option v-for="transmission_type in arrayData['transmissionTypes']" :key="transmission_type.id"
                     :value="transmission_type.id">
                     {{ transmission_type.transmission_type }}
@@ -80,7 +94,9 @@
                     </div>
                 </div>
             </div>
+            <hr>
         </div>
+        
     </div>
 </template>
 <style scoped>
@@ -146,6 +162,7 @@
 
 .active-color {
     background: #06CBA3;
+    color : black ;
 }
 
 .rounded-sm {
@@ -233,7 +250,7 @@ export default {
                             step1.license = query.license_plate;
                             step1.millage = query.kilo_meter;
                             step1.grade = query.grade;
-                            step1.exterior_color = query.exterior_color_id;
+                            step1.eingne_power = query.exterior_color_id;
                             step1.transmission = query.transmission_type;
                             // for Step 2
                             step2.license_state = query.license_state;
@@ -314,6 +331,7 @@ export default {
     mounted() {
         this.data.grade = this.defaultGradeId;
         this.data.transmission = this.defaultTransmission;
+        console.log(this.arrayData.engine_powers + " kkkk ");
     },
     watch : {
         adjustColor () {

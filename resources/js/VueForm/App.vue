@@ -15,6 +15,12 @@
                     <div class="col-md-6 text-end"  v-if="currentSteps > 0">
                         <button class="btn btn-primary " v-on:click="previousStep">Perivous Steps</button>
                     </div>
+                    <data class="col-md-6 text-end" v-else>
+                        <a :href="backRoute" class="btn btn-danger">
+                            <i class="fa-solid fa-backward"></i>
+                            <span class="ml-2">Back</span>
+                        </a>
+                    </data>
                 </div>
             </div>
         </div>
@@ -34,6 +40,7 @@
         }, 
         data () {
             return {
+                backRoute : "http://localhost:8000/admin/grade/create" ,
                 currentSteps : 0,
                 steps : ['Vue1', 'Vue2' , 'Vue3'] ,
                 removeBar : false ,
@@ -213,6 +220,8 @@
     .step-done .step-label  {
         opacity: 1;
     }
-    
+    .ml-2 {
+        margin-left: 3px;
+    }
     
 </style>

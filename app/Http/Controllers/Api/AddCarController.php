@@ -48,6 +48,7 @@ class AddCarController extends Controller
         $carOwners['license_state'] = $data2['license_state'];
         $carOwners['model_id'] = $model_id ;
         $carOwners['year'] = $year ;
+        $carOwners['engine_power_id'] = $data1['engine_power'];
         $carOwners['license_plate'] = $data1['license'];
         $carOwners['pass_owner'] = $data2['pass_owner'] ;
         $carOwners['transmission_type'] = $data1['transmission'];
