@@ -2,7 +2,7 @@
     <div class="fixed z-[9999] w-full top-0 bg-white shadow">
         <div class="flex py-5 px-8 justify-between cursor-pointer font-semibold  align-baseline h-[60px] border-b-1 border-neutral-100">
             <div>
-                <a href="{{url('mm_cars')}}" class="header_logo text-lg">
+                <a href="{{url('mm_cars/shop_mm')}}" class="header_logo text-lg">
                     <h1 class="font-bold main-color">Shift MM</h1>
                 </a>
             </div>

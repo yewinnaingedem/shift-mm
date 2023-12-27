@@ -55,12 +55,12 @@
 @section('content') 
     <main class="sticky top-[60px] z-50">
         <div class="block px-5 pt-2 bg-white border-b-2 relative border-gray-300">
-            <div class="flex items-center justify-between ">
+            <div class="flex items-center justify-between " id="wrapper">
                 <div id="makes" class="pb-3 border-b-0  ">
-                    <div class="relative makes">makes</div>
+                    <div class="relative makes">Makes</div>
                 </div>
                 <div id="el_hy" class="pb-3 border-b-0  ">
-                    <div class="el_hy relative" >Electric / Hybird </div>
+                    <div class="el_hy relative" >Electric_Hybird </div>
                 </div>
                 <div id="luxury" class="pb-3 border-b-0">
                     <div class="luxury relative" >Luxury</div>

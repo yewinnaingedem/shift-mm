@@ -14,4 +14,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('sarchQuery' , [ModelController::class , 'searchQuery']);
 Route::resource('end-point' , GradeApiController::class);
 Route::get('default_function/{dataId}' , [GradeApiController::class , 'apiRoute']);
-Route::get('makes' , [HoverResponseController::class , 'index']);
+Route::get('{value}' , [HoverResponseController::class , 'index']);

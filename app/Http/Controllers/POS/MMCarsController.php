@@ -28,7 +28,6 @@ class MMCarsController extends Controller
                 ->leftJoin('grades','items.grade','grades.id')
                 ->paginate($this->pageLimit(8));
         return view('MM.index')->with('datas',$datas);
-        
     }
 
     public function index () {
