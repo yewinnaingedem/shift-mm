@@ -546,7 +546,7 @@
                             if(value == 1 ) {
                                 var replace= key.replace('_'," ");
                                 var element = $('<div class="flex items-center mb-2">\
-                                                <a href="" class="font-bold hover:bg-main">\
+                                                <a href="" class="font-bold hover:bg-main capitalize">\
                                                 ' +replace  + '\
                                                 </a>\
                                             </div>');

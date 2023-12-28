@@ -10,6 +10,7 @@ use App\Models\ExteriorColor ;
 use App\Models\Car\Item ;
 use App\Models\Car\OwnerBook ;
 use App\Models\Car\Car ;
+use App\Models\Year ;
 
 
 class AddCarController extends Controller
@@ -21,7 +22,7 @@ class AddCarController extends Controller
         $data2 = $request['field'][1];
         $data3 = $request['field'][2];
         $model_id = $request['model_Id'];
-        $year = $request['year'];
+        $main = $request['year'];
         $items = [] ;
         $items['warranty'] = $data2['warranty'] ;
         $items['steering_coner'] = $data2['steering'] ;
@@ -47,7 +48,8 @@ class AddCarController extends Controller
         }
         $carOwners['license_state'] = $data2['license_state'];
         $carOwners['model_id'] = $model_id ;
-        $carOwners['year'] = $year ;
+        $year_id =  Year::where('year', $main['year'])->first() ;
+        $carOwners['year_id'] =$year_id->id ;
         $carOwners['engine_power_id'] = $data1['engine_power'];
         $carOwners['license_plate'] = $data1['license'];
         $carOwners['pass_owner'] = $data2['pass_owner'] ;
@@ -59,7 +61,7 @@ class AddCarController extends Controller
         $cars = [];
         $cars['item_id'] = $itemId ;
         $cars['owner_book_id'] = $carOwnerId ;
-        $cars['year'] = $year ;
+        $cars['year'] = $main['year'] ;
         session(['car_datas' => $cars]);
         $response = [
             'success' => true ,

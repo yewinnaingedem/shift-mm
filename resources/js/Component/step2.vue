@@ -21,8 +21,10 @@
             <input type="text" v-model="data.pass_owner" id="owner" class="form-control" placeholder="Enter Pass Owner">
         </div>
         <div class="col-md-6 mb-3">
-            <label for="madeIn" class="form-label">Place Of Orignal</label>
-            <input type="text" v-model="data.madeIn" id="madeIn" class="form-control" placeholder="Place Of Orignal ">
+            <label for="country" class="form-label">Pleace Of Original </label>
+            <select v-model="data.madeIn" id="" class="form-select">
+                <option :value="country.id" :key="country.id" v-for="country in arrayData['countries']">{{ country.country }}</option>
+            </select>
         </div>
         <div class="col-md-6 mb-3">
             <label for="num_seat" class="form-label">Number Of Seat</label>
@@ -64,6 +66,9 @@ export default ({
                 return this.arrayData['license-states'][0].id ;
             }
             return null ;
+        },
+        defaultCountry () {
+            return this.arrayData['countries'].length > 0 ? this.arrayData['countries'][0].id : null ;
         }
     },
     data () {
@@ -83,6 +88,7 @@ export default ({
     mounted () {
         this.data.steering = this.defaultSteeringConer ;
         this.data.license_state = this.defaultState ;
+        this.data.madeIn = this.defaultCountry ;
     }
     
 });

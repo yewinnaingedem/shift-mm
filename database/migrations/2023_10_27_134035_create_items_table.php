@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('warranty');
             $table->unsignedBigInteger("steering_coner");
-            $table->string('place_of_orgin');
+            $table->unsignedBigInteger('place_of_orgin');
             $table->string('number_seats');
             $table->string('kilo_meter');
             $table->unsignedBigInteger('grade');
@@ -25,6 +25,7 @@ return new class extends Migration
 
             $table->foreign('steering_coner')->references('id')->on('steerings');
             $table->foreign('grade')->references('id')->on('grades');
+            $table->foreign('place_of_orgin')->references('id')->on('made_in');
         });
     }
 

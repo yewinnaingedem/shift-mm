@@ -156,7 +156,7 @@
                 }
             },
             submit () {
-                axios.post('/admin/setup', { field : this.field , model_Id : this.data['id'].id , year : this.data['main'].year}) 
+                axios.post('/admin/setup', { field : this.field , model_Id : this.data['id'].id , year : this.data['main']}) 
                 .then((response) => {
                     console.log(response);
                     window.location.href = response.data.redirect;

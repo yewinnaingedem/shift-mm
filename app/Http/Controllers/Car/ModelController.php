@@ -14,6 +14,7 @@ use App\Models\Brand ;
 use App\Models\Divertrim ;
 use App\Models\Car\Car ;
 use App\Models\ExteriorColor ;
+use App\Models\MadeIn ;
 use App\Models\EnginePower ;
 use App\Models\Steering ;
 use App\Models\Car\OwnerBook ;
@@ -59,6 +60,7 @@ class ModelController extends Controller
             $data['id']  = $brandId ;
             $data['license-states'] = LicenseState::get();
             $data['engine_powers'] = EnginePower::get();
+            $data['countries'] = MadeIn::get();
             // dd($data['engine_powers']);
         return view('admin.cars.stepProgess',compact('data'));
     }
