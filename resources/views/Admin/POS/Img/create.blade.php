@@ -160,16 +160,100 @@
                     </label>
                 </div>
             </div>
-            <div class="mb-3 row">
-                <div class="col-md-6"></div>
-                <div class="col-md-6 text-end">
-                    <button type="submit" class="btn btn-primary w-50">
-                        Submit 
-                    </button>
-                </div>
+            <div class="mb-3 ">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" >Submit </button>
             </div>
         </form>
     </div>
+    <!-- Bootstrap Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Report Demange For <span class="fw-bold text-danger">Accent</span></h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-1">
+                        <div class="row">
+                            <div class="col-md-6 ">
+                                <label for="recipient-name" class="col-form-label">Engine Malfunction</label>
+                            </div>
+                            <div class="col-md-6  form-switch d-flex justify-content-end align-items-center">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" >
+                                    <label class="form-check-label fw-bold text-danger" for="flexSwitchCheckChecked">Good ?</label>
+                                </div>
+                            </div>
+                        </div>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="1"></textarea>
+                    </div>
+                    <div class="mb-1">
+                        <div class="row">
+                            <div class="col-md-6 ">
+                                <label for="message-text" class="col-form-label">Paint Demange</label>
+                            </div>
+                            <div class="col-md-6  form-switch d-flex justify-content-end align-items-center">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" >
+                                    <label class="form-check-label fw-bold text-danger" for="flexSwitchCheckChecked">Good ?</label>
+                                </div>
+                            </div>
+                        </div>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="1"></textarea>
+                    </div>
+                    <div class="mb-1">
+                        <div class="row">
+                            <div class="col-md-6 ">
+                                <label for="message-text" class="col-form-label">TV Exception</label>
+                            </div>
+                            <div class="col-md-6  form-switch d-flex justify-content-end align-items-center">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" >
+                                    <label class="form-check-label fw-bold text-danger" for="flexSwitchCheckChecked">Good ?</label>
+                                </div>
+                            </div>
+                        </div>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="1"></textarea>
+                    </div>
+                    <div class="mb-1">
+                        <div class="row">
+                            <div class="col-md-6 ">
+                                <label for="message-text" class="col-form-label">Suspection</label>
+                            </div>
+                            <div class="col-md-6  form-switch d-flex justify-content-end align-items-center">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" >
+                                    <label class="form-check-label fw-bold text-danger" for="flexSwitchCheckChecked">Good ?</label>
+                                </div>
+                            </div>
+                        </div>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="1"></textarea>
+                    </div>
+                    <div class="mb-1">
+                        <div class="row">
+                            <div class="col-md-6 ">
+                                <label for="message-text" class="col-form-label">Addtional Exception</label>
+                            </div>
+                            <div class="col-md-6  form-switch d-flex justify-content-end align-items-center">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" >
+                                    <label class="form-check-label fw-bold text-danger" for="flexSwitchCheckChecked">Good ?</label>
+                                </div>
+                            </div>
+                        </div>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="1"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Send message</button>
+            </div>
+            </div>
+        </div>
+</div>
 @endsection 
 
 @section('footer')

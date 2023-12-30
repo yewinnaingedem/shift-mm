@@ -62,7 +62,7 @@
                     <button class="btn btn-primary">Sumbit</button> 
                 </div>
                 <div class="col-md-6 text-end">
-                    <a href="{{url('admin/grade')}}" class="btn btn-primary mb-3">
+                    <a href="{{url('admin/routeBack')}}" class="btn btn-primary mb-3">
                         <i class="fa-sharp fa-solid fa-backward"></i>
                         <span>Back </span>
                     </a>

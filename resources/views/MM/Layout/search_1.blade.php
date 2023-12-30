@@ -71,7 +71,7 @@
 </div>
 
 <!-- Main modal -->
-<div id="crypto-modal" tabindex="-1" aria-hidden="true" class="hidden  overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 bottom-0 justify-start items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+<div id="crypto-modal" tabindex="-1" aria-hidden="true" class="hidden  overflow-y-auto overflow-x-hidden absolute top-0 right-0 left-0 z-50 bottom-0 justify-start items-center w-full  max-h-full">
     <div class="relative p-4 w-full max-w-md max-h-full">
         <!-- Modal content -->
         <div class="relative bg-white rounded-lg shadow ">
@@ -96,7 +96,8 @@
                         role="status">
                         <span
                             class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
-                            >Loading...</span
+                            >
+                        </span
                         >
                         </div>
                     </div>
