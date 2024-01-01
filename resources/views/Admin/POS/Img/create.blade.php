@@ -15,6 +15,9 @@
         .object-fit-cover {
             object-fit : cover ;
         }
+        .cursor-not-allowed {
+            cursor : not-allowed ;
+        }
     </style>
 @endsection 
 
@@ -182,12 +185,12 @@
                             </div>
                             <div class="col-md-6  form-switch d-flex justify-content-end align-items-center">
                                 <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" >
-                                    <label class="form-check-label fw-bold text-danger" for="flexSwitchCheckChecked">Good ?</label>
+                                    <input class="form-check-input" name="recipient_name" type="checkbox" role="switch" id="recipient_name" >
+                                    <label class="form-check-label fw-bold text-danger" for="recipient_name">Good ?</label>
                                 </div>
                             </div>
                         </div>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="1"></textarea>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" name="recipient" rows="1"></textarea>
                     </div>
                     <div class="mb-1">
                         <div class="row">
@@ -373,6 +376,41 @@
                 }
             });
 
+            var malfunction = $('input[name="recipient_name"]');
+            $(document).on('change', malfunction , function () {
+                if (malfunction.is(':checked')) {
+                    $('#exampleFormControlTextarea1').prop('disabled', true);
+                    malfunction.val('none');
+                    $('#exampleFormControlTextarea1').addClass('cursor-not-allowed');
+                } else {
+                    $('#exampleFormControlTextarea1').prop('disabled', false);
+                    malfunction.val(' ');
+                    $('#exampleFormControlTextarea1').removeClass('cursor-not-allowed');
+                }
+                console.log(malfunction.val());
+            });
+            
+            var malfunction = $('input[name="recipient_name"]');
+            $(document).on('change', malfunction , function () {
+                if (malfunction.is(':checked')) {
+                    $('#exampleFormControlTextarea1').prop('disabled', true);
+                    $('#exampleFormControlTextarea1').addClass('cursor-not-allowed');
+                } else {
+                    $('#exampleFormControlTextarea1').prop('disabled', false);
+                    $('#exampleFormControlTextarea1').removeClass('cursor-not-allowed');
+                }
+            });
+
+            var malfunction = $('input[name="recipient_name"]');
+            $(document).on('change', malfunction , function () {
+                if (malfunction.is(':checked')) {
+                    $('#exampleFormControlTextarea1').prop('disabled', true);
+                    $('#exampleFormControlTextarea1').addClass('cursor-not-allowed');
+                } else {
+                    $('#exampleFormControlTextarea1').prop('disabled', false);
+                    $('#exampleFormControlTextarea1').removeClass('cursor-not-allowed');
+                }
+            });
         });
     </script>
 @endsection 

@@ -13,6 +13,7 @@ use App\Models\Seat ;
 use App\Models\Key ;
 use App\Models\Function_Name ;
 use App\Models\SunRoof ;
+use App\Models\Brand ;
 use App\Models\Sonor ;
 use App\Models\CarDetails ;
 use App\Models\Aircon ;
@@ -33,6 +34,8 @@ class GradeController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+
     public function index()
     {
         $grades = Grade::select('car_models.model_name','grades.grade'  , 'grades.id' , 'grades.created_at')
@@ -47,7 +50,8 @@ class GradeController extends Controller
     public function create()
     {
         $models = CarModel::get();
-        return view('admin.POS.Grade.create' , compact('models'));
+        $brands = Brand::get();
+        return view('admin.POS.Grade.create' , compact('models' , 'brands'));
     }
 
     /**
@@ -74,6 +78,10 @@ class GradeController extends Controller
         $datas = [] ;
         $datas['functions'] = CarDetails::get();
         $datas['transmissions'] = Transmission::get();
+        $brand = Brand::where('id' , $request->brand)->first();
+        $model = CarModel::where('id' , $request->model)->first();
+        $datas['brand_name']  = $brand->brand_name;
+        $datas['model_name'] = $model->model_name ;
         $datas['body_styles'] = BodyStyle::get(); 
         $datas['cylinders'] =  Cylinder::get();
         $datas['fuels'] =  Engine_type::get();

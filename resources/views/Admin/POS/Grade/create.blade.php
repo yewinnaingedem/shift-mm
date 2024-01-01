@@ -32,23 +32,24 @@
                 <input type="hidden" name="modelX[test]" value="FALSE">
             @endif
             @csrf 
-            <div class="mb-3">
-                <label for="models" class="form-label">Add Model</label>
-                <select class="form-select" name="model" id="models" aria-label="Disabled select example" >
-                    @foreach($models as $model)
-                        <option value="{{$model->id}}"
-                        @if(session('modelX')) 
-                            {{ $model->id == $modelX['model'] ? "selected" : " "}}
-                        @endif 
-                        >
-                            {{$model->model_name}}
-                        </option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="form-check form-switch mb-3">
-                <input class="form-check-input" type="checkbox" role="switch" value="exist" id="gradeValide">
-                <label class="form-check-label" for="gradeValide">Does it have grade ?</label>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label" for="grade">Brand Name</label>
+                    <select name="brand" id="brand" class="form-select">
+                        @foreach($brands as $brand)
+                            <option value="{{$brand->id}}"
+                            >
+                                {{$brand->brand_name}}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="models" class="form-label">Add Model</label>
+                    <select class="form-select" name="model" id="models" aria-label="Disabled select example" >
+                        <option slected>Chose Model</option>
+                    </select>
+                </div>
             </div>
             <div class="mb-3">
                 <label for="model" class="form-label">Car Model</label>
@@ -56,6 +57,10 @@
                 @if($errors->has('grade'))
                     <p class="text-danger">{{$errors->first('grade')}}</p>
                 @endif 
+            </div>
+            <div class="form-check form-switch mb-3">
+                <input class="form-check-input" type="checkbox" role="switch" value="exist" id="gradeValide">
+                <label class="form-check-label" for="gradeValide">Does it have grade ?</label>
             </div>
             <div class="mb-3 row">
                 <div class="col-md-6">
@@ -80,7 +85,7 @@
 @section('script')
     <script>
         $(document).ready(()=>{
-            
+            var route = "/admin/model/' + $make.val()";
             $('#gradeValide').change(function ()
             {
                 let $grade = $('input[name="grade"]');
@@ -92,6 +97,34 @@
                 }
             }
             );
+            
+            $(document).on('change' , '#brand' , function () {
+                let val = $('#brand') ;
+                $.ajax({
+                    type : "post" ,
+                    url : "/admin/model/" + val.val() ,
+                    data : {
+                        "_token" : "{{csrf_token()}}"
+                    } ,
+                    success : (response) => {
+                        $('#models').empty();
+                        if(response.response.length > 0) {
+                            
+                        }
+                        let brand = `
+                                <option slected class="d-none" >Chose Model</option>
+                                
+                                ${response.response.map(function (item) {
+                                    return `<option value="${item.id}">${item.model_name}</option>`;
+                                }).join()}`;
+                        
+                        $('#models').append(brand);
+                    },
+                    error : (error) => {
+                        console.log(error);
+                    }
+                });
+            }) ;
         });
     </script>
 @endsection 

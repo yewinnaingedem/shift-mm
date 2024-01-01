@@ -1,5 +1,8 @@
 <template>
     <div class="container">
+        <div class="h3 text-center fw-bold">
+                Adding the grade for <span class="fw-bold text-primary">{{ datas.brand_name }}</span> <span class="text-danger">({{ datas.model_name }})</span>
+        </div>
         <div class="row">
             <div class="fw-bold mb-3 h-3 text-header">Transmission</div>
             <div class="col-lg-2 col-md-3 col-sm-4 mb-3" v-for="(transmission  , index ) in datas['transmissions']" :key="transmission.id">
