@@ -13,12 +13,15 @@
 @section('page-name' , 'Car Models')
 
 @section('content')
-    <div class="container-fluid mt-3">
-        <div class="mb-3">
-            <a href="{{url('admin/function/create')}}" class=" btn btn-primary">
-                <i class="fa-solid fa-plus">Add</i>
-                <span>Add New</span>
-            </a>
+    <div class="container-fluid mt-3 ">
+        <div class="row">
+            <div class="col-md-6"></div>
+            <div class="mb-3 text-end col-md-6">
+                <a href="{{url('admin/function/create')}}" class=" btn btn-primary">
+                    <i class="fa-solid fa-plus">Add</i>
+                    <span>Add New</span>
+                </a>
+            </div>
         </div>
         @if(session('message')) 
             <div class="alert alert-warning alert-dismissible fade show" role="alert">

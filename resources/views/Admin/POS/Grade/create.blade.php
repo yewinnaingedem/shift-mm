@@ -107,18 +107,38 @@
                         "_token" : "{{csrf_token()}}"
                     } ,
                     success : (response) => {
-                        $('#models').empty();
-                        if(response.response.length > 0) {
-                            
-                        }
-                        let brand = `
+                        
+                        if(response.response.length !== 0) {
+                            $('#models').empty();
+                            let brand = `
                                 <option slected class="d-none" >Chose Model</option>
-                                
                                 ${response.response.map(function (item) {
                                     return `<option value="${item.id}">${item.model_name}</option>`;
                                 }).join()}`;
+                            $('#models').append(brand);
+                        }else {
+                            $('#models').empty();
+                            swal({
+                                    title: "Are you sure?",
+                                    text: "You will not be able to recover this imaginary file!",
+                                    type: "warning",
+                                    showCancelButton: true,
+                                    confirmButtonColor: "#DD6B55",
+                                    confirmButtonText: "Yes, delete it!",
+                                    cancelButtonText: "No, cancel plx!",
+                                    closeOnConfirm: false,
+                                    closeOnCancel: false
+                                },
+                                function(isConfirm){
+                                    if (isConfirm) {
+                                        // swal("Go Another Route!", "Your imaginary file has been deleted.", "success");
+                                        window.location.href = response.redirect ;
+                                    } else {
+                                        swal("Cancelled", "Your imaginary file is safe :)", "error");
+                                    }
+                                });
+                        }
                         
-                        $('#models').append(brand);
                     },
                     error : (error) => {
                         console.log(error);

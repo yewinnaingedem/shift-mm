@@ -1,7 +1,8 @@
 <template>
     <div class="container">
-        <div class="h3 text-center fw-bold">
-                Adding the grade for <span class="fw-bold text-primary">{{ datas.brand_name }}</span> <span class="text-danger">({{ datas.model_name }})</span>
+        <div class=" text-center fw-bold text-truncate text-capitalize">
+                Adding the grade for <span class="fw-bold text-primary">{{ datas.brand_name }}</span> <span class="text-danger">{{ datas.model_name }}</span>
+                <span class="ml-3 text-capitalize" v-if="datas.grade !== 'none'">{{ datas.grade }}</span>
         </div>
         <div class="row">
             <div class="fw-bold mb-3 h-3 text-header">Transmission</div>
@@ -127,5 +128,8 @@
 }
     .main-color {
         background: #06CBA3;
+    }
+    .ml-3 {
+        margin-left:  5px;
     }
 </style>

@@ -42,6 +42,7 @@
                 <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
                         <a class="nav-link" href="{{url('admin/car_models')}}"> Car Models </a>
+                        <a class="nav-link" href="{{url('admin/brand')}}"> Car Brand </a>
                         <a class="nav-link" href="{{url('admin/grade')}}">Grade</a>
                         <a class="nav-link" href="{{url('admin/function')}}">Function </a>
                         <a class="nav-link" href="{{url('admin/default-function')}}">Default Function </a>

@@ -7,7 +7,12 @@
             <div class="container mt-3">
                 <div class="row">
                     <div class="col-md-6" v-if="submitGet">
-                        <button class="btn btn-primary" v-on:click="submit">Submit</button>
+                        <button class="btn btn-primary" v-on:click="submit">
+                            <span>Submit</span>
+                            <div class="spinner-border text-white w-15 h-15" role="status" v-if="loadState">
+                              
+                            </div>
+                        </button>
                     </div>
                     <div class="col-md-6" v-else>
                         <button class="btn btn-primary" v-on:click.prevent="nextStep">Next</button>
@@ -45,6 +50,7 @@
                 steps : ['Vue1', 'Vue2' , 'Vue3'] ,
                 removeBar : false ,
                 checkSumbit : false ,
+                loadState : false ,
             }
         },
         components : {
@@ -64,6 +70,7 @@
                 }
             },
             submit () {
+                this.loadState = true ;
                 $.ajax({
                         type : "POST" ,
                         url  : "/api/end-point" ,
@@ -121,6 +128,13 @@
     .step-container {
         width: 95%;
         margin : 0 auto ;
+    }
+    .w-15 {
+        width: 15px;
+        margin-left: 5px;
+    }
+    .h-15 {
+        height: 15px;
     }
     .step-list {
         display: flex;

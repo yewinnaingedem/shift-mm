@@ -38,8 +38,9 @@ class GradeController extends Controller
 
     public function index()
     {
-        $grades = Grade::select('car_models.model_name','grades.grade'  , 'grades.id' , 'grades.created_at')
+        $grades = Grade::select('car_models.model_name','grades.grade'  , 'grades.id' , 'grades.created_at', 'brands.brand_name')
                     ->leftJoin('car_models' , 'grades.carModel_id' , 'car_models.id')
+                    ->leftJoin('brands' , 'car_models.brand_id' , 'brands.id' )
                     ->get();
         return view('admin.POS.Grade.index' , compact('grades'));
     }
@@ -63,10 +64,16 @@ class GradeController extends Controller
             $request->all() ,
             [
                 'model' => 'required' ,
-                'modelX' => 'required'
             ]
         );
-
+        $grade = $request['grade'] ? $request['grade'] : 'none' ;
+        $carExist = Grade::where('carModel_id' , $request->model)
+                                ->where('grade' , $grade )
+                                ->exists() ;
+        if($carExist) {
+            $validator->errors()->add('grade', 'it is already taken');
+            return redirect('admin/grade/create')->withErrors($validator)->withInput();
+        }
         if($validator->fails()) {
             return redirect('admin/grade/create')->withErrors($validator)->withInput();
         }
@@ -95,6 +102,7 @@ class GradeController extends Controller
         $datas['defaultFunctions'] = Default_function::first() ;
         $datas['function_names'] = Function_Name::get();
         $datas['inputField'] = $inputs ;
+        $datas['grade'] = $grade ;
         $datas['cameras'] = Camera::get();
         $modelX = [] ;
         if($request['modelX']['test'] == "TRUE"){

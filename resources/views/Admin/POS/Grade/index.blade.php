@@ -40,7 +40,7 @@
             <tbody>
                 @foreach($grades as $grade)
                     <tr>
-                        <td> {{ $grade->model_name}}</td>
+                        <td class="fw-bold"> <span class="text-danger"> {{$grade->brand_name}} </span>{{ $grade->model_name}}</td>
                         <td> {{$grade->grade == 0 ? 'None' : $grade->grade }}</td>
                         <td>{{ $grade->created_at }}</td>
                         <td>
