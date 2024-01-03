@@ -38,7 +38,7 @@ class GradeController extends Controller
 
     public function index()
     {
-        $grades = Grade::select('car_models.model_name','grades.grade'  , 'grades.id' , 'grades.created_at', 'brands.brand_name')
+        $grades = Grade::select('car_models.model_name','grades.grade'  , 'grades.id' , 'grades.created_at', 'brands.brand_name' , 'brands.id as mainId')
                     ->leftJoin('car_models' , 'grades.carModel_id' , 'car_models.id')
                     ->leftJoin('brands' , 'car_models.brand_id' , 'brands.id' )
                     ->get();
@@ -186,7 +186,38 @@ class GradeController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validator = Validator::make(
+            $request->all() ,
+            [
+                'brand' => "required",
+            ]
+        );
+        $carExist = Grade::where('carModel_id', $request->model_id)
+                             ->where('grade', $request->brand)
+                             ->where('id', '!=', $id)
+                             ->exists();
+        return response()->json($carExist);
+        if($carExist) {
+            $validator->errors()->add('grade', 'it is already taken');
+            return response()->json([
+                'message' => 'fail' ,
+                'errors' => $validator->errors() ,
+            ], 422) ;
+        }
+        if($validator->fails()) {
+            return response()->json([
+                'message' => "fail" ,
+                'error' => $validator->errors()
+            ] , 422) ;
+        }
+
+        $updated = [] ;
+        $update['brand_name'] = $request['brand'];
+        $update['updated_at'] = Carbon::now();
+        Brand::where('id', $id)->update($updated);
+        return response()->json([
+            'message' => 'You updated successfully',
+        ] , 200);
     }
 
     /**

@@ -53,13 +53,13 @@
             </div>
             <div class="mb-3">
                 <label for="model" class="form-label">Car Model</label>
-                <input type="text" class="form-control" value="{{old('grade')}}" placeholder="Enter Car Model" name="grade" >
+                <input type="text" class="form-control" value="{{old('grade')}}" {{ $errors->has('grade') ? 'disabled' : '' }} placeholder="Enter Car Model" name="grade" >
                 @if($errors->has('grade'))
                     <p class="text-danger">{{$errors->first('grade')}}</p>
                 @endif 
             </div>
             <div class="form-check form-switch mb-3">
-                <input class="form-check-input" type="checkbox" role="switch" value="exist" id="gradeValide">
+                <input class="form-check-input" {{ $errors->has('grade') ? 'checked' : '' }}  type="checkbox" role="switch" value="exist" id="gradeValide">
                 <label class="form-check-label" for="gradeValide">Does it have grade ?</label>
             </div>
             <div class="mb-3 row">

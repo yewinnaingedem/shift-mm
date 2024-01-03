@@ -24,7 +24,7 @@ class BrandController extends Controller
      */
     public function create()
     {
-        return view('admin/Cars/Brand/create');    
+        return view('admin.POS.Brand.create');    
     }
 
     /**
@@ -35,22 +35,15 @@ class BrandController extends Controller
         $validation = Validator::make(
             $request->all() ,
             [
-                'brand_name' => 'required' ,
-                'model' => ['required','numeric'] ,
-                'make'       => 'required|string',
-                'name' => 'required|string'
+                'brand' => 'required|unique:brands,brand_name' ,
             ]
         );
         if($validation->fails()) {
-            return redirect('admin/imgs/create')->withErrors($validation)->withInput() ;
+            return redirect('admin/brand/create')->withErrors($validation)->withInput() ;
         }
         $inputs = [] ;
-        $inputs['brand_name'] = $request['brand_name'] ;
-        $inputs['model'] = $request['model'] ;
-        $inputs['make'] = $request->make ;
-        $inputs['name'] = $request['name'];
+        $inputs['brand'] = $request['brand'] ;
         $inputs['created_at'] = Carbon::now();
-
         Brand::insert($inputs);
         return redirect('admin/brands') ;
     }
