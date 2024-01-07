@@ -15,3 +15,4 @@ Route::post('sarchQuery' , [ModelController::class , 'searchQuery']);
 Route::resource('end-point' , GradeApiController::class);
 Route::get('default_function/{dataId}' , [GradeApiController::class , 'apiRoute']);
 Route::get('{value}' , [HoverResponseController::class , 'index']);
+Route::get('gradeTurbo/{id}' , [GradeApiController::class , 'turboLoad']);

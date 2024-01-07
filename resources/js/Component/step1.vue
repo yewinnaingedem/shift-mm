@@ -37,14 +37,22 @@
         </div>
         <div class="mb-3" v-else>
             <label for="form-label mb-3">Grade </label>
-            <select class="form-select" v-model="data.grade">
+            <select class="form-select" v-model="childGrade">
                 <option :value="grade.id" v-for="grade in arrayData['grades']" :key="grade.id">
-                    {{ grade.grade }}
+                    {{ grade.grade + " " +"Grade" }}
                 </option>
             </select>
         </div>
         <div class="mb-3">
-            <h5 class="fw-bold cap-5 mb-2">Engine Power</h5>
+            <div class="row">
+                <div class="col-md-6">
+                    <h5 class="fw-bold cap-5 mb-2">Engine Power</h5>
+                </div>
+                <div class="col-md-6 text-end">
+                    <label for="turbo" class="form-check-label cap-5 ">Trubo</label>
+                    <input type="checkbox" class="form-check-input mr-5" v-model="data.turbo"  id="turbo">
+                </div>
+            </div>
             <div class="row">
                 <div class="col-md-3 mb-3" v-for="engine_power in arrayData['engine_powers']" :key="engine_power.id">
                     <label :for="engine_power.engine_power + 'en'"
@@ -52,7 +60,7 @@
                         :class="[data.engine_power == engine_power.id ? activeClass : mainClass]">
                         <input type="radio"  v-model="data.engine_power"  :id="engine_power.engine_power + 'en'" :value="engine_power.id"
                             class="check-input">
-                        <div class="fw-bold">{{ engine_power.engine_power + "/" + "CC" }}</div>
+                        <div class="fw-bold">{{ engine_power.engine_power + " " + "CC" }}</div>
                     </label>
                 </div>
             </div>
@@ -103,6 +111,10 @@
 .spinner-fw {
     width: 25px;
     height: 25px;
+}
+.mr-5 
+{
+    margin-left: 5px;
 }
 .mr-50 {
     margin-right:  50px;
@@ -181,6 +193,7 @@
 <script >
 import $ from "jquery";
 import { color } from "./Form/Wrapper";
+import axios from "axios";
 
 export default {
     setup () {
@@ -217,7 +230,8 @@ export default {
             loading: false,
             showAlert: false,
             showError: false,
-            plate_number: null,
+            plate_number: null, 
+            childGrade : this.data.grade ,
         }
     },
     methods: {
@@ -268,22 +282,6 @@ export default {
                             step3.license_exception = query.license_exception;
                             step3.exception = query.exception;
                         } else {
-                            // for step1
-                            step1.millage = null;
-                            step1.exterior_color = null;
-                            // for step2
-                            step2.license_state = null;
-                            step2.steering = null;
-                            step2.warranty = null ;
-                            step2.pass_owner = null ;
-                            step2.madeIn = null ;
-                            step2.num_seat = null ;
-                            step2.font_break = null ;
-                            step2.back_break = null ;
-                            // for step3
-
-                            step3.interior_color = null ;
-                            step3.VIN = null ;
                             step3.engine_exception = 'none' ;
                             step3.license_exception = 'none' ;
                             step3.exception = 'none' ;
@@ -331,11 +329,24 @@ export default {
     mounted() {
         this.data.grade = this.defaultGradeId;
         this.data.transmission = this.defaultTransmission;
-        console.log(this.arrayData.engine_powers + " kkkk ");
+        this.childGrade = this.defaultGradeId ;
     },
     watch : {
         adjustColor () {
             return this.data.exterior_color = null ;
+        } ,
+        childGrade (newValue) {
+            axios.get('http://localhost:8000/api/gradeTurbo/' + newValue)
+                .then(response => {
+                    if(response.data.Turbo) {
+                        this.data.turbo = true ;
+                    }else {
+                        this.data.turbo = false ;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+            });  
         }
     }
 }

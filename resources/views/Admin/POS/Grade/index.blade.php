@@ -4,6 +4,14 @@
 
 @section('style')
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <style>
+        .w-15 {
+            width  : 15px ;
+        }
+        .h-15 {
+            height : 15px ;
+        }
+    </style>
 @endsection 
 
 @section('navbar') 
@@ -42,7 +50,7 @@
                     <tr>
                         <td class="fw-bold brand-header"> <span class="text-danger"> {{$grade->brand_name}} </span>{{ $grade->model_name}}</td>
                         <td class="gradeModal"> 
-                            <button type="button" class="btn btn-danger fw-bold " data-id="{{$grade->id}}" data-class="{{$grade->mainId}}" >
+                            <button type="button" class="btn btn-danger fw-bold " data-id="{{$grade->gradeId}}" data-class="{{$grade->mainId}}" >
                                     {{$grade->grade == 0 ? 'None' : $grade->grade }}
                             </button>
                         </td>
@@ -57,7 +65,7 @@
                                         <a href="{{url('admin/grade/'. $grade->id .'/edit')}}" class="dropdown-item">View</a>
                                     </li>
                                     <li >
-                                        <button class="dropdown-item delete" data-id="{{$grade->id}}" >Delete</button>
+                                        <button class="dropdown-item delete" data-id="{{$grade->gradeId}}" >Delete</button>
                                     </li>
                                 </ul>
                             </li>
@@ -78,9 +86,6 @@
     <!-- Grade Modal Goes here -->
     <div class="modal fade" id="gradeModaltest" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-            <form id="myForm" method="post">
-                @method('put')
-                @csrf 
                 <div class="modal-content">
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="exampleModalLabel">New message</h1>
@@ -93,11 +98,16 @@
                         </div>
                     </div>
                     <div class="modal-footer">
+                        <div class="text-danger fw-bold" id="footer">
+                        </div>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary submit">Send message</button>
+                        <button type="button" class="btn btn-primary submit">
+                            <span>Send message</span> 
+                            <div class="spinner-border text-white w-15 h-15 d-none" id="spinner" role="status">
+                            </div>
+                        </button>
                     </div>
                 </div>
-            </form>
         </div>
     </div>
 @endsection 
@@ -112,6 +122,7 @@
     <script>
         $(document).ready(()=> {
             new DataTable('#example');
+
             $(document).on('click','.delete' ,((e)=> 
                 {
                     let deleteBtn = $(e.currentTarget);
@@ -146,42 +157,44 @@
                     });
                 }
             ));
-            $('.gradeModal').click(()=> {
-                $('#gradeModaltest').modal('show');
-            });
             $(document).on('click','.gradeModal' , (e) => {
+                $('#gradeModaltest').modal('show');
                 let currentTarget = $(e.currentTarget);
                 let getRow = currentTarget.parent();
                 let id = currentTarget.find('.btn').data('id');
                 let model_id = currentTarget.find('.btn').data('class');
                 let parentText = getRow.find('.brand-header').text().trim();
-                let text = currentTarget.find('.btn').text().trim();
-                $('input[name="grade"]').val(text);
+                let mainText = currentTarget.find('.btn');
+                let textIndex = mainText.text().trim()
+                $('input[name="grade"]').val(textIndex);
                 $('#supportText').text(parentText);
-                $('.submit').attr('id' , id )  ;
-                $(".submit").attr('data-id' , model_id);
+                $('.submit').click( function () {
+                    $('#spinner').removeClass('d-none');
+                    let value = $('input[name="grade"]').val();
+                    $.ajax({
+                        url : "/admin/grade/" + id ,
+                        method : 'put' , 
+                        data : {
+                            "_token" : "{{csrf_token()}}" ,
+                            brand : value ,
+                            model_id : model_id ,
+                        },
+                        success : (response) => {
+                            $('#spinner').addClass('d-none');
+                            $('#footer').text(response.message);
+                            mainText.text(value);
+                            setTimeout(() => {
+                                $('#gradeModaltest').modal('hide');     
+                            }, 2000);
+                        },
+                        error : (error) => {
+                            console.log(error);
+                        }
+                    }) 
+                });
+                
             });
-            $(document).on('click' , '.submit' , function (event) {
-                let btn = $(event.currentTarget);
-                let id = btn.attr('id');
-                let model_id = btn.data('id');
-                let value = $('input[name="grade"]').val();
-                $.ajax({
-                    url : "/admin/grade/" + id ,
-                    method : 'put' , 
-                    data : {
-                        "_token" : "{{csrf_token()}}" ,
-                        brand : value ,
-                        model_id : model_id ,
-                    },
-                    success : (response) => {
-                        console.log(response);
-                    },
-                    error : (error) => {
-                        console.log(error);
-                    }
-                }) 
-            });
+            
         });
     </script>
 @endsection 

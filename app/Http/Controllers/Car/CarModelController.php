@@ -45,6 +45,14 @@ class CarModelController extends Controller
                 'car_model' => 'required'
             ]
         );
+
+        $modelExist = CarModel::where('brand_id' , $request['brand'])
+                                ->where('model_name' , $request['car_model'])
+                                ->exists();
+        if($modelExist) {
+            $validator->errors()->add('car_model', 'it is already taken');
+            return redirect('admin/car_models/create')->withErrors($validator)->withInput() ;
+        }
         if($validator->fails()) {
             return redirect('admin/car_models/create')->withErrors($validator)->withInput() ;
         }

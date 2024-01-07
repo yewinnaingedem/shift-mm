@@ -8,6 +8,7 @@ use App\Models\Car\Car ;
 use Carbon\Carbon ;
 use App\Models\CarImage ;
 use App\Models\Before_Sale ;
+use App\Models\Exception ;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
@@ -42,6 +43,7 @@ class CarImageItemController extends Controller
      */
     public function store(Request $request)
     {
+        
         $carImages = [];
         foreach ($request->file('img') as $key => $image) {
             $validatedData = $request->validate([
@@ -61,6 +63,28 @@ class CarImageItemController extends Controller
         $before_Sale['car_item'] = $car_item ;
         $before_Sale['created_at'] = Carbon::now();
         Before_Sale::create($before_Sale);
+        $exceptions = [];
+        $exceptions['car_id'] = $car_item;
+        if($request->has('all_good')) {
+            $exceptions['engine_malfunction'] = 'none' ;
+            $exceptions['paint_demage'] = 'none' ;
+            $exceptions['tv'] = 'none';
+            $exceptions['suspection'] = 'none';
+            $exceptions['lights'] = 'none' ;
+            $exceptions['addition_exception'] = 'none';   
+            Exception::insert($exceptions);     
+        }  else {
+            $exceptions['engine_malfunction'] = $request->has('engine_malfunction') ? $request['engine_malfunction'] : 'none' ;
+            $exceptions['pain_demange'] = $request->has('pain_demange') ? $request['pain_demange'] : 'none';
+            $exceptions['paint_demage'] = $request->has('paint_demage') ?  $request['paint_demage'] : 'none';
+            $exceptions['tv'] = $request->has('tv') ? $request['tv'] : 'none';
+            $exceptions['suspection'] = $request->has('suspection') ? $request['suspection'] : 'none';
+            $exceptions['lights'] = $request->has('light') ? $request['lights'] : 'none' ;
+            $exceptions['addtional_exceptions'] = $request->has('addtional_exceptions') ? $request['addtional_exceptions'] : 'none';
+            Exception::insert($exceptions);
+        }
+        
+        
         return redirect('admin/before_sale')->with('message','You added to the cars table successfully') ;
 
     }

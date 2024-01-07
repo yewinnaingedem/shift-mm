@@ -69,7 +69,6 @@ class GradeApiController extends Controller
         $grades['grade'] = $grade['grade'] == 'false' ? "none" : $grade['grade'];
         $grade['created_at'] = $now->day."/".$now->month."/".$now->year ;
         $gradeId = Grade::insertGetId($grades);
-        // return response()->json($gradeId);
         // for car fuctures 
         $car_fuctures = [] ;
         $car_fuctures['grade_id'] = $gradeId ;
@@ -145,5 +144,10 @@ class GradeApiController extends Controller
         $data = Default_function::where('id',$dataId)->first();
         $responseData = \Illuminate\Support\Arr::except($data, ['id']);
         return response()->json($responseData);
+    }
+
+    public function turboLoad($id) {
+        $grade = Engine::where('id' , $id)->first();
+        return response()->json($grade , 200);
     }
 }

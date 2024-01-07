@@ -10,6 +10,7 @@ use App\Models\ExteriorColor ;
 use App\Models\Car\Item ;
 use App\Models\Car\OwnerBook ;
 use App\Models\Car\Car ;
+use App\Models\Engine ;
 use App\Models\Year ;
 
 
@@ -22,6 +23,7 @@ class AddCarController extends Controller
         $data2 = $request['field'][1];
         $data3 = $request['field'][2];
         $model_id = $request['model_Id'];
+        
         $main = $request['year'];
         $items = [] ;
         $items['warranty'] = $data2['warranty'] ;
@@ -51,6 +53,12 @@ class AddCarController extends Controller
         $year_id =  Year::where('year', $main['year'])->first() ;
         $carOwners['year_id'] =$year_id->id ;
         $carOwners['engine_power_id'] = $data1['engine_power'];
+        if($data1['turbo'] == 'true' ) {
+            $engineTesting  = Engine::where('id' , $data1['grade'])->update([
+                'Turbo' => 1 ,
+                'updated_at' => Carbon::now(),
+            ]);
+        }
         $carOwners['license_plate'] = $data1['license'];
         $carOwners['pass_owner'] = $data2['pass_owner'] ;
         $carOwners['transmission_type'] = $data1['transmission'];
@@ -59,6 +67,9 @@ class AddCarController extends Controller
         $carOwners['exception'] = $data3['exception'];
         $carOwnerId = OwnerBook::insertGetId($carOwners);
         $cars = [];
+        $main = $request['year'];
+        $cars['license_plate']  = $data1['license'];
+        $cars['model_name'] = $main['model'];
         $cars['item_id'] = $itemId ;
         $cars['owner_book_id'] = $carOwnerId ;
         $cars['year'] = $main['year'] ;

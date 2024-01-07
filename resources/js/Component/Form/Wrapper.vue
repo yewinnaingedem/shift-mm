@@ -37,8 +37,16 @@
                         >
                             <button  v-show="currentStep == (steps.length -1)" class="btn btn-primary"
                              :disabled="notAllowed"
-                           @click="submit">Sumbit</button>
+                           @click="submit">
+                           <span >Sumbit</span>
+                        
+                           <div class="spinner-border text-white w-15 h-15" role="status" v-if="loadeStated" >
+                              
+                            </div>
+                            </button>
+                           
                         </div>
+
                     </div>
                     <div class="d-flex justify-content-end align-items-center col-md-6"  >
                         <button class="btn btn-primary"  v-show="toggleVisitable"  @click="previousStep">Preivous Step</button>
@@ -50,11 +58,12 @@
 </template>
 
 <style scoped>
-    .flex-col {
-        flex-direction: column ;
+    .w-15 {
+        width: 15px;
     }
-    .list-none {
-        list-style: none;
+    .h-15 {
+        height: 15px;
+        margin-left: 5px;
     }
     .m-0 {
         margin: 0 !important;
@@ -78,7 +87,6 @@
     import step2 from '../step2.vue';
     import step3 from '../step3.vue';
     import axios from 'axios';
-    import Swal from 'sweetalert2' ;
     export default {
         data () {
             return {
@@ -92,12 +100,14 @@
                 toggleVisitable : false ,
                 nextVisibality : false ,
                 currentStep : 0 ,
+                loadeStated : false,
                 field : [
                     {
                         license : null ,
                         millage : null ,
                         grade : this.data['grades'][0].grade,
                         exterior_color: null ,
+                        turbo : false ,
                         transmission : null ,
                         engine_power : null ,
                     }, 
@@ -156,9 +166,10 @@
                 }
             },
             submit () {
+                this.loadeStated = true ;
                 axios.post('/admin/setup', { field : this.field , model_Id : this.data['id'].id , year : this.data['main']}) 
                 .then((response) => {
-                    console.log(response);
+                    this.loadeStated = false ;
                     window.location.href = response.data.redirect;
                 }).catch((error )=> {
                     console.log(error);

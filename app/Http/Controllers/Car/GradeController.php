@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Car;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Rules\GradeAndCarModelExist;
+use Illuminate\Validation\Rule;
 use App\Models\Grade ;
 use App\Models\CarModel ;
 use Carbon\Carbon;
@@ -38,7 +40,7 @@ class GradeController extends Controller
 
     public function index()
     {
-        $grades = Grade::select('car_models.model_name','grades.grade'  , 'grades.id' , 'grades.created_at', 'brands.brand_name' , 'brands.id as mainId')
+        $grades = Grade::select('car_models.model_name','grades.grade'  , 'grades.id as gradeId' , 'grades.created_at', 'brands.brand_name' , 'car_models.id as mainId')
                     ->leftJoin('car_models' , 'grades.carModel_id' , 'car_models.id')
                     ->leftJoin('brands' , 'car_models.brand_id' , 'brands.id' )
                     ->get();
@@ -186,24 +188,17 @@ class GradeController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $brand = $request->brand;
+        $modelId = $request->model_id;
+
         $validator = Validator::make(
             $request->all() ,
             [
-                'brand' => "required",
+                'brand' => [
+                    'required',
+                ],
             ]
         );
-        $carExist = Grade::where('carModel_id', $request->model_id)
-                             ->where('grade', $request->brand)
-                             ->where('id', '!=', $id)
-                             ->exists();
-        return response()->json($carExist);
-        if($carExist) {
-            $validator->errors()->add('grade', 'it is already taken');
-            return response()->json([
-                'message' => 'fail' ,
-                'errors' => $validator->errors() ,
-            ], 422) ;
-        }
         if($validator->fails()) {
             return response()->json([
                 'message' => "fail" ,
@@ -212,11 +207,11 @@ class GradeController extends Controller
         }
 
         $updated = [] ;
-        $update['brand_name'] = $request['brand'];
-        $update['updated_at'] = Carbon::now();
-        Brand::where('id', $id)->update($updated);
+        $updated['grade'] = $brand;
+        $updated['updated_at'] = Carbon::now();
+        Grade::where('id',$id)->update($updated);
         return response()->json([
-            'message' => 'You updated successfully',
+            'message' => 'You successfully updated',
         ] , 200);
     }
 
@@ -287,7 +282,6 @@ class GradeController extends Controller
         );
         if($validator->fails())
         {
-            dd('hi');
             return  redirect()->back()->withErrors($validator)->withInput();
         }
         $id = $request['id'] ;
