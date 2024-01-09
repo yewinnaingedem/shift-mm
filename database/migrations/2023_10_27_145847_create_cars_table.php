@@ -16,11 +16,13 @@ return new class extends Migration
             $table->unsignedBigInteger('item_id');
             $table->unsignedBigInteger('owner_book_id');
             $table->unsignedBigInteger('car_image_id');
+            $table->unsignedBigInteger('exception_id')->nullable();
             $table->timestamps();
 
             $table->foreign('item_id')->references('id')->on('items');
             $table->foreign('owner_book_id')->references('id')->on('owner_books');
             $table->foreign('car_image_id')->references('id')->on('car_images');
+            $table->foreign('exception_id')->references('id')->on('exceptions');
         });
     }
 

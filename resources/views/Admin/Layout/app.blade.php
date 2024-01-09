@@ -19,7 +19,10 @@
                 display : none ;
             }
             .delete:hover  {
-                background : tomato ;
+                background : #06CBA3 ;
+            }
+            .main-color {
+                color : #06CBA3 ;
             }
         </style>
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>

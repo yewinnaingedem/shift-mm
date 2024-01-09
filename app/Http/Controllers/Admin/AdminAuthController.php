@@ -26,7 +26,9 @@ use Carbon\Carbon ;
 class AdminAuthController extends Controller
 {
     public function index() {
-        return view('admin.main.index');
+        $brands = Brand::get();
+        $years = Year::get();
+        return view('admin.cars.add-car',compact('brands','years'));
     }
 
     public function addCars() {

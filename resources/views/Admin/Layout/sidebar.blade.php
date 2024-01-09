@@ -4,26 +4,36 @@
             <div class="nav">
                 <!-- adding car -->
                 <a class="nav-link" href="{{url('admin/add-cars')}}">
-                    <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                    <div class="sb-nav-link-icon">
+                        <i class="fa-solid fa-car-side"></i>
+                    </div>
                     Car Add 
                 </a>
                 <!-- Car CarItemController -->
                 <a class="nav-link collapsed" href="{{url('admin/before_sale')}}" >
-                    <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                    <div class="sb-nav-link-icon">
+                        <i class="fa-regular fa-hand-point-left"></i>
+                    </div>
                      Before Sale
                 </a>
                 <!-- CarsellController -->
                 <a class="nav-link collapsed" href="{{url('admin/car_sells')}}" >
-                    <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                    <div class="sb-nav-link-icon">
+                        <i class="fa-solid fa-money-bill-wave"></i>
+                    </div>
                     Car Sale  
                 </a>
                 <a class="nav-link collapsed" href="{{url('admin/saled')}}" >
-                    <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                    Histor Of Saled Car 
+                    <div class="sb-nav-link-icon">
+                        <i class="fa-solid fa-car"></i>
+                    </div>
+                    History Of Saled Car 
                 </a>
                 <!-- Car info -->
                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#employees" aria-expanded="false" aria-controls="employees">
-                    <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                    <div class="sb-nav-link-icon">
+                        <i class="fa-solid fa-people-roof"></i>
+                    </div>
                         Employee 
                     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                 </a>
@@ -35,7 +45,9 @@
                 </div>
                 <!-- Car info -->
                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                    <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                    <div class="sb-nav-link-icon">
+                        <i class="fa-solid fa-info"></i>
+                    </div>
                         Car Info
                     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                 </a>
@@ -51,7 +63,9 @@
                 </div>
                 <!-- EngineController -->
                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#aboutEngine" aria-expanded="false" aria-controls="aboutEngine">
-                    <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                    <div class="sb-nav-link-icon">
+                        <i class="fa-brands fa-searchengin"></i>
+                    </div>
                         About Engine
                     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                 </a>
@@ -62,7 +76,9 @@
                 </div>
                 <!-- Car Contdition -->
                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#car_condition" aria-expanded="false" aria-controls="car_condition">
-                    <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                    <div class="sb-nav-link-icon">
+                        <i class="fa-solid fa-car-tunnel"></i>
+                    </div>
                         Car Condition 
                     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                 </a>
@@ -75,6 +91,14 @@
                         <a class="nav-link" href="{{url('admin/camera')}}">Car Camera</a>
                     </nav>
                 </div>
+                <!-- Panding state -->
+                <a class="nav-link collapsed" href="{{url('admin/panding_state')}}" >
+                    <div class="sb-nav-link-icon">
+                        <i class="fa-solid fa-clock"></i>
+                    </div>
+                        Panding State
+                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                </a>
             </div>
         </div>
     </nav>
