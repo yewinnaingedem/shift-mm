@@ -125,7 +125,7 @@
                     </div>
                 </div>
                 <div class="testing d-flex justify-content-center align-items-center">
-                    <a href="" class="">
+                    <a href="{{url('admin/panding_state/' . $data->car_id )}}" class="">
                         <i class="fa-solid fa-arrow-right"></i>
                     </a>
                 </div>

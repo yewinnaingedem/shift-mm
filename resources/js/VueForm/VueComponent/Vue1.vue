@@ -8,7 +8,7 @@
             <div class="fw-bold mb-3 h-3 text-header">Transmission</div>
             <div class="col-lg-2 col-md-3 col-sm-4 mb-3" v-for="(transmission  , index ) in datas['transmissions']" :key="transmission.id">
                 <label :for="transmission.id + 'tr'" class="d-flex justify-content-center align-items-center main-color p-10 rounded" 
-                    :class="(transmission.id === stepProgess.step1.transmission) ? 'bg-dark text-white' : ' ' "
+                    :class="(transmission.id === stepProgess.step1.transmission) ? 'bg-dark text-white' : '' "
                 >
                     <input type="radio"
                     @input="definedTransmisson"
@@ -128,6 +128,7 @@
 }
     .main-color {
         background: #06CBA3;
+        color : black ;
     }
     .ml-3 {
         margin-left:  5px;

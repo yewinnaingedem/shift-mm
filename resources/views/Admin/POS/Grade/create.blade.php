@@ -31,13 +31,16 @@
                 @else
                 <input type="hidden" name="modelX[test]" value="FALSE">
             @endif
-            @csrf 
+            @csrf
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label class="form-label" for="grade">Brand Name</label>
                     <select name="brand" id="brand" class="form-select">
                         @foreach($brands as $brand)
                             <option value="{{$brand->id}}"
+                            @if(session()->has('model')) 
+                                {{ session()->get('model') == $brand->id ? 'selected' : ' ' }}
+                            @endif
                             >
                                 {{$brand->brand_name}}
                             </option>
@@ -85,7 +88,7 @@
 @section('script')
     <script>
         $(document).ready(()=>{
-            var route = "/admin/model/' + $make.val()";
+            loadeState() ;
             $('#gradeValide').change(function ()
             {
                 let $grade = $('input[name="grade"]');
@@ -97,7 +100,52 @@
                 }
             }
             );
-            
+            function loadeState () {
+                let val = $('#brand') ;
+                $.ajax({
+                    type : "post" ,
+                    url : "/admin/model/" + val.val() ,
+                    data : {
+                        "_token" : "{{csrf_token()}}"
+                    } ,
+                    success : (response) => {
+                        if(response.response.length !== 0) {
+                            $('#models').empty();
+                            let brand = `
+                                <option slected class="d-none" >Chose Model</option>
+                                ${response.response.map(function (item) {
+                                    return `<option value="${item.id}">${item.model_name}</option>`;
+                                }).join()}`;
+                            $('#models').append(brand);
+                        }else {
+                            $('#models').empty();
+                            swal({
+                                    title: "Are you sure?",
+                                    text: "You will not be able to recover this imaginary file!",
+                                    type: "warning",
+                                    showCancelButton: true,
+                                    confirmButtonColor: "#DD6B55",
+                                    confirmButtonText: "Yes, delete it!",
+                                    cancelButtonText: "No, cancel plx!",
+                                    closeOnConfirm: false,
+                                    closeOnCancel: false
+                                },
+                                function(isConfirm){
+                                    if (isConfirm) {
+                                        window.location.href = response.redirect ;
+                                    } else {
+                                        swal("Cancelled", "Your imaginary file is safe :)", "error");
+                                    }
+                                });
+                        }
+                        
+                    },
+                    error : (error) => {
+                        console.log(error);
+                    }
+                });
+            }
+                
             $(document).on('change' , '#brand' , function () {
                 let val = $('#brand') ;
                 $.ajax({

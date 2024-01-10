@@ -27,7 +27,7 @@
                 </div>
             </div>
             <div class="main w-75 m-auto pt-20">
-                <component v-bind:is="steps[currentStep]" :forSpecific="field" :data="field[currentStep]"  :arrayData="data" ></component>
+                <component v-bind:is="steps[currentStep]" :main="data['main']" :forSpecific="field" :data="field[currentStep]"  :arrayData="data" ></component>
                 <div class="row mb-5 mt-3">
                     <div class="d-flex justify-content-start align-items-center col-md-6"
                      >
@@ -195,9 +195,7 @@
                 required : true ,
             } ,
         },
-        mounted () {
-            console.log(this.data['engine_powers']);
-        }
+        
     }
     
 </script>

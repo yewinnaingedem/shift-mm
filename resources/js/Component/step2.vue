@@ -52,11 +52,18 @@ export default ({
         data : {
             type : Object ,
             required : true ,
+        },
+        main : {
+            type : Object ,
+            required : true ,
         }
     },
     computed :  {
         defaultSteeringConer () {
             if(this.arrayData['steerings'].length > 0) {
+                if(this.main.year < 2014) {
+                    return this.arrayData['steerings'][1].id ;
+                }
                 return this.arrayData['steerings'][0].id ;
             }
             return null ;

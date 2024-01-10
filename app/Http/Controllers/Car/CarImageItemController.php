@@ -8,6 +8,7 @@ use App\Models\Car\Car ;
 use Carbon\Carbon ;
 use App\Models\CarImage ;
 use App\Models\Before_Sale ;
+use App\Models\Panding ;
 use App\Models\Exception ;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -38,7 +39,7 @@ class CarImageItemController extends Controller
     
     public function store(Request $request)
     {
-        
+        // dd($request->all());
         $carImages = [];
         foreach ($request->file('img') as $key => $image) {
             $validatedData = $request->validate([
@@ -57,7 +58,6 @@ class CarImageItemController extends Controller
         
         $exceptions = [];
         if($request->has('all_good')) {
-            dd('hi');
             $exceptions['engine_malfunction'] = 'none' ;
             $exceptions['paint_demage'] = 'none' ;
             $exceptions['tv'] = 'none';
@@ -73,18 +73,19 @@ class CarImageItemController extends Controller
             return redirect('admin/before_sale')->with('message','You added to the cars table successfully') ;
         }
         
-        $exceptions['engine_malfunction'] = $request->has('engine_malfunction') ? $request['engine_malfunction'] : 'none' ;
-        $exceptions['paint_demage'] = $request->has('paint_demage') ?  $request['paint_demage'] : 'none';
-        $exceptions['tv'] = $request->has('tv') ? $request['tv'] : 'none';
-        $exceptions['suspection'] = $request->has('suspection') ? $request['suspection'] : 'none';
-        $exceptions['lights'] = $request->has('light') ? $request['lights'] : 'none' ;
-        $exceptions['addition_exception'] = $request->has('addtional_exception') ? $request['addtional_exception'] : 'none';
+        $exceptions['engine_malfunction'] = $request->engine_malfunction !== null ? $request['engine_malfunction'] : 'none' ;
+        $exceptions['paint_demage'] = $request['paint_demage'] !== null ?  $request['paint_demage'] : 'none';
+        $exceptions['tv'] = $request['tv'] !== null ? $request['tv'] : 'none';
+        $exceptions['suspection'] = $request['suspection'] !== null ? $request['suspection'] : 'none';
+        $exceptions['lights'] = $request['light'] !== null ? $request['light'] : 'none' ;
+        $exceptions['addition_exception'] = $request['addtional_exception'] !== null ? $request['addtional_exception'] : 'none';
         $exceptionId = Exception::insertGetId($exceptions);   
         $finalDatas['exception_id'] = $exceptionId ;
         $car_item = Car::insertGetId($finalDatas);
         $fixes = [] ;
-        $fiexes['car_id'] = $car_item ;
-        $fiexes['created_at'] = Carbon::now();
+        $fixes['car_id'] = $car_item ;
+        $fixes['created_at'] = Carbon::now();
+        Panding::insert($fixes);
         return redirect('admin/panding_state')->with('message' , 'You added to the car in the panding state');
     }
 

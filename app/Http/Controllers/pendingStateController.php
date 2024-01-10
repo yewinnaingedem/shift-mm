@@ -11,7 +11,7 @@ class pendingStateController extends Controller
      */
     public function index()
     {
-        $datas = Panding::select('brands.brand_name','car_models.model_name','years.year','owner_books.license_plate','grades.grade')
+        $datas = Panding::select('brands.brand_name','car_models.model_name','years.year','owner_books.license_plate','grades.grade' , 'pandings.car_id')
                     ->leftJoin('cars' , 'pandings.car_id','cars.id')
                     ->leftJoin('owner_books' , 'cars.owner_book_id' , 'owner_books.id')
                     ->leftJoin('car_models','owner_books.model_id','car_models.id')
@@ -45,7 +45,12 @@ class pendingStateController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $data  = Panding::select('exceptions.*' ,)
+                        ->leftJoin('cars' , 'pandings.car_id','cars.id')
+                        ->leftJoin('exceptions','cars.exception_id','exceptions.id')
+                        ->where('pandings.car_id','=',$id)
+                        ->first();
+        return view('Admin.PendingState.create', compact('data'));
     }
 
     /**

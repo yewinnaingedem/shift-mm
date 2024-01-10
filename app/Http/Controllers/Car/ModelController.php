@@ -50,8 +50,9 @@ class ModelController extends Controller
                 $modelX = [];
                 $modelX['model'] = CarModel::where('model_name' , $year)->first('id')->id;
                 $modelX['year'] = $make ;
-                $modelX['make'] = $model ;
-                session()->put('model' , $modelX['model']);
+                $getBrand = Brand::where('brand_name' , $model )->first();
+                $modelX['make'] = $getBrand->id ;
+                session()->put('model' , $modelX['make']);
                 return redirect('admin/grade/create')->with('modelX' , $modelX );
             }
             $data['grades'] = Grade::where('carModel_id',$brandId->id)->get();

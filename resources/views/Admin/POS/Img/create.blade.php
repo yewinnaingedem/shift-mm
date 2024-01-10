@@ -179,28 +179,28 @@
                         <div class="modal-body">
                             <div class="mb-1">
                                 <label for="engine_malfunction" class="col-form-label">Engine Malfunction</label>
-                                <textarea class="form-control" id="engine_malfunction" name="recipient" rows="1"></textarea>
+                                <textarea class="form-control" id="engine_malfunction" name="engine_malfunction" rows="1"></textarea>
                             </div>
                             <div class="mb-1">
-                                <label for="pain_demange" class="col-form-label">Paint Demange</label>
-                                <textarea class="form-control" id="pain_demange" rows="1"></textarea>
+                                <label for="paint_demage" class="col-form-label">Paint Demange</label>
+                                <textarea class="form-control" name="paint_demage" id="paint_demage" rows="1"></textarea>
                             </div>
                             <div class="mb-1">
                                 <label for="tv" class="col-form-label">TV Exception</label>
-                                <textarea class="form-control" id="tv" rows="1"></textarea>
+                                <textarea class="form-control" id="tv" name="tv" rows="1"></textarea>
                             </div>
                             <div class="mb-1">
                                 <label for="suspection" class="col-form-label">Suspection</label>
-                                <textarea class="form-control" id="suspection" rows="1"></textarea>
+                                <textarea class="form-control" id="suspection" name="suspection" rows="1"></textarea>
                             </div>
                             <div class="row">
                                 <div class="col-md-6 mb-1">
                                     <label for="light" class="col-form-label">Lights</label>
-                                    <textarea class="form-control" id="light" rows="1"></textarea>
+                                    <textarea class="form-control" id="light" rows="1" name="light"></textarea>
                                 </div>
                                 <div class="col-md-6 mb-1">
                                     <label for="message-text" class="col-form-label">Addtional Exception</label>
-                                    <textarea class="form-control" id="addtional_exception" rows="1"></textarea>
+                                    <textarea class="form-control" id="addtional_exception" rows="1" name="addtional_exception"></textarea>
                                 </div>
                             </div>
                         </div>
