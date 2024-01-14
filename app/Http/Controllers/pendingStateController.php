@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\machine ;
+use App\Models\PaintDemage ;
 use App\Models\Panding ;
+use App\Models\Sepcialize ;
 class pendingStateController extends Controller
 {
     /**
@@ -45,12 +48,16 @@ class pendingStateController extends Controller
      */
     public function show(string $id)
     {
-        $data  = Panding::select('exceptions.*' ,)
+        $panding = [];
+        $panding['demage']  = Panding::select('exceptions.*', 'cars.id as car_id' ,)
                         ->leftJoin('cars' , 'pandings.car_id','cars.id')
                         ->leftJoin('exceptions','cars.exception_id','exceptions.id')
                         ->where('pandings.car_id','=',$id)
                         ->first();
-        return view('Admin.PendingState.create', compact('data'));
+        $panding['fixers'] = machine::get() ;
+        $panding['paintDemage'] = PaintDemage::get();
+        $panding['sepcializes'] = Sepcialize::get() ;
+        return view('Admin.PendingState.create', compact('panding'));
     }
 
     /**

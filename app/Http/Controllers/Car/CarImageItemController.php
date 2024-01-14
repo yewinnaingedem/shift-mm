@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Car\Car ;
 use Carbon\Carbon ;
+use App\Models\machine ;
 use App\Models\CarImage ;
 use App\Models\Before_Sale ;
 use App\Models\Panding ;
@@ -86,6 +87,7 @@ class CarImageItemController extends Controller
         $fixes['car_id'] = $car_item ;
         $fixes['created_at'] = Carbon::now();
         Panding::insert($fixes);
+        
         return redirect('admin/panding_state')->with('message' , 'You added to the car in the panding state');
     }
 

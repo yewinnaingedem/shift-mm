@@ -32,9 +32,7 @@ use App\Http\Controllers\Car\SoldOutController ;
 use App\Http\Controllers\Car\DefaultFunctionController;
 use App\Http\Controllers\Car\licenseStateController;
 use App\Http\Controllers\BeforeSaleController ;
-
-
-
+use App\Http\Controllers\paintDemageController ;
 
 Route::get('/google' , [AuthController::class , 'googleLogIn']);
 Route::prefix('mm_cars')->group(function () {
@@ -97,6 +95,7 @@ Route::prefix('admin')->group(function (){
         return redirect()->back() ;
     });
     Route::resource('panding_state' , PendingStateController::class );
+    Route::resource('paintDemage' , paintDemageController::class );
 });
 
 ?> 
