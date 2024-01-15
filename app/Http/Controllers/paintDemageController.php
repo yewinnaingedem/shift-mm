@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\PaintDemage; 
 use Carbon\Carbon ;
+use App\Models\Car\Car ;
 use Illuminate\Support\Facades\Validator;
 
 class paintDemageController extends Controller
@@ -35,8 +36,8 @@ class paintDemageController extends Controller
             [
                 'fixer_id' => 'required' ,
                 'car_id' => 'required' ,
-                'description' => 'required' ,
-                'code_id' => 'required'
+                'paintAndBody' => 'required' ,
+                'code_id' => 'required|unique:paint_demages'
             ]
         );
         if($validator->fails()){
@@ -48,9 +49,13 @@ class paintDemageController extends Controller
         $paintDemage = [] ;
         $paintDemage['fixer_id'] = $request->fixer_id ;
         $paintDemage['car_id'] = $request->car_id ;
-        $paintDemage['description'] = $request->description ;
+        $paintDemage['description'] = $request->paintAndBody ;
+        $data = PaintDemage::leftJoin('cars', 'paint_demages.car_id', '=', 'cars.id')
+        ->leftJoin('exceptions', 'cars.exception_id', '=', 'exceptions.id')
+        ->where('paint_demages.car_id', $request->car_id)
+        ->update(['exceptions.paint_demage' => $request->paintAndBody]);
         $paintDemage['code_id'] = $request->code_id ;
-        $paintDemage['created_at'] = Carbon::today();
+        $paintDemage['created_at'] = Carbon::now();
         PaintDemage::insert($paintDemage);
         return response()->json([
             'message' => 'You added successfully' ,
@@ -87,5 +92,17 @@ class paintDemageController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function checkApi(Request $request) {
+        $main = PaintDemage::where('code_id' , $request->codeId)->first() ;
+        if($main->exists()) {
+            $timeSinceCreation = Carbon::parse($main->created_at)->diffForHumans();
+            return response()->json([
+                'success' => $main->exists() ,
+                'timeSinceCreated' => $timeSinceCreation ,
+            ] , 200);
+        }
+        
     }
 }

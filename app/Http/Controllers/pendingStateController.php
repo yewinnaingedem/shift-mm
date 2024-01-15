@@ -40,7 +40,9 @@ class pendingStateController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return response()->json([
+            'data' => $request->all() ,
+        ], 200) ;
     }
 
     /**
@@ -57,6 +59,7 @@ class pendingStateController extends Controller
         $panding['fixers'] = machine::get() ;
         $panding['paintDemage'] = PaintDemage::get();
         $panding['sepcializes'] = Sepcialize::get() ;
+        $panding['car_id'] = $id ;
         return view('Admin.PendingState.create', compact('panding'));
     }
 

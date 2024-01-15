@@ -32,8 +32,14 @@
     import suspension from './suspension.vue';
     import Lights from './Lights.vue';
     import Additonal from "./Additonal.vue";
+    import demageStore from './DemageStore';
 
     export default {
+        setup () {
+            return {
+                demageStore ,
+            }
+        },  
         name : "Panding" ,
         data () {
             return {
@@ -66,6 +72,7 @@
             this.suspension ;
             this.light ;
             this.additional ;
+            this.carId ;
         },
         computed : {
             bodyAndDemage () {
@@ -107,6 +114,9 @@
                 this.panding.fixers.forEach(additonal => {
                     this.additionals.push(additonal);
                 });
+            },
+            carId () {
+                this.demageStore.state.car_id = this.panding.car_id ;
             }
         }
     }

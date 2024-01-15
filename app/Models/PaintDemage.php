@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class PaintDemage extends Model
 {
     use HasFactory;
+    
+    public $timestamps = true;
 }
