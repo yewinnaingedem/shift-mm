@@ -95,7 +95,6 @@ Route::prefix('admin')->group(function (){
         return redirect()->back() ;
     });
     Route::resource('panding_state' , PendingStateController::class );
-    Route::resource('paintDemage' , paintDemageController::class );
 });
 
 ?> 

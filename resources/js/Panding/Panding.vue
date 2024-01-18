@@ -1,5 +1,5 @@
 <template>
-    <div class="my-3">
+    <div class="my-3 position-relative overflow-hidden">
         <figure class="text-center">
             <blockquote class="blockquote">
                 <p>A well-known quote, contained in a blockquote element.</p>
@@ -22,8 +22,44 @@
             <!-- This is for additional Exceptions -->
             <Additonal :additionalDemage="panding.demage.addition_exception" :fixers="additionals"></Additonal>
         </div>
+        <div class="alert-container" v-if="demageStore.state.showAlert">
+            <div class="alert alert-show " id="myAlert">
+                {{ demageStore.state.showText }}
+            </div>
+        </div>
     </div>
 </template>
+
+<style>
+    .alert-container {
+        position: absolute;
+        top: 0;
+        right: 0;
+        overflow: hidden;
+    }
+
+    .alert {
+        background-color: #dc3545; /* Set your desired background color */
+        color: #fff; /* Set your desired text color */
+        padding: 10px 20px;
+        margin: 10px;
+        border-radius: 10px 0px 0px 10px;
+        opacity: 0;
+        animation: slideIn 0.5s forwards;
+    }
+
+    
+    @keyframes slideIn {
+        0% {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+        100% {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+</style>
 
 <script>
     import Engine from './Engine.vue';
@@ -49,6 +85,7 @@
                 suspensions : [] ,
                 ligthsDemage : [] ,
                 additionals : [] ,
+                showAlert : false ,
             }
         },
         components : {
@@ -73,6 +110,9 @@
             this.light ;
             this.additional ;
             this.carId ;
+            setInterval(() => {
+                demageStore.state.showAlert = false ; 
+            }, 60000);
         },
         computed : {
             bodyAndDemage () {

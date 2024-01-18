@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\PaintDemage; 
+use App\Models\EngineDemage; 
 use Carbon\Carbon ;
 use App\Models\Car\Car ;
 use Illuminate\Support\Facades\Validator;
 
-class paintDemageController extends Controller
+class EngineDemageController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -36,7 +36,7 @@ class paintDemageController extends Controller
             [
                 'fixer_id' => 'required' ,
                 'car_id' => 'required' ,
-                'paintAndBody' => 'required' ,
+                'engineDemage' => 'required' ,
                 'code_id' => 'required|unique:paint_demages'
             ]
         );
@@ -45,19 +45,18 @@ class paintDemageController extends Controller
                 'errors' => $validator->errors() ,
             ] , 500  );
         }
-
         $paintDemage = [] ;
         $paintDemage['fixer_id'] = $request->fixer_id ;
         $paintDemage['car_id'] = $request->car_id ;
-        $paintDemage['description'] = $request->paintAndBody ;
+        $paintDemage['description'] = $request->engineDemage ;
         $code_id = str_replace(" "  , '%' , $request->code_id);
         $paintDemage['code_id'] = $code_id ;
         $paintDemage['created_at'] = Carbon::now();
-        PaintDemage::insert($paintDemage);
-        $data = PaintDemage::leftJoin('cars', 'paint_demages.car_id', '=', 'cars.id')
-                    ->leftJoin('exceptions', 'cars.exception_id', '=', 'exceptions.id')
-                    ->where('paint_demages.car_id', $request->car_id)
-                    ->update(['exceptions.suspection' => $request->paintAndBody]);
+        EngineDemage::insert($paintDemage);
+        $data = EngineDemage::leftJoin('cars', 'engine_demages.car_id', '=', 'cars.id')
+            ->leftJoin('exceptions', 'cars.exception_id', '=', 'exceptions.id')
+            ->where('engine_demages.car_id', $request->car_id)
+            ->update(['exceptions.engine_malfunction' => $request->engineDemage]);
         return response()->json([
             'message' => 'You added successfully' ,
         ] , 200) ;
@@ -85,7 +84,7 @@ class paintDemageController extends Controller
     public function update(Request $request, string $id)
     {
         $codeId = str_replace(' ', '%' , $id);
-        $check = paintDemage::where('code_id' , $codeId)->update([
+        $check = EngineDemage::where('code_id' , $codeId)->update([
             'state' => 1 ,
             'updated_at' => Carbon::now()
         ]);
@@ -104,7 +103,7 @@ class paintDemageController extends Controller
 
     public function checkApi(Request $request) {
         $codeId = str_replace(' '  , "%" , $request->codeId);
-        $main = $paintDamage = PaintDemage::where('code_id', $codeId)->first();
+        $main = EngineDemage::where('code_id', $codeId)->first();
         $check = $main ?  TRUE : FALSE ;
         if($check) {
             $timeSinceCreation = Carbon::parse($main->created_at)->diffForHumans();
