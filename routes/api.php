@@ -11,6 +11,7 @@ use App\Http\Controllers\TVController ;
 use App\Http\Controllers\SuspensionDemageController ;
 use App\Http\Controllers\EngineDemageController ;
 use App\Http\Controllers\LightsDemageController ;
+use App\Http\Controllers\AdditionalDemageController ;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
@@ -36,3 +37,6 @@ Route::post('suspensionDemage/codeApi' , [SuspensionDemageController::class , 'c
 // For Lights 
 Route::apiResource('lightsDemage' , LightsDemageController::class);
 Route::post('lightsDemage/codeApi' , [LightsDemageController::class , 'checkApi']);
+// for AdditionalDemage
+Route::apiResource('additionalDemage' , AdditionalDemageController::class);
+Route::post('additionalDemage/codeApi' , [AdditionalDemageController::class , 'checkApi']);

@@ -27,13 +27,13 @@
                 </div>
                 <div class="row" v-else >
                     <div class="col-md-6">
-                        <button class="btn btn-primary w-100" :class="{ 'disable' : disable}" @click="demageStore.dispatch('getBodyAndPaint')" >
+                        <button class="btn btn-primary w-100" :class="{ 'disable' : disable}" @click="demageStore.dispatch('getLightDemage')" >
                             <span class="me-1">{{ demageStore.state.lights.paintLoading ? "Panding" : "Send" }}</span>
                             <span class="position-relative loader" v-if="demageStore.state.lights.paintLoading">....</span>
                         </button>
                     </div>
                     <div class="col-md-6">
-                        <button class="btn btn-danger w-100" @click="demageStore.dispatch('haveDoneBodyAndPaint')">Have Done</button>
+                        <button class="btn btn-danger w-100" @click="demageStore.dispatch('haveDoneSupension')">Have Done</button>
                     </div>
                 </div>
             </div>

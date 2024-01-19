@@ -56,6 +56,7 @@
                 fixer : null ,
                 disable : false ,
                 setTime : null ,
+                setValue : null ,
             }
         },
         props : {
@@ -73,28 +74,35 @@
                 if(this.engineDemage == "none") {
                     demageStore.state.engine.engineDemage = demageStore.state.dot ;
                     this.disable = true ;
+                    demageStore.state.engine.engineDemageState = false ;
                 }else {
                     demageStore.state.engine.engineDemage = this.engineDemage ;
                 }
             },
             fixerId () {
-                if(this.fixers.length > 0) {
-                    return  this.fixers[0].id ;
-                }
-                return  null ;
+                return this.fixers.length > 0 ? this.fixers[0].id : null ;
             },
         },
         mounted () {
             this.engine ;
             this.fixer = 1 ;
-            setInterval(() => {
-                this.getIdCode(this.fixer);
-            }, 60000);
+            this.getIdCode(this.fixer);
+            if(demageStore.state.engine.engineDemageState == false) {
+                setInterval(() => {
+                    this.getIdCode(this.fixer);
+                }, 60000);
+            }
         },
         watch : {
             fixer(newValue) {
-               this.getIdCode(newValue) ;
-               demageStore.state.engine.fixer_id = newValue ;
+                if(demageStore.state.engine.engineDemageState == false) {
+                    this.getIdCode(newValue) ;
+                }
+                demageStore.state.engine.fixer_id = newValue ;
+                
+            } ,
+            setValue (newValue ) {
+                console.log(newValue);
             }
         },
         methods : {

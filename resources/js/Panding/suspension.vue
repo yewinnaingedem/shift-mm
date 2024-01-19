@@ -73,15 +73,13 @@
                 if(this.supsensionDemage == "none") {
                     demageStore.state.suspension.suspensionDemage = demageStore.state.dot ;
                     this.disable = true ;
+                    demageStore.state.suspension.suspensionDemageState = false ;
                 }else {
                     demageStore.state.suspension.suspensionDemage = this.supsensionDemage ;
                 }
             },
             fixerId () {
-                if(this.fixers.length > 0) {
-                    return  this.fixers[0].id ;
-                }
-                return  null ;
+                return this.fixers.length > 0 ? this.fixers[0].id : null ;
             },
         },
         mounted () {
@@ -118,8 +116,10 @@
         },
         watch : {
             fixer(newValue) {
-               this.getIdCode(newValue) ;
-               demageStore.state.suspension.fixer_id = newValue ;
+                if(demageStore.state.suspension.suspensionDemageState != false) {
+                    this.getIdCode(newValue) ;
+                }
+                demageStore.state.suspension.fixer_id = newValue ;
             }
         },
     }

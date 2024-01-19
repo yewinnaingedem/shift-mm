@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\LightDemage; 
+use App\Models\AdditionalDemage; 
 use Carbon\Carbon ;
 use App\Models\Car\Car ;
 use Illuminate\Support\Facades\Validator;
 
-class LightsDemageController extends Controller
+class AdditionalDemageController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -36,8 +36,8 @@ class LightsDemageController extends Controller
             [
                 'fixer_id' => 'required' ,
                 'car_id' => 'required' ,
-                'lightsDemage' => 'required' ,
-                'code_id' => 'required|unique:light_demages'
+                'additionalDemage' => 'required' ,
+                'code_id' => 'required|unique:additional_demages'
             ]
         );
         if($validator->fails()){
@@ -48,16 +48,16 @@ class LightsDemageController extends Controller
         $paintDemage = [] ;
         $paintDemage['fixer_id'] = $request->fixer_id ;
         $paintDemage['car_id'] = $request->car_id ;
-        $paintDemage['description'] = $request->lightsDemage ;
+        $paintDemage['description'] = $request->additionalDemage ;
         
         $code_id = str_replace(" "  , '%' , $request->code_id);
         $paintDemage['code_id'] = $code_id ;
         $paintDemage['created_at'] = Carbon::now();
-        LightDemage::insert($paintDemage);
-        $data = LightDemage::leftJoin('cars', 'light_demages.car_id', '=', 'cars.id')
+        AdditionalDemage::insert($paintDemage);
+        $data = AdditionalDemage::leftJoin('cars', 'additional_demages.car_id', '=', 'cars.id')
             ->leftJoin('exceptions', 'cars.exception_id', '=', 'exceptions.id')
-            ->where('light_demages.car_id', $request->car_id)
-            ->update(['exceptions.lights' => $request->lightsDemage]);
+            ->where('additional_demages.car_id', $request->car_id)
+            ->update(['exceptions.addition_exception' => $request->additionalDemage]);
         return response()->json([
             'message' => 'You added successfully' ,
         ] , 200) ;
@@ -85,7 +85,7 @@ class LightsDemageController extends Controller
     public function update(Request $request, string $id)
     {
         $codeId = str_replace(' ', '%' , $id);
-        $check = LightDemage::where('code_id' , $codeId)->update([
+        $check = AdditionalDemage::where('code_id' , $codeId)->update([
             'state' => 1 ,
             'updated_at' => Carbon::now()
         ]);
@@ -104,7 +104,7 @@ class LightsDemageController extends Controller
 
     public function checkApi(Request $request) {
         $codeId = str_replace(' '  , "%" , $request->codeId);
-        $main = LightDemage::where('code_id', $codeId)->first();
+        $main = AdditionalDemage::where('code_id', $codeId)->first();
         $check = $main ?  TRUE : FALSE ;
         if($check) {
             $timeSinceCreation = Carbon::parse($main->created_at)->diffForHumans();
