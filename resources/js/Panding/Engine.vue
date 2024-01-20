@@ -86,16 +86,15 @@
         mounted () {
             this.engine ;
             this.fixer = 1 ;
-            this.getIdCode(this.fixer);
-            if(demageStore.state.engine.engineDemageState == false) {
-                setInterval(() => {
+            setInterval(() => {
+                if(demageStore.state.engine.engineDemageState) {
                     this.getIdCode(this.fixer);
-                }, 60000);
-            }
+                }
+            }, 60000);
         },
         watch : {
             fixer(newValue) {
-                if(demageStore.state.engine.engineDemageState == false) {
+                if(demageStore.state.engine.engineDemageState == true) {
                     this.getIdCode(newValue) ;
                 }
                 demageStore.state.engine.fixer_id = newValue ;
@@ -108,21 +107,24 @@
         methods : {
             getIdCode (fixer) {
                 axios.post('http://localhost:8000/api/engineDemage/codeApi' , {
-                    codeId : fixer + demageStore.state.car_id + demageStore.state.engine.engineDemage ,
+                    codeId : fixer + demageStore.state.car_id + demageStore.state.engine.engineDemage + demageStore.state.licensePlate ,
                 })
                 .then((response) => {
                     this.setTime = null ;
                     if(response.data.success == true ) {
                         this.demageStore.state.engine.paintLoading = true ;
+                        demageStore.state.engine.engineDemageState = true ;  
                         this.setTime = response.data.timeSinceCreated ;
                         if(response.data.state !== 0) {
                             demageStore.state.engine.state = true ;
+                            
                         }else {
                             demageStore.state.engine.state = false ;   
                         }
                     }else {
                         this.demageStore.state.engine.paintLoading = false ;
                         demageStore.state.engine.state = false ;
+                        demageStore.state.engine.engineDemageState = false ;  
                     }
                 })
                 .catch((error) => {

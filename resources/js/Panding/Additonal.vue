@@ -2,7 +2,7 @@
     <div class="mb-1">
         <div class="row">
             <div class="col-md-8">
-                <label class="form-label">Suspension Manipulation </label>
+                <label class="form-label">Additional Exceptions </label>
             </div>
             <div class="col-md-4 text-end ">
                 <div class="lead font-mono font-size-sm me-1" v-if="setTime">{{ setTime }}</div>
@@ -73,42 +73,45 @@
                 if(this.additionalDemage == "none") {
                     demageStore.state.exceptions.exceptionsDemage = demageStore.state.dot ;
                     this.disable = true ;
+                    demageStore.state.exceptions.exceptionsDemageState = false ;
                 }else {
                     demageStore.state.exceptions.exceptionsDemage = this.additionalDemage ;
                 }
             },
             fixerId () {
-                if(this.fixers.length > 0) {
-                    return  this.fixers[0].id ;
-                }
-                return  null ;
+                return this.fixers.length > 0 ? this.fixers[0].id : null ;
             },
         },
         mounted () {
             this.additionalException ;
             this.fixer = 1 ;
             setInterval(() => {
-                this.getIdCode(this.fixer);
+                if(demageStore.state.exceptions.exceptionsDemageState ) {
+                    this.getIdCode(this.fixer);
+                }
             }, 60000);
         },
         methods : {
             getIdCode (fixer) {
                 axios.post('http://localhost:8000/api/additionalDemage/codeApi' , {
-                    codeId : fixer + demageStore.state.car_id + demageStore.state.exceptions.exceptionsDemage ,
+                    codeId : fixer + demageStore.state.car_id + demageStore.state.exceptions.exceptionsDemage + demageStore.state.licensePlate,
                 })
                 .then((response) => {
                     this.setTime = null ;
                     if(response.data.success == true ) {
                         this.demageStore.state.exceptions.paintLoading = true ;
                         this.setTime = response.data.timeSinceCreated ;
+                        demageStore.state.exceptions.exceptionsDemageState  = true ; 
                         if(response.data.state !== 0) {
+                            
                             demageStore.state.exceptions.state = true ;
                         }else {
-                            demageStore.state.exceptions.state = false ;   
+                            demageStore.state.exceptions.state = false ;  
                         }
                     }else {
                         this.demageStore.state.exceptions.paintLoading = false ;
                         demageStore.state.exceptions.state = false ;
+                        demageStore.state.exceptions.exceptionsDemageState  = false ; 
                     }
                 })
                 .catch((error) => {
@@ -118,7 +121,9 @@
         },
         watch : {
             fixer(newValue) {
-               this.getIdCode(newValue) ;
+               if(demageStore.state.exceptions.exceptionsDemageState) {
+                    this.getIdCode(newValue) ;
+               }
                demageStore.state.exceptions.fixer_id = newValue ;
             }
         },

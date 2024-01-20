@@ -120,10 +120,5 @@ class paintDemageController extends Controller
                 'timeSinceCreated' => null ,
             ] , 200);
         }
-        
-    }
-
-    public function putDemage (Request $request  , $codeId) {
-        $code_id = str_replace(' ','%' , $codeId);
     }
 }

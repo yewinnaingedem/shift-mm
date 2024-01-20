@@ -73,42 +73,45 @@
                 if(this.lightDemage == "none") {
                     demageStore.state.lights.lightDemage = demageStore.state.dot ;
                     this.disable = true ;
+                    demageStore.state.lights.lightDemageState = false ;
                 }else {
                     demageStore.state.lights.lightDemage = this.lightDemage ;
                 }
             },
             fixerId () {
-                if(this.fixers.length > 0) {
-                    return  this.fixers[0].id ;
-                }
-                return  null ;
+                return this.fixers.length > 0 ? this.fixers[0].id : null ;
             },
         },
         mounted () {
             this.ligths ;
             this.fixer = 1 ;
             setInterval(() => {
-                this.getIdCode(this.fixer);
+                if(demageStore.state.lights.lightDemageState) {
+                    this.getIdCode(this.fixer);
+                }
             }, 60000);
         },
         methods : {
             getIdCode (fixer) {
                 axios.post('http://localhost:8000/api/lightsDemage/codeApi' , {
-                    codeId : fixer + demageStore.state.car_id + demageStore.state.lights.lightDemage ,
+                    codeId : fixer + demageStore.state.car_id + demageStore.state.lights.lightDemage + demageStore.state.licensePlate ,
                 })
                 .then((response) => {
                     this.setTime = null ;
                     if(response.data.success == true ) {
                         this.demageStore.state.lights.paintLoading = true ;
                         this.setTime = response.data.timeSinceCreated ;
+                        demageStore.state.lights.lightDemageState = true ;
                         if(response.data.state !== 0) {
                             demageStore.state.lights.state = true ;
+                            
                         }else {
                             demageStore.state.lights.state = false ;   
                         }
                     }else {
                         this.demageStore.state.lights.paintLoading = false ;
                         demageStore.state.lights.state = false ;
+                        demageStore.state.lights.lightDemageState = false ;
                     }
                 })
                 .catch((error) => {

@@ -4,25 +4,26 @@ const demageStore = createStore ({
     state () {
         return {
             car_id : null ,
+            licensePlate : null ,
             dot : "----------" ,
             showAlert : false ,
             showText : null ,
             bodyAndPaint : {
-                bodyAndPaintState : false ,
+                bodyAndPaintState : true ,
                 bodyAndPaint : null ,
                 fixer_id : null ,
                 paitnLoading : false ,
                 state : false ,
             } ,
             tv  : {
-                tvDemageState : false ,
+                tvDemageState : true ,
                 tvDemage : null ,
                 fixer_id : null ,
                 paintLoading : false ,
                 state : false ,
             } , 
             wiring : {
-                wiringDemageState : false ,
+                wiringDemageState : true ,
                 wiringDemage : null ,
                 fixer_id : null ,
                 paintLoading : false ,
@@ -43,14 +44,14 @@ const demageStore = createStore ({
                 state : false ,
             } ,
             lights : {
-                lightDemageState : false ,
+                lightDemageState : true ,
                 lightDemage : null ,
                 fixer_id : null ,
                 paintLoading : false ,
                 state : false ,
             } ,
             exceptions : {
-                exceptionsDemageState : false ,
+                exceptionsDemageState : true ,
                 exceptionsDemage : null ,
                 fixer_id : null ,
                 paintLoading : false ,
@@ -68,7 +69,7 @@ const demageStore = createStore ({
     actions : {
         // for PaintAndBody 
         getBodyAndPaint ( {state} ) {
-            let origin = state.bodyAndPaint.fixer_id + state.car_id + state.bodyAndPaint.bodyAndPaint ;
+            let origin = state.bodyAndPaint.fixer_id + state.car_id + state.bodyAndPaint.bodyAndPaint + state.licensePlate;
             let code_id = origin.replace(/\s/g , '%') ;
             axios.post('http://localhost:8000/api/paintDemage' , {
                 'paintAndBody' : state.bodyAndPaint.bodyAndPaint ,
@@ -88,7 +89,7 @@ const demageStore = createStore ({
             ) ;
         },
         haveDoneBodyAndPaint({state}) {
-            let origin = state.bodyAndPaint.fixer_id + state.car_id + state.bodyAndPaint.bodyAndPaint ;
+            let origin = state.bodyAndPaint.fixer_id + state.car_id + state.bodyAndPaint.bodyAndPaint + state.licensePlate ;
             axios.put(`http://localhost:8000/api/paintDemage/${origin}` ).then((response) => {
                 if(response.status == 200) {
                     state.bodyAndPaint.state = true ;
@@ -99,7 +100,7 @@ const demageStore = createStore ({
         } ,
         // for TV 
         getTVDemage ( {state} ) {
-            let origin = state.tv.fixer_id + state.car_id + state.tv.tvDemage ;
+            let origin = state.tv.fixer_id + state.car_id + state.tv.tvDemage  + state.licensePlate;
             let code_id = origin.replace(/\s/g , '%') ;
             axios.post('http://localhost:8000/api/tvDemage' , {
                 'tvDemage' : state.tv.tvDemage ,
@@ -117,7 +118,7 @@ const demageStore = createStore ({
             ) ;
         },
         haveDoneTV({state}) {
-            let origin = state.tv.fixer_id + state.car_id + state.tv.tvDemage ;
+            let origin = state.tv.fixer_id + state.car_id + state.tv.tvDemage + state.licensePlate ;
             axios.put(`http://localhost:8000/api/tvDemage/${origin}` ).then((response) => {
                 if(response.status == 200) {
                     state.tv.state = true ;
@@ -129,7 +130,7 @@ const demageStore = createStore ({
         } ,
         // for Engine 
         getEngineDemage ( {state} ) {
-            let origin = state.engine.fixer_id + state.car_id + state.engine.engineDemage ;
+            let origin = state.engine.fixer_id + state.car_id + state.engine.engineDemage + state.licensePlate ;
             let code_id = origin.replace(/\s/g , '%') ;
             axios.post('http://localhost:8000/api/engineDemage' , {
                 'engineDemage' : state.engine.engineDemage ,
@@ -149,7 +150,7 @@ const demageStore = createStore ({
             ) ;
         },
         haveDoneEngine({state}) {
-            let origin = state.engine.fixer_id + state.car_id + state.engine.engineDemage ;
+            let origin = state.engine.fixer_id + state.car_id + state.engine.engineDemage + state.licensePlate ;
             axios.put(`http://localhost:8000/api/engineDemage/${origin}` ).then((response) => {
                 if(response.status == 200) {
                     state.engine.state = true ;
@@ -162,7 +163,7 @@ const demageStore = createStore ({
         } ,
         // for Suspension
         getSuspensionDemage ( {state} ) {
-            let origin = state.suspension.fixer_id + state.car_id + state.suspension.suspensionDemage ;
+            let origin = state.suspension.fixer_id + state.car_id + state.suspension.suspensionDemage + state.licensePlate ;
             let code_id = origin.replace(/\s/g , '%') ;
             axios.post('http://localhost:8000/api/suspensionDemage' , {
                 'suspensionDemage' : state.suspension.suspensionDemage ,
@@ -182,7 +183,7 @@ const demageStore = createStore ({
             ) ;
         },
         haveDoneSupension({state}) {
-            let origin = state.suspension.fixer_id + state.car_id + state.suspension.suspensionDemage ;
+            let origin = state.suspension.fixer_id + state.car_id + state.suspension.suspensionDemage + state.licensePlate ;
             axios.put(`http://localhost:8000/api/suspensionDemage/${origin}` ).then((response) => {
                 if(response.status == 200) {
                     state.suspension.state = true ;
@@ -195,7 +196,7 @@ const demageStore = createStore ({
         } ,
         // for Light
         getLightDemage ({state}) {
-            let origin = state.lights.fixer_id + state.car_id + state.lights.lightDemage ;
+            let origin = state.lights.fixer_id + state.car_id + state.lights.lightDemage  + state.licensePlate ;
             let code_id = origin.replace(/\s/g , '%') ;
             axios.post('http://localhost:8000/api/lightsDemage' , {
                 'lightsDemage' : state.lights.lightDemage ,
@@ -215,7 +216,7 @@ const demageStore = createStore ({
             ) ;
         },
         haveDoneSupension({state}) {
-            let origin = state.lights.fixer_id + state.car_id + state.lights.lightDemage ;
+            let origin = state.lights.fixer_id + state.car_id + state.lights.lightDemage + state.licensePlate ;
             axios.put(`http://localhost:8000/api/lightsDemage/${origin}` ).then((response) => {
                 if(response.status == 200) {
                     state.lights.state = true ;
@@ -228,7 +229,7 @@ const demageStore = createStore ({
         } ,
         // for Additional Exceptions
         getAdditionalDemage ({state}) {
-            let origin = state.exceptions.fixer_id + state.car_id + state.exceptions.exceptionsDemage ;
+            let origin = state.exceptions.fixer_id + state.car_id + state.exceptions.exceptionsDemage  + state.licensePlate ;
             let code_id = origin.replace(/\s/g , '%') ;
             axios.post('http://localhost:8000/api/additionalDemage' , {
                 'additionalDemage' : state.exceptions.exceptionsDemage ,
@@ -248,7 +249,7 @@ const demageStore = createStore ({
             ) ;
         },
         haveDoneAdditionalDemage({state}) {
-            let origin = state.exceptions.fixer_id + state.car_id + state.exceptions.exceptionsDemage ;
+            let origin = state.exceptions.fixer_id + state.car_id + state.exceptions.exceptionsDemage  + state.licensePlate ;
             axios.put(`http://localhost:8000/api/additionalDemage/${origin}` ).then((response) => {
                 if(response.status == 200) {
                     state.exceptions.state = true ;
@@ -260,6 +261,6 @@ const demageStore = createStore ({
             });
         } ,
     }
-})
+});
 
 export default demageStore ;

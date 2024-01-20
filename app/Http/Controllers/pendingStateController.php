@@ -51,8 +51,9 @@ class pendingStateController extends Controller
     public function show(string $id)
     {
         $panding = [];
-        $panding['demage']  = Panding::select('exceptions.*', 'cars.id as car_id' ,)
+        $panding['demage']  = Panding::select('exceptions.*', 'cars.id as car_id','owner_books.license_plate')
                         ->leftJoin('cars' , 'pandings.car_id','cars.id')
+                        ->leftJoin('owner_books','cars.owner_book_id' , "owner_books.id")
                         ->leftJoin('exceptions','cars.exception_id','exceptions.id')
                         ->where('pandings.car_id','=',$id)
                         ->first();

@@ -71,7 +71,9 @@
         },
         watch : {
             fixer(newValue) {
-               this.getIdCode(newValue) ;
+                if(demageStore.state.tv.tvDemageState) {
+                    this.getIdCode(newValue) ;
+                }
                demageStore.state.tv.fixer_id = newValue ;
             }
         } ,
@@ -79,7 +81,9 @@
             this.tv ;
             this.fixer = 1 ;
             setInterval(() => {
-                this.getIdCode(this.fixer);
+                if(demageStore.state.tv.tvDemageState) {
+                    this.getIdCode(this.fixer);
+                }
             }, 60000);
         },
         computed : {
@@ -87,6 +91,7 @@
                 if(this.tvDemage == "none") {
                     demageStore.state.tv.tvDemage = demageStore.state.dot ;
                     this.disable = true ;
+                    demageStore.state.tv.tvDemageState = false ;
                 }else {
                     demageStore.state.tv.tvDemage = this.tvDemage ;
                 }
@@ -95,13 +100,14 @@
         methods : {
             getIdCode (fixer) {
                 axios.post('http://localhost:8000/api/tv/codeApi' , {
-                    codeId : fixer + demageStore.state.car_id + demageStore.state.tv.tvDemage ,
+                    codeId : fixer + demageStore.state.car_id + demageStore.state.tv.tvDemage + demageStore.state.licensePlate ,
                 })
                 .then((response) => {
                     this.setTime = null ;
                     if(response.data.success == true ) {
                         this.demageStore.state.tv.paintLoading = true ;
                         this.setTime = response.data.timeSinceCreated ;
+                        demageStore.state.tv.tvDemageState = true ;
                         if(response.data.state !== 0) {
                             demageStore.state.tv.state = true ;
                         }else {
@@ -110,7 +116,10 @@
                     }else {
                         this.demageStore.state.tv.paintLoading = false ;
                         demageStore.state.tv.state = false ;
+                        demageStore.state.tv.tvDemageState = false ;
+                        
                     }
+                    console.log(demageStore.state.tv.tvDemageState);
                 })
                 .catch((error) => {
                     console.log(error);

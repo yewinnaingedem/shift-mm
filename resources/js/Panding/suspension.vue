@@ -86,17 +86,19 @@
             this.suspension ;
             this.fixer = 1 ;
             setInterval(() => {
-                this.getIdCode(this.fixer);
+                if(demageStore.state.suspension.suspensionDemageState) {
+                    this.getIdCode(this.fixer);
+                }
             }, 60000);
         },
         methods : {
             getIdCode (fixer) {
                 axios.post('http://localhost:8000/api/suspensionDemage/codeApi' , {
-                    codeId : fixer + demageStore.state.car_id + demageStore.state.suspension.suspensionDemage ,
+                    codeId : fixer + demageStore.state.car_id + demageStore.state.suspension.suspensionDemage + demageStore.state.licensePlate ,
                 })
                 .then((response) => {
                     this.setTime = null ;
-                    if(response.data.success == true ) {
+                    if(response.data.success == "true" ) {
                         this.demageStore.state.suspension.paintLoading = true ;
                         this.setTime = response.data.timeSinceCreated ;
                         if(response.data.state !== 0) {
@@ -107,6 +109,7 @@
                     }else {
                         this.demageStore.state.suspension.paintLoading = false ;
                         demageStore.state.suspension.state = false ;
+                        demageStore.state.suspension.suspensionDemageState = false ;
                     }
                 })
                 .catch((error) => {
@@ -116,7 +119,7 @@
         },
         watch : {
             fixer(newValue) {
-                if(demageStore.state.suspension.suspensionDemageState != false) {
+                if(demageStore.state.suspension.suspensionDemageState ) {
                     this.getIdCode(newValue) ;
                 }
                 demageStore.state.suspension.fixer_id = newValue ;

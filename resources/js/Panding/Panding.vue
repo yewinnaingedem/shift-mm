@@ -113,6 +113,7 @@
             setInterval(() => {
                 demageStore.state.showAlert = false ; 
             }, 60000);
+            this.licenseSet ;
         },
         computed : {
             bodyAndDemage () {
@@ -157,6 +158,9 @@
             },
             carId () {
                 this.demageStore.state.car_id = this.panding.car_id ;
+            },
+            licenseSet () {
+                demageStore.state.licensePlate  = this.panding.demage.license_plate ;
             }
         }
     }

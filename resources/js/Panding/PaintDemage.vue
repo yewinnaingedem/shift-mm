@@ -74,48 +74,53 @@
                 if(this.paint == "none") {
                     demageStore.state.bodyAndPaint.bodyAndPaint = demageStore.state.dot ;
                     this.disable = true ;
+                    demageStore.state.bodyAndPaint.bodyAndPaintState = false ;
                 }else {
                     demageStore.state.bodyAndPaint.bodyAndPaint = this.paint ;
                 }
             },
             fixerId () {
-                if(this.fixers.length > 0) {
-                    return  this.fixers[0].id ;
-                }
-                return  null ;
+                return this.fixers.length > 0 ? this.fixers[0].id : null ;
             },
         },
         mounted () {
             this.bodyAndPaint ;
             this.fixer = 1 ;
             setInterval(() => {
-                this.getIdCode(this.fixer);
+                if(demageStore.state.bodyAndPaint.bodyAndPaintState) {
+                    this.getIdCode(this.fixer);
+                }
             }, 60000);
         },
         watch : {
             fixer(newValue) {
-               this.getIdCode(newValue) ;
+                if(demageStore.state.bodyAndPaint.bodyAndPaintState) {
+                    this.getIdCode(newValue) ;
+                }
                demageStore.state.bodyAndPaint.fixer_id = newValue ;
             }
         } ,
         methods : {
             getIdCode (fixer) {
                 axios.post('http://localhost:8000/api/bodyAndPaint/codeApi' , {
-                    codeId : fixer + demageStore.state.car_id + demageStore.state.bodyAndPaint.bodyAndPaint ,
+                    codeId : fixer + demageStore.state.car_id + demageStore.state.bodyAndPaint.bodyAndPaint + demageStore.state.licensePlate ,
                 })
                 .then((response) => {
                     this.setTime = null ;
                     if(response.data.success == true ) {
                         this.demageStore.state.bodyAndPaint.paitnLoading = true ;
+                        demageStore.state.bodyAndPaint.bodyAndPaintState = true ;
                         this.setTime = response.data.timeSinceCreated ;
                         if(response.data.state !== 0) {
                             demageStore.state.bodyAndPaint.state = true ;
+                            
                         }else {
                             demageStore.state.bodyAndPaint.state = false ;   
                         }
                     }else {
                         this.demageStore.state.bodyAndPaint.paitnLoading = false ;
                         demageStore.state.bodyAndPaint.state = false ;
+                        demageStore.state.bodyAndPaint.bodyAndPaintState = false ;
                     }
                 })
                 .catch((error) => {
