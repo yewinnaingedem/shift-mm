@@ -50,16 +50,15 @@ class TVController extends Controller
         $tvDemages['fixer_id'] = $request->fixer_id ;
         $tvDemages['car_id'] = $request->car_id ;
         $tvDemages['description'] = $request->tvDemage ; 
-        $data = TvFiexer::leftJoin('cars', 'tv_fiexers.car_id', '=', 'cars.id')
-                        ->leftJoin('exceptions', 'cars.exception_id', '=', 'exceptions.id')
-                        ->where('cars.id','=' , $request->car_id)
-                        ->update([
-                            'tv' => $request['tvDemage'] ,
-                        ]);
+        
         $code_id = str_replace(" "  , '%' , $request->code_id);
         $tvDemages['code_id'] = $code_id ;
         $tvDemages['created_at'] = Carbon::now();
         TvFiexer::insert($tvDemages);
+        $data = TvFiexer::leftJoin('cars', 'tv_fiexers.car_id', '=', 'cars.id')
+            ->leftJoin('exceptions', 'cars.exception_id', '=', 'exceptions.id')
+            ->where('tv_fiexers.car_id', $request->car_id)
+            ->update(['exceptions.tv' => $request->tvDemage]);
         return response()->json([
             'message' => 'You added successfully for TV Fixer' ,
         ] , 200) ;

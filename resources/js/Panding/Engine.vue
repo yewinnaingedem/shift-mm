@@ -10,7 +10,7 @@
         </div>
         <div class="row">
             <div class="col-md-4">
-                <textarea class="form-control"  rows="1" v-model="demageStore.state.engine.engineDemage"></textarea>
+                <textarea class="form-control"  rows="1" v-model="engineInner"></textarea>
             </div>
             <div class="col-md-4">
                 <select class="form-select w-100" >
@@ -26,8 +26,8 @@
                     </button>
                 </div>
                 <div class="row" v-else >
-                    <div class="col-md-6">
-                        <button class="btn btn-primary w-100" :class="{ 'disable' : disable}" @click="demageStore.dispatch('getEngineDemage')" >
+                    <div class="col-md-6" :class="{ 'disable' : disable}">
+                        <button class="btn btn-primary w-100"  @click="demageStore.dispatch('getEngineDemage')" :disabled="disable" >
                             <span class="me-1">{{ demageStore.state.engine.paintLoading ? "Panding" : "Send" }}</span>
                             <span class="position-relative loader" v-if="demageStore.state.engine.paintLoading">....</span>
                         </button>
@@ -56,7 +56,7 @@
                 fixer : null ,
                 disable : false ,
                 setTime : null ,
-                setValue : null ,
+                engineInner  : null ,
             }
         },
         props : {
@@ -72,11 +72,11 @@
         computed : {
             engine () {
                 if(this.engineDemage == "none") {
-                    demageStore.state.engine.engineDemage = demageStore.state.dot ;
+                    this.engineInner = demageStore.state.dot ;
                     this.disable = true ;
                     demageStore.state.engine.engineDemageState = false ;
                 }else {
-                    demageStore.state.engine.engineDemage = this.engineDemage ;
+                    this.engineInner = this.engineDemage ;
                 }
             },
             fixerId () {
@@ -100,8 +100,13 @@
                 demageStore.state.engine.fixer_id = newValue ;
                 
             } ,
-            setValue (newValue ) {
-                console.log(newValue);
+            engineInner (newValue ) {
+                if(!newValue.includes('-') && newValue !== "") {
+                    this.disable  = false ;
+                    demageStore.state.engine.engineDemage = newValue ;
+                }else {
+                    this.disable = true ;
+                }
             }
         },
         methods : {
@@ -117,7 +122,6 @@
                         this.setTime = response.data.timeSinceCreated ;
                         if(response.data.state !== 0) {
                             demageStore.state.engine.state = true ;
-                            
                         }else {
                             demageStore.state.engine.state = false ;   
                         }

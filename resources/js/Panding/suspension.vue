@@ -10,7 +10,7 @@
         </div>
         <div class="row">
             <div class="col-md-4">
-                <textarea class="form-control"  rows="1" v-model="demageStore.state.suspension.suspensionDemage"></textarea>
+                <textarea class="form-control"  rows="1" v-model="suspensionInner"></textarea>
             </div>
             <div class="col-md-4">
                 <select class="form-select w-100" aria-label="Default select example">
@@ -26,8 +26,8 @@
                     </button>
                 </div>
                 <div class="row" v-else >
-                    <div class="col-md-6">
-                        <button class="btn btn-primary w-100" :class="{ 'disable' : disable}" @click="demageStore.dispatch('getSuspensionDemage')" >
+                    <div class="col-md-6"  :class="{ 'disable' : disable}">
+                        <button class="btn btn-primary w-100" @click="demageStore.dispatch('getSuspensionDemage')"  :disabled="disable">
                             <span class="me-1">{{ demageStore.state.suspension.paintLoading ? "Panding" : "Send" }}</span>
                             <span class="position-relative loader" v-if="demageStore.state.suspension.paintLoading">....</span>
                         </button>
@@ -56,6 +56,7 @@
                 fixer : null ,
                 disable : false ,
                 setTime : null ,
+                suspensionInner : null ,
             }
         },
         props : {
@@ -71,11 +72,11 @@
         computed : {
             suspension () {
                 if(this.supsensionDemage == "none") {
-                    demageStore.state.suspension.suspensionDemage = demageStore.state.dot ;
+                    this.suspensionInner = demageStore.state.dot ;
                     this.disable = true ;
                     demageStore.state.suspension.suspensionDemageState = false ;
                 }else {
-                    demageStore.state.suspension.suspensionDemage = this.supsensionDemage ;
+                    this.suspensionInner = this.supsensionDemage ;
                 }
             },
             fixerId () {
@@ -98,9 +99,10 @@
                 })
                 .then((response) => {
                     this.setTime = null ;
-                    if(response.data.success == "true" ) {
+                    if(response.data.success == true ) {
                         this.demageStore.state.suspension.paintLoading = true ;
                         this.setTime = response.data.timeSinceCreated ;
+                        demageStore.state.suspension.suspensionDemageState = true ;
                         if(response.data.state !== 0) {
                             demageStore.state.suspension.state = true ;
                         }else {
@@ -111,6 +113,7 @@
                         demageStore.state.suspension.state = false ;
                         demageStore.state.suspension.suspensionDemageState = false ;
                     }
+                    console.log(demageStore.state.suspension.suspensionDemageState);
                 })
                 .catch((error) => {
                     console.log(error);
@@ -123,6 +126,14 @@
                     this.getIdCode(newValue) ;
                 }
                 demageStore.state.suspension.fixer_id = newValue ;
+            },
+            suspensionInner (newVal) {
+                if(!newVal.includes('-') && newVal !== "")  {
+                    this.demageStore.state.suspension.suspensionDemage = this.suspensionInner ;
+                    this.disable = false ;
+                }else {
+                    this.disable = true  ;
+                }
             }
         },
     }

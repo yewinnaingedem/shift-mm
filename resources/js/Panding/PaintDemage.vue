@@ -10,7 +10,7 @@
         </div>
         <div class="row">
             <div class="col-md-4">
-                <textarea class="form-control"  rows="1" v-model="demageStore.state.bodyAndPaint.bodyAndPaint"></textarea>
+                <textarea class="form-control"  rows="1" v-model="paintDemageInner"></textarea>
             </div>
             <div class="col-md-4">
                 <select class="form-select w-100" v-model="fixer" aria-label="Default select example">
@@ -26,8 +26,8 @@
                     </button>
                 </div>
                 <div class="row" v-else >
-                    <div class="col-md-6">
-                        <button class="btn btn-primary w-100" :class="{ 'disable' : disable}" @click="demageStore.dispatch('getBodyAndPaint')" >
+                    <div class="col-md-6" :class="{ 'disable' : disable}">
+                        <button class="btn btn-primary w-100"  @click="demageStore.dispatch('getBodyAndPaint')" :disabled="disable">
                             <span class="me-1">{{ demageStore.state.bodyAndPaint.paitnLoading ? "Panding" : "Send" }}</span>
                             <span class="position-relative loader" v-if="demageStore.state.bodyAndPaint.paitnLoading">....</span>
                         </button>
@@ -57,6 +57,7 @@
                 fixer : null ,
                 disable : false ,
                 setTime : null ,
+                paintDemageInner : null ,
             }
         },
         props : {
@@ -72,11 +73,11 @@
         computed : {
             bodyAndPaint () {
                 if(this.paint == "none") {
-                    demageStore.state.bodyAndPaint.bodyAndPaint = demageStore.state.dot ;
+                    this.paintDemageInner= demageStore.state.dot ;
                     this.disable = true ;
                     demageStore.state.bodyAndPaint.bodyAndPaintState = false ;
                 }else {
-                    demageStore.state.bodyAndPaint.bodyAndPaint = this.paint ;
+                    this.paintDemageInner= this.paint ;
                 }
             },
             fixerId () {
@@ -94,10 +95,17 @@
         },
         watch : {
             fixer(newValue) {
-                if(demageStore.state.bodyAndPaint.bodyAndPaintState) {
-                    this.getIdCode(newValue) ;
-                }
+               this.getIdCode(newValue) ;
                demageStore.state.bodyAndPaint.fixer_id = newValue ;
+            },
+            paintDemageInner (newVal) {
+                if(!newVal.includes('-') && newVal !== "") {
+                    this.disable = false ;
+                    this.demageStore.state.bodyAndPaint.bodyAndPaint = this.paintDemageInner ;
+                }else {
+                    this.disable = true ;
+                }
+                console.log(this.demageStore.state.bodyAndPaint.bodyAndPaint);
             }
         } ,
         methods : {
@@ -113,7 +121,6 @@
                         this.setTime = response.data.timeSinceCreated ;
                         if(response.data.state !== 0) {
                             demageStore.state.bodyAndPaint.state = true ;
-                            
                         }else {
                             demageStore.state.bodyAndPaint.state = false ;   
                         }

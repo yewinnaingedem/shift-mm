@@ -10,7 +10,7 @@
         </div>
         <div class="row">
             <div class="col-md-4">
-                <textarea class="form-control"  rows="1" v-model="demageStore.state.exceptions.exceptionsDemage"></textarea>
+                <textarea class="form-control"  rows="1" v-model="exceptionInner"></textarea>
             </div>
             <div class="col-md-4">
                 <select class="form-select w-100" aria-label="Default select example">
@@ -26,8 +26,8 @@
                     </button>
                 </div>
                 <div class="row" v-else >
-                    <div class="col-md-6">
-                        <button class="btn btn-primary w-100" :class="{ 'disable' : disable}" @click="demageStore.dispatch('getAdditionalDemage')" >
+                    <div class="col-md-6" :class="{ 'disable' : disable}">
+                        <button class="btn btn-primary w-100"  @click="demageStore.dispatch('getAdditionalDemage')" :disabled="disable">
                             <span class="me-1">{{ demageStore.state.exceptions.paintLoading ? "Panding" : "Send" }}</span>
                             <span class="position-relative loader" v-if="demageStore.state.exceptions.paintLoading">....</span>
                         </button>
@@ -56,6 +56,7 @@
                 fixer : null ,
                 disable : false ,
                 setTime : null ,
+                exceptionInner : null ,
             }
         },
         props : {
@@ -71,11 +72,11 @@
         computed : {
             additionalException () {
                 if(this.additionalDemage == "none") {
-                    demageStore.state.exceptions.exceptionsDemage = demageStore.state.dot ;
+                    this.exceptionInner = demageStore.state.dot ;
                     this.disable = true ;
                     demageStore.state.exceptions.exceptionsDemageState = false ;
                 }else {
-                    demageStore.state.exceptions.exceptionsDemage = this.additionalDemage ;
+                    this.exceptionInner = this.additionalDemage ;
                 }
             },
             fixerId () {
@@ -125,6 +126,14 @@
                     this.getIdCode(newValue) ;
                }
                demageStore.state.exceptions.fixer_id = newValue ;
+            },
+            exceptionInner (newVal) {
+                if(!newVal.includes('-') && newVal !== "") {
+                    this.disable = false ;
+                    demageStore.state.exceptions.exceptionsDemage  = newVal ;
+                }else {
+                    this.disable = true ;
+                }
             }
         },
     }

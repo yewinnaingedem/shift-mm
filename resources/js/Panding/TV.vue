@@ -10,7 +10,7 @@
         </div>
         <div class="row">
             <div class="col-md-4">
-                <textarea class="form-control"  rows="1" v-model="demageStore.state.tv.tvDemage "></textarea>
+                <textarea class="form-control"  rows="1" v-model="tvInner"></textarea>
             </div>
             <div class="col-md-4">
                 <select class="form-select w-100" aria-label="Default select example">
@@ -26,8 +26,8 @@
                     </button>
                 </div>
                 <div class="row" v-else >
-                    <div class="col-md-6">
-                        <button class="btn btn-primary w-100" :class="{ 'disable' : disable}" @click="demageStore.dispatch('getTVDemage')" >
+                    <div class="col-md-6" :class="{ 'disable' : disable}">
+                        <button class="btn btn-primary w-100"  @click="demageStore.dispatch('getTVDemage')" :disabled="disable">
                             <span class="me-1">{{ demageStore.state.tv.paintLoading ? "Panding" : "Send" }}</span>
                             <span class="position-relative loader" v-if="demageStore.state.tv.paintLoading">....</span>
                         </button>
@@ -54,8 +54,8 @@
         data () {
             return {
                 disable : false ,
-                loading : false ,
                 setTime : null ,
+                tvInner : null ,
                 fixer : null ,
             }
         },
@@ -75,7 +75,16 @@
                     this.getIdCode(newValue) ;
                 }
                demageStore.state.tv.fixer_id = newValue ;
+            } ,
+            tvInner (newVal)      {
+                if(!newVal.includes('-') && newVal !== "")  {
+                    this.demageStore.state.tv.tvDemage = this.tvInner ;
+                    this.disable = false ;
+                }else {
+                    this.disable = true  ;
+                }
             }
+ 
         } ,
         mounted () {
             this.tv ;
@@ -89,11 +98,12 @@
         computed : {
             tv () {
                 if(this.tvDemage == "none") {
-                    demageStore.state.tv.tvDemage = demageStore.state.dot ;
+                    this.tvInner = demageStore.state.dot ;
                     this.disable = true ;
-                    demageStore.state.tv.tvDemageState = false ;
+                    this.demageStore.state.tv.tvDemageState = false ;
+                    console.log(demageStore.state.tv.tvDemageState + " computed");
                 }else {
-                    demageStore.state.tv.tvDemage = this.tvDemage ;
+                    this.tvInner = this.tvDemage ;
                 }
             }
         },
@@ -107,7 +117,7 @@
                     if(response.data.success == true ) {
                         this.demageStore.state.tv.paintLoading = true ;
                         this.setTime = response.data.timeSinceCreated ;
-                        demageStore.state.tv.tvDemageState = true ;
+                        this.demageStore.state.tv.tvDemageState = true ;
                         if(response.data.state !== 0) {
                             demageStore.state.tv.state = true ;
                         }else {
@@ -116,10 +126,9 @@
                     }else {
                         this.demageStore.state.tv.paintLoading = false ;
                         demageStore.state.tv.state = false ;
-                        demageStore.state.tv.tvDemageState = false ;
-                        
+                        this.demageStore.state.tv.tvDemageState = false ;
                     }
-                    console.log(demageStore.state.tv.tvDemageState);
+                    console.log(this.demageStore.state.tv.tvDemageState + "tvdemagestate");
                 })
                 .catch((error) => {
                     console.log(error);

@@ -81,6 +81,7 @@ const demageStore = createStore ({
                     state.bodyAndPaint.paitnLoading = true ;
                     state.showAlert = true ;
                     state.showText = response.data.message ;
+                    state.bodyAndPaint.bodyAndPaintState = true ;
                 }
             ).catch(
                 (error) => {
@@ -110,6 +111,9 @@ const demageStore = createStore ({
             }).then(
                 (response) => {
                     state.tv.paintLoading = true ;
+                    state.showAlert  = true ;
+                    state.showText = response.data.message ;
+                    state.tv.tvDemageState = true ;
                 }
             ).catch(
                 (error) => {
@@ -142,6 +146,7 @@ const demageStore = createStore ({
                     state.engine.paintLoading = true ;
                     state.showAlert = true ;
                     state.showText = response.data.message ;
+                    state.engine.engineDemageState = true ;
                 }
             ).catch(
                 (error) => {
@@ -175,6 +180,7 @@ const demageStore = createStore ({
                     state.suspension.paintLoading = true ;
                     state.showAlert = true ;
                     state.showText = response.data.message ;
+                    state.suspension.suspensionDemageState = true ;
                 }
             ).catch(
                 (error) => {
@@ -208,6 +214,7 @@ const demageStore = createStore ({
                     state.lights.paintLoading = true ;
                     state.showAlert = true ;
                     state.showText = response.data.message ;
+                    state.lights.lightDemageState  = true ;
                 }
             ).catch(
                 (error) => {
@@ -215,7 +222,7 @@ const demageStore = createStore ({
                 }
             ) ;
         },
-        haveDoneSupension({state}) {
+        haveDoneLight({state}) {
             let origin = state.lights.fixer_id + state.car_id + state.lights.lightDemage + state.licensePlate ;
             axios.put(`http://localhost:8000/api/lightsDemage/${origin}` ).then((response) => {
                 if(response.status == 200) {
@@ -241,6 +248,7 @@ const demageStore = createStore ({
                     state.exceptions.paintLoading = true ;
                     state.showAlert = true ;
                     state.showText = response.data.message ;
+                    state.exceptions.exceptionsDemageState = true ;
                 }
             ).catch(
                 (error) => {

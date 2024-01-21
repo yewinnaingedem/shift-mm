@@ -37,7 +37,7 @@ class SuspensionDemageController extends Controller
                 'fixer_id' => 'required' ,
                 'car_id' => 'required' ,
                 'suspensionDemage' => 'required' ,
-                'code_id' => 'required|unique:paint_demages'
+                'code_id' => 'required|unique:suspension_demages'
             ]
         );
         if($validator->fails()){
@@ -49,7 +49,7 @@ class SuspensionDemageController extends Controller
         $paintDemage = [] ;
         $paintDemage['fixer_id'] = $request->fixer_id ;
         $paintDemage['car_id'] = $request->car_id ;
-        $paintDemage['description'] = $request->suspensionDemage ;
+        $paintDemage['description'] = $request->suspensionDemage ;  
         
         $code_id = str_replace(" "  , '%' , $request->code_id);
         $paintDemage['code_id'] = $code_id ;
@@ -113,7 +113,7 @@ class SuspensionDemageController extends Controller
                 'success' => $check ,
                 'state' => $main->state ,
                 'timeSinceCreated' => $timeSinceCreation ,
-            ] , 200);
+            ] , 200);   
         }else {
             return response()->json([
                 'success' => $check ,

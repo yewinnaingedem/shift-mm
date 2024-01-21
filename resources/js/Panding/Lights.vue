@@ -10,7 +10,7 @@
         </div>
         <div class="row">
             <div class="col-md-4">
-                <textarea class="form-control"  rows="1" v-model="demageStore.state.lights.lightDemage"></textarea>
+                <textarea class="form-control"  rows="1" v-model="lightsInner"></textarea>
             </div>
             <div class="col-md-4">
                 <select class="form-select w-100" aria-label="Default select example">
@@ -26,14 +26,14 @@
                     </button>
                 </div>
                 <div class="row" v-else >
-                    <div class="col-md-6">
-                        <button class="btn btn-primary w-100" :class="{ 'disable' : disable}" @click="demageStore.dispatch('getLightDemage')" >
+                    <div class="col-md-6" :class="{ 'disable' : disable}">
+                        <button class="btn btn-primary w-100"  @click="demageStore.dispatch('getLightDemage')" :disabled="disable">
                             <span class="me-1">{{ demageStore.state.lights.paintLoading ? "Panding" : "Send" }}</span>
                             <span class="position-relative loader" v-if="demageStore.state.lights.paintLoading">....</span>
                         </button>
                     </div>
                     <div class="col-md-6">
-                        <button class="btn btn-danger w-100" @click="demageStore.dispatch('haveDoneSupension')">Have Done</button>
+                        <button class="btn btn-danger w-100" @click="demageStore.dispatch('haveDoneLight')">Have Done</button>
                     </div>
                 </div>
             </div>
@@ -55,6 +55,7 @@
             return {
                 fixer : null ,
                 disable : false ,
+                lightsInner : null ,
                 setTime : null ,
             }
         },
@@ -71,11 +72,11 @@
         computed : {
             ligths () {
                 if(this.lightDemage == "none") {
-                    demageStore.state.lights.lightDemage = demageStore.state.dot ;
+                    this.lightsInner = demageStore.state.dot ;
                     this.disable = true ;
                     demageStore.state.lights.lightDemageState = false ;
                 }else {
-                    demageStore.state.lights.lightDemage = this.lightDemage ;
+                    this.lightsInner = this.lightDemage ;
                 }
             },
             fixerId () {
@@ -107,6 +108,7 @@
                             
                         }else {
                             demageStore.state.lights.state = false ;   
+                            
                         }
                     }else {
                         this.demageStore.state.lights.paintLoading = false ;
@@ -121,8 +123,18 @@
         },
         watch : {
             fixer(newValue) {
-               this.getIdCode(newValue) ;
+                if(demageStore.state.lights.lightDemageState) {
+                    this.getIdCode(newValue) ;
+                }
                demageStore.state.lights.fixer_id = newValue ;
+            }, 
+            lightsInner ( newValue ) {
+                if(!newValue.includes('-') && newValue !== "" )  {
+                    demageStore.state.lights.lightDemage = this.lightsInner ;
+                    this.disable = false ;
+                }else {
+                    this.disable = true ;
+                }
             }
         }
     }
