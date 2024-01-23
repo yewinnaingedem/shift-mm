@@ -105,15 +105,16 @@
                         demageStore.state.suspension.suspensionDemageState = true ;
                         if(response.data.state !== 0) {
                             demageStore.state.suspension.state = true ;
+                            demageStore.state.suspension.suspensionDemageState = false; 
                         }else {
                             demageStore.state.suspension.state = false ;   
+                            demageStore.state.suspension.suspensionDemageState = true ;
                         }
                     }else {
                         this.demageStore.state.suspension.paintLoading = false ;
                         demageStore.state.suspension.state = false ;
                         demageStore.state.suspension.suspensionDemageState = false ;
                     }
-                    console.log(demageStore.state.suspension.suspensionDemageState);
                 })
                 .catch((error) => {
                     console.log(error);

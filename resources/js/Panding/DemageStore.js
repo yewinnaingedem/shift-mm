@@ -57,11 +57,9 @@ const demageStore = createStore ({
                 paintLoading : false ,
                 state : false ,
             } ,
-            
         }
     },
     getters : {
-        
     },
     mutations : {
         
@@ -94,6 +92,7 @@ const demageStore = createStore ({
             axios.put(`http://localhost:8000/api/paintDemage/${origin}` ).then((response) => {
                 if(response.status == 200) {
                     state.bodyAndPaint.state = true ;
+                    state.bodyAndPaint.bodyAndPaintState = false ;
                 }
             }).catch((error) => {
                 console.log(error);
@@ -126,6 +125,7 @@ const demageStore = createStore ({
             axios.put(`http://localhost:8000/api/tvDemage/${origin}` ).then((response) => {
                 if(response.status == 200) {
                     state.tv.state = true ;
+                    state.tv.tvDemageState  = false ;
                 }
                 console.log(response.status);
             }).catch((error) => {
@@ -161,6 +161,7 @@ const demageStore = createStore ({
                     state.engine.state = true ;
                     state.showAlert = true ;
                     state.showText = response.data.success ;
+                    state.engine.engineDemageState = false ;
                 }
             }).catch((error) => {
                 console.log(error);
@@ -195,6 +196,7 @@ const demageStore = createStore ({
                     state.suspension.state = true ;
                     state.showAlert = true ;
                     state.showText = response.data.success ;
+                    state.suspension.suspensionDemageState  = false ;
                 }
             }).catch((error) => {
                 console.log(error);
@@ -229,6 +231,7 @@ const demageStore = createStore ({
                     state.lights.state = true ;
                     state.showAlert = true ;
                     state.showText = response.data.success ;
+                    state.lights.lightDemageState = false ;
                 }
             }).catch((error) => {
                 console.log(error);
@@ -263,6 +266,7 @@ const demageStore = createStore ({
                     state.exceptions.state = true ;
                     state.showAlert = true ;
                     state.showText = response.data.success ;
+                    state.exceptions.exceptionsDemageState = false ;
                 }
             }).catch((error) => {
                 console.log(error);

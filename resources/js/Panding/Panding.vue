@@ -21,6 +21,7 @@
             <Lights :fixers="ligthsDemage" :lightDemage="panding.demage.lights"></Lights>
             <!-- This is for additional Exceptions -->
             <Additonal :additionalDemage="panding.demage.addition_exception" :fixers="additionals"></Additonal>
+            <showAlert></showAlert>
         </div>
         <div class="alert-container" v-if="demageStore.state.showAlert">
             <div class="alert alert-show " id="myAlert">
@@ -69,37 +70,20 @@
     import Lights from './Lights.vue';
     import Additonal from "./Additonal.vue";
     import demageStore from './DemageStore';
+    import showAlert from './showAlert.vue';
 
     export default {
         setup () {
             return {
                 demageStore ,
-                pagesTitles : [
-                    {
-                        title : 'Suspension Manipulation' ,
-                    },
-                    {
-                        title : "TV Demage" ,
-                    },
-                    {
-                        title : "Engine Maniputlation" ,
-                    },
-                    {
-                        title : "Panit And Body Demage" ,
-                    },
-                    {
-                        title : "Exception Demage" ,
-                    } ,
-                    {
-                        title : "Light Demage" ,
-                    }
-                ]
             }
         },  
         name : "Panding" ,
         data () {
             return {
                 paint : [] , 
+                
+                state : false ,
                 tvDemage : [] ,
                 engineDemage : [] ,
                 suspensions : [] ,
@@ -114,7 +98,8 @@
             Engine ,
             suspension ,
             Lights ,
-            Additonal
+            Additonal ,
+            showAlert
         },
         props : {
             panding : {
@@ -136,7 +121,6 @@
             this.licenseSet ;
         },
         computed : {
-
             bodyAndDemage () {
                 this.panding.fixers.forEach(element => {
                     if(element.specialize == this.panding.sepcializes[1].id) {
@@ -182,6 +166,19 @@
             },
             licenseSet () {
                 demageStore.state.licensePlate  = this.panding.demage.license_plate ;
+            },
+            checkValue () {
+                console.log(this.states);
+                const allTrue = Object.values(this.states).every((value) => value == true) ;
+                return allTrue ;
+            }
+        },
+        watch : {
+            states  : {
+                handler (newValue , oldValue ) {
+                    console.log(newValue , oldValue);
+                },
+                deep  :true ,
             }
         }
     }

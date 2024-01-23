@@ -123,8 +123,10 @@
                         this.setTime = response.data.timeSinceCreated ;
                         if(response.data.state !== 0) {
                             demageStore.state.bodyAndPaint.state = true ;
+                            demageStore.state.bodyAndPaint.bodyAndPaintState = false ;
                         }else {
                             demageStore.state.bodyAndPaint.state = false ;   
+                            demageStore.state.bodyAndPaint.bodyAndPaintState = true ;
                         }
                     }else {
                         this.demageStore.state.bodyAndPaint.paitnLoading = false ;

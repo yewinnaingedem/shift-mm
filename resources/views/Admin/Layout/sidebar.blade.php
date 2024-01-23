@@ -35,7 +35,7 @@
                         <i class="fa-solid fa-people-roof"></i>
                     </div>
                         Employee 
-                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    <div class="sb-sidenav-collapse-arrow"><i class="fa-solid fa-plus"></i></div>
                 </a>
                 <div class="collapse" id="employees" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
@@ -49,7 +49,7 @@
                         <i class="fa-solid fa-info"></i>
                     </div>
                         Car Info
-                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    <div class="sb-sidenav-collapse-arrow"><i class="fa-solid fa-plus"></i></div>
                 </a>
                 <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
@@ -67,7 +67,7 @@
                         <i class="fa-brands fa-searchengin"></i>
                     </div>
                         About Engine
-                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    <div class="sb-sidenav-collapse-arrow"><i class="fa-solid fa-plus"></i></div>
                 </a>
                 <div class="collapse" id="aboutEngine" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
@@ -80,7 +80,7 @@
                         <i class="fa-solid fa-car-tunnel"></i>
                     </div>
                         Car Condition 
-                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    <div class="sb-sidenav-collapse-arrow"><i class="fa-solid fa-plus"></i></div>
                 </a>
                 <div class="collapse" id="car_condition" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
@@ -97,7 +97,7 @@
                         <i class="fa-solid fa-clock"></i>
                     </div>
                         Panding State
-                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    <div class="sb-sidenav-collapse-arrow"><i class="fa-solid fa-plus"></i></div>
                 </a>
             </div>
         </div>

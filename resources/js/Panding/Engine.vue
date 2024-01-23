@@ -121,9 +121,11 @@
                         demageStore.state.engine.engineDemageState = true ;  
                         this.setTime = response.data.timeSinceCreated ;
                         if(response.data.state !== 0) {
+                            demageStore.state.engine.engineDemageState = false ;
                             demageStore.state.engine.state = true ;
                         }else {
                             demageStore.state.engine.state = false ;   
+                            demageStore.state.engine.engineDemageState = true ;
                         }
                     }else {
                         this.demageStore.state.engine.paintLoading = false ;

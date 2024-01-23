@@ -104,7 +104,6 @@
                     this.tvInner = demageStore.state.dot ;
                     this.disable = true ;
                     this.demageStore.state.tv.tvDemageState = false ;
-                    console.log(demageStore.state.tv.tvDemageState + " computed");
                 }else {
                     this.tvInner = this.tvDemage ;
                 }
@@ -123,15 +122,16 @@
                         this.demageStore.state.tv.tvDemageState = true ;
                         if(response.data.state !== 0) {
                             demageStore.state.tv.state = true ;
+                            demageStore.state.tv.tvDemageState = false ;
                         }else {
                             demageStore.state.tv.state = false ;   
+                            demageStore.state.tv.tvDemageState = true ;
                         }
                     }else {
                         this.demageStore.state.tv.paintLoading = false ;
                         demageStore.state.tv.state = false ;
                         this.demageStore.state.tv.tvDemageState = false ;
                     }
-                    console.log(this.demageStore.state.tv.tvDemageState + "tvdemagestate");
                 })
                 .catch((error) => {
                     console.log(error);

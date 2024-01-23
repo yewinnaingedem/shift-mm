@@ -104,10 +104,11 @@
                         this.setTime = response.data.timeSinceCreated ;
                         demageStore.state.exceptions.exceptionsDemageState  = true ; 
                         if(response.data.state !== 0) {
-                            
+                            demageStore.state.exceptions.exceptionsDemageState = false ;
                             demageStore.state.exceptions.state = true ;
                         }else {
                             demageStore.state.exceptions.state = false ;  
+                            demageStore.state.exceptions.exceptionsDemageState = true ;
                         }
                     }else {
                         this.demageStore.state.exceptions.paintLoading = false ;

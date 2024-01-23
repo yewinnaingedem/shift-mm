@@ -105,10 +105,10 @@
                         demageStore.state.lights.lightDemageState = true ;
                         if(response.data.state !== 0) {
                             demageStore.state.lights.state = true ;
-                            
+                            demageStore.state.lights.lightDemageState = false ;
                         }else {
                             demageStore.state.lights.state = false ;   
-                            
+                            demageStore.state.lights.lightDemageState = true ;
                         }
                     }else {
                         this.demageStore.state.lights.paintLoading = false ;
