@@ -74,6 +74,26 @@
         setup () {
             return {
                 demageStore ,
+                pagesTitles : [
+                    {
+                        title : 'Suspension Manipulation' ,
+                    },
+                    {
+                        title : "TV Demage" ,
+                    },
+                    {
+                        title : "Engine Maniputlation" ,
+                    },
+                    {
+                        title : "Panit And Body Demage" ,
+                    },
+                    {
+                        title : "Exception Demage" ,
+                    } ,
+                    {
+                        title : "Light Demage" ,
+                    }
+                ]
             }
         },  
         name : "Panding" ,
@@ -116,6 +136,7 @@
             this.licenseSet ;
         },
         computed : {
+
             bodyAndDemage () {
                 this.panding.fixers.forEach(element => {
                     if(element.specialize == this.panding.sepcializes[1].id) {

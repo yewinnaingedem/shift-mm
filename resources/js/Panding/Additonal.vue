@@ -134,6 +134,9 @@
                 }else {
                     this.disable = true ;
                 }
+                if(newVal == " ") {
+                    this.exceptionInner = demageStore.state.dot ;
+                }
             }
         },
     }

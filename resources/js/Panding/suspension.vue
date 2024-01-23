@@ -133,6 +133,9 @@
                     this.disable = false ;
                 }else {
                     this.disable = true  ;
+                } 
+                if(newVal == " ") {
+                    this.suspensionInner = demageStore.state.dot ;
                 }
             }
         },

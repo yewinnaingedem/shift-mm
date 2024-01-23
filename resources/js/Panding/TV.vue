@@ -83,6 +83,9 @@
                 }else {
                     this.disable = true  ;
                 }
+                if(newVal == " ") {
+                    this.tvInner = demageStore.state.dot ;
+                }
             }
  
         } ,

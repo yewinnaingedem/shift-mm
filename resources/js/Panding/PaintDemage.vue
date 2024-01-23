@@ -105,7 +105,9 @@
                 }else {
                     this.disable = true ;
                 }
-                console.log(this.demageStore.state.bodyAndPaint.bodyAndPaint);
+                if(newVal == " ") {
+                    this.paintDemageInner = demageStore.state.dot ;
+                }
             }
         } ,
         methods : {

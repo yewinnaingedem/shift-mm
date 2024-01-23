@@ -135,6 +135,9 @@
                 }else {
                     this.disable = true ;
                 }
+                if(newValue == " ") {
+                    this.lightsInner = demageStore.state.dot ;
+                }
             }
         }
     }
