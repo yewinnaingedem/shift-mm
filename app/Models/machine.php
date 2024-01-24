@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class machine extends Model
 {
     use HasFactory;
+
+    public $fillable = [
+        'name' ,
+        'phone' ,
+        'specialize'
+    ];
 }

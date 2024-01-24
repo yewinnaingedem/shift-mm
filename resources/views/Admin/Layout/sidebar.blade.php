@@ -99,6 +99,19 @@
                         Panding State
                     <div class="sb-sidenav-collapse-arrow"><i class="fa-solid fa-plus"></i></div>
                 </a>
+                <!-- Machines Name  -->
+                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#mechanic" aria-expanded="false" aria-controls="mechanic">
+                    <div class="sb-nav-link-icon">
+                        <i class="fa-solid fa-screwdriver-wrench"></i>                        
+                    </div>
+                        Mechanic
+                    <div class="sb-sidenav-collapse-arrow"><i class="fa-solid fa-plus"></i></div>
+                </a>
+                <div class="collapse" id="mechanic" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                    <nav class="sb-sidenav-menu-nested nav">
+                        <a class="nav-link" href="{{url('admin/mechanic')}}"> Mechanic List </a>
+                    </nav>
+                </div>
             </div>
         </div>
     </nav>

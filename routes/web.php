@@ -22,6 +22,7 @@ use App\Http\Controllers\Condition\SeatController ;
 use App\Http\Controllers\Condition\KeyController ;
 use App\Http\Controllers\Condition\SunRoofController ;
 use App\Http\Controllers\PendingStateController ;
+use App\Http\Controllers\MechanicController ;
 use App\Http\Controllers\Condition\SonarController ;
 use App\Http\Controllers\Condition\CameraController ;
 use App\Http\Controllers\Engine\EngineController ;
@@ -95,6 +96,7 @@ Route::prefix('admin')->group(function (){
         return redirect()->back() ;
     });
     Route::resource('panding_state' , PendingStateController::class );
+    Route::resource('mechanic' , MechanicController::class );
 });
 
 ?> 

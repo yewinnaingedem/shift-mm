@@ -19,7 +19,7 @@
 
 <script>
     import { ref, watch } from 'vue';
-    
+    import axios from "axios" ;
     import demageStore from './DemageStore';
     export default {
 
@@ -51,6 +51,31 @@
             };
             const submit = () => {
                 showLoading.value = true ;
+                axios.get('http://localhost:8000/api/moveToNextStep/'+ demageStore.state.car_id)
+                .then((response) => {
+                    showLoading.value = false ;
+                    swal({
+                            title: "Are you sure?",
+                            text: "You will not be able to recover this imaginary file!",
+                            type: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#DD6B55",
+                            confirmButtonText: "Yes, Move To Next Step",
+                            cancelButtonText: "No, cancel plx!",
+                            closeOnConfirm: false,
+                            closeOnCancel: false
+                        },
+                        function(isConfirm){
+                            if (isConfirm) {
+                                window.location.href = response.data.redirectRoute ;
+                            } else {
+                                swal("Cancelled", "Your imaginary file is safe :)", "error");
+                            }
+                    });
+                }).catch((error) => {
+                    demageStore.state.showAlert = true ;
+                    demageStore.state.showText = error.response.data.message ;
+                })
             }
             return {
                 testing ,

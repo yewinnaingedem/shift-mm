@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\machine ;
 use App\Models\PaintDemage ;
 use App\Models\Panding ;
+use Carbon\Carbon ;
+use App\Models\Before_Sale ;
 use App\Models\Sepcialize ;
 class pendingStateController extends Controller
 {
@@ -80,11 +82,32 @@ class pendingStateController extends Controller
         //
     }
 
+
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
         //
+    }
+
+    public function moveToNextStep ($carId) {
+        $beforeStates = [] ;
+        $exist = Before_Sale::where('car_item' , $carId)->exists() ;
+        if(!$exist) {
+            $beforeStates['car_item'] = $carId ;
+            $beforeStates['created_at'] = Carbon::now() ;
+            Before_Sale::create($beforeStates);
+            return response()->json([
+                'message' => 'You created Successfully' ,
+                'redirectRoute' => "http://localhost:8000/admin/before_sale" ,
+            ] , 200);
+        }
+        return response()->json([
+            'message' => 'You already Created For this car !!' ,
+            'redirectRoute' => "http://localhost:8000/admin/before_sale" ,
+        ] , 200);
+        
+        
     }
 }
