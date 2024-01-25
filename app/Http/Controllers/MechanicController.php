@@ -38,12 +38,18 @@ class MechanicController extends Controller
         $validator = Validator::make(
             $request->all() ,
             [
-                'name' => 'required|unique:machines' ,
+                'name' => 'required' ,
                 'phoneNumber' => ['required', 'numeric', 'min:9'] ,
                 'sepcialize' => 'required'
             ]
         );
-        
+        $exists = machine::where('specialize' , $request['sepcialize'])->where('name' , $request['name'])->exists();
+        if($exists) {
+            $validator->errors()->add('metch' , 'You already create for the rule');
+            return redirect('admin/mechanic/create')
+                ->withErrors($validator)
+                ->withInput();
+        }
         if ($validator->fails()) {
             return redirect('admin/mechanic/create')
                 ->withErrors($validator)

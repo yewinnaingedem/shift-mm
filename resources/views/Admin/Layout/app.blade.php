@@ -24,6 +24,15 @@
             .main-color {
                 color : #06CBA3 ;
             }
+            .customize {
+                top : 0 ;
+                right: 0;
+                opacity: 0;
+                transition: opacity 0.3s ease ;
+            }
+            .hoverEffect:hover  .customize {
+                opacity: 1 ; 
+            }
         </style>
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
         @yield('style')
@@ -66,5 +75,50 @@
         <script src="https://common.olemiss.edu/_js/sweet-alert/sweet-alert.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
         @yield('script')
+        <script>
+            $(document).ready(function () {
+                $(document).on('click', '.copyIcon', (e) => {
+                        let currentValue = $(e.currentTarget);
+                        currentValue.removeClass('fa-copy').addClass('fa-check');
+                        
+                        // Find the phone number text within the same parent <td> element
+                        let phoneNumber = currentValue.closest('td').find('.phoneID').text().trim();
+                        
+                        // Create a temporary <span> element to hold the text
+                        let tempElement = $('<span>').text(phoneNumber).appendTo('body').css('position', 'absolute').css('left', '-9999px');
+                        
+                        // Create a range and select the text inside the temporary <span> element
+                        let range = document.createRange();
+                        range.selectNodeContents(tempElement[0]);
+                        
+                        // Clear any existing selection and add the new range
+                        let selection = window.getSelection();
+                        selection.removeAllRanges();
+                        selection.addRange(range);
+                        
+                        // Copy the selected text to the clipboard
+                        try {
+                            document.execCommand('copy');
+                            selection.removeAllRanges();
+                            swal({
+                                title: "Auto close alert!",
+                                text: "Phone number copied to clipboard!",
+                                timer: 2000, 
+                            });
+                            setTimeout(() => {
+                                currentValue.removeClass('fa-check').addClass('fa-copy');
+                            }, 3000);
+                        } catch (err) {
+                            console.error('Unable to copy to clipboard:', err);
+                            alert('Error copying to clipboard. Please try again.');
+                        } finally {
+                            // Clean up: remove the temporary <span> element from the DOM
+                            tempElement.remove();
+                        }
+                    });
+
+
+            })
+        </script>
     </body>
 </html>

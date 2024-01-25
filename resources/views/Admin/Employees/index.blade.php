@@ -46,7 +46,14 @@
                     <tr>
                         <td> {{ $employee->name}}</td>
                         <td> {{$employee->email }}</td>
-                        <td>{{ $employee->phone }}</td>
+                        <td class="position-relative hoverEffect">
+                            <div class="w-100 fw-bold phoneID">
+                                {{$employee->phone}}
+                            </div>
+                            <div class="position-absolute h-100 customize d-flex justify-content-center align-items-center">
+                                <i class="fa-solid fa-copy copyIcon"></i>
+                            </div>
+                        </td>
                         <td>{{$employee->role}}</td>
                         <td>{{ $employee->age }}</td>
                         <td>{{ $employee->start_date }}</td>

@@ -4,17 +4,7 @@
 
 @section('style')
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
-    <style>
-        .customize {
-            top : 0 ;
-            right: 0;
-            opacity: 0;
-            transition: opacity 0.3s ease ;
-        }
-        .hoverEffect:hover  .customize {
-            opacity: 1 ; 
-        }
-    </style>
+    
 @endsection 
 
 @section('navbar') 
@@ -54,7 +44,7 @@
                 <td class="text-center">{{$machine->id}}</td>
                 <td>{{$machine->name}}</td>
                 <td class="position-relative hoverEffect">
-                    <div class="w-100 fw-bold ">
+                    <div class="w-100 fw-bold phoneID">
                         {{$machine->phone}}
                     </div>
                     <div class="position-absolute h-100 customize d-flex justify-content-center align-items-center">
@@ -104,28 +94,6 @@
     <script>
         $(document).ready(()=> {
             new DataTable('#example');
-            $(document).on('click' ,'.copyIcon' , () => {
-                var phoneNumber = $('.hoverEffect');
-                var range = document.createRange();
-                var selection = window.getSelection();
-                range.selectNodeContents(phoneNumber[0]);
-                selection.removeAllRanges();
-                selection.addRange(range);
-
-                // Attempt to copy the selected text
-                try {
-                    document.execCommand('copy');
-                    selection.removeAllRanges();
-                    swal({
-                        title: "Auto close alert!",
-                        text: "Phone number copied to clipboard!",
-                        timer: 2000 , 
-                    });
-                } catch (err) {
-                    console.error('Unable to copy to clipboard:', err);
-                    alert('Error copying to clipboard. Please try again.');
-                }
-            });
         });
     </script>
 @endsection 

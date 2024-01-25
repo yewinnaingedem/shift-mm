@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Car\Car ;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Car\Sale ;
+use App\Models\Before_Sale ;
 use App\Models\Car\Item ;
 use Carbon\Carbon ;
 
@@ -59,6 +60,7 @@ class CarSellController extends Controller
         $inputs['car_id'] = $request['id'];
         $inputs['price'] = $request['price'];
         Sale::insert($inputs);
+        Before_Sale::where('car_item', $request['id'])->delete();
         return redirect('admin/car_sells')->with('message' , 'You successfully created It');
     }
 

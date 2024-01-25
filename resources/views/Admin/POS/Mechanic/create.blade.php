@@ -4,6 +4,33 @@
 
 @section('style')
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <style>
+        .customize {
+            top : 0 ;
+            right : 0 ;
+            width : 30% ;
+            height: 25%;
+            border-radius : 5px 0px 0px 5px ;
+            overflow : hidden ;
+            animation: slideIn 0.5s forwards;
+        }
+        .p-10{
+            padding : 10px ;
+        }
+        .overflow-hidden {
+            overflow : hidden ;
+        }
+        @keyframes slideIn {
+            0% {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            100% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+    </style>
 @endsection 
 
 @section('navbar') 
@@ -14,8 +41,8 @@
 
 @section('content')
     <div class="container mt-3 pt-3" >
-        <div class="mb-2 ">
-            <figure class="text-center">
+        <div class="mb-2 position-relative">
+            <figure class="text-center overflow-hidden">
                 <blockquote class="blockquote">
                     <p>A well-known quote, contained in a blockquote element.</p>
                 </blockquote>
@@ -23,7 +50,13 @@
                     Someone famous in <cite title="Source Title">Source Title</cite>
                 </figcaption>
             </figure>
-        </div>
+            @if($errors->has('metch'))
+            <div class="position-absolute customize">
+                <div class="p-10 bg-info  fw-bold">
+                    <div class="text-success text-center">{{$errors->first('metch')}}</div>
+                </div>
+            </div>
+            @endif
         <form action="{{url('admin/mechanic')}}"  method="post">
             @csrf 
             <div class="mb-3 row">

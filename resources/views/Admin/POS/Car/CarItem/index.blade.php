@@ -112,7 +112,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="sumbit" class="btn btn-primary">Save changes</button>
+                        <button type="sumbit" class="btn btn-primary" id="disabledId" disabled >Save changes</button>
                     </div>
                 </div>
             </div>
@@ -139,12 +139,23 @@
                         <input type="hidden" name="id" value="${$data}">
                         <div class="mb-3">
                             <label for="price" class="form-label">Price For <span class="text-danger fw-bold">${$modelName}</span ><span class="fw-bold">(${$licensePlate})</span></label>
-                            <input type="number" name="price" id="price" placeholder="Enter Price" class="form-control">
+                            <input type="text" name="price" id="price" placeholder="Enter Price" class="form-control">
                         </div>
                 `;
                 $('.modal-body').html($modelContent);
             });
-
+            let priceList = $('input[name="price"]');
+            $(document).on('keyup', priceList , (e) => {
+                let price = $('input[name="price"]');
+                let inputValue = price.val().replace(/,/g, '')
+                let value = Number(inputValue).toLocaleString();
+                price.val(value);
+                if(value.length >= 9 && value.length <= 11) {
+                    $("#disabledId").prop('disabled' , false);
+                }else {
+                    $("#disabledId").prop('disabled' , true);
+                }
+            });
             $(document).on("click" , '.delete' , function (e) {
                 let deleteBtn = $(e.currentTarget);
                 let id = deleteBtn.data('id');
