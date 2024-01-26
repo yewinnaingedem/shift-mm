@@ -24,4 +24,9 @@ class GradeAndCarModelExist implements ValidationRule
                     ->where('id', '<>' , $this->existedId )
                     ->exists();
     }
+
+    public function message () 
+    {
+        return 'this is alrady taken or what ';
+    }
 }

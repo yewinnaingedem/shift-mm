@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('car_id');
             $table->timestamps();
+            $table->boolean('state')->default(0);
             $table->foreign('car_id')->references('id')->on('cars');
         });
     }

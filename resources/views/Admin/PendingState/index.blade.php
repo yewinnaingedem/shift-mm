@@ -95,7 +95,7 @@
                     </div>
                     <div class="col-md-6 text-end">
                         <label for="" class="me-1 rounded">Serch :</label>
-                        <input type="text" name="" id="" class="p-52">
+                        <input type="text" name="searchable" id="" class="p-52">
                     </div>
                 </div>
                 <hr>
@@ -107,7 +107,7 @@
             </div>
             @endif 
             @foreach($datas as $data)
-            <div class="position rounded mb-3">
+            <div class="position rounded mb-3 searchable">
                 <div class="d-flex justify-content-between align-items-center h-30 p-10">
                     <div class="d-flex flex-column justify-content-center align-itmes-center ">
                         <div class=" text-capitalize">
@@ -121,7 +121,11 @@
                         </div>
                     </div>
                     <div class="fw-bolder">
-                        Pending <span class="p_loading">.....</span>
+                        @if($data->state == 0) 
+                            Pending <span class="p_loading">.....</span>
+                        @else 
+                            <span class="fw-bold">finished </span>
+                        @endif 
                     </div>
                 </div>
                 <div class="testing d-flex justify-content-center align-items-center">
@@ -146,6 +150,22 @@
     <script>
         $(document).ready(()=> {
             new DataTable('#example');
+            let searchable  = $('input[name="searchable"]');
+            searchable.focus();
+            $(document).on('keyup' , searchable , function () {
+                let searchInput = searchable.val().toLowerCase();
+                let searchAble = $('.searchable');
+                let dataRecord = $('.fw-lighter');
+                dataRecord.each(function () {
+                    let search = $(this).text().toLowerCase();
+                    let row = $(this).parent().parent().parent() ;
+                    if(search.includes(searchInput)) {
+                        row.show();
+                    }else {
+                        row.hide();
+                    }
+                });
+            });
         });
     </script>
 @endsection 

@@ -40,6 +40,13 @@
                     allStatesAreTrue.value = Object.values(newVal).every((value) => value === false);
                     if (allStatesAreTrue.value) {
                         testing.value = true ;
+                        axios.post('http://localhost:8000/api/pendingState' , {
+                            'carId' : demageStore.state.car_id ,
+                        }).then((response) => {
+                            console.log(response);
+                        }).catch((error) => {
+                            console.log(error);
+                        });
                     } else {
                         testing.value = false ;
                     }

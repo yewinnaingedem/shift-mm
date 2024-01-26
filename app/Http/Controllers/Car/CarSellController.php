@@ -41,7 +41,6 @@ class CarSellController extends Controller
      */
     public function store(Request $request)
     {
-        
         $validator = Validator::make(
             $request->all() ,
             [
@@ -56,9 +55,10 @@ class CarSellController extends Controller
         if($existId) {
             return redirect('admin/cars')->with('message','You already Created the record');
         }
+        $cleanedValue = str_replace(',', '', $request['price']);
         $inputs = [];
         $inputs['car_id'] = $request['id'];
-        $inputs['price'] = $request['price'];
+        $inputs['price'] = $cleanedValue;
         Sale::insert($inputs);
         Before_Sale::where('car_item', $request['id'])->delete();
         return redirect('admin/car_sells')->with('message' , 'You successfully created It');
@@ -85,6 +85,7 @@ class CarSellController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        dd($request->all());    
         $validator = Validator::make(
             $request->all() ,
             [

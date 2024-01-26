@@ -16,7 +16,7 @@ class pendingStateController extends Controller
      */
     public function index()
     {
-        $datas = Panding::select('brands.brand_name','car_models.model_name','years.year','owner_books.license_plate','grades.grade' , 'pandings.car_id')
+        $datas = Panding::select('brands.brand_name','car_models.model_name','years.year','owner_books.license_plate','grades.grade' , 'pandings.car_id', 'pandings.state')
                     ->leftJoin('cars' , 'pandings.car_id','cars.id')
                     ->leftJoin('owner_books' , 'cars.owner_book_id' , 'owner_books.id')
                     ->leftJoin('car_models','owner_books.model_id','car_models.id')
@@ -35,6 +35,15 @@ class pendingStateController extends Controller
     public function create()
     {
         //
+    }
+
+    public function fixedPanding(Request $request) {
+        Panding::where('car_id',$request->carId)->update([
+            'state' => 1 ,
+        ]);
+        return response()->json([
+            'message' => "OK"
+        ], 200) ;
     }
 
     /**
@@ -98,6 +107,7 @@ class pendingStateController extends Controller
             $beforeStates['car_item'] = $carId ;
             $beforeStates['created_at'] = Carbon::now() ;
             Before_Sale::create($beforeStates);
+            Panding::where('car_id', $carId)->delete();
             return response()->json([
                 'message' => 'You created Successfully' ,
                 'redirectRoute' => "http://localhost:8000/admin/before_sale" ,

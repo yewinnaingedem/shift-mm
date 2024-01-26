@@ -19,6 +19,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 }); 
 Route::post('sarchQuery' , [ModelController::class , 'searchQuery']);
 Route::get('moveToNextStep/{carId}' , [pendingStateController::class , 'moveToNextStep']);
+Route::post('pendingState' , [pendingStateController::class , 'fixedPanding']);
 Route::resource('end-point' , GradeApiController::class);
 Route::get('default_function/{dataId}' , [GradeApiController::class , 'apiRoute']);
 Route::get('{value}' , [HoverResponseController::class , 'index']);
