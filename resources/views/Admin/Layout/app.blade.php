@@ -78,46 +78,63 @@
         <script>
             $(document).ready(function () {
                 $(document).on('click', '.copyIcon', (e) => {
-                        let currentValue = $(e.currentTarget);
-                        currentValue.removeClass('fa-copy').addClass('fa-check');
-                        
-                        // Find the phone number text within the same parent <td> element
-                        let phoneNumber = currentValue.closest('td').find('.phoneID').text().trim();
-                        
-                        // Create a temporary <span> element to hold the text
-                        let tempElement = $('<span>').text(phoneNumber).appendTo('body').css('position', 'absolute').css('left', '-9999px');
-                        
-                        // Create a range and select the text inside the temporary <span> element
-                        let range = document.createRange();
-                        range.selectNodeContents(tempElement[0]);
-                        
-                        // Clear any existing selection and add the new range
-                        let selection = window.getSelection();
+                    let currentValue = $(e.currentTarget);
+                    currentValue.removeClass('fa-copy').addClass('fa-check');
+                    
+                    // Find the phone number text within the same parent <td> element
+                    let phoneNumber = currentValue.closest('td').find('.phoneID').text().trim();
+                    
+                    // Create a temporary <span> element to hold the text
+                    let tempElement = $('<span>').text(phoneNumber).appendTo('body').css('position', 'absolute').css('left', '-9999px');
+                    
+                    // Create a range and select the text inside the temporary <span> element
+                    let range = document.createRange();
+                    range.selectNodeContents(tempElement[0]);
+                    
+                    // Clear any existing selection and add the new range
+                    let selection = window.getSelection();
+                    selection.removeAllRanges();
+                    selection.addRange(range);
+                    
+                    try {
+                        document.execCommand('copy');
                         selection.removeAllRanges();
-                        selection.addRange(range);
-                        
-                        // Copy the selected text to the clipboard
-                        try {
-                            document.execCommand('copy');
-                            selection.removeAllRanges();
-                            swal({
-                                title: "Auto close alert!",
-                                text: "Phone number copied to clipboard!",
-                                timer: 2000, 
-                            });
-                            setTimeout(() => {
-                                currentValue.removeClass('fa-check').addClass('fa-copy');
-                            }, 3000);
-                        } catch (err) {
-                            console.error('Unable to copy to clipboard:', err);
-                            alert('Error copying to clipboard. Please try again.');
-                        } finally {
-                            // Clean up: remove the temporary <span> element from the DOM
-                            tempElement.remove();
+                        swal({
+                            title: "Auto close alert!",
+                            text: "Phone number copied to clipboard!",
+                            timer: 2000, 
+                        });
+                        setTimeout(() => {
+                            currentValue.removeClass('fa-check').addClass('fa-copy');
+                        }, 3000);
+                    } catch (err) {
+                        alert('Error copying to clipboard. Please try again. ' , err);
+                    } finally {
+                        tempElement.remove();
+                    }
+                });
+                let routeSearch = $('input[name="routeSearch"]');
+                $(document).on('keyup', routeSearch , function () {
+                    let search = routeSearch.val().toLowerCase();
+                    let record = $('.nav-link');
+                    $('#dataSuggest').empty();
+                    let addedValues = {}; // Object to keep track of added values
+                    record.each(function () {
+                        let value = $(this).text().toLowerCase().trim();
+                        let href = $(this).attr('href');
+                        if(value.includes(search) && !addedValues[value] && search !== "") { // Check if value is not already added
+                            addedValues[value] = true; // Mark value as added
+                            let innerLi = `
+                                <li class="list-group-item">
+                                    <a href="${href}" class="nav-link d-flex justify-content-between align-items-center">
+                                        ${$(this).html()} 
+                                    </a>
+                                </li>
+                            ` ;
+                            $('#dataSuggest').append(innerLi);
                         }
                     });
-
-
+                });
             })
         </script>
     </body>

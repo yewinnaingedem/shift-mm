@@ -18,6 +18,12 @@
         .cursor-not-allowed {
             cursor : not-allowed ;
         }
+        .img .imagePreview {
+            transition : transform 0.3s ease ;
+        }
+        .img:hover .imagePreview{
+            transform: scale(1.1); /* Scale the image on hover */
+        }
     </style>
 @endsection 
 
@@ -43,7 +49,7 @@
                                 <div class="text-center fw-bold">Font Images </div>
                             </div>
                             <div class="car-body ">
-                                <div class="card-main bg-dark d-flex justify-content-center align-items-center img1">
+                                <div class="card-main bg-dark d-flex justify-content-center align-items-center img img1">
                                     <p class="text-white">Please Chose Here</p>
                                 </div>
                             </div>
@@ -59,7 +65,7 @@
                                 <div class="text-center fw-bold">Back Images </div>
                             </div>
                             <div class="car-body ">
-                                <div class="card-main bg-dark d-flex justify-content-center align-items-center img2">
+                                <div class="card-main bg-dark d-flex justify-content-center align-items-center img img2">
                                     <p class="text-white">Please Chose Here</p>
                                 </div>
                             </div>
@@ -75,7 +81,7 @@
                                 <div class="text-center fw-bold">Side Images </div>
                             </div>
                             <div class="car-body ">
-                                <div class="card-main bg-dark d-flex justify-content-center align-items-center img3">
+                                <div class="card-main bg-dark d-flex justify-content-center img align-items-center img3">
                                     <p class="text-white">Please Chose Here</p>
                                 </div>
                             </div>
@@ -91,7 +97,7 @@
                                 <div class="text-center fw-bold">Side Images </div>
                             </div>
                             <div class="car-body ">
-                                <div class="card-main bg-dark d-flex justify-content-center align-items-center img4">
+                                <div class="card-main bg-dark d-flex justify-content-center img align-items-center img4">
                                     <p class="text-white">Please Chose Here</p>
                                 </div>
                             </div>
@@ -107,7 +113,7 @@
                                 <div class="text-center fw-bold">Inside 1 Images </div>
                             </div>
                             <div class="car-body ">
-                                <div class="card-main bg-dark d-flex justify-content-center align-items-center img5">
+                                <div class="card-main bg-dark d-flex justify-content-center img align-items-center img img5">
                                     <p class="text-white">Please Chose Here</p>
                                 </div>
                             </div>
@@ -123,7 +129,7 @@
                                 <div class="text-center fw-bold">Inside 2 Images </div>
                             </div>
                             <div class="car-body ">
-                                <div class="card-main bg-dark d-flex justify-content-center align-items-center img6">
+                                <div class="card-main bg-dark d-flex justify-content-center align-items-center img img6">
                                     <p class="text-white">Please Chose Here</p>
                                 </div>
                             </div>
@@ -139,7 +145,7 @@
                                 <div class="text-center fw-bold">OUt Images </div>
                             </div>
                             <div class="car-body ">
-                                <div class="card-main bg-dark d-flex justify-content-center align-items-center img7">
+                                <div class="card-main bg-dark d-flex justify-content-center align-items-center img img7">
                                     <p class="text-white">Please Chose Here</p>
                                 </div>
                             </div>
@@ -155,7 +161,7 @@
                                 <div class="text-center fw-bold">Wheel Images </div>
                             </div>
                             <div class="car-body ">
-                                <div class="card-main bg-dark d-flex justify-content-center align-items-center img8">
+                                <div class="card-main bg-dark d-flex justify-content-center align-items-center img img8">
                                     <p class="text-white">Please Chose Here</p>
                                 </div>
                             </div>
@@ -234,7 +240,7 @@
                 if(input.files && input.files[0]) {
                     var render = new FileReader() ;
                     render.onload = function (e) {
-                        var image = ` <img id="imagePreview" class="object-fit-cover rounded" src="${e.target.result}" alt="Selected Photo" width="100%" height="100%"> ` ;
+                        var image = ` <img id="imagePreview" class="object-fit-cover imagePreview rounded" src="${e.target.result}" alt="Selected Photo" width="100%" height="100%"> ` ;
                         img1.append(image);
                     }
                     render.readAsDataURL(input.files[0]);
@@ -248,7 +254,7 @@
                 if(input.files && input.files[0]) {
                     var render = new FileReader() ;
                     render.onload = function (e) {
-                        var image = ` <img id="imagePreview" class="object-fit-cover rounded" src="${e.target.result}" alt="Selected Photo" width="100%" height="100%"> ` ;
+                        var image = ` <img id="imagePreview" class="object-fit-cover imagePreview rounded" src="${e.target.result}" alt="Selected Photo" width="100%" height="100%"> ` ;
                         img2.append(image);
                     }
                     render.readAsDataURL(input.files[0]);
@@ -262,7 +268,7 @@
                 if(input.files && input.files[0]) {
                     var render = new FileReader() ;
                     render.onload = function (e) {
-                        var image = ` <img id="imagePreview" class="object-fit-cover rounded" src="${e.target.result}" alt="Selected Photo" width="100%" height="100%"> ` ;
+                        var image = ` <img id="imagePreview" class="object-fit-cover imagePreview rounded" src="${e.target.result}" alt="Selected Photo" width="100%" height="100%"> ` ;
                         img3.append(image);
                     }
                     render.readAsDataURL(input.files[0]);
@@ -276,7 +282,7 @@
                 if(input.files && input.files[0]) {
                     var render = new FileReader() ;
                     render.onload = function (e) {
-                        var image = ` <img id="imagePreview" class="object-fit-cover rounded" src="${e.target.result}" alt="Selected Photo" width="100%" height="100%"> ` ;
+                        var image = ` <img id="imagePreview" class="object-fit-cover imagePreview rounded" src="${e.target.result}" alt="Selected Photo" width="100%" height="100%"> ` ;
                         img4.append(image);
                     }
                     render.readAsDataURL(input.files[0]);
@@ -289,7 +295,7 @@
                 if(input.files && input.files[0]) {
                     var render = new FileReader() ;
                     render.onload = function (e) {
-                        var image = ` <img id="imagePreview" class="object-fit-cover rounded" src="${e.target.result}" alt="Selected Photo" width="100%" height="100%"> ` ;
+                        var image = ` <img id="imagePreview" class="object-fit-cover imagePreview rounded" src="${e.target.result}" alt="Selected Photo" width="100%" height="100%"> ` ;
                         img5.append(image);
                     }
                     render.readAsDataURL(input.files[0]);
@@ -303,7 +309,7 @@
                 if(input.files && input.files[0]) {
                     var render = new FileReader() ;
                     render.onload = function (e) {
-                        var image = ` <img id="imagePreview" class="object-fit-cover rounded" src="${e.target.result}" alt="Selected Photo" width="100%" height="100%"> ` ;
+                        var image = ` <img id="imagePreview" class="object-fit-cover imagePreview rounded" src="${e.target.result}" alt="Selected Photo" width="100%" height="100%"> ` ;
                         img6.append(image);
                     }
                     render.readAsDataURL(input.files[0]);
@@ -317,7 +323,7 @@
                 if(input.files && input.files[0]) {
                     var render = new FileReader() ;
                     render.onload = function (e) {
-                        var image = ` <img id="imagePreview" class="object-fit-cover rounded" src="${e.target.result}" alt="Selected Photo" width="100%" height="100%"> ` ;
+                        var image = ` <img id="imagePreview" class="object-fit-cover imagePreview rounded" src="${e.target.result}" alt="Selected Photo" width="100%" height="100%"> ` ;
                         img7.append(image);
                     }
                     render.readAsDataURL(input.files[0]);
@@ -330,7 +336,7 @@
                 if(input.files && input.files[0]) {
                     var render = new FileReader() ;
                     render.onload = function (e) {
-                        var image = ` <img id="imagePreview" class="object-fit-cover rounded" src="${e.target.result}" alt="Selected Photo" width="100%" height="100%"> ` ;
+                        var image = ` <img id="imagePreview" class="object-fit-cover imagePreview rounded" src="${e.target.result}" alt="Selected Photo" width="100%" height="100%"> ` ;
                         img8.append(image);
                     }
                     render.readAsDataURL(input.files[0]);

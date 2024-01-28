@@ -32,6 +32,7 @@ use App\Http\Controllers\Car\CarImageItemController ;
 use App\Http\Controllers\Car\SoldOutController ;
 use App\Http\Controllers\Car\DefaultFunctionController;
 use App\Http\Controllers\Car\licenseStateController;
+use App\Http\Controllers\AdminDashBoardController;
 use App\Http\Controllers\BeforeSaleController ;
 use App\Http\Controllers\paintDemageController ;
 
@@ -58,6 +59,7 @@ Route::prefix('mm_cars')->group(function () {
 });
 
 Route::prefix('admin')->group(function (){
+    Route::get('dashbord' , [AdminDashBoardController::class , 'index']);
     Route::get('/' , [AdminAuthController::class , 'index']);
     Route::get('add-cars' , [AdminAuthController::class , 'addCars'] );
     Route::get('car-info' , [AdminAuthController::class , 'carInfo']);

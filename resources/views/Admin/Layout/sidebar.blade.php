@@ -2,6 +2,13 @@
     <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
         <div class="sb-sidenav-menu">
             <div class="nav">
+                <!-- Admin Dashbord -->
+                <a class="nav-link" href="{{url('admin/dashbord')}}">
+                    <div class="sb-nav-link-icon">
+                        <i class="fa-solid fa-person"></i>
+                    </div>
+                    Admin Dashbord  
+                </a>
                 <!-- adding car -->
                 <a class="nav-link" href="{{url('admin/add-cars')}}">
                     <div class="sb-nav-link-icon">

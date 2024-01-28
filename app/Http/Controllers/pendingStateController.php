@@ -99,6 +99,14 @@ class pendingStateController extends Controller
     {
         //
     }
+    public function pandingState(Request $request) {
+        Panding::where('car_id',$request->carId)->update([
+            'state' => 0 ,
+        ]);
+        return response()->json([
+            'message' => "OK"
+        ], 200) ;
+    }
 
     public function moveToNextStep ($carId) {
         $beforeStates = [] ;

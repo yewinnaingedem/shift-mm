@@ -187,7 +187,7 @@
                                     @endif 
                                 </label>
                             </div>
-                            <div class="flex-1">
+                            <!-- <div class="flex-1">
                                     <div class="custom-select-wrapper">
                                         <input type="text" name="model" class="d-none" >
                                         <div class="select-header cursor-not-allowed">
@@ -202,10 +202,25 @@
                                 @if($errors->has('make'))
                                     <p class="text-danger">{{ $errors->first('make')}} </p>
                                 @endif 
+                            </div> -->
+                            <div class="flex-1">
+                                <label class="w-full ">
+                                    <div class="wrapper  d-flex justify-content-center align-items-center px-10">
+                                        <select name="model" class="" id="brand" >
+                                            <option selected class="d-none">Chose Model</option>
+                                        </select>
+                                        <div class="">
+                                            <i class="fa-solid fa-caret-down"></i>
+                                        </div>
+                                    </div>
+                                    @if($errors->has('make'))
+                                        <p class="text-danger">{{ $errors->first('make')}} </p>
+                                    @endif 
+                                </label>
                             </div>
                             
                             <div class="flex-1 wrapper active h-50" >
-                                <button class="w-full disabled cursor-not-allowed"  id="Year"  type="submit">
+                                <button class="w-full disabled  cursor-not-allowed"  disabled id="Year"  type="submit">
                                     Get Started
                                 </button>
                             </div>
@@ -226,12 +241,9 @@
         $(document).ready(()=>{
             let $model_year = $('select[name="model_year"]');
             let $make = $('select[name="make"]');
-            let $model = $('input[name="model"] ');
+            let $model = $('select[name="model"] ');
             let opitonSelected = $('.select-options');
-            const $selectWrapper = $('.custom-select-wrapper');
-            const $selectHeader = $selectWrapper.find('.select-header');
-            const $selectOptions = $selectWrapper.find('.select-options');
-            const $selectedModel = $selectWrapper.find('#selectedModel');
+            
             $model_year.on('change' , ()=> {
                 if($model_year.val() !== '') {
                     $make.prop('disabled' , false );
@@ -239,8 +251,6 @@
                 }
             });
             $make.on('change',()=> {
-                // $model.val('');
-                $selectedModel.text('Chose Model');
                 opitonSelected.empty();
                 $('#model option:not(:first-child)').remove();
                 $.ajax({
@@ -250,16 +260,18 @@
                         "_token" : "{{csrf_token()}}"
                     },
                     success : (res) => {
+                        $('select[name="model"]').empty();
                         if(res.response.length !== 0) {
                             let $innerHtml = `
+                                            <option class="d-none" selected>Chose Model </option>
                                             ${res.response.map(item => `
-                                                <li class="option" data-id="${item.id}">${item.model_name}</li>
+                                                <option value="${item.id}">${item.model_name}</option>
                                             `).join('')}
-                                            <li class="option">
-                                                <a href="{{url('admin/car_models/create')}}">add new</a>
-                                            </li>
                                         `;      
-                            opitonSelected.append($innerHtml);
+                            $('select[name="model"]').append($innerHtml);
+                            $('.disable').prop('disabled' , false);
+                            $('.active').css('background' , 'white');
+                            $('.disabled').addClass('cursor-not-allowed');
                         }else {
                             swal({
                                     title: "Are you sure?",
@@ -288,35 +300,13 @@
                     }
                 });
             });
-            
-            // change () ;
-            // function change () {
-            //     if($model.val() == '') {
-            //         console.log('hi');
-            //         $('.disabled').addClass('cursor-not-allowed');
-            //         $('.disabled').prop('disabled' , true) ;
-            //     }else {
-            //         $('.disabled').prop('disabled' , false) ;
-            //         $('.disabled').removeClass('cursor-not-allowed');
-            //         $('.active').css('background' , '#06CBA3');
-            //     }
-            // }
-
-            $selectHeader.on('click', function() {
-                $selectOptions.toggle();
-            });
-
-            $selectOptions.on('click', 'li', function(e) {
-                const getData = $(e.currentTarget);
-                const id = getData.data('id');
-                const selectedOption = $(this).text();
-                $selectedModel.text(selectedOption);
-                $model.val(id) ;
-                $selectOptions.hide();
-            });
-            
-            $model.on('change',function () {
-                console.log('hi');
+            $model.on('change', ()=> {
+                let $value = $model.val();
+                if($value !== "Chose Model") {
+                    $('.disabled').prop('disabled' , false) ;
+                    $('.disabled').removeClass('cursor-not-allowed');
+                    $('.active').css('background' , '#06CBA3');
+                }
             });
         });
     </script>

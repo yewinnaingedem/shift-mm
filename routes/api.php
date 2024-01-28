@@ -43,3 +43,4 @@ Route::post('lightsDemage/codeApi' , [LightsDemageController::class , 'checkApi'
 // for AdditionalDemage
 Route::apiResource('additionalDemage' , AdditionalDemageController::class);
 Route::post('additionalDemage/codeApi' , [AdditionalDemageController::class , 'checkApi']);
+Route::post('pendingStateCheck' , [pendingStateController::class , 'pandingState']);

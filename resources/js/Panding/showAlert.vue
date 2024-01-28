@@ -49,6 +49,13 @@
                         });
                     } else {
                         testing.value = false ;
+                         axios.post('http://localhost:8000/api/pendingStateCheck' , {
+                            'carId' : demageStore.state.car_id ,
+                        }).then((response) => {
+                            console.log(response);
+                        }).catch((error) => {
+                            console.log(error);
+                        });
                     }
                 },
                 { deep: true }
