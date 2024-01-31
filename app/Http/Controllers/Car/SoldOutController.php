@@ -59,6 +59,7 @@ class SoldOutController extends Controller
         $buyer['phone'] = $request['phone_number'] ;
         $buyer['purchase_price'] = $request['purchase_price'] ;
         $buyer['address'] = $request['address'] ;
+        
         $buyerId = Buyer::insertGetId($buyer);
 
         $hps = [];
@@ -86,7 +87,9 @@ class SoldOutController extends Controller
         $soldOuts['employee_id'] = $request['employee'];
         $soldOuts['car_id'] = $request['id'];
         $soldOuts['buyer_id'] = $buyerId;
-        $soldOuts['created_at'] = Carbon::now();
+        $soldOuts['currentMonth'] = Carbon::now()->format('Y-m');
+        $soldOuts['created_at'] = carbon::today()->toDateString();
+        $soldOuts['updated_at'] = carbon::today()->toDateString();
         $soldOuts['hire_purchase_id'] = $hp_id;
 
         SoldOut::insertGetId($soldOuts);

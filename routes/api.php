@@ -12,6 +12,7 @@ use App\Http\Controllers\SuspensionDemageController ;
 use App\Http\Controllers\pendingStateController ;
 use App\Http\Controllers\EngineDemageController ;
 use App\Http\Controllers\LightsDemageController ;
+use App\Http\Controllers\ChartController ;
 use App\Http\Controllers\AdditionalDemageController ;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -44,3 +45,5 @@ Route::post('lightsDemage/codeApi' , [LightsDemageController::class , 'checkApi'
 Route::apiResource('additionalDemage' , AdditionalDemageController::class);
 Route::post('additionalDemage/codeApi' , [AdditionalDemageController::class , 'checkApi']);
 Route::post('pendingStateCheck' , [pendingStateController::class , 'pandingState']);
+Route::get('Google/coreChart' , [ChartController::class , 'coreChart'] );
+Route::get('Google/checkMonthly' , [ChartController::class , 'monthlyChart']);

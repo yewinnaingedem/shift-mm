@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('buyer_id');
             $table->unsignedBigInteger('hire_purchase_id');
             $table->unsignedBigInteger('broker_id')->nullable();
+            $table->integer('currentMonth');
             $table->timestamps();
 
             $table->foreign('employee_id')->references('id')->on('employees');
