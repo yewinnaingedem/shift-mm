@@ -32,9 +32,11 @@ class ChartController extends Controller
         $currentYear = Carbon::now()->year ;
         $months = collect();
         for ($month = 1 ; $month <= $currentMonth ; $month++) {
-            $monthly = $currentYear."-0".$currentMonth ;  
+            
+            $date = Carbon::now()->startOfMonth()->subMonths($currentMonth - $month);
+            $monthly = $date->format('Y-m');
             $yearMonth = SoldOut::where('currentMonth' , $monthly)->count();
-            $months->put($month , $yearMonth);
+            $months->put($monthly , $yearMonth);
         }
         return response()->json([
             'data' => $months ,

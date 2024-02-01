@@ -33,12 +33,23 @@
             .hoverEffect:hover  .customize {
                 opacity: 1 ; 
             }
+            .loader {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 0;
+                height: 4px; /* or adjust as needed */
+                background-color: #007bff; /* or any color you prefer */
+                transition: width 0.3s ease;
+                z-index: 9999; /* Ensure it appears above other content */
+            }
         </style>
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
         @yield('style')
     </head>
     <body class="sb-nav-fixed hidden">
         <!-- navBar -->
+        <div id="loader" class="loader"></div>
         @section('navbar') 
             @include('Admin.Layout.navbar')
         @show 
@@ -77,6 +88,17 @@
         @yield('script')
         <script>
             $(document).ready(function () {
+                showLoader() ;
+                $(window).on('load', function() {
+                    hideLoader() ;
+                });
+
+                function showLoader () {
+                    $('#loader').css('width' , '100%') ;
+                }
+                function hideLoader () {
+                    $('#loader').css('display' , 'none') ;
+                }
                 $(document).on('click', '.copyIcon', (e) => {
                     let currentValue = $(e.currentTarget);
                     currentValue.removeClass('fa-copy').addClass('fa-check');

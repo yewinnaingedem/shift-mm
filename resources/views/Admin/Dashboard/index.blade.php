@@ -105,19 +105,19 @@
                             Saled Car For Today 
                         </div>
                         <div class="fw-bold  fs-18">
-                            12
+                            {{ $todaySold }}
                         </div>
                     </div>
                 </div>
                 <div class="position-absolute top-0 right-0 d-cusotmize w-25 h-100 bg-color rounded">
-                    <div class=" d-flex justify-content-center w-100 h-100 align-items-center  ">
+                    <a href="{{url('admin/dashboard/saledFor2Day')}}" class="text-decoration-none d-flex justify-content-center w-100 h-100 align-items-center ">
                         <div class="fw-bold me-2">
                             See 
                         </div>
                         <div class="">
                             <i class="fa-solid fa-forward"></i>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 
             </div>

@@ -60,6 +60,7 @@ Route::prefix('mm_cars')->group(function () {
 
 Route::prefix('admin')->group(function (){
     Route::get('dashbord' , [AdminDashBoardController::class , 'index']);
+    Route::get('dashboard/saledFor2Day' , [AdminDashBoardController::class , "SaledFor2Day"]);
     Route::get('/' , [AdminAuthController::class , 'index']);
     Route::get('add-cars' , [AdminAuthController::class , 'addCars'] );
     Route::get('car-info' , [AdminAuthController::class , 'carInfo']);
