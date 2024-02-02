@@ -7,6 +7,9 @@
         .cursor-pointer {
             cursor: pointer;
         }
+        .sale-agreement {
+            line-height: 1.6;
+        }
     </style>
 @endsection 
 
@@ -32,6 +35,7 @@
             </div>
         </div>
         <div class="card-contaier mt-3">
+            @foreach($todaySoldes as soldOut)
             <div class="card bg-warning shadow">
                 <div class="card-header fw-bold">
                     <div class="row">
@@ -39,7 +43,7 @@
                             2012 / Accent / 5Q-1589 
                         </div>
                         <div class="col-md-6 text-end">
-                            2024 / 02 / 01 
+                            {{ $soldOut->created_at }}
                         </div>
                     </div>
                 </div>
@@ -49,19 +53,19 @@
                             Yoma HP with 30% Downpayment within 5 years 
                         </h5>
                         <p class="card-text">
-                            <div>
-                                U Soe Thiha Naung saled this car Deposit 10000 Lakhs death line 2024-5-15  <span class="seeMore cursor-pointer">....see more<i class="fa-solid fa-chevron-down"></i></span>
-                            </div>
-                            <div class="main-content d-none">
-                                <ul class="text-white">
-                                    <li>Font Bumper</li>
-                                    <li>TV</li>
-                                    <li>Aircon Back</li>
-                                    <li>Suspension</li>
-                                </ul>
-                                <div class="fw-bold">
-                                    Agreed with U Soe Thi Ha Aung 
+                            <div class="sale-agreement">
+                                Mr. U Soe Thiha Naung, represented by broker Mr. Kyaw Min Htike, 
+                                and ABC Motors have agreed to the purchase of a <span class="fw-semibold"> 2023 Toyota Camry, silver in color, </span>
+                                equipped with additional features including a <span class="fw-semibold">front bumper, TV, air conditioning, and back suspension.</span>
+                                <span class="seeMore cursor-pointer">....see more<i class="fa-solid fa-chevron-down"></i></span>
+                                <div class="main-content d-none">
+                                ABC Motors has made a deposit of <span class="fw-semibold">10000</span> Lakhs to secure the transaction until the deadline of
+                                <span class="fw-bold"> May 15, 2024. </span>
+                                Both parties commit to honoring the terms of the agreement, with Mr. Kyaw Min Htike facilitating the transaction and
+                                serving as a point of contact for any inquiries.
                                 </div>
+                                
+                                
                             </div>
                         </p>
                     </div>
@@ -72,6 +76,7 @@
                     </div>
                 </div>
             </div>
+            @endforeach
         </div>
     </div>
 @endsection 
@@ -87,11 +92,15 @@
             $(document).on('click' , '.seeMore' , function (e) {
                 let currentTarget = $(e.currentTarget);
                 currentTarget.toggleClass('d-none');
-                var mainContent = currentTarget.parent().parent().find('.main-content').toggleClass('d-none');
+                var mainContent = currentTarget.parent().find('.main-content').toggleClass('d-none');
                 if(mainContent.hasClass('d-none')) {
                     mainContent.slideDown();
                 }
             });
+            let mainContent = $('.main-content');
+            if(mainContent.text().length > 300) {
+
+            }
         });
     </script>    
 @endsection 

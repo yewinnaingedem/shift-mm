@@ -8,6 +8,9 @@
         .p-10 {
             padding : 10px ;
         }
+        .p-customize {
+            padding : 0px 15px ;
+        }
     </style>
 @endsection 
 
@@ -26,8 +29,8 @@
                     <p class="h3">Mingalar Car Sale Center </p>
                 </div>
                 <div class="col-md-3 text-end">
-                    <select name="employee" class="form-select" width="50%" >
-                        <option selected class="d-none">Who Sell This Car?</option>
+                    <select name="employee" class="form-select check-valid " width="50%" placeholder="Who Sale This Car ?" aria-label="Default select example">
+                        <option selected class="d-none">Who sell it ?</option>
                         @foreach($employees as $employee)
                             <option value="{{$employee->id}}">{{$employee->name}}</option>
                         @endforeach
@@ -39,7 +42,7 @@
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label for="buyer" class="form-label">Buyer Name</label>
-                    <input type="text" class="form-control" name="buyer" placeholder="Enter Buyer Name">
+                    <input type="text" class="form-control check-valid" name="buyer" placeholder="Enter Buyer Name">
                     @if($errors->has('name'))
                         <p class="text-danger">{{$errors->first('name')}}</p>
                     @endif 
@@ -50,11 +53,11 @@
                 </div>
                 <div class="col-md-6 mb-3">
                     <label class="form-label" for="purchase">Saled Price</label>
-                    <input type="number" name="purchase_price" id="purchase" class="form-control">
+                    <input type="number" name="purchase_price" id="purchase" class="form-control check-valid">
                 </div>
                 <div class="col-md-6 mb-3">
                     <label class="form-label" for="origin_price">Phone Number</label>
-                    <input type="number" class="form-control" name="phone_number" placeholder="Enter Phone Number">
+                    <input type="number" class="form-control" name="phone_number" placeholder="Enter Phone Number check-valid">
                 </div>
                     <div class="col-md-6 mb-3">
                     <label for="address" class="form-label">Enter Address</label>
@@ -75,7 +78,7 @@
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <select name="hp" id="hp" class="form-select">
+                                        <select name="hp" id="hp" class="form-select check-valid">
                                             <option class="d-none" selected>Enter Loan Plan</option>
                                             @foreach($hps as $hp)
                                                 <option value="{{$hp->id}}">{{$hp->hp_loan}}</option>
@@ -83,7 +86,7 @@
                                         </select>
                                     </div>
                                     <div class="col-md-6">
-                                        <input type="text" name="present" value="50" class="form-control bg-dark text-white" placeholder="Enter Parsent">
+                                        <input type="text" name="present" value="50" class="form-control check-valid bg-dark text-white" placeholder="Enter Parsent">
                                     </div>
                                 </div>
                             </div>
@@ -93,7 +96,7 @@
                                 <label class="form-label" for="hp">Downpayment</label>
                             </div>
                             <div class="col-md-6">
-                                <input type="text" name="downpayment" class="form-control fw-bold" placeholder="Enter Downpayment">
+                                <input type="text" name="downpayment" class="form-control check-valid fw-bold" placeholder="Enter Downpayment">
                             </div>
                         </div>
                         <div class="row mb-2">
@@ -101,7 +104,7 @@
                                 <label class="form-label" for="hp">Insurance</label>
                             </div>
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="insurance" placeholder="Enter Insurance">
+                                <input type="text" class="form-control check-valid" name="insurance" placeholder="Enter Insurance">
                             </div>
                         </div>
                         <div class="row mb-2">
@@ -109,7 +112,7 @@
                                 <label class="form-label" for="hp">Bank Commission</label>
                             </div>
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="bankCommission" placeholder="Enter Bank Commission">
+                                <input type="text" class="form-control check-valid" name="bankCommission" placeholder="Enter Bank Commission">
                             </div>
                         </div>
                         <div class="row mb-2">
@@ -117,7 +120,7 @@
                                 <label class="form-label" for="hp">Service Charge</label>
                             </div>
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="serviceCharge" placeholder="Enter Service Charge">
+                                <input type="text" class="form-control check-valid" name="serviceCharge" placeholder="Enter Service Charge">
                             </div>
                         </div>
                         <div class="row mb-2">
@@ -135,10 +138,10 @@
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <input type="text" class="form-control fw-bold" name="loanamount" placeholder="Enter Loan Lenght">
+                                        <input type="text" class="form-control check-valid fw-bold" name="loanamount" placeholder="Enter Loan Lenght">
                                     </div>
                                     <div class="col-md-6">
-                                        <input type="text" name="monthly"  value="60" class="form-control bg-dark text-white fw-bold" placeholder="Enter Months Only">
+                                        <input type="text" name="monthly"  value="60" class="form-control check-valid bg-dark text-white fw-bold" placeholder="Enter Months Only">
                                     </div>
                                 </div>
                             </div>
@@ -187,11 +190,52 @@
                         Go Back
                     </a>
                 </div>
-                <div class="col-md-6 text-end btn-width">
-                    <button class="btn btn-primary">Sumbit</button>
+                <div class="col-md-6 text-end btn-width mb-3">
+                    <button type="button" class="btn btn-primary " id="clickCheck" >
+                        Sumbit
+                    </button>
                 </div>
             </div>
         </form>
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="" method="post">
+                    @csrf 
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="" class="form-label">Deposit</label>
+                                <input type="text" name="" id="" placeholder="Enter Deposit" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="" class="form-label">Final Deposit</label>
+                            <input type="date" name="" class="form-control" placeholder="Enter Final Deposit" id="">
+                        </div>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+                        <label for="floatingTextarea">Noted </label>
+                    </div>
+                </form>
+            </div>
+            <div class="mb-3 row p-customize">
+                <div class="col-md-6 text-start ">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+                <div class="col-md-6 text-end">
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
     </div>
 @endsection 
 
@@ -201,4 +245,28 @@
 
 @section('script')
     <script src="{{asset('storage/admin/js/sold-out.js')}}"></script>
+    <script>
+        $(document).ready(()=> {
+            let checkValue = false ;
+            function checkValid () {
+                let valid  = $('.check-valid');
+                valid.each(function (index , element) {
+                    var value = element.value ;
+                    if(value.trim() == "") {
+                        $(element).addClass('is-invalid');
+                        checkValue = false ;
+                    }else {
+                        $(element).removeClass('is-invalid');
+                        checkValue = true ;
+                    }
+                });
+            }
+            $('#clickCheck').click(function() {
+                checkValid()
+                if(checkValue) {
+                    $('#exampleModal').modal('show');
+                }
+            });
+        });
+    </script>
 @endsection 
