@@ -11,6 +11,42 @@
         .p-customize {
             padding : 0px 15px ;
         }
+        .overflow-hidden {
+            overflow: hidden;   
+        }
+        .loading-bar {
+            position: relative;
+            top: 0;
+            display: none;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background-color: transparent;
+            border-radius : 15px ;
+            overflow: hidden;
+        }
+        .loading-bar--active::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 30%;
+            height: 4px;
+            background-color: #ff5151;
+            animation: moveLoadBar 2s cubic-bezier(0.09, 0.89, 0.7, 0.71) infinite;
+        }
+
+        @keyframes moveLoadBar {
+            0% {
+                left: -10%;
+            }
+            100% {
+                left: 110%;
+            }
+        }
+        .m-0 {
+            margin-bottom : 0px  !important ;
+        }
     </style>
 @endsection 
 
@@ -29,7 +65,7 @@
                     <p class="h3">Mingalar Car Sale Center </p>
                 </div>
                 <div class="col-md-3 text-end">
-                    <select name="employee" class="form-select check-valid " width="50%" placeholder="Who Sale This Car ?" aria-label="Default select example">
+                    <select name="employee" class="form-select select-valid " width="50%" >
                         <option selected class="d-none">Who sell it ?</option>
                         @foreach($employees as $employee)
                             <option value="{{$employee->id}}">{{$employee->name}}</option>
@@ -53,15 +89,15 @@
                 </div>
                 <div class="col-md-6 mb-3">
                     <label class="form-label" for="purchase">Saled Price</label>
-                    <input type="number" name="purchase_price" id="purchase" class="form-control check-valid">
+                    <input type="text" name="purchase_price" id="purchase" class="form-control check-valid" placeholder="Enter Purchase Price">
                 </div>
                 <div class="col-md-6 mb-3">
                     <label class="form-label" for="origin_price">Phone Number</label>
-                    <input type="number" class="form-control" name="phone_number" placeholder="Enter Phone Number check-valid">
+                    <input type="number" class="form-control check-valid" name="phone_number " placeholder="Enter Phone Number ">
                 </div>
                     <div class="col-md-6 mb-3">
                     <label for="address" class="form-label">Enter Address</label>
-                    <textarea class="form-control" name="address" value="{{old('address')}}" id="address" rows="2" placeholder="Enter Address"></textarea>
+                    <textarea class="form-control check-valid" name="address" value="{{old('address')}}" id="address" rows="2" placeholder="Enter Address"></textarea>
                 </div>
             </div>
             <div class="bg-dark rounded overflow-hidden mb-3">
@@ -78,7 +114,7 @@
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <select name="hp" id="hp" class="form-select check-valid">
+                                        <select name="hp" id="hp" class="form-select  select-valid">
                                             <option class="d-none" selected>Enter Loan Plan</option>
                                             @foreach($hps as $hp)
                                                 <option value="{{$hp->id}}">{{$hp->hp_loan}}</option>
@@ -96,7 +132,7 @@
                                 <label class="form-label" for="hp">Downpayment</label>
                             </div>
                             <div class="col-md-6">
-                                <input type="text" name="downpayment" class="form-control check-valid fw-bold" placeholder="Enter Downpayment">
+                                <input type="text" name="downpayment" class="form-control   fw-bold" placeholder="Enter Downpayment">
                             </div>
                         </div>
                         <div class="row mb-2">
@@ -104,7 +140,7 @@
                                 <label class="form-label" for="hp">Insurance</label>
                             </div>
                             <div class="col-md-6">
-                                <input type="text" class="form-control check-valid" name="insurance" placeholder="Enter Insurance">
+                                <input type="text" class="form-control  " name="insurance" placeholder="Enter Insurance">
                             </div>
                         </div>
                         <div class="row mb-2">
@@ -112,7 +148,7 @@
                                 <label class="form-label" for="hp">Bank Commission</label>
                             </div>
                             <div class="col-md-6">
-                                <input type="text" class="form-control check-valid" name="bankCommission" placeholder="Enter Bank Commission">
+                                <input type="text" class="form-control  " name="bankCommission" placeholder="Enter Bank Commission">
                             </div>
                         </div>
                         <div class="row mb-2">
@@ -120,7 +156,7 @@
                                 <label class="form-label" for="hp">Service Charge</label>
                             </div>
                             <div class="col-md-6">
-                                <input type="text" class="form-control check-valid" name="serviceCharge" placeholder="Enter Service Charge">
+                                <input type="text" class="form-control  " name="serviceCharge" placeholder="Enter Service Charge">
                             </div>
                         </div>
                         <div class="row mb-2">
@@ -138,10 +174,10 @@
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <input type="text" class="form-control check-valid fw-bold" name="loanamount" placeholder="Enter Loan Lenght">
+                                        <input type="text" class="form-control   fw-bold" name="loanamount" placeholder="Enter Loan Lenght">
                                     </div>
                                     <div class="col-md-6">
-                                        <input type="text" name="monthly"  value="60" class="form-control check-valid bg-dark text-white fw-bold" placeholder="Enter Months Only">
+                                        <input type="text" name="monthly"  value="60" class="form-control   bg-dark text-white fw-bold" placeholder="Enter Months Only">
                                     </div>
                                 </div>
                             </div>
@@ -197,44 +233,46 @@
                 </div>
             </div>
         </form>
+        <!-- Bootstrap Modal  -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form action="" method="post">
-                    @csrf 
-                    <div class="row mb-3">
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label for="" class="form-label">Deposit</label>
-                                <input type="text" name="" id="" placeholder="Enter Deposit" class="form-control">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content overflow-hidden">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="loading-bar loading-bar--active"></div>
+                    <div class="modal-body">
+                        <form action="" method="post">
+                            @csrf 
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Deposit</label>
+                                        <input type="text" name="" id="" placeholder="Enter Deposit" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="" class="form-label">Final Deposit</label>
+                                    <input type="date" name="" class="form-control" placeholder="Enter Final Deposit" id="">
+                                </div>
                             </div>
+                            <div class="form-floating mb-3">
+                                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+                                <label for="floatingTextarea">Noted </label>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="mb-3 row p-customize">
+                        <div class="col-md-6 text-start ">
+                            <button type="button" class="btn btn-secondary"  data-bs-dismiss="modal">Close</button>
                         </div>
-                        <div class="col-md-6">
-                            <label for="" class="form-label">Final Deposit</label>
-                            <input type="date" name="" class="form-control" placeholder="Enter Final Deposit" id="">
+                        <div class="col-md-6 text-end">
+                            <button type="button" class="btn btn-primary" id="submit">Save changes</button>
                         </div>
                     </div>
-                    <div class="form-floating mb-3">
-                        <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
-                        <label for="floatingTextarea">Noted </label>
-                    </div>
-                </form>
-            </div>
-            <div class="mb-3 row p-customize">
-                <div class="col-md-6 text-start ">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                </div>
-                <div class="col-md-6 text-end">
-                    <button type="button" class="btn btn-primary">Save changes</button>
                 </div>
             </div>
-            </div>
-        </div>
         </div>
     </div>
 @endsection 
@@ -246,27 +284,65 @@
 @section('script')
     <script src="{{asset('storage/admin/js/sold-out.js')}}"></script>
     <script>
-        $(document).ready(()=> {
-            let checkValue = false ;
-            function checkValid () {
-                let valid  = $('.check-valid');
-                valid.each(function (index , element) {
-                    var value = element.value ;
-                    if(value.trim() == "") {
+            $(document).ready(()=> {
+                $('#clickCheck').click(function() {
+                     var checkValue = true; 
+                    $('.check-valid').each(function (index, element) {
+                        var value = $(element).val().trim();
+                        if (value === "") {
+                            $(element).addClass('is-invalid');
+                            $(element).focus();
+                            $(element).next('.error-message').remove();
+                            let errorText = $(element).attr('placeholder');
+                            checkValue = false;
+                            var errorMessage = $('<p>').addClass('error-message m-0 text-danger fst-italic').text(`Please ${errorText}`);
+                            $(element).after(errorMessage);
+                        } else {
+                            $(element).removeClass('is-invalid');
+                            $(element).next('.error-message').remove();
+                        }
+                });
+                
+                $('.select-valid').each(function (index , element ) {
+                    let select = $(element).val().trim();
+                    if(select === "Who sell it ?" || select === "Enter Loan Plan") {
                         $(element).addClass('is-invalid');
+                        $(element).focus();
                         checkValue = false ;
                     }else {
-                        $(element).removeClass('is-invalid');
-                        checkValue = true ;
+                            $(element).removeClass('is-invalid');
+                        }
+                    });
+                    if (checkValue) {
+                        $('#exampleModal').modal('show');
+                    } else {
+                        $('#exampleModal').modal('hide');
                     }
                 });
-            }
-            $('#clickCheck').click(function() {
-                checkValid()
-                if(checkValue) {
-                    $('#exampleModal').modal('show');
-                }
+
+                $('#submit').click(()=> {
+                    $('.loading-bar').show();
+                    $.ajax({
+                        url : "/admin/adminTesting" ,
+                        method : "post" ,
+                        data : {
+                            "_token" : "{{csrf_token()}}"
+                        },
+                        success : (response) => {
+                            console.log('hi');
+                            $('.loading-bar').hide();
+                        },
+                        error : (error) => {
+                            console.log(error);
+                        }
+                    });
+                })
+                let purchase = $('input[name="purchase_price"');
+                $(purchase).on('keyup',function () {
+                    let purchasePrice = $(this).val();
+                    let formattedValue = Number(purchasePrice).toLocaleString();
+                    $(this).val(formattedValue);
+                });
             });
-        });
     </script>
 @endsection 

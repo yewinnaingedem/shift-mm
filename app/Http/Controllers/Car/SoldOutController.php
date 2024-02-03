@@ -133,4 +133,9 @@ class SoldOutController extends Controller
     {
         //
     }
+    public function testing(Request $request) {
+        return response()->json([
+            'message' => 'hi'
+        ] , 200);
+    }
 }

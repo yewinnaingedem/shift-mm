@@ -88,6 +88,7 @@ Route::prefix('admin')->group(function (){
     Route::resource('cars' ,  CarItemController::class );
     Route::resource('car_sells', CarsellController::class);
     Route::resource('sold_out' , SoldOutController::class) ;
+    Route::post('adminTesting', [SoldOutController::class , 'testing']);
     Route::resource('employees', EmployeeController::class);
     Route::resource('brand' , BrandController::class );
     Route::resource('positions' , PositionController::class);
