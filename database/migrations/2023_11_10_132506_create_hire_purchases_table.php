@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('hire_purchases', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('hp_plan_id');
+            $table->string('finalPrice');
             $table->string('downpayment');
             $table->string('deposit')->nullable();
             $table->string('insurance');

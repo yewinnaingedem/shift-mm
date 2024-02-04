@@ -147,7 +147,7 @@
             let priceList = $('input[name="price"]');
             $(document).on('keyup', priceList , (e) => {
                 let price = $('input[name="price"]');
-                let inputValue = price.val().replace(/,/g, '')
+                let inputValue = price.val().replace(/,/g, '') ;
                 let value = Number(inputValue).toLocaleString();
                 price.val(value);
                 if(value.length >= 9 && value.length <= 11) {

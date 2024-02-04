@@ -93,7 +93,7 @@
                 </div>
                 <div class="col-md-6 mb-3">
                     <label class="form-label" for="origin_price">Phone Number</label>
-                    <input type="number" class="form-control check-valid" name="phone_number " placeholder="Enter Phone Number ">
+                    <input type="number" class="form-control check-valid" name="phone_number" placeholder="Enter Phone Number ">
                 </div>
                     <div class="col-md-6 mb-3">
                     <label for="address" class="form-label">Enter Address</label>
@@ -129,34 +129,34 @@
                         </div>
                         <div class="row mb-2 dpAmount">
                             <div class="col-md-6 d-flex jsutify-content-center align-items-center">
-                                <label class="form-label" for="hp">Downpayment</label>
+                                <label class="form-label" for="hp">Downpayment <span id="dpPresent" class="fw-bold"></span></label>
                             </div>
                             <div class="col-md-6">
-                                <input type="text" name="downpayment" class="form-control   fw-bold" placeholder="Enter Downpayment">
+                                <input type="text" name="downpayment" class="form-control fw-bold" placeholder="Enter Downpayment">
                             </div>
                         </div>
                         <div class="row mb-2">
                             <div class="col-md-6 d-flex jsutify-content-center align-items-center">
-                                <label class="form-label" for="hp">Insurance</label>
+                                <label class="form-label" for="hp">Insurance (<span class="fw-bold" id="insurance">1.5%</span>)</label>
                             </div>
                             <div class="col-md-6">
-                                <input type="text" class="form-control  " name="insurance" placeholder="Enter Insurance">
+                                <input type="text" class="form-control" name="insurance" placeholder="Enter Insurance">
                             </div>
                         </div>
                         <div class="row mb-2">
                             <div class="col-md-6 d-flex jsutify-content-center align-items-center">
-                                <label class="form-label" for="hp">Bank Commission</label>
+                                <label class="form-label" for="hp">Bank Commission <span class="fw-bold">( <span id="bankCommission">1%</span> on Loan Amount )</span></label>
                             </div>
                             <div class="col-md-6">
-                                <input type="text" class="form-control  " name="bankCommission" placeholder="Enter Bank Commission">
+                                <input type="text" class="form-control" name="bankCommission" placeholder="Enter Bank Commission">
                             </div>
                         </div>
                         <div class="row mb-2">
                             <div class="col-md-6 d-flex jsutify-content-center align-items-center">
-                                <label class="form-label" for="hp">Service Charge</label>
+                                <label class="form-label" for="hp">Service Charge <span class="fw-bold">( <span id="serviceCharge">2%</span> on Car Price )</span></label>
                             </div>
                             <div class="col-md-6">
-                                <input type="text" class="form-control  " name="serviceCharge" placeholder="Enter Service Charge">
+                                <input type="text" class="form-control" name="serviceCharge" placeholder="Enter Service Charge">
                             </div>
                         </div>
                         <div class="row mb-2">
@@ -214,7 +214,7 @@
                 </div>
                 <div class="col-md-6">
                     <label for="broker_phone" class="form-label">Broker Phone</label>
-                    <input type="text" name="broker[phone]" id="broker_fee" class="form-control" placeholder="Enter Broker Phone Number">
+                    <input type="text" name="broker[broker_phone]" id="brokerPhone" class="form-control" placeholder="Enter Broker Phone Number">
                     @if($errors->has('broker_phone'))
                         <p class="text-danger">{{$errors->first('broker_phone')}}</p>
                     @endif 
@@ -248,18 +248,18 @@
                             <div class="row mb-3">
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label for="" class="form-label">Deposit</label>
-                                        <input type="text" name="" id="" placeholder="Enter Deposit" class="form-control">
+                                        <label for="deposit" class="form-label">Deposit Amount</label>
+                                        <input type="text"  id="deposit" placeholder="Enter Deposit" class="form-control">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="" class="form-label">Final Deposit</label>
-                                    <input type="date" name="" class="form-control" placeholder="Enter Final Deposit" id="">
+                                    <label for="" class="form-label">Final Date</label>
+                                    <input type="date" name="finalDate" class="form-control" placeholder="Enter Final Deposit" id="finalDate">
                                 </div>
                             </div>
                             <div class="form-floating mb-3">
-                                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
-                                <label for="floatingTextarea">Noted </label>
+                                <textarea class="form-control"  placeholder="Leave a comment here" style="height: 100px;" id="noted"></textarea>
+                                <label for="noted">Need To Fixed </label>
                             </div>
                         </form>
                     </div>
@@ -319,28 +319,77 @@
                         $('#exampleModal').modal('hide');
                     }
                 });
+                let employee = $('select[name="employee"]') ;
+                let buyer = $('input[name="buyer"]');
+                let purchase_price = $('input[name="purchase_price"]');
+                let phone_number = $('input[name="phone_number"]');
+                let address = $('textarea[name="address"]');
+                let hp = $('select[name="hp"]');
+                let id = $('input[name="id"]');
+                let present = $('input[name="present"]');
+                let insurance = $('#insurance').text().trim();
+                let bankCommission = $('#bankCommission').text().trim();
+                let deposit = $('#deposit');
+                let serviceCharge = $('#serviceCharge').text().trim() ;
+                let monthly = $('input[name="monthly"]') ;
+                let broker_name = $('#broker_name');
+                let broker_fee = $('#broker_fee');
+                let brokerPhone = $('#brokerPhone');
 
                 $('#submit').click(()=> {
                     $('.loading-bar').show();
+                    let finalDate = $('#finalDate');
+                    console.log(finalDate);
+                    let noted = $('#noted');
                     $.ajax({
                         url : "/admin/adminTesting" ,
                         method : "post" ,
                         data : {
-                            "_token" : "{{csrf_token()}}"
+                            'id' : id.val() ,
+                            "_token" : "{{csrf_token()}}" ,
+                            'depositAmount' : depositValue.val().replace(/,/g,'') ,
+                            'finalDate' : finalDate.val() ,
+                            'noted' : noted.val() ,
+                            'employee' : employee.val() ,
+                            'monthly' : monthly.val() ,
+                            'buyer' : buyer.val() ,
+                            'purchase_price' : purchase_price.val() ,
+                            'phone_number' : phone_number.val() ,
+                            'address' : address.val() ,
+                            'hp' : hp.val() ,
+                            'present' : present.val() ,
+                            'deposit' : deposit.val() ,
+                            'insurance' : insurance ,
+                            'bankCommission' : bankCommission ,
+                            'serviceCharge' : serviceCharge ,
+                            'broker[name]' : broker_name.val() ,
+                            'broker[broker_fee]' : broker_fee.val() ,
+                            'broker[phone]' : brokerPhone.val() ,
                         },
                         success : (response) => {
-                            console.log('hi');
                             $('.loading-bar').hide();
+                            window.location.href = response.redirect ;
+                            console.log(response);
                         },
                         error : (error) => {
                             console.log(error);
                         }
                     });
-                })
+                });
+
                 let purchase = $('input[name="purchase_price"');
                 $(purchase).on('keyup',function () {
-                    let purchasePrice = $(this).val();
+                    let purchasePrice = $(this).val().replace(/,/g, '');
                     let formattedValue = Number(purchasePrice).toLocaleString();
+                    let originPirce = $('input[name="price_of_ori"]').val();
+                    $(this).val(formattedValue);
+                    
+                });
+                
+                let depositValue = $('#deposit');
+                $(depositValue).on('keyup',function () {
+                    let value = $(this).val().replace(/,/g,'');
+                    let formattedValue = Number(value).toLocaleString();
                     $(this).val(formattedValue);
                 });
             });

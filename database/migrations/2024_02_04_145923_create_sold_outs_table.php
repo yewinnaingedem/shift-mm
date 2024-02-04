@@ -12,13 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('sold_outs', function (Blueprint $table) {
+
             $table->id();
             $table->unsignedBigInteger('employee_id');
+            $table->unsignedBigInteger('depositState');
             $table->unsignedBigInteger('car_id');
             $table->unsignedBigInteger('buyer_id');
             $table->unsignedBigInteger('hire_purchase_id');
             $table->unsignedBigInteger('broker_id')->nullable();
-            $table->integer('currentMonth');
+            $table->string('currentMonth');
             $table->timestamps();
 
             $table->foreign('employee_id')->references('id')->on('employees');
@@ -26,6 +28,8 @@ return new class extends Migration
             $table->foreign('buyer_id')->references('id')->on('buyers');
             $table->foreign('hire_purchase_id')->references('id')->on('hire_purchases');
             $table->foreign('broker_id')->references('id')->on('brokers');
+            $table->foreign('depositState')->references('id')->on('deposits');
+
         });
     }
 

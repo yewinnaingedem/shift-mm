@@ -11,9 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('sold_outs', function (Blueprint $table) {
-            $table->date('created_at')->change();
-            $table->date('updated_at')->change();
+        Schema::create('deposits', function (Blueprint $table) {
+            $table->id();
+            $table->string('depositAmount');
+            $table->date('finalDate');
+            $table->string('noted')->nullable();
+            $table->boolean('state')->default(0);
+            $table->timestamps();
         });
     }
 
@@ -22,8 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('sold_outs', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('deposits');
     }
 };

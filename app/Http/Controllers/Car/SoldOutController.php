@@ -11,6 +11,7 @@ use App\Models\Car\Sale ;
 use App\Models\SoldOut ;
 use App\Models\Buyer ;
 use Carbon\Carbon ;
+use App\Models\Deposit ;
 use App\Models\Before_Sale ;
 use App\Models\Broker ;
 use App\Models\Hire_purchase ;
@@ -134,8 +135,61 @@ class SoldOutController extends Controller
         //
     }
     public function testing(Request $request) {
+        
+        $soldOuts = [] ;
+        $buyer = [] ;
+        $buyer['name'] = $request['buyer'] ;
+        $buyer['phone'] = $request['phone_number'] ;
+        $buyer['purchase_price'] = $request['purchase_price'] ;
+        $buyer['address'] = $request['address'] ;
+        
+        $buyerId = Buyer::insertGetId($buyer);
+
+        $hps = [];
+        $hps['hp_plan_id'] = $request['hp'];
+        $hps['downpayment'] = $request['present'];
+        $hps['deposit'] = $request['deposit'];
+        $hps['insurance'] = $request['insurance'];
+        $hps['bank_commission'] = $request['bankCommission'];
+        $hps['service_charge'] = $request['serviceCharge'];
+        $hps['loan_month'] = $request['monthly'];
+        $hp_id = Hire_purchase::insertGetId($hps);
+
+        $brokerFee = [];
+        foreach ($request['broker'] as $key => $value) {
+            if($value !== null ) {
+                $brokerFee[$key] = $value ;
+            }
+        }
+        if(!empty($brokerFee)) {
+            $brokerId = Broker::insertGetId($brokerFee);
+            $soldOuts['broker_id'] = $brokerId ;
+        }
+        
+        $deposit = [] ;
+        $deposit['depositAmount']  = $request['depositAmount'] ;
+        $deposit['finalDate'] = $request['finalDate'] ;
+        $deposit['noted'] = $request['noted'] ;
+        $deposit['state'] = 0 ;
+        $deposit['created_at'] = Carbon::now();
+        $depositState = Deposit::insertGetId($deposit);
+
+        $soldOuts['employee_id'] = $request['employee'];
+        $soldOuts['car_id'] = $request['id'];
+        $soldOuts['buyer_id'] = $buyerId;
+        $soldOuts['depositState'] = $depositState ;
+        $soldOuts['currentMonth'] = Carbon::now()->format('Y-m');
+        $soldOuts['created_at'] = carbon::today()->toDateString();
+        $soldOuts['updated_at'] = carbon::today()->toDateString();
+        $soldOuts['hire_purchase_id'] = $hp_id;
+        
+        SoldOut::insertGetId($soldOuts);
+        Sale::where('car_id',$request['id'])->delete();
+        Before_Sale::where('car_item',$request['id'])->delete();
         return response()->json([
-            'message' => 'hi'
+            'message' => 'successfully' ,
+            'redirect' => "http://localhost:8000/admin/saled" ,
         ] , 200);
+        
     }
 }
