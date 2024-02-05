@@ -71,6 +71,7 @@ Route::prefix('admin')->group(function (){
     Route::put('update-info/{id}' , [AdminAuthController::class , 'updateInfo']);
     Route::post('setup' , [AddCarController::class , 'index']);
     Route::resource('car_img' , CarImageItemController::class );
+    Route::post('car_img/test' , [CarImageItemController::class , 'imgTest']);
     Route::resource('car_models' , CarModelController::class) ;
     Route::resource('grade'  , GradeController::class);
     Route::post('grade/function' , [GradeController::class , 'gradeFunction']);

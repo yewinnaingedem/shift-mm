@@ -24,6 +24,38 @@
         .img:hover .imagePreview{
             transform: scale(1.1); /* Scale the image on hover */
         }
+        .loading-bar {
+            position: relative;
+            top: 0;
+            display: none;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background-color: transparent;
+            border-radius : 15px ;
+            overflow: hidden;
+        }
+        .loading-bar--active::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 30%;
+            height: 4px;
+            background-color: #ff5151;
+            animation: moveLoadBar 2s cubic-bezier(0.09, 0.89, 0.7, 0.71) infinite;
+        }
+        .m-0 {
+            margin-bottom : 0 !important ;
+        }
+        @keyframes moveLoadBar {
+            0% {
+                left: -10%;
+            }
+            100% {
+                left: 110%;
+            }
+        }
     </style>
 @endsection 
 
@@ -35,7 +67,7 @@
 
 @section('content')
     <div class="container-fulid pt-3">
-        <form action="{{url('admin/car_img')}}" method="post" enctype="multipart/form-data">
+        <form action="{{url('admin/car_img')}}" id="uploadForm" enctype="multipart/form-data">
             @csrf
             <input type="hidden" name="item_id" value="{{$car_datas['item_id']}}">
             <input type="hidden" name="owner_book_id" value="{{$car_datas['owner_book_id']}}">
@@ -43,7 +75,7 @@
                 <!-- img1 -->
                 <div class="col-md-4 mb-3">
                     <label for="img1" class="w-100">
-                        <input type="file" name="img[1]" id="img1" class="file-input">
+                        <input type="file" name="img[1]" id="img1" class="file-input" accept="img/*">
                         <div class="card">
                             <div class="card-header">
                                 <div class="text-center fw-bold">Font Images </div>
@@ -59,7 +91,7 @@
                 <!-- img2 -->
                 <div class="col-md-4 mb-3">
                     <label for="img2" class="w-100">
-                        <input type="file" name="img[2]" id="img2" class="file-input">
+                        <input type="file" name="img[2]" id="img2" class="file-input" accept="img/*">
                         <div class="card">
                             <div class="card-header">
                                 <div class="text-center fw-bold">Back Images </div>
@@ -75,7 +107,7 @@
                 <!-- img3 -->
                 <div class="col-md-4 mb-3">
                     <label for="img3" class="w-100">
-                        <input type="file" name="img[3]" id="img3" class="file-input">
+                        <input type="file" name="img[3]" id="img3" class="file-input" accept="img/*">
                         <div class="card">
                             <div class="card-header">
                                 <div class="text-center fw-bold">Side Images </div>
@@ -91,7 +123,7 @@
                 <!-- img4 -->
                 <div class="col-md-4 mb-3">
                     <label for="img4" class="w-100">
-                        <input type="file" name="img[4]" id="img4" class="file-input">
+                        <input type="file" name="img[4]" id="img4" class="file-input" accept="img/*">
                         <div class="card">
                             <div class="card-header">
                                 <div class="text-center fw-bold">Side Images </div>
@@ -155,7 +187,7 @@
                 <!-- img8 -->
                 <div class="col-md-4 mb-3">
                     <label for="img8" class="w-100">
-                        <input type="file" name="img[8]" id="img8" class="file-input">
+                        <input type="file" name="img[8]" id="img8"  class="file-input">
                         <div class="card">
                             <div class="card-header">
                                 <div class="text-center fw-bold">Wheel Images </div>
@@ -176,37 +208,39 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
+                        
                             <h1 class="modal-title fs-5" id="exampleModalLabel">Report Demange For 
                                 <span class="fw-bold text-danger">{{$car_datas['model_name']}}</span>
                                 <span>{{$car_datas['license_plate']}}</span>
                             </h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
+                        <div class="loading-bar loading-bar--active"></div>
                         <div class="modal-body">
                             <div class="mb-1">
                                 <label for="engine_malfunction" class="col-form-label">Engine Malfunction</label>
-                                <textarea class="form-control" id="engine_malfunction" name="engine_malfunction" rows="1"></textarea>
+                                <textarea class="form-control valid-check" id="engine_malfunction" name="engine_malfunction" rows="1"></textarea>
                             </div>
                             <div class="mb-1">
                                 <label for="paint_demage" class="col-form-label">Paint Demange</label>
-                                <textarea class="form-control" name="paint_demage" id="paint_demage" rows="1"></textarea>
+                                <textarea class="form-control valid-check" name="paint_demage" id="paint_demage" rows="1"></textarea>
                             </div>
                             <div class="mb-1">
                                 <label for="tv" class="col-form-label">TV Exception</label>
-                                <textarea class="form-control" id="tv" name="tv" rows="1"></textarea>
+                                <textarea class="form-control valid-check" id="tv" name="tv" rows="1"></textarea>
                             </div>
                             <div class="mb-1">
                                 <label for="suspection" class="col-form-label">Suspection</label>
-                                <textarea class="form-control" id="suspection" name="suspection" rows="1"></textarea>
+                                <textarea class="form-control valid-check" id="suspection" name="suspection" rows="1"></textarea>
                             </div>
                             <div class="row">
                                 <div class="col-md-6 mb-1">
                                     <label for="light" class="col-form-label">Lights</label>
-                                    <textarea class="form-control" id="light" rows="1" name="light"></textarea>
+                                    <textarea class="form-control valid-check" id="light" rows="1" name="light"></textarea>
                                 </div>
                                 <div class="col-md-6 mb-1">
                                     <label for="message-text" class="col-form-label">Addtional Exception</label>
-                                    <textarea class="form-control" id="addtional_exception" rows="1" name="addtional_exception"></textarea>
+                                    <textarea class="form-control valid-check" id="addtional_exception" rows="1" name="addtional_exception"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -215,14 +249,14 @@
                                 <input type="checkbox" name="all_good" value="all_good" class="form-check-input" id="all_good">
                                 <label for="all_good" class="form-check-label fw-bold">All Fine ? </label>
                             </div>
-                            <button type="submit" class="btn btn-primary">Send message</button>
+                            <button type="button" id="submitButton" class="btn btn-primary">Send message</button>
                         </div>
                     </div>
                 </div>
             </div>
         </form>
     </div>
-    <!-- Bootstrap Modal -->
+    
     
 @endsection 
 
@@ -245,8 +279,8 @@
                     }
                     render.readAsDataURL(input.files[0]);
                 }
-
             });
+
             $('#img2').on('change',function () {
                 var input = this ;
                 var img2 = $('.img2');
@@ -261,6 +295,7 @@
                 }
 
             });
+
             $('#img3').on('change',function () {
                 var input = this ;
                 var img3 = $('.img3');
@@ -275,6 +310,7 @@
                 }
 
             });
+
             $('#img4').on('change',function () {
                 var input = this ;
                 var img4 = $('.img4');
@@ -288,6 +324,7 @@
                     render.readAsDataURL(input.files[0]);
                 }
             });
+
             $('#img5').on('change',function () {
                 var input = this ;
                 var img5 = $('.img5');
@@ -302,6 +339,7 @@
                 }
 
             });
+
             $('#img6').on('change',function () {
                 var input = this ;
                 var img6 = $('.img6');
@@ -316,6 +354,7 @@
                 }
 
             });
+
             $('#img7').on('change',function () {
                 var input = this ;
                 var img7 = $('.img7');
@@ -329,6 +368,7 @@
                     render.readAsDataURL(input.files[0]);
                 }
             });
+
             $('#img8').on('change',function () {
                 var input = this ;
                 var img8 = $('.img8');
@@ -343,39 +383,49 @@
                 }
             });
 
-            var malfunction = $('input[name="recipient_name"]');
-            $(document).on('change', malfunction , function () {
-                if (malfunction.is(':checked')) {
-                    $('#exampleFormControlTextarea1').prop('disabled', true);
-                    malfunction.val('none');
-                    $('#exampleFormControlTextarea1').addClass('cursor-not-allowed');
-                } else {
-                    $('#exampleFormControlTextarea1').prop('disabled', false);
-                    malfunction.val(' ');
-                    $('#exampleFormControlTextarea1').removeClass('cursor-not-allowed');
-                }
-                console.log(malfunction.val());
-            });
-            
-            var malfunction = $('input[name="recipient_name"]');
-            $(document).on('change', malfunction , function () {
-                if (malfunction.is(':checked')) {
-                    $('#exampleFormControlTextarea1').prop('disabled', true);
-                    $('#exampleFormControlTextarea1').addClass('cursor-not-allowed');
-                } else {
-                    $('#exampleFormControlTextarea1').prop('disabled', false);
-                    $('#exampleFormControlTextarea1').removeClass('cursor-not-allowed');
-                }
-            });
+            $(document).on('click','#submitButton' , () => {
+                let valid = $('.valid-check');
+                let allGood = $('#all_good');
+                let checked = true ;
+                $('.loading-bar').show();
+                valid.each(function (index , element) {
+                    let value = $(element).val().trim();
+                    if(allGood.is(':checked') ) {
+                        $(element).removeClass('is-invalid');
+                        $(element).next('.error-message').remove();
+                        $(element).val('');
+                    }else {
+                        if(value === "") {
+                            $(element).next('.error-message').remove();
+                            $(element).addClass('is-invalid');
+                            var errorMessage = $('<p>').addClass('text-danger m-0 error-message').text('Your Value is not validate');
+                            $(element).after(errorMessage);
+                            checked = false ;
+                        }else {
+                            $(element).removeClass('is-invalid');
+                            $(element).next('.error-message').remove();
+                        }
+                    };
 
-            var malfunction = $('input[name="recipient_name"]');
-            $(document).on('change', malfunction , function () {
-                if (malfunction.is(':checked')) {
-                    $('#exampleFormControlTextarea1').prop('disabled', true);
-                    $('#exampleFormControlTextarea1').addClass('cursor-not-allowed');
-                } else {
-                    $('#exampleFormControlTextarea1').prop('disabled', false);
-                    $('#exampleFormControlTextarea1').removeClass('cursor-not-allowed');
+                    
+                });
+                var formData = new FormData($('#uploadForm')[0]);
+                
+                if(checked) {
+                    $.ajax({
+                        url : "/admin/car_img/test",
+                        type : "post" ,
+                        data: formData,
+                        processData : false ,
+                        contentType : false ,
+                        success : (success) => {
+                            $('.loading-bar').hide();
+                            window.location.href = success.redirect;
+                        },
+                        error : (error) => {
+                            console.log(error);
+                        }
+                    });
                 }
             });
         });

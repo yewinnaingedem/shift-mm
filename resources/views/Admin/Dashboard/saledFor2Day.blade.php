@@ -35,37 +35,35 @@
             </div>
         </div>
         <div class="card-contaier mt-3">
-            @foreach($todaySoldes as soldOut)
-            <div class="card bg-warning shadow">
+            @foreach($todaySoldes as $soldOut)
+            <div class="card bg-warning shadow mb-3">
                 <div class="card-header fw-bold">
                     <div class="row">
                         <div class="col-md-6">
-                            2012 / Accent / 5Q-1589 
+                            {{$soldOut->year}} / {{$soldOut->brand_name}} / {{$soldOut->license_plate}} 
                         </div>
                         <div class="col-md-6 text-end">
-                            {{ $soldOut->created_at }}
+                            {{ $soldOut->dateTime}}
                         </div>
                     </div>
                 </div>
                 <div class="card-body row">
                     <div class="col-md-8">
                         <h5 class="card-title">
-                            Yoma HP with 30% Downpayment within 5 years 
+                            {{$soldOut->hp_loan}} with {{$soldOut->asdownpayment}} Downpayment within {{$soldOut->loan_month}}
                         </h5>
                         <p class="card-text">
                             <div class="sale-agreement">
                                 Mr. U Soe Thiha Naung, represented by broker Mr. Kyaw Min Htike, 
-                                and ABC Motors have agreed to the purchase of a <span class="fw-semibold"> 2023 Toyota Camry, silver in color, </span>
-                                equipped with additional features including a <span class="fw-semibold">front bumper, TV, air conditioning, and back suspension.</span>
+                                and {{$soldOut->by_name}} have agreed to the purchase of a <span class="fw-semibold"> {{$soldOut->year}} {{$soldOut->brand_name}}, silver in color, </span>
+                                equipped with additional features including a <span class="fw-semibold">{{$soldOut->noted}}.</span>
                                 <span class="seeMore cursor-pointer">....see more<i class="fa-solid fa-chevron-down"></i></span>
                                 <div class="main-content d-none">
-                                ABC Motors has made a deposit of <span class="fw-semibold">10000</span> Lakhs to secure the transaction until the deadline of
-                                <span class="fw-bold"> May 15, 2024. </span>
-                                Both parties commit to honoring the terms of the agreement, with Mr. Kyaw Min Htike facilitating the transaction and
-                                serving as a point of contact for any inquiries.
+                                {{$soldOut->by_name}} has made a deposit of <span class="fw-semibold">{{$soldOut->depositAmount}}</span> Lakhs to secure the transaction until the deadline of
+                                <span class="fw-bold"> {{$soldOut->finalDate}} </span>
+                                    Both parties commit to honoring the terms of the agreement, with Mr. Kyaw Min Htike facilitating the transaction and
+                                    serving as a point of contact for any inquiries.
                                 </div>
-                                
-                                
                             </div>
                         </p>
                     </div>
