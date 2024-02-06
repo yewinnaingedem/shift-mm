@@ -67,6 +67,7 @@
                 <div class="col-md-3 text-end">
                     <select name="employee" class="form-select select-valid " width="50%" >
                         <option selected class="d-none">Who sell it ?</option>
+                        
                         @foreach($employees as $employee)
                             <option value="{{$employee->id}}">{{$employee->name}}</option>
                         @endforeach
@@ -76,6 +77,15 @@
             <hr>
             <input type="hidden" name="id" value="{{$id}}">
             <div class="row">
+                <div class="col-md-6">
+                    <label for="dealer" class="form-label">Dealer</label>
+                    <select name="dealer" class="form-select select-valid " width="50%" >
+                        <option selected class="d-none">Dealer</option>
+                        @foreach($dealers as $dealer)
+                            <option value="{{$dealer->id}}">{{$dealer->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
                 <div class="col-md-6 mb-3">
                     <label for="buyer" class="form-label">Buyer Name</label>
                     <input type="text" class="form-control check-valid" name="buyer" placeholder="Enter Buyer Name">
@@ -97,7 +107,7 @@
                 </div>
                     <div class="col-md-6 mb-3">
                     <label for="address" class="form-label">Enter Address</label>
-                    <textarea class="form-control check-valid" name="address" value="{{old('address')}}" id="address" rows="2" placeholder="Enter Address"></textarea>
+                    <textarea class="form-control check-valid" name="address" value="{{old('address')}}" id="address" rows="" placeholder="Enter Address"></textarea>
                 </div>
             </div>
             <div class="bg-dark rounded overflow-hidden mb-3">
@@ -305,7 +315,7 @@
                 
                 $('.select-valid').each(function (index , element ) {
                     let select = $(element).val().trim();
-                    if(select === "Who sell it ?" || select === "Enter Loan Plan") {
+                    if(select === "Who sell it ?" || select === "Enter Loan Plan" || select === "Dealer") {
                         $(element).addClass('is-invalid');
                         $(element).focus();
                         checkValue = false ;
@@ -335,6 +345,7 @@
                 let broker_name = $('#broker_name');
                 let broker_fee = $('#broker_fee');
                 let brokerPhone = $('#brokerPhone');
+                let dealer = $('select[name="dealer"]');
 
                 $('#submit').click(()=> {
                     $('.loading-bar').show();
@@ -365,6 +376,7 @@
                             'broker[name]' : broker_name.val() ,
                             'broker[broker_fee]' : broker_fee.val() ,
                             'broker[phone]' : brokerPhone.val() ,
+                            'dealer' : dealer.val() ,
                         },
                         success : (response) => {
                             $('.loading-bar').hide();

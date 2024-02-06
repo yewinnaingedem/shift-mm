@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('depositState');
             $table->unsignedBigInteger('car_id');
             $table->unsignedBigInteger('buyer_id');
+            $table->unsignedBigInteger('dealer_id');
             $table->unsignedBigInteger('hire_purchase_id');
             $table->unsignedBigInteger('broker_id')->nullable();
             $table->string('currentMonth');
@@ -29,6 +30,7 @@ return new class extends Migration
             $table->foreign('hire_purchase_id')->references('id')->on('hire_purchases');
             $table->foreign('broker_id')->references('id')->on('brokers');
             $table->foreign('depositState')->references('id')->on('deposits');
+            $table->foreign('dealer_id')->references('id')->on('dealers');
 
         });
     }

@@ -13,6 +13,7 @@ use App\Models\Buyer ;
 use Carbon\Carbon ;
 use App\Models\Deposit ;
 use App\Models\Before_Sale ;
+use App\Models\Dealer ;
 use App\Models\Broker ;
 use App\Models\Hire_purchase ;
 
@@ -108,7 +109,8 @@ class SoldOutController extends Controller
         $hps = HpPlan::get();
         $employees = Employee::get();
         $salePrice = Sale::where('car_id',$id)->first('price');
-        return view('admin.POS.Car.SoldOut.index' , compact('employees','hps','salePrice'))->with('id',$id);
+        $dealers = Dealer::get() ;
+        return view('admin.POS.Car.SoldOut.index' , compact('employees','hps','salePrice','dealers'))->with('id',$id);
     }
 
     /**
@@ -177,6 +179,7 @@ class SoldOutController extends Controller
         $soldOuts['employee_id'] = $request['employee'];
         $soldOuts['car_id'] = $request['id'];
         $soldOuts['buyer_id'] = $buyerId;
+        $soldOuts['dealer_id'] = $request['dealer'] ;
         $soldOuts['depositState'] = $depositState ;
         $soldOuts['currentMonth'] = Carbon::now()->format('Y-m');
         $soldOuts['created_at'] = carbon::today()->toDateString();

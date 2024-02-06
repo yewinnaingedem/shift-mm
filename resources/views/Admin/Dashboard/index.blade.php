@@ -75,7 +75,10 @@
 @section('page-name' , 'Car Models')
 
 @section('content')
-    <div class="container my-3">
+    <div class="container ">
+        <blockquote class="blockquote text-center mt-1">
+            <p class="fw-bolder">Daily Report For Admin ...</p>
+        </blockquote>
         <div class="row">
             <div class="col-md-6 ">
                 <div class="chart-container">
@@ -119,7 +122,6 @@
                         </div>
                     </a>
                 </div>
-                
             </div>
             <div class="col-md-6 position-relative hover-element mb-3 rounded">
                 <div class=" position-relative rounded overflow-hidden bg-info  bg-main">
@@ -128,24 +130,23 @@
                     </div>
                     <div class="color bg-img position-absolute w-100 fn-f-mono h-100 d-flex justify-content-around align-items-center">
                         <div class="fw-bold text-center fs-20px">
-                            Saled Car For Today 
+                            Depoist State Cars
                         </div>
                         <div class="fw-bold  fs-18">
-                            12
+                            {{ $depositStates }}
                         </div>
                     </div>
                 </div>
                 <div class="position-absolute top-0 right-0 d-cusotmize w-25 h-100 bg-color rounded">
-                    <div class=" d-flex justify-content-center w-100 h-100 align-items-center  ">
+                    <a href="{{url('admin/deposits/state')}}" class="text-decoration-none d-flex justify-content-center w-100 h-100 align-items-center ">
                         <div class="fw-bold me-2">
                             See 
                         </div>
                         <div class="">
                             <i class="fa-solid fa-forward"></i>
                         </div>
-                    </div>
+                    </a>
                 </div>
-                
             </div>
             <div class="col-md-6 position-relative hover-element mb-3 rounded">
                 <div class=" position-relative rounded overflow-hidden bg-info  bg-main">
