@@ -44,10 +44,15 @@ class AdminDashBoardController extends Controller
     }
 
     public function depositSate () {
-        $depositStates = SoldOut::select('deposits.*')
+        $depositStates = SoldOut::select('deposits.*','buyers.*','brands.brand_name as brandName','owner_books.license_plate as license_plate')
                         ->leftJoin('deposits','sold_outs.depositState','deposits.id')
+                        ->leftJoin('buyers','sold_outs.buyer_id','buyers.id')
+                        ->leftJoin('cars','sold_outs.car_id','cars.id')
+                        ->leftJoin('owner_books','cars.owner_book_id','owner_books.id')
+                        ->leftJoin('car_models','owner_books.model_id','car_models.id')
+                        ->leftJoin('brands','car_models.brand_id','brands.id')
                         ->where('deposits.state','=',0)
-                        ->count();
+                        ->get();
         return view('admin.Dashboard.depositState' , compact('depositStates'));
     }
     
