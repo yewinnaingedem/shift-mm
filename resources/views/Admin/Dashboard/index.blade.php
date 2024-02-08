@@ -155,7 +155,7 @@
                     </div>
                     <div class="color bg-img position-absolute w-100 fn-f-mono h-100 d-flex justify-content-around align-items-center">
                         <div class="fw-bold text-center fs-20px">
-                            Saled Car For Today 
+                            Machines State Cars 
                         </div>
                         <div class="fw-bold  fs-18">
                             12
@@ -163,14 +163,14 @@
                     </div>
                 </div>
                 <div class="position-absolute top-0 right-0 d-cusotmize w-25 h-100 bg-color rounded">
-                    <div class=" d-flex justify-content-center w-100 h-100 align-items-center  ">
+                    <a href="{{url('admin/machines/state')}}" class="text-decoration-none d-flex justify-content-center w-100 h-100 align-items-center ">
                         <div class="fw-bold me-2">
                             See 
                         </div>
                         <div class="">
                             <i class="fa-solid fa-forward"></i>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 
             </div>

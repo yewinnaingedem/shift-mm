@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\SoldOut ;
 use Carbon\Carbon ;
+use App\Models\machine ;
 class AdminDashBoardController extends Controller
 {
     public function index () {
@@ -44,16 +45,28 @@ class AdminDashBoardController extends Controller
     }
 
     public function depositSate () {
-        $depositStates = SoldOut::select('deposits.*','buyers.*','brands.brand_name as brandName','owner_books.license_plate as license_plate')
+        $depositStates = SoldOut::select('deposits.*','buyers.*','brands.brand_name as brandName','owner_books.license_plate as license_plate',
+                        'car_models.model_name as modelname','exterior_colors.exterior_color as exterior_color')
                         ->leftJoin('deposits','sold_outs.depositState','deposits.id')
                         ->leftJoin('buyers','sold_outs.buyer_id','buyers.id')
                         ->leftJoin('cars','sold_outs.car_id','cars.id')
                         ->leftJoin('owner_books','cars.owner_book_id','owner_books.id')
                         ->leftJoin('car_models','owner_books.model_id','car_models.id')
                         ->leftJoin('brands','car_models.brand_id','brands.id')
+                        ->leftJoin('exterior_colors','owner_books.exterior_color_id', 'exterior_colors.id')
                         ->where('deposits.state','=',0)
                         ->get();
         return view('admin.Dashboard.depositState' , compact('depositStates'));
+    }
+
+
+    public function machineState () {
+        $machines = machine::select('machines.*','sepcializes.*')
+                    ->leftJoin('sepcializes','machines.specialize','sepcializes.id')
+                    ->get();
+        // $panding  = [] ;
+        // $panding['paintDemage'] = PaintDemage::where('')->get();
+        return view('Admin.Dashboard.machineState',compact('machines'));
     }
     
 }

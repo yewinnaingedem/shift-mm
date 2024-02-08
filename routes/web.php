@@ -97,6 +97,7 @@ Route::prefix('admin')->group(function (){
     Route::resource('default-function' , DefaultFunctionController::class );
     Route::resource('license-state' , licenseStateController::class);
     Route::get('deposits/state', [AdminDashBoardController::class ,'depositSate']);
+    Route::get('machines/state' , [AdminDashBoardController::class , 'machineState']);
     Route::get('search/{query}', [SearchController::class , 'search'] );
     Route::get('routeBack' , function () {
         return redirect()->back() ;
