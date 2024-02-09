@@ -86,7 +86,7 @@
         },
         mounted () {
             this.bodyAndPaint ;
-            this.fixer = 1 ;
+            this.fixer = this.fixers.length > 0 ? this.fixers[0].id : null ; 
             setInterval(() => {
                 if(demageStore.state.bodyAndPaint.bodyAndPaintState) {
                     this.getIdCode(this.fixer);

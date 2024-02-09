@@ -61,7 +61,7 @@
                                 </div>
                                 <div class="col-md-4 text-end d-flex justify-content-center align-items-center">
                                     <div class="fw-bold text-warning">
-                                        12 Car is panding
+                                        {{ $machine->pending_count == null ?  'no car is panding' : $machine->pending_count . " car is panding"}}
                                     </div>
                                     
                                 </div>

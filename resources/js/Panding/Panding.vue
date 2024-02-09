@@ -132,6 +132,7 @@
                 this.panding.fixers.forEach(tv => {
                     if(tv.specialize == this.panding.sepcializes[0].id){
                         this.tvDemage.push(tv)
+                        console.log(this.tvDemage);
                     }
                 });
             },

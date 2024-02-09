@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->bigInteger('phone');
             $table->unsignedBigInteger('specialize');
+            $table->integer('pending_count')->nullable();
             $table->timestamps();
 
             $table->foreign('specialize')->references('id')->on('sepcializes');

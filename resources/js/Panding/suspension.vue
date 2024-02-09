@@ -13,8 +13,8 @@
                 <textarea class="form-control"  rows="1" v-model="suspensionInner"></textarea>
             </div>
             <div class="col-md-4">
-                <select class="form-select w-100" aria-label="Default select example">
-                    <option v-for="fixer in fixers" :key="fixer.id">
+                <select class="form-select w-100" v-model="fixer" aria-label="Default select example">
+                    <option v-for="fixer in fixers" :key="fixer.id" :value="fixer.id">
                         {{ fixer.name }}
                     </option>
                 </select>
@@ -85,7 +85,7 @@
         },
         mounted () {
             this.suspension ;
-            this.fixer = 1 ;
+            this.fixer = this.fixerId ;
             setInterval(() => {
                 if(demageStore.state.suspension.suspensionDemageState) {
                     this.getIdCode(this.fixer);

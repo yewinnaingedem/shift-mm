@@ -13,7 +13,7 @@
                 <textarea class="form-control"  rows="1" v-model="exceptionInner"></textarea>
             </div>
             <div class="col-md-4">
-                <select class="form-select w-100" aria-label="Default select example">
+                <select class="form-select w-100" v-model="fixer" aria-label="Default select example">
                     <option v-for="fixer in fixers" :key="fixer.id">
                         {{ fixer.name }}
                     </option>
@@ -85,7 +85,7 @@
         },
         mounted () {
             this.additionalException ;
-            this.fixer = 1 ;
+            this.fixer = this.fixerId ;
             setInterval(() => {
                 if(demageStore.state.exceptions.exceptionsDemageState ) {
                     this.getIdCode(this.fixer);

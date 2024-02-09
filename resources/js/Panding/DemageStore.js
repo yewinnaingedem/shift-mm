@@ -174,7 +174,7 @@ const demageStore = createStore ({
             axios.post('http://localhost:8000/api/suspensionDemage' , {
                 'suspensionDemage' : state.suspension.suspensionDemage ,
                 car_id : state.car_id ,
-                fixer_id : state.engine.fixer_id ,
+                fixer_id : state.suspension.fixer_id ,
                 code_id :  code_id,
             }).then(
                 (response) => {
@@ -209,7 +209,7 @@ const demageStore = createStore ({
             axios.post('http://localhost:8000/api/lightsDemage' , {
                 'lightsDemage' : state.lights.lightDemage ,
                 car_id : state.car_id ,
-                fixer_id : state.engine.fixer_id ,
+                fixer_id : state.lights.fixer_id ,
                 code_id :  code_id,
             }).then(
                 (response) => {

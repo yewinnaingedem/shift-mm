@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\SoldOut ;
+use App\Models\PaintDemage ;
+use App\Models\SuspensionDemage ;
+use App\Models\LightDemage ;
+use App\Models\EngineDemage ;
 use Carbon\Carbon ;
 use App\Models\machine ;
 class AdminDashBoardController extends Controller
@@ -61,11 +65,41 @@ class AdminDashBoardController extends Controller
 
 
     public function machineState () {
+        
+        
+        
+        $pandingPaint['koWinKhiang'] = PaintDemage::where('machines.id', '1')
+                                                    ->leftJoin('machines', 'paint_demages.fixer_id', 'machines.id')
+                                                    ->where('paint_demages.state', 0) 
+                                                    ->count();
+        
+        $pandingPaint['koThayLay'] = PaintDemage::where('machines.id', '4')
+                                                    ->leftJoin('machines', 'paint_demages.fixer_id', 'machines.id')
+                                                    ->where('paint_demages.state', 0) 
+                                                    ->count();
+        $engine['seventBrother'] = EngineDemage::where('machines.id','1')
+                                                            ->leftJoin('machines', 'engine_demages.fixer_id', 'machines.id')
+                                                            ->where('engine_demages.state',0)
+                                                            ->count();
+        machine::where('specialize',3)->where('name','Ko Thant Oo')->update([
+            'pending_count' => $engine['seventBrother'] ,
+            'updated_at' => Carbon::now() ,
+        ]);
+        $suspension['paukSi'] = EngineDemage::where('machines.id','3')
+                                                            ->leftJoin('machines', 'engine_demages.fixer_id', 'machines.id')
+                                                            ->where('engine_demages.state',0)
+                                                            ->count();
+        $lighter['KyawKo'] = LightDemage::where('machines.id',8)
+                                            ->leftJoin('machines', 'light_demages.fixer_id', 'machines.id')
+                                            ->where('light_demages.state',0)
+                                            ->count();
+        $engine['seventBrother'] = SuspensionDemage::where('machines.id','3')
+                                    ->leftJoin('machines', 'suspension_demages.fixer_id', 'machines.id')
+                                    ->where('suspension_demages.state',0)
+                                    ->count();
         $machines = machine::select('machines.*','sepcializes.*')
-                    ->leftJoin('sepcializes','machines.specialize','sepcializes.id')
-                    ->get();
-        // $panding  = [] ;
-        // $panding['paintDemage'] = PaintDemage::where('')->get();
+                            ->leftJoin('sepcializes','machines.specialize','sepcializes.id')
+                            ->get();
         return view('Admin.Dashboard.machineState',compact('machines'));
     }
     
