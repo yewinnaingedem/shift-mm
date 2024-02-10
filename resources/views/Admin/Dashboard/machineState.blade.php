@@ -63,12 +63,11 @@
                                     <div class="fw-bold text-warning">
                                         {{ $machine->pending_count == null ?  'no car is panding' : $machine->pending_count . " car is panding"}}
                                     </div>
-                                    
                                 </div>
                             </div>
                             <div class="position-absolute hover-element d-flex w-30 right-0  h-100 bg-success justify-content-center align-items-center top-0 ">
                                 <div class="fw-bold font-monospace">
-                                    <a href="" class="text-decoration-none">
+                                    <a href="{{url('admin/'.$machine->specialize.'/'.$machine->name)}}" class="text-decoration-none">
                                         Check More..
                                     </a>
                                 </div>
