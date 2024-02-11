@@ -67,7 +67,7 @@
                             </div>
                             <div class="position-absolute hover-element d-flex w-30 right-0  h-100 bg-success justify-content-center align-items-center top-0 ">
                                 <div class="fw-bold font-monospace">
-                                    <a href="{{url('admin/'.$machine->specialize.'/'.$machine->name)}}" class="text-decoration-none">
+                                    <a href="{{url('admin/details/'.$machine->specialize.'/'.$machine->name)}}" class="text-decoration-none">
                                         Check More..
                                     </a>
                                 </div>

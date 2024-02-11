@@ -102,7 +102,7 @@ Route::prefix('admin')->group(function (){
     Route::get('routeBack' , function () {
         return redirect()->back() ;
     });
-    Route::get('{specialize}/{name}' , [AdminDashBoardController::class , 'seeDetial']);
+    Route::get('details/{specialize}/{name}' , [AdminDashBoardController::class , 'seeDetial']);
     Route::resource('panding_state' , PendingStateController::class );
     Route::resource('mechanic' , MechanicController::class );
 });

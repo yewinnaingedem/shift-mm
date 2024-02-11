@@ -14,11 +14,18 @@
 
 @section('content')
     <div class="container-fluid mt-3">
-        <div class="mb-3">
-            <a href="{{url('admin/employees/create')}}" class=" btn btn-primary">
-                <i class="fa-solid fa-plus">Add</i>
-                <span>Add New</span>
-            </a>
+        <div class="mb-3 row">
+            <div class="col-md-6">
+                <a href="{{url('admin/employees/create')}}" class=" btn btn-primary">
+                    <i class="fa-solid fa-plus">Add</i>
+                    <span>Add New</span>
+                </a>
+            </div>
+            <div class="col-md-6 text-end">
+                <a href="{{url('admin/machines/state')}}" class="btn btn-danger">
+                    Back 
+                </a>
+            </div>
         </div>
         @if(session('message')) 
             <div class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -28,19 +35,21 @@
         @endif 
         
             
-        <table id="example" class="display" style="width:100%">
+        <table id="example" class="display text-center bg-dark text-white rounded" style="width:100%">
             <thead>
-                <tr>
+                <tr class="text-center">
                     <th>Car Id</th>
                     <th>Description</th>
+                    <th>Start Day</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($states as $states)
                     <tr>
-                        <td> {{ $states->car_id}}</td>
-                        <td> {{$states->description }}</td>
+                        <td class="text-center text-danger fw-bold"> {{ $states->license_plate}}</td>
+                        <td class="text-capitalize text-center"> {{$states->description }}</td>
+                        <td>{{$states->created_at}}</td>
                         <td>
                             <li class="nav-item  list-style-none">
                                 <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
@@ -63,6 +72,7 @@
                 <tr>
                     <th>Car Id</th>
                     <th>Description</th>
+                    <th>Start Day</th>
                     <th>Action</th>
                 </tr>
             </tfoot>

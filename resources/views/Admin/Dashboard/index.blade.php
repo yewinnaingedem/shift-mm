@@ -3,6 +3,7 @@
 @section('title' , 'Admin')
 
 @section('style')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magic/1.1.0/magic.min.css">
     <style>
         #curve_chart {
             border-radius : 10px ;
@@ -98,8 +99,8 @@
             </div>
         </div>
         <div class="row mt-3">
-            <div class="col-md-6 position-relative hover-element mb-3 rounded">
-                <div class=" position-relative rounded overflow-hidden bg-info  bg-main">
+            <div class="col-md-6 position-relative  hover-element mb-3 rounded tinRightIn" >
+                <div class=" position-relative shadow rounded overflow-hidden bg-info  bg-main">
                     <div class=" w-100px h-100px  p-2">
                         <img class="bg-cover w-100 h-100" src="{{asset('storage/images/simileEmoji.png')}}" alt="">
                     </div>
@@ -112,7 +113,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="position-absolute top-0 right-0 d-cusotmize w-25 h-100 bg-color rounded">
+                <div class="position-absolute top-0 right-0 d-cusotmize w-25 h-100 bg-color rounded rotateLeft">
                     <a href="{{url('admin/dashboard/saledFor2Day')}}" class="text-decoration-none d-flex justify-content-center w-100 h-100 align-items-center ">
                         <div class="fw-bold me-2">
                             See 
@@ -123,8 +124,8 @@
                     </a>
                 </div>
             </div>
-            <div class="col-md-6 position-relative hover-element mb-3 rounded">
-                <div class=" position-relative rounded overflow-hidden bg-info  bg-main">
+            <div class="col-md-6 position-relative  hover-element mb-3 rounded">
+                <div class=" position-relative shadow rounded overflow-hidden bg-info  bg-main">
                     <div class=" w-100px h-100px  p-2">
                         <img class="bg-cover w-100 h-100" src="{{asset('storage/images/loveEmoji.png')}}" alt="">
                     </div>
@@ -148,8 +149,8 @@
                     </a>
                 </div>
             </div>
-            <div class="col-md-6 position-relative hover-element mb-3 rounded">
-                <div class=" position-relative rounded overflow-hidden bg-info  bg-main">
+            <div class="col-md-6 position-relative  hover-element mb-3 rounded">
+                <div class=" position-relative shadow rounded overflow-hidden bg-info  bg-main">
                     <div class=" w-100px h-100px  p-2">
                         <img class="bg-cover w-100 h-100" src="{{asset('storage/images/dogEmoji.png')}}" alt="">
                     </div>
@@ -172,10 +173,9 @@
                         </div>
                     </a>
                 </div>
-                
             </div>
-            <div class="col-md-6 position-relative hover-element mb-3 rounded">
-                <div class=" position-relative rounded overflow-hidden bg-info  bg-main">
+            <div class="col-md-6 position-relative  hover-element mb-3 rounded">
+                <div class=" position-relative shadow rounded overflow-hidden bg-info  bg-main">
                     <div class=" w-100px h-100px  p-2">
                         <img class="bg-cover w-100 h-100" src="{{asset('storage/images/dogLIstionToMusi.png')}}" alt="">
                     </div>
@@ -198,7 +198,6 @@
                         </div>
                     </div>
                 </div>
-                
             </div>
         </div>
     </div>
