@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\Employee ;
 use App\Models\Car\Sale ;
 use App\Models\SoldOut ;
+use PDF;
 use App\Models\Buyer ;
 use Carbon\Carbon ;
 use App\Models\Deposit ;
@@ -193,6 +194,10 @@ class SoldOutController extends Controller
             'message' => 'successfully' ,
             'redirect' => "http://localhost:8000/admin/saled" ,
         ] , 200);
+        
+    }
+
+    public function generatePDF ( string $id) {
         
     }
 }

@@ -288,4 +288,19 @@ class AdminDashBoardController extends Controller
                     ->get();
         return view('Admin.Dashboard.SeeDetails',compact('states'));
     }
+
+
+    public function histroyOfSellingCar () {
+        $records = SoldOut::select('owner_books.license_plate as licensePlate','buyers.name as buyerName','hp_plans.hp_loan as hpPlan' ,'hire_purchases.loan_month as loanMonths'
+        ,'sold_outs.created_at as createdAt', 'buyers.purchase_price as purchasePrice','car_models.model_name as modelName'                  
+        )
+                            ->leftJoin('cars','sold_outs.car_id','cars.id')
+                            ->leftJoin('buyers','sold_outs.buyer_id','buyers.id')
+                            ->leftJoin('hire_purchases','sold_outs.hire_purchase_id','hire_purchases.id')
+                            ->leftJoin('owner_books','cars.owner_book_id','owner_books.id')
+                            ->leftJoin('hp_plans','hire_purchases.hp_plan_id','hp_plans.id')
+                            ->leftJoin('car_models','owner_books.model_id','car_models.id')
+                            ->get();
+        return view('Admin.Dashboard.historyOfSellingCars', compact('records'));
+    }
 }

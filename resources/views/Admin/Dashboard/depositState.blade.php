@@ -91,7 +91,10 @@
                     </div>
                     <div class="col-md-3  text-center d-flex justify-content-end align-items-center">
                         <div class="fw-bold w-75 h-100 rounded bg-white shadow fs-20">
-                            <div class="w-100 deposit-container h-100">
+                            <div class="w-100 deposit-container position-relative  h-100 ">
+                                <div class="loader position-absolute  d-flex justify-content-center bg-transparent  align-items-center w-100 h-100">
+                                    <div class="spinner-border" role="status"></div>
+                                </div>
                                 <span class="position-relative w-25">
                                     <span class="days"></span>
                                     <span class="position-absolute fw-semibold bottom-27px fs-15 right-0 daysText text-center"></span>
@@ -128,7 +131,7 @@
 
             let deposit = $('.deposit');
             deposit.each(function (index , element ) {
-
+                var loader  = $(element).find('.loader');
                 var dateIn = $(element).find('.date').text();
                 var daysIn = $(element).find('.days');
                 var hoursIn = $(element).find('.hours');
@@ -160,6 +163,7 @@
                         depositContainer.html(expired) ;
 
                     }else {
+                        loader.remove();
                         daysIn.text(days + " :");
                         hoursIn.text(hours + " :");
                         minutesIn.text(minutes + " :");

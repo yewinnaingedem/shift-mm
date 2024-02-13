@@ -5,5 +5,4 @@ const app = createApp({
         Wrapper ,
     }
 });
-
 app.mount('#app') ;

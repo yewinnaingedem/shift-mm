@@ -10,6 +10,7 @@
         }
         .chart-container {
             background : #f8f8f8 ;
+            position: relative;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
             border-radius: 10px; /* Rounded corners */
             overflow: hidden; /* Hide any overflow content */
@@ -66,6 +67,9 @@
             opacity: 0.65;
             color : #141616 ;
         }
+        .h-200 {
+            min-height: 300px;
+        }
     </style>
 @endsection 
 
@@ -82,17 +86,27 @@
         </blockquote>
         <div class="row">
             <div class="col-md-6 ">
-                <div class="chart-container">
+                <div class="chart-container h-200">
                     <div class="google-visualization-table-caption text-center fw-bold">
                         Sale Performance
+                    </div>
+                    <div class="loading-content">
+                        <div class="loader position-absolute d-flex justify-content-center bg-transparent  align-items-center w-100 h-100">
+                            <div class="spinner-border" role="status"></div>
+                        </div>
                     </div>
                     <div  id="curve_chart" ></div>
                 </div>
             </div>
             <div class="col-md-6 ">
-                <div class="chart-container">
+                <div class="chart-container h-200">
                     <div class="google-visualization-table-caption text-center fw-bold">
                         Monthly Sale Performance
+                    </div>
+                    <div class="loading-content">
+                        <div class="loader position-absolute d-flex justify-content-center bg-transparent  align-items-center w-100 h-100">
+                            <div class="spinner-border" role="status"></div>
+                        </div>
                     </div>
                     <div id="coreChart" ></div>
                 </div>
@@ -181,7 +195,7 @@
                     </div>
                     <div class="color bg-img position-absolute w-100 fn-f-mono h-100 d-flex justify-content-around align-items-center">
                         <div class="fw-bold text-center fs-20px">
-                            Saled Car For Today 
+                            History Of Selling Car 
                         </div>
                         <div class="fw-bold  fs-18">
                             12
@@ -189,14 +203,14 @@
                     </div>
                 </div>
                 <div class="position-absolute top-0 right-0 d-cusotmize w-25 h-100 bg-color rounded">
-                    <div class=" d-flex justify-content-center w-100 h-100 align-items-center  ">
+                    <a href="{{url('admin/histroy/sold_out')}}" class="text-decoration-none d-flex justify-content-center w-100 h-100 align-items-center ">
                         <div class="fw-bold me-2">
                             See 
                         </div>
                         <div class="">
                             <i class="fa-solid fa-forward"></i>
                         </div>
-                    </div>
+                    </a>
                 </div>
             </div>
         </div>

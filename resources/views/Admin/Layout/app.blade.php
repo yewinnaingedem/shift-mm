@@ -149,7 +149,7 @@
                             let innerLi = `
                                 <li class="list-group-item">
                                     <a href="${href}" class="nav-link d-flex justify-content-between align-items-center">
-                                        ${$(this).html()} 
+                                        ${$(this).text()} 
                                     </a>
                                 </li>
                             ` ;
