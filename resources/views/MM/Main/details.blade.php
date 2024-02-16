@@ -266,7 +266,7 @@
                 </div>
             </div>  
             <div class="col-span-1 my-[135px] mx-2 hover:shadow-full rounded-xl  flex-col mt-2 flex justify-center items-center ">
-                <div class="w-100  p-6 h-[65%]  border border-gray-500  rounded">
+                <div class="w-100  p-6 h-[100%]  border border-gray-500  rounded">
                     <div class="flex justify-between w-full ">
                         <div class="text-primary-60 font-bold text-neutral-90 text-3xl font-display price"> {{$sale->price}} </div>
                         <div>

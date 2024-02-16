@@ -23,6 +23,7 @@ use App\Http\Controllers\Condition\KeyController ;
 use App\Http\Controllers\Condition\SunRoofController ;
 use App\Http\Controllers\PendingStateController ;
 use App\Http\Controllers\MechanicController ;
+use App\Http\Controllers\EmailController ;
 use App\Http\Controllers\Condition\SonarController ;
 use App\Http\Controllers\Condition\CameraController ;
 use App\Http\Controllers\Engine\EngineController ;
@@ -55,9 +56,8 @@ Route::prefix('mm_cars')->group(function () {
     Route::get('car/{details}' , [DetailsController::class , 'index'] );
     // financing 
     Route::get('financing' , [FinancingController::class , 'index']);
-    
 });
-
+Route::get('testingEmail', [EmailController::class , 'index']);
 Route::prefix('admin')->group(function (){
     Route::get('dashbord' , [AdminDashBoardController::class , 'index']);
     Route::get('dashboard/saledFor2Day' , [AdminDashBoardController::class , "SaledFor2Day"]);

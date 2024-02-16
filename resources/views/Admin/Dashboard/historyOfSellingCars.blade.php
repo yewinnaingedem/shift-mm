@@ -39,7 +39,7 @@
                     <td>{{$record->createdAt}}</td>
                     <td>{{$record->purchasePrice}}</td>
                     <td>
-                        <a href="" class="btn btn-primary">
+                        <a href="{{url('admin/generatePDF/'.$record->soldOutId)}}" class="btn btn-primary">
                             <span class="fw-lighter me-1">PDF </span>
                             <i class="fa-solid fa-print"></i>
                         </a>

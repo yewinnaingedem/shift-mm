@@ -100,10 +100,7 @@ return array(
           * @var string
           */
         'log_output_file' => null,
-
-        /**
-         * Whether to enable font subsetting or not.
-         */
+        'paper_size' => 'A4',
         "enable_font_subsetting" => false,
 
         /**

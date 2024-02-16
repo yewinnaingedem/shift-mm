@@ -292,7 +292,7 @@ class AdminDashBoardController extends Controller
 
     public function histroyOfSellingCar () {
         $records = SoldOut::select('owner_books.license_plate as licensePlate','buyers.name as buyerName','hp_plans.hp_loan as hpPlan' ,'hire_purchases.loan_month as loanMonths'
-        ,'sold_outs.created_at as createdAt', 'buyers.purchase_price as purchasePrice','car_models.model_name as modelName'                  
+        ,'sold_outs.created_at as createdAt', 'buyers.purchase_price as purchasePrice','car_models.model_name as modelName','sold_outs.id as soldOutId'              
         )
                             ->leftJoin('cars','sold_outs.car_id','cars.id')
                             ->leftJoin('buyers','sold_outs.buyer_id','buyers.id')
