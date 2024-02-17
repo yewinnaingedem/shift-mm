@@ -42,6 +42,7 @@ class SoldOutController extends Controller
      */
     public function store(Request $request)
     {
+        
         $validator = Validator::make(
             $request->all()  ,
             [
@@ -202,7 +203,7 @@ class SoldOutController extends Controller
         $record = SoldOut::select('brands.brand_name as brandName','car_models.model_name as modelName','owner_books.license_plate as licensePlate','buyers.name as buyerName'
                             ,'sold_outs.created_at as createdAt','hp_plans.hp_loan as HpLoan','dealers.name as dealerName','years.year as year','owner_books.vin as vin','items.kilo_meter as kilo_meter',
                             'car_models.id as carModelId','grades.id as gradeId','buyers.purchase_price as purchasePrice','hire_purchases.loan_month as loanMonths','hire_purchases.downpayment as downpayment'
-                            ,'hire_purchases.insurance as insurance','hire_purchases.service_charge as service_charge','hire_purchases.bank_commission as bank_commission')
+                            ,'hire_purchases.insurance as insurance','hire_purchases.deposit as deposit','hire_purchases.service_charge as service_charge','hire_purchases.bank_commission as bank_commission')
                             ->leftJoin('cars','sold_outs.car_id','cars.id')
                             ->leftJoin('items','cars.item_id', 'items.id')
                             ->leftJoin('buyers','sold_outs.buyer_id','buyers.id')
@@ -223,11 +224,12 @@ class SoldOutController extends Controller
         $hpPlan = [] ;
         $hpPlan['downpaymentAmount'] = intval( $purchase * ($record->downpayment / 100) ) ;
         $hpPlan['loanAmount'] = $purchase - $hpPlan['downpaymentAmount'] ;
+        $hpPlan['deposit'] = ($hpPlan['loanAmount'] * (intval($record->deposit ) / 100));
         $hpPlan['insurance'] = $purchase * (str_replace('%','',$record->insurance) / 100);
         $hpPlan['bankcomission'] = $hpPlan['loanAmount'] * (str_replace('%','',$record->bank_commission) / 100) ;
         $hpPlan['serviceCharge'] = $purchase * (str_replace('%','',$record->service_charge)/100);
         $hpPlan['emiAmount'] = $this->calculateEMI($hpPlan['loanAmount'] , 10 , $record->loanMonths);
-        $hpPlan['totalAmount'] = $hpPlan['downpaymentAmount'] + $hpPlan['insurance'] + $hpPlan['serviceCharge'] + $hpPlan['bankcomission'];
+        $hpPlan['totalAmount'] = $hpPlan['downpaymentAmount'] + $hpPlan['deposit'] + $hpPlan['insurance'] + $hpPlan['serviceCharge'] + $hpPlan['bankcomission'];
         $html = view('Admin.Dashboard.generatePDF' , compact('record' ,'carFunctions','hpPlan'));
         $pdf = PDF::loadHTML($html);
         return $pdf->stream('simple-pdf.pdf');

@@ -62,6 +62,7 @@
                         <tr style="background-color: #fff;">
                             <th style="border: 1px solid #000; padding: 8px; text-align: center;">Purchase Price</th>
                             <th style="border: 1px solid #000; padding: 8px; text-align: center;">Downpayment (<span style="font-weight: bold;">{{$record->downpayment}}</span>)</th>
+                            <th style="border: 1px solid #000; padding: 8px; text-align: center;">Deposit (<span style="font-weight: bold;">{{$record->downpayment}}</span>)</th>
                             <th style="border: 1px solid #000; padding: 8px; text-align: center;">Insurance (<span style="font-weight: bold;">{{$record->insurance}}</span>)</th>
                             <th style="border: 1px solid #000; padding: 8px; text-align: center;">Bank Commission (<span style="font-weight: bold;">{{$record->bank_commission}}</span>)</th>
                             <th style="border: 1px solid #000; padding: 8px; text-align: center;">Service Charge (<span style="font-weight: bold;">{{$record->service_charge}}</span>)</th>
@@ -72,6 +73,7 @@
                         <tr style="text-align: center;">
                             <td style="border: 1px solid #000; padding: 8px;">{{$record->purchasePrice}}</td>
                             <td style="border: 1px solid #000; padding: 8px;">{{$hpPlan['downpaymentAmount']}}</td>
+                            <td style="border: 1px solid #000; padding: 8px;">{{$hpPlan['deposit'] !== 0 ? $hpPlan['deposit'] : "---" }}</td>
                             <td style="border: 1px solid #000; padding: 8px;">{{$hpPlan['insurance']}}</td>
                             <td style="border: 1px solid #000; padding: 8px;">{{$hpPlan['bankcomission']}}</td>
                             <td style="border: 1px solid #000; padding: 8px;">{{$hpPlan['serviceCharge']}}</td>

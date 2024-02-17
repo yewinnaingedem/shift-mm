@@ -47,6 +47,9 @@
         .m-0 {
             margin-bottom : 0px  !important ;
         }
+        .min-height {
+            min-height : 400px ;
+        }
     </style>
 @endsection 
 
@@ -113,92 +116,97 @@
             <div class="bg-dark rounded overflow-hidden mb-3">
                 <div class="card text-center">
                     <div class="card-header">
-                        <button type="button" class="btn btn-dark">HP</button>
-                        <button type="button" class="btn btn-dark">Cash</button>
+                        <button type="button" id="hp" class="btn btn-dark">HP</button>
+                        <button type="button"  id="cash" class="btn btn-dark">Cash</button>
                     </div>
-                    <div class="card-body">
-                        <div class="row mb-2">
-                            <div class="col-md-6 d-flex jsutify-content-center align-items-center">
-                                <label class="form-label "  for="hp">Loan Plan</label>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <select name="hp" id="hp" class="form-select  select-valid">
-                                            <option class="d-none" selected>Enter Loan Plan</option>
-                                            @foreach($hps as $hp)
-                                                <option value="{{$hp->id}}">{{$hp->hp_loan}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <input type="text" name="present" value="50" class="form-control check-valid bg-dark text-white" placeholder="Enter Parsent">
+                    <div  class="card-body min-height">
+                        <div id="hp-content">
+                            <div class="row mb-2">
+                                <div class="col-md-6 d-flex jsutify-content-center align-items-center">
+                                    <label class="form-label "  for="hp">Loan Plan</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <select name="hp" id="hp" class="form-select  select-valid">
+                                                <option class="d-none" selected>Enter Loan Plan</option>
+                                                @foreach($hps as $hp)
+                                                    <option value="{{$hp->id}}">{{$hp->hp_loan}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="text" name="present" value="50" class="form-control check-valid bg-dark text-white" placeholder="Enter Parsent">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row mb-2 dpAmount">
-                            <div class="col-md-6 d-flex jsutify-content-center align-items-center">
-                                <label class="form-label" for="hp">Downpayment <span id="dpPresent" class="fw-bold"></span></label>
+                            <div class="row mb-2 dpAmount">
+                                <div class="col-md-6 d-flex jsutify-content-center align-items-center">
+                                    <label class="form-label" for="hp">Downpayment <span id="dpPresent" class="fw-bold"></span></label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" name="downpayment" class="form-control fw-bold" placeholder="Enter Downpayment">
+                                </div>
                             </div>
-                            <div class="col-md-6">
-                                <input type="text" name="downpayment" class="form-control fw-bold" placeholder="Enter Downpayment">
+                            <div class="row mb-2">
+                                <div class="col-md-6 d-flex jsutify-content-center align-items-center">
+                                    <label class="form-label" for="hp">Insurance (<span class="fw-bold" id="insurance">1.5%</span>)</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="insurance" placeholder="Enter Insurance">
+                                </div>
                             </div>
-                        </div>
-                        <div class="row mb-2">
-                            <div class="col-md-6 d-flex jsutify-content-center align-items-center">
-                                <label class="form-label" for="hp">Insurance (<span class="fw-bold" id="insurance">1.5%</span>)</label>
+                            <div class="row mb-2">
+                                <div class="col-md-6 d-flex jsutify-content-center align-items-center">
+                                    <label class="form-label" for="hp">Bank Commission <span class="fw-bold">( <span id="bankCommission">1%</span> on Loan Amount )</span></label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="bankCommission" placeholder="Enter Bank Commission">
+                                </div>
                             </div>
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" name="insurance" placeholder="Enter Insurance">
+                            <div class="row mb-2">
+                                <div class="col-md-6 d-flex jsutify-content-center align-items-center">
+                                    <label class="form-label" for="hp">Service Charge <span class="fw-bold">( <span id="serviceCharge">2%</span> on Car Price )</span> </label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="serviceCharge" placeholder="Enter Service Charge">
+                                </div>
                             </div>
-                        </div>
-                        <div class="row mb-2">
-                            <div class="col-md-6 d-flex jsutify-content-center align-items-center">
-                                <label class="form-label" for="hp">Bank Commission <span class="fw-bold">( <span id="bankCommission">1%</span> on Loan Amount )</span></label>
+                            <div class="row mb-2">
+                                <div class="col-md-6 d-flex jsutify-content-center align-items-center">
+                                    <label class="form-label" for="hp">Initial Payment</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" name="intial" class="form-control bg-dark text-white font-bold" >
+                                </div>
                             </div>
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" name="bankCommission" placeholder="Enter Bank Commission">
-                            </div>
-                        </div>
-                        <div class="row mb-2">
-                            <div class="col-md-6 d-flex jsutify-content-center align-items-center">
-                                <label class="form-label" for="hp">Service Charge <span class="fw-bold">( <span id="serviceCharge">2%</span> on Car Price )</span></label>
-                            </div>
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" name="serviceCharge" placeholder="Enter Service Charge">
-                            </div>
-                        </div>
-                        <div class="row mb-2">
-                            <div class="col-md-6 d-flex jsutify-content-center align-items-center">
-                                <label class="form-label" for="hp">Initial Payment</label>
-                            </div>
-                            <div class="col-md-6">
-                                <input type="text" name="intial" class="form-control bg-dark text-white font-bold" >
-                            </div>
-                        </div>
-                        <div class="row mb-2">
-                            <div class="col-md-6 d-flex jsutify-content-center align-items-center">
-                                <label class="form-label" for="hp">Loan Amount</label>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <input type="text" class="form-control   fw-bold" name="loanamount" placeholder="Enter Loan Lenght">
-                                    </div>
-                                    <div class="col-md-6">
-                                        <input type="text" name="monthly"  value="60" class="form-control   bg-dark text-white fw-bold" placeholder="Enter Months Only">
+                            <div class="row mb-2">
+                                <div class="col-md-6 d-flex jsutify-content-center align-items-center">
+                                    <label class="form-label" for="hp">Loan Amount</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <input type="text" class="form-control   fw-bold" name="loanamount" placeholder="Enter Loan Lenght">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="text" name="monthly"  value="60" class="form-control   bg-dark text-white fw-bold" placeholder="Enter Months Only">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                            <div class="row mb-2">
+                                <div class="col-md-6 d-flex jsutify-content-center align-items-center">
+                                    <label class="form-label" for="hp">Monthly Payment</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="monthlyPayment"  placeholder="Enter Loan">
+                                </div>
+                            </div>
                         </div>
-                        <div class="row mb-2">
-                            <div class="col-md-6 d-flex jsutify-content-center align-items-center">
-                                <label class="form-label" for="hp">Monthly Payment</label>
-                            </div>
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" name="monthlyPayment"  placeholder="Enter Loan">
-                            </div>
+                        <div id="cash-content">
+                            <p>Hi I am cash content</p>
                         </div>
                     </div>
                 </div>
@@ -259,12 +267,12 @@
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="deposit" class="form-label">Deposit Amount</label>
-                                        <input type="text"  id="deposit" placeholder="Enter Deposit" class="form-control">
+                                        <input type="text"  id="deposit" placeholder="Enter Deposit" class="form-control model-valid">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="" class="form-label">Final Date</label>
-                                    <input type="date" name="finalDate" class="form-control" placeholder="Enter Final Deposit" id="finalDate">
+                                    <input type="date" name="finalDate" class="form-control model-valid" placeholder="Enter Final Deposit" id="finalDate">
                                 </div>
                             </div>
                             <div class="form-floating mb-3">
@@ -296,7 +304,7 @@
     <script>
             $(document).ready(()=> {
                 $('#clickCheck').click(function() {
-                     var checkValue = true; 
+                    var checkValue = true; 
                     $('.check-valid').each(function (index, element) {
                         var value = $(element).val().trim();
                         if (value === "") {
@@ -312,7 +320,6 @@
                             $(element).next('.error-message').remove();
                         }
                 });
-                
                 $('.select-valid').each(function (index , element ) {
                     let select = $(element).val().trim();
                     if(select === "Who sell it ?" || select === "Enter Loan Plan" || select === "Dealer") {
@@ -323,6 +330,7 @@
                             $(element).removeClass('is-invalid');
                         }
                     });
+
                     if (checkValue) {
                         $('#exampleModal').modal('show');
                     } else {
@@ -339,55 +347,81 @@
                 let present = $('input[name="present"]');
                 let insurance = $('#insurance').text().trim();
                 let bankCommission = $('#bankCommission').text().trim();
-                let deposit = $('#deposit');
+                
                 let serviceCharge = $('#serviceCharge').text().trim() ;
                 let monthly = $('input[name="monthly"]') ;
                 let broker_name = $('#broker_name');
                 let broker_fee = $('#broker_fee');
                 let brokerPhone = $('#brokerPhone');
                 let dealer = $('select[name="dealer"]');
-
+                
                 $('#submit').click(()=> {
-                    $('.loading-bar').show();
+                    let depositAmount = depositValue.val().replace(/,/g,'')
                     let finalDate = $('#finalDate');
-                    console.log(finalDate);
                     let noted = $('#noted');
-                    $.ajax({
-                        url : "/admin/adminTesting" ,
-                        method : "post" ,
-                        data : {
-                            'id' : id.val() ,
-                            "_token" : "{{csrf_token()}}" ,
-                            'depositAmount' : depositValue.val().replace(/,/g,'') ,
-                            'finalDate' : finalDate.val() ,
-                            'noted' : noted.val() ,
-                            'employee' : employee.val() ,
-                            'monthly' : monthly.val() ,
-                            'buyer' : buyer.val() ,
-                            'purchase_price' : purchase_price.val() ,
-                            'phone_number' : phone_number.val() ,
-                            'address' : address.val() ,
-                            'hp' : hp.val() ,
-                            'present' : present.val() ,
-                            'deposit' : deposit.val() ,
-                            'insurance' : insurance ,
-                            'bankCommission' : bankCommission ,
-                            'serviceCharge' : serviceCharge ,
-                            'broker[name]' : broker_name.val() ,
-                            'broker[broker_fee]' : broker_fee.val() ,
-                            'broker[phone]' : brokerPhone.val() ,
-                            'dealer' : dealer.val() ,
-                        },
-                        success : (response) => {
-                            $('.loading-bar').hide();
-                            window.location.href = response.redirect ;
-                            console.log(response);
-                        },
-                        error : (error) => {
-                            console.log(error);
+                    if(validation()) {
+                        let deposit = 0 ;
+                        if(present.val() < 50) {
+                            deposit = $('#depositAmount').text().trim();
+                        }
+                        $('.loading-bar').show();
+                        $.ajax({
+                            url : "/admin/adminTesting" ,
+                            method : "post" ,
+                            data : {
+                                'id' : id.val() ,
+                                "_token" : "{{csrf_token()}}" ,
+                                'depositAmount' : depositAmount  ,
+                                'finalDate' : finalDate.val() ,
+                                'noted' : noted.val() ,
+                                'employee' : employee.val() ,
+                                'monthly' : monthly.val() ,
+                                'buyer' : buyer.val() ,
+                                'purchase_price' : purchase_price.val() ,
+                                'phone_number' : phone_number.val() ,
+                                'address' : address.val() ,
+                                'hp' : hp.val() ,
+                                'present' : present.val() ,
+                                'deposit' : deposit ,
+                                'insurance' : insurance ,
+                                'bankCommission' : bankCommission ,
+                                'serviceCharge' : serviceCharge ,
+                                'broker[name]' : broker_name.val() ,
+                                'broker[broker_fee]' : broker_fee.val() ,
+                                'broker[phone]' : brokerPhone.val() ,
+                                'dealer' : dealer.val() ,
+                            },
+                            success : (response) => {
+                                $('.loading-bar').hide();
+                                window.location.href = response.redirect ;
+                            },
+                            error : (error) => {
+                                console.log(error);
+                            }
+                        });
+                    }
+                });
+                function validation () {
+                    let modelValid = $('.model-valid');
+                    var validateValue = true ;
+                    modelValid.each(function (index , element) {
+                        var value = $(element).val().trim();
+                        if (value === "") {
+                            $(element).addClass('is-invalid');
+                            $(element).focus();
+                            $(element).next('.error-message').remove();
+                            let errorText = $(element).attr('placeholder');
+                            validateValue = false;
+                            var errorMessage = $('<p>').addClass('error-message m-0 text-danger fst-italic').text(`Please ${errorText}`);
+                            $(element).after(errorMessage);
+                        } else {
+                            $(element).removeClass('is-invalid');
+                            $(element).next('.error-message').remove();
                         }
                     });
-                });
+
+                    return validateValue ;
+                }
 
                 let purchase = $('input[name="purchase_price"');
                 $(purchase).on('keyup',function () {
@@ -404,6 +438,20 @@
                     let formattedValue = Number(value).toLocaleString();
                     $(this).val(formattedValue);
                 });
-            });
+
+                $("#hp-content").hide();
+
+                // Show cash content when cash button is clicked
+                $("#cash").click(function() {
+                    $("#cash-content").toggle();
+                    $("#hp-content").hide();
+                });
+
+                // Show hp content when hp button is clicked
+                $("#hp").click(function() {
+                        $("#hp-content").toggle();
+                        $("#cash-content").hide();
+                    });
+                });
     </script>
 @endsection 
