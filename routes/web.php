@@ -49,6 +49,7 @@ Route::prefix('mm_cars')->group(function () {
         Auth::logout() ;
         return redirect('mm_cars');
     });
+    Route::post('askquestion/{id}', [EmailController::class , 'index']);
     Route::get('/register',[AuthController::class , 'userRegister']);
     Route::post('/register',[AuthController::class , 'register']);
     Route::post('change_profile/{id}' , [AuthController::class , 'changeProfile']);
@@ -57,7 +58,7 @@ Route::prefix('mm_cars')->group(function () {
     // financing 
     Route::get('financing' , [FinancingController::class , 'index']);
 });
-Route::get('testingEmail', [EmailController::class , 'index']);
+
 Route::prefix('admin')->group(function (){
     Route::get('dashbord' , [AdminDashBoardController::class , 'index']);
     Route::get('dashboard/saledFor2Day' , [AdminDashBoardController::class , "SaledFor2Day"]);

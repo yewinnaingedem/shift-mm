@@ -80,15 +80,15 @@
                             <td style="border: 1px solid #000; padding: 8px;">----</td>
                         </tr>
                         <tr style="text-align: center;">
-                            <td colspan="5" style="border: 1px solid #000; padding: 8px;">Initial Paymenet</td>
+                            <td colspan="6" style="border: 1px solid #000; padding: 8px;">Initial Paymenet</td>
                             <td style="border: 1px solid #000; padding: 8px;">{{$hpPlan['totalAmount']}}</td>
                         </tr>
                         <tr style="text-align: center;">
-                            <td colspan="5" style="border: 1px solid #000; padding: 8px;">Loan Amount</td>
+                            <td colspan="6" style="border: 1px solid #000; padding: 8px;">Loan Amount</td>
                             <td style="border: 1px solid #000; padding: 8px;">{{$hpPlan['loanAmount']}}</td>
                         </tr>
                         <tr style="text-align: center;">
-                            <td colspan="5" style="border: 1px solid #000; padding: 8px;">Monthly Payment within {{$record->loanMonths}} months</td>
+                            <td colspan="6" style="border: 1px solid #000; padding: 8px;">Monthly Payment within {{$record->loanMonths}} months</td>
                             <td style="border: 1px solid #000; padding: 8px;">{{$hpPlan['emiAmount']}}</td>
                         </tr>
                     </tbody>

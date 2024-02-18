@@ -12,7 +12,7 @@ class DetailsController extends Controller
 {
     public function index($carname) {
         $main = explode("id_",$carname)[1];
-        $sale = Sale::select('sales.id as sale_id' ,'sales.price', 'car_models.*' , 'brands.*','owner_books.*','grades.grade as grade_main','transmission_types.*','items.*','car_images.*','cars.*','grades.default_function_id as df_id'
+        $sale = Sale::select('sales.id as sale_id' ,'sales.price', 'cars.id as mainId' ,'car_models.*' , 'brands.*','owner_books.*','grades.grade as grade_main','transmission_types.*','items.*','car_images.*','cars.*','grades.default_function_id as df_id'
                         ,'exterior_colors.exterior_color as exterior'  , 'engine_powers.engine_power as engine_power' , 'cylinders.cylinder' , 'engine_types.type as type' , 'grades.grade as mainGrade' , 'license_states.state as lincese_state_main' )
                         ->leftJoin('cars','sales.car_id','cars.id')
                         ->leftJoin('car_images','cars.car_image_id','car_images.id')
@@ -30,7 +30,6 @@ class DetailsController extends Controller
                         ->leftJoin('engine_types' , 'engines.fuel' , 'engine_types.id')
                         ->where('sales.id',$main)
                         ->first();
-        // dd($sale->df_id);
         $result = Grade::select()
                 ->leftJoin('car_functions','grades.id','car_functions.grade_id')
                 ->leftJoin('car_details as cd','car_functions.car_detail_id','cd.id')
@@ -45,7 +44,6 @@ class DetailsController extends Controller
             $item = $value->function ;
             array_push($advacanceFuntions , $item);
         }
-        // dd($sale);
         return view('MM.Main.details')->with('sale',$sale)->with('advanc',$advacanceFuntions)->with('df_id', $sale->df_id);
     }
 }

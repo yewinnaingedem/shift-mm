@@ -12,13 +12,15 @@ use Illuminate\Queue\SerializesModels;
 class toAdmin extends Mailable
 {
     use Queueable, SerializesModels;
-    public $name ;
+    public $car ;
+    public $description ;
     /**
      * Create a new message instance.
      */
-    public function __construct($name)
+    public function __construct(array $car , $description)
     {
-        $this->name = $name;   
+        $this->car = $car;   
+        $this->description = $description;
     }
 
     /**
