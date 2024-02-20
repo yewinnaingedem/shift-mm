@@ -12,8 +12,8 @@ class DetailsController extends Controller
 {
     public function index($carname) {
         $main = explode("id_",$carname)[1];
-        $sale = Sale::select('sales.id as sale_id' ,'sales.price', 'cars.id as mainId' ,'car_models.*' , 'brands.*','owner_books.*','grades.grade as grade_main','transmission_types.*','items.*','car_images.*','cars.*','grades.default_function_id as df_id'
-                        ,'exterior_colors.exterior_color as exterior'  , 'engine_powers.engine_power as engine_power' , 'cylinders.cylinder' , 'engine_types.type as type' , 'grades.grade as mainGrade' , 'license_states.state as lincese_state_main' )
+        $sale = Sale::select('sales.id as sale_id' ,'sales.price', 'cars.id as mainId' ,'car_models.*' , 'brands.brand_name as brandName' , 'brands.*','owner_books.*','grades.grade as grade_main','transmission_types.*','items.*','car_images.*','cars.*','grades.default_function_id as df_id'
+                        ,'exterior_colors.exterior_color as exterior','made_in.country','engine_types.type as fuelType' ,'engines.Turbo as trubo' ,'transmission_types.transmission_type as transmissionType' ,'owner_books.license_plate as licenserPlate' , 'engine_powers.engine_power as engine_power' , 'cylinders.cylinder' , 'engine_types.type as type' , 'grades.grade as mainGrade' , 'license_states.state as lincese_state_main' )
                         ->leftJoin('cars','sales.car_id','cars.id')
                         ->leftJoin('car_images','cars.car_image_id','car_images.id')
                         ->leftJoin('owner_books','cars.owner_book_id','owner_books.id')
@@ -25,9 +25,10 @@ class DetailsController extends Controller
                         ->leftJoin('license_states' , 'owner_books.license_state' , 'license_states.id')
                         ->leftJoin('exterior_colors','owner_books.exterior_color_id' , 'exterior_colors.id')
                         ->leftJoin('grades','items.grade','grades.id')
+                        ->leftJoin('made_in','items.place_of_orgin','made_in.id')
                         ->leftJoin('engines' ,'grades.engine_id' , 'engines.id')
                         ->leftJoin('cylinders' , 'engines.Cylinder_id' , 'cylinders.id')
-                        ->leftJoin('engine_types' , 'engines.fuel' , 'engine_types.id')
+                        ->leftJoin('engine_types' , 'engines.Fuel' , 'engine_types.id')
                         ->where('sales.id',$main)
                         ->first();
         $result = Grade::select()

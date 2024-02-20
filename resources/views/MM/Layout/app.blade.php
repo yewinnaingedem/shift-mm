@@ -41,7 +41,7 @@
         }
     </style>
 </head>
-<body >
+<body  class="scroll-smooth">
     @section('nav-bar')
         @include('MM.Layout.navbar')
     @show 

@@ -19,13 +19,8 @@ class EmailController extends Controller
                 ->leftJoin('grades','items.grade','grades.id')
                 ->leftJoin('years','owner_books.year_id','years.id')
                 ->first();
-        $description = $request->description ;
-        if (Mail::to('yewinnaing1160@gmail.com')
-            ->cc($data->licensePlate , $data->brandName , $data->modelName , $data->grade)
-            ->send(new toAdmin($data->toArray() , $description ))) {
-                return response()->json('success');
-        } else {
-            return response()->json('error');
-        }
+        
+        Mail::to('yewinnaing1160@gmail.com')->send(new toAdmin($data->toArray())) ;
+        return response()->json('success');
     }
 }

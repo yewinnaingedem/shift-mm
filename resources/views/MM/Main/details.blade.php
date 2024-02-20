@@ -29,11 +29,32 @@
         .bg-secondary-100 {
             background-color : #232D3E ;
         }
-        .hover-bg-secondary-100:hover {
+        /* .hover-bg-secondary-100:hover {
             background-color : #232D3E ;
-        }
+        } */
         .text-secondary-100 {
             color :#232D3E ;
+        }
+        .arrow-container {
+            position: relative;
+            width: 1em;
+            height: 1em;
+        }
+
+        .arrow {
+            position: absolute;
+            left: 0;
+            top: 0;
+            animation: arrow-animation 2s linear infinite;
+        }
+
+        @keyframes arrow-animation {
+            0% {
+                left: -100%;
+            }
+            100% {
+                left: 100%;
+            }
         }
     </style>
 @endsection 
@@ -92,41 +113,38 @@
             </div>
         </div>
         <!-- image -->
-        <div id="indicators-carousel" style="width:80%;" class="relative hover:shadow-md mx-auto mb-4" data-carousel="static">
+        <div id="indicators-carousel" style="width:80%;" class="relative hover:shadow-md shadow-xl border border-gray-50  rounded-md mx-auto mb-4" data-carousel="static">
             <!-- Carousel wrapper -->
             <a href="#" data-modal-target="default-modal" data-modal-toggle="default-modal">
-            <!-- <button data-modal-target="default-modal" data-modal-toggle="default-modal" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
-  Toggle modal
-</button> -->
-                <div style="height: 500px; " class="relative m-auto overflow-hidden rounded-lg ">
+                <div style="height: 500px;" class="relative m-auto overflow-hidden rounded-lg">
                     <!-- Item 1 -->
                     <div class="hidden duration-700 ease-in-out" data-carousel-item="active">
-                        <img src="{{asset('storage/'.$sale->img1)}}" class="absolute block w-full h-auto -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                    <img src="{{asset('storage/'.$sale->img1)}}" class="w-full h-full object-fit" alt="..." style="object-position: center;">
                     </div>
                     <!-- Item 2 -->
                     <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                        <img src="{{asset('storage/'.$sale->img2)}}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                    <img src="{{asset('storage/'.$sale->img2)}}" class="w-full h-full object-fit" alt="..." style="object-position: center;">
                     </div>
                     <!-- Item 3 -->
                     <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                        <img src="{{asset('storage/'.$sale->img3)}}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                    <img src="{{asset('storage/'.$sale->img3)}}" class="w-full h-full object-fit" alt="..." style="object-position: center;">
                     </div>
                     <!-- Item 4 -->
                     <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                        <img src="{{asset('storage/'.$sale->img4)}}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                    <img src="{{asset('storage/'.$sale->img4)}}" class="w-full h-full object-fit" alt="..." style="object-position: center;">
                     </div>
                     <!-- Item 5 -->
                     <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                        <img src="{{asset('storage/'.$sale->img5)}}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                    <img src="{{asset('storage/'.$sale->img5)}}" class="w-full h-full object-fit" alt="..." style="object-position: center;">
                     </div>
                     <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                        <img src="{{asset('storage/'.$sale->img6)}}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                    <img src="{{asset('storage/'.$sale->img6)}}" class="w-full h-full object-fit" alt="..." style="object-position: center;">
                     </div>
                     <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                        <img src="{{asset('storage/'.$sale->img7)}}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                    <img src="{{asset('storage/'.$sale->img7)}}" class="w-full h-full object-fit" alt="..." style="object-position: center;">
                     </div>
                     <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                        <img src="{{asset('storage/'.$sale->img7)}}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                    <img src="{{asset('storage/'.$sale->img7)}}" class="w-full h-full object-fit" alt="..." style="object-position: center;">
                     </div>
                 </div>
             </a>
@@ -143,7 +161,7 @@
             </div>
             <!-- Slider controls -->
             <button type="button" class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
-                <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-gray/30 dark:bg-gray-800/30  group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
                     <svg class="w-4 h-4 text-white dark:text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
                     </svg>
@@ -151,7 +169,7 @@
                 </span>
             </button>
             <button type="button" class="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
-                <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-gray/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
                     <svg class="w-4 h-4 text-white dark:text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
                     </svg>
@@ -159,6 +177,7 @@
                 </span>
             </button>
         </div>
+        <!-- information content  -->
         <div class="grid grid-cols-3 mb-5">
             <div class='col-span-2  ' style="margin-left : 30px;">
                 <div  class="w-full mt-8  ">
@@ -166,28 +185,42 @@
                         <h2  class="text-2xl font-bold mb-4 ">Details At a Glance</h2>
                         <div class="grid grid-cols-4 grid-flow-row items-center">
                             <div class="p-cus ">
-                                <div class="w-100 text-neutral-80 font-light uppercase ">Transmission</div>
+                                <div class="w-100 text-neutral-80 font-light uppercase ">Transmission </div>
                                 <div class="w-100 font-bold">{{$sale->transmission_type}}</div>
                             </div>
                             <div class="p-cus ">
                                 <div class="w-100 text-neutral-80 font-light uppercase ">Drive Type</div>
-                                <div class="w-100 font-bold">All wheel drive</div>
+                                <div class="w-100 font-bold">
+                                    <!-- drive Type ; -->
+                                    {{$sale->transmissionType}}
+                                </div>
                             </div>
                             <div class="p-cus ">
-                                <div class="w-100 text-neutral-80 font-light uppercase ">Number Of Seats</div>
-                                <div class="w-100 font-bold">{{$sale->number_seats}}</div>
+                                <div class="w-100 text-neutral-80 font-light uppercase ">Number Of Seats
+                                    <span class="ml-2">
+                                        <i class="fa-solid fa-chair"></i>
+                                    </span>
+                                </div>
+                                <div class="w-100 font-bold"> <span class="">{{$sale->number_seats}}</span></div>
                             </div>
                             <div class="p-cus ">
                                 <div class="w-100 text-neutral-80 font-light uppercase ">Please Of Origin</div>
-                                <div class="w-100 font-bold">{{$sale->place_of_orgin}}</div>
+                                <div class="w-100 font-bold">{{$sale->country}}</div>
                             </div>
                             <div class="p-cus ">
                                 <div class="w-100 text-neutral font-light upparecase">Interior</div>
-                                <div class="w-100 font-bold">{{$sale->interior_color}}</div>
+                                <div class="w-100 font-bold capitalize">{{$sale->interior_color}}</div>
                             </div>
                             <div class="p-cus ">
-                                <div class="w-100 text-neutral-80 font-light upparecase">Fuel Type</div>
-                                <div class="w-100 font-bold">Gasoline</div>
+                                <div class="w-100 text-neutral-80 font-light upparecase">Fuel Type
+                                    <span class="ml-2 ">
+                                        <i class="fa-solid fa-gas-pump"></i>
+                                    </span>
+                                </div>
+                                <div class="w-100 font-bold">
+                                    <!-- Fuel Type  -->
+                                    {{$sale->fuelType}}
+                                </div>
                             </div> 
                             <div class="p-cus">
                                 <div class="w-100 text-neutral-80 font-light upparecase">VIN #</div>
@@ -202,50 +235,73 @@
                                 <div class="w-100 font-bold">{{$sale->mainGrade}}</div>
                             </div>
                             <div class="p-cus">
-                                <div class="w-100 text-neutral-80 font-light uppercase ">Engine Power</div>
+                                <div class="w-100 text-neutral-80 font-light uppercase ">Engine Power
+                                    @if($sale->trubo)
+                                    <span class="bg-green-900 shadow-sm tracking-tight text-white lowercase px-2  py-1 font-extrabold text-[12px] rounded">
+                                    <i class="fa-solid fa-circle-check"></i>
+                                        turbo 
+                                    </span>
+                                    @endif
+                                </div>
                                 <div class="w-100 font-bold">{{$sale->engine_power . " CC" . " / " . $sale->cylinder}}</div>
                             </div>
+                            
                             <div class="p-cus">
                                 <div class="w-100 text-neutral-80 font-light uppercase ">License State</div>
-                                <div class="w-100 font-bold">{{$sale->lincese_state_main}}</div>
-                            </div>
-                            <div class="p-cus">
-                                <div class="w-100 text-neutral-80 font-light uppercase ">Turbo</div>
-                                <div class="w-100 font-bold text-neutral-90 text-[18px]"><i class="fa-solid fa-circle-check"></i></div>
+                                <div class="w-100 font-bold text-white text-[18px] ">
+                                    <div class="license w-[60%] border border-white rounded bg-black ">
+                                        <div class="licnese-header flex justify-center items-center " >
+                                            <div class="text-[12px] tracking-wider font-extrabold ">{{$sale->lincese_state_main}}</div>
+                                        </div>
+                                        <div class="linces-body flex justify-center items-center ">
+                                            <div class="text-[13px] tracking-wider">
+                                                <!-- Add licnese Plate -->
+                                                {{$sale->licenserPlate}}
+                                            </div>
+                                        </div>
+                                        <div class="license-footer flex justify-center items-center ">
+                                            <div class="text-[10px]">
+                                            {{$sale->brandName}} {{$sale->model_name}} 
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <!-- <div class="flex items-center mt-8">
-                            <div class="mr-12">
-                                <a href="" class="shift-button capitalize border font-semibold border-gray-400 secondary small h-[52px]">
-                                    view All Deatals
-                                </a>
-                            </div>
-                            <div class="ml-12 ">
-                                <a href="" class="text-blue-700 inline-block my-4 font-light">See Original Window Sticker </a>
-                            </div>
-                            <a href="" class="ml-5">
-                                <i class="fa-solid fa-circle-exclamation"></i>
-                            </a>
-                        </div> -->
                     </div>
                     <hr>
                     <div class="px-5">
                         <h2 class="text-2xl font-bold mb-6 mt-6  ">Top Feacture</h2>
                         <div class="grid grid-cols-2 ">
-                            @foreach($advanc as $ad)
-                            <div class="flex items-center mb-2">
-                                <a href="" class='font-bold hover:bg-main'>
-                                    {{$ad}}
-                                </a>
-                            </div>
-                            @endforeach 
+                            @php 
+                                $count = count($advanc) > 1 ? true : false ;
+                            @endphp
+                            @if($count)
+                                @foreach($advanc as $ad)
+                                <div class="flex items-center mb-2">
+                                    <a href="" class='font-bold hover:bg-main'>
+                                        {{$ad}}
+                                    </a>
+                                </div>
+                                @endforeach 
+                            @else 
+                                <div class="flex items-center mb-2">
+                                    <a href="" class='font-bold hover:bg-main capitalize bg-gray-300 rounded-md px-3 text-yellow-800 py-1'>
+                                        <i class="fa-solid fa-triangle-exclamation"></i>
+                                        <span>There is no Special Top Functons </span>
+                                    </a>
+                                </div>
+                            @endif
                         </div>
                         <div class="mt-3 mb-4 ">
-                            <button type="button" data-id="{{$df_id}}" class="capitalize border border-gray-500 shift-button rounded-lg font-bold " id="view_all">View All Fucture</button>
+                            <button type="button" data-id="{{$df_id}}" class="capitalize border border-gray-500 shift-button rounded-lg font-bold " id="view_all">
+                                View Base Functons
+                            </button>
                         </div>
                         <div class="grid grid-cols-2 w-full" id="dataContainer">
                         </div>
                     </div>
+                    <hr>
                     <div class="px-5">
                         <h2 class="text-2xl font-bold mt-10 mb-6 ">Vehicle History</h2>
                         <div class="grid grid-cols-1 text-base">
@@ -270,8 +326,39 @@
                     <div class="flex justify-between w-full ">
                         <div class="text-primary-60 font-bold text-neutral-90 text-3xl font-display price"> {{$sale->price}} </div>
                         <div>
-                            <div class="w-100 ">Est $145/month</div>
-                            <div class="text-xs text-neutral-50 font-inter font-normal mt-1"><a href="" class="text-gray-600">Customize my payment</a></div>
+                            <div class="w-100 ">
+                                <div class="relative">
+                                    <div id="hoverButton" class="text-red-600">Est <span class="estAmount"></span> <span>/Monthly</span></div>                                    <div id="hoverData" class="w-full hidden absolute top-[40px] right-[150px]  bg-blend-darken rouned">
+                                        <ul class="w-100 p-[2px] block text-[10px]   text-white fw-bolder bg-gray-950 rounded">
+                                            <li class="w-100 flex">
+                                                <div class="w-1/2  flex content-center items-center">
+                                                    <div>EST</div>    
+                                                </div>
+                                                <div class="w-1/2 flex content-center items-center">
+                                                    <div class="estAmount"></div>
+                                                </div>
+                                            </li>
+                                            <li class="w-100 flex">
+                                                <div class="w-1/2 flex content-center items-center">
+                                                    <div>Loan Months</div>    
+                                                </div>
+                                                <div class="w-1/2 flex content-center items-center">
+                                                    <div ><span class="months"></span> Months</div>
+                                                </div>
+                                            </li>
+                                            <li class="w-100 flex">
+                                                <div class="w-1/2 flex content-center items-center">
+                                                    <div>DownPayment</div>    
+                                                </div>
+                                                <div class="w-1/2 flex content-center items-center" >
+                                                    <div class="dpPresent"></div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-xs text-neutral-50 font-inter font-normal mt-1"><a href="#paymentPlan" class="text-gray-600">Customize my payment</a></div>
                         </div>
                     </div>
                     <hr class="mt-8 mb-8">
@@ -314,7 +401,6 @@
                                 <button data-modal-target="crud-modal" data-modal-toggle="crud-modal" class="inline-block font-semibold main-color" type="button">
                                     Ask a question about this car
                                 </button>
-                                
                             </div>
                         </div>
                     </div>
@@ -322,14 +408,18 @@
             </div>
         </div>
         <!-- Payment Plans -->
-        <div class="bg-secondary-100 max-w-screen-2xl h-[700px] mx-auto mb-8 rounded-lg border">
+        <div class="bg-secondary-100 max-w-screen-2xl h-[700px] mx-auto mb-8 rounded-lg border" id="paymentPlan">
             <div>
                 <h1 class="mx-6 my-4 text-center font-bold text-[30px] text-white">Bulid Your Prefect Payment Plan </h1>
                 <div class="flex item-center justify-center mt-5 mb-5">
-                    <div class="py-2 px-4 rounded-l-lg hover-bg-secondary-100 hover:text-white uppercase text-[20px] text-gray-600 font-semibold  border-black bg-white ">Financing </div>
-                    <div class="py-2 px-4 rounded-r-lg hover-bg-secondary-100 hover:text-white uppercase text-[20px] text-gray-600 font-semibold  border-black bg-white ">Cash </div>
+                    <div data-target="content1" class="toggle-btn py-2 cursor-pointer px-4 rounded-l-lg hover-bg-secondary-100 hover:text-white  hover:bg-gray-900 uppercase text-[20px] text-gray-900 font-semibold  border-black bg-white ">
+                        Financing 
+                    </div>
+                    <div data-target="content2" class="toggle-btn cursor-pointer py-2 px-4 rounded-r-lg hover-bg-secondary-100 hover:text-white hover:bg-gray-900 uppercase text-[20px] text-gray-900 font-semibold  border-black bg-white ">
+                        Cash
+                     </div>
                 </div>
-                <div class="grid grid-cols-2 w-[80%] m-auto ">
+                <div class="grid grid-cols-2 w-[80%] m-auto collapsible" id="content1">
                     <div class="text-secondary-100 mr-1 bg-white h-[400px] px-5 border rounded-lg my-2 mb-4 ">
                         <h1 class="text-center my-3 font-bold text-[25px] capitalize">Enter Your Estimated Term </h1>
                         <hr>
@@ -414,7 +504,7 @@
                             </div>
                             <div class="flex justify-between items-center py-1 ">
                                 <div class="font-semibold text-[17px]">Est. Monthly Payment</div>
-                                <div class="font-extrabold text-[21px]" id="months"></div>
+                                <div class="font-extrabold text-[21px]" id="fin_mon"></div>
                             </div>
                             <div class="flex justify-between items-center py-1 ">
                                 <div class="font-semibold text-[17px]">Est. Finance Amount</div>
@@ -426,6 +516,61 @@
                         </div>
                     </div>
                 </div>
+                <!-- Content 2 -->
+                <div id="content2" class="collapsible hidden">
+                    <div class="w-[80%] m-auto bg-white h-full rounded-md p-4" >
+                        <div class="text-center mb-3">
+                            <h2 class="font-extrabold capitalize text-black text-[25px] tracking-wider ">Cash Pay Plan</h2>
+                        </div>
+                        <div class="grid grid-cols-3 mb-2 text-gray-900 p-">
+                            <div class="flex justify-center items-center ">
+                                <div class="text-[20px] font-bold">
+                                    Car Price
+                                </div>
+                            </div>
+                            <div class="text-dark flex justify-center items-center overflow-hidden">
+                                <div class="arrow-container font-extrabold w-11/12 text-[20px]">
+                                    <i class="fa-solid fa-angles-right arrow"></i>
+                                </div>
+                            </div>
+                            <div class="text-gray-900 font-bold text-[20px] flex justify-center items-center">
+                                <div class="">
+                                    180000 Kyats
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-3 mb-3 text-gray-900">
+                            <div class="flex justify-center items-center">
+                                <div class="text-[20px] font-bold">
+                                    Insurance 
+                                </div>
+                            </div>
+                            <div class="text-dark flex justify-center items-center overflow-hidden">
+                                <div class="arrow-container font-extrabold w-11/12 text-[20px]">
+                                    <i class="fa-solid fa-angles-right arrow"></i>
+                                </div>
+                            </div>
+                            <div class="text-gray-900 font-bold text-[20px] flex justify-center items-center">
+                                <div class="">
+                                    1580000  Kyats
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 mb-6">
+                            <div class="flex justify-center items-center">
+                                <div class="w-1/2">
+                                    <button class="px-3 py-2 w-full rounded bg-blue-600 text-white">Cash</button>
+                                </div>
+                            </div>
+                            <div class="flex justify-center items-center">
+                                <div class="w-1/2">
+                                    <button class="px-3 w-full py-2 rounded bg-blue-600 text-white">Call to Pay</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
             </div>
         </div>
     </main>
@@ -516,51 +661,53 @@
         </div>
     </div>
     
-
-
-<!-- Modal toggle -->
-
-
-<!-- Main modal -->
-<div id="crud-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-    <div class="relative p-4 w-full max-w-lg max-h-full">
-        <!-- Modal content -->
-        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-            <!-- Modal header -->
-            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                    Send Mail Here 
-                </h3>
-                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="crud-modal">
-                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                    </svg>
-                    <span class="sr-only">Close modal</span>
-                </button>
-            </div>
-            <!-- Modal body -->
-            <form class="p-4 md:p-5" id="sendMail">
-                @csrf 
-                <div class="grid gap-4 mb-4 grid-cols-2">
-                    <div class="col-span-2">
-                        <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
-                        <input type="email" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type product name" required="">
-                    </div>
-                    <div class="col-span-2">
-                        <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Here is how you send Mail</label>
-                        <textarea id="description" name="description" rows="3" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write product description here"></textarea>                    
-                    </div>
-                </div>
-                <div class="text-end" id="submitTest">
-                    <button type="submit" class="text-white  bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                        Send Email
+    <!-- Main modal -->
+    <div id="crud-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div class="relative p-4 w-full max-w-lg max-h-full">
+            <!-- Modal content -->
+            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                <!-- Modal header -->
+                <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                        Send Mail Here 
+                    </h3>
+                    <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="crud-modal">
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                        </svg>
+                        <span class="sr-only">Close modal</span>
                     </button>
                 </div>
-            </form>
+                <!-- Modal body -->
+                <form class="p-4 md:p-5" id="sendMail">
+                    @csrf 
+                    <div class="grid gap-4 mb-4 grid-cols-2">
+                        <div class="col-span-2">
+                            <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
+                            <input type="email" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type product name" required="">
+                        </div>
+                        <div class="col-span-2">
+                            <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Here is how you send Mail</label>
+                            <textarea id="description" name="description" rows="3" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write product description here"></textarea>                    
+                        </div>
+                    </div>
+                    <div class="text-end" id="submitTest">
+                        <button type="submit" class="text-white flex justify-between items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                            <div class="font-bold ">
+                                Send Email 
+                            </div>
+                            <div role="status" class="ml-1">
+                                <svg aria-hidden="true" class="inline w-5 h-5 text-gray-200 animate-spin dark:text-gray-600 fill-blue-700 dark:fill-blue-800" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+                                    <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+                                </svg>
+                            </div>
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
-    </div>
-</div> 
-
+    </div> 
 
 @endsection 
 
@@ -622,6 +769,20 @@
                     }
                 })
             });
+            $('#hoverButton').mouseenter(function() {
+                $('#hoverData').removeClass('hidden');
+            });
+
+            $('#hoverButton').mouseleave(function() {
+                $('#hoverData').addClass('hidden');
+            });
+
+            $('.toggle-btn').click(function(){
+                var target = $(this).data('target');
+                $('.collapsible').hide();
+                $('#' + target).show();
+            });
+
         });
     </script>
 @endsection 

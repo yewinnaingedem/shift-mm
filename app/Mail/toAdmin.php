@@ -13,14 +13,13 @@ class toAdmin extends Mailable
 {
     use Queueable, SerializesModels;
     public $car ;
-    public $description ;
+
     /**
      * Create a new message instance.
      */
-    public function __construct(array $car , $description)
+    public function __construct(array $car  )
     {
         $this->car = $car;   
-        $this->description = $description;
     }
 
     /**
