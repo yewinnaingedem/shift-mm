@@ -25,35 +25,35 @@
                         </div>
                         <div class="md:pt-0 md:py-0 md:flex md:flex-1  flex">
                             <button type="button" id="make_model"  data-modal-target="crypto-modal" data-modal-toggle="crypto-modal" class="clickAble text-gray-900 bg-white hover:bg-gray-100 border border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-600 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700">
-                                    <div class='mr-2'>
-                                        Make & Model 
-                                    </div>
-                                    <i class="fa-solid fa-chevron-down main-color"></i>
-                                </button>
+                                <div class='mr-2'>
+                                    Make & Model 
+                                </div>
+                                <i class="fa-solid fa-chevron-down main-color"></i>
+                            </button>
                         </div>
                         <div class="md:pt-0 md:py-0 md:flex md:flex-1  flex">
-                                <button type="button" id="body_style"  data-modal-target="crypto-modal" data-modal-toggle="crypto-modal" class="clickAble text-gray-900 bg-white hover:bg-gray-100 border border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-600 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700">
-                                    <div class='mr-2'>
-                                        Body Style
-                                    </div>
-                                    <i class="fa-solid fa-chevron-down main-color"></i>
-                                </button>
+                            <button type="button" id="body_style"  data-modal-target="crypto-modal" data-modal-toggle="crypto-modal" class="clickAble text-gray-900 bg-white hover:bg-gray-100 border border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-600 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700">
+                                <div class='mr-2'>
+                                    Body Style
+                                </div>
+                                <i class="fa-solid fa-chevron-down main-color"></i>
+                            </button>
                         </div>
                         <div class="md:pt-0 md:py-0 md:flex md:flex-1  flex">
-                                <button type="button" id="year"  data-modal-target="crypto-modal" data-modal-toggle="crypto-modal" class="clickAble text-gray-900 bg-white hover:bg-gray-100 border border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-600 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700">
-                                    <div class='mr-2'>
-                                        Year 
-                                    </div>
-                                    <i class="fa-solid fa-chevron-down main-color"></i>
-                                </button>
+                            <button type="button" id="year"  data-modal-target="crypto-modal" data-modal-toggle="crypto-modal" class="clickAble text-gray-900 bg-white hover:bg-gray-100 border border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-600 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700">
+                                <div class='mr-2'>
+                                    Year 
+                                </div>
+                                <i class="fa-solid fa-chevron-down main-color"></i>
+                            </button>
                         </div>
                         <div class="md:pt-0 md:py-0 md:flex md:flex-1  flex">
-                            <button type="button"  data-modal-target="crypto-modal" data-modal-toggle="crypto-modal" class=" text-gray-900 bg-white hover:bg-gray-100 border border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-600 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700">
-                                    <div class='mr-2'>
-                                        Price
-                                    </div>
-                                    <i class="fa-solid fa-chevron-down main-color"></i>
-                                </button>
+                            <button type="button" id="price"  data-modal-target="crypto-modal" data-modal-toggle="crypto-modal" class="clickAble text-gray-900 bg-white hover:bg-gray-100 border border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-600 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700">
+                                <div class='mr-2'>
+                                    Year 
+                                </div>
+                                <i class="fa-solid fa-chevron-down main-color"></i>
+                            </button>
                         </div>
                         <div class="md:pt-0 md:py-0 md:flex md:flex-1  flex">
                             <button class="flex  bg-white px-2 rounded font-sans  text-sm min-w-[9rem] md:min-w-[9rem] w-full item-center md:jsutify-between h-[42px] items-center justify-between border border-gray-200 focus:ring-0 focus:ring-transparent ml-0 h-42 text-center ">
@@ -71,7 +71,7 @@
 </div>
 
 <!-- Main modal -->
-<div id="crypto-modal" tabindex="-1" aria-hidden="true" class="hidden  overflow-y-auto overflow-x-hidden absolute top-0 right-0 left-0 z-50 bottom-0 justify-start items-center w-full  max-h-full">
+<div id="crypto-modal" tabindex="-1" aria-hidden="true" class="hidden background-modal  overflow-y-auto overflow-x-hidden absolute top-0 right-0 left-0 z-[50000] bottom-0 justify-start items-center w-full  max-h-full">
     <div class="relative p-4 w-full max-w-md max-h-full">
         <!-- Modal content -->
         <div class="relative bg-white rounded-lg shadow ">
@@ -88,19 +88,20 @@
                 </button>
             </div>
             <div class="p-4 md:p-5">
-                <ul class="my-4 space-y-3 max-h-[300px] overflow-x-auto min-h-[150px]" id="modelAble" >
-                    <!-- Model Data Goes here  -->
                     <div class="w-full h-[150px] flex items-center justify-center" id="loadContent">
-                      <div
-                        class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
-                        role="status">
-                        <span
-                            class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
-                            >
-                        </span
+                          <div
+                            class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+                            role="status">
+                            <span
+                                class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
+                                >
+                            </span
                         >
                         </div>
                     </div>
+                <ul class="my-4 space-y-3 max-h-[300px] overflow-x-auto min-h-[150px]" id="modelAble" >
+                    <!-- Model Data Goes here  -->
+                    
                 </ul>
                 <div>
                     <a href="#" class="inline-flex items-center text-xs font-normal text-gray-500 hover:underline dark:text-gray-400">

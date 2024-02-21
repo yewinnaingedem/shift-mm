@@ -56,6 +56,10 @@
                 left: 100%;
             }
         }
+        .active-btn {
+            background: #1a202c;
+            color: white;
+        }
     </style>
 @endsection 
 
@@ -412,10 +416,10 @@
             <div>
                 <h1 class="mx-6 my-4 text-center font-bold text-[30px] text-white">Bulid Your Prefect Payment Plan </h1>
                 <div class="flex item-center justify-center mt-5 mb-5">
-                    <div data-target="content1" class="toggle-btn py-2 cursor-pointer px-4 rounded-l-lg hover-bg-secondary-100 hover:text-white  hover:bg-gray-900 uppercase text-[20px] text-gray-900 font-semibold  border-black bg-white ">
+                    <div data-target="content1" class="toggle-btn py-2 cursor-pointer px-4 rounded-l-lg  active-btn  uppercase text-[20px] text-gray-900 font-semibold  border-black bg-white ">
                         Financing 
                     </div>
-                    <div data-target="content2" class="toggle-btn cursor-pointer py-2 px-4 rounded-r-lg hover-bg-secondary-100 hover:text-white hover:bg-gray-900 uppercase text-[20px] text-gray-900 font-semibold  border-black bg-white ">
+                    <div data-target="content2" class="toggle-btn cursor-pointer py-2 px-4 rounded-r-lg   uppercase text-[20px] text-gray-900 font-semibold  border-black bg-white ">
                         Cash
                      </div>
                 </div>
@@ -564,7 +568,8 @@
                             </div>
                             <div class="flex justify-center items-center">
                                 <div class="w-1/2">
-                                    <button class="px-3 w-full py-2 rounded bg-blue-600 text-white">Call to Pay</button>
+                                    <a href="tel:09673127480" class="px-3 w-full py-2 rounded bg-blue-600 text-white">Call To Pay</a>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -781,8 +786,8 @@
                 var target = $(this).data('target');
                 $('.collapsible').hide();
                 $('#' + target).show();
+                $('.toggle-btn').toggleClass('active-btn');                
             });
-
         });
     </script>
 @endsection 

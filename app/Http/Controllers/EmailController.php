@@ -20,7 +20,7 @@ class EmailController extends Controller
                 ->leftJoin('years','owner_books.year_id','years.id')
                 ->first();
         
-        Mail::to('yewinnaing1160@gmail.com')->send(new toAdmin($data->toArray())) ;
+        Mail::to('yewinnaing0597@gmail.com')->send(new toAdmin($data->toArray())) ;
         return response()->json('success');
     }
 }
