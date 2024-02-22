@@ -12,6 +12,27 @@
         .modelAble {
             transition: min-height 0.3s ease
         }
+        input[type="number"]::webkit-outer-spin-button , 
+        input[type="number"]::webkit-inner-spin-button {
+            --webkit-appearance : none ;
+        }
+        .webkit-appearance-none {
+            background : none ;
+            appearance : none ;
+        }
+        .range::-webkit-slider-thumb {
+            height : 17px ;
+            width : 17px ;
+            background : #17a2b8 ;
+            pointer-events : auto ;
+            --webkit-appearance : none ;
+        }
+        .bg-customize {
+            background : #ddd ;
+        }
+        .ragne-color {
+            background : #17A2B8 ;
+        }
     </style>
 @endsection 
 @section('nav-bar')
@@ -19,6 +40,31 @@
 @endsection 
 
 @section('content') 
+        <!-- just for testing ; -->
+                        <!-- <li class="count">
+                            <div class="broder mb-[15px]">
+                                <div class="flex flex-col sm:flex-row gap-4 priceInput" >
+                                    <div class="flex flex-col w-full sm:w-1/2">
+                                        <label for="min_price" class="text-sm font-medium text-gray-700">Min</label>
+                                        <input type="number" id="min_price" name="min_price" value="2772" class="mt-1 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
+                                    </div>
+                                    <div class="flex flex-col w-full sm:w-1/2">
+                                        <label for="max_price" class="text-sm font-medium text-gray-700">Max</label>
+                                        <input type="number" id="max_price" name="max_price" value="8018" class="mt-1 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
+                                    </div>
+                                </div>
+                                <div class="slider  h-[5px] relative rounded bg-customize mt-3">
+                                    <div class="progess ragne-color h-[5px] rounded absolute left-[25%] right-[25%]" ></div>
+                                </div>
+                                <div class="range-input relative">
+                                    <input type="range" id="range-min" class="absolute range-min range top-[-5px] pointer-events-none h-[5px] w-full webkit-appearance-none bg-none" min="0" max="10000" max="25000" value="2500" name="range-min" id="">
+                                    <input type="range" id="range-max" class="absolute range-max range top-[-5px] pointer-events-none h-[5px] w-full webkit-appearance-none bg-none" min="0" max="10000" max="75000" value="7500" name="range-max" id="">
+                                </div>
+                                <div class="mt-[30px] text-end">
+                                    <a href="" class="px-4 tracking-wide hover:bg-blue-800   py-3 rounded bg-blue-700 text-white font-bold shadow-md">Get Started</a>
+                                </div>
+                            </div>
+                        </li> -->
     @include('MM.Layout.content')
 @endsection 
 
@@ -33,8 +79,8 @@
             $(window).on('load', function () {
                 $('.body-fade').remove();
                 $('.loader-content').removeClass('hidden'); 
-            } 
-            );
+            });
+
             $('.price').each(function() {
                 var $priceElement = $(this);
                 var test = $priceElement.html();
@@ -77,8 +123,8 @@
                     let element = 
                     `
                         <li class="count">
-                            <div>
-                                <div class="flex flex-col sm:flex-row gap-4">
+                            <div class="broder mb-[20px]">
+                                <div class="flex flex-col sm:flex-row gap-4 mb-[40px] priceInput" >
                                     <div class="flex flex-col w-full sm:w-1/2">
                                         <label for="min_price" class="text-sm font-medium text-gray-700">Min</label>
                                         <input type="number" id="min_price" name="min_price" value="2772" class="mt-1 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
@@ -88,16 +134,16 @@
                                         <input type="number" id="max_price" name="max_price" value="8018" class="mt-1 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
                                     </div>
                                 </div>
-                            </div>
-
-                            <div class="relative">
-                            <input type="range" id="price-range" name="price-range" min="2772" max="8018" value="2772" class="w-full h-2 bg-gray-200 appearance-none rounded-lg cursor-pointer">
-                            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                                <span id="price-range-value" class="text-sm font-medium text-gray-700">2772</span>
-                            </div>
-                            <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                                <span id="price-range-max" class="text-sm font-medium text-gray-700">8018</span>
-                            </div>
+                                <div class="slider  h-[5px] relative rounded bg-customize mt-3">
+                                    <div class="progess ragne-color h-[5px] rounded absolute left-[25%] right-[25%]" ></div>
+                                </div>
+                                <div class="range-input relative">
+                                    <input type="range" id="range-min" class="absolute range-min range top-[-5px] pointer-events-none h-[5px] w-full webkit-appearance-none bg-none" min="0" max="10000" max="25000" value="2500" name="range-min" id="">
+                                    <input type="range" id="range-max" class="absolute range-max range top-[-5px] pointer-events-none h-[5px] w-full webkit-appearance-none bg-none" min="0" max="10000" max="75000" value="7500" name="range-max" id="">
+                                </div>
+                                <div class="mt-[30px] text-end">
+                                    <a href="" class="px-4 tracking-wide hover:bg-blue-800   py-3 rounded bg-blue-700 text-white font-bold shadow-md">Get Started</a>
+                                </div>
                             </div>
                         </li>
                     ` ;
@@ -106,7 +152,55 @@
                 }
             });
             
-
-        });
+            
+            // priceInput.each((index, input) => {
+            //     $(input).on('input', (e) => {
+            //             let minValue = parseInt($(rangeInputs[0]).val());
+            //             let maxValue = parseInt($(rangeInputs[1]).val());
+            //             let right = 100 - (maxValue / rangeInputs[1].max) * 100 ;
+                        
+            //             if(maxValue - minValue < priceGap) {
+            //                 if(e.target.id === "range-min") {
+            //                     $(rangeInputs[0]).val(maxValue - priceGap);
+            //                 }else {
+            //                     $(rangeInputs[1]).val(minValue + priceGap);
+            //                 }
+            //             }else {
+            //                 $(priceInput[0]).val(minValue);
+            //                 $(priceInput[1]).val(maxValue);
+            //                 $(progess).css('left', (minValue / rangeInputs[0].max) * 100 + '%');
+            //                 $(progess).css('right', + right + "%");
+            //             }
+            //         });
+            //     });
+            // });
+            $('.clickAble').on('click' , function () {
+                let rangeInputs = $('.range-input input');
+                let progess = $('.slider .progess');
+                const priceInput = $('.priceInput input');
+                let priceGap = 1000 ;
+                rangeInputs.each((index, input) => {
+                    $(input).on('input', (e) => {
+                            let minValue = parseInt($(rangeInputs[0]).val());
+                            let maxValue = parseInt($(rangeInputs[1]).val());
+                            let right = 100 - (maxValue / rangeInputs[1].max) * 100 ;
+                            
+                            if(maxValue - minValue < priceGap) {
+                                if(e.target.id === "range-min") {
+                                    $(rangeInputs[0]).val(maxValue - priceGap);
+                                }else {
+                                    $(rangeInputs[1]).val(minValue + priceGap);
+                                }
+                            }else {
+                                $(priceInput[0]).val(minValue);
+                                $(priceInput[1]).val(maxValue);
+                                $(progess).css('left', (minValue / rangeInputs[0].max) * 100 + '%');
+                                $(progess).css('right', + right + "%");
+                            }
+                        });
+                    });
+                });
+            })
+            
     </script>
 @endsection 
