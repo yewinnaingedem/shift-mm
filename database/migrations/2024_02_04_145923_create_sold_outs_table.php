@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('depositState');
             $table->unsignedBigInteger('car_id');
             $table->unsignedBigInteger('buyer_id');
+            
             $table->unsignedBigInteger('dealer_id');
             $table->unsignedBigInteger('hire_purchase_id');
             $table->unsignedBigInteger('broker_id')->nullable();

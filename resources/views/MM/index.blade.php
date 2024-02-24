@@ -40,31 +40,6 @@
 @endsection 
 
 @section('content') 
-        <!-- just for testing ; -->
-                        <!-- <li class="count">
-                            <div class="broder mb-[15px]">
-                                <div class="flex flex-col sm:flex-row gap-4 priceInput" >
-                                    <div class="flex flex-col w-full sm:w-1/2">
-                                        <label for="min_price" class="text-sm font-medium text-gray-700">Min</label>
-                                        <input type="number" id="min_price" name="min_price" value="2772" class="mt-1 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
-                                    </div>
-                                    <div class="flex flex-col w-full sm:w-1/2">
-                                        <label for="max_price" class="text-sm font-medium text-gray-700">Max</label>
-                                        <input type="number" id="max_price" name="max_price" value="8018" class="mt-1 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
-                                    </div>
-                                </div>
-                                <div class="slider  h-[5px] relative rounded bg-customize mt-3">
-                                    <div class="progess ragne-color h-[5px] rounded absolute left-[25%] right-[25%]" ></div>
-                                </div>
-                                <div class="range-input relative">
-                                    <input type="range" id="range-min" class="absolute range-min range top-[-5px] pointer-events-none h-[5px] w-full webkit-appearance-none bg-none" min="0" max="10000" max="25000" value="2500" name="range-min" id="">
-                                    <input type="range" id="range-max" class="absolute range-max range top-[-5px] pointer-events-none h-[5px] w-full webkit-appearance-none bg-none" min="0" max="10000" max="75000" value="7500" name="range-max" id="">
-                                </div>
-                                <div class="mt-[30px] text-end">
-                                    <a href="" class="px-4 tracking-wide hover:bg-blue-800   py-3 rounded bg-blue-700 text-white font-bold shadow-md">Get Started</a>
-                                </div>
-                            </div>
-                        </li> -->
     @include('MM.Layout.content')
 @endsection 
 
@@ -73,6 +48,7 @@
 @endsection 
 
 @section('script')
+    @vite('resources/js/searchable.js')
     <script>
         $(document).ready(function () {
             $('.body-fade').show() ;
@@ -141,66 +117,72 @@
                                     <input type="range" id="range-min" class="absolute range-min range top-[-5px] pointer-events-none h-[5px] w-full webkit-appearance-none bg-none" min="0" max="10000" max="25000" value="2500" name="range-min" id="">
                                     <input type="range" id="range-max" class="absolute range-max range top-[-5px] pointer-events-none h-[5px] w-full webkit-appearance-none bg-none" min="0" max="10000" max="75000" value="7500" name="range-max" id="">
                                 </div>
-                                <div class="mt-[30px] text-end">
-                                    <a href="" class="px-4 tracking-wide hover:bg-blue-800   py-3 rounded bg-blue-700 text-white font-bold shadow-md">Get Started</a>
+                                <div class="mt-[30px] flex">
+                                    <div class="w-1/2 text-start">
+                                        <button id="clearFormated" class="px-4 py-3 rounded bg-red-700 text-white font-bold shadow-sm">Clear </button>
+                                    </div>
+                                    <div class="w-1/2 flex justify-end items-center">
+                                        <a href="" class="px-4 tracking-wide hover:bg-blue-800   py-3 rounded bg-blue-700 text-white font-bold shadow-md">Get Started</a>
+                                    </div>
                                 </div>
                             </div>
                         </li>
                     ` ;
                     $('#modelAble').append(element);
+                    rangeInput () ; priceInput () ;
                     $('#modelAble').show();
                 }
             });
-            
-            
-            // priceInput.each((index, input) => {
-            //     $(input).on('input', (e) => {
-            //             let minValue = parseInt($(rangeInputs[0]).val());
-            //             let maxValue = parseInt($(rangeInputs[1]).val());
-            //             let right = 100 - (maxValue / rangeInputs[1].max) * 100 ;
-                        
-            //             if(maxValue - minValue < priceGap) {
-            //                 if(e.target.id === "range-min") {
-            //                     $(rangeInputs[0]).val(maxValue - priceGap);
-            //                 }else {
-            //                     $(rangeInputs[1]).val(minValue + priceGap);
-            //                 }
-            //             }else {
-            //                 $(priceInput[0]).val(minValue);
-            //                 $(priceInput[1]).val(maxValue);
-            //                 $(progess).css('left', (minValue / rangeInputs[0].max) * 100 + '%');
-            //                 $(progess).css('right', + right + "%");
-            //             }
-            //         });
-            //     });
-            // });
-            $('.clickAble').on('click' , function () {
+            // Range Input ;
+            function rangeInput () {
                 let rangeInputs = $('.range-input input');
                 let progess = $('.slider .progess');
-                const priceInput = $('.priceInput input');
+                let priceInputs = $('.priceInput input');
                 let priceGap = 1000 ;
                 rangeInputs.each((index, input) => {
                     $(input).on('input', (e) => {
-                            let minValue = parseInt($(rangeInputs[0]).val());
-                            let maxValue = parseInt($(rangeInputs[1]).val());
-                            let right = 100 - (maxValue / rangeInputs[1].max) * 100 ;
-                            
-                            if(maxValue - minValue < priceGap) {
-                                if(e.target.id === "range-min") {
-                                    $(rangeInputs[0]).val(maxValue - priceGap);
-                                }else {
-                                    $(rangeInputs[1]).val(minValue + priceGap);
-                                }
+                        let minValue = parseInt($(rangeInputs[0]).val());
+                        let maxValue = parseInt($(rangeInputs[1]).val());
+                        let right = 100 - (maxValue / rangeInputs[1].max) * 100 ;
+                        if(maxValue - minValue < priceGap) {
+                            if(e.target.id === "range-min") {
+                                $(rangeInputs[0]).val(maxValue - priceGap);
                             }else {
-                                $(priceInput[0]).val(minValue);
-                                $(priceInput[1]).val(maxValue);
-                                $(progess).css('left', (minValue / rangeInputs[0].max) * 100 + '%');
-                                $(progess).css('right', + right + "%");
+                                $(rangeInputs[1]).val(minValue + priceGap);
                             }
-                        });
+                        }else {
+                            $(priceInputs[0]).val(minValue);
+                            $(priceInputs[1]).val(maxValue);
+                            $(progess).css('left', (minValue / rangeInputs[0].max) * 100 + '%');
+                            $(progess).css('right', + right + "%");
+                        }
                     });
                 });
-            })
-            
+            }
+            // Price Input ;
+            function priceInput () {
+                let priceInputs = $('.priceInput input');
+                let progess = $('.slider .progess');
+                let rangeInputs = $('.range-input input');
+                let priceGap = 1000 ;
+                priceInputs.each((index, input) => {
+                    $(input).on('input', (e) => {
+                        let minValue = parseInt($(priceInputs[0]).val());
+                        let maxValue = parseInt($(priceInputs[1]).val());
+                        let right = 100 - (maxValue / rangeInputs[1].max) * 100 ;
+                        if((maxValue - minValue >= priceGap) && maxValue <= 10000) {
+                            if(e.target.id === "min_price") {
+                                $(rangeInputs[0]).val(minValue);
+                                $(progess).css('left', (minValue / rangeInputs[0].max) * 100 + '%');
+                            }else {
+                                $(rangeInputs[1]).val(maxValue);
+                                $(progess).css('right', + right + "%");
+                            }
+                        }
+                    });
+                });
+            }
+            // end js 
+        }) ;
     </script>
 @endsection 

@@ -5,11 +5,7 @@
                 <div class="px-4 md:px-8 flex flex-row flex-wrap content-center gap-y-3 ">
                     <div class="order-first h-10 w-full md:order-none md:mr-1 justify-between ">
                         <div id="app">
-                            <form action="" method="post">
-                                @csrf 
-                                <i class="fa-solid fa-magnifying-glass absolute top-[15px] left-[28px]"></i>
-                                <input type="text" v-model="searchQuery" id="input_search" class="reg-input w-input rounded w-full pl-10 pr-2 outline-none border-none focus:ring-0 focus:ring-transparent h-10 bg-neutral-50 " placeholder="Search Keyword , Modals , Type ... ">
-                            </form>
+                            <Searchable/>
                         </div>
                     </div>
                     <div class="flex md:space-x-2 w-full justify-between border-b-2 border-neutral-100 pb-3">

@@ -78,6 +78,7 @@
             <div class="row w-100 mx-auto mb-3">
                 <div class="col-md-12 w-100 h-100px row p-3 rounded bg-danger shadow deposit">
                     <div class="col-md-9 fs-18 d-flex justify-content-start align-items-center">
+                        <input type="hidden" name="id" name="id" value="{{$deposits->mainId}}">
                         <div class="text-black fw-semibold">
                             <figure>
                                 <blockquote class="blockquote">
@@ -128,7 +129,6 @@
 @section('script')
     <script>
         $(document).ready(()=> {
-
             let deposit = $('.deposit');
             deposit.each(function (index , element ) {
                 var loader  = $(element).find('.loader');
@@ -141,6 +141,7 @@
                 var depositContainer = $(element).find('.deposit-container');
                 var value = depositAmount.text().trim() ;
                 var deadline = new Date(dateIn).getTime();
+                var id = $(element).find('input[name="id"]').val();
 
                 // var amount  = Number(value).toLocaleString();
                 var formattedValue = formatNumber(value);
@@ -161,7 +162,19 @@
                         clearInterval(x);
                         depositContainer.empty();
                         depositContainer.html(expired) ;
-
+                        $.ajax({
+                            url : "/admin/expiredDeposit/" + id ,
+                            method : "get" ,
+                            data : {
+                                "_token" : "{{csrf_token()}}" ,
+                            },
+                            success : (response) => {
+                                console.log(response);
+                            },
+                            error : (error) => {
+                                console.log(error);
+                            }
+                        });
                     }else {
                         loader.remove();
                         daysIn.text(days + " :");
@@ -172,7 +185,6 @@
                         $('.hoursText').text('Hours');
                         $('.minsText').text('Mins');
                         $('.secondsText').text('Seconds');
-
                     }
                 }, 1000);
             });

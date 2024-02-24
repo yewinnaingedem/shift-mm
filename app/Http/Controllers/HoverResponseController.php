@@ -14,7 +14,6 @@ class HoverResponseController extends Controller
         if($value == "Makes") {
             $data = Brand::select('brand_name as responseData')->get();
             $icon = "fa-car-side" ;
-            
         } elseif ( $value == "make_model") {
             $data = MadeIn::select('country as responseData')->get();
             $icon = "fa-globe" ;         

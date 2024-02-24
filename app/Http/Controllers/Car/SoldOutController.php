@@ -175,7 +175,6 @@ class SoldOutController extends Controller
         $deposit['depositAmount']  = $request['depositAmount'] ;
         $deposit['finalDate'] = $request['finalDate'] ;
         $deposit['noted'] = $request['noted'] ;
-        $deposit['state'] = 0 ;
         $deposit['created_at'] = Carbon::now();
         $depositState = Deposit::insertGetId($deposit);
 

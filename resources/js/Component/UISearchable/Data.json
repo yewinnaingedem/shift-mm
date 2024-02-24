@@ -1,0 +1,23 @@
+[
+    {
+        "name" : "Suzuki"  ,
+        "model" : "2002" 
+    },
+    {
+        "name" : "KIA"  ,
+        "model" : "2012" 
+    },
+    {
+        "name" : "BMW"  ,
+        "model" : "2022" 
+    },
+    {
+        "name" : "GAC"  ,
+        "model" : "2072" 
+    },
+    {
+        "name" : "GGA"  ,
+        "model" : "2072" 
+    }
+
+]

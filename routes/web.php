@@ -36,6 +36,7 @@ use App\Http\Controllers\Car\licenseStateController;
 use App\Http\Controllers\AdminDashBoardController;
 use App\Http\Controllers\BeforeSaleController ;
 use App\Http\Controllers\paintDemageController ;
+use App\Http\Controllers\AdminGmailController ;
 
 Route::get('/google' , [AuthController::class , 'googleLogIn']);
 Route::prefix('mm_cars')->group(function () {
@@ -53,61 +54,62 @@ Route::prefix('mm_cars')->group(function () {
     Route::get('/register',[AuthController::class , 'userRegister']);
     Route::post('/register',[AuthController::class , 'register']);
     Route::post('change_profile/{id}' , [AuthController::class , 'changeProfile']);
-    // Car Details
     Route::get('car/{details}' , [DetailsController::class , 'index'] );
-    // financing 
     Route::get('financing' , [FinancingController::class , 'index']);
 });
 
 Route::prefix('admin')->group(function (){
-    Route::get('dashbord' , [AdminDashBoardController::class , 'index']);
-    Route::get('dashboard/saledFor2Day' , [AdminDashBoardController::class , "SaledFor2Day"]);
     Route::get('/' , [AdminAuthController::class , 'index']);
-    Route::get('add-cars' , [AdminAuthController::class , 'addCars'] );
-    Route::get('car-info' , [AdminAuthController::class , 'carInfo']);
-    Route::post('add-cars' , [ModelController::class , 'index']);
-    Route::get('car/{make}/{model}/{year}' , [ModelController::class , 'stepProgess']);
-    Route::post('car-info/{id}' , [AdminAuthController::class , 'details']);
-    Route::delete('car-info/{id}', [AdminAuthController::class , 'deleteCard']);
-    Route::put('update-info/{id}' , [AdminAuthController::class , 'updateInfo']);
-    Route::post('setup' , [AddCarController::class , 'index']);
-    Route::resource('car_img' , CarImageItemController::class );
-    Route::post('car_img/test' , [CarImageItemController::class , 'imgTest']);
-    Route::resource('car_models' , CarModelController::class) ;
-    Route::resource('grade'  , GradeController::class);
-    Route::post('grade/function' , [GradeController::class , 'gradeFunction']);
-    Route::resource('function' , FunctionController::class );
-    Route::post('model/{id}' , [CarModelController::class , 'modelSearch']);
-    Route::post('function/create' , [GradeController::class , 'gradeFunction']);
-    Route::post('function/testing' , [GradeController::class , 'functionTesting']);
-    Route::resource('seat' , SeatController::class) ;
-    Route::resource('key' , KeyController::class);
-    Route::resource('sun_roof' , SunRoofController::class);
-    Route::resource('sonar' , SonarController::class);
-    Route::resource('camera' , CameraController::class);
-    Route::resource('engine' , EngineController::class );
-    Route::resource('before_sale' , BeforeSaleController::class );
-    Route::resource('cars' ,  CarItemController::class );
-    Route::resource('car_sells', CarsellController::class);
-    Route::resource('sold_out' , SoldOutController::class) ;
-    Route::post('adminTesting', [SoldOutController::class , 'testing']);
-    Route::resource('employees', EmployeeController::class);
-    Route::resource('brand' , BrandController::class );
-    Route::resource('positions' , PositionController::class);
-    Route::resource('saled' , SaledController::class);
-    Route::resource('default-function' , DefaultFunctionController::class );
-    Route::resource('license-state' , licenseStateController::class);
-    Route::get('deposits/state', [AdminDashBoardController::class ,'depositSate']);
-    Route::get('machines/state' , [AdminDashBoardController::class , 'machineState']);
-    Route::get('search/{query}', [SearchController::class , 'search'] );
-    Route::get('routeBack' , function () {
+    Route::get('/dashbord' , [AdminDashBoardController::class , 'index']);
+    Route::get('/dashboard/saledFor2Day' , [AdminDashBoardController::class , "SaledFor2Day"]);
+    Route::get('/expiredDeposit/{id}', [AdminGmailController::class , 'expiredDeposit']);
+    Route::get('/add-cars' , [AdminAuthController::class , 'addCars'] );
+    Route::get('/car-info' , [AdminAuthController::class , 'carInfo']);
+    Route::post('/add-cars' , [ModelController::class , 'index']);
+    Route::get('/car/{make}/{model}/{year}' , [ModelController::class , 'stepProgess']);
+    Route::post('/car-info/{id}' , [AdminAuthController::class , 'details']);
+    Route::delete('/car-info/{id}', [AdminAuthController::class , 'deleteCard']);
+    Route::put('/update-info/{id}' , [AdminAuthController::class , 'updateInfo']);
+    Route::post('/setup' , [AddCarController::class , 'index']);
+    Route::resource('/car_img' , CarImageItemController::class );
+    Route::post('/car_img/test' , [CarImageItemController::class , 'imgTest']);
+    Route::resource('/car_models' , CarModelController::class) ;
+    Route::resource('/grade'  , GradeController::class);
+    Route::post('/grade/function' , [GradeController::class , 'gradeFunction']);
+    Route::resource('/function' , FunctionController::class );
+    Route::post('/model/{id}' , [CarModelController::class , 'modelSearch']);
+    Route::post('/function/create' , [GradeController::class , 'gradeFunction']);
+    Route::post('/function/testing' , [GradeController::class , 'functionTesting']);
+    Route::resource('/seat' , SeatController::class) ;
+    Route::resource('/key' , KeyController::class);
+    Route::resource('/sun_roof' , SunRoofController::class);
+    Route::resource('/sonar' , SonarController::class);
+    Route::resource('/camera' , CameraController::class);
+    Route::resource('/engine' , EngineController::class );
+    Route::resource('/before_sale' , BeforeSaleController::class );
+    Route::resource('/cars' ,  CarItemController::class );
+    Route::resource('/car_sells', CarsellController::class);
+    Route::resource('/sold_out' , SoldOutController::class) ;
+    Route::post('/adminTesting', [SoldOutController::class , 'testing']);
+    Route::resource('/employees', EmployeeController::class);
+    Route::resource('/brand' , BrandController::class );
+    Route::resource('/positions' , PositionController::class);
+    Route::resource('/saled' , SaledController::class);
+    Route::resource('/default-function' , DefaultFunctionController::class );
+    Route::resource('/license-state' , licenseStateController::class);
+    Route::get('/deposits/state', [AdminDashBoardController::class ,'depositSate']);
+    Route::get('/machines/state' , [AdminDashBoardController::class , 'machineState']);
+    Route::get('/search/{query}', [SearchController::class , 'search'] );
+    Route::get('/routeBack' , function () {
         return redirect()->back() ;
     });
-    Route::get('details/{specialize}/{name}' , [AdminDashBoardController::class , 'seeDetial']);
-    Route::get('generatePDF/{id}' , [SoldOutController::class ,'generatePDF']);
-    Route::get('histroy/sold_out' , [AdminDashBoardController::class , 'histroyOfSellingCar']);
-    Route::resource('panding_state' , PendingStateController::class );
-    Route::resource('mechanic' , MechanicController::class );
+    Route::get('/details/{specialize}/{name}' , [AdminDashBoardController::class , 'seeDetial']);
+    Route::get('/generatePDF/{id}' , [SoldOutController::class ,'generatePDF']);
+    Route::get('/histroy/sold_out' , [AdminDashBoardController::class , 'histroyOfSellingCar']);
+    Route::resource('/panding_state' , PendingStateController::class );
+    Route::resource('/mechanic' , MechanicController::class );
 });
+
+
 
 ?> 

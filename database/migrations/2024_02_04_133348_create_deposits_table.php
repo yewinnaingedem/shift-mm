@@ -16,7 +16,8 @@ return new class extends Migration
             $table->string('depositAmount');
             $table->date('finalDate');
             $table->string('noted')->nullable();
-            $table->boolean('state')->default(0);
+            $table->boolean('mail_state')->default(0);
+            $table->boolean('deposit_state')->default(0);
             $table->timestamps();
         });
     }

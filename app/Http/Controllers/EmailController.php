@@ -19,7 +19,6 @@ class EmailController extends Controller
                 ->leftJoin('grades','items.grade','grades.id')
                 ->leftJoin('years','owner_books.year_id','years.id')
                 ->first();
-        
         Mail::to('yewinnaing0597@gmail.com')->send(new toAdmin($data->toArray())) ;
         return response()->json('success');
     }

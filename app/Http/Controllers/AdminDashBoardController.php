@@ -21,7 +21,7 @@ class AdminDashBoardController extends Controller
         // deposit state 
         $depositStates = SoldOut::select('deposits.*')
                         ->leftJoin('deposits','sold_outs.depositState','deposits.id')
-                        ->where('deposits.state','=',0)
+                        ->where('deposits.deposit_state','=',0)
                         ->count();
         return view('Admin.Dashboard.index' , compact('todaySold' , 'depositStates'));
     }
@@ -52,7 +52,7 @@ class AdminDashBoardController extends Controller
     }
 
     public function depositSate () {
-        $depositStates = SoldOut::select('deposits.*','buyers.*','brands.brand_name as brandName','owner_books.license_plate as license_plate',
+        $depositStates = SoldOut::select('deposits.*','buyers.*','sold_outs.id as mainId','brands.brand_name as brandName','owner_books.license_plate as license_plate',
                         'car_models.model_name as modelname','exterior_colors.exterior_color as exterior_color')
                         ->leftJoin('deposits','sold_outs.depositState','deposits.id')
                         ->leftJoin('buyers','sold_outs.buyer_id','buyers.id')
@@ -61,7 +61,7 @@ class AdminDashBoardController extends Controller
                         ->leftJoin('car_models','owner_books.model_id','car_models.id')
                         ->leftJoin('brands','car_models.brand_id','brands.id')
                         ->leftJoin('exterior_colors','owner_books.exterior_color_id', 'exterior_colors.id')
-                        ->where('deposits.state','=',0)
+                        ->where('deposits.deposit_state','=',0)
                         ->get();
         return view('admin.Dashboard.depositState' , compact('depositStates'));
     }
@@ -292,8 +292,7 @@ class AdminDashBoardController extends Controller
 
     public function histroyOfSellingCar () {
         $records = SoldOut::select('owner_books.license_plate as licensePlate','buyers.name as buyerName','hp_plans.hp_loan as hpPlan' ,'hire_purchases.loan_month as loanMonths'
-        ,'sold_outs.created_at as createdAt', 'buyers.purchase_price as purchasePrice','car_models.model_name as modelName','sold_outs.id as soldOutId'              
-        )
+                            ,'sold_outs.created_at as createdAt', 'buyers.purchase_price as purchasePrice','car_models.model_name as modelName','sold_outs.id as soldOutId')
                             ->leftJoin('cars','sold_outs.car_id','cars.id')
                             ->leftJoin('buyers','sold_outs.buyer_id','buyers.id')
                             ->leftJoin('hire_purchases','sold_outs.hire_purchase_id','hire_purchases.id')
