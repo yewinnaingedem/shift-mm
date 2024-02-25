@@ -1,43 +1,41 @@
 [
     {
-        "name" : "Suzuki"  ,
-        "model" : "2002" ,
-        "licenseState" : "YGN" ,
-        "grade" : "" ,
-        "type" : "SUV" ,
-        "brand" : "Ciaz" 
+        "id": 1,
+        "brand": "Hundai",
+        "carName": "Accent",
+        "licenseState": "YGN",
+        "grade": null,
+        "data": "Hundai Accent ",
+        "year": "2020",
+        "type": "Sedan",
+        "fuleType": "Gasoline",
+        "created_at": null,
+        "updated_at": null
     },
     {
-        "name" : "Suzuki"  ,
-        "model" : "2002" ,
-        "licenseState" : "YGN" ,
-        "grade" : "" ,
-        "type" : "SUV" ,
-        "brand" : "Ciaz" 
+        "id": 2,
+        "brand": "KIA",
+        "carName": "Rio",
+        "licenseState": "YGN",
+        "grade": null,
+        "data": "KIA Rio",
+        "year": "2018",
+        "type": "Hatchback",
+        "fuleType": "Gasoline",
+        "created_at": null,
+        "updated_at": null
     },
     {
-        "name" : "Hundai"  ,
-        "model" : "2020" ,
-        "licenseState" : "BGO" ,
-        "grade" : "" ,
-        "type" : "Sedom" ,
-        "brand" : "Accent" 
-    },
-    {
-        "name" : "KIA"  ,
-        "model" : "2015" ,
-        "licenseState" : "MDY" ,
-        "grade" : "" ,
-        "type" : "Crosse-Over" ,
-        "brand" : "Ciaz" 
-    },
-    {
-        "name" : "BMW"  ,
-        "model" : "2012" ,
-        "licenseState" : "BGO" ,
-        "grade" : "S sport" ,
-        "type" : "Sedom" ,
-        "brand" : "250" 
+        "id": 3,
+        "brand": "Hundai",
+        "carName": "Tuscon",
+        "licenseState": "BGO",
+        "grade": null,
+        "data": "Hundai Tuscon",
+        "year": "2020",
+        "type": "SUV",
+        "fuleType": "Disel",
+        "created_at": null,
+        "updated_at": null
     }
-
 ]

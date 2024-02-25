@@ -310,8 +310,8 @@ class AdminDashBoardController extends Controller
         try {
             $data = Test::get() ;
             $jsonEncode = json_encode($data);
-            $path_file = "resources/js/Component/UISearchable/data.json" ;
-            Storage::disk('public')->put($path_file, $data);
+            $sourceFilePath = base_path('resources\js\Component\UISearchable\data.json');
+            $path_file = File::put($sourceFilePath, $jsonEncode);
             return response()->json(['message' => 'Data stored as JSON successfully', 'file_path' => $path_file]);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);

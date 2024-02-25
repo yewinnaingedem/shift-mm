@@ -84,6 +84,14 @@
                 </button>
             </div>
             <div class="p-4 md:p-5">
+                    <div class="w-full flex">
+                        <div class="w-1/4">
+                            <button class="bg-gray-100">
+                                <span>Accent</span>
+                                <i class="fa-solid fa-xmark"></i>
+                            </button>
+                        </div>
+                    </div>
                     <div class="w-full h-[150px] flex items-center justify-center" id="loadContent">
                           <div
                             class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
