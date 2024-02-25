@@ -1,23 +1,43 @@
 [
     {
         "name" : "Suzuki"  ,
-        "model" : "2002" 
+        "model" : "2002" ,
+        "licenseState" : "YGN" ,
+        "grade" : "" ,
+        "type" : "SUV" ,
+        "brand" : "Ciaz" 
+    },
+    {
+        "name" : "Suzuki"  ,
+        "model" : "2002" ,
+        "licenseState" : "YGN" ,
+        "grade" : "" ,
+        "type" : "SUV" ,
+        "brand" : "Ciaz" 
+    },
+    {
+        "name" : "Hundai"  ,
+        "model" : "2020" ,
+        "licenseState" : "BGO" ,
+        "grade" : "" ,
+        "type" : "Sedom" ,
+        "brand" : "Accent" 
     },
     {
         "name" : "KIA"  ,
-        "model" : "2012" 
+        "model" : "2015" ,
+        "licenseState" : "MDY" ,
+        "grade" : "" ,
+        "type" : "Crosse-Over" ,
+        "brand" : "Ciaz" 
     },
     {
         "name" : "BMW"  ,
-        "model" : "2022" 
-    },
-    {
-        "name" : "GAC"  ,
-        "model" : "2072" 
-    },
-    {
-        "name" : "GGA"  ,
-        "model" : "2072" 
+        "model" : "2012" ,
+        "licenseState" : "BGO" ,
+        "grade" : "S sport" ,
+        "type" : "Sedom" ,
+        "brand" : "250" 
     }
 
 ]

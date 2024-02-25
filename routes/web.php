@@ -58,6 +58,8 @@ Route::prefix('mm_cars')->group(function () {
     Route::get('financing' , [FinancingController::class , 'index']);
 });
 
+Route::get('autosuggestReflesh' , [AdminDashBoardController::class , 'refleshJson']);
+
 Route::prefix('admin')->group(function (){
     Route::get('/' , [AdminAuthController::class , 'index']);
     Route::get('/dashbord' , [AdminDashBoardController::class , 'index']);

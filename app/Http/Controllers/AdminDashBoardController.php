@@ -8,9 +8,12 @@ use App\Models\PaintDemage ;
 use App\Models\SuspensionDemage ;
 use App\Models\LightDemage ;
 use App\Models\TvFiexer ;
+use App\Models\Test ;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\DB;
 use App\Models\EngineDemage ;
 use App\Models\Wiring ;
+use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon ;
 use App\Models\machine ;
 class AdminDashBoardController extends Controller
@@ -301,5 +304,17 @@ class AdminDashBoardController extends Controller
                             ->leftJoin('car_models','owner_books.model_id','car_models.id')
                             ->get();
         return view('Admin.Dashboard.historyOfSellingCars', compact('records'));
+    }
+
+    public function refleshJson() {
+        try {
+            $data = Test::get() ;
+            $jsonEncode = json_encode($data);
+            $path_file = "resources/js/Component/UISearchable/data.json" ;
+            Storage::disk('public')->put($path_file, $data);
+            return response()->json(['message' => 'Data stored as JSON successfully', 'file_path' => $path_file]);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
 }
