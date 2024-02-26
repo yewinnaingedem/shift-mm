@@ -4,9 +4,9 @@
             <i class="fa-solid fa-magnifying-glass absolute top-[15px] left-[28px]"></i>
             <input type="text" v-model="inputSearch" autocomplete="off"  id="input_search" class="reg-input w-input rounded w-full pl-10 pr-2 outline-none border-none focus:ring-0 focus:ring-transparent h-10 bg-neutral-50 " placeholder="Search Keyword , Modals , Type ... ">
         </div>
-        <div class="result w-full relative borer-radious-customize bg-white px-3 py-2 text-black" v-show="results.length > 0">
+        <div class="result w-full relative borer-radious-customize bg-gray-50 px-3 py-2 text-black" v-show="results.length > 0">
             <ul>
-                <li class="px-[25px] py-[5px] bg-suggest-color rounded" v-for="result in results" :key="result.id">
+                <li class="px-[25px] py-[5px] mb-[1px] bg-suggest-color rounded" v-for="result in results" :key="result.id">
                     <span v-html="hightLightMatchedWorlds(result.data)"></span>
                      <span>{{ result.carName }}{{ result.year }} {{ result.type }} {{ result.grade }} </span>
                 </li>

@@ -85,12 +85,8 @@
             </div>
             <div class="p-4 md:p-5">
                     <div class="w-full flex">
-                        <div class="w-1/4">
-                            <button class="bg-gray-100">
-                                <span>Accent</span>
-                                <i class="fa-solid fa-xmark"></i>
-                            </button>
-                        </div>
+                        <ul id="grapItem" class="flex gap-1 mb-3">
+                        </ul>
                     </div>
                     <div class="w-full h-[150px] flex items-center justify-center" id="loadContent">
                           <div
@@ -103,10 +99,24 @@
                         >
                         </div>
                     </div>
-                <ul class="my-4 space-y-3 max-h-[300px] overflow-x-auto min-h-[150px]" id="modelAble" >
-                    <!-- Model Data Goes here  -->
-                    
-                </ul>
+                    <ul class="my-2 space-y-3 max-h-[300px] overflow-x-auto min-h-[100px]" id="modelAble" >
+                        <!-- Model Data Goes here  -->
+                    </ul>
+                    <div class="flex mb-3">
+                        <div class="w-1/2 ">
+                            <button type="button" class="flex text-[16px] mr-auto clear-data  bg-gray-50 hover:bg-gray-100 hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white px-4 rounded-xl font-sans  text-sm min-w-[9rem] md:min-w-[9rem] w-1/2 item-center md:jsutify-between h-[42px] items-center justify-between border border-gray-200 focus:ring-0 focus:ring-transparent  h-42 text-center ">
+                                <div class="font-semibold tracking-wide "> Clear </div>
+                                <div class="">
+                                    <i class="fa-solid fa-ban "></i>
+                                </div>
+                            </button>
+                        </div>
+                        <div class="w-1/2 text-end">
+                            <button class="flex  px-4 bg-gray-50 hover:bg-gray-100 hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white rounded-xl font-sans  text-sm min-w-[9rem] md:min-w-[9rem] w-1/2 item-center md:jsutify-between h-[42px] items-center justify-center border border-gray-200 focus:ring-0 focus:ring-transparent ml-auto h-42 text-center ">
+                                <div class="font-semibold tracking-wide text-[16px]"> Search </div>
+                            </button>
+                        </div>
+                    </div>
                 <div>
                     <a href="#" class="inline-flex items-center text-xs font-normal text-gray-500 hover:underline dark:text-gray-400">
                         <svg class="w-3 h-3 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
