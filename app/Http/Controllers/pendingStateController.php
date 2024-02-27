@@ -5,15 +5,19 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\machine ;
 use App\Models\PaintDemage ;
+use Illuminate\Support\Facades\DB;
 use App\Models\Panding ;
 use Carbon\Carbon ;
 use App\Models\Before_Sale ;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 use App\Models\Sepcialize ;
+
 class pendingStateController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    
     public function index()
     {
         $datas = Panding::select('brands.brand_name','car_models.model_name','years.year','owner_books.license_plate','grades.grade' , 'pandings.car_id', 'pandings.state')
@@ -127,5 +131,5 @@ class pendingStateController extends Controller
         ] , 200);
         
         
-    }
+    } 
 }

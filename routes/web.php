@@ -37,6 +37,7 @@ use App\Http\Controllers\AdminDashBoardController;
 use App\Http\Controllers\BeforeSaleController ;
 use App\Http\Controllers\paintDemageController ;
 use App\Http\Controllers\AdminGmailController ;
+use App\Http\Controllers\creatDynamicTables ;
 
 Route::get('/google' , [AuthController::class , 'googleLogIn']);
 Route::prefix('mm_cars')->group(function () {
@@ -110,6 +111,7 @@ Route::prefix('admin')->group(function (){
     Route::get('/histroy/sold_out' , [AdminDashBoardController::class , 'histroyOfSellingCar']);
     Route::resource('/panding_state' , PendingStateController::class );
     Route::resource('/mechanic' , MechanicController::class );
+    Route::get('generateTable', [creatDynamicTables::class ,"createDynamicTables"]);
 });
 
 
