@@ -34,14 +34,14 @@
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <select class="form-select" v-model="mechines" aria-label="Default select example">
+                    <select class="form-select"  v-model="mechines">
                         <option v-for="fixer in fixers" :key="fixer.id" :value="fixer.id" >
                             {{ fixer.name }}
                         </option>
                     </select>
                 </div>
                 <div class="col-md-3">
-                    <textarea class="form-control" id="exampleFormControlTextarea1"  v-model="description" rows="1"></textarea>
+                    <textarea class="form-control" id="exampleFormControlTextarea1"  v-model="centeraStore.state.paintAndBody.about" rows="1"></textarea>
                 </div>
                 <div class="col-md-3">
                     <div class="w-full d-flex ">
@@ -60,9 +60,9 @@
             </div>
         </div>
         <!-- this is for Engine And Suspension and body  -->
-        <div class="content-1 mt-1">
+        <div class="content-1">
             <div class="header text-muted mb-1 fw-bold">
-                Engine And Suspension
+                Engine And Suspension 
             </div>
             <div class="row mb-1">
                 <div class="col-md-3">
@@ -71,14 +71,14 @@
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <select class="form-select" v-model="mechines" aria-label="Default select example">
+                    <select class="form-select"  v-model="engineSuspension">
                         <option v-for="fixer in fixers" :key="fixer.id" :value="fixer.id" >
                             {{ fixer.name }}
                         </option>
                     </select>
                 </div>
                 <div class="col-md-3">
-                    <textarea class="form-control" id="exampleFormControlTextarea1"  v-model="description" rows="1"></textarea>
+                    <textarea class="form-control" id="exampleFormControlTextarea1"  v-model="centeraStore.state.engineAndSuspension.about" rows="1"></textarea>
                 </div>
                 <div class="col-md-3">
                     <div class="w-full d-flex ">
@@ -96,10 +96,10 @@
                 </div>
             </div>
         </div>
-        <!-- this is for Wiring And Suspension and body  -->
-        <div class="content-1 mt-1">
+        <!-- this is for Engine And Suspension and body  -->
+        <div class="content-1">
             <div class="header text-muted mb-1 fw-bold">
-                Wiring And TV 
+                Wiring And TV
             </div>
             <div class="row mb-1">
                 <div class="col-md-3">
@@ -108,14 +108,51 @@
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <select class="form-select" v-model="mechines" aria-label="Default select example">
+                    <select class="form-select"  v-model="wiringAndTV">
                         <option v-for="fixer in fixers" :key="fixer.id" :value="fixer.id" >
                             {{ fixer.name }}
                         </option>
                     </select>
                 </div>
                 <div class="col-md-3">
-                    <textarea class="form-control" id="exampleFormControlTextarea1"  v-model="description" rows="1"></textarea>
+                    <textarea class="form-control" id="exampleFormControlTextarea1"  v-model="centeraStore.state.wiringAndTV.about" rows="1"></textarea>
+                </div>
+                <div class="col-md-3">
+                    <div class="w-full d-flex ">
+                        <div class= " w-half d-flex  justify-content-center ">
+                            <div class="w-75   btn btn-primary">
+                                <span>Send</span>
+                            </div>
+                        </div>
+                        <div class= " w-half d-flex justify-content-center ">
+                            <div class="w-75 bg-danger btn btn-danger">
+                                <span> Done</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- This is the additional demage  -->
+        <div class="content-1">
+            <div class="header text-muted mb-1 fw-bold">
+                Additional Exception
+            </div>
+            <div class="row mb-1">
+                <div class="col-md-3">
+                    <div class="mb-2">
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="1">There is no data </textarea>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <select class="form-select"  v-model="additional">
+                        <option v-for="fixer in fixers" :key="fixer.id" :value="fixer.id" >
+                            {{ fixer.name }}
+                        </option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <textarea class="form-control" id="exampleFormControlTextarea1"  v-model="centeraStore.state.additional.about" rows="1"></textarea>
                 </div>
                 <div class="col-md-3">
                     <div class="w-full d-flex ">
@@ -137,13 +174,22 @@
 </template>
 
 <script>
+    import centeraStore from "./centeralStore" ;
     export default {
         name : "PandingState" ,
+        setup () {
+            return {
+                centeraStore ,
+            }
+        }, 
         data : function () {
             return  {
                 fixers : [] ,
                 mechines : null ,
                 description : null ,
+                engineSuspension : null ,
+                wiringAndTV : null ,
+                additional : null ,
             }
         },
         props : {
@@ -152,18 +198,35 @@
                 require : true ,
             }
         },
-        methods: {
-        
-        },
         watch : {
             mechines (newVal) {
-                console.log(newVal);
                 this.fixers.forEach( fixer  => {
                     if(newVal == fixer.id)  {
-                        this.description = fixer.description ;
+                        centeraStore.state.paintAndBody.about = fixer.description ;
                     }
                 });
-            }    
+            }  ,
+            engineSuspension (newVal ) {
+                this.fixers.forEach(fixer => {
+                    if(newVal == fixer.id) {
+                        centeraStore.state.engineAndSuspension.about  = fixer.description ;
+                    }
+                });
+            },
+            wiringAndTV (newVal) {
+                this.fixers.forEach(fixer => {
+                    if(newVal == fixer.id) {
+                        centeraStore.state.wiringAndTV.about  = fixer.description ;
+                    }
+                });
+            },
+            additional (newVal) {
+                this.fixers.forEach(fixer => {
+                    if(newVal == fixer.id) {
+                        centeraStore.state.additional.about  = fixer.description ;
+                    }
+                });
+            }
         },
         mounted () {
             this.fixers = this.panding.fixers ;
