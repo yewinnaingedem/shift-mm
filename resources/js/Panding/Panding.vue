@@ -29,24 +29,27 @@
             </div>
             <div class="row mb-1">
                 <div class="col-md-3">
-                    <div class="mb-2">
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="1">There is no data </textarea>
+                    <div class="mb-2" >
+                        <textarea class="form-control text-capitalize" v-model="fixpoint"  rows="1"></textarea>
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <select class="form-select"  v-model="mechines">
+                    <select class="form-select"  v-model="paintAndBody">
                         <option v-for="fixer in fixers" :key="fixer.id" :value="fixer.id" >
                             {{ fixer.name }}
                         </option>
                     </select>
                 </div>
-                <div class="col-md-3">
-                    <textarea class="form-control" id="exampleFormControlTextarea1"  v-model="centeraStore.state.paintAndBody.about" rows="1"></textarea>
+                <div class="col-md-3  ">
+                    <div class=" rounded  w-full h-30  border d-flex justify-content-center align-items-center">
+                        <div>{{ centeraStore.state.paintAndBody.about }}</div>
+                    </div>
                 </div>
+                
                 <div class="col-md-3">
                     <div class="w-full d-flex ">
                         <div class= " w-half d-flex  justify-content-center ">
-                            <div class="w-75   btn btn-primary">
+                            <div class="w-75   btn btn-primary" @click="centeraStore.dispatch('sendFormData')">
                                 <span>Send</span>
                             </div>
                         </div>
@@ -59,115 +62,24 @@
                 </div>
             </div>
         </div>
-        <!-- this is for Engine And Suspension and body  -->
-        <div class="content-1">
-            <div class="header text-muted mb-1 fw-bold">
-                Engine And Suspension 
-            </div>
-            <div class="row mb-1">
-                <div class="col-md-3">
-                    <div class="mb-2">
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="1">There is no data </textarea>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <select class="form-select"  v-model="engineSuspension">
-                        <option v-for="fixer in fixers" :key="fixer.id" :value="fixer.id" >
-                            {{ fixer.name }}
-                        </option>
-                    </select>
-                </div>
-                <div class="col-md-3">
-                    <textarea class="form-control" id="exampleFormControlTextarea1"  v-model="centeraStore.state.engineAndSuspension.about" rows="1"></textarea>
-                </div>
-                <div class="col-md-3">
-                    <div class="w-full d-flex ">
-                        <div class= " w-half d-flex  justify-content-center ">
-                            <div class="w-75   btn btn-primary">
-                                <span>Send</span>
-                            </div>
-                        </div>
-                        <div class= " w-half d-flex justify-content-center ">
-                            <div class="w-75 bg-danger btn btn-danger">
-                                <span> Done</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        
+        <div class="my-3">
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" :style="{ width: progress + '%' }" aria-valuenow="progress" aria-valuemin="0" aria-valuemax="100">10%</div>
             </div>
         </div>
-        <!-- this is for Engine And Suspension and body  -->
-        <div class="content-1">
-            <div class="header text-muted mb-1 fw-bold">
-                Wiring And TV
+        <div class="row mt-3">
+            <div class="col-md-3">
+                <button class="btn btn-primary">Showroom</button>
             </div>
-            <div class="row mb-1">
-                <div class="col-md-3">
-                    <div class="mb-2">
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="1">There is no data </textarea>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <select class="form-select"  v-model="wiringAndTV">
-                        <option v-for="fixer in fixers" :key="fixer.id" :value="fixer.id" >
-                            {{ fixer.name }}
-                        </option>
-                    </select>
-                </div>
-                <div class="col-md-3">
-                    <textarea class="form-control" id="exampleFormControlTextarea1"  v-model="centeraStore.state.wiringAndTV.about" rows="1"></textarea>
-                </div>
-                <div class="col-md-3">
-                    <div class="w-full d-flex ">
-                        <div class= " w-half d-flex  justify-content-center ">
-                            <div class="w-75   btn btn-primary">
-                                <span>Send</span>
-                            </div>
-                        </div>
-                        <div class= " w-half d-flex justify-content-center ">
-                            <div class="w-75 bg-danger btn btn-danger">
-                                <span> Done</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="col-md-3">
+                <button class="btn btn-primary">NVMRS</button>
             </div>
-        </div>
-        <!-- This is the additional demage  -->
-        <div class="content-1">
-            <div class="header text-muted mb-1 fw-bold">
-                Additional Exception
+            <div class="col-md-3">
+                <button class="btn btn-primary">Finish</button>
             </div>
-            <div class="row mb-1">
-                <div class="col-md-3">
-                    <div class="mb-2">
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="1">There is no data </textarea>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <select class="form-select"  v-model="additional">
-                        <option v-for="fixer in fixers" :key="fixer.id" :value="fixer.id" >
-                            {{ fixer.name }}
-                        </option>
-                    </select>
-                </div>
-                <div class="col-md-3">
-                    <textarea class="form-control" id="exampleFormControlTextarea1"  v-model="centeraStore.state.additional.about" rows="1"></textarea>
-                </div>
-                <div class="col-md-3">
-                    <div class="w-full d-flex ">
-                        <div class= " w-half d-flex  justify-content-center ">
-                            <div class="w-75   btn btn-primary">
-                                <span>Send</span>
-                            </div>
-                        </div>
-                        <div class= " w-half d-flex justify-content-center ">
-                            <div class="w-75 bg-danger btn btn-danger">
-                                <span> Done</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="col-md-3">
+                <button class="btn btn-primary">Showroom</button>
             </div>
         </div>
     </div>    
@@ -185,11 +97,9 @@
         data : function () {
             return  {
                 fixers : [] ,
-                mechines : null ,
-                description : null ,
-                engineSuspension : null ,
-                wiringAndTV : null ,
-                additional : null ,
+                paintAndBody : null  ,
+                fixpoint : null ,
+                progress : 50 ,
             }
         },
         props : {
@@ -199,54 +109,58 @@
             }
         },
         watch : {
-            mechines (newVal) {
+            paintAndBody (newVal) {
+                centeraStore.state.paintAndBody.mechineName  = newVal ;
                 this.fixers.forEach( fixer  => {
                     if(newVal == fixer.id)  {
                         centeraStore.state.paintAndBody.about = fixer.description ;
                     }
                 });
             }  ,
-            engineSuspension (newVal ) {
-                this.fixers.forEach(fixer => {
-                    if(newVal == fixer.id) {
-                        centeraStore.state.engineAndSuspension.about  = fixer.description ;
-                    }
-                });
+            fixpoint (newVal ) {
+                if(newVal !== "" || newVal !== null ) {
+                    centeraStore.state.paintAndBody.fixpoint = newVal ;    
+                }
+            }
+        }, 
+        computed  : {
+            forPaintAndBody () {
+                this.paintAndBody = this.panding.fixers.length > 0  ? this.panding.fixers[0].id : null ;
+                centeraStore.state.paintAndBody.about = this.panding.fixers.length > 0  ? this.panding.fixers[0].description : null ;
+                this.fixpoint = this.panding.demage.bodyAndPaint ;
+                centeraStore.state.paintAndBody.fixpoint = this.fixpoint ;
+                if(this.paintAndBody !== null ) {
+                    centeraStore.state.paintAndBody.mechineName = this.paintAndBody ;
+                }
             },
-            wiringAndTV (newVal) {
-                this.fixers.forEach(fixer => {
-                    if(newVal == fixer.id) {
-                        centeraStore.state.wiringAndTV.about  = fixer.description ;
-                    }
-                });
-            },
-            additional (newVal) {
-                this.fixers.forEach(fixer => {
-                    if(newVal == fixer.id) {
-                        centeraStore.state.additional.about  = fixer.description ;
-                    }
-                });
+            carCode () {
+                centeraStore.state.carCode = this.panding.demage.license_plate ;
             }
         },
         mounted () {
+            this.forPaintAndBody;
+            this.carCode ;
             this.fixers = this.panding.fixers ;
         },
     }
 </script>
 
 <style>
-.tracking-wide {
-    letter-spacing: 1px;
-}
-.footer-content {
-    height: 2px;
-    background-color: gray;
-}
-.w-75{
-    width  : 75px ;
-}
+    .tracking-wide {
+        letter-spacing: 1px;
+    }
+    .footer-content {
+        height: 2px;
+        background-color: gray;
+    }
+    .w-75{
+        width  : 75px ;
+    }
     .w-half {
         width: 50%;
+    }
+    .h-30 {
+        height : 40px ;
     }
     .container-description {
             cursor: pointer;
@@ -260,5 +174,27 @@
     }
     .h-35px {
         height: 35px;
+    }
+    .skeleton {
+        width: 100%;
+        height: 40px;
+        animation: skeleton-animation 1s linear infinite alternate ;
+    }
+    @keyframes skeleton-animation {
+        0% {
+            background-color : hsl(200, 20%, 70%);
+        }
+        25% {
+            background-color : hsl(200, 20%, 70%);
+        }
+        50% {
+            background-color : hsl(200, 20%, 80%);
+        }
+        75% {
+            background-color : hsl(200 , 20 , 90%)
+        }
+        100% {
+            background-color : hsl(200, 20%, 95%);
+        }
     }
 </style>

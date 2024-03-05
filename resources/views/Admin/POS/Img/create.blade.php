@@ -66,7 +66,7 @@
 @section('page-name' , 'Car Models')
 
 @section('content')
-    <div class="container-fulid pt-3">
+    <div class="container-fulid pt-2">
         <form action="{{url('admin/car_img')}}" id="uploadForm" enctype="multipart/form-data">
             @csrf
             <input type="hidden" name="item_id" value="{{$car_datas['item_id']}}">
@@ -204,11 +204,11 @@
             <div class="mb-3 ">
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" >Submit </button>
             </div>
+            <!-- Modal  -->
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                        
                             <h1 class="modal-title fs-5" id="exampleModalLabel">Report Demange For 
                                 <span class="fw-bold text-danger">{{$car_datas['model_name']}}</span>
                                 <span>{{$car_datas['license_plate']}}</span>
@@ -218,36 +218,53 @@
                         <div class="loading-bar loading-bar--active"></div>
                         <div class="modal-body">
                             <div class="mb-1">
-                                <label for="engine_malfunction" class="col-form-label">Engine Malfunction</label>
-                                <textarea class="form-control valid-check" id="engine_malfunction" name="engine_malfunction" rows="1"></textarea>
+                                <label for="engineAndSuspension" class="col-form-label">Engine And Suspension</label>
+                                <textarea class="form-control valid-check" id="engineAndSuspension" name="engineAndSuspension" rows="1"></textarea>
                             </div>
                             <div class="mb-1">
-                                <label for="paint_demage" class="col-form-label">Paint Demange</label>
-                                <textarea class="form-control valid-check" name="paint_demage" id="paint_demage" rows="1"></textarea>
+                                <label for="paintAndBody" class="col-form-label">Paint And Body Repairt</label>
+                                <textarea class="form-control valid-check" name="paintAndBody" id="paintAndBody" rows="1"></textarea>
                             </div>
                             <div class="mb-1">
-                                <label for="tv" class="col-form-label">TV Exception</label>
-                                <textarea class="form-control valid-check" id="tv" name="tv" rows="1"></textarea>
+                                <label for="paintAndBody" class="col-form-label">TV And Wiring </label>
+                                <textarea class="form-control valid-check" id="tvAndWiring" name="tvAndWiring" rows="1"></textarea>
                             </div>
-                            <div class="mb-1">
-                                <label for="suspection" class="col-form-label">Suspection</label>
-                                <textarea class="form-control valid-check" id="suspection" name="suspection" rows="1"></textarea>
+                            <div class="">
+                                <label for="addtional_exception" class="col-form-label" >Addtional Exception</label>
+                                <textarea class="form-control valid-check" id="addtional_exception" rows="1" name="addtional_exception"></textarea>
                             </div>
-                            <div class="row">
-                                <div class="col-md-6 mb-1">
-                                    <label for="light" class="col-form-label">Lights</label>
-                                    <textarea class="form-control valid-check" id="light" rows="1" name="light"></textarea>
+                            <fieldset>
+                                <legend>
+                                    Are You Gonna Check It ?
+                                </legend>
+                                <div class="row">
+                                    <div class="col-md-1">
+                                        <hr>
+                                    </div>
+                                    <div class="col-md-11 d-flex justify-content-start align-items-center">
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" value="false" type="checkbox" name="show_room" role="switch" id="show_room">
+                                            <label class="form-check-label" for="show_room">Are You Gonna Check it at ShwoRoom <strong>?</strong></label>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col-md-6 mb-1">
-                                    <label for="message-text" class="col-form-label">Addtional Exception</label>
-                                    <textarea class="form-control valid-check" id="addtional_exception" rows="1" name="addtional_exception"></textarea>
+                                <div class="row">
+                                    <div class="col-md-1">
+                                        <hr>
+                                    </div>
+                                    <div class="col-md-11 d-flex justify-content-start align-items-center">
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" value="true" type="checkbox" name="NMVTIS" role="switch" id="NMVTIS">
+                                            <label class="form-check-label" for="NMVTIS">Are You Gonna Check it at Car Registation <strong>?</strong> </label>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
+                            </fieldset>
                         </div>
                         <div class="modal-footer justify-content-between">
                             <div>
-                                <input type="checkbox" name="all_good" value="all_good" class="form-check-input" id="all_good">
-                                <label for="all_good" class="form-check-label fw-bold">All Fine ? </label>
+                                <input type="checkbox" name="all_good" value="all_good" class="form-check-input me-2" id="all_good">
+                                <label for="all_good" class="form-check-label">Everthing Good <strong>?</strong></label>
                             </div>
                             <button type="button" id="submitButton" class="btn btn-primary">Send message</button>
                         </div>
@@ -256,7 +273,6 @@
             </div>
         </form>
     </div>
-    
     
 @endsection 
 
@@ -388,29 +404,21 @@
                 let allGood = $('#all_good');
                 let checked = true ;
                 $('.loading-bar').show();
-                valid.each(function (index , element) {
+                valid.each(function(index, element) {
                     let value = $(element).val().trim();
-                    if(allGood.is(':checked') ) {
+                    let allGoodChecked = $('#allGood').is(':checked'); // Assuming 'allGood' is the ID of your checkbox
+                    if (allGoodChecked || value !== "") {
                         $(element).removeClass('is-invalid');
                         $(element).next('.error-message').remove();
-                        $(element).val('');
-                    }else {
-                        if(value === "") {
-                            $(element).next('.error-message').remove();
-                            $(element).addClass('is-invalid');
-                            var errorMessage = $('<p>').addClass('text-danger m-0 error-message').text('Your Value is not validate');
-                            $(element).after(errorMessage);
-                            checked = false ;
-                        }else {
-                            $(element).removeClass('is-invalid');
-                            $(element).next('.error-message').remove();
-                        }
-                    };
-
-                    
+                    } else {
+                        $(element).addClass('is-invalid');
+                        $(element).next('.error-message').remove();
+                        var errorMessage = $('<p>').addClass('text-danger m-0 error-message').text('Your Value is not valid');
+                        $(element).after(errorMessage);
+                        checked = false ;
+                    }
                 });
                 var formData = new FormData($('#uploadForm')[0]);
-                
                 if(checked) {
                     $.ajax({
                         url : "/admin/car_img/test",

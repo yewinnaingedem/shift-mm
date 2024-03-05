@@ -42,7 +42,7 @@ class CarImageItemController extends Controller
         $carImages = [];
         foreach ($request->file('img') as $key => $image) {
             $validatedData = $request->validate([
-                'img.' . $key => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust file types and size as needed
+                'img.' . $key => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', 
             ]);
             $path = $image->store('carImages', 'public');
             $carImages[ 'img'.$key] = $path;
@@ -56,31 +56,35 @@ class CarImageItemController extends Controller
         $before_Sale = [] ;
         
         $exceptions = [];
-        if($request->has('all_good')) {
-            $exceptions['engine_malfunction'] = 'none' ;
-            $exceptions['paint_demage'] = 'none' ;
-            $exceptions['tv'] = 'none';
-            $exceptions['suspection'] = 'none';
-            $exceptions['lights'] = 'none' ;
-            $exceptions['addition_exception'] = 'none';   
-            $exceptionId = Exception::insertGetId($exceptions);   
-            $finalDatas['exception_id'] = $exceptionId ;
-            $car_item = Car::insertGetId($finalDatas);
-            $before_Sale['car_item'] = $car_item ;
-            $before_Sale['created_at'] = Carbon::now();
-            Before_Sale::create($before_Sale);
-            return response()->json([
-                'message' => 'success' ,
-                'redirect' => 'http://localhost:8000/admin/before_sale'
-            ]);
+        $checkService = $request->has('show_room') ? true : false ;
+        $NMVTIS = $request->has('NMVTIS') ? true : false ;
+        $valid = true ;
+        if($request->has('all_good')  ) {
+            if($checkService || $NMVTIS ) {
+                $exceptions['checkedAtShowroom'] = $checkService ;
+                $exceptions['NMVTIS'] = $NMVTIS ;
+                $exceptionId = Exception::insertGetId($exceptions) ;
+                $valid = false ;
+            }
+            if(!$valid) {
+                $finalDatas['exception_id'] = $exceptionId ;
+            }
+                $car_item = Car::insertGetId($finalDatas);
+                $before_Sale['car_item'] = $car_item ;
+                Before_Sale::create($before_Sale);
+                return response()->json([
+                    'message' => 'success' ,
+                    'redirect' => 'http://localhost:8000/admin/before_sale'
+                ]);
+            
         }
         
-        $exceptions['engine_malfunction'] = $request->engine_malfunction !== null ? $request['engine_malfunction'] : 'none' ;
-        $exceptions['paint_demage'] = $request['paint_demage'] !== null ?  $request['paint_demage'] : 'none';
-        $exceptions['tv'] = $request['tv'] !== null ? $request['tv'] : 'none';
-        $exceptions['suspection'] = $request['suspection'] !== null ? $request['suspection'] : 'none';
-        $exceptions['lights'] = $request['light'] !== null ? $request['light'] : 'none' ;
-        $exceptions['addition_exception'] = $request['addtional_exception'] !== null ? $request['addtional_exception'] : 'none';
+        $exceptions['engineAndSuspension'] = $request['engineAndSuspension'] !== null ? $request['engineAndSuspension'] : null ;
+        $exceptions['bodyAndPaint'] = $request['paintAndBody'] !== null ? $request['paintAndBody'] : null ;
+        $exceptions['TvAndWiring'] = $request['tvAndWiring'] !== null ? $request['tvAndWiring'] : null ;
+        $exceptions['addition_exception'] = $request['addtional_exception'] !== null ? $request['addtional_exception'] : null ;
+        $exceptions['checkedAtShowroom'] = $checkService ;
+        $exceptions['NMVTIS'] = $NMVTIS ;
         $exceptionId = Exception::insertGetId($exceptions);   
         $finalDatas['exception_id'] = $exceptionId ;
         $car_item = Car::insertGetId($finalDatas);

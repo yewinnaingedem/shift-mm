@@ -23,6 +23,7 @@ class creatDynamicTables extends Controller
                         $table->unsignedBigInteger('car_id');
                         $table->string('code_id');
                         $table->string('fxingPoint');
+                        $table->string('about');
                         $table->boolean('pandingState')->default(0);
                         $table->foreign('car_id')->references('id')->on('cars');
                     });

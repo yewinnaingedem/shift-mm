@@ -13,14 +13,12 @@ return new class extends Migration
     {
         Schema::create('exceptions', function (Blueprint $table) {
             $table->id();
-            $table->text('engine_malfunction');
-            $table->text('paint_demage');
-            $table->text('tv');
-            $table->text('suspection');
-            $table->text('lights');
+            $table->text('engineAndSuspension')->nullable();
+            $table->text('bodyAndPaint')->nullable();
+            $table->text('TvAndWiring')->nullable();
             $table->text('addition_exception')->nullable();
-            $table->timestamps();
-
+            $table->boolean('checkedAtShowroom')->default(0)->nullable();
+            $table->boolean('NMVTIS')->default(0)->nullable();
         });
     }
 
