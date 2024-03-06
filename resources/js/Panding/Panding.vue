@@ -125,9 +125,17 @@
         }, 
         computed  : {
             forPaintAndBody () {
-                this.paintAndBody = this.panding.fixers.length > 0  ? this.panding.fixers[0].id : null ;
-                centeraStore.state.paintAndBody.about = this.panding.fixers.length > 0  ? this.panding.fixers[0].description : null ;
-                this.fixpoint = this.panding.demage.bodyAndPaint ;
+                
+                if(this.panding.paintAndBody['about'] == centeraStore.state.paintAndBody.description) {
+                    const numericString = this.panding.paintAndBody['code_id'].replace(/\D/g, '');
+                    const finalChar = numericString.charAt(numericString.length - 1);
+                    this.paintAndBody = finalChar;
+                    this.fixpoint  = this.panding.paintAndBody['fxingPoint'] ;
+                }else {
+                    this.fixpoint = this.panding.demage.bodyAndPaint ;
+                    this.paintAndBody = this.panding.fixers.length > 0  ? this.panding.fixers[0].id : null ;
+                    centeraStore.state.paintAndBody.about = this.panding.fixers.length > 0  ? this.panding.fixers[0].description : null ;
+                }
                 centeraStore.state.paintAndBody.fixpoint = this.fixpoint ;
                 if(this.paintAndBody !== null ) {
                     centeraStore.state.paintAndBody.mechineName = this.paintAndBody ;
@@ -141,6 +149,7 @@
             this.forPaintAndBody;
             this.carCode ;
             this.fixers = this.panding.fixers ;
+            
         },
     }
 </script>

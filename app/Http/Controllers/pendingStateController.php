@@ -74,17 +74,15 @@ class pendingStateController extends Controller
                         ->first();
         $panding['fixers'] = machine::get() ;
         $codeid = $panding['demage']->license_plate . $panding['demage']->car_id; 
-        $count = 1; 
         foreach ($panding['fixers'] as $name) {
             $tableName = strtolower(str_replace(' ', '_', $name->name));
             if (Schema::hasTable($tableName)) {
                 $checked = $panding['demage']->license_plate . $name->id;
                 $data = DB::table($tableName)->where('code_id', $checked)->first();
                 if($data) {
-                    $panding['data' . $count] = $data;
+                    $panding[$data->about] = $data;
                 }
             }
-            $count++; 
         }
         $panding['paintDemage'] = PaintDemage::get();
         $panding['car_id'] = $id ;
