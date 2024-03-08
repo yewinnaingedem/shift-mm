@@ -25,7 +25,7 @@
             <div class="col-md-3">
                 <div class="w-full d-flex ">
                     <div class= " w-half d-flex  justify-content-center ">
-                        <div class="w-75   btn btn-primary" @click="centeraStore.dispatch('sendFormData')">
+                        <div class="w-75   btn btn-primary" @click="sendForm">
                             <span>Send</span>
                         </div>
                     </div>
@@ -89,15 +89,20 @@
                     this.mechines = finalChar;
                     this.fixpoint  = this.paintAndBodies.fxingPoint;
                 }else {
-                    // this.fixpoint = this.bodyAndPaint['f'] ;
-                    // this.paintAndBody = this.panding.fixers.length > 0  ? this.panding.fixers[0].id : null ;
-                    // centeraStore.state.paintAndBody.about = this.panding.fixers.length > 0  ? this.panding.fixers[0].description : null ;
+                    this.fixpoint = this.origin == null ? centeraStore.state.defaultString : this.origin ;
+                    this.mechines = this.fixers.length > 0 ? this.fixers[0].id : null ;
+                    centeraStore.state.paintAndBody.about = this.fixers.length > 0  ? this.fixers[0].description : null ;
                 }
                 centeraStore.state.paintAndBody.fixpoint = this.fixpoint ;
                 if(this.mechines !== null ) {
                     centeraStore.state.paintAndBody.mechineName = this.mechines ;
                 }
             },
+        },
+        methods : {
+            sendForm () {
+               centeraStore.dispatch('sendBodyAndPaint', this.mechines );
+            }
         },
         mounted () {
             this.forPaintAndBody ;          

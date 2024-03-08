@@ -23,13 +23,11 @@
         </div>
         <!-- this is the paing and body  -->
         <PaintAndBody :fixers="this.panding.fixers" :paintAndBodies="this.paintAndBody"></PaintAndBody>
-        <engineAndSuspenson></engineAndSuspenson>
-        <!-- <div class="my-3">
-            <div class="progress">
-                <div class="progress-bar" role="progressbar" :style="{ width: progress + '%' }" aria-valuenow="progress" aria-valuemin="0" aria-valuemax="100">10%</div>
-            </div>
-        </div>
-        <div class="row mt-3">
+        <engineAndSuspenson :origin="this.panding.demage.engineAndSuspension"  :fixers="this.panding.fixers" :engineAndSuspensiones="this.engineAndSuspenson"></engineAndSuspenson>
+        <tvAndWiring :origin="this.panding.demage.TvAndWiring"  :fixers="this.panding.fixers" :tvAndWiringes="this.tvAndWiring"></tvAndWiring>
+        <additonalDemage :origin="this.panding.demage.addition_exception"  :fixers="this.panding.fixers" :additionales="this.additional"></additonalDemage>
+        
+        <!-- <div class="row mt-3">
             <div class="col-md-3">
                 <button class="btn btn-primary">Showroom</button>
             </div>
@@ -49,11 +47,15 @@
 <script>
     import PaintAndBody from "./Components/PaintAndBody.vue";
     import engineAndSuspenson from "./components/engineAndSuspension.vue";
+    import tvAndWiring from "./components/tvAndWiring.vue";
+    import additonalDemage from "./components/additonalDemage.vue";
     export default {
         name : "PandingState" ,
         components : {
             PaintAndBody ,
             engineAndSuspenson ,
+            tvAndWiring ,
+            additonalDemage ,
         },
         data  () {
             return  {
@@ -73,6 +75,18 @@
                 }
                 return null ;
             },
+            engineAndSuspenson () {
+                if(this.panding.paintAndBody) {
+                    return this.panding.paintAndBody ;
+                }
+                return null ;
+            },
+            tvAndWiring () {
+                return null ;
+            },
+            additional () {
+                return null ;
+            }, 
             carCode () {
                 centeraStore.state.carCode = this.panding.demage.license_plate ;
             }

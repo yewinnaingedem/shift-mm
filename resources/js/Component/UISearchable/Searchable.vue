@@ -2,13 +2,23 @@
     <form action="" method="post">
         <div>
             <i class="fa-solid fa-magnifying-glass absolute top-[15px] left-[28px]"></i>
-            <input type="text" v-model="inputSearch" autocomplete="off"  id="input_search" class="reg-input w-input rounded w-full pl-10 pr-2 outline-none border-none focus:ring-0 focus:ring-transparent h-10 bg-neutral-50 " placeholder="Search Keyword , Modals , Type ... ">
+            <input type="text" v-model="inputSearch" autocomplete="off"  id="input_search" class="reg-input rounded-t-md rounded-tr-md w-input  w-full pl-10 pr-2 outline-none border-none focus:ring-0 focus:ring-transparent h-10 bg-neutral-50" placeholder="Search Keyword , Modals , Type ... ">
         </div>
-        <div class="result w-full relative borer-radious-customize bg-gray-50 px-3 py-2 text-black" v-show="results.length > 0">
-            <ul>
-                <li class="px-[25px] py-[5px] mb-[1px] bg-suggest-color rounded" v-for="result in results" :key="result.id">
-                    <span v-html="hightLightMatchedWorlds(result.data)"></span>
-                     <span>{{ result.carName }}{{ result.year }} {{ result.type }} {{ result.grade }} </span>
+        <div class="result w-full relative borer-radious-customize bg-neutral-50  2 text-black" v-if="inputSearch">
+            <ul class="pb-3 pt-1  w-full bg-neutral-50">
+                <li class="rounded-sm mb-[1px] w-full pl-10  bg-neutral-100 py-1" >
+                    <div class="relative border-l-4 border-green-400">
+                        <span class="pl-2 font-medium tracking-wide mr-1">Mingalar Search</span><span class="font-light "> 
+                            <span class="font-semibold">&#8220;</span>
+                            <span class="italic font-light">{{   inputSearch  }} </span>
+                            <span class="font-semibold">&#8220;</span>
+                        </span>
+                    </div>
+                </li>
+                <li class=" mb-[1px] w-full pl-10 hover:bg-neutral-100 hover:font-semibold  bg-neutral-50 py-1" v-for="data in results" :key="data.id">
+                    <div class="relative ">
+                        <span class="pl-2  tracking-wide ">{{ data.carName }}</span>
+                    </div>
                 </li>
             </ul>
         </div>
