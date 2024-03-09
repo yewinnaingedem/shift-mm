@@ -25,22 +25,10 @@
         <PaintAndBody :fixers="this.panding.fixers" :paintAndBodies="this.paintAndBody"></PaintAndBody>
         <engineAndSuspenson :origin="this.panding.demage.engineAndSuspension"  :fixers="this.panding.fixers" :engineAndSuspensiones="this.engineAndSuspenson"></engineAndSuspenson>
         <tvAndWiring :origin="this.panding.demage.TvAndWiring"  :fixers="this.panding.fixers" :tvAndWiringes="this.tvAndWiring"></tvAndWiring>
-        <additonalDemage :origin="this.panding.demage.addition_exception"  :fixers="this.panding.fixers" :additionales="this.additional"></additonalDemage>
-        
-        <!-- <div class="row mt-3">
-            <div class="col-md-3">
-                <button class="btn btn-primary">Showroom</button>
-            </div>
-            <div class="col-md-3">
-                <button class="btn btn-primary">NVMRS</button>
-            </div>
-            <div class="col-md-3">
-                <button class="btn btn-primary">Finish</button>
-            </div>
-            <div class="col-md-3">
-                <button class="btn btn-primary">Showroom</button>
-            </div>
-        </div> -->
+        <div class="mb-3">
+            <additonalDemage :origin="this.panding.demage.addition_exception"  :fixers="this.panding.fixers" :additionales="this.additional"></additonalDemage>
+        </div>
+        <StateCheck></StateCheck>
     </div>    
 </template>
 
@@ -49,6 +37,8 @@
     import engineAndSuspenson from "./components/engineAndSuspension.vue";
     import tvAndWiring from "./components/tvAndWiring.vue";
     import additonalDemage from "./components/additonalDemage.vue";
+    import StateCheck from "./components/StateCheck.vue";
+    import centeraStore from "./centeralStore";
     export default {
         name : "PandingState" ,
         components : {
@@ -56,6 +46,7 @@
             engineAndSuspenson ,
             tvAndWiring ,
             additonalDemage ,
+            StateCheck
         },
         data  () {
             return  {
@@ -76,22 +67,32 @@
                 return null ;
             },
             engineAndSuspenson () {
-                if(this.panding.paintAndBody) {
-                    return this.panding.paintAndBody ;
+                if(this.panding.engineandsuspension) {
+                    return this.panding.engineandsuspension ;
                 }
                 return null ;
             },
             tvAndWiring () {
+                if(this.panding.tvAndWiring) {
+                    return this.panding.tvAndWiring ;
+                }
                 return null ;
             },
             additional () {
+                if(this.panding.additional)
+                {
+                    return this.panding.additional ;
+                }
                 return null ;
             }, 
             carCode () {
                 centeraStore.state.carCode = this.panding.demage.license_plate ;
             }
         },
-
+        mounted () {
+            this.carCode ;
+            console.log(this.panding.demage);
+        }
     }
 </script>
 

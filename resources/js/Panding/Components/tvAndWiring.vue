@@ -91,7 +91,7 @@
         },
         computed  : {
             forEngineAndSuspension () {
-                if(this.tvAndWiring){
+                if(this.tvAndWiringes){
                     if(this.tvAndWiringes.about == centeraStore.state.tvAndWiring.description) {
                         const numericString = this.tvAndWiringes.code_id.replace(/\D/g, '');
                         const finalChar = numericString.charAt(numericString.length - 1);

@@ -86,6 +86,7 @@ class pendingStateController extends Controller
         }
         $panding['paintDemage'] = PaintDemage::get();
         $panding['car_id'] = $id ;
+        // dd($panding);
         return view('Admin.PendingState.create', compact('panding'));
     }
 

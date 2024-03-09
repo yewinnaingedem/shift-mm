@@ -9,9 +9,11 @@
         "year": "2020",
         "type": "Sedan",
         "fuleType": "Gasoline",
-        "created_at": null,
+        "created_at": "need to add engine power",
         "updated_at": null
+        
     },
+    
     {
         "id": 2,
         "brand": "KIA",

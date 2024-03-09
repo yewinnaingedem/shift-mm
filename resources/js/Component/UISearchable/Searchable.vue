@@ -15,9 +15,16 @@
                         </span>
                     </div>
                 </li>
-                <li class=" mb-[1px] w-full pl-10 hover:bg-neutral-100 hover:font-semibold  bg-neutral-50 py-1" v-for="data in results" :key="data.id">
-                    <div class="relative ">
-                        <span class="pl-2  tracking-wide ">{{ data.carName }}</span>
+                <li @click="clickAble(data)"  class=" mb-[1px] w-full pl-10 hover:bg-neutral-100 hover:font-semibold
+                  bg-neutral-50 py-1" v-if="results" v-for="data in results" :key="data.id">
+                    <div class="relative hover:border-l-4 hover:border-green-400">
+                        <span class="pl-2 font-medium tracking-wide mr-1">
+                            <span class="me-1 font-semibold">  {{ data.carName }}</span>    
+                            <span class="me-1 font-light">{{ data.type }}</span>    
+                            <span class="me-1 font-light">{{ data.fuleType }}</span>    
+                            <span class="me-1 font-light">{{ data.brand }}</span>    
+                            <span class="me-1 font-light">{{ data.year }}</span>    
+                        </span>
                     </div>
                 </li>
             </ul>
@@ -37,36 +44,28 @@
             }
         },
         watch : {
-            inputSearch (value) {
+            inputSearch (input) {
+                var value = input.toLowerCase() ;
                 if(value !== "") {
                     return this.results = this.data.filter(item => 
                         item.brand.toLowerCase().includes(value.toLowerCase()) || 
-                        item.data.toString().includes(value)
+                        item.data.toString().includes(value) ||
+                        item.fuleType.toString().includes(value) ||
+                        item.carName.toLowerCase().includes(value) ||
+                        item.type.toLowerCase().includes(value) ||
+                        item.year.includes(value) ||
+                        item.licenseState.toString().includes(value) || 
+                        item.type.toString().includes(value) 
                     );
                 }
                 return this.results = [] ;
-
             }
         },
         methods : {
-            hightLightMatchedWorlds (text) {
-                if (!this.inputSearch) return text;
-                const words = this.inputSearch.trim().split(/\s+/);
-                if(words.length > 0) {
-                    const suggestions = []; 
-                    for(const word of words) {
-                        const wordSuggestions = this.data.filter(item =>
-                        item.brand.toLowerCase().includes(word.toLowerCase())
-                        ).map(item => item.brand);
-                        suggestions.push(...wordSuggestions);
-                    }
-                    console.log(suggestions);
-                }
-                
+            clickAble (data ) {
+                this.inputSearch = data.carName + " " + data.type + " " + data.fuleType + " " + data.year ;
             }
-            
         }
-        
     }
 </script>
 <style scoped>

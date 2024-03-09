@@ -63,7 +63,7 @@
             },
             paintAndBodies : {
                 type : Object ,
-                required : true ,
+                default : null ,
             }
         },
         watch : {
@@ -83,11 +83,13 @@
         }, 
         computed  : {
             forPaintAndBody () {
-                if(this.paintAndBodies.about == centeraStore.state.paintAndBody.description) {
+                if(this.paintAndBodies){
+                    if(this.paintAndBodies.about == centeraStore.state.paintAndBody.description) {
                     const numericString = this.paintAndBodies.code_id.replace(/\D/g, '');
                     const finalChar = numericString.charAt(numericString.length - 1);
                     this.mechines = finalChar;
                     this.fixpoint  = this.paintAndBodies.fxingPoint;
+                }
                 }else {
                     this.fixpoint = this.origin == null ? centeraStore.state.defaultString : this.origin ;
                     this.mechines = this.fixers.length > 0 ? this.fixers[0].id : null ;

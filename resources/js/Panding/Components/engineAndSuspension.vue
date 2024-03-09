@@ -63,7 +63,7 @@
             },
             engineAndSuspensiones : {
                 type : Object ,
-                required : true ,
+                default : null ,
             },
             origin : {
                 type : String ,
@@ -87,11 +87,13 @@
         }, 
         computed  : {
             forEngineAndSuspension () {
-                if(this.engineAndSuspensiones.about == centeraStore.state.engineAdnSuspension.description) {
-                    const numericString = this.engineAndSuspensiones.code_id.replace(/\D/g, '');
-                    const finalChar = numericString.charAt(numericString.length - 1);
-                    this.mechines = finalChar;
-                    this.fixpoint  = this.engineAndSuspensiones.fxingPoint;
+                if(this.engineAndSuspensiones) {
+                    if(this.engineAndSuspensiones.about == centeraStore.state.engineAdnSuspension.description) {
+                       const numericString = this.engineAndSuspensiones.code_id.replace(/\D/g, '');
+                        const finalChar = numericString.charAt(numericString.length - 1);
+                        this.mechines = finalChar;
+                        this.fixpoint  = this.engineAndSuspensiones.fxingPoint;
+                    }
                 }else {
                     this.fixpoint = this.origin == null ? centeraStore.state.defaultString : this.origin ;
                     this.mechines = this.fixers.length > 0 ? this.fixers[0].id : null ;
