@@ -23,7 +23,9 @@
         </div>
         <!-- this is the paing and body  -->
         <PaintAndBody :fixers="this.panding.fixers" :paintAndBodies="this.paintAndBody"></PaintAndBody>
+        <!-- this is for engineAnd Suspension -->
         <engineAndSuspenson :origin="this.panding.demage.engineAndSuspension"  :fixers="this.panding.fixers" :engineAndSuspensiones="this.engineAndSuspenson"></engineAndSuspenson>
+        <!-- this is Tv and Wiring -->
         <tvAndWiring :origin="this.panding.demage.TvAndWiring"  :fixers="this.panding.fixers" :tvAndWiringes="this.tvAndWiring"></tvAndWiring>
         <div class="mb-3">
             <additonalDemage :origin="this.panding.demage.addition_exception"  :fixers="this.panding.fixers" :additionales="this.additional"></additonalDemage>

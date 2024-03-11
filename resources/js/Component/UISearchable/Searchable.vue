@@ -2,7 +2,15 @@
     <form action="" method="post">
         <div>
             <i class="fa-solid fa-magnifying-glass absolute top-[15px] left-[28px]"></i>
-            <input type="text" v-model="inputSearch" autocomplete="off"  id="input_search" class="reg-input rounded-t-md rounded-tr-md w-input  w-full pl-10 pr-2 outline-none border-none focus:ring-0 focus:ring-transparent h-10 bg-neutral-50" placeholder="Search Keyword , Modals , Type ... ">
+            <input 
+             v-model="inputSearch"
+             autocomplete="off"  
+             class="reg-input rounded-t-md rounded-tr-md w-input  w-full pl-10 pr-2 outline-none border-none focus:ring-0 focus:ring-transparent h-10 bg-neutral-50" 
+             placeholder="Search Keyword , Modals , Type ... "
+             @keydown.up.prevent = "hightPervious"
+             @keydown.down.prevent = "hightNext(results.length)"
+             @keydown.enter = "goDoc(indences)"
+             >
         </div>
         <div class="result w-full relative borer-radious-customize bg-neutral-50  2 text-black" v-if="inputSearch">
             <ul class="pb-3 pt-1  w-full bg-neutral-50">
@@ -15,9 +23,15 @@
                         </span>
                     </div>
                 </li>
-                <li @click="clickAble(data)"  class=" mb-[1px] w-full pl-10 hover:bg-neutral-100 hover:font-semibold
-                  bg-neutral-50 py-1" v-if="results" v-for="data in results" :key="data.id">
-                    <div class="relative hover:border-l-4 hover:border-green-400">
+                <li 
+                
+                class=" mb-[1px] w-full pl-10  hover:font-semibold hover:bg-neutral-100
+                   py-1" v-if="results" v-for="(data , index) in results" :key="data.id"
+                  :class="(iscurrent(index) ? 'bg-neutral-100 ' : 'bg-neutral-50' )"
+                  >
+                    <div class="relative hover:border-l-4 hover:border-green-400"
+                        :class="{'border-l-4 border-green-400' : iscurrent(index)}"
+                    >
                         <span class="pl-2 font-medium tracking-wide mr-1">
                             <span class="me-1 font-semibold">  {{ data.carName }}</span>    
                             <span class="me-1 font-light">{{ data.type }}</span>    
@@ -41,6 +55,7 @@
                 inputSearch : null ,
                 results : [] ,
                 data : Data ,
+                higthLightIndex : -1 ,
             }
         },
         watch : {
@@ -62,9 +77,30 @@
             }
         },
         methods : {
-            clickAble (data ) {
-                this.inputSearch = data.carName + " " + data.type + " " + data.fuleType + " " + data.year ;
+            hightPervious() {
+                if(this.higthLightIndex > 0) {
+                    this.higthLightIndex -= 1 ;
+                }
+            },
+            hightNext(resultCount) {
+                if(this.higthLightIndex < resultCount - 1) {
+                    this.higthLightIndex += 1 ;
+                }
+            },
+            iscurrent (index) {
+                if(index === this.higthLightIndex ) {
+                    return true ;
+                }else {
+                    return false ;
+                }
+                 
             }
+        },
+        beforeDestroy () {
+            window.removeEventListener('keydown', this.handleKeyDown); 
+        },
+        mounted ( ) {
+            window.addEventListener('keydown', this.handleKeyDown);
         }
     }
 </script>
