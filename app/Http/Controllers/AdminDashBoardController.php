@@ -9,6 +9,7 @@ use App\Models\SuspensionDemage ;
 use App\Models\LightDemage ;
 use App\Models\TvFiexer ;
 use App\Models\Test ;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\DB;
 use App\Models\EngineDemage ;
@@ -71,227 +72,46 @@ class AdminDashBoardController extends Controller
 
 
     public function machineState () {
-
-        $pandingPaintkoWinKhiang = PaintDemage::where('machines.id', '3')
-                                                    ->leftJoin('machines', 'paint_demages.fixer_id', 'machines.id')
-                                                    ->where('paint_demages.state', 0) 
-                                                    ->get();
-        if(!$pandingPaintkoWinKhiang->isEmpty()) {
-            machine::where('specialize',$pandingPaintkoWinKhiang->first()->specialize)->where('name',$pandingPaintkoWinKhiang->first()->name)->update([
-                'table_name' => 'paint_demages' ,
-                'pending_count' => $pandingPaintkoWinKhiang->count(),
-                'updated_at' => Carbon::now() ,
-            ]);
-        }else {
-            machine::where('id', 3)->update([
-                'table_name' => 'paint_demages' ,
-                'pending_count' => 0 ,
-                'updated_at' => Carbon::now() ,
-            ]);
+        $mechinses = machine::get();
+        $mechinCounts = [] ;
+        foreach ($mechinses as $mechinsesName) {
+            $tableName = strtolower(str_replace(' ', '_', $mechinsesName->name));
+            if (Schema::hasTable($tableName)) {
+                $data= DB::table($tableName)->where('pandingState',0)->count();
+                $mechinCounts[$mechinsesName->name ] = $data ;
+            }
         }
-
-        $pandingPaintkoThayLay = PaintDemage::where('machines.id', '4')
-                                                    ->leftJoin('machines', 'paint_demages.fixer_id', 'machines.id')
-                                                    ->where('paint_demages.state', 0) 
-                                                    ->get();
-        if(!$pandingPaintkoThayLay->isEmpty()) {
-            machine::where('specialize',$pandingPaintkoThayLay->first()->specialize)->where('name',$pandingPaintkoThayLay->first()->name)->update([
-                'table_name' => 'paint_demages' ,
-                'pending_count' => $pandingPaintkoThayLay->count(),
-                'updated_at' => Carbon::now() ,
-            ]);
-        }else {
-            machine::where('id', 4)->update([
-                'table_name' => 'paint_demages' ,
-                'pending_count' => 0 ,
-                'updated_at' => Carbon::now() ,
-            ]);
-        }
-
-        $engineKoThanOo = EngineDemage::where('machines.id','1')
-                                        ->leftJoin('machines', 'engine_demages.fixer_id', 'machines.id')
-                                        ->where('engine_demages.state',0)
-                                        ->get();
-        if(!$engineKoThanOo->isEmpty()) {
-            machine::where('specialize',$engineKoThanOo->first()->specialize)->where('name',$engineKoThanOo->first()->name)->update([
-                'table_name' => 'engine_demages' ,
-                'pending_count' => $engineKoThanOo->count(),
-                'updated_at' => Carbon::now() ,
-            ]);
-        }else {
-            machine::where('id', 1)->update([
-                'table_name' => 'engine_demages' ,
-                'pending_count' => 0 ,
-                'updated_at' => Carbon::now() ,
-            ]);
-        }
-        
-        // For suspensionPaukSi
-        $enginePaukSi = EngineDemage::where('machines.id','8')
-                                        ->leftJoin('machines', 'engine_demages.fixer_id', 'machines.id')
-                                        ->where('engine_demages.state',0)
-                                        ->get();
-        if(!$enginePaukSi->isEmpty()) {
-            machine::where('specialize',$enginePaukSi->first()->specialize)->where('name',$enginePaukSi->first()->name)->update([
-                'table_name' => 'engine_demages' ,
-                'pending_count' => $enginePaukSi->count(),
-                'updated_at' => Carbon::now(),
-            ]);
-        }else {
-            machine::where('id', 8)->update([
-                'table_name' => 'engine_demages' ,
-                'pending_count' => 0 ,
-                'updated_at' => Carbon::now() ,
-            ]);
-        }
-        
-        // For lighterKoSomething
-        $lighterKoSomething = LightDemage::where('machines.id','6')
-                                            ->leftJoin('machines', 'light_demages.fixer_id', 'machines.id')
-                                            ->where('light_demages.state',0)
-                                            ->get();
-        if(!$lighterKoSomething->isEmpty()) {
-            machine::where('specialize',$lighterKoSomething->first()->specialize)->where('name',$lighterKoSomething->first()->name )->update([
-                'table_name' => 'light_demages' ,
-                'pending_count' => $lighterKoSomething->count(),
-                'updated_at' => Carbon::now(),
-            ]);
-        }else {
-            machine::where('id', 6)->update([
-                'table_name' => 'light_demages' ,
-                'pending_count' => 0 ,
-                'updated_at' => Carbon::now() ,
-            ]);
-        }
-        
-        $lighterKoKyawKo = LightDemage::where('machines.id',5)
-                                        ->leftJoin('machines', 'light_demages.fixer_id', 'machines.id')
-                                        ->where('light_demages.state',0)
-                                        ->get();
-        if(!$lighterKoKyawKo->isEmpty()) {
-            machine::where('specialize',$lighterKoKyawKo->first()->specialize)->where('name',$lighterKoKyawKo->first()->name)->update([
-                'table_name' => 'light_demages' ,
-                'pending_count' => $lighterKoKyawKo->count(),
-                'updated_at' => Carbon::now(),
-            ]);
-        }else {
-            machine::where('id', 5)->update([
-                'table_name' => 'light_demages' ,
-                'pending_count' => 0 ,
-                'updated_at' => Carbon::now() ,
-            ]);
-        }
-
-        $suspensionkoThanOo = SuspensionDemage::where('machines.id','2')
-                                    ->leftJoin('machines', 'suspension_demages.fixer_id', 'machines.id')
-                                    ->where('suspension_demages.state',0)
-                                    ->get();
-        if(!$suspensionkoThanOo->isEmpty()) {
-            machine::where('specialize',$suspensionkoThanOo->first()->specialize)->where('name',$suspensionkoThanOo->first()->name)->update([
-                'table_name' => 'suspension_demages' ,
-                'pending_count' => $suspensionkoThanOo ,
-                'updated_at' => Carbon::now() ,
-            ]);
-        }else {
-            machine::where('id', 2)->update([
-                'table_name' => 'suspension_demages' ,
-                'pending_count' => 0 ,
-                'updated_at' => Carbon::now() ,
-            ]);
-        }
-
-        $suspensionKoPaukSi = SuspensionDemage::where('machines.id','9')
-                                    ->leftJoin('machines', 'suspension_demages.fixer_id', 'machines.id')
-                                    ->where('suspension_demages.state',0)
-                                    ->get();
-        if(!$suspensionKoPaukSi->isEmpty()) {
-            machine::where('specialize',$suspensionKoPaukSi->first()->specialize)->where('name', $suspensionKoPaukSi->first()->name)->update([
-                'table_name' => 'suspension_demages' ,
-                'pending_count' => $suspensionKoPaukSi->count() ,
-                'updated_at' => Carbon::now() ,
-            ]);    
-        }else {
-            machine::where('id', 11)->update([
-                'table_name' => 'suspension_demages' ,
-                'pending_count' => 0 ,
-                'updated_at' => Carbon::now() ,
-            ]);
-        }
-
-        $wiringkoThitKo = Wiring::where('machines.id',)
-                                    ->leftJoin('machines','wirings.fixer_id','machines.id')
-                                    ->where('wirings.state',0)
-                                    ->get();
-        if(!$wiringkoThitKo->isEmpty()) {
-            machine::where('specialize',$wiringkoThitKo->first()->specialize)->where('name', $wiringkoThitKo->first()->name)->update([
-                'table_name' => 'wirings' ,
-                'pending_count' => $wiringkoThitKo->count ,
-                'updated_at' => Carbon::now() ,
-            ]);
-        }else {
-            machine::where('id', 11)->update([
-                'table_name' => 'wirings' ,
-                'pending_count' => 0 ,
-                'updated_at' => Carbon::now() ,
-            ]);
-        }
-
-        $tvkoChitPu = TvFiexer::where('machines.id','11')
-                            ->leftJoin('machines','tv_fiexers.fixer_id','machines.id')
-                            ->where('tv_fiexers.state',0)
-                            ->get();
-        if(!$tvkoChitPu->isEmpty()) {
-            machine::where('specialize',$tvkoChitPu->first()->specialize)->where('name', $tvkoChitPu->first()->name)->update([
-                'table_name' => 'tv_fiexers' ,
-                'pending_count' => $tvkoChitPu->count() ,
-                'updated_at' => Carbon::now() ,
-            ]);
-        }else {
-            machine::where('id', 11)->update([
-                'table_name' => 'tv_fiexers' ,
-                'pending_count' => 0 ,
-                'updated_at' => Carbon::now() ,
-            ]);
-        }
-
-        $tvKoPaukSi = TvFiexer::where('machines.id','10')
-                            ->leftJoin('machines','tv_fiexers.fixer_id','machines.id')
-                            ->where('tv_fiexers.state',0)
-                            ->get();
-        
-        if(!$tvKoPaukSi->isEmpty()) {
-            machine::where('specialize',$tvKoPaukSi->first()->specialize)->where('name', $tvKoPaukSi->first()->name)->update([
-                'table_name' => 'tv_fiexers' ,
-                'pending_count' => $tvKoPaukSi->count() ,
-                'updated_at' => Carbon::now() ,
-            ]);
-        }else {
-            machine::where('id', 10)->update([
-                'table_name' => 'tv_fiexers' ,
-                'pending_count' => 0 ,
-                'updated_at' => Carbon::now() ,
-            ]);
-        }
-        
-        $machines = machine::select('machines.*','sepcializes.*')
-                            ->leftJoin('sepcializes','machines.specialize','sepcializes.id')
-                            ->get();
-        return view('Admin.Dashboard.machineState',compact('machines'));
+        return view('Admin.Dashboard.machineState',compact('mechinses', 'mechinCounts'));
     }
 
-    public function seeDetial($specialize , $name) {
-        $data = machine::where('specialize',$specialize)->where('name',$name)->first();
-        $modelName = $data->table_name ;
-        $states = DB::table($modelName)
-                    ->select('owner_books.*','cars.*',$modelName.'.*')
-                    ->leftJoin('cars', $modelName . ".car_id", '=', 'cars.id')
-                    ->leftJoin('owner_books','cars.owner_book_id','owner_books.id')
-                    ->where('fixer_id', $data->id)
-                    ->where($modelName.'.state', 0)
+    // ->leftJoin('cars',$tableName.'car_id' ,'cars.id')
+                    // ->leftJoin('')
+    public function seeDetial( $name) {
+        $tableName = strtolower(str_replace(' ', '_', $name));
+        if (Schema::hasTable($tableName)) {
+            $states= DB::table($tableName)
+                    ->where('pandingState',0)
                     ->get();
-        return view('Admin.Dashboard.SeeDetails',compact('states'));
+            return view('Admin.Dashboard.SeeDetails',compact('states'));    
+        }
+        dd("none");
+        
     }
 
+    public function stateChange ($id , Request $request) {
+        $tableName = strtolower(str_replace(' ', '_', $request->name));
+        if (Schema::hasTable($tableName)) {
+            $states= DB::table($tableName)
+                    ->where('code_id',$id)
+                    ->update([
+                        'pandingState' => 1 ,
+                        'updated_at' => Carbon::now() ,
+                    ]);
+            return response()->json([
+                'message' => 'success',
+            ] , 200);
+        }
+    }
 
     public function histroyOfSellingCar () {
         $records = SoldOut::select('owner_books.license_plate as licensePlate','buyers.name as buyerName','hp_plans.hp_loan as hpPlan' ,'hire_purchases.loan_month as loanMonths'

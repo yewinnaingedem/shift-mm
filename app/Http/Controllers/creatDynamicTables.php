@@ -25,6 +25,8 @@ class creatDynamicTables extends Controller
                         $table->string('fxingPoint');
                         $table->string('about');
                         $table->boolean('pandingState')->default(0);
+                        $table->timestamps(); 
+                        
                         $table->foreign('car_id')->references('id')->on('cars');
                     });
                 }

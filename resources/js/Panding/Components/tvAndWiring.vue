@@ -22,15 +22,15 @@
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="w-full d-flex ">
-                    <div class= " w-half d-flex  justify-content-center ">
-                        <div class="w-75   btn btn-primary" @click="sendForm">
-                            <span>Send</span>
+                <div class="w-full">
+                    <div class= "">
+                        <div class="w-100 btn btn-success" v-if="centeraStore.state.tvAndWiring.success">
+                            <span class="me-2">Verified</span>
+                            <i class="fa-solid fa-star"></i>
                         </div>
-                    </div>
-                    <div class= " w-half d-flex justify-content-center ">
-                        <div class="w-75 bg-danger btn btn-danger">
-                            <span> Done</span>
+                        <div class="w-100  btn btn-primary" v-else>
+                            <span v-if="centeraStore.state.tvAndWiring.state">Panding</span>
+                            <span v-else @click="sendForm">Send</span>
                         </div>
                     </div>
                 </div>
@@ -97,6 +97,7 @@
                         const finalChar = numericString.charAt(numericString.length - 1);
                         this.mechines = finalChar;
                         this.fixpoint  = this.tvAndWiringes.fxingPoint;
+                        centeraStore.state.tvAndWiring.state = true ;
                     }
                 }else {
                     this.fixpoint = this.origin == null ? centeraStore.state.defaultString : this.origin ;

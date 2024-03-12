@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\machine ;
+use Carbon\Carbon ;
 use DB ;
 class demageReportState extends Controller
 {
-    
     public function report  (Request $request , $id ) {
         $data = machine::get();
         $inserts = [] ;
@@ -20,6 +20,7 @@ class demageReportState extends Controller
                     $inserts['code_id'] = $request->carCode . $id ;
                     $inserts['car_id'] = $id ;
                     $inserts['about'] = $request->about ;
+                    $inserts['created_at'] = Carbon::now();
                     $getData = DB::table($tableName)->insert($inserts);
                     return response()->json([
                         'message' => $getData  ,

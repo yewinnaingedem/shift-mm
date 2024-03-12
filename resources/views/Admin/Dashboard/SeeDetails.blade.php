@@ -45,25 +45,13 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($states as $states)
+                @foreach($states as $state)
                     <tr>
-                        <td class="text-center text-danger fw-bold"> {{ $states->license_plate}}</td>
-                        <td class="text-capitalize text-center"> {{$states->description }}</td>
-                        <td>{{$states->created_at}}</td>
+                        <td class="text-danger fw-bold"> {{ $state->code_id}}</td>
+                        <td class="text-capitalize text-center"> {{$state->fxingPoint }}</td>
+                        <td>{{$state->created_at}}</td>
                         <td>
-                            <li class="nav-item  list-style-none">
-                                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
-                                    <i class="fa-solid fa-list"></i>
-                                </a>
-                                <ul class="dropdown-menu ">
-                                    <li>
-                                    <a href="{{url('admin/employee/'. $states->id .'/edit')}}" class="dropdown-item">View</a>
-                                    </li>
-                                    <li >
-                                        <button class="dropdown-item delete" data-id="{{$states->id}}">Delete</button>
-                                    </li>
-                                </ul>
-                            </li>
+                            <button data-id="{{$state->code_id}}" data-name="Ko Thay Lay" class="btn btn-warning hit">Submit</button>
                         </td>
                     </tr>
                 @endforeach
@@ -90,10 +78,11 @@
     <script>
         $(document).ready(()=> {
             new DataTable('#example');
-            $(document).on('click','.delete' ,((e)=> 
+            $(document).on('click','.hit' ,((e)=> 
                 {
                     let deleteBtn = $(e.currentTarget);
                     let id = deleteBtn.data('id') ;
+                    let name = deleteBtn.data('name');
                     let row = deleteBtn.parent().parent();
                     swal({
                         title: "Are you sure?",
@@ -108,9 +97,10 @@
                             swal("Deleted!", 'response' , "success");
                             $.ajax({
                                 type : 'delete' ,
-                                url : "/admin/employees/" + id ,
+                                url : "/admin/details/" + id ,
                                 data : {
-                                    "_token" : "{{csrf_token()}}"
+                                    "_token" : "{{csrf_token()}}" ,
+                                    name : name ,
                                 },
                                 success : (response) => 
                                 {

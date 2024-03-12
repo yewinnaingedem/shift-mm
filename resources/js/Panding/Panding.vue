@@ -30,7 +30,7 @@
         <div class="mb-3">
             <additonalDemage :origin="this.panding.demage.addition_exception"  :fixers="this.panding.fixers" :additionales="this.additional"></additonalDemage>
         </div>
-        <StateCheck></StateCheck>
+        <StateCheck :state1="this.panding.demage.checkedAtShowroom" :state2="this.panding.demage.NMVTIS"></StateCheck>
     </div>    
 </template>
 
@@ -89,11 +89,10 @@
             }, 
             carCode () {
                 centeraStore.state.carCode = this.panding.demage.license_plate ;
-            }
+            },
         },
         mounted () {
             this.carCode ;
-            console.log(this.panding.demage);
         }
     }
 </script>

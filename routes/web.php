@@ -106,12 +106,13 @@ Route::prefix('admin')->group(function (){
     Route::get('/routeBack' , function () {
         return redirect()->back() ;
     });
-    Route::get('/details/{specialize}/{name}' , [AdminDashBoardController::class , 'seeDetial']);
+    Route::get('/details/{name}' , [AdminDashBoardController::class , 'seeDetial']);
     Route::get('/generatePDF/{id}' , [SoldOutController::class ,'generatePDF']);
     Route::get('/histroy/sold_out' , [AdminDashBoardController::class , 'histroyOfSellingCar']);
     Route::resource('/panding_state' , PendingStateController::class );
     Route::resource('/mechanic' , MechanicController::class );
     Route::get('generateTable', [creatDynamicTables::class ,"createDynamicTables"]);
+    Route::delete('/details/{id}',[AdminDashBoardController::class , 'stateChange']);
 });
 
 

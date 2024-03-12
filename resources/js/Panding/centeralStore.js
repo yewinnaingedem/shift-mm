@@ -10,24 +10,32 @@ const centeraStore = createStore({
                 mechineName : null ,
                 about : null ,
                 description : 'paintAndBody' ,
+                state : false ,
+                success : false ,
             },
             engineAdnSuspension : {
                 fixpoint : null ,
                 mechineName : null ,
                 about : null ,
-                description : 'engineandsuspension'  
+                description : 'engineandsuspension' ,
+                state : false , 
+                success : false ,
             },
             tvAndWiring : {
                 fixpoint : null ,
                 mechineName : null ,
                 about : null ,
                 description : 'tvAndWiring' ,
+                state : false ,
+                success : false ,
             },
             additional : {
                 fixpoint : null ,
                 mechineName : null ,
                 about : null ,
                 description : 'additional' ,
+                state : false ,
+                success : false ,
             }
         }
     },

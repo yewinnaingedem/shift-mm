@@ -23,15 +23,15 @@
             </div>
             
             <div class="col-md-3">
-                <div class="w-full d-flex ">
-                    <div class= " w-half d-flex  justify-content-center ">
-                        <div class="w-75   btn btn-primary" @click="sendForm">
-                            <span>Send</span>
+                <div class="w-full ">
+                    <div>
+                        <div class="w-100 btn btn-success" v-if="centeraStore.state.paintAndBody.success">
+                            <span class="me-2">Verified</span>
+                            <i class="fa-solid fa-star"></i>
                         </div>
-                    </div>
-                    <div class= " w-half d-flex justify-content-center ">
-                        <div class="w-75 bg-danger btn btn-danger">
-                            <span> Done</span>
+                        <div class="w-100  btn btn-primary" v-else>
+                            <span v-if="centeraStore.state.paintAndBody.state">Panding</span>
+                            <span v-else  @click="sendForm">Send</span>
                         </div>
                     </div>
                 </div>
@@ -85,11 +85,15 @@
             forPaintAndBody () {
                 if(this.paintAndBodies){
                     if(this.paintAndBodies.about == centeraStore.state.paintAndBody.description) {
-                    const numericString = this.paintAndBodies.code_id.replace(/\D/g, '');
-                    const finalChar = numericString.charAt(numericString.length - 1);
-                    this.mechines = finalChar;
-                    this.fixpoint  = this.paintAndBodies.fxingPoint;
-                }
+                        const numericString = this.paintAndBodies.code_id.replace(/\D/g, '');
+                        const finalChar = numericString.charAt(numericString.length - 1);
+                        this.mechines = finalChar;
+                        this.fixpoint  = this.paintAndBodies.fxingPoint;
+                        centeraStore.state.paintAndBody.state = true ;
+                        if(this.paintAndBodies.pandingState ) {
+                            centeraStore.state.paintAndBody.success = true ;
+                        }
+                    }
                 }else {
                     this.fixpoint = this.origin == null ? centeraStore.state.defaultString : this.origin ;
                     this.mechines = this.fixers.length > 0 ? this.fixers[0].id : null ;

@@ -45,14 +45,14 @@
         </div>
         <div class="box-container">
             <div class="row">
-                @foreach($machines as $machine)
-                    <div class="col-md-6 mb-3">
+                @foreach($mechinses as $machine)
+                    <div class="col-md-12 mb-2">
                         <div class="card overflow-hidden shadow bg-secondary fw-semibold text-white fs-18">
                             <div class="card-body row position-relative">
                                 <div class="col-md-8">
                                     <figure>
                                         <blockquote class="blockquote">
-                                            <p>{{$machine->name}} , <span class="fw-bold">{{$machine->category}}</span></p>
+                                            <p>{{$machine->name}} , <span class="fw-bold">{{$machine->description}}</span></p>
                                         </blockquote>
                                         <figcaption class="blockquote-footer text-tomato">
                                             Someone phone <cite title="phone number" class="text-black">{{$machine->phone}}</cite>
@@ -61,13 +61,13 @@
                                 </div>
                                 <div class="col-md-4 text-end d-flex justify-content-center align-items-center">
                                     <div class="fw-bold text-warning">
-                                        {{ $machine->pending_count == null ?  'no car is panding' : $machine->pending_count . " car is panding"}}
+                                    {{ $mechinCounts[$machine->name] ?? 'N/A' }}
                                     </div>
                                 </div>
                             </div>
                             <div class="position-absolute hover-element d-flex w-30 right-0  h-100 bg-success justify-content-center align-items-center top-0 ">
                                 <div class="fw-bold font-monospace">
-                                    <a href="{{url('admin/details/'.$machine->specialize.'/'.$machine->name)}}" class="text-decoration-none">
+                                    <a href="{{url('admin/details/'.$machine->name)}}" class="text-decoration-none">
                                         Check More..
                                     </a>
                                 </div>
