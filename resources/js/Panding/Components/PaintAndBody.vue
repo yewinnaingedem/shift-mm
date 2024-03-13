@@ -64,6 +64,10 @@
             paintAndBodies : {
                 type : Object ,
                 default : null ,
+            },
+            origin : {
+                type : String ,
+                required : true ,
             }
         },
         watch : {

@@ -22,7 +22,7 @@
             </div>
         </div>
         <!-- this is the paing and body  -->
-        <PaintAndBody :fixers="this.panding.fixers" :paintAndBodies="this.paintAndBody"></PaintAndBody>
+        <PaintAndBody :origin="this.panding.demage.bodyAndPaint"  :fixers="this.panding.fixers" :paintAndBodies="this.paintAndBody"></PaintAndBody>
         <!-- this is for engineAnd Suspension -->
         <engineAndSuspenson :origin="this.panding.demage.engineAndSuspension"  :fixers="this.panding.fixers" :engineAndSuspensiones="this.engineAndSuspenson"></engineAndSuspenson>
         <!-- this is Tv and Wiring -->
@@ -89,10 +89,12 @@
             }, 
             carCode () {
                 centeraStore.state.carCode = this.panding.demage.license_plate ;
+                centeraStore.state.carId = this.panding.car_id ;
             },
         },
         mounted () {
             this.carCode ;
+            
         }
     }
 </script>

@@ -51,7 +51,7 @@
                         <td class="text-capitalize text-center"> {{$state->fxingPoint }}</td>
                         <td>{{$state->created_at}}</td>
                         <td>
-                            <button data-id="{{$state->code_id}}" data-name="Ko Thay Lay" class="btn btn-warning hit">Submit</button>
+                            <button data-id="{{$state->code_id}}" data-name="{{$tableName}}" class="btn btn-warning hit">Submit</button>
                         </td>
                     </tr>
                 @endforeach

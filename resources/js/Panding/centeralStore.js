@@ -4,6 +4,9 @@ const centeraStore = createStore({
         return {
             carCode : null ,
             progess : null ,
+            nmvtis : false ,
+            carId : null ,
+            showRoom : false ,
             defaultString : "-----------" ,
             paintAndBody : {
                 fixpoint : null ,
@@ -51,7 +54,9 @@ const centeraStore = createStore({
                     'about' : state.paintAndBody.description ,
                 },
                 success : (response) => {
-                    console.log(response);
+                    if(response){
+                        state.paintAndBody.state = true ;
+                    }
                 },
                 error : (error) => {
                     console.log(error);
@@ -69,7 +74,10 @@ const centeraStore = createStore({
                     'about' : state.engineAdnSuspension.description ,
                 },
                 success : (response) => {
-                    console.log(response);
+                    if(response)
+                    {
+                        state.engineAdnSuspension.state = true ;
+                    }
                 },
                 error : (error) => {
                     console.log(error);
@@ -87,7 +95,9 @@ const centeraStore = createStore({
                     'about' : state.tvAndWiring.description ,
                 },
                 success : (response) => {
-                    console.log(response);
+                    if(response){
+                        state.tvAndWiring.state = true ;
+                    }
                 },
                 error : (error) => {
                     console.log(error);
@@ -105,13 +115,80 @@ const centeraStore = createStore({
                     'about' : state.additional.description ,
                 },
                 success : (response) => {
-                    console.log(response);
+                    if(response) {
+                        state.additional.state = true ;
+                    }
                 },
                 error : (error) => {
                     console.log(error);
                 }
             });  
         },
+        sendNmvtis ({state}) {
+            $.ajax({
+                url : "/api/stateChange" ,
+                method : "POST" ,
+                data : {
+                    name : !state.nmvtis ,
+                    carCode : state.carCode ,
+                    content : "nmvtis"
+                },
+                success : (response) => {
+                    if(response){
+                        state.nmvtis = !state.nmvtis ;
+                    }
+                },
+                error : (error) => {
+                    console.log(error);
+                }
+            })
+        },
+        sendShowRoom ({state}){
+            let name = !state.showRoom ;
+            $.ajax({
+                url : "/api/stateChange" ,
+                method : "POST" ,
+                data : {
+                    name :  name,
+                    carCode : state.carCode ,
+                    content : "showRoom"
+                },
+                success : (response) => {
+                    if(response) {
+                        state.showRoom = name ;
+                    }
+                },
+                error : (error) => {
+                    console.log(error);
+                }
+            })
+        } ,
+        moveNext ({state}) {
+            $.ajax({
+                url : "/api/moveNext" ,
+                method : "post" ,
+                data : {
+                    engineAndSuspension : state.engineAdnSuspension.fixpoint ,
+                    paintAndBody : state.paintAndBody.fixpoint ,
+                    tvAndWiring : state.tvAndWiring.fixpoint ,
+                    additional : state.additional.fixpoint ,
+                    showRoom : state.showRoom ,
+                    nmvtis : state.nmvtis ,
+                    carId : state.carId ,
+                },
+                success : (response) => {
+                    window.location.href = response.data.redirect;
+                    if (response.data.redirect) {
+                        window.location.href = response.data.redirect;
+                    } else {
+                        console.log(response.data.message);
+                    }
+                },
+                error : (error) => {
+                    console.log(error);
+                }
+            })
+        }
     }
 });
 

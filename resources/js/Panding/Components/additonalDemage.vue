@@ -99,6 +99,9 @@
                         this.mechines = finalChar;
                         this.fixpoint  = this.additionales.fxingPoint;
                         centeraStore.state.additional.state = true ;
+                        if(this.additionales.pandingState) {
+                            centeraStore.state.additional.success = true ;
+                        }
                     }
                 }else {
                     this.fixpoint = this.origin == null ? centeraStore.state.defaultString : this.origin ;

@@ -94,6 +94,9 @@
                         this.mechines = finalChar;
                         this.fixpoint  = this.engineAndSuspensiones.fxingPoint;
                         centeraStore.state.engineAdnSuspension.state = true ;
+                        if(this.engineAndSuspensiones.pandingState ) {
+                            centeraStore.state.engineAdnSuspension.success = true ;
+                        }
                     }
                 }else {
                     this.fixpoint = this.origin == null ? centeraStore.state.defaultString : this.origin ;

@@ -92,14 +92,14 @@ class AdminDashBoardController extends Controller
             $states= DB::table($tableName)
                     ->where('pandingState',0)
                     ->get();
-            return view('Admin.Dashboard.SeeDetails',compact('states'));    
+            return view('Admin.Dashboard.SeeDetails',compact('states','tableName'));    
         }
         dd("none");
         
     }
 
     public function stateChange ($id , Request $request) {
-        $tableName = strtolower(str_replace(' ', '_', $request->name));
+        $tableName =  $request->name;
         if (Schema::hasTable($tableName)) {
             $states= DB::table($tableName)
                     ->where('code_id',$id)

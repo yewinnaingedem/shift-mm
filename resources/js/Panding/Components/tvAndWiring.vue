@@ -98,6 +98,9 @@
                         this.mechines = finalChar;
                         this.fixpoint  = this.tvAndWiringes.fxingPoint;
                         centeraStore.state.tvAndWiring.state = true ;
+                        if(this.tvAndWiringes.pandingState ) {
+                            centeraStore.state.tvAndWiring.success = true ;
+                        }
                     }
                 }else {
                     this.fixpoint = this.origin == null ? centeraStore.state.defaultString : this.origin ;

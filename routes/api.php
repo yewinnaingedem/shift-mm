@@ -34,3 +34,5 @@ Route::get('Google/checkMonthly' , [ChartController::class , 'monthlyChart']);
 
 // Demage Report 
 Route::post('demageReport/{id}' , [demageReportState::class , 'report']);
+Route::post('stateChange' , [demageReportState::class , 'stateChange']);
+Route::post('moveNext' , [demageReportState::class , 'MoveNext']);
