@@ -41,6 +41,12 @@
         .makes:hover:before  , .el_hy:hover:before , .luxury:hover:before , .coupe:hover:before , .sedan:hover:before , .suv:hover:before , .truck:hover:before  , .hatchback:hover:before , .van:hover:before , .convertibles:hover:before {
             width : 100% ;
         }
+        .hover-effect:hover {
+            color : #06CBA3 ;
+        }
+        .pt-20 {
+            padding-top : 20px ;
+        }
     </style>
 @endsection 
 

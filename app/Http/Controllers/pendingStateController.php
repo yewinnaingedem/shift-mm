@@ -78,9 +78,11 @@ class pendingStateController extends Controller
             $tableName = strtolower(str_replace(' ', '_', $name->name));
             if (Schema::hasTable($tableName)) {
                 $checked = $panding['demage']->license_plate . $name->id;
-                $data = DB::table($tableName)->where('code_id', $checked)->first();
-                if($data) {
-                    $panding[$data->about] = $data;
+                $data = DB::table($tableName)->where('code_id', $checked)->get();
+                if($data->isNotEmpty()) {
+                    foreach ($data  as $value) {
+                        $panding[$value->about] = $value;
+                    }
                 }
             }
         }

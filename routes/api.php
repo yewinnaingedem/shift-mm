@@ -25,6 +25,7 @@ Route::post('pendingState' , [pendingStateController::class , 'fixedPanding']);
 Route::resource('end-point' , GradeApiController::class);
 Route::get('default_function/{dataId}' , [GradeApiController::class , 'apiRoute']);
 Route::get('{value}' , [HoverResponseController::class , 'index']);
+Route::get('hover/{value}' , [HoverResponseController::class , 'hoverText']);
 Route::get('gradeTurbo/{id}' , [GradeApiController::class , 'turboLoad']);
 Route::apiResource('additionalDemage' , AdditionalDemageController::class);
 Route::post('additionalDemage/codeApi' , [AdditionalDemageController::class , 'checkApi']);

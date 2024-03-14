@@ -164,30 +164,47 @@ const centeraStore = createStore({
             })
         } ,
         moveNext ({state}) {
-            $.ajax({
-                url : "/api/moveNext" ,
-                method : "post" ,
-                data : {
-                    engineAndSuspension : state.engineAdnSuspension.fixpoint ,
-                    paintAndBody : state.paintAndBody.fixpoint ,
-                    tvAndWiring : state.tvAndWiring.fixpoint ,
-                    additional : state.additional.fixpoint ,
-                    showRoom : state.showRoom ,
-                    nmvtis : state.nmvtis ,
-                    carId : state.carId ,
-                },
-                success : (response) => {
-                    window.location.href = response.data.redirect;
-                    if (response.data.redirect) {
-                        window.location.href = response.data.redirect;
+            swal({
+                    title: "Are you sure?",
+                    text: "You will not be able to recover this imaginary file!",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Yes, Confirm !",
+                    cancelButtonText: "No, cancel plx!",
+                    closeOnConfirm: false,
+                    closeOnCancel: false
+              },
+              function(isConfirm){
+                    if (isConfirm) {
+                        $.ajax({
+                            url : "/api/moveNext" ,
+                            method : "post" ,
+                            data : {
+                                engineAndSuspension : state.engineAdnSuspension.fixpoint ,
+                                paintAndBody : state.paintAndBody.fixpoint ,
+                                tvAndWiring : state.tvAndWiring.fixpoint ,
+                                additional : state.additional.fixpoint ,
+                                showRoom : state.showRoom ,
+                                nmvtis : state.nmvtis ,
+                                carId : state.carId ,
+                            },
+                            success : (response) => {
+                                swal("Deleted!", "Your imaginary file has been deleted.", "success");
+                                if (response.redirect) {
+                                    window.location.href = response.redirect;
+                                }
+                            },
+                            error : (error) => {
+                                console.log(error);
+                            }
+                        })
+                     
                     } else {
-                        console.log(response.data.message);
+                    swal("Cancelled", "Your imaginary file is safe :)", "error");
                     }
-                },
-                error : (error) => {
-                    console.log(error);
-                }
-            })
+              });
+            
         }
     }
 });

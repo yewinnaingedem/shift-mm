@@ -9,35 +9,35 @@ use Carbon\Carbon ;
 use App\Models\Exception ;
 use App\Models\Car\Car  ;
 use App\Models\Panding ;
+use Illuminate\Support\Str;
 use DB ;
+
 class demageReportState extends Controller
 {
     public function report  (Request $request , $id ) {
         $data = machine::get();
         $inserts = [] ;
+        $updateds = [] ;
         foreach ($data  as $item ) {
             if($id == $item->id )  {
                 $tableName = strtolower(str_replace(' ', '_', $item->name));
-                $data = DB::table($tableName)->where('code_id' , $request->carCode . $id)->count() ;
-                $check = $data < 0 ? true : false ;
-                if($check) {
-                    $inserts['fxingPoint']  = $request->fixpoint;
-                    $inserts['code_id'] = $request->carCode . $id ;
-                    $inserts['car_id'] = $id ;
-                    $inserts['about'] = $request->about ;
-                    $inserts['created_at'] = Carbon::now();
-                    $getData = DB::table($tableName)->insert($inserts);
-                    return response()->json([
-                        'message' => $getData  ,
-                        'id' => $item ,
-                    ] , 200) ;
-                }
-                $fxingPoint = $request->fixpoint ;
-                $comparson =  DB::table($tableName)->where('code_id' , $request->carCode . $id)->get() ;
-                $updateds = [] ;
-                // need to work tommorrow ;
-                foreach ($comparson as $data ) {
-                    if($request->about !== $data->about) {
+                $data = DB::table($tableName)->where('code_id' , $request->carCode . $id)->get() ;
+                if($data->isNotEmpty()) {
+                    $response = $data->where('about', $request->about)->first();
+                    if($response) {
+                        if(Str::lower(trim($response->fxingPoint)) === Str::lower(trim($request->fixpoint))) {
+                            return response()->json([
+                                'message' => 'You alredy create data for that row' ,
+                            ]);
+                        }else {
+                            $updateds['fxingPoint'] = $fxingPoint  ;
+                            $updateds['pandingState'] = 0 ;
+                            DB::table($tableName)->update($updateds);
+                            return response()->json([
+                                'message' => 'You automatically updated that row' ,
+                            ] , 200) ;
+                        }
+                    }else {
                         $inserts['fxingPoint']  = $request->fixpoint;
                         $inserts['code_id'] = $request->carCode . $id ;
                         $inserts['car_id'] = $id ;
@@ -45,24 +45,20 @@ class demageReportState extends Controller
                         $inserts['created_at'] = Carbon::now();
                         $getData = DB::table($tableName)->insert($inserts);
                         return response()->json([
-                            'message' => $getData  ,
-                            'id' => $item ,
-                        ] , 200) ;
+                            'message' => 'you data do not matched and created' ,
+                        ]);
                     }
-                }
-                if(str_replace(' ', '%', strtolower($fxingPoint)) !== str_replace(' ', '%', strtolower($comparson->fxingPoint))) {
-                    $updateds['fxingPoint'] = $fxingPoint  ;
-                    $updateds['pandingState'] = 0 ;
-                    DB::table($tableName)->update($updateds);
+                }else {
+                    $inserts['fxingPoint']  = $request->fixpoint;
+                    $inserts['code_id'] = $request->carCode . $id ;
+                    $inserts['car_id'] = $id ;
+                    $inserts['about'] = $request->about ;
+                    $inserts['created_at'] = Carbon::now();
+                    $getData = DB::table($tableName)->insert($inserts);
                     return response()->json([
-                        'message' => 'You automatically update that row' ,
-                        'id' => $item ,
-                    ] , 200) ;
+                        'message' => 'you code id is empty' ,
+                    ]);
                 }
-                return response()->json([
-                    'message' => 'You already created the data' ,
-                    'id' => $item ,
-                ] , 200) ;
             }
         }
     }

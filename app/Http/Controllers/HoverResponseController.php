@@ -37,11 +37,27 @@ class HoverResponseController extends Controller
                 ]);
             }
         }
-
         return response()->json([
             'success' => true ,
             'data' => $data ,
             'icon' => $icon 
+        ]);
+    }
+
+    public function  hoverText ($value) {
+        $data = "";
+        if($value == "Makes") {
+            $data = Brand::select('brand_name as responseData')->get();
+        } elseif ( $value == "make_model") {
+            $data = MadeIn::select('country as responseData')->get();
+        }elseif ($value == 'body_style' ) {
+            $data = BodyStyle::select('body_style as responseData')->get();
+        }elseif ($value == "year") {
+            $data = Year::select('year as responseData')->get();
+        }
+        return response()->json([
+            'success' => true ,
+            'data' => $data 
         ]);
     }
 }
