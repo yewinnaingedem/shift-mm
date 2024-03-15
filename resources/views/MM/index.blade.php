@@ -40,7 +40,6 @@
 @endsection 
 
 @section('content') 
-
     <div class="wrapper m-3">
         <div class="header flex px-3">
             <div class="w-1/2">
@@ -190,6 +189,7 @@
                             </div>
                         </li>
                     ` ;
+                    
                     $('#modelAble').append(element);
                     rangeInput () ; priceInput () ;
                     $('#modelAble').show();
@@ -213,6 +213,7 @@
                                 $(rangeInputs[1]).val(minValue + priceGap);
                             }
                         }else {
+                            priceSuggest(minValue , maxValue);
                             $(priceInputs[0]).val(minValue);
                             $(priceInputs[1]).val(maxValue);
                             $(progess).css('left', (minValue / rangeInputs[0].max) * 100 + '%');
@@ -262,7 +263,24 @@
                 $('#grapItem').empty().append(htmlString);
             }
             
-            
+            function  priceSuggest (value1 , value2) {
+                    let htmlString = `
+                        <li>
+                            <button class="bg-gray-50 py-[6px] px-[15px] hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white rounded-lg hover:bg-gray-100 shadow-sm">
+                                <span class="font-bold">Min <span>:</span></span>
+                                <span class="font-bold text-input text-[15px] text-gray-700 me-1">&quot; ${value1 } &quot;</span>
+                                <span class="fw-bold">Lakhs</span>
+                            </button>
+                            <button class="bg-gray-50 py-[6px] px-[15px] hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white rounded-lg hover:bg-gray-100 shadow-sm">
+                                <span class="font-bold">Min <span>:</span></span>
+                                <span class="font-bold text-input text-[15px] text-gray-700 me-1">&quot; ${value2} &quot;</span>
+                                <span class="fw-bold">Lakhs</span>
+                            </button>
+                        </li>
+                    `;
+                    $('#grapItem').empty().append(htmlString);
+            }
+
             $(document).on('click', '.choseItem', (e) => {
                 e.preventDefault();
                 var currentEle = $(e.currentTarget);
