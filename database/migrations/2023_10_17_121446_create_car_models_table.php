@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('brand_id');
             $table->string('model_name');
             $table->timestamps();
-
+            
             $table->foreign('brand_id')->references('id')->on('brands');
         });
     }

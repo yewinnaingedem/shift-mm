@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\DB;
 use App\Models\EngineDemage ;
 use App\Models\Wiring ;
+use App\Models\Before_Sale ;
 use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon ;
 use App\Models\machine ;
@@ -128,7 +129,20 @@ class AdminDashBoardController extends Controller
 
     public function refleshJson() {
         try {
-            $data = Test::get() ;
+            // $data = Test::get() ;
+            $data = Before_Sale::select('brands.brand_name as brand','car_models.model_name as carName','engine_powers.engine_power as enginePower','transmission_types.transmission_type as fuleType',
+            'years.year as year','license_states.state as licenseState')
+                        ->LeftJoin('cars','before__sales.car_item','cars.id')
+                        ->leftJoin('owner_books','cars.owner_book_id','owner_books.id')
+                        ->leftJoin('items','cars.item_id','items.id')
+                        ->leftJoin('car_models','owner_books.model_id','car_models.id')
+                        ->leftJoin('years','owner_books.year_id','years.id')
+                        ->leftJoin('engine_powers','owner_books.engine_power_id','engine_powers.id')
+                        ->leftJoin('license_states','owner_books.license_state','license_states.id')
+                        ->leftJoin('brands','car_models.brand_id','brands.id')
+                        ->leftJoin('transmission_types','owner_books.transmission_type','transmission_types.id')
+                        ->get();
+            dd($data);
             $jsonEncode = json_encode($data);
             $sourceFilePath = base_path('resources\js\Component\UISearchable\data.json');
             $path_file = File::put($sourceFilePath, $jsonEncode);
