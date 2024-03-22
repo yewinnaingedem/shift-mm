@@ -1,40 +1,24 @@
 [
     {
-        "id": 1,
-        "brand": "Hundai",
-        "carName": "Accent",
+        "brand": "Toyota",
+        "id": 30,
+        "carName": "Wish",
+        "enginePower": "1800",
+        "fuleType": "Automatic",
+        "year": "2012",
         "licenseState": "YGN",
-        "grade": null,
-        "data": "Hundai Accent ",
-        "year": "2020",
-        "type": "Sedan",
-        "fuleType": "Gasoline"
+        "grade": "XL",
+        "type": "Gasolin"
     },
-    
     {
-        "id": 2,
         "brand": "KIA",
+        "id": 31,
         "carName": "Rio",
-        "licenseState": "YGN",
-        "grade": null,
-        "data": "KIA Rio",
-        "year": "2018",
-        "type": "Hatchback",
-        "fuleType": "Gasoline",
-        "created_at": null,
-        "updated_at": null
-    },
-    {
-        "id": 3,
-        "brand": "Hundai",
-        "carName": "Tuscon",
-        "licenseState": "BGO",
-        "grade": null,
-        "data": "Hundai Tuscon",
+        "enginePower": "1400",
+        "fuleType": "Automatic",
         "year": "2020",
-        "type": "SUV",
-        "fuleType": "Disel",
-        "created_at": null,
-        "updated_at": null
+        "licenseState": "YGN",
+        "grade": "none",
+        "type": "Gasolin"
     }
 ]

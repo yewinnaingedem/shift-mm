@@ -48,7 +48,8 @@
 </template>
 
 <script>
-    import Data from "./Data.json";
+    import { error } from "jquery";
+import Data from "./Data.json";
     export default {
         name : 'searchableUi'    ,
         data : () => {
@@ -65,21 +66,16 @@
                 if(value !== "") {
                     return this.results = this.data.filter(item => 
                         item.brand.toLowerCase().includes(value.toLowerCase()) || 
-                        item.data.toString().includes(value) ||
-                        item.fuleType.toLocaleLowerCase().includes(value) ||
-                        item.carName.toLowerCase().includes(value) ||
-                        item.type.toLowerCase().includes(value) ||
+                        item.type.toLocaleLowerCase().includes(value) ||
+                        item.licenseState.toLowerCase().includes(value) ||
+                        item.grade.toLowerCase().includes(value) ||
                         item.year.includes(value) ||
-                        item.licenseState.toLocaleLowerCase().includes(value) || 
-                        item.type.toLocaleLowerCase().includes(value) 
+                        item.fuleType.toLocaleLowerCase().includes(value) || 
+                        item.enginePower.includes(value) ||
+                        item.carName.toLocaleLowerCase().includes(value)
                     );
                 }
                 return this.results = [] ;
-            }
-        },
-        computed : {
-            methodCall () {
-                console.log('hi');
             }
         },
         methods : {
@@ -102,12 +98,21 @@
             },
             goDoc (results) {
                 if(this.higthLightIndex > -1 ) {
-                    console.log(results[this.higthLightIndex].id);
+                    this.check(results[this.higthLightIndex].id);
                 }
             },
             check (id) {
-                if(id) {
-                    console.log(id);
+                if( id ) {
+                    $.ajax({
+                        url : "/api/uiserach/" + id ,
+                        method : 'post' ,
+                        success : (response) => {
+                            console.log(response);
+                        },
+                        error : (error) => {
+                            console.log(error);
+                        }
+                    })
                 }
             }
         },
