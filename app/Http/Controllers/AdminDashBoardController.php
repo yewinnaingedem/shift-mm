@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\EngineDemage ;
 use App\Models\Wiring ;
 use App\Models\Before_Sale ;
+use App\Models\Car\Sale ;
 use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon ;
 use App\Models\machine ;
@@ -129,9 +130,9 @@ class AdminDashBoardController extends Controller
 
     public function refleshJson() {
         try {
-            $data = Before_Sale::select('brands.brand_name as brand', 'cars.id as id','car_models.model_name as carName','engine_powers.engine_power as enginePower','transmission_types.transmission_type as fuleType',
+            $data = Sale::select('brands.brand_name as brand', 'cars.id as id','car_models.model_name as carName','engine_powers.engine_power as enginePower','transmission_types.transmission_type as fuleType',
             'years.year as year','license_states.state as licenseState','grades.grade as grade','engine_types.type as type')
-                        ->LeftJoin('cars','before__sales.car_item','cars.id')
+                        ->LeftJoin('cars','sales.car_id','cars.id')
                         ->leftJoin('owner_books','cars.owner_book_id','owner_books.id')
                         ->leftJoin('items','cars.item_id','items.id')
                         ->leftJoin('car_models','owner_books.model_id','car_models.id')

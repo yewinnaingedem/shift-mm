@@ -2,7 +2,7 @@
     <section class="grid grid-cols-4 auto-rows-fr gap-4 mb-8 mt-5 m-full px-4" id="fader">
         <!-- cart1 -->
         @foreach ($datas as $data)
-            <div class="rounded-xl shadow-md hover:shadow-xl bg-white flex flex-col">
+            <div class="rounded-xl shadow-md hover:shadow-xl bg-white flex flex-col" >
                 <!-- header -->
                 <div class="for-cars-slide">
                     <div class="w-full overflow-hidden  rounded-xl  " >

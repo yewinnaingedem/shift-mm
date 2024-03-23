@@ -123,13 +123,19 @@
                 $('.body-fade').remove();
                 $('.loader-content').removeClass('hidden'); 
             });
-
+            
             $('.price').each(function() {
                 var $priceElement = $(this);
                 var test = $priceElement.html();
                 var val = parseFloat(test).toLocaleString(); // Assuming the content is a number
                 $priceElement.html(val); // Update the content with the formatted value
             });
+            // $(document).on('DOMNodeInserted', '.price', function() {
+            //     var $priceElement = $(this);
+            //     var test = $priceElement.text();
+            //     var val = parseFloat(test).toLocaleString(); // Assuming the content is a number
+            //     $priceElement.text(val); // Update the content with the formatted value
+            // });
             
             $('.clickAble').click((e) => {
                 $('#loadContent').show();
