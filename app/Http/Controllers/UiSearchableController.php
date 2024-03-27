@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Storage;
 
 class UiSearchableController extends Controller
 {
-    public function apisearch ($id ) {
+    public function apisearch ( $id ) {
         $data = Sale::select('brands.brand_name as brand' , 'sales.*', 'cars.id as id','car_models.model_name as carName','engine_powers.engine_power as enginePower','transmission_types.transmission_type as fuleType',
             'years.year as year','license_states.state as licenseState', 'items.*' , 'owner_books.*','grades.grade as grade','engine_types.type as type','car_images.*')
                         ->LeftJoin('cars','sales.car_id','cars.id')
@@ -28,8 +28,7 @@ class UiSearchableController extends Controller
                         ->first();
         
         $imageUrls = [];
-
-        // Iterate over the image fields in $data and generate asset URLs
+        
         foreach ($data->getAttributes() as $key => $value) {
             if (strpos($key, 'img') === 0) {
                 $imageUrls[$key] = asset('storage/'.$value);

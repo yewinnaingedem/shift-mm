@@ -38,4 +38,4 @@ Route::get('Google/checkMonthly' , [ChartController::class , 'monthlyChart']);
 Route::post('demageReport/{id}' , [demageReportState::class , 'report']);
 Route::post('stateChange' , [demageReportState::class , 'stateChange']);
 Route::post('moveNext' , [demageReportState::class , 'MoveNext']);
-Route::post('uiserach/{id}' , [UiSearchableController::class , 'apisearch']);
+Route::get('uiserach/{id}' , [UiSearchableController::class , 'apisearch']);

@@ -1,4 +1,7 @@
 <template>
+    <div class="progress-bar-container" v-if="this.progressBarWidth">
+        <div class="progress-bar progess" :style="{ width: this.progressBarWidth + '%' }"></div>
+    </div>
     <form @submit.prevent="methodCall" method="post" >
         <div class="">
             <i class="fa-solid fa-magnifying-glass absolute top-[15px] left-[28px]"></i>
@@ -12,7 +15,7 @@
                 @keydown.enter.prevent="goDoc(results)"
             >
         </div>
-        <div class="result w-full relative borer-radious-customize bg-neutral-50  2 text-black" v-if="inputSearch">
+        <div class="result w-full relative borer-radious-customize bg-neutral-50  fade-enter-active 2 text-black" v-if="inputSearch">
             <ul class="pb-3 pt-1  w-full bg-neutral-50">
                 <li class="rounded-sm mb-[1px] w-full pl-10  bg-neutral-100 py-1" >
                     <div class="relative border-l-4 border-green-400">
@@ -48,7 +51,6 @@
 </template>
 
 <script>
-import { initFlowbite } from 'flowbite'
 import Data from "./Data.json";
     export default {
         name : 'searchableUi'    ,
@@ -58,10 +60,12 @@ import Data from "./Data.json";
                 results : [] ,
                 data : Data ,
                 higthLightIndex : -1 ,
+                progressBarWidth : 0 , 
             }
         },
         watch : {
             inputSearch (input) {
+                let arrayInput = input.split(" ");
                 var value = input.toLowerCase() ;
                 if(value !== "") {
                     return this.results = this.data.filter(item => 
@@ -98,21 +102,39 @@ import Data from "./Data.json";
             },
             goDoc (results) {
                 if(this.higthLightIndex > -1 ) {
-                    this.check(results[this.higthLightIndex].id);
+                    this.fetchData(results[this.higthLightIndex].id)
                 }
             },
-            check (id) {
-                
-                if( id ) {
-                    $.ajax({
-                        url : "/api/uiserach/" + id ,
-                        method : 'post' ,
-                        success : (response) => {
-                            let searchContianer = $('#fader');
-                            if(response.getData) {
-                                let imgUrls = response.imgUrls ;
-                                let insert = response.getData ;
-                                let data = `
+            fetchData(id) {
+                this.progressBarWidth = 0;
+                $.ajax({
+                    url : "/api/uiserach/"+ id  ,
+                    method : "GET" ,
+                    dataType : "json",
+                    xhr : function () {
+                        var xhr =  new window.XMLHttpRequest();
+                        xhr.onreadystatechange = function () {
+                            var progess = xhr.readyState;
+                            if(progess < XMLHttpRequest.DONE ) {
+                                this.progressBarWidth =  25 * progess ; 
+                            }else {
+                                this.progressBarWidth = 100 ;
+                                setTimeout(() => {
+                                    this.progressBarWidth = 0 ;
+                                    this.inputSearch = '';
+                                }, 500);
+                                
+                            }
+                            
+                        }.bind(this);
+                        
+                        return xhr ;
+                    }.bind(this), 
+                    success : function (response) {
+                        let searchContianer = $('#fader');
+                        let imgUrls = response.imgUrls ;
+                        let insert = response.getData ;
+                        let data = `
                                     <div class="rounded-xl shadow-md hover:shadow-xl bg-white flex flex-col" >
                                         <div class="for-cars-slide">
                                             <div class="w-full overflow-hidden  rounded-xl " >
@@ -247,16 +269,14 @@ import Data from "./Data.json";
                                         </div>
                                     </div>
                                 `;
-                                searchContianer.empty().append(data);
-                                initFlowbite(); 
-                            }
-                        },
-                        error : (error) => {
-                            console.log(error);
-                        }
-                    })
-                }
-            }
+                        searchContianer.empty().append(data);
+                        initFlowbite(); 
+                    },
+                    error : function (error) {
+                        console.log(error);
+                    }
+                })  ;
+            },
         },
         beforeDestroy () {
             window.removeEventListener('keydown', this.handleKeyDown); 
@@ -273,6 +293,9 @@ import Data from "./Data.json";
     .bg-suggest-color{
         background : #dfdfdf ;
     }
+    .fade-enter-active {
+        transition: opacity 0.5s ease;
+    }
     .see {
         position: absolute; /* Ensure proper positioning */
         left: 0; /* Adjust positioning according to your layout */
@@ -280,5 +303,30 @@ import Data from "./Data.json";
         width: 100%;
         height: 100%;
         /* Other CSS properties */
+    }
+
+    .progress-bar-container {
+            width: 100%;
+            height: 5px;
+            background-color: #f0f0f0;
+            position: fixed;
+            top: 0; /* Position at the top */
+            left: 0;
+            z-index: 1000; /* Ensure it's above other content */
+            margin-top: 60px; /* 1000; /* Ensure it's above other content */
+    }
+
+    .progress-bar {
+        height: 100%;
+        background-color: #007bff; /* Color of the progress bar */
+        transition: width 0.3s ease;
+    }
+
+    .progress-label {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: #fff; /* Color of the progress label */
     }
 </style>

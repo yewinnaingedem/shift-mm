@@ -20,7 +20,7 @@
         "jquery": "^3.7.1",
         "lodash": "^4.17.21",
         "sweetalert2": "^11.7.31",
-        "vue": "^3.2.36",
+        "vue": "^3.2.25",
         "vue-bootstrap4-table": "^1.1.11",
         "vue-router": "^4.3.0",
         "vue-scrollto": "^2.20.0",

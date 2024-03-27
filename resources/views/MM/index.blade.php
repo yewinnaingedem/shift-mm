@@ -33,6 +33,9 @@
         .ragne-color {
             background : #17A2B8 ;
         }
+        .loader-container {
+
+        }
     </style>
 @endsection 
 @section('nav-bar')
@@ -40,9 +43,10 @@
 @endsection 
 
 @section('content') 
+    
     <div class="wrapper m-3">
         <div class="header flex px-3">
-            <div class="w-1/2">
+            <div class="w-1/2 " >
                 <div class="w-1/3  flex text-[15px] ">
                     <div class="flex w-full p-2 items-center bg-gray-50 border  hover:bg-gray-100 rounded  ">
                         <div class="w-[75%] tracking-wider font-semibold">Show Result :</div>
@@ -51,6 +55,9 @@
                                 <i class="fa-solid fa-angle-down"></i>
                             </span> 
                         </div>
+                    </div>
+                    <div class="flex justify-center items-center ml-2 bold  cursor-pointer" id="id_reflesh">
+                        <i class="fa-solid fa-arrows-rotate"></i>
                     </div>
                 </div>
             </div>
@@ -130,13 +137,9 @@
                 var val = parseFloat(test).toLocaleString(); // Assuming the content is a number
                 $priceElement.html(val); // Update the content with the formatted value
             });
-            // $(document).on('DOMNodeInserted', '.price', function() {
-            //     var $priceElement = $(this);
-            //     var test = $priceElement.text();
-            //     var val = parseFloat(test).toLocaleString(); // Assuming the content is a number
-            //     $priceElement.text(val); // Update the content with the formatted value
-            // });
-            
+            $('#id_reflesh').on('click' , ()=> {
+                $('#fader').empty();
+            });
             $('.clickAble').click((e) => {
                 $('#loadContent').show();
                 $('#modelAble').hide();
