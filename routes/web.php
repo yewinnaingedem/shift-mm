@@ -38,6 +38,7 @@ use App\Http\Controllers\BeforeSaleController ;
 use App\Http\Controllers\paintDemageController ;
 use App\Http\Controllers\AdminGmailController ;
 use App\Http\Controllers\creatDynamicTables ;
+use App\Http\Controllers\depositController ;
 
 Route::get('/google' , [AuthController::class , 'googleLogIn']);
 Route::prefix('mm_cars')->group(function () {
@@ -57,6 +58,7 @@ Route::prefix('mm_cars')->group(function () {
     Route::post('change_profile/{id}' , [AuthController::class , 'changeProfile']);
     Route::get('car/{details}' , [DetailsController::class , 'index'] );
     Route::get('financing' , [FinancingController::class , 'index']);
+    Route::post('make/deposit' , [depositController::class , 'index']);
 });
 
 Route::get('autosuggestReflesh' , [AdminDashBoardController::class , 'refleshJson']);

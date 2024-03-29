@@ -31,5 +31,16 @@
         "licenseState": "YGN",
         "grade": "none",
         "type": "Gasolin"
+    },
+    {
+        "brand": "Toyota",
+        "id": 30,
+        "carName": "Wish",
+        "enginePower": "1800",
+        "fuleType": "Automatic",
+        "year": "2012",
+        "licenseState": "YGN",
+        "grade": "XL",
+        "type": "Gasolin"
     }
 ]
