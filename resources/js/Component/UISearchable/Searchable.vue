@@ -123,7 +123,6 @@ import Data from "./Data.json";
                                     this.progressBarWidth = 0 ;
                                     this.inputSearch = '';
                                 }, 500);
-                                
                             }
                             
                         }.bind(this);

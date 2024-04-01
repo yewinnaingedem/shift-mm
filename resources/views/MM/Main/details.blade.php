@@ -427,7 +427,7 @@
                         Cash
                      </div>
                 </div>
-                <div class="grid grid-cols-2 w-[80%] m-auto collapsible" id="content1">
+                <div class="grid grid-cols-2 w-[80%] m-auto collapsible hidden" id="content1">
                     <div class="text-secondary-100 mr-1 bg-white h-[400px] px-5 border rounded-lg my-2 mb-4 ">
                         <h1 class="text-center my-3 font-bold text-[25px] capitalize">Enter Your Estimated Term </h1>
                         <hr>
@@ -525,8 +525,11 @@
                     </div>
                 </div>
                 <!-- Content 2 -->
-                <div id="content2" class="collapsible hidden">
-                    <div class="w-[80%] m-auto bg-white h-full rounded-md p-4" >
+                <div id="content2" class="collapsible ">
+                    <div class="w-[80%] m-auto bg-white h-full rounded-md p-4 relative" >
+                        <div class="w-full bg-gray-200 hidden rounded-full h-1.5 mb-4 absolute top-0 left-0 dark:bg-gray-700">
+                            <div class="bg-blue-600 h-1.5  dark:bg-blue-500 progess" ></div>
+                        </div>
                         <div class="mb-3">
                             <h2 class="font-extrabold capitalize text-black text-[25px] text-center tracking-wider ">Cash Pay Plan</h2>
                         </div>
@@ -566,7 +569,7 @@
                         </div>
                         <div class="border-dashed mx-auto my-2 mb-4 w-[500px] border border-black h-[250px]  p-[30px] text-center bg-white rounded-md">
                             <label for="upload-image" id="drop-image">
-                                <input type="file" id="upload-image" hidden>
+                                <input type="file" name="images" id="upload-image" accept="images/*" hidden>
                                 <div id="drop-area" class="flex justify-center items-center w-100 h-full ">
                                     <div>
                                         <div class="text-[50px]">
@@ -805,7 +808,9 @@
             });
 
             const dropArea = $('#drop-image') , inputFile = $('#upload-image') , imageView = $('#drop-area') ;
+            var inputImg = $("input[name='']");
             $(document).on('change',inputFile , uploadeImage) ;
+
             function uploadeImage (e) {
                 var input = e.target.files[0];
                 if(input) {
@@ -815,6 +820,7 @@
                     imageView.css('background-repeat' , 'no-repeat');
                     imageView.find('div').remove();
                     imageView.find('p').remove();
+                    imput.val(imageLink.name);
                 }
             }
             
@@ -822,34 +828,64 @@
                 e.preventDefault();
                 e.stopPropagation();
             });
+
             $(dropArea).on('dragenter', function(e) {
                 e.preventDefault();
                 e.stopPropagation();
             });
+
             $(dropArea).on('drop', function(e) {
                 e.preventDefault();
                 e.stopPropagation();
-
                 var files = e.originalEvent.dataTransfer.files;
+                inputImg.files= files ;
+                $(inputImg).trigger('change');
                 if (files.length > 0) {
-                    var imageLink = URL.createObjectURL(files[0]);
-                    inputFile.val(imageLink);
-                    imageView.css('background-image' , 'url(' + imageLink + ')' ) ;
-                    imageView.css('background-position' , 'center');
-                    imageView.css('background-repeat' , 'no-repeat');
-                    imageView.find('div').remove();
-                    imageView.find('p').remove();   
+                     if (files[0].type.startsWith('image/')) {
+                        let imageLink = URL.createObjectURL(files[0]) ;
+                        imageView.css('background-image', 'url(' + imageLink + ')');
+                        imageView.css('background-position', 'center');
+                        imageView.css('background-repeat', 'no-repeat');
+                        imageView.find('div').remove();
+                        imageView.find('p').remove();
+                    } 
                 }
             });
-
+            
             $('#make_deposit').click(function () {
+                var imgFile = inputImg.files[0]; 
+                var formData = new FormData();
+                formData.append('image', imgFile);
+                formData.append('_token', '{{csrf_token()}}');
+
                 $.ajax({
                     url  : '/mm_cars/make/deposit' ,
                     method : 'post' ,
-                    data : {
-                        "_token" : "{{csrf_token()}}" ,
-                        'images' : inputFile.val() ,
-                    },
+                    xhr : function () {
+                        var xhr =  new window.XMLHttpRequest();
+                        xhr.onreadystatechange = function () {
+                            var progess = xhr.readyState;
+                            var progessBarWidth = $('.progess') ;
+                            progessBarWidth.parent().removeClass('hidden');
+                            if(progess < XMLHttpRequest.DONE ) {
+                                progressBarWidthParent =  25 * progess ; 
+                                progessBarWidth.css('width' , progressBarWidthParent + "%")
+                                console.log(progressBarWidthParent);
+                            }else {
+                                progessBarWidth.css('width' , "100%");
+                                setTimeout(() => {
+                                    progessBarWidth.css('width' , "0");
+                                    progessBarWidth.parent().addClass('hidden');
+                                    
+                                }, 500);
+                            }
+                            
+                        }.bind(this);
+                        return xhr ;
+                    }.bind(this),
+                    contentType : false ,
+                    processData: false ,
+                    data : formData,
                     success : (response) => {
                         console.log(response);
                     },
