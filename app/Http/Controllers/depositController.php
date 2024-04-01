@@ -33,6 +33,8 @@ class depositController extends Controller
                 'message' => 'you made deposit for it successfully',
             ]);
         }
-        return response()->json('User does not have login');
+        return response()->json([
+            'message' => 'Please login first',
+        ]);
     }
 }

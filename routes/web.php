@@ -59,6 +59,7 @@ Route::prefix('mm_cars')->group(function () {
     Route::get('car/{details}' , [DetailsController::class , 'index'] );
     Route::get('financing' , [FinancingController::class , 'index']);
     Route::post('make/deposit' , [depositController::class , 'index']);
+    Route::get('getAll' , [MMCarsController::class , 'getAll']);
 });
 
 Route::get('autosuggestReflesh' , [AdminDashBoardController::class , 'refleshJson']);

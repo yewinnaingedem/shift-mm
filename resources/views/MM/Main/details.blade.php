@@ -427,7 +427,7 @@
                         Cash
                      </div>
                 </div>
-                <div class="grid grid-cols-2 w-[80%] m-auto collapsible hidden" id="content1">
+                <div class="grid grid-cols-2 w-[80%] m-auto collapsible " id="content1">
                     <div class="text-secondary-100 mr-1 bg-white h-[400px] px-5 border rounded-lg my-2 mb-4 ">
                         <h1 class="text-center my-3 font-bold text-[25px] capitalize">Enter Your Estimated Term </h1>
                         <hr>
@@ -525,7 +525,7 @@
                     </div>
                 </div>
                 <!-- Content 2 -->
-                <div id="content2" class="collapsible ">
+                <div id="content2" class="collapsible hidden">
                     <div class="w-[80%] m-auto bg-white h-full rounded-md p-4 relative" >
                         <div class="w-full bg-gray-200 hidden rounded-full h-1.5 mb-4 absolute top-0 left-0 dark:bg-gray-700">
                             <div class="bg-blue-600 h-1.5  dark:bg-blue-500 progess" ></div>
@@ -813,6 +813,8 @@
 
             function uploadeImage (e) {
                 var input = e.target.files[0];
+                inputImg.files= e.target.files ;
+                $(inputImg).trigger('change');
                 if(input) {
                     let imageLink = URL.createObjectURL(input) ;
                     imageView.css('background-image' , 'url(' + imageLink + ')' ) ;
@@ -820,7 +822,6 @@
                     imageView.css('background-repeat' , 'no-repeat');
                     imageView.find('div').remove();
                     imageView.find('p').remove();
-                    imput.val(imageLink.name);
                 }
             }
             
@@ -887,7 +888,7 @@
                     processData: false ,
                     data : formData,
                     success : (response) => {
-                        console.log(response);
+                        swal("Good job!", response.message, "success")
                     },
                     error : (error) => {
                         console.log(error);
