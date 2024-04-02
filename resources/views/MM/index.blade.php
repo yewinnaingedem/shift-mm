@@ -33,8 +33,17 @@
         .ragne-color {
             background : #17A2B8 ;
         }
-        .loader-container {
+        #rotateIcon.rotating {
+            animation: rotate 0.5s linear infinite; /* Rotate animation */
+        }
 
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
         }
     </style>
 @endsection 
@@ -50,13 +59,13 @@
                     <div class="flex w-full p-2 items-center bg-gray-50 border  hover:bg-gray-100 rounded  ">
                         <div class="w-[75%] tracking-wider font-semibold">Show Result :</div>
                         <div class="w-1/4 font-bold">105 
-                            <span>
-                                <i class="fa-solid fa-angle-down"></i>
+                            <span  >
+                                <i class="fa-solid fa-angle-down" id=""></i>
                             </span> 
                         </div>
                     </div>
                     <div class="flex justify-center items-center ml-2 bold  cursor-pointer" id="id_reflesh">
-                        <i class="fa-solid fa-arrows-rotate"></i>
+                        <i class="fa-solid fa-arrows-rotate" id="rotateIcon"></i>
                     </div>
                 </div>
             </div>
@@ -121,8 +130,5 @@
 
 @section('script')
     @vite('resources/js/searchable.js')
-    <script>
-        var baseUrl = "{{ asset('storage/') }}";
-    </script>
-    <script src="{{asset('storage/jquery/mmIndex.js')}}"></script>
+    <script  src="{{asset('storage/jquery/mmIndex.js')}}" data-baseurl="{{ asset('storage/') }}" data-routeurl="{{ url('mm_cars/car/') }}"></script>
 @endsection 
