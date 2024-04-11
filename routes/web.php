@@ -60,6 +60,7 @@ Route::prefix('mm_cars')->group(function () {
     Route::get('financing' , [FinancingController::class , 'index']);
     Route::post('make/deposit' , [depositController::class , 'index']);
     Route::get('getAll' , [MMCarsController::class , 'getAll']);
+    Route::post('dataSearchable' , [MMCarsController::class , 'searchable']);
 });
 
 Route::get('autosuggestReflesh' , [AdminDashBoardController::class , 'refleshJson']);
@@ -72,7 +73,7 @@ Route::prefix('admin')->group(function (){
     Route::get('/add-cars' , [AdminAuthController::class , 'addCars'] );
     Route::get('/car-info' , [AdminAuthController::class , 'carInfo']);
     Route::post('/add-cars' , [ModelController::class , 'index']);
-    Route::get('/car/{make}/{model}/{year}' , [ModelController::class , 'stepProgess']);
+    Route::get('/car/{brand}/{model}/{year}' , [ModelController::class , 'stepProgess']);
     Route::post('/car-info/{id}' , [AdminAuthController::class , 'details']);
     Route::delete('/car-info/{id}', [AdminAuthController::class , 'deleteCard']);
     Route::put('/update-info/{id}' , [AdminAuthController::class , 'updateInfo']);
@@ -83,7 +84,7 @@ Route::prefix('admin')->group(function (){
     Route::resource('/grade'  , GradeController::class);
     Route::post('/grade/function' , [GradeController::class , 'gradeFunction']);
     Route::resource('/function' , FunctionController::class );
-    Route::post('/model/{id}' , [CarModelController::class , 'modelSearch']);
+    Route::get('/model/{id}' , [CarModelController::class , 'modelSearch']);
     Route::post('/function/create' , [GradeController::class , 'gradeFunction']);
     Route::post('/function/testing' , [GradeController::class , 'functionTesting']);
     Route::resource('/seat' , SeatController::class) ;

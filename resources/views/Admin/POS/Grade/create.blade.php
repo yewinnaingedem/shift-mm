@@ -20,27 +20,17 @@
 @section('content')
     <div class="container mt-3" >
         <form action="{{url('admin/grade')}}"  method="post">
-            @if(session('modelX'))
-                @php 
-                    $modelX = session()->get('modelX');
-                @endphp 
-                    <input type="hidden" name="modelX[model]" value="{{$modelX['model']}}">
-                    <input type="hidden" name="modelX[year]" value="{{$modelX['year']}}">
-                    <input type="hidden" name="modelX[make]" value="{{$modelX['make']}}">
-                    <input type="hidden" name="modelX[test]" value="TRUE">
-                @else
-                <input type="hidden" name="modelX[test]" value="FALSE">
-            @endif
             @csrf
+            <input type="hidden" name="validation" value="{{session('models')? session('models')['model'] . '/' .session('models')['year'] : false }}">
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label class="form-label" for="grade">Brand Name</label>
                     <select name="brand" id="brand" class="form-select">
                         @foreach($brands as $brand)
                             <option value="{{$brand->id}}"
-                            @if(session()->has('model')) 
-                                {{ session()->get('model') == $brand->id ? 'selected' : ' ' }}
-                            @endif
+                                @if (session('models'))
+                                    {{ session('models')['brand'] == $brand->id ? 'selected' : null  }}
+                                @endif
                             >
                                 {{$brand->brand_name}}
                             </option>
@@ -50,7 +40,11 @@
                 <div class="col-md-6 mb-3">
                     <label for="models" class="form-label">Add Model</label>
                     <select class="form-select" name="model" id="models" aria-label="Disabled select example" >
-                        <option slected>Chose Model</option>
+                        @if (session('models'))
+                            <option slected>Loading Please Wait ...</option>
+                        @else
+                            <option slected>Chose Model</option> 
+                        @endif 
                     </select>
                 </div>
             </div>
@@ -89,6 +83,8 @@
     <script>
         $(document).ready(()=>{
             loadeState() ;
+            var modelName = "{{session('models') ? session('models')['model'] : null }}";
+            console.log(modelName);
             $('#gradeValide').change(function ()
             {
                 let $grade = $('input[name="grade"]');
@@ -103,20 +99,18 @@
             function loadeState () {
                 let val = $('#brand') ;
                 $.ajax({
-                    type : "post" ,
+                    type : "get" ,
                     url : "/admin/model/" + val.val() ,
                     data : {
                         "_token" : "{{csrf_token()}}"
                     } ,
                     success : (response) => {
                         if(response.response.length !== 0) {
-                            $('#models').empty();
                             let brand = `
-                                <option slected class="d-none" >Chose Model</option>
                                 ${response.response.map(function (item) {
-                                    return `<option value="${item.id}">${item.model_name}</option>`;
+                                    return `<option value="${item.id}" ${item.model_name == modelName ?  'selected' : ''}>${item.model_name}</option>`;
                                 }).join()}`;
-                            $('#models').append(brand);
+                            $('#models').empty().append(brand);
                         }else {
                             $('#models').empty();
                             swal({
@@ -138,7 +132,6 @@
                                     }
                                 });
                         }
-                        
                     },
                     error : (error) => {
                         console.log(error);
@@ -149,7 +142,7 @@
             $(document).on('change' , '#brand' , function () {
                 let val = $('#brand') ;
                 $.ajax({
-                    type : "post" ,
+                    type : "get" ,
                     url : "/admin/model/" + val.val() ,
                     data : {
                         "_token" : "{{csrf_token()}}"

@@ -275,6 +275,10 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="p-cus">
+                                <div class="w-100 text-neutral-80 font-light uppercase ">Body Style</div>
+                                <div class="w-100 font-bold">{{$sale->exterior}}</div>
+                            </div>
                         </div>
                     </div>
                     <hr>

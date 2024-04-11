@@ -20,13 +20,6 @@
             </div>
         </div>
         <hr>
-        <div class="mb-3">
-            <label class="text-header mb-2" for="">Body Style</label>
-            <select name="" id="" class="form-select" v-model="stepProgess.step1.body_style">
-                <option :value="body_style.id" v-for="body_style in datas['body_styles']" :key="body_style.id">{{ body_style.body_style }}</option>
-            </select>
-        </div>
-        <hr>
         <div class="row">
             <div class="text-header text-center mb-3 fw-bold">Enigne</div>
             <div class="col-md-12 mb-3">

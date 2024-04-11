@@ -70,8 +70,8 @@ class GradeController extends Controller
         );
         $grade = $request['grade'] ? $request['grade'] : 'none' ;
         $carExist = Grade::where('carModel_id' , $request->model)
-                                ->where('grade' , $grade )
-                                ->exists() ;
+                        ->where('grade' , $grade )
+                        ->exists() ;
         if($carExist) {
             $validator->errors()->add('grade', 'it is already taken');
             return redirect('admin/grade/create')->withErrors($validator)->withInput();
@@ -106,19 +106,8 @@ class GradeController extends Controller
         $datas['inputField'] = $inputs ;
         $datas['grade'] = $grade ;
         $datas['cameras'] = Camera::get();
-        $modelX = [] ;
-        if($request['modelX']['test'] == "TRUE"){
-            $modelX['model'] = $request['modelX']['model'] ;
-            $modelX['year'] = $request['modelX']['year'] ;
-            $modelX['make'] = $request['modelX']['make'] ;
-            $modelX['test'] = $request['modelX']['test'] ;
-        }else {
-            $modelX['test'] = $request['modelX']['test'] ;
-        }
-        $datas['modelX'] = $modelX ;
-        $datas['modelX'] = $request['modelX'] ;
+        $datas['validation'] = $request['validation'];
         return view('admin.POS.Grade.gradeForm',compact('datas'));
-        
     }
 
     /**
@@ -140,7 +129,6 @@ class GradeController extends Controller
         $datas['sonars'] = Sonor::get();
         $datas['motors'] = Motor::get();
         $datas['defaultFunctions'] = Default_function::first() ;
-        dd($datas['defaultFunctions']);
         $datas['function_names'] = Function_Name::get();
         $datas['engine_powers'] = EnginePower::get();
         return view('admin.POS.Grade.gradeForm',compact('datas'));

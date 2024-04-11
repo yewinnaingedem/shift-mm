@@ -112,7 +112,7 @@
                             </button>
                         </div>
                         <div class="w-1/2 text-end">
-                            <button class="flex  px-4 bg-gray-50 hover:bg-gray-100 hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white rounded-xl font-sans  text-sm min-w-[9rem] md:min-w-[9rem] w-1/2 item-center md:jsutify-between h-[42px] items-center justify-center border border-gray-200 focus:ring-0 focus:ring-transparent ml-auto h-42 text-center ">
+                            <button id="searchable" class="flex  px-4 bg-gray-50 hover:bg-gray-100 hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white rounded-xl font-sans  text-sm min-w-[9rem] md:min-w-[9rem] w-1/2 item-center md:jsutify-between h-[42px] items-center justify-center border border-gray-200 focus:ring-0 focus:ring-transparent ml-auto h-42 text-center ">
                                 <div class="font-semibold tracking-wide text-[16px]"> Search </div>
                             </button>
                         </div>

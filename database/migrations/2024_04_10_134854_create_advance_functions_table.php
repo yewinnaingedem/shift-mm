@@ -11,9 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('car_fuctures', function (Blueprint $table) {
+        Schema::create('advance_functions', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('grade_id');
             $table->unsignedBigInteger('seat_id');
             $table->unsignedBigInteger('sun_roof_id');
             $table->unsignedBigInteger('sonor_id');
@@ -23,10 +22,8 @@ return new class extends Migration
             $table->unsignedBigInteger('transmission_id');
             $table->unsignedBigInteger('camera_id');
             $table->unsignedBigInteger('divertrim_id');
-            $table->unsignedBigInteger('bodyStyle_id');
             $table->timestamps();
 
-            $table->foreign('grade_id')->references('id')->on('grades');
             $table->foreign('seat_id')->references('id')->on('seats');
             $table->foreign('sun_roof_id')->references('id')->on('sun_roofs');
             $table->foreign('sonor_id')->references('id')->on('sonors');
@@ -35,9 +32,8 @@ return new class extends Migration
             $table->foreign('motor_id')->references('id')->on('motors');
             $table->foreign('transmission_id')->references('id')->on('transmissions');
             $table->foreign('divertrim_id')->references('id')->on('divertrims');
-            $table->foreign('bodyStyle_id')->references('id')->on('body_styles');
             $table->foreign('camera_id')->references('id')->on('cameras');
-            
+
         });
     }
 
@@ -46,6 +42,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('car_fuctures');
+        Schema::dropIfExists('advance_functions');
     }
 };

@@ -38,27 +38,29 @@ class ModelController extends Controller
         $year = $request['model_year'] ;
         $brand = Brand::where('id' , $request['make'])->first();
         $model = CarModel::where('id' , $request['model'])->first() ;
-        return redirect('admin/car/'. $year  .'/'. $brand->brand_name .'/'. $model->model_name);
+        return redirect('admin/car/'. $brand->brand_name  .'/'. $model->model_name.'/'.  $year  );
     }
 
-    public function stepProgess ($make , $model , $year) {
-            $data['main'] = [ 'year'=>$make , 'make'=>$model , 'model'=>$year ] ;
+    public function stepProgess ($brand , $model , $year) {
+            $data['main'] = [ 'year'=>$year , 'make'=>$brand , 'model'=>$model ] ;
             $data['exterior_colors'] = ExteriorColor::get();
-            $brandId = CarModel::where('model_name',$year)->first('id');
-            $grade = Grade::where('carModel_id',$brandId->id)->count();
-            if($grade == 0) {
-                $modelX = [];
-                $modelX['model'] = CarModel::where('model_name' , $year)->first('id')->id;
-                $modelX['year'] = $make ;
-                $getBrand = Brand::where('brand_name' , $model )->first();
-                $modelX['make'] = $getBrand->id ;
-                session()->put('model' , $modelX['make']);
-                return redirect('admin/grade/create')->with('modelX' , $modelX );
+            $brands = CarModel::select('car_models.id' , 'brands.id as brandId')
+                                ->leftJoin('brands','car_models.brand_id','brands.id')
+                                ->where('model_name',$model)
+                                ->first();
+            $grade = Grade::where('carModel_id',$brands->id)->exists();
+            if( ! $grade ) {
+                $models = [];
+                $models['brand'] = $brands->brandId ;
+                $models['year'] = $year ;
+                $models['model'] =$model ;
+                session()->put('models' , $models);
+                return redirect('admin/grade/create')->with('models',$models);
             }
-            $data['grades'] = Grade::where('carModel_id',$brandId->id)->get();
+            $data['grades'] = Grade::where('carModel_id',$brands->id)->get();
             $data['steerings'] = Steering::get();
             $data['transmissionTypes'] = TransmissionType::get();
-            $data['id']  = $brandId ;
+            $data['id']  = $brands->brandId ;
             $data['license-states'] = LicenseState::get();
             $data['engine_powers'] = EnginePower::get();
             $data['countries'] = MadeIn::get();

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\CarFucture; 
+use App\Models\Advance_functions; 
 use App\Models\Default_function; 
 use App\Models\Car\CarFunction ;
 use App\Models\Engine ;
@@ -39,9 +39,7 @@ class GradeApiController extends Controller
         $step2 = $request['vue2'];
         $step3 = $request['vue3'];
         $grade = $request['gread'];
-        $modelX = $request['modelX'];
-
-        
+        $validation = $request['validation'];
         // for grade 
         $grades = [] ;
         $engines = [] ;
@@ -68,21 +66,24 @@ class GradeApiController extends Controller
         $grades['default_function_id'] = $defaultFunId ;
         $grades['grade'] = $grade['grade'] == 'false' ? "none" : $grade['grade'];
         $grade['created_at'] = $now->day."/".$now->month."/".$now->year ;
-        $gradeId = Grade::insertGetId($grades);
-        // for car fuctures 
-        $car_fuctures = [] ;
-        $car_fuctures['grade_id'] = $gradeId ;
-        $car_fuctures['seat_id'] = $step2['seat'] ;
-        $car_fuctures['sun_roof_id'] = $step2['sun_roof'] ;
-        $car_fuctures['sonor_id'] = $step2['sonor'] ;
-        $car_fuctures['key_id'] = $step2['key'] ;
-        $car_fuctures['aircon_id'] = $step2['aircon'] ;
-        $car_fuctures['motor_id'] = $step2['motor'] ;
-        $car_fuctures['camera_id'] = $step2['camera'];
-        $car_fuctures['transmission_id'] = $step1['transmission'] ;
-        $car_fuctures['divertrim_id'] = $step2['divertrim'] ;
-        $car_fuctures['bodyStyle_id'] = $step1['body_style'] ;
         
+        // for car fuctures 
+        $advan_function = [] ;
+        
+        $advan_function['seat_id'] = $step2['seat'] ;
+        $advan_function['sun_roof_id'] = $step2['sun_roof'] ;
+        $advan_function['sonor_id'] = $step2['sonor'] ;
+        $advan_function['key_id'] = $step2['key'] ;
+        $advan_function['aircon_id'] = $step2['aircon'] ;
+        $advan_function['motor_id'] = $step2['motor'] ;
+        $advan_function['camera_id'] = $step2['camera'];
+        $advan_function['transmission_id'] = $step1['transmission'] ;
+        $advan_function['divertrim_id'] = $step2['divertrim'] ;
+        $advan_function['created_at'] = Carbon::now();
+        // get id column from advanc_function table 
+        $advance_function_id = Advance_functions::insertGetId($advan_function);
+        $grades['advance_function_id']  = $advance_function_id ;
+        $gradeId = Grade::insertGetId($grades);
         $existFunction = Arr::has($step3, 'functions');
         if($existFunction) {
             if(count($step3['functions']) !== 0) {
@@ -94,14 +95,19 @@ class GradeApiController extends Controller
                 }
             }
         }
-        if($modelX['test'] == "TRUE") {
-            $model = CarModel::where('id',$modelX['model'])->first();
+        if($validation != "false") {
+            $year = substr($validation, strpos($validation, "/") + 1);
+            $model_name = substr($validation, 0, strpos($validation, "/"));
+            $model = CarModel::select('car_models.model_name as model','brands.brand_name as brand')
+                            ->leftJoin('brands','car_models.brand_id','brands.id')
+                            ->where('model_name',$model_name)
+                            ->first();
             return response()->json([
                 'message' => "You success" ,
-                'redirect' => '/admin/car/'. $modelX['year'] . '/' . $modelX['make'] . '/' . $model->model_name ,
+                'redirect' => '/admin/car/'. $model->brand . '/' . $model->model . '/' . $year  ,
             ]);
         }
-        CarFucture::insert($car_fuctures);
+        // get id form advance_functions
         return response()->json([
             'message' => "You success" ,
             'redirect' => '/admin/grade'

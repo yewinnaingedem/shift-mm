@@ -187,22 +187,6 @@
                                     @endif 
                                 </label>
                             </div>
-                            <!-- <div class="flex-1">
-                                    <div class="custom-select-wrapper">
-                                        <input type="text" name="model" class="d-none" >
-                                        <div class="select-header cursor-not-allowed">
-                                            <div class="model" id="selectedModel">Choose Model</div>
-                                            <div class="caret"><i class="fa-solid fa-caret-down"></i></div>
-                                        </div>
-                                        <ul class="select-options">
-                                            
-                                        </ul>
-                                    </div>
-
-                                @if($errors->has('make'))
-                                    <p class="text-danger">{{ $errors->first('make')}} </p>
-                                @endif 
-                            </div> -->
                             <div class="flex-1">
                                 <label class="w-full ">
                                     <div class="wrapper  d-flex justify-content-center align-items-center px-10">
@@ -254,7 +238,7 @@
                 opitonSelected.empty();
                 $('#model option:not(:first-child)').remove();
                 $.ajax({
-                    type : 'POST' , 
+                    method : "get" ,
                     url : '/admin/model/' + $make.val() ,
                     data : {
                         "_token" : "{{csrf_token()}}"

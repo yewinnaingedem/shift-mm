@@ -167,7 +167,8 @@
             },
             submit () {
                 this.loadeStated = true ;
-                axios.post('/admin/setup', { field : this.field , model_Id : this.data['id'].id , year : this.data['main']}) 
+                // add body style id in here
+                axios.post('/admin/setup', { field : this.field , model_Id : this.data['id'] , year : this.data['main']}) 
                 .then((response) => {
                     this.loadeStated = false ;
                     window.location.href = response.data.redirect;

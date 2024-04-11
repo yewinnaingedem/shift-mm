@@ -18,34 +18,16 @@
                                             <path d="M5 5V.13a2.96 2.96 0 0 0-1.293.749L.879 3.707A2.98 2.98 0 0 0 .13 5H5Z"/>
                                         </svg>
                                     </div>
-                                    <div class="hidden duration-700 ease-in-out" data-carousel-item="active">
-                                        <img src="{{asset('storage/'.$data->img1)}}" class="absolute block w-full -translate-x-1/2 h-full object-cover -translate-y-1/2 top-1/2 left-1/2" alt="...">
-                                    </div>
-                                    <!-- Item 2 -->
-                                    <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                                        <img src="{{asset('storage/'.$data->img2)}}" class="absolute block w-full h-full object-cover -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-                                    </div> 
-                                    <!-- Item 3 -->
-                                    <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                                        <img src="{{asset('storage/'.$data->img3)}}" class="absolute block w-full  h-full object-cover -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-                                    </div>
-                                    <!-- Item 4 -->
-                                    <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                                        <img src="{{asset('storage/'.$data->img4)}}" class="absolute block w-full h-full object-cover -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-                                    </div>
-                                    <!-- Item 5 -->
-                                    <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                                        <img src="{{asset('storage/'.$data->img5)}}" class="absolute block w-full h-full object-cover -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-                                    </div>
-                                    <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                                        <img src="{{asset('storage/'.$data->img6)}}" class="absolute block w-full h-full object-cover -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-                                    </div>
-                                    <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                                        <img src="{{asset('storage/'.$data->img7)}}" class="absolute block w-full h-full object-cover -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-                                    </div>
-                                    <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                                        <img src="{{asset('storage/'.$data->img8)}}" class="absolute block w-full h-full object-cover -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-                                    </div>
+                                    @php
+                                        $imageCount = 8; // Assuming you have 8 images
+                                    @endphp
+                                    @foreach(range(1, $imageCount) as $i)
+                                        @if(isset($data->{'img'.$i}))
+                                            <div class="hidden duration-700 ease-in-out" data-carousel-item="{{ $i == 1 ? 'active' : '' }}">
+                                                <img src="{{ asset('storage/' . $data->{'img'.$i}) }}" class="absolute block w-full h-full object-cover -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                                            </div>
+                                        @endif
+                                    @endforeach
                                 </div>
                             </a>
                             <!-- Slider indicators -->

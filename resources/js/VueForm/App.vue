@@ -10,7 +10,6 @@
                         <button class="btn btn-primary" v-on:click="submit">
                             <span>Submit</span>
                             <div class="spinner-border text-white w-15 h-15" role="status" v-if="loadState">
-                              
                             </div>
                         </button>
                     </div>
@@ -76,7 +75,7 @@
                         url  : "/api/end-point" ,
                         data : {
                             gread : this.datas.inputField ,
-                            modelX : this.datas.modelX ,
+                            validation : this.datas.validation ,
                             vue1 : stepProgess.step1 ,
                             vue2 : stepProgess.step2 ,
                             vue3 : stepProgess.step3,

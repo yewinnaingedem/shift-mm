@@ -130,5 +130,5 @@
 
 @section('script')
     @vite('resources/js/searchable.js')
-    <script  src="{{asset('storage/jquery/mmIndex.js')}}" data-baseurl="{{ asset('storage/') }}" data-routeurl="{{ url('mm_cars/car/') }}"></script>
+    <script  src="{{asset('storage/jquery/mmIndex.js')}}" data-csrf="{{ csrf_token() }}"  data-baseurl="{{ asset('storage/') }}" data-routeurl="{{ url('mm_cars/car/') }}"></script>
 @endsection 
