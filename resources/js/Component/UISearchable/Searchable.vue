@@ -126,7 +126,6 @@ import Data from "./Data.json";
                             }
                             
                         }.bind(this);
-                        
                         return xhr ;
                     }.bind(this), 
                     success : function (response) {

@@ -45,6 +45,14 @@
                 transform: rotate(360deg);
             }
         }
+        #alert-1 {
+            position: fixed;
+            top : 2px ;
+            z-index : 1000000;
+            background : tomato ;
+            width : 90% ;
+            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out; 
+        }
     </style>
 @endsection 
 @section('nav-bar')
@@ -52,7 +60,8 @@
 @endsection 
 
 @section('content') 
-    <div class="wrapper m-3">
+    <div class="wrapper m-3" >
+        <div id="warning_alter"></div>
         <div class="header flex px-3">
             <div class="w-1/2 " >
                 <div class="w-1/3  flex text-[15px] ">

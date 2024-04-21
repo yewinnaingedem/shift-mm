@@ -60,7 +60,7 @@ class ModelController extends Controller
             $data['grades'] = Grade::where('carModel_id',$brands->id)->get();
             $data['steerings'] = Steering::get();
             $data['transmissionTypes'] = TransmissionType::get();
-            $data['id']  = $brands->brandId ;
+            $data['model_id']  = $brands->id ;
             $data['license-states'] = LicenseState::get();
             $data['engine_powers'] = EnginePower::get();
             $data['countries'] = MadeIn::get();

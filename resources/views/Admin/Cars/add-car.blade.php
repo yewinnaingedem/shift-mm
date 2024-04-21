@@ -26,7 +26,7 @@
             border-radius: 4px;
             background-color: #fff;
         }
-        #Year , #brand  , #model{
+        .year , .brand  , .model{
             width: 100%;
             display: block;
             text-overflow: ellipsis;
@@ -142,7 +142,7 @@
                     <div class="d-inline-flex flex-row min-width-450px border-b-2 pb-2">
                         <div class="d-flex justify-content-center align-items-center w-full">
                             <h5 class="text-18px px-0">
-                                <p class="px-0">Yars , Make  , Modal , Grade </p>
+                                <p class="px-0">Years , Make  , Modal , Grade </p>
                             </h5>
                         </div>
                     </div>
@@ -154,7 +154,7 @@
                             <div class="flex-1">
                                 <label class="w-full ">
                                     <div class="wrapper d-flex justify-content-center align-items-center px-10">
-                                        <select name="model_year" id="Year" >
+                                        <select name="model_year" class="year" >
                                             <option class="d-none" selected>Year</option>
                                             @foreach($years as $year) 
                                                     <option value="{{$year->year}}" >{{$year->year}}</option>
@@ -172,7 +172,7 @@
                             <div class="flex-1">
                                 <label class="w-full ">
                                     <div class="wrapper  d-flex justify-content-center align-items-center px-10">
-                                        <select name="make" class="cursor-not-allowed" id="brand" disabled>
+                                        <select name="make" class="cursor-not-allowed brand"  disabled>
                                             <option class="d-none" selected>Brand</option>
                                             @foreach($brands as $brand )
                                                 <option value="{{$brand->id}}">{{$brand->brand_name}}</option>
@@ -190,7 +190,7 @@
                             <div class="flex-1">
                                 <label class="w-full ">
                                     <div class="wrapper  d-flex justify-content-center align-items-center px-10">
-                                        <select name="model" class="" id="brand" >
+                                        <select name="model" class="model cursor-not-allowed"  disabled>
                                             <option selected class="d-none">Chose Model</option>
                                         </select>
                                         <div class="">
@@ -204,7 +204,7 @@
                             </div>
                             
                             <div class="flex-1 wrapper active h-50" >
-                                <button class="w-full disabled  cursor-not-allowed"  disabled id="Year"  type="submit">
+                                <button class="w-full disabled  cursor-not-allowed year"  disabled   type="submit">
                                     Get Started
                                 </button>
                             </div>
@@ -232,57 +232,69 @@
                 if($model_year.val() !== '') {
                     $make.prop('disabled' , false );
                     $make.removeClass('cursor-not-allowed');
+                }else {
+                    $make.prop('disabled' , true );
+                    $make.addClass('cursor-not-allowed');
                 }
             });
+
             $make.on('change',()=> {
-                opitonSelected.empty();
-                $('#model option:not(:first-child)').remove();
-                $.ajax({
-                    method : "get" ,
-                    url : '/admin/model/' + $make.val() ,
-                    data : {
-                        "_token" : "{{csrf_token()}}"
-                    },
-                    success : (res) => {
-                        $('select[name="model"]').empty();
-                        if(res.response.length !== 0) {
-                            let $innerHtml = `
-                                            <option class="d-none" selected>Chose Model </option>
-                                            ${res.response.map(item => `
-                                                <option value="${item.id}">${item.model_name}</option>
-                                            `).join('')}
-                                        `;      
-                            $('select[name="model"]').append($innerHtml);
-                            $('.disable').prop('disabled' , false);
-                            $('.active').css('background' , 'white');
-                            $('.disabled').addClass('cursor-not-allowed');
-                        }else {
-                            swal({
-                                    title: "Are you sure?",
-                                    text: "You have not added the model yet ",
-                                    type: "warning",
-                                    showCancelButton: true,
-                                    confirmButtonColor: "#DD6B55",
-                                    confirmButtonText: "Go To Next Step",
-                                    cancelButtonText: "No, cancel It",
-                                    closeOnConfirm: false,
-                                    closeOnCancel: false
-                                },
-                                function(isConfirm){
-                                    if (isConfirm) {
-                                        window.location.href = res.redirect ;
-                                    } else {
-                                        window.location.href = "http://localhost:8000/admin/add-cars" ;
-                                    }
-                                });
+                var $models = $('select[name="model"]') ;
+                if($make.val() !== " ") {
+                    $models.prop('disabled' , false);
+                    $models.removeClass('cursor-not-allowed');
+                    opitonSelected.empty();
+                    $.ajax({
+                        method : "get" ,
+                        url : '/admin/model/' + $make.val() ,
+                        data : {
+                            "_token" : "{{csrf_token()}}"
+                        },
+                        success : (res) => {
+                            if(res.response.length !== 0) {
+                                let $innerHtml = `
+                                                <option class="d-none" selected>Chose Model </option>
+                                                ${res.response.map(item => `
+                                                    <option value="${item.id}">${item.model_name}</option>
+                                                `).join('')}
+                                            `;      
+                                $models.empty().append($innerHtml);
+                                $('.disable').prop('disabled' , false);
+                                $('.active').css('background' , 'white');
+                                $('.disabled').addClass('cursor-not-allowed');
+                            }else {
+                                swal({
+                                        title: "Are you sure?",
+                                        text: "You have not added the model yet ",
+                                        type: "warning",
+                                        showCancelButton: true,
+                                        confirmButtonColor: "#DD6B55",
+                                        confirmButtonText: "Go To Next Step",
+                                        cancelButtonText: "No, cancel It",
+                                        closeOnConfirm: false,
+                                        closeOnCancel: false
+                                    },
+                                    function(isConfirm){
+                                        if (isConfirm) {
+                                            window.location.href = res.redirect ;
+                                        } else {
+                                            swal("Cancelled", "Your imaginary file is safe :)", "error");
+                                            $model.empty();
+                                            $models.prop('disabled' , true);
+                                            $models.addClass('cursor-not-allowed');
+                                        }
+                                    });
+                            }
+                            $('.select-header').removeClass('cursor-not-allowed');
+                        },
+                        error : (err) => {
+                            console.log(err );
                         }
-                        $model.prop('disabled' , false);
-                        $('.select-header').removeClass('cursor-not-allowed');
-                    },
-                    error : (err) => {
-                        console.log(err );
-                    }
-                });
+                    });
+                }else {
+                    $models.prop('disabled' , true);
+                    $models.addClass('cursor-not-allowed');
+                }
             });
             $model.on('change', ()=> {
                 let $value = $model.val();
