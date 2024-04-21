@@ -39,7 +39,7 @@
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="models" class="form-label">Add Model</label>
-                    <select class="form-select" name="model" id="models" aria-label="Disabled select example" >
+                    <select class="form-select" name="model" id="models" >
                         @if (session('models'))
                             <option slected>Loading Please Wait ...</option>
                         @else
@@ -49,16 +49,24 @@
                 </div>
             </div>
             <div class="mb-3">
-                <label for="model" class="form-label">Car Model</label>
+                <div class="row">
+                    <div class="col-md-8">
+                        <label for="model" class="form-label">Car Model</label>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-check form-switch ">
+                            <input class="form-check-input" {{ $errors->has('grade') ? 'checked' : '' }}  type="checkbox" role="switch" value="exist" id="gradeValide">
+                            <label class="form-check-label" for="gradeValide">Does it have grade ?</label>
+                        </div>
+                    </div>
+                </div>
                 <input type="text" class="form-control" value="{{old('grade')}}" {{ $errors->has('grade') ? 'disabled' : '' }} placeholder="Enter Car Model" name="grade" >
                 @if($errors->has('grade'))
                     <p class="text-danger">{{$errors->first('grade')}}</p>
                 @endif 
             </div>
-            <div class="form-check form-switch mb-3">
-                <input class="form-check-input" {{ $errors->has('grade') ? 'checked' : '' }}  type="checkbox" role="switch" value="exist" id="gradeValide">
-                <label class="form-check-label" for="gradeValide">Does it have grade ?</label>
-            </div>
+            
+            
             <div class="mb-3 row">
                 <div class="col-md-6">
                     <button class="btn btn-primary">Sumbit</button> 
@@ -84,7 +92,6 @@
         $(document).ready(()=>{
             loadeState() ;
             var modelName = "{{session('models') ? session('models')['model'] : null }}";
-            console.log(modelName);
             $('#gradeValide').change(function ()
             {
                 let $grade = $('input[name="grade"]');

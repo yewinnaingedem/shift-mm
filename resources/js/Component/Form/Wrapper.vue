@@ -167,7 +167,6 @@
             },
             submit () {
                 this.loadeStated = true ;
-                // add body style id in here
                 axios.post('/admin/setup', { field : this.field , model_Id : this.data['id'] , year : this.data['main']}) 
                 .then((response) => {
                     this.loadeStated = false ;

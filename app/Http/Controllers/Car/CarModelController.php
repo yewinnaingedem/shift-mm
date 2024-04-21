@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Brand ;
 use Illuminate\Validation\Rule;
 use App\Models\CarModel ;
+use App\Models\BodyStyle ;
 use Carbon\Carbon ;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\RedirectResponse;
@@ -30,7 +31,8 @@ class CarModelController extends Controller
     public function create()
     {
         $brands = Brand::get();
-        return view('admin.POS.Car_Model.create' , compact('brands'));
+        $bodyStyles = BodyStyle::get();
+        return view('admin.POS.Car_Model.create' , compact('brands' , 'bodyStyles'));
     }
 
     /**
@@ -42,7 +44,8 @@ class CarModelController extends Controller
             $request->all() ,
             [
                 'brand' => 'required' ,
-                'car_model' => 'required'
+                'car_model' => 'required',
+                "bodyStyle" => 'required'
             ]
         );
 
@@ -60,6 +63,7 @@ class CarModelController extends Controller
         $inputs = [] ;
         $inputs['brand_id'] = $request['brand'] ;
         $inputs['model_name'] = $request['car_model'];
+        $inputs['body_style_id'] = $request['bodyStyle'];
         $inputs['created_at'] = Carbon::now();
         CarModel::insert($inputs) ;
         session()->forget('id');

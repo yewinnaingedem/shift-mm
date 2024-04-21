@@ -64,7 +64,7 @@ class ModelController extends Controller
             $data['license-states'] = LicenseState::get();
             $data['engine_powers'] = EnginePower::get();
             $data['countries'] = MadeIn::get();
-            // dd($data['engine_powers']);
+            
         return view('admin.cars.stepProgess',compact('data'));
     }
     public function leftJoin($id) {

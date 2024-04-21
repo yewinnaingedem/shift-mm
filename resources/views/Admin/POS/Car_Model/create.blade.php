@@ -34,13 +34,22 @@
                     <p class="text-danger">{{$errors->first('car_model')}}</p>
                 @endif 
             </div>
+            <div class="mb-3">
+                <label class="form-label" for="bodyStyle">Add Body Style</label>
+                <select class="form-select" name="bodyStyle" id="bodyStyle" >
+                    <option selected class="d-none">Your body style here </option>
+                    @foreach($bodyStyles as $bodyStyle)
+                        <option value="{{$bodyStyle->id}}">{{$bodyStyle->body_style}}</option>
+                    @endforeach
+                </select>
+            </div>
             <div class="mb-3 row">
                 <div class="col-md-6">
                     <button class="btn btn-primary">Sumbit</button>
                 </div>
                 <div class="col-md-6 text-end">
-                    <a href="{{url('admin/car_models')}}" class="btn btn-primary mb-3">
-                        <i class="fa-sharp fa-solid fa-backward"></i>
+                    <a href="{{url('admin/car_models')}}" class="btn btn-danger mb-3">
+                        <i class="fa-solid fa-backward"></i>
                         <span>Back </span>
                     </a>
                 </div>

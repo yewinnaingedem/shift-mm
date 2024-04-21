@@ -22,7 +22,6 @@ return new class extends Migration
             $table->string('license_plate');
             $table->string('pass_owner');
             $table->unsignedBigInteger('transmission_type');
-            $table->unsignedBigInteger('body_style_id');
             $table->string('engine_exception')->nullable();
             $table->string('license_exception')->nullable();
             $table->string('exception')->nullable();
@@ -30,7 +29,6 @@ return new class extends Migration
             
             $table->foreign('model_id')->references('id')->on('car_models');
             $table->foreign('year_id')->references('id')->on('years');
-            $table->foreign('body_style_id')->references('id')->on('body_styles');
             $table->foreign('engine_power_id')->references('id')->on('engine_powers');
             $table->foreign('exterior_color_id')->references('id')->on('exterior_colors');
             $table->foreign('transmission_type')->references('id')->on('transmission_types');
