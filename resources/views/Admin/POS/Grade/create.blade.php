@@ -51,7 +51,7 @@
             <div class="mb-3">
                 <div class="row">
                     <div class="col-md-8">
-                        <label for="model" class="form-label">Car Model</label>
+                        <label for="model" class="form-label">Car Grade</label>
                     </div>
                     <div class="col-md-4">
                         <div class="form-check form-switch ">

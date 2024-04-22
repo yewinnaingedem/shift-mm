@@ -67,10 +67,8 @@
                 <div class="w-1/3  flex text-[15px] ">
                     <div class="flex w-full p-2 items-center bg-gray-50 border  hover:bg-gray-100 rounded  ">
                         <div class="w-[75%] tracking-wider font-semibold">Show Result :</div>
-                        <div class="w-1/4 font-bold">105 
-                            <span  >
-                                <i class="fa-solid fa-angle-down" id=""></i>
-                            </span> 
+                        <div class="w-1/4 font-bold" id="showResult">
+                            
                         </div>
                     </div>
                     <div class="flex justify-center items-center ml-2 bold  cursor-pointer" id="id_reflesh">
@@ -82,7 +80,7 @@
                 <div class="w-1/4 ">
                     <div class="flex w-full p-2 items-center bg-gray-50 border  hover:bg-gray-100 rounded  ">
                         <div class="w-[75%] tracking-wider font-semibold">Total :</div>
-                        <div class="w-1/4 font-bold">150 </div>
+                        <div class="w-1/4 font-bold"> {{$totals}} </div>
                     </div>
                 </div>
             </div>

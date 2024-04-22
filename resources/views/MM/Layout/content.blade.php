@@ -19,7 +19,7 @@
                                         </svg>
                                     </div>
                                     @php
-                                        $imageCount = 8; // Assuming you have 8 images
+                                        $imageCount = 8; 
                                     @endphp
                                     @foreach(range(1, $imageCount) as $i)
                                         @if(isset($data->{'img'.$i}))
