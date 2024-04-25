@@ -75,7 +75,7 @@
                         url  : "/api/end-point" ,
                         data : {
                             gread : this.datas.inputField ,
-                            validation : this.datas.validation ,
+                            validation : this.validation ,
                             vue1 : stepProgess.step1 ,
                             vue2 : stepProgess.step2 ,
                             vue3 : stepProgess.step3,
@@ -107,6 +107,9 @@
                 if(this.currentSteps === this.steps.length -1 ) {
                     return true ;
                 }
+            },
+            validation () {
+                return this.datas.validation == null ? false : this.datas.validation ;
             }
         },
 

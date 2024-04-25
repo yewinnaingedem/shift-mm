@@ -11,7 +11,6 @@
                     :class="(transmission.id === stepProgess.step1.transmission) ? 'bg-dark text-white' : '' "
                 >
                     <input type="radio"
-                    @input="definedTransmisson"
                     v-model="stepProgess.step1.transmission" :value="transmission.id" :id="transmission.id + 'tr'" class="d-none">
                     <div class="fw-bold">
                         {{ transmission.transmission }}
@@ -23,7 +22,7 @@
         <div class="row">
             <div class="text-header text-center mb-3 fw-bold">Enigne</div>
             <div class="col-md-12 mb-3">
-                <label for="cylinder" class="form-label">Cylinder</label>
+                <label for="cylinder" class="form-label fw-bold">Cylinder</label>
                 <select name="cylinder" id="" class="form-select" v-model="stepProgess.step1.engine.cylinder">
                     <option v-for="cylinder in datas.cylinders" :key="cylinder.id" :value="cylinder.id"> {{ cylinder.cylinder }}</option>
                 </select>
@@ -32,10 +31,10 @@
         <div class=" mb-3">
             <div class="row">
                 <div class="col-md-6">
-                    <label for="fuel" class="form-label">Fuel </label>
+                    <label for="fuel" class="fw-bold form-label">Fuel </label>
                 </div>
                 <div class="form-check col-md-6 form-switch mb-3 d-flex justify-content-end align-items-center ">
-                    <label class="d-block mr-50" for="gradeValide">Does it have Trubo ?</label>
+                    <label class="d-block  mr-50" for="gradeValide">Does it have Trubo ?</label>
                     <input class="form-check-input" type="checkbox" name="Turbo" role="switch" v-model="stepProgess.step1.engine.turbo" value="exist" id="gradeValide">
                 </div>
             </div>
@@ -45,6 +44,36 @@
                 </select>
             </div>
         </div>
+        <!-- this for engine power  -->
+        <div class="mb-1">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="fw-bold mb-2">Engine Power</div>
+                </div>
+                <div class="form-check col-md-6 form-switch mb-3 d-flex justify-content-end align-items-center ">
+                    <label class="d-block mr-50" for="checked">Create my own engine power?</label>
+                    <input class="form-check-input" type="checkbox" name="Turbo"  v-model="checked" id="checked">
+                </div>
+            </div>
+            <div v-if="checked">
+                <label class="form-label">Add Engine Power</label>
+                <input type="number" class="form-control" v-model="stepProgess.step1.engine.engine_power" >
+            </div>
+            <div class="row" v-else>
+                <div class="col-lg-2 col-md-3 col-sm-4 mb-3" v-for="(engine_power  , index ) in datas['engine_powers']" :key="engine_power.id">
+                    <label :for="engine_power.id + 'en'" class="d-flex justify-content-center align-items-center main-color p-10 rounded" 
+                        :class="(engine_power.id === stepProgess.step1.engine.engine_power) ? 'bg-dark text-white' : '' "
+                    >
+                        <input type="radio"
+                        v-model="stepProgess.step1.engine.engine_power" :value="engine_power.id" :id="engine_power.id + 'en'" class="d-none">
+                        <div class="fw-bold">
+                            {{ engine_power.engine_power + "CC"}}
+                        </div>
+                    </label>
+                </div>
+            </div>
+        </div>
+        
     </div>
 </template>
 
@@ -65,17 +94,10 @@
         data () {
             return {
                 body_style :null ,
-                
+                checked : false ,
             }
         },
         computed : {
-            definedTransmisson () {
-                const turbo = this.stepProgess.step1.engine.engine_power ;
-                if(turbo) {
-                    turbo.scrollIntoView({behavior : 'smooth' , block :'center' ,
-                    })
-                }
-            },
             defaultTransmission () {
                 return this.datas.transmissions.length  > 0 ? this.datas.transmissions[0].id : null ;
             },
@@ -87,6 +109,14 @@
             },
             defaultFuel () {
                 return this.datas.fuels.length  > 0 ? this.datas.fuels[0].id : null ;
+            },
+            defaultEnginePower () {
+                return this.datas.engine_powers.length > 0 ? this.datas.engine_powers[0].id  : null ;
+            },
+            defaultSetup () {
+                stepProgess.step1.brand = this.datas.brand_name ;
+                stepProgess.step1.model_name = this.datas.model_name ;
+                stepProgess.step1.grade = this.datas.grade ;
             }
         },
         mounted () {
@@ -101,6 +131,9 @@
             }
             if(this.stepProgess.step1.engine.fuel_type == null) {
                 this.stepProgess.step1.engine.fuel_type = this.defaultFuel ;
+            }
+            if (this.stepProgess.step1.engine.engine_power == null ) {
+                this.stepProgess.step1.engine.engine_power = this.defaultEnginePower ;
             }
         }
     }

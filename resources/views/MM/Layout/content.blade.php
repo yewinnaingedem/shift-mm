@@ -32,14 +32,9 @@
                             </a>
                             <!-- Slider indicators -->
                             <div class="absolute z-30 flex space-x-3 -translate-x-1/2 bottom-5 left-1/2">
-                                <button type="button" class="w-3 h-3 rounded-full" aria-current="true" aria-label="Slide 1" data-carousel-slide-to="0"></button>
-                                <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 2" data-carousel-slide-to="1"></button>
-                                <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="2"></button>
-                                <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 4" data-carousel-slide-to="3"></button>
-                                <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 5" data-carousel-slide-to="4"></button>
-                                <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 6" data-carousel-slide-to="4"></button>
-                                <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 7" data-carousel-slide-to="4"></button>
-                                <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 8" data-carousel-slide-to="4"></button>
+                                @foreach(range( 0 , 7) as $i) 
+                                    <button type="button" class="w-3 h-3 rounded-full" aria-current="{{$i == 1 ? 'true' : 'false' }}" aria-label="Slide {{ $i + 1}}" data-carousel-slide-to="{{$i}}"></button>
+                                @endforeach
                             </div>
                             <!-- Slider controls -->
                             <button type="button" class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
@@ -110,7 +105,7 @@
                     <div class="grow flex flex-col content-between justify-between  font-normal pt-3 px-3 pb-4 ">
                         <div class="flex h-[110px] pb-1 justify-between align-baseline font-serif gap-x-4  border-b-2 border-neutral-300">
                             <a href="">
-                                <div class="capitalize font-sans text-gray-dark text-[14px] font-bold"><span>{{$data->year}}</span> {{$data->model_name}} for Sale </div>
+                                <div class="capitalize font-sans text-gray-dark text-[14px] font-bold"><span>{{$data->year}}</span> {{$data->model_name}} for Sale ...</div>
                                 <div class="text-gray-light text-[13px] flex justify-between items-center" style="color:rgb(101 , 96 , 96 , )" >
                                     <div class="">Kilo:</div>
                                     <div id="kilo">{{$data->kilo_meter}}</div>
@@ -128,11 +123,21 @@
                                 <a href="" class="text-right shrink-0 font-sans">
                                     <div class="text-gray-darkest font-dispaly font-bold font-sans text-xl price"> {{$data->price }}</div>
                                     @php 
-                                        $show = $data->main_grade == 0 ? TRUE : FALSE ;
+                                        $show = $data->main_grade == 0 ? true : false ;
                                     @endphp 
-                                    <div class=" font-extrabold {{$show ? 'text-red-500' : 'text-gray-500'}}">{{$show ? " " : $data->main_grade}}</div>
+                                    <div class=" font-extrabold "> 
+                                    @if (!$show)
+                                        <span class="font-extrabold ">
+                                            {{ $data->main_grade}}
+                                        </span>
+                                        <span class="font-semibold">Grade</span>
+                                    @endif 
+                                    </div>
                                     <div class="font-bold">{{$data->transmission_type}}</div>
-                                    <div class="font-extrabold font-mono">{{$data->state}}</div>
+                                    <div class="font-extrabold font-mono">
+                                        <span class="font-bold">{{$data->state}} </span>
+                                        <span class="font-semibold">State</span>
+                                    </div>
                                 </a>
                             </div>
                         </div>

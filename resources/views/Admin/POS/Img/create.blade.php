@@ -400,41 +400,21 @@
             });
 
             $(document).on('click','#submitButton' , () => {
-                let valid = $('.valid-check');
-                let allGood = $('#all_good');
-                let checked = true ;
-                $('.loading-bar').show();
-                valid.each(function(index, element) {
-                    let value = $(element).val().trim();
-                    let allGoodChecked = $('#allGood').is(':checked'); // Assuming 'allGood' is the ID of your checkbox
-                    if (allGoodChecked || value !== "") {
-                        $(element).removeClass('is-invalid');
-                        $(element).next('.error-message').remove();
-                    } else {
-                        $(element).addClass('is-invalid');
-                        $(element).next('.error-message').remove();
-                        var errorMessage = $('<p>').addClass('text-danger m-0 error-message').text('Your Value is not valid');
-                        $(element).after(errorMessage);
-                        checked = false ;
+                var formData = new FormData($('#uploadForm')[0]);
+                $.ajax({
+                    url : "/admin/car_img/test",
+                    type : "post" ,
+                    data: formData,
+                    processData : false ,
+                    contentType : false ,
+                    success : (success) => {
+                        $('.loading-bar').hide();
+                        window.location.href = success.redirect;
+                    },
+                    error : (error) => {
+                        console.log(error);
                     }
                 });
-                var formData = new FormData($('#uploadForm')[0]);
-                if(checked) {
-                    $.ajax({
-                        url : "/admin/car_img/test",
-                        type : "post" ,
-                        data: formData,
-                        processData : false ,
-                        contentType : false ,
-                        success : (success) => {
-                            $('.loading-bar').hide();
-                            window.location.href = success.redirect;
-                        },
-                        error : (error) => {
-                            console.log(error);
-                        }
-                    });
-                }
             });
         });
     </script>

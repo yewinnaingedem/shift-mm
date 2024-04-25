@@ -9,14 +9,13 @@ use App\Models\Car\CarFunction ;
 use App\Models\Engine ;
 use App\Models\Grade ;
 use Carbon\Carbon ;
+use App\Models\EnginePower ;
 use App\Models\CarModel ;
 use Illuminate\Support\Arr;
 
 class GradeApiController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    
     public function index()
     {
         //
@@ -48,8 +47,25 @@ class GradeApiController extends Controller
         $engines['Cylinder_id'] = $step1['engine']['cylinder'];
         $engines['Fuel'] = $step1['engine']['fuel_type'];
         $engines['Turbo'] = $step1['engine']['turbo'] == "false" ? FALSE : TRUE;
+        # add engine power 
+        $enginePower = $step1['engine']['engine_power'] ;
+        $engineExisted = EnginePower::where('id' , $enginePower)->exists();
+        $enginePowerId;
+        if(!$engineExisted) {
+            $returnId = EnginePower::insertGetId([
+                'engine_power' => $enginePower ,
+                'created_at' => Carbon::now() ,
+            ]);
+            $enginePowerId = $returnId ;
+        }else {
+            $enginePowerId = $enginePower ;
+        }
+        
+        $engines['engine_power_id'] =  $enginePowerId ;
         $grades['engine_id'] = Engine::insertGetId($engines);
-        // for default Functions 
+        /* for default Functions 
+            this is so funny
+        */
         $default_functionSet = [] ;
         $now = Carbon::now();
         $defaultFunId = 1 ;
@@ -83,6 +99,7 @@ class GradeApiController extends Controller
         // get id column from advanc_function table 
         $advance_function_id = Advance_functions::insertGetId($advan_function);
         $grades['advance_function_id']  = $advance_function_id ;
+        $grades['created_at'] = Carbon::now();
         $gradeId = Grade::insertGetId($grades);
         $existFunction = Arr::has($step3, 'functions');
         if($existFunction) {
@@ -107,6 +124,7 @@ class GradeApiController extends Controller
                 'redirect' => '/admin/car/'. $model->brand . '/' . $model->model . '/' . $year  ,
             ]);
         }
+        
         // get id form advance_functions
         return response()->json([
             'message' => "You success" ,

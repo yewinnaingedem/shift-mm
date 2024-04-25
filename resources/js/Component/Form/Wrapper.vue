@@ -109,7 +109,6 @@
                         exterior_color: null ,
                         turbo : false ,
                         transmission : null ,
-                        engine_power : null ,
                     }, 
                     {
                         license_state : null ,

@@ -52,7 +52,6 @@ class AddCarController extends Controller
         $carOwners['model_id'] = $model_id ;
         $year_id =  Year::where('year', $main['year'])->first() ;
         $carOwners['year_id'] =$year_id->id ;
-        $carOwners['engine_power_id'] = $data1['engine_power'];
         if($data1['turbo'] == 'true' ) {
             $engineTesting  = Engine::where('id' , $data1['grade'])->update([
                 'Turbo' => 1 ,
@@ -81,6 +80,7 @@ class AddCarController extends Controller
         ];
         return response()->json($response);
     }
+    
     public function sessionCheck () {
         return session()->has('id') ? session()->get('id') : '' ;
     }

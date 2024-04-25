@@ -62,7 +62,6 @@ class ModelController extends Controller
             $data['transmissionTypes'] = TransmissionType::get();
             $data['model_id']  = $brands->id ;
             $data['license-states'] = LicenseState::get();
-            $data['engine_powers'] = EnginePower::get();
             $data['countries'] = MadeIn::get();
             
         return view('admin.cars.stepProgess',compact('data'));

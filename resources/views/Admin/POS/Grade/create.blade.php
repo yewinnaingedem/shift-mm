@@ -53,11 +53,9 @@
                     <div class="col-md-8">
                         <label for="model" class="form-label">Car Grade</label>
                     </div>
-                    <div class="col-md-4">
-                        <div class="form-check form-switch ">
+                    <div class="col-md-4 text-end">
+                            <label class="form-check-label" for="gradeValide">Does it have grade </label>
                             <input class="form-check-input" {{ $errors->has('grade') ? 'checked' : '' }}  type="checkbox" role="switch" value="exist" id="gradeValide">
-                            <label class="form-check-label" for="gradeValide">Does it have grade ?</label>
-                        </div>
                     </div>
                 </div>
                 <input type="text" class="form-control" value="{{old('grade')}}" {{ $errors->has('grade') ? 'disabled' : '' }} placeholder="Enter Car Model" name="grade" >

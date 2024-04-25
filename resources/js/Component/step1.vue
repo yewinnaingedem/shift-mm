@@ -43,30 +43,19 @@
                 </option>
             </select>
         </div>
+        
         <div class="mb-3">
             <div class="row">
                 <div class="col-md-6">
-                    <h5 class="fw-bold cap-5 mb-2">Engine Power</h5>
+                    <label for="transmission_type" class="form-label mb-3">Transmission Auto</label>
                 </div>
                 <div class="col-md-6 text-end">
-                    <label for="turbo" class="form-check-label cap-5 ">Trubo</label>
-                    <input type="checkbox" class="form-check-input mr-5" v-model="data.turbo"  id="turbo">
+                    <div class="mb-3 ">
+                        <label for="turbo" class="form-check-label cap-5"> Turbo Engine Manipulation </label>
+                        <input type="checkbox" class="form-check-input mr-5" v-model="data.turbo"  id="turbo">
+                    </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-3 mb-3" v-for="engine_power in arrayData['engine_powers']" :key="engine_power.id">
-                    <label :for="engine_power.engine_power + 'en'"
-                        class="justify-content-center d-flex align-items-center p-10 rounded-sm  text-white"    
-                        :class="[data.engine_power == engine_power.id ? activeClass : mainClass]">
-                        <input type="radio"  v-model="data.engine_power"  :id="engine_power.engine_power + 'en'" :value="engine_power.id"
-                            class="check-input">
-                        <div class="fw-bold">{{ engine_power.engine_power + " " + "CC" }}</div>
-                    </label>
-                </div>
-            </div>
-        </div>
-        <div class="mb-3">
-            <label for="transmission_type" class="form-label mb-3">Transmission Auto</label>
             <select v-model="data.transmission" id="transmission_type" class="form-select">
                 <option v-for="transmission_type in arrayData['transmissionTypes']" :key="transmission_type.id"
                     :value="transmission_type.id">
@@ -79,9 +68,10 @@
                 <div class="col-md-6">
                     <h5 class="fw-bold cap-5">Exterior color</h5>
                 </div>
-                <div class="form-check col-md-6 form-switch mb-3 d-flex justify-content-end align-items-center ">
-                    <label class="d-block mr-50" for="preDefinedColor">Color ?</label>
-                    <input class="form-check-input" type="checkbox" v-model="adjustColor"  :value="true" id="preDefinedColor">
+                <div class="col-md-6  mb-3 d-flex justify-content-end align-items-center ">
+                    <label class="d-block  cap-5" for="preDefinedColor">Create Own New Color </label>
+                    <input class="form-check-input mr-5" type="checkbox" v-model="adjustColor"  :value="true" id="preDefinedColor">
+                    
                 </div>
             </div>
             <div class=" row ">
@@ -97,12 +87,11 @@
                 </div>
                 <div v-else>
                     <div class="mb-3">
-                        <label for="preDefindedColor" class="form-label">Color</label>
+                        <label for="preDefindedColor" class="form-label">Add New Color</label>
                         <input type="text" class="form-control" v-model="data.exterior_color" placeholder="Enter Color">
                     </div>
                 </div>
             </div>
-            <hr>
         </div>
         
     </div>
@@ -254,7 +243,6 @@ export default {
                         let step1 = this.forSpecific[0];
                         let step2 = this.forSpecific[1];
                         let step3 = this.forSpecific[2];
-
                         if (response.message) {
                             this.showError = true;
                             this.showAlert = false;

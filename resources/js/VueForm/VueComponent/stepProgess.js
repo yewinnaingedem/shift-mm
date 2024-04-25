@@ -4,10 +4,14 @@ export const stepProgess  = reactive({
     step1 : {
         transmission : null ,
         body_style : null ,
+        brand : null ,
+        grade : null ,
+        model_name : null ,
         engine : {
             cylinder : null ,
             fuel_type : null ,
             turbo : false ,
+            engine_power : null 
         }
     },
     step2 : {

@@ -19,6 +19,7 @@ use App\Models\Brand ;
 use App\Models\Sonor ;
 use App\Models\CarDetails ;
 use App\Models\Aircon ;
+use App\Models\EnginePower ;
 use App\Models\Camera ;
 use App\Models\Cylinder ;
 use App\Models\Engine_type ;
@@ -27,7 +28,6 @@ use App\Models\Transmission ;
 use App\Models\BodyStyle ;
 use App\Models\Car\CarFunction ;
 use App\Models\Default_function ;
-use App\Models\EnginePower ;
 use App\Models\CarFucture ;
 use App\Models\Divertrim ;
 
@@ -107,6 +107,7 @@ class GradeController extends Controller
         $datas['grade'] = $grade ;
         $datas['cameras'] = Camera::get();
         $datas['validation'] = $request['validation'];
+        $datas['engine_powers'] = EnginePower::get();
         return view('admin.POS.Grade.gradeForm',compact('datas'));
     }
 
