@@ -61,25 +61,57 @@ import Data from "./Data.json";
                 data : Data ,
                 higthLightIndex : -1 ,
                 progressBarWidth : 0 , 
+                filteredBrand : true ,
+                filteredYear : true ,
+                finalBrand : true ,
+                finalYear : true ,
+                filteredModel : true ,
             }
         },
         watch : {
             inputSearch (input) {
-                let arrayInput = input.split(" ");
-                var value = input.toLowerCase() ;
-                if(value !== "") {
-                    return this.results = this.data.filter(item => 
-                        item.brand.toLowerCase().includes(value.toLowerCase()) || 
-                        item.type.toLocaleLowerCase().includes(value) ||
-                        item.licenseState.toLowerCase().includes(value) ||
-                        item.grade.toLowerCase().includes(value) ||
-                        item.year.includes(value) ||
-                        item.fuleType.toLocaleLowerCase().includes(value) || 
-                        item.enginePower.includes(value) ||
-                        item.carName.toLocaleLowerCase().includes(value)
-                    );
-                }
-                return this.results = [] ;
+                var inputText = input.toLowerCase();
+                var splitedText = input.split(' ');
+                console.log(splitedText);
+                // console.log(this.filteredBrand + " brand" + "\n" + "=======" + "\n" +  this.filteredYear + " Year");
+                var haveSpace = true ;
+                var checkedCode = false
+                
+                if (inputText !== "") {
+                    if (this.filteredBrand && this.finalBrand) {
+                           this.data.brands.some(value => {
+                            if (value.brand.toLocaleLowerCase().includes(inputText)) {
+                                console.log(value.brand + " brand"); 
+                                this.filteredYear = false  ;
+                                if (value.brand.toLocaleLowerCase() == inputText) {
+                                    console.log('completey match brand');
+                                    this.finalBrand  = false ;
+                                    this.filteredYear = true  ;
+                                }
+                                // console.log(this.filteredYear);
+                            }else {
+                                this.filteredYear = true  ;
+                            }
+                        });
+                    }
+                    if (this.filteredYear && this.finalYear ) {
+                        var numbersArray = inputText.match(/\b\d+\b/g);
+                        if (numbersArray !== null) {
+                            this.data.years.some(value => {
+                            if (value.year.toString().includes(numbersArray[0])) {
+                                if (value.year == numbersArray[0]) {
+                                    console.log('year complety matched');
+                                    this.finalYear = false ;
+                                }
+                                }else {
+                                    console.log('hi');
+                                }
+                            });
+                        }
+                       
+                    }
+                };
+                
             }
         },
         methods : {
