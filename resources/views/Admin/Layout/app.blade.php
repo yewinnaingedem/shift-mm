@@ -7,9 +7,9 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <link rel="stylesheet" href="{{asset('storage/style/main.css')}}">
-        <link rel="stylesheet" type="text/css" href="https://common.olemiss.edu/_js/sweet-alert/sweet-alert.css">
+        <link rel="stylesheet" href="{{asset('storage/sweetAlert/CSS/sweet.css')}}">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
         <title>@yield('title')</title>
-        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
         <link href="{{asset('storage/admin/css/styles.css')}}" rel="stylesheet" />
         <style>
             .list-style-none {
@@ -43,8 +43,16 @@
                 transition: width 0.3s ease;
                 z-index: 9999; /* Ensure it appears above other content */
             }
+            .dataSuggest:hover {
+                background : tomato ;
+                color : black ;
+            }
+            .setMaxHeight {
+                max-height : 300px ;
+                overflow-y : auto ;
+            }
         </style>
-        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        
         @yield('style')
     </head>
     <body class="sb-nav-fixed hidden">
@@ -80,10 +88,10 @@
         <script src="{{asset('storage/admin/js/scripts.js')}}"></script>
         <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
         <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/fontawesome-iconpicker/3.2.0/js/fontawesome-iconpicker.min.js" integrity="sha512-7dlzSK4Ulfm85ypS8/ya0xLf3NpXiML3s6HTLu4qDq7WiJWtLLyrXb9putdP3/1umwTmzIvhuu9EW7gHYSVtCQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-        <script src="https://common.olemiss.edu/_js/sweet-alert/sweet-alert.min.js"></script>
+        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <script src="{{asset('storage/sweetAlert/Js/sweetAlert.js')}}"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
         @yield('script')
         <script>
@@ -145,11 +153,11 @@
                         let value = $(this).text().toLowerCase().trim();
                         let href = $(this).attr('href');
                         if(value.includes(search) && !addedValues[value] && search !== "") { // Check if value is not already added
-                            addedValues[value] = true; // Mark value as added
+                            addedValues[value] = true; 
                             let innerLi = `
-                                <li class="list-group-item">
-                                    <a href="${href}" class="nav-link d-flex justify-content-between align-items-center">
-                                        ${$(this).text()} 
+                                <li class="list-group-item dataSuggest">
+                                    <a href="${href}" class="nav-link d-flex justify-content-between   align-items-center">
+                                        ${$(this).text().toLowerCase()} 
                                     </a>
                                 </li>
                             ` ;
@@ -157,7 +165,35 @@
                         }
                     });
                 });
-            })
+                $(document).on('mouseenter', '.dataSuggest', (e) => {
+                    let targetElement = e.currentTarget;
+                    routeSearch.val(targetElement.innerText);
+                    let child = $(targetElement).children("a").attr('href');
+
+                    // Handle keypress event for Enter key
+                    $(document).on('keypress', function(event) {
+                        // Check if the pressed key is Enter (keyCode 13)
+                        if (event.which === 13) {
+                            event.preventDefault();
+                            
+                            // Update the URL parameters without reloading the page
+                            let url = new URL(window.location.href);
+                            url.searchParams.set('routeSearch', routeSearch.val());
+                            window.history.pushState({}, '', url);
+                            window.location.href = child
+                            
+                        }
+                    });
+                });
+                $(document).on('keydown' , function (e) {
+                    var suggesstions = $('.dataSuggst') ;
+                    if (e.keyCode === 40 || e.keyCode === 38) {
+                        var currentIndex = suggesstions.index();
+                        console.log(currentIndex);
+                    }
+                });
+            });
+
         </script>
     </body>
 </html>

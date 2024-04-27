@@ -14,7 +14,7 @@
                     <div class="sb-nav-link-icon">
                         <i class="fa-solid fa-car-side"></i>
                     </div>
-                    Car Add 
+                     Add Car 
                 </a>
                 <!-- Car CarItemController -->
                 <a class="nav-link collapsed" href="{{url('admin/before_sale')}}" >

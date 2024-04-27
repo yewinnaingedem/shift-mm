@@ -3,7 +3,7 @@
 @section('title' , 'Admin')
 
 @section('style')
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+
     <style>
         .list-style-none {
             list-style : none ;
@@ -89,8 +89,6 @@
 @endsection 
 
 @section('script')
-    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script>
         $(document).ready(()=> {
             new DataTable('#example');

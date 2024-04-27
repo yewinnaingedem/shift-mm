@@ -5,7 +5,6 @@
 @section('style')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
-    <link rel="stylesheet"  href="https://common.olemiss.edu/_js/sweet-alert/sweet-alert.css">
     <style> 
         .mr-3 {
             margin-right : 5px ;
@@ -75,7 +74,6 @@
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-    <script src="https://common.olemiss.edu/_js/sweet-alert/sweet-alert.min.js"></script>
     <script src="{{asset('storage/Jquery/car_info.js')}}"></script>
     <script>
         $(document).ready(()=>{

@@ -3,7 +3,6 @@
 @section('title' , 'Admin')
 
 @section('style')
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
     <style>
         .file-input {
             display : none ;
@@ -401,6 +400,7 @@
 
             $(document).on('click','#submitButton' , () => {
                 var formData = new FormData($('#uploadForm')[0]);
+                $('.loading-bar').show();
                 $.ajax({
                     url : "/admin/car_img/test",
                     type : "post" ,

@@ -3,7 +3,6 @@
 @section('title' , 'Admin')
 
 @section('style')
-    <link rel="stylesheet" type="text/css" href="https://common.olemiss.edu/_js/sweet-alert/sweet-alert.css">
 @endsection 
 
 @section('navbar') 
@@ -23,6 +22,5 @@
 @endsection 
 
 @section('script')
-    <script src="https://common.olemiss.edu/_js/sweet-alert/sweet-alert.min.js"></script>
     @vite('resources/js/VueForm/app.js')
 @endsection 
