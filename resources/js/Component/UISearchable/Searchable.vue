@@ -8,16 +8,18 @@
             <input 
                 v-model="inputSearch"
                 autocomplete="off"  
+                ref="cusorPos"
                 class="reg-input  rounded-t-md rounded-tr-md w-input w-full pl-10 pr-2 outline-none border-none focus:ring-0 focus:ring-transparent h-10 bg-neutral-50 " 
                 placeholder="Search Keyword, Modals, Type..."
                 @keydown.up.prevent="hightPervious"
                 @keydown.down.prevent="hightNext(results.length)"
                 @keydown.enter.prevent="goDoc(results)"
+                @keydown.tab.prevent="moveFocusToNextInput()"
             >
         </div>
         <div class="result w-full relative borer-radious-customize bg-neutral-50  fade-enter-active 2 text-black" v-if="inputSearch">
             <ul class="pb-3 pt-1  w-full bg-neutral-50">
-                <li class="rounded-sm mb-[1px] w-full pl-10  bg-neutral-100 py-1" >
+                <li class="rounded-sm mb-[1px] w-full pl-10  bg-neutral-100 py-1" v-if="results.length == 0" >
                     <div class="relative border-l-4 border-green-400">
                         <span class="pl-2 font-medium tracking-wide mr-1">Mingalar Search</span><span class="font-light "> 
                             <span class="font-semibold">&#8220;</span>
@@ -28,20 +30,16 @@
                 </li>
                 <li 
                 class=" mb-[1px] w-full pl-10  hover:font-semibold hover:bg-neutral-100
-                    py-1" v-if="results" v-for="(data , index) in results" :key="data.id"
+                    py-1" v-if="results" v-for="(data , index) in results" :key="index"
                     :class="(iscurrent(index) ? 'bg-neutral-100 ' : 'bg-neutral-50' )"
                     @mouseover="higthLightIndex = index"
-                    @click="check(data.id)"
+                    @click="check(index)"
                   >
-                    <div class="relative hover:border-l-4 hover:border-green-400" @mousover="higthLightIndex = index "
+                  <div class="relative hover:border-l-4 hover:border-green-400" @mousover="higthLightIndex = index "
                         :class="{'border-l-4 border-green-400' : iscurrent(index)}"
                     >
                         <span class="pl-2 font-medium tracking-wide mr-1">
-                            <span class="me-1 font-semibold" v-if="data.carName">  {{ data.carName }}</span>    
-                            <span class="me-1 font-light" v-if="data.type">{{ data.type }}</span>    
-                            <span class="me-1 font-light" v-if="data.fuleType">{{ data.fuleType }}</span>    
-                            <span class="me-1 font-light" v-if="data.brand">{{ data.brand }}</span>    
-                            <span class="me-1 font-light" v-if="data.year">{{ data.year }}</span>    
+                            <span class="me-1 font-semibold" v-if="data">  {{ data.toLocaleLowerCase()}}</span>    
                         </span>
                     </div>
                 </li>
@@ -66,71 +64,80 @@ import Data from "./Data.json";
                 finalBrand : true ,
                 finalYear : true ,
                 filteredModel : true ,
+                passCode : null ,
             }
         },
         watch : {
             inputSearch (input) {
-                var inputText = input.toLowerCase();
-                var splitedText = input.split(' ');
-                console.log(splitedText);
-                // console.log(this.filteredBrand + " brand" + "\n" + "=======" + "\n" +  this.filteredYear + " Year");
-                var haveSpace = true ;
-                var checkedCode = false
-                
+                var inputTextSplited = input.split(" ");
+                var inputText = inputTextSplited[inputTextSplited.length - 1].toLowerCase();
+                this.results = [] ;
                 if (inputText !== "") {
                     if (this.filteredBrand && this.finalBrand) {
                            this.data.brands.some(value => {
                             if (value.brand.toLocaleLowerCase().includes(inputText)) {
-                                console.log(value.brand + " brand"); 
                                 this.filteredYear = false  ;
                                 if (value.brand.toLocaleLowerCase() == inputText) {
-                                    console.log('completey match brand');
                                     this.finalBrand  = false ;
                                     this.filteredYear = true  ;
                                 }
-                                // console.log(this.filteredYear);
+                                this.results.push(value.brand);
                             }else {
                                 this.filteredYear = true  ;
                             }
                         });
                     }
+                    // add brand and some data to it 
                     if (this.filteredYear && this.finalYear ) {
                         var numbersArray = inputText.match(/\b\d+\b/g);
                         if (numbersArray !== null) {
+                            this.results = [] ;
                             this.data.years.some(value => {
-                            if (value.year.toString().includes(numbersArray[0])) {
-                                if (value.year == numbersArray[0]) {
-                                    console.log('year complety matched');
-                                    this.finalYear = false ;
-                                }
-                                }else {
-                                    console.log('hi');
+                                if (value.year.toString().includes(numbersArray[0])) {
+                                    if (value.year == numbersArray[0]) {
+                                        this.finalYear = false ;
+                                    }
+                                    this.results.push(value.year);
                                 }
                             });
                         }
-                       
                     }
-                };
-                
+                }else {
+                    this.finalBrand = true ;
+                    this.finalYear = true ;
+                    this.results = [] ;
+                }
             }
         },
         methods : {
+
             hightPervious() {
                 if(this.higthLightIndex > 0) {
                     this.higthLightIndex -= 1 ;
                 }
             },
+
+            moveFocusToNextInput () {
+                var splitedText = this.inputSearch.split(' ');
+                splitedText[splitedText.length -1] = this.passCode.toLocaleLowerCase();
+                this.inputSearch = splitedText.join(" ");
+            },  
+
             hightNext(resultCount) {
                 if(this.higthLightIndex < resultCount - 1) {
                     this.higthLightIndex += 1 ;
                 }
             },
-            iscurrent (index , data) {
-                if(index === this.higthLightIndex ) {
+
+            iscurrent (index) {
+                if(index === this.higthLightIndex && this.results.length !== 0 ) {
+                    this.passCode = this.results[index] ;
                     return true ;
                 }else {
+                    index = null ;
                     return false ;
                 }
+
             },
             goDoc (results) {
                 if(this.higthLightIndex > -1 ) {
@@ -183,6 +190,7 @@ import Data from "./Data.json";
                                                     </a>
                                                     <!-- Slider indicators -->
                                                     <div class="absolute z-30 flex space-x-3 -translate-x-1/2 bottom-5 left-1/2">
+                                                        
                                                         <button type="button" class="w-3 h-3 rounded-full" aria-current="true" aria-label="Slide 1" data-carousel-slide-to="0"></button>
                                                         <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 2" data-carousel-slide-to="1"></button>
                                                         <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="2"></button>
