@@ -65,7 +65,7 @@
                                 </a>
                                 <ul class="dropdown-menu ">
                                     <li>
-                                    <a href="{{url('admin/employee/'. $employee->id .'/edit')}}" class="dropdown-item">View</a>
+                                    <a href="{{url('admin/employees/'. $employee->id .'/edit')}}" class="dropdown-item">View</a>
                                     </li>
                                     <li >
                                         <button class="dropdown-item delete" data-id="{{$employee->id}}">Delete</button>
@@ -97,8 +97,6 @@
 @endsection 
 
 @section('script')
-    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script>
         $(document).ready(()=> {
             new DataTable('#example');

@@ -96,7 +96,8 @@ class EmployeeController extends Controller
      */
     public function edit(string $id)
     {
-        
+        $employee = Employee::where('id' , $id)->first();
+        return view('Admin/employees/update' , compact('employee'));
     }
 
     /**
@@ -104,7 +105,7 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        dd('hi');
     }
 
     /**

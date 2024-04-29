@@ -7,12 +7,35 @@
             "brand" : "Toyato"
         }
     ],
+    "bodyStyles" : [
+        {
+            "bodyStyle" : "SUV" 
+        },
+        {
+            "bodyStyle" : "Saloon" 
+        },
+        {
+            "bodyStyle" : "Headbatch"
+        }
+    ],
     "models" : [
         {
             "model" : "Rush"
         },
         {
             "model" : "Sportage"
+        },
+        {
+            "model" : "Tuscon"
+        },
+        {
+            "model" : "Accent"
+        },
+        {
+            "model" : "Wish"
+        },
+        {
+            "model" : "Fit"
         }
     ],
     "years" : [

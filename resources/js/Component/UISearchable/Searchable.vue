@@ -18,7 +18,7 @@
             >
         </div>
         <div class="result w-full relative borer-radious-customize bg-neutral-50  fade-enter-active 2 text-black" v-if="inputSearch">
-            <ul class="pb-3 pt-1  w-full bg-neutral-50">
+            <ul class="pb-3 pt-1 max-h-[200px] overflow-x-auto  w-full bg-neutral-50">
                 <li class="rounded-sm mb-[1px] w-full pl-10  bg-neutral-100 py-1" v-if="results.length == 0" >
                     <div class="relative border-l-4 border-green-400">
                         <span class="pl-2 font-medium tracking-wide mr-1">Mingalar Search</span><span class="font-light "> 
@@ -58,7 +58,9 @@ import Data from "./Data.json";
                 results : [] ,
                 data : Data ,
                 higthLightIndex : -1 ,
-                progressBarWidth : 0 , 
+                progressBarWidth : 0 ,
+                finalBodyStyle : true ,
+                finalModel : true , 
                 filteredBrand : true ,
                 filteredYear : true ,
                 finalBrand : true ,
@@ -72,32 +74,65 @@ import Data from "./Data.json";
                 var inputTextSplited = input.split(" ");
                 var inputText = inputTextSplited[inputTextSplited.length - 1].toLowerCase();
                 this.results = [] ;
-                if (inputText !== "") {
-                    if (this.filteredBrand && this.finalBrand) {
-                           this.data.brands.some(value => {
-                            if (value.brand.toLocaleLowerCase().includes(inputText)) {
-                                this.filteredYear = false  ;
-                                if (value.brand.toLocaleLowerCase() == inputText) {
-                                    this.finalBrand  = false ;
-                                    this.filteredYear = true  ;
+                if (input !== "" && inputText !== null) {
+                    if (this.finalBrand) {
+                         if (inputText !== "") {
+                            this.data.brands.some(value => {
+                                if (value.brand.toLocaleLowerCase().includes(inputText)) {
+                                    this.finalModel = false ;
+                                    if (value.brand.toLocaleLowerCase() == inputText) {
+                                        this.finalBrand  = false ;
+                                        this.finalModel = true ;
+                                    }
+                                    this.results.push(value.brand);
+                                }else {
+                                    this.finalModel = true ;
                                 }
-                                this.results.push(value.brand);
-                            }else {
-                                this.filteredYear = true  ;
-                            }
-                        });
+                            });
+                         }
                     }
                     // add brand and some data to it 
-                    if (this.filteredYear && this.finalYear ) {
-                        var numbersArray = inputText.match(/\b\d+\b/g);
-                        if (numbersArray !== null) {
+                    if (this.finalYear ) {
+                        if (inputText !== "" && !isNaN(inputText)) {
                             this.results = [] ;
                             this.data.years.some(value => {
-                                if (value.year.toString().includes(numbersArray[0])) {
-                                    if (value.year == numbersArray[0]) {
+                                if (value.year.toString().includes(inputText)) {
+                                    if (value.year.toString() == inputText) {
                                         this.finalYear = false ;
                                     }
                                     this.results.push(value.year);
+                                }
+                            });
+                        }
+                    }
+
+                    // add model and somedata to it 
+                    if (this.finalModel) {
+                        if (inputText !== "") {
+                            this.data.models.some(value => {
+                                if (value.model.toLocaleLowerCase().includes(inputText)) {
+                                        this.finalBrand = false ;
+                                        if (value.model.toLocaleLowerCase() === inputText ) {
+                                            this.finalModel = false ;
+                                            this.finalBrand = true ;
+                                        }
+                                        this.results.push(value.model);
+                                    }else {
+                                        this.finalBrand = true ;
+                                    }
+                                });
+                        }
+                    }
+
+                    // add body style 
+                    if (this.finalBodyStyle) {
+                        if (inputText !== "") {
+                            this.data.bodyStyles.some(value => {
+                                if (value.bodyStyle.toLocaleLowerCase().includes(inputText)) {
+                                    if (value.bodyStyle.toLocaleLowerCase() == inputText) {
+                                        this.finalBodyStyle = false ;
+                                    }
+                                    // this.results.push(value.bodyStyle);
                                 }
                             });
                         }
