@@ -67,7 +67,6 @@
             },
             origin : {
                 type : String ,
-                required : true ,
             }
         },
         watch : {
@@ -99,7 +98,12 @@
                         }
                     }
                 }else {
-                    this.fixpoint = this.origin == null ? centeraStore.state.defaultString : this.origin ;
+                    if (this.origin == null ) {
+                        this.fixpoint = centeraStore.state.defaultString ;
+                        centeraStore.state.paintAndBody.success = true ;
+                    }else {
+                        this.fixpoint = this.origin ;
+                    }
                     this.mechines = this.fixers.length > 0 ? this.fixers[0].id : null ;
                     centeraStore.state.paintAndBody.about = this.fixers.length > 0  ? this.fixers[0].description : null ;
                 }

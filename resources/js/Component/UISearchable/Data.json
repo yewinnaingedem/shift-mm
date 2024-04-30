@@ -4,7 +4,7 @@
             "brand" : "Hundia"
         },
         {
-            "brand" : "Toyato"
+            "brand" : "Toyota"
         }
     ],
     "bodyStyles" : [
@@ -44,14 +44,6 @@
         },
         {
             "year" : "2002" 
-        }
-    ],
-    "trasmattions" : [
-        {
-            "transmattion" : "Auto"
-        },
-        {
-            "transmattion" : "Manual"
         }
     ]
 }

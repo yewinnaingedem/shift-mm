@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('vin');
             $table->unsignedBigInteger('exterior_color_id');
-            
             $table->unsignedBigInteger('year_id');
             $table->unsignedBigInteger('model_id');
             $table->unsignedBigInteger('license_state');

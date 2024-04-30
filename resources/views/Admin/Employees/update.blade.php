@@ -83,7 +83,7 @@
                     </div>
                 </div>
             </div>
-            <div class="profile-content bg-cute little-white py-4 mb-2">
+            <div class="profile-content bg-cute little-white shadow-sm py-4 mb-2">
                 <div class="row">
                     <div class="col-md-3">
                     </div>
@@ -98,22 +98,22 @@
                             <li>
                                 <a href="">Gender</a>
                             </li>
-                            <li><a href="">Contact Information (Phone, Email, Address)</a></li>
+                            <li><a href="">Contact Information (Phone )</a></li>
                         </ul>
                     </div>
                     <div class="col-md-3">
                         <ul>
                             <li>
-                                <a href="">Mg Ye Win Naing</a>
+                                <a href="">{{$employee->name}}</a>
                             </li>
                             <li>
-                                <a href="">18/12/2001</a>
+                                <a href="">{{$employee->age}}</a>
                             </li>
                             <li>
                                 <a href="">Male</a>
                             </li>
                             <li>
-                                <a href="">09673127480</a>
+                                <a href="">{{$employee->phone}}</a>
                             </li>
                         </ul>
                     </div>
@@ -132,45 +132,49 @@
                     </div>
                 </div>
             </div>
-            <div class="bg-cute py-4 mb-2 px-2 rounded">
+            <div class="bg-cute shadow-sm py-4 mb-2 px-2 rounded">
                 <div class="description-title">
                     <p class="fw-bold">Contant Details </p>
                 </div>
                 <div class="row px-2">
-                    <div class="col-md-3">Phone</div>
+                    <div class="col-md-3">
+                        <i class="fa-solid fa-phone me-1"></i>
+                        <span class="fw-semibold">Phone</span>
+                    </div>
                     <div class="col-md-1">:</div>
-                    <div class="col-md-8">09673127480</div>
+                    <div class="col-md-8">{{$employee->phone}}</div>
                 </div>
                 <div class="row px-2">
-                    <div class="col-md-3">Email</div>
+                    <div class="col-md-3">
+                        <i class="fa-solid fa-envelope me-2"></i>
+                        <span class="fw-semibold">Email</span> 
+                    </div>
                     <div class="col-md-1">:</div>
-                    <div class="col-md-8">yewinnang@116058</div>
+                    <div class="col-md-8">${{$employee->email}}</div>
                 </div>
                 <div class="row px-2 ">
-                    <div class="col-md-3">Family Phone</div>
+                    <div class="col-md-3">
+                        <i class="fa-solid fa-phone-volume me-2"></i>
+                        <span class="fw-semibold">Family Phone</span> 
+                    </div>
                     <div class="col-md-1">:</div>
-                    <div class="col-md-8">09751200100</div>
+                    <div class="col-md-8">{{$employee->phone}}</div>
                 </div>
                 <div class="row px-2 ">
-                    <div class="col-md-3">Current Address</div>
+                    <div class="col-md-3">
+                        <i class="fa-solid fa-location-dot me-2"></i>
+                        <span class="fw-semibold" >Current Address</span>
+                    </div>
                     <div class="col-md-1">:</div>
-                    <div class="col-md-8">Hlaing Thar Yar , street 1 , </div>
+                    <div class="col-md-8">{{$employee->address}}</div>
                 </div>
             </div>
-            <div class="about-me bg-warning mb-3 py-3 px-2 rounded">
-                <div class="fw-bold">
-                    <p>About Me</p>
-                </div>
-                <div class="content">
-                    <div class="about">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Labore, enim libero! Provident tempore voluptates commodi incidunt at harum, facilis laboriosam amet libero accusantium quidem vero voluptatem, deserunt, repellendus quam eius? Architecto sed deserunt blanditiis nemo non. Eligendi repellendus voluptatem, culpa illo maxime delectus nihil consequatur cum! Assumenda perspiciatis numquam omnis nihil soluta ipsum accusamus quas velit eaque quos alias animi magni, dolorem, quisquam corrupti! Molestiae animi suscipit commodi asperiores, praesentium esse maxime possimus aut, rem, modi voluptates earum. Recusandae, adipisci unde perspiciatis, pariatur aliquam quae placeat nam, voluptatibus quo quos odit. Beatae ut soluta quae amet numquam, sequi facilis quis?</div>
-                </div>
-            </div>
-            <div class="py-3">
+            <div class="py-3 bg-cute shadow-sm mb-3 px-2 rounded">
                 <div>
-                    <p>Employee Details</p> 
+                    <p class="fw-bold">Employee Details</p> 
                 </div>
-                <div class="employee-details">
-                    <table class="table table-dark table-striped rounded">
+                <div class="employee-details px-3">
+                    <table class="table table-striped  table-light rounded">
                         <thead>
                             <tr>
                                 <th scope="col">Lable </th>
@@ -188,19 +192,19 @@
                             </tr>
                             <tr>
                                 <th scope="row">Position</th>
-                                <td colspan="2">Supervior</td>
+                                <td colspan="2">{{$employee->role}}</td>
                             </tr>
                             <tr>
                                 <th scope="row">Employment  Status</th>
-                                <td colspan="2">Sale and promotion</td>
+                                <td colspan="2">Full Time</td>
                             </tr>
                             <tr>
                                 <th scope="row">Start Date</th>
-                                <td colspan="2">now()</td>
+                                <td colspan="2">{{$employee->created_at}}</td>
                             </tr>
                             <tr>
                                 <th scope="row">End Date</th>
-                                <td colspan="2">Sale and promotion</td>
+                                <td colspan="2">---- </td>
                             </tr>
                             <tr>
                                 <th scope="row">Job Title</th>
@@ -210,6 +214,12 @@
                     </table>
                 </div>
             </div>
+        </div>
+        <div class="mb-3 text-end">
+            <a href="" class="btn btn-danger">
+                <i class="fa-solid fa-backward me-1"></i>
+                <span>Back</span>
+            </a>
         </div>
     </div>
 @endsection 

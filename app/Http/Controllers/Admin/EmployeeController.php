@@ -96,7 +96,7 @@ class EmployeeController extends Controller
      */
     public function edit(string $id)
     {
-        $employee = Employee::where('id' , $id)->first();
+        $employee = Employee::select()->leftJoin('positions','employees.position','positions.id')->where('employees.id' , $id)->first();
         return view('Admin/employees/update' , compact('employee'));
     }
 
