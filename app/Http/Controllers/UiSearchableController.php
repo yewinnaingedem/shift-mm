@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Car\Sale ;
 use Illuminate\Support\Facades\Storage; 
+use Illuminate\Support\Facades\Cache;
 
 class UiSearchableController extends Controller
 {
@@ -21,14 +22,36 @@ class UiSearchableController extends Controller
             if (isset($data['year'])) {
                 $seachValue['year'] =$data['year'] ;
             }
+            if (isset($data['id1'])) {
+                $seachValue['id1'] =$data['id1'] ;
+            }
+            if (isset($data['id2'])) {
+                $seachValue['id2'] =$data['id2'] ;
+            }
         }
-
-        // return response()->json([
-        //     'requests' => $seachValue['brand'] ,
-        // ] , 404 );
+        $cacheKey = 'search_' . md5(json_encode($seachValue));
+        if (Cache::has($cacheKey)) {
+            $data = Cache::get($cacheKey);
+            return response()->json([
+                'getData' => $data ,
+                'returnState' => 'cache' ,
+            ] , 200 );
+        }
         
-        $dataQuery = Sale::select('brands.brand_name as brand', 'sales.*', 'cars.id as id', 'car_models.model_name as carName', 'engine_powers.engine_power as enginePower', 'transmission_types.transmission_type as fuelType',
-                            'years.year as year', 'license_states.state as licenseState','car_models.brand_id','owner_books.model_id', 'items.*', 'owner_books.*', 'grades.grade as grade', 'engine_types.type as type', 'car_images.*')
+        $dataQuery = Sale::select(
+                            'sales.id as sale_id',
+                            'sales.price',
+                            'car_models.model_name',
+                            'brands.brand_name',
+                            'owner_books.license_plate',
+                            'owner_books.vin',
+                            'transmission_types.transmission_type',
+                            'grades.grade as main_grade',
+                            'items.kilo_meter' ,
+                            'car_images.*',
+                            'license_states.state',
+                            'years.year','car_images.*'
+                            )
                             ->leftJoin('cars', 'sales.car_id', 'cars.id')
                             ->leftJoin('owner_books', 'cars.owner_book_id', 'owner_books.id')
                             ->leftJoin('car_images', 'cars.car_image_id', 'car_images.id')
@@ -51,11 +74,25 @@ class UiSearchableController extends Controller
         if (!empty($seachValue['year'])) {
             $dataQuery->where('years.year', $seachValue['year']);
         }
-        
         $data = $dataQuery->get();
-        
+        Cache::put($cacheKey , $data  , now()->addMinutes(10));
         return response()->json([
             'getData' => $data ,
         ] , 200 );
+    }
+    private function normalizeParams($params)
+    {
+        // Sort the parameters alphabetically by key
+        ksort($params);
+
+        // Recursively normalize nested arrays
+        foreach ($params as &$param) {
+            ksort($params);
+            if (is_array($param)) {
+                $param = $this->normalizeParams($param);
+            }
+        }
+
+        return $params;
     }
 }

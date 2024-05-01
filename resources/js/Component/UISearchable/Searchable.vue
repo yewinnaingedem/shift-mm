@@ -73,6 +73,9 @@ import Data from "./Data.json";
         props : {
             asset : {
                 required : true ,
+            } ,
+            route : {
+                required : true ,
             }
         },
         watch : {
@@ -85,15 +88,15 @@ import Data from "./Data.json";
                          if (inputText !== "") {
                             this.data.brands.some(value => {
                                 if (value.brand.toLocaleLowerCase().includes(inputText)) {
-                                    this.finalModel = false ;
                                     if (value.brand.toLocaleLowerCase() == inputText) {
                                         this.finalBrand  = false ;
                                         this.finalModel = true ;
                                         this.finalResult.push({ 'brand': value.brand.toLocaleLowerCase() });
+                                    }else {
+                                        this.finalBrand = true ;
+                                        this.finalModel = false ;
                                     }
                                     this.results.push(value.brand);
-                                }else {
-                                    this.finalModel = true ;
                                 }
                             });
                          }
@@ -107,6 +110,8 @@ import Data from "./Data.json";
                                     if (value.year.toString() == inputText) {
                                         this.finalYear = false ;
                                         this.finalResult.push({ 'year': value.year });
+                                    }else {
+                                        this.finalYear = true ;
                                     }
                                     this.results.push(value.year);
                                 }
@@ -119,15 +124,12 @@ import Data from "./Data.json";
                         if (inputText !== "") {
                             this.data.models.some(value => {
                                 if (value.model.toLocaleLowerCase().includes(inputText)) {
-                                        this.finalBrand = false ;
                                         if (value.model.toLocaleLowerCase() === inputText ) {
                                             this.finalModel = false ;
                                             this.finalBrand = true ;
                                             this.finalResult.push({ 'model': value.model.toLocaleLowerCase() });
                                         }
                                         this.results.push(value.model);
-                                    }else {
-                                        this.finalBrand = true ;
                                     }
                                 });
                         }
@@ -150,16 +152,59 @@ import Data from "./Data.json";
                     this.finalBrand = true ;
                     this.finalYear = true ;
                     this.results = [] ;
-                }
+                    this.finalResult = [ ];
+                }   
+
             }
         },
-        computed : {
-            contentAppent (response) {
-                        let searchContianer = $('#fader');
-                        let inserts = response.getData ;
-                        let dataContent = "" ;
-                        $.each(inserts , function (index , data)
-                        {   
+        methods : {
+            hightPervious() {
+                if(this.higthLightIndex > 0) {
+                    this.higthLightIndex -= 1 ;
+                }
+            },
+            
+            moveFocusToNextInput () {
+                var splitedText = this.inputSearch.split(' ');
+                splitedText[splitedText.length -1] = this.passCode.toLocaleLowerCase();
+                this.inputSearch = splitedText.join(" ");
+            },  
+
+            hightNext(resultCount) {
+                if(this.higthLightIndex < resultCount - 1) {
+                    this.higthLightIndex += 1 ;
+                }
+            },
+            isObjectArrayValueExists(value, objectArray) {
+                // Iterate over each object in the object array
+                for (let i = 0; i < objectArray.length; i++) {
+                    // Check if the object's values array contains the value
+                    const valuesArray = Object.values(objectArray[i]);
+                    if (valuesArray.includes(value)) {
+                        return true; // Value exists in the object array
+                    }
+                }
+                return false; // Value does not exist in the object array
+            } ,
+
+            iscurrent (index) {
+                if(index === this.higthLightIndex && this.results.length !== 0 ) {
+                    this.passCode = this.results[index] ;
+                    return true ;
+                }else {
+                    index = null ;
+                    return false ;
+                }
+
+            },
+            ui_response (response) {
+                let inserts = response.getData ;
+                let searchContianer = $('#fader');
+                let dataContent = "" ;
+                var routeUrl = this.route  ;
+                var baseUrl = this.asset ;
+                $.each(inserts , function (index , data)
+                    {   
                         dataContent += `<div class="rounded-xl shadow-md hover:shadow-xl bg-white flex flex-col" >
                                 <!-- header ${index} -->
                                 <div class="for-cars-slide">
@@ -283,9 +328,9 @@ import Data from "./Data.json";
                                             <div>
                                                 <a href="" class="text-right shrink-0 font-sans">
                                                     <div class="text-gray-darkest font-dispaly font-bold font-sans text-xl price"> ${data.price}</div>
-                                                    <div class=" font-extrabold ">${data.main_grade}</div>
+                                                    <div class=" font-extrabold ">${data.main_grade} <span>Grade</span> </div>
                                                     <div class="font-bold">${data.transmission_type}</div>
-                                                    <div class="font-extrabold font-mono">${data.state}</div>
+                                                    <div class="font-extrabold font-mono">${data.state} <span>State</span></div>
                                                 </a>
                                             </div>
                                         </div>
@@ -302,56 +347,53 @@ import Data from "./Data.json";
                                         </div>
                                     </div>
                                 </div>
-                                    </div>`;
-                        }) ;
-                        searchContianer.empty().append(dataContent);
-                        console.log('hi');
-                        initFlowbite(); 
-            },
-        },  
-        methods : {
-            hightPervious() {
-                if(this.higthLightIndex > 0) {
-                    this.higthLightIndex -= 1 ;
-                }
-            },
-            
-            moveFocusToNextInput () {
-                var splitedText = this.inputSearch.split(' ');
-                splitedText[splitedText.length -1] = this.passCode.toLocaleLowerCase();
-                this.inputSearch = splitedText.join(" ");
-            },  
-
-            hightNext(resultCount) {
-                if(this.higthLightIndex < resultCount - 1) {
-                    this.higthLightIndex += 1 ;
-                }
-            },
-
-            iscurrent (index) {
-                if(index === this.higthLightIndex && this.results.length !== 0 ) {
-                    this.passCode = this.results[index] ;
-                    return true ;
-                }else {
-                    index = null ;
-                    return false ;
-                }
-
+                        </div>`;
+                    }) ;
+                searchContianer.empty().append(dataContent);
+                let x = setInterval(() => {
+                    $('.body-fade').remove();
+                    $('.loader-content').removeClass('hidden');
+                    clearInterval(x);
+                }, 500);
+                initFlowbite(); 
+            }, 
+            updateObjectArrayWithIndexArray(indexArray, objectArray) {
+                indexArray.forEach(value => {
+                        // Check if the value exists in the object array
+                        const key = this.isObjectArrayValueExists(value, objectArray);
+                        if (key !== null) {
+                            console.log(`Value ${value} found in object array at key ${key}`);
+                        } 
+                    });
             },
             goDoc () {
-                if (this.inputSearch !== "" && this.finalResult.length > 0) {
-                    this.fetchData();
+                if (this.inputSearch !== "" ) {
+                    var arr1 = this.inputSearch.split(" ");
+                    var count = 0 ;
+                    if (arr1[arr1.length -1] == null || arr1[arr1.length -1] == "") {
+                        arr1.pop() ;
+                    }
+                    this.updateObjectArrayWithIndexArray(arr1 , this.finalResult) ;
+                    arr1.forEach(value => {
+                    // Check if the value exists in the object array
+                        if (!this.isObjectArrayValueExists(value, this.finalResult)) {
+                            // If the value doesn't exist, add it to the object array
+                            const newObj = {};
+                            newObj["id" + ++count] = value;
+                            this.finalResult.push(newObj);
+                        }
+                    });
+                    this.fetchData() ;
                 }
             },
             fetchData() {
                 this.progressBarWidth = 0;
-                var scope = this ;
+                var formData = this.finalResult ;
                 $.ajax({
                     url : "/api/uiserach/list"  ,
                     method : "POST" ,
-                    dataType : "json",
                     data : {
-                        dataSearch  : this.finalResult ,
+                        dataSearch  : formData ,
                     }, 
                     xhr : function () {
                         var xhr =  new window.XMLHttpRequest();
@@ -366,12 +408,11 @@ import Data from "./Data.json";
                                     this.inputSearch = '';
                                 }, 500);
                             }
-                            
                         }.bind(this);
                         return xhr ;
                     }.bind(this), 
-                    success : function (response) {
-                        scope.contentAppent(response);
+                    success :  (response) => {
+                        this.ui_response(response);
                     },
                     error : function (error) {
                         console.log(error);
@@ -384,7 +425,7 @@ import Data from "./Data.json";
         },
         mounted ( ) {
             window.addEventListener('keydown', this.handleKeyDown);
-            console.log(this.asset);
+            
         }
     }
 </script>
