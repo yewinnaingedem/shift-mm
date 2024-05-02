@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Brand ;
 use App\Models\Car\Sale ;
+use App\Models\CarModel ;
+use App\Models\Year ;
 use Illuminate\Support\Facades\Storage; 
 use Illuminate\Support\Facades\Cache;
 
@@ -12,6 +15,8 @@ class UiSearchableController extends Controller
     public function apisearch ( Request $request ) {
         $seachData = $request->dataSearch ;
         $seachValue = [] ;
+        $unSeeValue = [] ;
+        $returnState = false ;
         foreach ($seachData as $data ) {
             if (isset($data['brand'])) {
                 $seachValue['brand'] =$data['brand'] ;
@@ -24,9 +29,33 @@ class UiSearchableController extends Controller
             }
             if (isset($data['id1'])) {
                 $seachValue['id1'] =$data['id1'] ;
+                $brandCheck = Brand::where('brand_name',$data['id1'])->exists();
+                if ($brandCheck) {
+                    $seachValue['brand'] = $data['id1'] ;
+                }
+                $modelCheck = CarModel::where('model_name',$data['id1'])->exists(); 
+                if ($modelCheck) {
+                    $seachValue['model'] = $data['id1'] ;
+                }
+                $yearCheck = Year::where('year',$data['id1'])->exists();
+                if($yearCheck) {
+                    $seachValue['year'] = $data['id1'] ;
+                }
             }
             if (isset($data['id2'])) {
                 $seachValue['id2'] =$data['id2'] ;
+                $brandCheck = Brand::where('brand_name',$data['id2'])->exists();
+                if ($brandCheck) {
+                    $seachValue['brand'] = $data['id2'] ;
+                }
+                $modelCheck = CarModel::where('model_name',$data['id2'])->exists(); 
+                if ($modelCheck) {
+                    $seachValue['model'] = $data['id2'] ;
+                }
+                $yearCheck = Year::where('year',$data['id2'])->exists();
+                if($yearCheck) {
+                    $seachValue['year'] = $data['id2'] ;
+                }
             }
         }
         $cacheKey = 'search_' . md5(json_encode($seachValue));
@@ -34,10 +63,9 @@ class UiSearchableController extends Controller
             $data = Cache::get($cacheKey);
             return response()->json([
                 'getData' => $data ,
-                'returnState' => 'cache' ,
+                'returnState' => true ,
             ] , 200 );
         }
-        
         $dataQuery = Sale::select(
                             'sales.id as sale_id',
                             'sales.price',
@@ -66,20 +94,42 @@ class UiSearchableController extends Controller
                             ->leftJoin('engine_types', 'engines.Fuel', 'engine_types.id')
                             ->leftJoin('engine_powers','engines.engine_power_id','engine_powers.id');
         if (!empty($seachValue['brand'])) {
-            $dataQuery->where('brands.brand_name', 'like', '%' . $seachValue['brand'] . '%');
+            $returnState = true ;
+            $dataQuery->orWhere('brands.brand_name', 'like', '%' . $seachValue['brand'] . '%');
+            if (!$dataQuery->exists()) {
+                $unSeeValue = [$seachValue['brand']] ;
+            }
         }
         if (!empty($seachValue['model'])) {
-            $dataQuery->where('car_models.model_name', 'like', '%' . $seachValue['model'] . '%');
+            $returnState = true ;
+            $dataQuery->orWhere('car_models.model_name', 'like', '%' . $seachValue['model'] . '%');
+            if(!$dataQuery->exists()) {
+                $unSeeValue = [$seachValue['model']] ;
+            }
         }
         if (!empty($seachValue['year'])) {
+            $returnState = true ;
             $dataQuery->where('years.year', $seachValue['year']);
+            if(!$dataQuery->exists()) {
+                $unSeeValue = [$seachValue['year']] ;
+            }
         }
         $data = $dataQuery->get();
-        Cache::put($cacheKey , $data  , now()->addMinutes(10));
-        return response()->json([
-            'getData' => $data ,
-        ] , 200 );
+        if ($returnState) {
+            Cache::put($cacheKey , $data  , now()->addMinutes(10));
+            return response()->json([
+                'getData' => $data ,
+                'returnState' => false ,
+                'unSeeValue' => $unSeeValue 
+            ] , 200 );
+        }else {
+            return response()->json([
+                'getData' => false ,
+                'returnState' => false 
+            ] , 200 );
+        }
     }
+
     private function normalizeParams($params)
     {
         // Sort the parameters alphabetically by key

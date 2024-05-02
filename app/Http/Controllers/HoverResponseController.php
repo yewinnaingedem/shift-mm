@@ -8,9 +8,12 @@ use App\Models\CarFucture ;
 use App\Models\MadeIn ;
 use App\Models\BodyStyle ;
 use App\Models\Year ;
+use Illuminate\Support\Facades\Cache;
+
 class HoverResponseController extends Controller
 {
     public function index ($value) {
+
         if($value == "Makes") {
             $data = Brand::select('brand_name as responseData')->get();
             $icon = "fa-car-side" ;
@@ -46,18 +49,36 @@ class HoverResponseController extends Controller
 
     public function  hoverText ($value) {
         $data = "";
+        if (Cache::has($value)) {
+            $data = Cache::get($value) ;
+            return response()->json([
+                'success' => true ,
+                'data' => $data ,
+                'cached' => true 
+            ]);
+        }
         if($value == "Makes") {
             $data = Brand::select('brand_name as responseData')->get();
+            Cache::put($value , $data , now()->addMinutes(20)) ;
         } elseif ( $value == "make_model") {
             $data = MadeIn::select('country as responseData')->get();
+            Cache::put($value , $data , now()->addMinutes(20)) ;
         }elseif ($value == 'body_style' ) {
             $data = BodyStyle::select('body_style as responseData')->get();
+            Cache::put($value , $data , now()->addMinutes(20)) ;
         }elseif ($value == "year") {
             $data = Year::select('year as responseData')->get();
+            Cache::put($value , $data , now()->addMinutes(20)) ;
         }
         return response()->json([
             'success' => true ,
-            'data' => $data 
+            'data' => $data ,
+            'cached' => false  
         ]);
+    }
+
+    public function searchBy ($name ) {
+        session()->flash('brand' , $name);
+        return redirect('mm_cars/shop_mm');
     }
 }

@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\ImagesController;
 use App\Http\Controllers\Admin\PositionController;
 use App\Http\Controllers\Admin\EmployeeController;
+use App\Http\Controllers\HoverResponseController ;
 use App\Http\Controllers\Admin\SaledController;
 use App\Http\Controllers\Cars\BrandController;
 use App\Http\Controllers\Cars\FectureController;
@@ -43,7 +44,7 @@ use App\Http\Controllers\depositController ;
 Route::get('/google' , [AuthController::class , 'googleLogIn']);
 Route::prefix('mm_cars')->group(function () {
     Route::get('/' , [MMCarsController::class , 'index']);
-    Route::get('shop_mm' , [MMCarsController::class , 'shopMM']);
+    Route::get('/shop_mm' , [MMCarsController::class , 'shopMM']);
     Route::get('/log-in' , [AuthController::class , 'index']); 
     Route::post('log-in',[AuthController::class , 'logIn']);
     Route::get('/redirect/google', [AuthController::class , 'redirectGoogle']);
@@ -52,6 +53,7 @@ Route::prefix('mm_cars')->group(function () {
         Auth::logout() ;
         return redirect('mm_cars');
     });
+    Route::get('searchBy/{name}' , [HoverResponseController::class , 'searchBy']);
     Route::post('askquestion/{id}', [EmailController::class , 'index']);
     Route::get('/register',[AuthController::class , 'userRegister']);
     Route::post('/register',[AuthController::class , 'register']);

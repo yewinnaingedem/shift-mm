@@ -355,5 +355,5 @@
     <script>
         var imgeUrl = "{{asset('storage/img/bg_cars.png')}}" ;
     </script>
-    <script src="{{asset('storage/Jquery/Details.js')}}"></script>
+    <script src="{{asset('storage/Jquery/Details.js')}}" data-url="{{url('mm_cars/searchBy')}}"></script>
 @endsection 

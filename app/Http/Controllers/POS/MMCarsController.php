@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Car\Sale ;
 use App\Models\MadeIn ;
 use App\Models\Car\Car ;
+use Illuminate\Support\Facades\Cache;
 use Stevebauman\Location\Facades\Location;
 
 
@@ -16,7 +17,8 @@ class MMCarsController extends Controller
         return $num ;
     }
     public function shopMM() {
-        $datas = Sale::select(
+        
+        $query = Sale::select(
                         'sales.id as sale_id',
                         'sales.price',
                         'car_models.model_name',
@@ -39,9 +41,15 @@ class MMCarsController extends Controller
                     ->leftJoin('transmission_types','owner_books.transmission_type','transmission_types.id')
                     ->leftJoin('license_states','owner_books.license_state','license_states.id')
                     ->leftJoin('items','cars.item_id','items.id')
-                    ->leftJoin('grades','items.grade','grades.id')
+                    ->leftJoin('grades','items.grade','grades.id') ;
+                    
+        if (session()->has('brand')) {
+            $datas = $query->where('brands.brand_name',session()->get('brand'))->get();
+        }else {
+            $datas = $query
                     ->inRandomOrder()
                     ->paginate($this->pageLimit(4));
+        }
         $totals = Sale::count();
         return view('MM.index')->with('datas',$datas)->with('totals',$totals);
     }
@@ -86,8 +94,23 @@ class MMCarsController extends Controller
     public function searchable (Request $request) {
         $dataArr = $request->datas ;
         $category = $request->catgeory ;
+        
+        $jsonCovert = (object)[
+            'dataArr' => $dataArr,
+            'category' => $category,
+        ];
+        $combinedData = json_encode($jsonCovert);
+        // return response()->json($combinedData);
+        if (Cache::has($combinedData)) {
+            $datas = Cache::get($combinedData);
+            return response()->json([
+                'datas' => $datas ,
+                'cached' => true ,
+            ] , 200);
+        }
+        // cache state if not found 
         if ($category == 'make_model') {
-            $datas = Sale::select(
+            $query = Sale::select(
                 'sales.id as sale_id',
                 'sales.price',
                 'car_models.model_name',
@@ -112,14 +135,11 @@ class MMCarsController extends Controller
             ->leftJoin('items','cars.item_id','items.id')
             ->leftJoin('made_in','items.place_of_orgin','made_in.id')
             ->leftJoin('grades','items.grade','grades.id')
-            ->whereIn('made_in.country',$dataArr)
-            ->get();
-            return response()->json([
-                'datas' => $datas ,
-            ] , 200);
+            ->whereIn('made_in.country',$dataArr) ;
+            
         }
         elseif ($category == 'body_style') {
-            $datas = Sale::select(
+            $query = Sale::select(
                 'sales.id as sale_id',
                 'sales.price',
                 'car_models.model_name',
@@ -146,11 +166,8 @@ class MMCarsController extends Controller
             ->leftJoin('made_in','items.place_of_orgin','made_in.id')
             ->leftJoin('grades','items.grade','grades.id')
             ->leftJoin('body_styles','car_models.body_style_id','body_styles.id')
-            ->whereIn('body_styles.body_style',$dataArr)
-            ->get();
-            return response()->json([
-                'datas' => $datas ,
-            ] , 200);
+            ->whereIn('body_styles.body_style',$dataArr);
+            
         }elseif ($category == 'year') { 
             $query = Sale::select(
                 'sales.id as sale_id',
@@ -182,14 +199,10 @@ class MMCarsController extends Controller
             if (count($dataArr) > 2) {
                 $query->whereIn('year', $dataArr);
             }else {
-                
                 $query->whereBetween('year' , $dataArr);
             }
-            return response()->json([
-                'datas' => $query->get() ,
-            ] , 200);            
         }elseif ($category == 'Makes') {
-            $datas = Sale::select(
+            $query = Sale::select(
                 'sales.id as sale_id',
                 'sales.price',
                 'car_models.model_name',
@@ -216,12 +229,15 @@ class MMCarsController extends Controller
             ->leftJoin('made_in','items.place_of_orgin','made_in.id')
             ->leftJoin('grades','items.grade','grades.id')
             ->leftJoin('body_styles','car_models.body_style_id','body_styles.id')
-            ->whereIn('brands.brand_name' , $dataArr)
-            ->get();
-            return response()->json([
-                'datas' => $datas ,
-            ] , 200);
+            ->whereIn('brands.brand_name' , $dataArr);
         }
-        return response()->json($category);
+
+        $datas = $query->get() ;
+        Cache::put($combinedData , $datas , now()->addMinute(20));
+        return response()->json([
+            'datas' => $datas ,
+            'cached' => false ,
+        ] , 200);
+        
     }
 }
