@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon ;
 use App\Models\Employee ;
 use App\Models\Position ;
+use App\Models\employmentStatus ;
+use App\Models\EmployeeDetail ;
 use Illuminate\Support\Facades\Storage;
 
 class EmployeeController extends Controller
@@ -15,9 +17,11 @@ class EmployeeController extends Controller
     
     public function index()
     {
-        $employees = Employee::select('employees.*' , 'positions.role')
-                        ->leftJoin('positions','employees.position','positions.id')
-                        ->get();
+        $employees = EmployeeDetail::select('employee_details.*' , 'positions.role' , 'employees.*')
+                    ->leftJoin('employees','employee_details.employee_id','employees.id')
+                    ->leftJoin('employment_statuses','employee_details.employment_status','employment_statuses.id')
+                    ->leftJoin('positions','employee_details.position_id','positions.id')
+                    ->get();
         return view('Admin.Employees.index',compact('employees'));
     }
 
@@ -27,7 +31,8 @@ class EmployeeController extends Controller
     public function create()
     {
         $positions = Position::get();
-        return view('Admin.Employees.create',compact('positions'));
+        $employmentStatus = EmploymentStatus::get();
+        return view('Admin.Employees.create',compact('positions','employmentStatus'));
     }
 
     /**
@@ -38,14 +43,18 @@ class EmployeeController extends Controller
         $validator = Validator::make(
             $request->all() ,
             [
-                'name' => 'required|unique:employees' ,
-                'phone' => 'required' ,
+                'name' => 'required|' ,
                 'email' => 'required' ,
-                'position' => 'required' ,
-                'age' => 'required' ,
-                'start_date' => 'required|date|date_format:Y-m-d' ,
+                'date_of_birth' => 'required|date|date_format:Y-m-d' ,
+                'gender' => "required" ,
+                'phone' => 'required' ,
                 'address' => 'required' ,
+                // this is the employee details 
+                'position' => 'required' ,
+                'employmentStatus' => 'required' ,
+                'dataOfHiring' => 'required|date|date_format:Y-m-d' ,
                 'salary' => 'required' ,
+                'profile' => ['image', 'mimes:jpeg,png,jpg,gif,svg'] ,
                 'font-nrc' => ['image', 'mimes:jpeg,png,jpg,gif,svg'] ,
                 'back-nrc' => ['image', 'mimes:jpeg,png,jpg,gif,svg'] 
             ]
@@ -55,31 +64,41 @@ class EmployeeController extends Controller
         {
             return redirect('admin/employees/create')->withErrors($validator)->withInput();
         }
-        
         $nrc = 'NRC/img' ;
-
-        
-        $employees = [] ;
-        $employees['name'] = $request['name'] ;
-        $employees['email'] = $request['email'] ;
-        $employees['phone'] = $request['phone'] ;
-        $employees['position'] = $request['position'] ;
-        $employees['age'] = $request['age'] ;
-        $employees['address'] = $request['address'];
+        $employees_info = [] ;
+        $employees_info['full_name'] = $request['name'] ;
+        $employees_info['email'] = $request['email'] ;
+        $employees_info['phone_number'] = $request['phone'] ;
+        $employees_info['date_of_birth'] = $request['date_of_birth'] ;
+        $employees_info['emergency_contact_name'] = $request['family_phone'];
+        $employees_info['gender'] = $request['gender'] ;
+        $employees_info['address'] = $request['address'];
+        if($request->hasFile('profile')) {
+            $profile = Storage::disk('public')->put($nrc , $request->file('profile'));
+        }
         if($request->hasFile('font-nrc')) {
             $font_nrc = Storage::disk('public')->put($nrc , $request->file('font-nrc'));
         }
-        // $validator->errors()->add('field_name','errors message');
         if($request->hasFile('back-nrc')) {
             $back_nrc = Storage::disk('public')->put($nrc ,$request->file('back-nrc'));
         }
-        $employees['font-nrc'] = $font_nrc ;
-        $employees['back-nrc'] = $back_nrc ;
-        $employees['start_date'] = $request['start_date'] ;
-        $employees['salary'] = $request['salary'] ;
-        $employees['created_at'] = Carbon::now();
+        $employees_info['profile'] = $profile ;
+        $employees_info['font-nrc'] = $font_nrc ;
+        $employees_info['back-nrc'] = $back_nrc ;
+        $employee_id = Employee::insertGetId($employees_info);
 
-        Employee::insert($employees);
+        $employee_details = [] ;
+        $employee_details['employee_id'] = $employee_id ;
+        $employee_details['date_of_hire'] = $request['dataOfHiring'] ;
+        $employee_details['employment_status'] = $request['employmentStatus'] ;
+        $employee_details['salary'] = $request['salary'] ;
+        $employee_details['summary'] = $request['summary'] ;
+        $employee_details['note'] = $request['note'] ;
+        $employee_details['position_id'] = $request['position'] ;
+        $employee_details['created_at'] = Carbon::now();
+
+        EmployeeDetail::insert($employee_details);
+        
         return redirect('admin/employees')->with('message','You created the employee Role Successfully');
     }
 

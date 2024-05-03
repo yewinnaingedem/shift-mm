@@ -31,12 +31,12 @@
         <table id="example" class="display" style="width:100%">
             <thead>
                 <tr>
-                    <th>Name </th>
+                    <th>Full Name </th>
                     <th>Email</th>
                     <th>Phone</th>
                     <th>Position</th>
-                    <th>Age</th>
-                    <th>Start Date</th>
+                    <th>Date Of Birth</th>
+                    <th>Hiring Date</th>
                     <th>Salery</th>
                     <th>Action</th>
                 </tr>
@@ -44,19 +44,19 @@
             <tbody>
                 @foreach($employees as $employee)
                     <tr>
-                        <td> {{ $employee->name}}</td>
+                        <td> {{ $employee->full_name}}</td>
                         <td> {{$employee->email }}</td>
                         <td class="position-relative hoverEffect">
                             <div class="w-100 fw-bold phoneID">
-                                {{$employee->phone}}
+                                {{$employee->phone_number}}
                             </div>
                             <div class="position-absolute h-100 customize d-flex justify-content-center align-items-center">
                                 <i class="fa-solid fa-copy copyIcon"></i>
                             </div>
                         </td>
                         <td>{{$employee->role}}</td>
-                        <td>{{ $employee->age }}</td>
-                        <td>{{ $employee->start_date }}</td>
+                        <td>{{ $employee->date_of_birth }}</td>
+                        <td>{{ $employee->date_of_hire }}</td>
                         <td>{{$employee->salary}}</td>
                         <td>
                             <li class="nav-item  list-style-none">
@@ -78,12 +78,12 @@
             </tbody>
             <tfoot>
                 <tr>
-                    <th>Name </th>
+                    <th>Full Name </th>
                     <th>Email</th>
                     <th>Phone</th>
                     <th>Position</th>
-                    <th>Age</th>
-                    <th>Start Date</th>
+                    <th>Date Of Birth</th>
+                    <th>Hiring Date</th>
                     <th>Salery</th>
                     <th>Action</th>
                 </tr>
