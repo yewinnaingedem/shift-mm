@@ -15,7 +15,7 @@ class DetailsController extends Controller
         $sale = Sale::select('sales.id as sale_id' ,'sales.price', 'cars.id as mainId' ,'car_models.*' , 'brands.brand_name as brandName' , 'brands.*','owner_books.*','grades.grade as grade_main','transmission_types.*','items.*','car_images.*','cars.*','grades.default_function_id as df_id'
                         ,'exterior_colors.exterior_color as exterior','made_in.country','engine_types.type as fuelType' ,'engines.Turbo as trubo' ,'transmission_types.transmission_type as transmissionType' ,'owner_books.license_plate as licenserPlate' , 'engine_powers.engine_power as engine_power' , 'cylinders.cylinder' , 'engine_types.type as type' , 'grades.grade as mainGrade' , 'license_states.state as lincese_state_main' 
                         ,'body_styles.body_style as bodyStyle')
-                        ->leftJoin('cars','sales.car_id','cars.id')
+                        ->leftJoin('cars','sales.automobile_sale_id','cars.id')
                         ->leftJoin('car_images','cars.car_image_id','car_images.id')
                         ->leftJoin('owner_books','cars.owner_book_id','owner_books.id')
                         ->leftJoin('car_models', 'owner_books.model_id' , 'car_models.id')

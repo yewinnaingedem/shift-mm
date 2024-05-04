@@ -3,6 +3,17 @@
 @section('title' , 'Admin')
 
 @section('style')
+    <style>
+        .btn-sell {
+            background-color : #f6f6f6 ;
+            padding : 5px ;
+            outline : none ;
+            border : 1px solid whitesmoke ;
+            border-radius : 5px ;
+            box-shadow : 0px 2px 5px black ;
+            text-transform : capitalize  ;
+        }
+    </style>
 @endsection 
 
 @section('navbar') 
@@ -33,7 +44,7 @@
         </thead>
         <tbody>
             @foreach($carItems as $carItem)
-                <tr>
+                <tr class="font-monospace">
                     <td id="model_name">{{$carItem->model_name}}</td>
                     <td id="licensePlate">{{$carItem->license_plate}}</td>
                     <td>
@@ -42,9 +53,10 @@
                             $default = 'bg-primary';
                         @endphp
                         <div
-                            class="rounded text-center {{  $carItem->grade == '0' ? 'bg-danger' : 'bg-primary fw-bold' }} " 
+                        
+                            class="text-muted" 
                         >
-                        {{$carItem->grade === '0' ? 'none': $carItem->grade   }}
+                            {{$carItem->grade === '0' ? 'none': $carItem->grade . " Grade"  }}
                         </div>
                     </td>
                     <td class="fst-italic fw-bolder">{{$carItem->vin}}</td>
@@ -55,29 +67,37 @@
                     @endphp
 
                     @foreach($saledItems as $saledItem)
-                        @if($carItem->car_id === $saledItem->car_id)
-                            <button class="btn btn-info">Selling</button>
+                        @if($carItem->main_id === $saledItem->car_id)
+                            <button class="btn-sell cursor-not-allowed">
+                                selling
+                            </button>
                             @php
-                                $found = true; // Set the found variable to true
-                                break; // Exit the loop
+                                $found = true; 
+                                break; 
                             @endphp
                         @endif
                     @endforeach
 
                     @if (!$found)
-                        <button id="modalId"  class="btn btn-primary" data-id="{{$carItem->car_id}}" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                            Sell
+                        <button class="btn-sell" id="modalId" data-id="{{$carItem->mainId}}" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            sell
                         </button>
                     @endif
-                        
                     </td>
                     <td>
-                        <button class="btn btn-danger delete" data-id="{{$carItem->car_item}}">Delete</button>
-                        <a href="{{url('admin/before_sale/'.$carItem->car_id.'/edit')}}"
-                            class="btn btn-primary"
-                        >
-                            View
-                        </a>
+                        <li class="nav-item  list-style-none">
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
+                                <i class="fa-solid fa-list"></i>
+                            </a>
+                            <ul class="dropdown-menu ">
+                                <li>
+                                    <a href="{{url('admin/before_sale/'.$carItem->mainId.'/edit')}}" class="dropdown-item">View</a>
+                                </li>
+                                <li >
+                                    <button class="dropdown-item delete" data-id="{{$carItem->car_item}}">Delete</button>
+                                </li>
+                            </ul>
+                        </li>
                     </td>
                 </tr>
             @endforeach

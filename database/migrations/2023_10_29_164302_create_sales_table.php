@@ -13,11 +13,12 @@ return new class extends Migration
     {
         Schema::create('sales', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('car_id');
-            $table->string('price');
-            $table->timestamps();
-
-            $table->foreign('car_id')->references('id')->on('cars');
+            $table->unsignedBigInteger('automobile_sale_id');
+            $table->bigInteger('price');
+            $table->boolean('bestSeller')->default(false);
+            $table->date('sale_date');
+            
+            $table->foreign('automobile_sale_id')->references('id')->on('automobile_sales');
         });
     }
 

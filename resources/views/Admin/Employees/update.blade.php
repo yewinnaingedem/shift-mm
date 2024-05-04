@@ -12,17 +12,24 @@
             height : 150px ;
             border-radius : 5px ;
         }
-        .cover-img {
+        .cover-img , .cover-logo{
             width : 100% ;
+            height : 200px ;
             min-height : 200px ;
+            overflow : hidden ;
+        }
+        .cover-logo img {
+            object-fit : cover ;
+            object-position : center ;
         }
         .profile-img {
             bottom : -50px ;
             left : 50px ;
             background : black ;
             border-radius : 50% ;
+            overflow : hidden ;
         }
-        .profile-img label {
+        .profile-img .img-container {
             width : 180px ;
             height : 180px ;
             
@@ -41,6 +48,9 @@
             font-weight : 500 ;
             text-decoration : none ;
             color : #ada4a4 ;
+        }
+        .cover-logo img {
+            
         }
         .bg-cute {
             background-color : #f6f6f6 ;
@@ -70,16 +80,19 @@
             <div class="profile-header">
                 <div class="img">
                     <div class="cover-img d-flex justify-content-center align-items-center ">
-                        <label for="">
+                        <!-- <label for="">
                             <p>Add your cover photo</p>
                             <input type="file" name="cover-photo" class="d-none" id="">
-                        </label>
+                        </label> -->
+                        <div class="cover-logo">
+                            <img class="w-100 h-100" src="{{asset('storage/NRC/img/mingalar.jpg')}}" alt="Mingalar">
+                        </div>
+                        
                     </div>
                     <div class="profile-img position-absolute">
-                        <label for="profile" class=" d-flex justify-content-center align-items-center text-white">
-                            <p>Profile</p>
-                            <input type="file" name="profile" class="d-none" id="profile">
-                        </label>
+                        <div class="d-flex img-container  justify-content-center overflow-hidden align-items-center text-white">
+                            <img src="{{asset('storage/'. $employee->profile)}}" alt="profile" class="w-100 h-100">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -90,43 +103,45 @@
                     <div class="col-md-3 description" >
                         <ul>
                             <li>
-                                <a href="">Full Name</a>
+                                <span class="fw-semibold">Full Name</span>
                             </li>
                             <li>
-                                <a href="">Date Of Birth</a>
+                                <span class="fw-semibold">Date Of Birth</span>
                             </li>
                             <li>
-                                <a href="">Gender</a>
-                            </li>
-                            <li><a href="">Contact Information (Phone )</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-md-3">
-                        <ul>
-                            <li>
-                                <a href="">{{$employee->name}}</a>
+                                <span class="fw-semibold">Gender</span>
                             </li>
                             <li>
-                                <a href="">{{$employee->age}}</a>
-                            </li>
-                            <li>
-                                <a href="">Male</a>
-                            </li>
-                            <li>
-                                <a href="">{{$employee->phone}}</a>
+                                <span class="fw-semibold">Contact Information (Phone )</span>
                             </li>
                         </ul>
                     </div>
                     <div class="col-md-3">
                         <ul>
                             <li>
-                                <a href="">About Me</a>
+                                <span class="text-muted">{{$employee->full_name}}</span>
                             </li>
                             <li>
-                                <a href="">Pervious Jon </a>
+                                <span class="text-muted">{{$employee->date_of_birth}}</span>
                             </li>
                             <li>
-                                <a href="">Content Details  </a>
+                                <span class="text-muted" >{{$employee->gender}}</span>
+                            </li>
+                            <li>
+                                <span class="text-muted" >{{$employee->phone_number}}</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3">
+                        <ul>
+                            <li>
+                                <a href="#content_Me">Contact Me</a>
+                            </li>
+                            <li>
+                                <a href="#job_position">Job Position And Status</a>
+                            </li>
+                            <li>
+                                <a href="#summary_note">Summary & Notes  </a>
                             </li>
                         </ul>
                     </div>
@@ -142,7 +157,7 @@
                         <span class="fw-semibold">Phone</span>
                     </div>
                     <div class="col-md-1">:</div>
-                    <div class="col-md-8">{{$employee->phone}}</div>
+                    <div class="col-md-8">{{$employee->phone_number}}</div>
                 </div>
                 <div class="row px-2">
                     <div class="col-md-3">
@@ -150,7 +165,7 @@
                         <span class="fw-semibold">Email</span> 
                     </div>
                     <div class="col-md-1">:</div>
-                    <div class="col-md-8">${{$employee->email}}</div>
+                    <div class="col-md-8">{{$employee->email}}</div>
                 </div>
                 <div class="row px-2 ">
                     <div class="col-md-3">
@@ -158,7 +173,7 @@
                         <span class="fw-semibold">Family Phone</span> 
                     </div>
                     <div class="col-md-1">:</div>
-                    <div class="col-md-8">{{$employee->phone}}</div>
+                    <div class="col-md-8">{{$employee->emergency_contact_name}}</div>
                 </div>
                 <div class="row px-2 ">
                     <div class="col-md-3">
@@ -196,27 +211,24 @@
                             </tr>
                             <tr>
                                 <th scope="row">Employment  Status</th>
-                                <td colspan="2">Full Time</td>
+                                <td colspan="2">{{$employee->status}}</td>
                             </tr>
                             <tr>
                                 <th scope="row">Start Date</th>
-                                <td colspan="2">{{$employee->created_at}}</td>
+                                <td colspan="2">{{$employee->date_of_hire}}</td>
                             </tr>
                             <tr>
                                 <th scope="row">End Date</th>
                                 <td colspan="2">---- </td>
                             </tr>
-                            <tr>
-                                <th scope="row">Job Title</th>
-                                <td colspan="2">Sale and promotion</td>
-                            </tr>
+                            
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
         <div class="mb-3 text-end">
-            <a href="" class="btn btn-danger">
+            <a href="{{url('admin/employees')}}" class="btn btn-danger">
                 <i class="fa-solid fa-backward me-1"></i>
                 <span>Back</span>
             </a>

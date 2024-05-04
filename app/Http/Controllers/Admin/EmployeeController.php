@@ -17,7 +17,7 @@ class EmployeeController extends Controller
     
     public function index()
     {
-        $employees = EmployeeDetail::select('employee_details.*' , 'positions.role' , 'employees.*')
+        $employees = EmployeeDetail::select('employee_details.*' ,'employee_details.id as employeeDetailsId', 'positions.role' , 'employees.*')
                     ->leftJoin('employees','employee_details.employee_id','employees.id')
                     ->leftJoin('employment_statuses','employee_details.employment_status','employment_statuses.id')
                     ->leftJoin('positions','employee_details.position_id','positions.id')
@@ -115,7 +115,12 @@ class EmployeeController extends Controller
      */
     public function edit(string $id)
     {
-        $employee = Employee::select()->leftJoin('positions','employees.position','positions.id')->where('employees.id' , $id)->first();
+        $employee = EmployeeDetail::select('employee_details.*' , 'positions.role' , 'employees.*')
+                    ->leftJoin('employees','employee_details.employee_id','employees.id')
+                    ->leftJoin('employment_statuses','employee_details.employment_status','employment_statuses.id')
+                    ->leftJoin('positions','employee_details.position_id','positions.id')
+                    ->where('employee_details.id',$id)
+                    ->first();
         return view('Admin/employees/update' , compact('employee'));
     }
 

@@ -21,7 +21,7 @@
                     <div class="sb-nav-link-icon">
                         <i class="fa-regular fa-hand-point-left"></i>
                     </div>
-                     Before Sale
+                     Automobile Sale
                 </a>
                 <!-- CarsellController -->
                 <a class="nav-link collapsed" href="{{url('admin/car_sells')}}" >

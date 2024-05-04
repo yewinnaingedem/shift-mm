@@ -32,7 +32,7 @@ class MMCarsController extends Controller
                         'license_states.state',
                         'years.year'
                     )
-                    ->leftJoin('cars','sales.car_id','cars.id')
+                    ->leftJoin('cars','sales.automobile_sale_id','cars.id')
                     ->leftJoin('car_images','cars.car_image_id','car_images.id')
                     ->leftJoin('owner_books','cars.owner_book_id','owner_books.id')
                     ->leftJoin('car_models', 'owner_books.model_id' , 'car_models.id')
@@ -74,7 +74,7 @@ class MMCarsController extends Controller
             'license_states.state',
             'years.year'
         )
-        ->leftJoin('cars','sales.car_id','cars.id')
+        ->leftJoin('cars','sales.automobile_sale_id','cars.id')
         ->leftJoin('car_images','cars.car_image_id','car_images.id')
         ->leftJoin('owner_books','cars.owner_book_id','owner_books.id')
         ->leftJoin('car_models', 'owner_books.model_id' , 'car_models.id')
@@ -100,7 +100,7 @@ class MMCarsController extends Controller
             'category' => $category,
         ];
         $combinedData = json_encode($jsonCovert);
-        // return response()->json($combinedData);
+        
         if (Cache::has($combinedData)) {
             $datas = Cache::get($combinedData);
             return response()->json([
@@ -108,7 +108,6 @@ class MMCarsController extends Controller
                 'cached' => true ,
             ] , 200);
         }
-        // cache state if not found 
         if ($category == 'make_model') {
             $query = Sale::select(
                 'sales.id as sale_id',
@@ -124,7 +123,7 @@ class MMCarsController extends Controller
                 'license_states.state',
                 'years.year'
             )
-            ->leftJoin('cars','sales.car_id','cars.id')
+            ->leftJoin('cars','sales.automobile_sale_id','cars.id')
             ->leftJoin('car_images','cars.car_image_id','car_images.id')
             ->leftJoin('owner_books','cars.owner_book_id','owner_books.id')
             ->leftJoin('car_models', 'owner_books.model_id' , 'car_models.id')
@@ -154,7 +153,7 @@ class MMCarsController extends Controller
                 'license_states.state',
                 'years.year'
             )
-            ->leftJoin('cars','sales.car_id','cars.id')
+            ->leftJoin('cars','sales.automobile_sale_id','cars.id')
             ->leftJoin('car_images','cars.car_image_id','car_images.id')
             ->leftJoin('owner_books','cars.owner_book_id','owner_books.id')
             ->leftJoin('car_models', 'owner_books.model_id' , 'car_models.id')
@@ -184,7 +183,7 @@ class MMCarsController extends Controller
                 'license_states.state',
                 'years.year'
             )
-            ->leftJoin('cars','sales.car_id','cars.id')
+            ->leftJoin('cars','sales.automobile_sale_id','cars.id')
             ->leftJoin('car_images','cars.car_image_id','car_images.id')
             ->leftJoin('owner_books','cars.owner_book_id','owner_books.id')
             ->leftJoin('car_models', 'owner_books.model_id' , 'car_models.id')
@@ -217,7 +216,7 @@ class MMCarsController extends Controller
                 'license_states.state',
                 'years.year'
             )
-            ->leftJoin('cars','sales.car_id','cars.id')
+            ->leftJoin('cars','sales.automobile_sale_id','cars.id')
             ->leftJoin('car_images','cars.car_image_id','car_images.id')
             ->leftJoin('owner_books','cars.owner_book_id','owner_books.id')
             ->leftJoin('car_models', 'owner_books.model_id' , 'car_models.id')

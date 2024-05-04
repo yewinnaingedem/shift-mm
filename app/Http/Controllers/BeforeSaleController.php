@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Before_Sale ;
+use App\Models\AutomobileSale ;
 use App\Models\Car\Sale ;
 use Illuminate\Http\Request;
 use App\Models\CarImage ;
@@ -17,15 +17,15 @@ class BeforeSaleController extends Controller
      */
     public function index()
     {
-        $carItems = Before_Sale::select('items.*' , 'cars.id as car_id','owner_books.*','grades.grade','cars.created_at','car_models.model_name' , 'before__sales.car_item')
-                    ->leftJoin('cars','before__sales.car_item','cars.id')
+        $carItems = AutomobileSale::select('items.*' ,'owner_books.*','grades.grade','cars.created_at','car_models.model_name' , 'automobile_sales.car_id' , 'automobile_sales.id as mainId')
+                    ->leftJoin('cars','automobile_sales.car_id','cars.id')
                     ->leftJoin('items','cars.item_id' , 'items.id')
                     ->leftJoin('owner_books' , 'cars.owner_book_id' ,'owner_books.id')
                     ->leftJoin('car_models','owner_books.model_id','car_models.id')
                     ->leftJoin('steerings','items.steering_coner','steerings.id')
                     ->leftJoin('grades','items.grade','grades.id')
                     ->get();
-        $saledItems = Sale::get('car_id');
+        $saledItems = Sale::get('automobile_sale_id');
         return view('Admin.POS.Car.CarItem.index' , compact('carItems','saledItems'));
     }
 

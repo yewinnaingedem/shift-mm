@@ -8,6 +8,7 @@ use App\Models\Car\Car ;
 use Carbon\Carbon ;
 use App\Models\machine ;
 use App\Models\CarImage ;
+use App\Models\AutomobileSale ;
 use App\Models\Before_Sale ;
 use App\Models\Panding ;
 use App\Models\Exception ;
@@ -54,6 +55,7 @@ class CarImageItemController extends Controller
         $finalDatas['car_image_id'] = $imageId ;
         $finalDatas['created_at'] = Carbon::now();
         $before_Sale = [] ;
+        $automobileSale = [] ;
         
         $exceptions = [];
         $checkService = $request->has('show_room') ? true : false ;
@@ -70,8 +72,9 @@ class CarImageItemController extends Controller
                 $finalDatas['exception_id'] = $exceptionId ;
             }
                 $car_item = Car::insertGetId($finalDatas);
-                $before_Sale['car_item'] = $car_item ;
-                Before_Sale::create($before_Sale);
+                $automobileSale['car_id'] = $car_item ;
+                $automobileSale['created_at'] = Carbon::now();
+                AutomobileSale::insert($automobileSale);
                 return response()->json([
                     'message' => 'success' ,
                     'redirect' => 'http://localhost:8000/admin/before_sale'
@@ -88,8 +91,12 @@ class CarImageItemController extends Controller
         $exceptionId = Exception::insertGetId($exceptions);   
         $finalDatas['exception_id'] = $exceptionId ;
         $car_item = Car::insertGetId($finalDatas);
+        $automobileSaleId = AutomobileSale::insertGetId([
+            'car_id' => $car_item ,
+            'created_at' => Carbon::now(),
+        ]);
         $fixes = [] ;
-        $fixes['car_id'] = $car_item ;
+        $fixes['car_id'] = $automobileSaleId ;
         $fixes['created_at'] = Carbon::now();
         Panding::insert($fixes);
         return response()->json([

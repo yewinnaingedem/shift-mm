@@ -11,12 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('before__sales', function (Blueprint $table) {
+        Schema::create('automobile_sales', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('car_item');
+            $table->unsignedBigInteger('car_id');
+            $table->unsignedBigInteger('company_id')->default(1);
             $table->timestamps();
-
-            $table->foreign('car_item')->references('id')->on('cars');
+            
+            $table->foreign('car_id')->references('id')->on('cars');
+            $table->foreign('company_id')->references('id')->on('company_infos');
         });
     }
 
@@ -25,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('before__sales');
+        Schema::dropIfExists('automobile_sales');
     }
 };

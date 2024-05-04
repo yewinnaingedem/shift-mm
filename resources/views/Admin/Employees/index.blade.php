@@ -65,10 +65,10 @@
                                 </a>
                                 <ul class="dropdown-menu ">
                                     <li>
-                                    <a href="{{url('admin/employees/'. $employee->id .'/edit')}}" class="dropdown-item">View</a>
+                                    <a href="{{url('admin/employees/'. $employee->employeeDetailsId .'/edit')}}" class="dropdown-item">View</a>
                                     </li>
                                     <li >
-                                        <button class="dropdown-item delete" data-id="{{$employee->id}}">Delete</button>
+                                        <button class="dropdown-item delete" data-id="{{$employee->employeeDetailsId}}">Delete</button>
                                     </li>
                                 </ul>
                             </li>

@@ -17,7 +17,7 @@ class CarSellController extends Controller
     public function index()
     {
         $sales = Sale::select('car_models.model_name','license_states.state as license_state','owner_books.license_plate','grades.grade','sales.id','sales.price' , 'cars.id as main_id')
-                    ->leftJoin('cars','sales.car_id','cars.id')
+                    ->leftJoin('cars','sales.automobile_sale_id','cars.id')
                     ->leftJoin('owner_books','cars.owner_book_id','owner_books.id')
                     ->leftJoin('license_states','owner_books.license_state','license_states.id')
                     ->leftJoin('items','cars.item_id','items.id')
@@ -49,18 +49,19 @@ class CarSellController extends Controller
             ]
         );  
         if($validator->fails()){
-            return redirect('admin/cars')->with('message','You can not skip the price Please Try Again');
+            return redirect('admin/before_sale')->with('message','You can not skip the price Please Try Again');
         }
-        $existId = Sale::where('car_id',$request['id'])->exists();
+        $existId = Sale::where('automobile_sale_id',$request['id'])->exists();
         if($existId) {
-            return redirect('admin/cars')->with('message','You already Created the record');
+            return redirect('admin/before_sale')->with('message','You already Created the record');
         }
         $cleanedValue = str_replace(',', '', $request['price']);
         $inputs = [];
-        $inputs['car_id'] = $request['id'];
+        $inputs['automobile_sale_id'] = $request['id'];
         $inputs['price'] = $cleanedValue;
+        $inputs['sale_date'] = Carbon::today();
+        $inputs['bestSeller'] = true ;
         Sale::insert($inputs);
-        Before_Sale::where('car_item', $request['id'])->delete();
         return redirect('admin/car_sells')->with('message' , 'You successfully created It');
     }
 
