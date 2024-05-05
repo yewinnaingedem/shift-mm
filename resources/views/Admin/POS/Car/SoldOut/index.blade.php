@@ -49,6 +49,9 @@
         .min-height {
             min-height : 400px ;
         }
+        .bg-cute {
+            background-color: #f6f6f6 ;
+        }
     </style>
 @endsection 
 
@@ -59,19 +62,19 @@
 @section('page-name' , 'Car Models')
 
 @section('content')
-    <div class="container mt-3">
+    <div class="container mt-3 p-3 rounded shadow-lg bg-cute">
         <form action="{{url('admin/sold_out')}}" method="post">
             @csrf 
             <div class=" row">
                 <div class="col-md-9">
-                    <p class="h3">Mingalar Car Sale Center </p>
+                    <p class="h3 text-muted font-monospace">Mingalar Car Sale Center </p>
                 </div>
                 <div class="col-md-3 text-end">
                     <select name="employee" class="form-select select-valid " width="50%" >
                         <option selected class="d-none">Who sell it ?</option>
                         
                         @foreach($employees as $employee)
-                            <option value="{{$employee->id}}">{{$employee->name}}</option>
+                            <option value="{{$employee->id}}">{{$employee->full_name}}</option>
                         @endforeach
                     </select>
                 </div>

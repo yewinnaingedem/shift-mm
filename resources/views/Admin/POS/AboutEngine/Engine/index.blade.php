@@ -32,11 +32,11 @@
             <thead>
                 <tr>
                     <th>ID </th>
+                    <th>Engine Power</th>
                     <th>Fuel</th>
                     <th>Type</th>
                     <th>Turbo </th>
                     <th>Created At</th>
-                    <th>Updated At</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -44,6 +44,7 @@
                 @foreach($engines as $engine)
                     <tr>
                         <td> {{ $engine->id}}</td>
+                        <td>{{$engine->engine_power . " CC"}}</td>
                         <td> {{ $engine->cylinder}}</td>
                         <td>{{$engine->type}}</td>
                         <td > 
@@ -54,9 +55,7 @@
                                 {{ $isTrue ? "Turbo" : "None" }}
                             </div>
                         </td>
-                        
                         <td>{{ $engine->created_at }}</td>
-                        <td>{{$engine->updated_at}}</td>
                         <td>
                             <li class="nav-item  list-style-none">
                                 <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
@@ -78,11 +77,11 @@
             <tfoot>
                 <tr>
                     <th>ID </th>
+                    <th>Engine Power</th>
                     <th>Fuel</th>
                     <th>Type </th>
                     <th>Turbo </th>
                     <th>Created At</th>
-                    <th>Updated At</th>
                     <th>Action</th>
                 </tr>
             </tfoot>

@@ -18,9 +18,10 @@ class SaledController extends Controller
      */
     public function index()
     {
-        $saled_cars = SoldOut::select('owner_books.license_plate as number_plate','buyers.name','employees.name as employee','hp_plans.hp_loan','sold_outs.created_at','brokers.name as broker_name')
-                    ->leftJoin('employees' , 'sold_outs.employee_id','employees.id')
-                    ->leftJoin('cars','sold_outs.car_id','cars.id')
+        $saled_cars = SoldOut::select('owner_books.license_plate as number_plate','buyers.name','employees.full_name as employee','hp_plans.hp_loan','sold_outs.created_at','brokers.name as broker_name')
+                    ->leftJoin('employee_details','sold_outs.employee_id' , 'employee_details.id')
+                    ->leftJoin('employees' , 'employee_details.employee_id','employees.id')
+                    ->leftJoin('cars','sold_outs.automobile_sale_id','cars.id')
                     ->leftJoin('owner_books','cars.owner_book_id','owner_books.id')
                     ->leftJoin('buyers','sold_outs.buyer_id','buyers.id')
                     ->leftJoin('hire_purchases','sold_outs.hire_purchase_id','hire_purchases.id')

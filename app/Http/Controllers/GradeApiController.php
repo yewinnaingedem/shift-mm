@@ -48,21 +48,27 @@ class GradeApiController extends Controller
         $engines['Fuel'] = $step1['engine']['fuel_type'];
         $engines['Turbo'] = $step1['engine']['turbo'] == "false" ? FALSE : TRUE;
         # add engine power 
-        $enginePower = $step1['engine']['engine_power'] ;
-        $engineExisted = EnginePower::where('id' , $enginePower)->exists();
-        $enginePowerId;
-        if(!$engineExisted) {
-            $returnId = EnginePower::insertGetId([
-                'engine_power' => $enginePower ,
-                'created_at' => Carbon::now() ,
-            ]);
-            $enginePowerId = $returnId ;
+        $defaultEngine = $step1['engineSetup'];
+        if (!$defaultEngine) {
+            $enginePower = $step1['engine']['engine_power'] ;
+            $engineExisted = EnginePower::where('id' , $enginePower)->exists();
+            $enginePowerId;
+            if(!$engineExisted) {
+                $returnId = EnginePower::insertGetId([
+                    'engine_power' => $enginePower ,
+                    'created_at' => Carbon::now() ,
+                ]);
+                $enginePowerId = $returnId ;
+            }else {
+                $enginePowerId = $enginePower ;
+            }
+            
+            $engines['engine_power_id'] =  $enginePowerId ;
+            $grades['engine_id'] = Engine::insertGetId($engines);
         }else {
-            $enginePowerId = $enginePower ;
+            $grades['engine_id'] = $defaultEngine ;
         }
-        
-        $engines['engine_power_id'] =  $enginePowerId ;
-        $grades['engine_id'] = Engine::insertGetId($engines);
+       
         /* for default Functions 
             this is so funny
         */

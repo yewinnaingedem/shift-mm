@@ -9,11 +9,6 @@ class Engine extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'Enigne_power' ,
-        'Fuel' ,
-        'Turbo' 
-    ];
 
     public static $rules = 
     [

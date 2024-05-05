@@ -13,7 +13,7 @@
 
 @section('content')
     <div id="app">
-       <App :datas="{{json_encode($datas)}}"></App>
+       <App :datas="{{json_encode($datas)}}" asset="{{asset('storage')}}"></App>
     </div>
 @endsection 
 

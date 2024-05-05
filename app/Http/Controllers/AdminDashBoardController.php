@@ -34,19 +34,20 @@ class AdminDashBoardController extends Controller
 
     public function SaledFor2Day() {
         $days = Carbon::now()->format('Y-m-d');
-        $todaySoldes = SoldOut::select('sold_outs.*','cars.*' , 'employees.*','brokers.*','hire_purchases.*','buyers.*' , 'buyers.name as by_name' , 'employees.name as em_name'
+        $todaySoldes = SoldOut::select('sold_outs.*','cars.*' , 'employees.*','brokers.*','hire_purchases.*','buyers.*' , 'buyers.name as by_name' , 'employees.full_name as em_name'
                     ,'sold_outs.created_at as dateTime','brands.brand_name as brand_name','years.year as year','owner_books.license_plate as license_plate',
                     'hp_plans.hp_loan as hp_loan','deposits.noted as noted','deposits.finalDate as finalDate','deposits.depositAmount as depositAmount',
                     'hire_purchases.deposit as deposit','hire_purchases.downpayment as asdownpayment','exterior_colors.exterior_color as exterior_color',
                     'brokers.name as brokerName','dealers.name as dealerName','car_images.*' , 'car_images.id as imageId')
-                    ->leftJoin('cars' , 'sold_outs.car_id' , 'cars.id')
+                    ->leftJoin('cars' , 'sold_outs.automobile_sale_id' , 'cars.id')
                     ->leftJoin('car_images','cars.car_image_id','car_images.id')
                     ->leftJoin('owner_books','cars.owner_book_id','owner_books.id')
                     ->leftJoin('years','owner_books.year_id','years.id')
                     ->leftJoin('car_models','owner_books.model_id','car_models.id')
                     ->leftJoin('brands','car_models.brand_id','brands.id')
                     ->leftJoin('buyers','sold_outs.buyer_id' , 'buyers.id')
-                    ->leftJoin('employees','sold_outs.employee_id', 'employees.id')
+                    ->leftJoin('employee_details','sold_outs.employee_id', 'employee_details.id')
+                    ->leftJoin('employees','employee_details.employee_id','employees.id')
                     ->leftJoin('deposits','sold_outs.depositState' , 'deposits.id')
                     ->leftJoin('brokers','sold_outs.broker_id','brokers.id')
                     ->leftJoin('hire_purchases','sold_outs.hire_purchase_id','hire_purchases.id')
@@ -62,7 +63,7 @@ class AdminDashBoardController extends Controller
                         'car_models.model_name as modelname','exterior_colors.exterior_color as exterior_color')
                         ->leftJoin('deposits','sold_outs.depositState','deposits.id')
                         ->leftJoin('buyers','sold_outs.buyer_id','buyers.id')
-                        ->leftJoin('cars','sold_outs.car_id','cars.id')
+                        ->leftJoin('cars','sold_outs.automobile_sale_id','cars.id')
                         ->leftJoin('owner_books','cars.owner_book_id','owner_books.id')
                         ->leftJoin('car_models','owner_books.model_id','car_models.id')
                         ->leftJoin('brands','car_models.brand_id','brands.id')
@@ -118,7 +119,7 @@ class AdminDashBoardController extends Controller
     public function histroyOfSellingCar () {
         $records = SoldOut::select('owner_books.license_plate as licensePlate','buyers.name as buyerName','hp_plans.hp_loan as hpPlan' ,'hire_purchases.loan_month as loanMonths'
                             ,'sold_outs.created_at as createdAt', 'buyers.purchase_price as purchasePrice','car_models.model_name as modelName','sold_outs.id as soldOutId')
-                            ->leftJoin('cars','sold_outs.car_id','cars.id')
+                            ->leftJoin('cars','sold_outs.automobile_sale_id','cars.id')
                             ->leftJoin('buyers','sold_outs.buyer_id','buyers.id')
                             ->leftJoin('hire_purchases','sold_outs.hire_purchase_id','hire_purchases.id')
                             ->leftJoin('owner_books','cars.owner_book_id','owner_books.id')

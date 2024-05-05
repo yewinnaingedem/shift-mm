@@ -10,7 +10,6 @@ use Illuminate\Validation\Rule;
 use App\Models\Grade ;
 use App\Models\CarModel ;
 use Carbon\Carbon;
-use App\Models\Engine ;
 use App\Models\Seat ;
 use App\Models\Key ;
 use App\Models\Function_Name ;
@@ -26,6 +25,7 @@ use App\Models\Engine_type ;
 use App\Models\Motor ;
 use App\Models\Transmission ;
 use App\Models\BodyStyle ;
+use App\Models\Engine ;
 use App\Models\Car\CarFunction ;
 use App\Models\Default_function ;
 use App\Models\CarFucture ;
@@ -108,6 +108,11 @@ class GradeController extends Controller
         $datas['cameras'] = Camera::get();
         $datas['validation'] = $request['validation'];
         $datas['engine_powers'] = EnginePower::get();
+        $datas['engines_setup'] = Engine::select('engine_powers.engine_power' , 'engines.id as engine_id' , 'engines.Turbo' , 'cylinders.cylinder' , 'engine_types.type')
+                                ->leftJoin('engine_powers','engines.engine_power_id','engine_powers.id')
+                                ->leftJoin('engine_types' , 'engines.Fuel' , 'engine_types.id')
+                                ->leftJoin('cylinders','engines.Cylinder_id' , 'cylinders.id')
+                                ->get(); 
         return view('admin.POS.Grade.gradeForm',compact('datas'));
     }
 

@@ -1,12 +1,14 @@
 import { reactive } from "vue";
 
 export const stepProgess  = reactive({
+    storage : null ,
     step1 : {
         transmission : null ,
         body_style : null ,
         brand : null ,
         grade : null ,
         model_name : null ,
+        engineSetup : null ,
         engine : {
             cylinder : null ,
             fuel_type : null ,

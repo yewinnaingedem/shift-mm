@@ -94,10 +94,14 @@
             datas : {
                 type : Object ,
                 required : true ,
+            },
+            asset : {
+                required : true  ,
             }
         },
         mounted ( ) {
             this.removeBar ;
+            stepProgess.storage  = this.asset ;
         } , 
         computed : {
             removeBarTe () {

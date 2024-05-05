@@ -12,6 +12,7 @@ use App\Models\SoldOut ;
 use PDF;
 use App\Models\Car\CarFunction ;
 use App\Models\Buyer ;
+use App\Models\EmployeeDetail ;
 use Carbon\Carbon ;
 use App\Models\Deposit ;
 use App\Models\Before_Sale ;
@@ -42,7 +43,10 @@ class SoldOutController extends Controller
      */
     public function store(Request $request)
     {
-        
+        return response()->json([
+            'request' => $request->all() ,
+        ] , 404);
+        dd($request->all());
         $validator = Validator::make(
             $request->all()  ,
             [
@@ -90,7 +94,7 @@ class SoldOutController extends Controller
         }
         
         $soldOuts['employee_id'] = $request['employee'];
-        $soldOuts['car_id'] = $request['id'];
+        $soldOuts['automobile_sale_id'] = $request['id'];
         $soldOuts['buyer_id'] = $buyerId;
         $soldOuts['currentMonth'] = Carbon::now()->format('Y-m');
         $soldOuts['created_at'] = carbon::today()->toDateString();
@@ -110,8 +114,10 @@ class SoldOutController extends Controller
     public function show(string $id)
     {
         $hps = HpPlan::get();
-        $employees = Employee::get();
-        $salePrice = Sale::where('car_id',$id)->first('price');
+        $employees = EmployeeDetail::select('employees.full_name','employee_details.id')
+                    ->leftJoin('employees','employee_details.employee_id','employees.id')
+                    ->get();
+        $salePrice = Sale::where('automobile_sale_id',$id)->first('price');
         $dealers = Dealer::get() ;
         return view('admin.POS.Car.SoldOut.index' , compact('employees','hps','salePrice','dealers'))->with('id',$id);
     }
@@ -141,6 +147,9 @@ class SoldOutController extends Controller
     }
     public function testing(Request $request) {
         
+        // return response()->json([
+        //     'request' => $request->all(),
+        // ] , 404);
         $soldOuts = [] ;
         $buyer = [] ;
         $buyer['name'] = $request['buyer'] ;
@@ -179,7 +188,7 @@ class SoldOutController extends Controller
         $depositState = Deposit::insertGetId($deposit);
 
         $soldOuts['employee_id'] = $request['employee'];
-        $soldOuts['car_id'] = $request['id'];
+        $soldOuts['automobile_sale_id'] = $request['id'];
         $soldOuts['buyer_id'] = $buyerId;
         $soldOuts['dealer_id'] = $request['dealer'] ;
         $soldOuts['depositState'] = $depositState ;
@@ -189,8 +198,7 @@ class SoldOutController extends Controller
         $soldOuts['hire_purchase_id'] = $hp_id;
         
         SoldOut::insertGetId($soldOuts);
-        Sale::where('car_id',$request['id'])->delete();
-        Before_Sale::where('car_item',$request['id'])->delete();
+        Sale::where('automobile_sale_id',$request['id'])->delete();
         return response()->json([
             'message' => 'successfully' ,
             'redirect' => "http://localhost:8000/admin/saled" ,
@@ -203,7 +211,7 @@ class SoldOutController extends Controller
                             ,'sold_outs.created_at as createdAt','hp_plans.hp_loan as HpLoan','dealers.name as dealerName','years.year as year','owner_books.vin as vin','items.kilo_meter as kilo_meter',
                             'car_models.id as carModelId','grades.id as gradeId','buyers.purchase_price as purchasePrice','hire_purchases.loan_month as loanMonths','hire_purchases.downpayment as downpayment'
                             ,'hire_purchases.insurance as insurance','hire_purchases.deposit as deposit','hire_purchases.service_charge as service_charge','hire_purchases.bank_commission as bank_commission')
-                            ->leftJoin('cars','sold_outs.car_id','cars.id')
+                            ->leftJoin('cars','sold_outs.automobile_sale_id','cars.id')
                             ->leftJoin('items','cars.item_id', 'items.id')
                             ->leftJoin('buyers','sold_outs.buyer_id','buyers.id')
                             ->leftJoin('dealers','sold_outs.dealer_id','dealers.id')
