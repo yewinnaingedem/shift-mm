@@ -16,6 +16,13 @@
                 @keydown.enter.prevent="goDoc()"
                 @keydown.tab.prevent="moveFocusToNextInput()"
             >
+            <div
+                :class="(inputSearch) ? 'rotate-animation' : 'fade-out' "
+                class="absolute top-2 right-[30px] cursor-pointer rotate-180 transition-all duration-300 ease-in-out transform rotate-360" 
+                
+                @click="clearSearch"  >
+                <i class="fa-solid fa-xmark"  ></i>
+            </div>
         </div>
         <div class="result w-full relative borer-radious-customize bg-neutral-50  fade-enter-active 2 text-black" v-if="inputSearch">
             <ul class="pb-3 pt-1 max-h-[200px] overflow-x-auto  w-full bg-neutral-50">
@@ -24,7 +31,6 @@
                         <span class="pl-2 font-medium tracking-wide mr-1">Mingalar Search</span><span class="font-light "> 
                             <span class="font-semibold">&#8220;</span>
                             <span class="italic font-light">
-                                
                                 <span>{{   inputSearch  }} </span>
                             </span>
                             <span class="font-semibold">&#8220;</span>
@@ -36,14 +42,14 @@
                     py-1" v-if="results" v-for="(data , index) in results" :key="index"
                     :class="(iscurrent(index) ? 'bg-neutral-100 ' : 'bg-neutral-50' )"
                     @mouseover="higthLightIndex = index"
-                    @click="check(index)"
+                    @click="check(data)"
                   >
                   <div class="relative hover:border-l-4 hover:border-green-400" @mousover="higthLightIndex = index "
                         :class="{'border-l-4 border-green-400' : iscurrent(index)}"
                     >
                         <span class="pl-2 font-medium tracking-wide mr-1">
                             <span class="me-1 font-semibold" v-if="data"> 
-                                <span v-if="dotConcept">..</span> 
+                                <span v-if="dotConcept" class="me-[2px]">...</span> 
                                 <span>{{ data.toLocaleLowerCase()}}</span>
                             </span>    
                         </span>
@@ -164,16 +170,26 @@ import Data from "./Data.json";
             }
         },
         methods : {
+            clearSearch () {
+                this.inputSearch = "" ;
+            } ,
+            check (data) {
+                var splitedText = this.inputSearch.split(' ');
+                splitedText[splitedText.length -1] = data.toLocaleLowerCase();
+                this.inputSearch = splitedText.join(" ");
+            } ,
+
             hightPervious() {
                 if(this.higthLightIndex > 0) {
                     this.higthLightIndex -= 1 ;
                 }
             },
-            
             moveFocusToNextInput () {
                 var splitedText = this.inputSearch.split(' ');
-                splitedText[splitedText.length -1] = this.passCode.toLocaleLowerCase();
-                this.inputSearch = splitedText.join(" ");
+                if (this.passCode && this.results.length > 0 ) {
+                    splitedText[splitedText.length -1] = this.passCode.toLocaleLowerCase();
+                    this.inputSearch = splitedText.join(" ");
+                }
             },  
 
             hightNext(resultCount) {
@@ -365,7 +381,7 @@ import Data from "./Data.json";
                 }else {
                     const warningAlert = 
                     `
-                        <div id="alert-1" class="flex items-center mx-auto fixed top-0 left-0 right-0  p-4 mb-4 text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
+                        <div id="alert-1" class="flex alert-container items-center mx-auto fixed top-0 left-0 right-0  p-4 mb-4 text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
                             <svg class="flex-shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                                 <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
                             </svg>
@@ -385,8 +401,7 @@ import Data from "./Data.json";
                     $('body').prepend(warningAlert);
                     setTimeout(() => {
                         $('#alert-1').remove() ;
-                        console.log('hi');
-                    }, 10000);
+                    }, 20000);
                 }
                 let numberOfElement = $('.for-cars-slide').length ;
                 $('#showResult').html(numberOfElement);
@@ -458,9 +473,9 @@ import Data from "./Data.json";
         computed : {
             dotConcept(){
                 var splitedText = this.inputSearch.split(" ");
-                console.log(splitedText.length);
                 return splitedText.length > 1 ? true : false ;
-            }
+            },
+            
         }, 
         beforeDestroy () {
             window.removeEventListener('keydown', this.handleKeyDown); 
@@ -478,9 +493,7 @@ import Data from "./Data.json";
     .bg-suggest-color{
         background : #dfdfdf ;
     }
-    .fade-enter-active {
-        transition: opacity 0.5s ease;
-    }
+    
     .see {
         position: absolute; /* Ensure proper positioning */
         left: 0; /* Adjust positioning according to your layout */
@@ -488,6 +501,32 @@ import Data from "./Data.json";
         width: 100%;
         height: 100%;
         /* Other CSS properties */
+    }
+    .rotate-animation {
+       animation: rotate 0.3s ease-in-out forwards;
+    }
+
+    @keyframes rotate {
+        from {
+            transform: rotate(0deg);
+        }
+        to {
+            transform: rotate(180deg);
+        }
+    }
+    .fade-out {
+        animation: fadeOut 0.3s ease-in-out forwards;
+    }
+
+    @keyframes fadeOut {
+        from {
+            opacity: 1;
+            transform: rotate(360deg);
+        }
+        to {
+            opacity: 0;
+            transform: rotate(0deg);
+        }
     }
 
     .progress-bar-container {
@@ -513,5 +552,35 @@ import Data from "./Data.json";
         left: 50%;
         transform: translate(-50%, -50%);
         color: #fff; /* Color of the progress label */
+    }
+    
+</style>
+<style>
+    @keyframes fall {
+        0% {
+            transform: translateY(-100%);
+        }
+        15% {
+            transform: translateY(-75%);
+        }
+        30% {
+            transform: translateY(-50%);
+        }
+        45% {
+            transform: translateY(-30%);
+        }
+        60% {
+            transform: translateY(-10%);
+        }
+        75% {
+            transform: translateY(-5%);
+        }
+        100% {
+            transform: translateY(0);
+        }
+    }
+
+    .alert-container {
+        animation: fall 0.5s cubic-bezier(0.1, 0.7, 1.0, 0.1) forwards;
     }
 </style>

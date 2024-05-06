@@ -64,28 +64,28 @@
                     <div class="flex h-[110px] pb-1 justify-between align-baseline font-serif gap-x-4  border-b-2 border-neutral-300">
                         <a href="">
                             <div class="capitalize font-sans text-gray-dark text-[14px] font-bold">
-                                <div class="h-4 bg-gray-200 rounded-full dark:bg-gray-700 w-[270px] mb-2 "></div>
+                                <div class="h-4 animate-pulse  bg-gray-200 rounded-full dark:bg-gray-700 w-[270px] mb-2 "></div>
                             </div>
                             <div class="text-gray-light text-[13px] grid grid-cols-2 gap-x-2" style="color:rgb(101 , 96 , 96 , )" >
-                                <div class="h-4 bg-gray-200 rounded-full dark:bg-gray-700 w-full mb-2"></div>
-                                <div class="h-4 bg-gray-200 rounded-full dark:bg-gray-700 w-full mb-2"></div>
+                                <div class="h-4 animate-pulse bg-gray-200 rounded-full dark:bg-gray-700 w-full mb-2"></div>
+                                <div class="h-4 animate-pulse bg-gray-200 rounded-full dark:bg-gray-700 w-full mb-2"></div>
                             </div>
                             <div class='chat-notification-message grid grid-cols-2 gap-x-2 mb-2' > 
-                                <h3 class="h-4 bg-gray-200 rounded-full dark:bg-gray-700" style="width: 100%;"></h3>
-                                <h3 class="h-4 bg-gray-200 rounded-full dark:bg-gray-700" style="width: 100%;"></h3>
+                                <h3 class="h-4 animate-pulse bg-gray-200 rounded-full dark:bg-gray-700" style="width: 100%;"></h3>
+                                <h3 class="h-4 animate-pulse bg-gray-200 rounded-full dark:bg-gray-700" style="width: 100%;"></h3>
                             </div>
                             <div class="text-gray-light text-[13px] grid grid-cols-2 gap-x-2 mb-2"> 
-                                <h3 class="h-4 bg-gray-200 rounded-full dark:bg-gray-700" style="width: 100%;"></h3>
-                                <h3 class="h-4 bg-gray-200 rounded-full dark:bg-gray-700" style="width: 100%;"></h3>
+                                <h3 class="h-4 animate-pulse bg-gray-200 rounded-full dark:bg-gray-700" style="width: 100%;"></h3>
+                                <h3 class="h-4 animate-pulse bg-gray-200 rounded-full dark:bg-gray-700" style="width: 100%;"></h3>
                             </div>
                         </a>
                         <div>
                             <div class="text-right shrink-0 font-sans">
                                 <div class="text-gray-darkest font-dispaly font-bold font-sans text-xl "> 
-                                    <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"></div>
+                                    <div class="h-2 animate-pulse bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"></div>
                                 </div>
-                                <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"></div>
-                                <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"></div>
+                                <div class="h-2 animate-pulse bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"></div>
+                                <div class="h-2 animate-pulse bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"></div>
                             </div>
                         </div>
                     </div>

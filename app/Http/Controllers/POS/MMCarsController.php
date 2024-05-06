@@ -32,6 +32,7 @@ class MMCarsController extends Controller
                         'license_states.state',
                         'years.year'
                     )
+                    ->leftJoin('automobile_sales','sales.automobile_sale_id','automobile_sales.id')
                     ->leftJoin('cars','sales.automobile_sale_id','cars.id')
                     ->leftJoin('car_images','cars.car_image_id','car_images.id')
                     ->leftJoin('owner_books','cars.owner_book_id','owner_books.id')
@@ -42,7 +43,6 @@ class MMCarsController extends Controller
                     ->leftJoin('license_states','owner_books.license_state','license_states.id')
                     ->leftJoin('items','cars.item_id','items.id')
                     ->leftJoin('grades','items.grade','grades.id') ;
-                    
         if (session()->has('brand')) {
             $datas = $query->where('brands.brand_name',session()->get('brand'))->get();
         }else {

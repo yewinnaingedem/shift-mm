@@ -86,7 +86,6 @@ class CarSellController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        dd($request->all());    
         $validator = Validator::make(
             $request->all() ,
             [
@@ -101,8 +100,7 @@ class CarSellController extends Controller
         $today = Carbon::today(); 
         $inputs = [] ;
         $inputs['price'] = $request['pirce'];
-        $inputs['updated_at'] = $today->format('Y-m-d');
-        Sale::where('car_id',$id)->update($inputs);
+        Sale::where('automobile_sale_id',$id)->update($inputs);
         return response()->json([
             'message' => true ,
         ]);

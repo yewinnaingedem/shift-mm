@@ -80,7 +80,8 @@ class UiSearchableController extends Controller
                             'license_states.state',
                             'years.year','car_images.*'
                             )
-                            ->leftJoin('cars', 'sales.car_id', 'cars.id')
+                            ->leftJoin('automobile_sales','sales.automobile_sale_id','automobile_sales.id')
+                            ->leftJoin('cars', 'automobile_sales.car_id', 'cars.id')
                             ->leftJoin('owner_books', 'cars.owner_book_id', 'owner_books.id')
                             ->leftJoin('car_images', 'cars.car_image_id', 'car_images.id')
                             ->leftJoin('items', 'cars.item_id', 'items.id')

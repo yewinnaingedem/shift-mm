@@ -19,62 +19,65 @@
 @section('content')
     <div class="container-fluid mt-3">
         <div class="mb-3  rounded">
-            <h2 class='text-center text-capitalize' >This Tabel is currently Sale Tabel</h2>
+            <p class='text-center text-capitalize text-muted font-monospace' >This Tabel is currently Sale Tabel</p>
         </div>
         <hr>
-        <table id="example" class="display text-center" style="width:100%">
-            <thead>
-                <tr>
-                    <th>Model</th>
-                    <th>License </th>
-                    <th>State</th>
-                    <th>Grade</th>
-                    <th>Price</th>
-                    <th>Sale</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($sales as $sale)
+        <div class="bg-cute">
+            <table id="example" class="display " style="width:100%">
+                <thead>
                     <tr>
-                        <td> {{ $sale->model_name}}</td>
-                        <td> {{ $sale->license_plate}}</td>
-                        <td>{{$sale->license_state}}</td>
-                        <td class="d-flex jsutify-content-center align-items-center">
-                            @php 
-                                $active = 'bg-primary' ;
-                                $default = 'bg-danger';
-                            @endphp 
-                            <div
-                                class="rounded text-center p-10 text-white fw-bold {{$sale->grade == '0' ? $active : $default }}"
-                            >
-                                {{$sale->grade == '0' ? 'none' : $sale->grade }}
-                            </div>
-                        </td>
-                        <td  class=''>
-                            <div data-id="{{$sale->main_id}}" class="editTd">{{$sale->price}}</div>
-                        </td>
-                        <td class='text-center'>
-                            <a href="{{url('admin/sold_out/'.$sale->main_id)}}" class="btn btn-primary">Sold Out</a>
-                        </td>
-                        <td class='text-center'>
-                            <button class="btn btn-danger delete" data-id="{{$sale->id}}">Delete</button>
-                        </td>
+                        <th>Model</th>
+                        <th>License </th>
+                        <th>State</th>
+                        <th>Grade</th>
+                        <th>Price</th>
+                        <th>Sale</th>
+                        <th>Action</th>
                     </tr>
-                @endforeach
-            </tbody>
-            <tfoot>
-                <tr>
-                    <th>Model</th>
-                    <th>License </th>
-                    <th>State</th>
-                    <th>Grade</th>
-                    <th>Price</th>
-                    <th>Sale</th>
-                    <th>Action</th>
-                </tr>
-            </tfoot>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach($sales as $sale)
+                        <tr>
+                            <td class="text-muted"> {{ $sale->model_name}}</td>
+                            <td> {{ $sale->license_plate}}</td>
+                            <td class="text-muted">{{$sale->license_state}}</td>
+                            <td class="d-flex jsutify-content-center align-items-center">
+                                @php 
+                                    $active = 'bg-primary' ;
+                                    $default = 'bg-danger';
+                                @endphp 
+                                <div
+                                    class="rounded text-center p-10 text-white fw-bold {{$sale->grade == '0' ? $active : $default }}"
+                                >
+                                    {{$sale->grade == '0' ? 'none' : $sale->grade }}
+                                </div>
+                            </td>
+                            <td  class='text-muted'>
+                                <div data-id="{{$sale->main_id}}" class="editTd">{{$sale->price}}</div>
+                            </td>
+                            <td class='text-center'>
+                                <a href="{{url('admin/sold_out/'.$sale->main_id)}}" class="btn-sell">Sold Out</a>
+                            </td>
+                            <td class='text-center'>
+                                <button class="btn btn-danger delete" data-id="{{$sale->id}}">Delete</button>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>Model</th>
+                        <th>License </th>
+                        <th>State</th>
+                        <th>Grade</th>
+                        <th>Price</th>
+                        <th>Sale</th>
+                        <th>Action</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        
     </div>
     
 @endsection 

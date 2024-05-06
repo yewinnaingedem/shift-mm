@@ -13,6 +13,12 @@
             box-shadow : 0px 2px 5px black ;
             text-transform : capitalize  ;
         }
+        .bg-cute {
+            background-color : #f6f6f6 ;
+            border-radius : 5px ;
+            padding : 10px  ;
+
+        }
     </style>
 @endsection 
 
@@ -30,90 +36,143 @@
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         @endif 
-    <table id="carItem" class="table table-striped" style="width:100%">
-        <thead>
-            <tr>
-                <th>Brand Name</th>
-                <th>Licens Plate</th>
-                <th>Grade </th>
-                <th>VIN</th>
-                <th>Created At</th>
-                <th>Sale</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($carItems as $carItem)
-                <tr class="font-monospace">
-                    <td id="model_name">{{$carItem->model_name}}</td>
-                    <td id="licensePlate">{{$carItem->license_plate}}</td>
-                    <td>
-                        @php 
-                            $active = 'bg-info' ;
-                            $default = 'bg-primary';
-                        @endphp
-                        <div
-                        
-                            class="text-muted" 
-                        >
-                            {{$carItem->grade === '0' ? 'none': $carItem->grade . " Grade"  }}
-                        </div>
-                    </td>
-                    <td class="fst-italic fw-bolder">{{$carItem->vin}}</td>
-                    <td>{{$carItem->created_at}}</td>
-                    <td>
-                    @php
-                        $found = false; 
-                    @endphp
-
-                    @foreach($saledItems as $saledItem)
-                        @if($carItem->main_id === $saledItem->car_id)
-                            <button class="btn-sell cursor-not-allowed">
+    <div class="bg-cute mb-3 shadow-lg">
+        <table id="carItem" class="table table-striped mb-3" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Brand Name</th>
+                    <th>Licens Plate</th>
+                    <th>Grade </th>
+                    <th>VIN</th>
+                    <th>Created At</th>
+                    <th>Sale</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($toSaleItems as $carItem)
+                    <tr class="font-monospace">
+                        <td id="model_name">{{$carItem->model_name}}</td>
+                        <td id="licensePlate">{{$carItem->license_plate}}</td>
+                        <td>
+                            @php 
+                                $active = 'bg-info' ;
+                                $default = 'bg-primary';
+                            @endphp
+                            <div
+                            
+                                class="text-muted" 
+                            >
+                                {{$carItem->grade === '0' ? 'none': $carItem->grade . " Grade"  }}
+                            </div>
+                        </td>
+                        <td class="fst-italic fw-bolder">{{$carItem->vin}}</td>
+                        <td>{{$carItem->created_at}}</td>
+                        <td>
+                            <button class="btn-sell" id="modalId" data-id="{{$carItem->mainId}}" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                sell
+                            </button>
+                        </td>
+                        <td>
+                            <li class="nav-item  list-style-none">
+                                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
+                                    <i class="fa-solid fa-list"></i>
+                                </a>
+                                <ul class="dropdown-menu ">
+                                    <li>
+                                        <a href="{{url('admin/before_sale/'.$carItem->mainId.'/edit')}}" class="dropdown-item">View</a>
+                                    </li>
+                                    <li >
+                                        <button class="dropdown-item delete" data-id="{{$carItem->car_item}}">Delete</button>
+                                    </li>
+                                </ul>
+                            </li>
+                        </td>
+                    </tr>
+                @endforeach
+                </tbody>
+            <tfoot>
+                <tr>
+                    <th>Brand Name</th>
+                    <th>Licens Plate</th>
+                    <th>Grade </th>
+                    <th>VIN</th>
+                    <th>Created At</th>
+                    <th>Sale</th>
+                    <th>Action</th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    <hr>
+    <div class="bg-cute shadow-lg">
+        <table id="foundTable" class="table table-striped mb-3" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Brand Name</th>
+                    <th>Licens Plate</th>
+                    <th>Grade </th>
+                    <th>VIN</th>
+                    <th>Created At</th>
+                    <th>Sale</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($foundItems as $foundItem)
+                    <tr class="font-monospace">
+                        <td id="model_name">{{$foundItem->model_name}}</td>
+                        <td id="licensePlate">{{$foundItem->license_plate}}</td>
+                        <td>
+                            @php 
+                                $active = 'bg-info' ;
+                                $default = 'bg-primary';
+                            @endphp
+                            <div
+                            
+                                class="text-muted" 
+                            >
+                                {{$foundItem->grade === '0' ? 'none': $foundItem->grade . " Grade"  }}
+                            </div>
+                        </td>
+                        <td class="fst-italic fw-bolder">{{$foundItem->vin}}</td>
+                        <td>{{$foundItem->created_at}}</td>
+                        <td>
+                            <button class="btn-sell" >
                                 selling
                             </button>
-                            @php
-                                $found = true; 
-                                break; 
-                            @endphp
-                        @endif
-                    @endforeach
-
-                    @if (!$found)
-                        <button class="btn-sell" id="modalId" data-id="{{$carItem->mainId}}" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                            sell
-                        </button>
-                    @endif
-                    </td>
-                    <td>
-                        <li class="nav-item  list-style-none">
-                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
-                                <i class="fa-solid fa-list"></i>
-                            </a>
-                            <ul class="dropdown-menu ">
-                                <li>
-                                    <a href="{{url('admin/before_sale/'.$carItem->mainId.'/edit')}}" class="dropdown-item">View</a>
-                                </li>
-                                <li >
-                                    <button class="dropdown-item delete" data-id="{{$carItem->car_item}}">Delete</button>
-                                </li>
-                            </ul>
-                        </li>
-                    </td>
+                        </td>
+                        <td>
+                            <li class="nav-item  list-style-none">
+                                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
+                                    <i class="fa-solid fa-list"></i>
+                                </a>
+                                <ul class="dropdown-menu ">
+                                    <li>
+                                        <a href="{{url('admin/before_sale/'.$foundItem->mainId.'/edit')}}" class="dropdown-item">View</a>
+                                    </li>
+                                    <li >
+                                        <button class="dropdown-item delete" data-id="{{$foundItem->car_item}}">Delete</button>
+                                    </li>
+                                </ul>
+                            </li>
+                        </td>
+                    </tr>
+                @endforeach
+                </tbody>
+            <tfoot>
+                <tr>
+                    <th>Brand Name</th>
+                    <th>Licens Plate</th>
+                    <th>Grade </th>
+                    <th>VIN</th>
+                    <th>Created At</th>
+                    <th>Sale</th>
+                    <th>Action</th>
                 </tr>
-            @endforeach
-            </tbody>
-        <tfoot>
-            <tr>
-                <th>Brand Name</th>
-                <th>Licens Plate</th>
-                <th>Grade </th>
-                <th>VIN</th>
-                <th>Created At</th>
-                <th>Sale</th>
-                <th>Action</th>
-            </tr>
-        </tfoot>
-    </table>
+            </tfoot>
+        </table>
+    </div>
 </div>
 
 
@@ -147,6 +206,7 @@
     <script>
         $(document).ready(()=> {
             new DataTable('#carItem');
+            new DataTable('#foundTable');
             $(document).on('click','#modalId',(e)=> {
                 var $modalId = $(e.currentTarget);
                 var $data = $modalId.data('id');
