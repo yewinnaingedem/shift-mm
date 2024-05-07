@@ -30,10 +30,13 @@ class MMCarsController extends Controller
                         'items.kilo_meter' ,
                         'car_images.*',
                         'license_states.state',
-                        'years.year'
+                        'sales.bestSeller' ,
+                        'years.year',
+                        'company_infos.industry_name as company_name'
                     )
                     ->leftJoin('automobile_sales','sales.automobile_sale_id','automobile_sales.id')
                     ->leftJoin('cars','sales.automobile_sale_id','cars.id')
+                    ->leftJoin('company_infos','automobile_sales.company_id','company_infos.id')
                     ->leftJoin('car_images','cars.car_image_id','car_images.id')
                     ->leftJoin('owner_books','cars.owner_book_id','owner_books.id')
                     ->leftJoin('car_models', 'owner_books.model_id' , 'car_models.id')

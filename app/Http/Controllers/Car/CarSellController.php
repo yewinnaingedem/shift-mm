@@ -16,12 +16,15 @@ class CarSellController extends Controller
     
     public function index()
     {
-        $sales = Sale::select('car_models.model_name','license_states.state as license_state','owner_books.license_plate','grades.grade','sales.id','sales.price' , 'cars.id as main_id')
-                    ->leftJoin('cars','sales.automobile_sale_id','cars.id')
+        $sales = Sale::select('car_models.model_name','brands.brand_name','license_states.state as license_state','owner_books.license_plate','grades.grade','sales.id','sales.price' , 'cars.id as main_id','company_infos.industry_name as company_name','sales.sale_date')
+                    ->leftJoin('automobile_sales','sales.automobile_sale_id','automobile_sales.id')
+                    ->leftJoin('cars','automobile_sales.car_id','cars.id')
+                    ->leftJoin('company_infos','automobile_sales.company_id','company_infos.id')
                     ->leftJoin('owner_books','cars.owner_book_id','owner_books.id')
                     ->leftJoin('license_states','owner_books.license_state','license_states.id')
                     ->leftJoin('items','cars.item_id','items.id')
                     ->leftJoin('car_models','owner_books.model_id','car_models.id')
+                    ->leftJoin('brands','car_models.brand_id','brands.id')
                     ->leftJoin('grades','items.grade','grades.id')
                     ->get();
         

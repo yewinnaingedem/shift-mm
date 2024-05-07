@@ -9,11 +9,18 @@
     @vite('resources/css/app.css')
     @yield('style')
     <style>
-        .font-dispaly , .i-color{
+        .font-dispaly , .i-color , {
             color : #06CBA3 ;
+        }
+        .main-btn {
+            background-color : #06CBA3 ;
+            z-index : 100 ;
         }
         .border-display {
             border-color : #06CBA3 ;
+        }
+        .main-color {
+            color : #06CBA3 ;
         }
         #register_down{
             display :none ;

@@ -30,7 +30,11 @@
                                     @endforeach
                                 </div>
                             </a>
+                            @if($data->bestSeller)
+                                <button class="absolute flex rounded-lg main-btn items-center bg-primary text-neutral-100 border-primary top-3 left-3 text-xs  outline-none  tracking-wider py-[4px] px-[8px] capitalize border " >best seller </button>
+                            @endif
                             <!-- Slider indicators -->
+                            <!-- ml-2   border   p-2 outline-none   capitalize  -->
                             <div class="absolute z-30 flex space-x-3 -translate-x-1/2 bottom-5 left-1/2">
                                 @foreach(range( 0 , 7) as $i) 
                                     <button type="button" class="w-3 h-3 rounded-full" aria-current="{{$i == 1 ? 'true' : 'false' }}" aria-label="Slide {{ $i + 1}}" data-carousel-slide-to="{{$i}}"></button>
@@ -101,6 +105,7 @@
                         </a>
                     </div>
                 </div>
+                <!-- body content  -->
                 <div class="loader-content hidden" >
                     <div class="grow flex flex-col content-between justify-between  font-normal pt-3 px-3 pb-4 ">
                         <div class="flex h-[110px] pb-1 justify-between align-baseline font-serif gap-x-4  border-b-2 border-neutral-300">
@@ -143,12 +148,12 @@
                         </div>
                         <div class="border-t-1 flex justify-around min-h-[2.75rem]">
                             <a href="" class="text-gray-darkest text-xs font-medium pt-3 flex-grow ">
-                                <div class="inline-block text-lg align-top pl-3 pr-3 border-r-2 mt-0.5 border-display relative ">
+                                <div class="inline-block text-lg align-top pl-3 pr-3 border-r-2 mt-0.5 main-color relative ">
                                     <i class="fa-solid fa-house i-color" ></i>
                                 </div>
                                 <div class="inline-block align-top ml-2 ">
                                     <div class="font-bold">Shipping Available</div>
-                                    <div>Mingalar Car Sale Center </div>
+                                    <div>{{$data->company_name}} </div>
                                 </div>
                             </a>
                         </div>
