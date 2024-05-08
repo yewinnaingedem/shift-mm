@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Cache;
 
 class UiSearchableController extends Controller
 {
-    public function apisearch ( Request $request ) {
+    public function search ( Request $request ) {
         $seachData = $request->dataSearch ;
         $seachValue = [] ;
         $unSeeValue = [] ;
@@ -30,40 +30,40 @@ class UiSearchableController extends Controller
             }
             if (isset($data['id1'])) {
                 $seachValue['id1'] =$data['id1'] ;
-                $brandCheck = Brand::where('brand_name',$data['id1'])->exists();
+                $brandCheck = Brand::where('brand_name','like','%'.$data['id1'].'%')->exists();
                 if ($brandCheck) {
                     $seachValue['brand'] = $data['id1'] ;
                 }
-                $modelCheck = CarModel::where('model_name',$data['id1'])->exists(); 
+                $modelCheck = CarModel::where('model_name','like','%'.$data['id1'].'%')->exists(); 
                 if ($modelCheck) {
                     $seachValue['model'] = $data['id1'] ;
                 }
-                $yearCheck = Year::where('year',$data['id1'])->exists();
+                $yearCheck = Year::where('year','like','%'.$data['id1'].'%')->exists();
                 if($yearCheck) {
                     $seachValue['year'] = $data['id1'] ;
                 }
             }
             if (isset($data['id2'])) {
                 $seachValue['id2'] =$data['id2'] ;
-                $brandCheck = Brand::where('brand_name',$data['id2'])->exists();
+                $brandCheck = Brand::where('brand_name','like','%'.$data['id2'] . '%')->exists();
                 if ($brandCheck) {
                     $seachValue['brand'] = $data['id2'] ;
                 }
-                $modelCheck = CarModel::where('model_name',$data['id2'])->exists(); 
+                $modelCheck = CarModel::where('model_name','like', '%'.$data['id2'] . '%')->exists(); 
                 if ($modelCheck) {
                     $seachValue['model'] = $data['id2'] ;
                 }
-                $yearCheck = Year::where('year',$data['id2'])->exists();
+                $yearCheck = Year::where('year','like','%'.$data['id2'] . '%')->exists();
                 if($yearCheck) {
                     $seachValue['year'] = $data['id2'] ;
                 }
             }
         }
         $cacheKey = 'search_' . md5(json_encode($seachValue));
-        // $searchQueris = md5(json_encode($seachValue));
         
         if (Cache::has($cacheKey)) {
             $data = Cache::get($cacheKey);
+            $this->sessionQuery( $data);
             return response()->json([
                 'getData' => $data ,
                 'returnState' => true ,
@@ -109,47 +109,15 @@ class UiSearchableController extends Controller
             $returnState = true ;
             $dataQuery->where('years.year', $seachValue['year']);
         }
-        $data = $dataQuery->get();
-        $queries = [] ;
-        $storageName ;
         if ($returnState) {
-            // Cache::put($cacheKey , $data  , now()->addMinutes(10));
-            foreach ($data as $item) {
-                $model_name = $item->model_name;
-                $brand_name = $item->brand_name;
-            
-                if (!in_array(['model_name' => $model_name, 'brand_name' => $brand_name], $queries)) {
-                    $queries[] = ['model_name' => $model_name, 'brand_name' => $brand_name];
-                    $storageName = $model_name . $brand_name;
-                    // Check count and insert into database if count > 3
-                }
-            }
-            if (session()->has($storageName)) {
-                $count = session()->get($storageName) + 1;
-                session()->put($storageName, $count);
-                return response()->json(['sessionValue' => $count], 404);
-            } else {
-                session()->put($storageName, 1);
-                return response()->json(['sessionValues' => 1], 404);
-
-            }
+            $data = $dataQuery->get();
+            Cache::put($cacheKey , $data  , now()->addMinutes(10));
+            $this->sessionQuery($data);
             // need to update tomorrow
-            if (session()->get($storageName) > 3) {
-                SearchQuery::create([
-                    'search_queries' => $storageName,
-                    'count' => session()->get($storageName),
-                    'date' => today(),
-                ]);
-    
-                return response()->json(['responseFromQuery' => true], 404);
-            }
-            // do change this code 
             return response()->json([
                 'getData' => $data ,
                 'returnState' => false ,
-                'sessionname' => $storageName ,
-                'unSeeValue' => $unSeeValue ,
-                'session' => session()->all() 
+                // 'unSeeValue' => $unSeeValue ,
             ] , 200 );
         }else {
             return response()->json([
@@ -173,5 +141,41 @@ class UiSearchableController extends Controller
         }
 
         return $params;
+    }
+
+    private function sessionQuery ( $data ) {
+        $queries = [] ;
+        $storageName ;
+        foreach ($data as $item) {
+            $model_name = $item->model_name;
+            $brand_name = $item->brand_name;
+            if (!in_array(['model_name' => $model_name, 'brand_name' => $brand_name], $queries)) {
+                $queries[] = ['model_name' => $model_name, 'brand_name' => $brand_name];
+                $storageName = $model_name ."_". $brand_name;
+            }
+        }
+        if (session()->has($storageName)) {
+            $count = session()->get($storageName) + 1;
+            session()->put($storageName, $count);
+            if ($count > 5 ) {
+                $query =  SearchQuery::where('search_queries','like', '%'.$storageName.'%') ;
+                $queriExisted = $query->exists();
+                if ($queriExisted) {
+                    $statement = $query->first() ;
+                    $id = $statement->id ;
+                    SearchQuery::where('id', $id)->update([
+                        'count' => $count
+                    ]);
+                }else {
+                    SearchQuery::insert([
+                        'search_queries' => $storageName ,
+                        'count' => $count , 
+                        'date' => today(),
+                    ]);
+                }
+            }
+        } else {
+            session()->put($storageName, 1);
+        }
     }
 }

@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class SearchQuery extends Model
 {
     use HasFactory;
+
+    public $fillable = 
+    [
+        'SearchQuery' ,
+        'count' ,
+        'date'
+    ];
+
+    public $timestamps = false ;
 }

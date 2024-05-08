@@ -16,6 +16,12 @@
         input[type="number"]::webkit-inner-spin-button {
             --webkit-appearance : none ;
         }
+        .hover-search .undo-img {
+            opacity: 0;
+        }
+        .hover-search:hover .undo-img {
+            opacity: 1;
+        }
         .webkit-appearance-none {
             background : none ;
             appearance : none ;
@@ -128,6 +134,26 @@
                 </div>
             </div>
         </div>
+        <section id="popular_search" class="mt-16 px-3">
+            <div class="search-header mb-5 ">
+                <h2 class="text-xl text-black font-extrabold ">Here is popular Search Withing This Week </h2>
+            </div>
+            <div class="grid grid-cols-4 gap-1">
+                
+                <div class="mb-3 rounded hover:bg-neutral-100 hover-search  hover:shadow py-1 px-2 ">
+                    <a href="{{url('mm_cars/search/toyota/rush')}}" class="">
+                        <div class="flex items-center justify-between">
+                            <div class="leading-5  ">
+                                Toyato Rush
+                            </div>
+                            <div class="undo-img duration-150 ">
+                                <img class="w-6" src="{{asset('storage/Icons/undo_icon.svg')}}" alt="Undo">
+                            </div>
+                        </div>    
+                    </a>
+                </div>
+            </div>
+        </section>
     </div>
 @endsection 
 

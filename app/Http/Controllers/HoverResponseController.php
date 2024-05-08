@@ -102,7 +102,17 @@ class HoverResponseController extends Controller
     }
 
     public function searchBy ($name ) {
-        session()->flash('brand' , $name);
+        session()->flash('searchQuery' , [
+            'brand' => $name ,
+        ]);
+        return redirect('mm_cars/shop_mm');
+    }
+
+    public function search ($name , $model_name) {
+        session()->flash('searchQuery' , [
+            'brand' => $name ,
+            'model' => $model_name ,
+        ]);
         return redirect('mm_cars/shop_mm');
     }
 }

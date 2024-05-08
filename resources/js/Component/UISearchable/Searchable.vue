@@ -88,6 +88,9 @@ import Data from "./Data.json";
             } ,
             route : {
                 required : true ,
+            },
+            token : {
+                required : true ,
             }
         },
         watch : {
@@ -440,9 +443,10 @@ import Data from "./Data.json";
                 this.progressBarWidth = 0;
                 var formData = this.finalResult ;
                 $.ajax({
-                    url : "/api/uiserach/list"  ,
+                    url : "/mm_cars/uiserach/list"  ,
                     method : "POST" ,
                     data : {
+                        '_token' : this.token ,
                         dataSearch  : formData ,
                     }, 
                     xhr : function () {
@@ -482,7 +486,6 @@ import Data from "./Data.json";
         },
         mounted ( ) {
             window.addEventListener('keydown', this.handleKeyDown);
-            
         }
     }
 </script>

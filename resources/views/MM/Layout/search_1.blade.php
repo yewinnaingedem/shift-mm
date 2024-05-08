@@ -5,7 +5,7 @@
                 <div class="px-4 md:px-8 flex flex-row flex-wrap content-center gap-y-3 ">
                     <div class="order-first h-10 w-full md:order-none md:mr-1 justify-between ">
                         <div id="app">
-                            <Searchable route="{{url('mm_cars/car/') }}" asset="{{asset('storage/')}}"/>
+                            <Searchable route="{{url('mm_cars/car/') }}" token="{{ csrf_token()}}" asset="{{asset('storage/')}}"/>
                         </div>
                     </div>
                     <div class="flex md:space-x-2 w-full justify-between border-b-2 border-neutral-100 pb-3">

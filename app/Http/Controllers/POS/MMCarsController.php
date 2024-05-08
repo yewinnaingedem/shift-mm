@@ -46,8 +46,16 @@ class MMCarsController extends Controller
                     ->leftJoin('license_states','owner_books.license_state','license_states.id')
                     ->leftJoin('items','cars.item_id','items.id')
                     ->leftJoin('grades','items.grade','grades.id') ;
-        if (session()->has('brand')) {
-            $datas = $query->where('brands.brand_name',session()->get('brand'))->get();
+        if (session()->has('searchQuery')) {
+            $brand = session()->get('searchQuery.brand');
+            $model = session()->get('searchQuery.model');
+            if (isset($brand)) {
+                $query->where('brands.brand_name','like','%'. $brand . '%');
+            }
+            if (isset($model)) {
+                $query->where('car_models.model_name','like','%'. $model . '%');
+            }
+            $datas = $query->get() ;
         }else {
             $datas = $query
                     ->inRandomOrder()

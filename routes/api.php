@@ -15,7 +15,6 @@ use App\Http\Controllers\LightsDemageController ;
 use App\Http\Controllers\ChartController ;
 use App\Http\Controllers\demageReportState ;
 use App\Http\Controllers\AdditionalDemageController ;
-use App\Http\Controllers\UiSearchableController ;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
@@ -38,4 +37,3 @@ Route::get('Google/checkMonthly' , [ChartController::class , 'monthlyChart']);
 Route::post('demageReport/{id}' , [demageReportState::class , 'report']);
 Route::post('stateChange' , [demageReportState::class , 'stateChange']);
 Route::post('moveNext' , [demageReportState::class , 'MoveNext']);
-Route::post('uiserach/list' , [UiSearchableController::class , 'apisearch']);

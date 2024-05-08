@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\POS\MMCarsController ;
 use App\Http\Controllers\Register\AuthController ;
 use App\Http\Controllers\Contant\DetailsController ;
+use App\Http\Controllers\UiSearchableController ;
 use App\Http\Controllers\Financing\FinancingController;
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\ImagesController;
@@ -54,6 +55,7 @@ Route::prefix('mm_cars')->group(function () {
         return redirect('mm_cars');
     });
     Route::get('searchBy/{name}' , [HoverResponseController::class , 'searchBy']);
+    Route::get('search/{name}/{model_name}' , [HoverResponseController::class , 'search']);
     Route::post('askquestion/{id}', [EmailController::class , 'index']);
     Route::get('/register',[AuthController::class , 'userRegister']);
     Route::post('/register',[AuthController::class , 'register']);
@@ -63,6 +65,7 @@ Route::prefix('mm_cars')->group(function () {
     Route::post('make/deposit' , [depositController::class , 'index']);
     Route::get('getAll' , [MMCarsController::class , 'getAll']);
     Route::post('dataSearchable' , [MMCarsController::class , 'searchable']);
+    Route::post('uiserach/list' , [UiSearchableController::class , 'search']);
 });
 
 Route::get('autosuggestReflesh' , [AdminDashBoardController::class , 'refleshJson']);
