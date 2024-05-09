@@ -30,9 +30,27 @@
                                     @endforeach
                                 </div>
                             </a>
-                            @if($data->bestSeller)
-                                <button class="absolute flex rounded-lg main-btn items-center bg-primary text-neutral-100 border-primary top-3 left-3 text-xs  outline-none  tracking-wider py-[4px] px-[8px] capitalize border " >best seller </button>
-                            @endif
+                            
+                            <div class="absolute main-btn top-3 grid grid-cols-4 left-3 w-[90%]">
+                                <div class="col-span-3">
+                                    @if($data->bestSeller)
+                                        <button class="flex rounded-lg  items-center main-bg bg-primary text-neutral-100 border-primary  text-xs  outline-none  tracking-wider py-[4px] px-[8px] capitalize border " >best seller </button>
+                                    @endif
+                                </div>
+                                <div class="flex justify-around items-center">
+                                    <div class="save-impact">
+                                        <label for="save + {{$data->sale_id}}" class="main-color save-icon" >
+                                            <div class="font-[18px]">
+                                                <i class="fa-regular fa-heart"></i>
+                                            </div>
+                                            <input type="checkbox" name="save_item" value="{{$data->sale_id}}" id="save + {{$data->sale_id}}" class="hidden">
+                                        </label>
+                                    </div>
+                                    <div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
                             <!-- Slider indicators -->
                             <!-- ml-2   border   p-2 outline-none   capitalize  -->
                             <div class="absolute z-30 flex space-x-3 -translate-x-1/2 bottom-5 left-1/2">
@@ -110,7 +128,7 @@
                     <div class="grow flex flex-col content-between justify-between  font-normal pt-3 px-3 pb-4 ">
                         <div class="flex h-[110px] pb-1 justify-between align-baseline font-serif gap-x-4  border-b-2 border-neutral-300">
                             <a href="">
-                                <div class="capitalize font-sans text-gray-dark text-[12px] font-bold"><span>{{$data->year}}</span> <span class="font-semibold">{{$data->brand_name}}</span> {{$data->model_name}} for Sale</div>
+                                <div class="capitalize font-sans text-gray-dark text-[12px] font-bold"><span>{{$data->year}}</span> <span class="fw-semibold"> {{$data->model_name}}</span> for Sale ...</div>
                                 <div class="text-gray-light text-[13px] flex justify-between items-center" style="color:rgb(101 , 96 , 96 , )" >
                                     <div class="">Kilo:</div>
                                     <div id="kilo">{{$data->kilo_meter}}</div>

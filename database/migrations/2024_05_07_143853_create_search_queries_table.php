@@ -14,6 +14,9 @@ return new class extends Migration
         Schema::create('search_queries', function (Blueprint $table) {
             $table->id();
             $table->string('search_queries');
+            $table->string('brand_name')->nullable();
+            $table->string('model_name')->nullable();
+            $table->unsignedInteger('year')->nullable();
             $table->unsignedInteger('count')->default(0);
             $table->date('date');
         });

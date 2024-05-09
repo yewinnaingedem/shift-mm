@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Car\Sale ;
 use App\Models\MadeIn ;
+use App\Models\SearchQuery ;
 use App\Models\Car\Car ;
 use Illuminate\Support\Facades\Cache;
 use Stevebauman\Location\Facades\Location;
@@ -62,7 +63,8 @@ class MMCarsController extends Controller
                     ->paginate($this->pageLimit(4));
         }
         $totals = Sale::count();
-        return view('MM.index')->with('datas',$datas)->with('totals',$totals);
+        $searchQueries = SearchQuery::get() ;
+        return view('MM.index')->with('datas',$datas)->with('totals',$totals)->with('searchQueries' , $searchQueries);
     }
 
 

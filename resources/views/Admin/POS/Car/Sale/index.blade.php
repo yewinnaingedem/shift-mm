@@ -104,8 +104,10 @@
                             </ul>
                             <p class="card-text">This car is now available for sale. Please take a look and manage accordingly.</p>
                         </div>
-                        <div class="card-footer text-end">
-                            <a href="{{url('admin/sold_out/'.$sale->main_id)}}" class="btn btn-info">Sold Out</a>
+                        <div class="card-footer ">
+                            <div class="text-end">
+                                <a href="{{url('admin/sold_out/'.$sale->main_id)}}" class="btn btn-info">Sold Out</a>
+                            </div>
                         </div>
                     </div>        
                 </div>

@@ -146,6 +146,8 @@ class UiSearchableController extends Controller
     private function sessionQuery ( $data ) {
         $queries = [] ;
         $storageName ;
+        $model_name  ;
+        $brand_name;
         foreach ($data as $item) {
             $model_name = $item->model_name;
             $brand_name = $item->brand_name;
@@ -169,6 +171,8 @@ class UiSearchableController extends Controller
                 }else {
                     SearchQuery::insert([
                         'search_queries' => $storageName ,
+                        'model_name' => $model_name ,
+                        'brand_name' => $brand_name ,
                         'count' => $count , 
                         'date' => today(),
                     ]);

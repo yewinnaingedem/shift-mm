@@ -106,35 +106,48 @@
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             @endif 
-            @foreach($datas as $data)
-            <div class="position rounded mb-3 searchable">
-                <div class="d-flex justify-content-between align-items-center h-30 p-10">
-                    <div class="d-flex flex-column justify-content-center align-itmes-center ">
-                        <div class=" text-capitalize">
-                            <span class="fw-bold">{{$data->brand_name}} </span>
-                            @if($data->grade !== "none")
-                                <span class="text-danger fw-bold text-sm"> ---{{ $data->grade }}</span>
-                            @endif 
+            @if(count($datas) !== 0) 
+                @foreach($datas as $data)
+                    <div class="position rounded mb-3 searchable">
+                        <div class="d-flex justify-content-between align-items-center h-30 p-10">
+                            <div class="d-flex flex-column justify-content-center align-itmes-center ">
+                                <div class=" text-capitalize">
+                                    <span class="fw-bold">{{$data->brand_name}} </span>
+                                    @if($data->grade !== "none")
+                                        <span class="text-danger fw-bold text-sm"> ---{{ $data->grade }}</span>
+                                    @endif 
+                                </div>
+                                <div class="fw-lighter">
+                                        {{ $data->model_name }} / {{ $data->year }} / {{$data->license_plate}} 
+                                </div>
+                            </div>
+                            <div class="fw-bolder">
+                                @if($data->state == 0) 
+                                    Pending <span class="p_loading">.....</span>
+                                @else 
+                                    <span class="fw-bold">finished </span>
+                                @endif 
+                            </div>
                         </div>
-                        <div class="fw-lighter">
-                                {{ $data->model_name }} / {{ $data->year }} / {{$data->license_plate}} 
+                        <div class="testing d-flex justify-content-center align-items-center">
+                            <a href="{{url('admin/panding_state/' . $data->car_id )}}" class="">
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </a>
                         </div>
                     </div>
-                    <div class="fw-bolder">
-                        @if($data->state == 0) 
-                            Pending <span class="p_loading">.....</span>
-                        @else 
-                            <span class="fw-bold">finished </span>
-                        @endif 
+                @endforeach
+
+            @else 
+                <!--  message alert  -->
+                <div class="mb-3">
+                    <div class="alert alert-danger" role="alert">
+                        <h4 class="alert-heading">Warning!</h4>
+                        <p>There is no car in the salling page <strong>Make Sure to add the car into car sell list </strong> </p>
+                        <hr>
+                        <p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
                     </div>
                 </div>
-                <div class="testing d-flex justify-content-center align-items-center">
-                    <a href="{{url('admin/panding_state/' . $data->car_id )}}" class="">
-                        <i class="fa-solid fa-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-            @endforeach
+            @endif
             
         </div>
     </div>

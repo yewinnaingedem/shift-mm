@@ -13,7 +13,6 @@
             color : #06CBA3 ;
         }
         .main-btn {
-            background-color : #06CBA3 ;
             z-index : 100 ;
         }
         .border-display {
@@ -21,6 +20,9 @@
         }
         .main-color {
             color : #06CBA3 ;
+        }
+        .main-bg {
+            background-color : #06CBA3 ;
         }
         #register_down{
             display :none ;
@@ -71,6 +73,23 @@
 <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
 <script src="https://common.olemiss.edu/_js/sweet-alert/sweet-alert.min.js"></script>
+<script>
+    $(document).ready(()=> {
+        $(document).on('click','.save-icon' , (e)=> {
+            // Get the checkbox element within the clicked save-icon
+                let checkbox = $(e.currentTarget).find('input[type="checkbox"]');
+                
+                // Check if the checkbox is checked
+                let isChecked = checkbox.prop('checked');
+                console.log(checkbox);
+                // if (isChecked) {
+                //     console.log('Checkbox is checked');
+                // } else {
+                //     console.log('Checkbox is not checked');
+                // }
+        });
+    });
+</script>
 @yield('script')
 </body>
 </html>

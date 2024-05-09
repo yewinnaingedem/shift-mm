@@ -12,6 +12,9 @@ class SearchQuery extends Model
     public $fillable = 
     [
         'SearchQuery' ,
+        'model_name' ,
+        'brand_name' ,
+        'year' ,
         'count' ,
         'date'
     ];
