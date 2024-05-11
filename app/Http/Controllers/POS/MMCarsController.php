@@ -18,7 +18,7 @@ class MMCarsController extends Controller
         return $num ;
     }
     public function shopMM() {
-        
+        // need to find the session value if not found return the whole query value 
         $query = Sale::select(
                         'sales.id as sale_id',
                         'sales.price',
@@ -57,6 +57,9 @@ class MMCarsController extends Controller
                 $query->where('car_models.model_name','like','%'. $model . '%');
             }
             $datas = $query->get() ;
+            if (count($datas)) {
+
+            }
         }else {
             $datas = $query
                     ->inRandomOrder()

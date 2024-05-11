@@ -75,19 +75,7 @@
 <script src="https://common.olemiss.edu/_js/sweet-alert/sweet-alert.min.js"></script>
 <script>
     $(document).ready(()=> {
-        $(document).on('click','.save-icon' , (e)=> {
-            // Get the checkbox element within the clicked save-icon
-                let checkbox = $(e.currentTarget).find('input[type="checkbox"]');
-                
-                // Check if the checkbox is checked
-                let isChecked = checkbox.prop('checked');
-                console.log(checkbox);
-                // if (isChecked) {
-                //     console.log('Checkbox is checked');
-                // } else {
-                //     console.log('Checkbox is not checked');
-                // }
-        });
+        
     });
 </script>
 @yield('script')

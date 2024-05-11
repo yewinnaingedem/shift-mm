@@ -230,7 +230,6 @@
             let $model_year = $('select[name="model_year"]');
             let $make = $('select[name="make"]');
             let $model = $('select[name="model"] ');
-            let opitonSelected = $('.select-options');
             let dontAskMe = $("input[name='dontaskme']");
             
             $model_year.on('change' , ()=> {
@@ -248,15 +247,14 @@
                 if($make.val() !== " ") {
                     $models.prop('disabled' , false);
                     $models.removeClass('cursor-not-allowed');
-                    opitonSelected.empty();
+                    let loading = `<option class="d-none" selected>Loading </option>`;
+                    $models.empty().append(loading);
                     $.ajax({
                         method : "get" ,
                         url : '/admin/model/' + $make.val() ,
-                        data : {
-                            "_token" : "{{csrf_token()}}"
-                        },
                         success : (res) => {
                             if(res.response.length !== 0) {
+
                                 $('#staticBackdrop').remove();
                                 let $innerHtml = `
                                                 <option class="d-none" selected>Chose Model </option>
@@ -265,36 +263,35 @@
                                                 `).join('')}
                                             `; 
                                 var $addAlert = 
-                                `
-                                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                        <div class="modal-body">
-                                            <div class="fw-bold font-20px" >I am not sure If you want to add the modal for this click here</div>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox"  name="dontaskme" id="dontaskme">
-                                                <label class="form-check-label" for="dontaskme">
-                                                    Don't ask me again!
-                                                </label>
+                                    `
+                                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                            <div class="modal-body">
+                                                <div class="fw-bold font-20px" >I am not sure If you want to add the modal for this click here</div>
                                             </div>
-                                        </div>
-                                        <div class="row mb-3 px-3">
-                                            <div class="col-md-6">
-                                                <button data-bs-dismiss="modal" aria-label="Close" class="btn btn-info">Cancel</button>
+                                            <div class="modal-body">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox"  name="dontaskme" id="dontaskme">
+                                                    <label class="form-check-label" for="dontaskme">
+                                                        Don't ask me again!
+                                                    </label>
+                                                </div>
                                             </div>
-                                            <div class="col-md-6 text-end">
-                                                <a href="{{url('admin/car_models/create')}}" class="btn btn-primary">Add <span class="ms-2"><i class="fa-solid fa-plus"></i></span></a>
+                                            <div class="row mb-3 px-3">
+                                                <div class="col-md-6">
+                                                    <button data-bs-dismiss="modal" aria-label="Close" class="btn btn-info">Cancel</button>
+                                                </div>
+                                                <div class="col-md-6 text-end">
+                                                    <a href="{{url('admin/car_models/create')}}" class="btn btn-primary">Add <span class="ms-2"><i class="fa-solid fa-plus"></i></span></a>
+                                                </div>
                                             </div>
-                                        </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                `;
+                                    `;
                                 var isCheckedString = localStorage.getItem("isChecked");
                                 var isChecked = JSON.parse(isCheckedString);
-                                console.log(isChecked);
                                 if (isChecked) {
                                     $('body').prepend($addAlert);
                                     $('#staticBackdrop').modal('show');
@@ -320,7 +317,7 @@
                                             window.location.href = res.redirect ;
                                         } else {
                                             swal("Cancelled", "Your imaginary file is safe :)", "error");
-                                            $model.empty();
+                                            $model.empty().append(`<option class="d-none " selected> Not Validate ! </option>`);
                                             $models.prop('disabled' , true);
                                             $models.addClass('cursor-not-allowed');
                                             $('.disabled').prop('disabled' , true) ;

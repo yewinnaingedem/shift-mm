@@ -25,21 +25,16 @@ class BeforeSaleController extends Controller
                     ->leftJoin('steerings','items.steering_coner','steerings.id')
                     ->leftJoin('grades','items.grade','grades.id')
                     ->get();
-        $saledItems = Sale::get('automobile_sale_id');
-        
         $toSaleItems = []  ;
         $foundItems = [] ;
         foreach ($carItems as $key ) {
-            foreach ($saledItems as $value ) {
-                if ($key->mainId === $value->automobile_sale_id) {
-                    $foundItems[] = $key ;
-                    break ;
-                }else {
-                    $toSaleItems[] = $key ;
-                }
+            $saledItems = Sale::find($key->mainId);
+            if ($saledItems) {
+                $foundItems[] = $key ;
+            }else {
+                $toSaleItems[] = $key ;
             }
         }
-        // print_r($foundItems)  ;
         return view('Admin.POS.Car.CarItem.index' , compact('toSaleItems','foundItems'));
     }
 

@@ -2,7 +2,7 @@
     <div class="progress-bar-container" v-if="this.progressBarWidth">
         <div class="progress-bar progess" :style="{ width: this.progressBarWidth + '%' }"></div>
     </div>
-    <form @submit.prevent="methodCall" method="post" >
+    <form @submit.prevent="methodCall" method="post" :class="(inputSearch) ? 'shadow-md' : 'shadow-sm'" >
         <div class="">
             <i class="fa-solid fa-magnifying-glass absolute top-[15px] left-[28px]"></i>
             <input 
@@ -24,8 +24,8 @@
                 <i class="fa-solid fa-xmark"  ></i>
             </div>
         </div>
-        <div class="result w-full relative borer-radious-customize bg-neutral-50  fade-enter-active 2 text-black" v-if="inputSearch">
-            <ul class="pb-3 pt-1 max-h-[200px] overflow-x-auto  w-full bg-neutral-50">
+        <div class="result w-full relative  borer-radious-customize bg-neutral-50  fade-enter-active 2 text-black" v-if="inputSearch">
+            <ul class="pb-3 pt-1 max-h-[140px]  overflow-x-auto  w-full bg-neutral-50">
                 <li class="rounded-sm mb-[1px] w-full pl-10  bg-neutral-100 py-1" v-if="results.length == 0" >
                     <div class="relative border-l-4 border-green-400">
                         <span class="pl-2 font-medium tracking-wide mr-1">Mingalar Search</span><span class="font-light "> 

@@ -60,10 +60,12 @@ class UiSearchableController extends Controller
             }
         }
         $cacheKey = 'search_' . md5(json_encode($seachValue));
-        
         if (Cache::has($cacheKey)) {
             $data = Cache::get($cacheKey);
-            $this->sessionQuery( $data);
+            if (count($data) > 0) {
+                $myArray = collect($data);
+                $this->sessionQuery( $myArray);
+            }
             return response()->json([
                 'getData' => $data ,
                 'returnState' => true ,
@@ -109,15 +111,14 @@ class UiSearchableController extends Controller
             $returnState = true ;
             $dataQuery->where('years.year', $seachValue['year']);
         }
-        if ($returnState) {
+        if ($returnState && count($dataQuery->get())) {
             $data = $dataQuery->get();
-            Cache::put($cacheKey , $data  , now()->addMinutes(10));
             $this->sessionQuery($data);
+            Cache::put($cacheKey , $data  , now()->addMinutes(10));
             // need to update tomorrow
             return response()->json([
                 'getData' => $data ,
                 'returnState' => false ,
-                // 'unSeeValue' => $unSeeValue ,
             ] , 200 );
         }else {
             return response()->json([
@@ -146,14 +147,14 @@ class UiSearchableController extends Controller
     private function sessionQuery ( $data ) {
         $queries = [] ;
         $storageName ;
-        $model_name  ;
-        $brand_name;
+        $model_names  ;
+        $brand_names;
         foreach ($data as $item) {
-            $model_name = $item->model_name;
-            $brand_name = $item->brand_name;
-            if (!in_array(['model_name' => $model_name, 'brand_name' => $brand_name], $queries)) {
-                $queries[] = ['model_name' => $model_name, 'brand_name' => $brand_name];
-                $storageName = $model_name ."_". $brand_name;
+            $model_names = $item->model_name;
+            $brand_names = $item->brand_name;
+            if (!in_array(['model_name' => $model_names, 'brand_name' => $brand_names], $queries)) {
+                $queries[] = ['model_name' => $model_names, 'brand_name' => $brand_names];
+                $storageName = $model_names ."_". $brand_names;
             }
         }
         if (session()->has($storageName)) {
